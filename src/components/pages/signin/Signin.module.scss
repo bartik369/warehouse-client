@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    .inner {
+        max-width: 750px;
+        width: 100%;
+        display: flex;
+        margin: 10px;
+        background-color: #ffffff;
+        box-shadow: rgba(50, 50, 93, 0.15) 0px 13px 27px -5px, rgba(0, 0, 0, 0.2) 0px 8px 16px -8px;
+        .left {
+            position: relative;
+            width: 50%;
+            .title {
+                position: absolute;
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: 800;
+                text-transform: uppercase;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+            }
+        }
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 30px;
+        }
+    }
+}

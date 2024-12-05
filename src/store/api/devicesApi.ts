@@ -8,15 +8,10 @@ export const devicesApi = createApi({
         getDevices: builder.query({
             query: () => 'devices'
         }),
-        getDevice: builder.query({
-            query: (id) => ({
-                url: `device/${id}`
-            })
-        }),
-        addDevice: builder.mutation({
+        createDevice: builder.mutation({
             query(body) {
                 return {
-                    url: '',
+                    url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_ADD_DEVICE}`,
                     method: 'POST',
                     body,
                 }
@@ -44,9 +39,6 @@ export const devicesApi = createApi({
 })
 
 export const  {
-    useGetDevicesQuery,
-    useGetDeviceQuery,
-    // useUpdateDeviceMutation,
-    useDeleteDeviceMutation,
+    useCreateDeviceMutation,
 
 } = devicesApi;

@@ -1,32 +1,51 @@
-import { RootState } from '../store';
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import { IUser } from './../../types/user';
+import {createSlice} from '@reduxjs/toolkit';
 
-const baseQuery = fetchBaseQuery({
-    baseUrl: '',
-    credentials: 'include',
-    prepareHeaders: (headers, {getState}) => {
-
-    }
-});
-
-
-const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
-
-  if (result.error && result.error.status === 403) {
-    const refreshResult:any = await baseQuery('', api, extraOptions);
-
-  }
-  return result
+type AuthState = {
+    user: IUser;
+    isAuth: boolean;
+    token: string | null;
+    error: string | null;
 }
-export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({
 
-    })
+const initialState: AuthState = {
+  user: {
+    userId: '',
+    workId: '',
+    login: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    department: '',
+    location: '',
+    permissions: [],
+    createdAt: null,
+    updatedAt: null,
+  },
+  isAuth: false,
+  token: null,
+  error: null,
+};
+
+const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        setCredentials:(state, action) => {
+            const {user, token} = action.payload
+            state.user = user;
+            state.token = token;
+        },
+        logOut:(state, action) => {
+            state.user = action.payload
+            state.token = null;
+            state.isAuth = false;
+        },
+        setAuth: (state, action) => {
+            state.isAuth = action.payload;
+        },
+    },
 });
+
+export default authSlice.reducer
+export const  {setCredentials, setAuth,  logOut} = authSlice.actions;

@@ -1,0 +1,20 @@
+.button {
+    outline: none;
+    border: none;
+    padding: 12px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all .6s ease-in;
+}
+
+.blue {
+    background-color: #3f70ed;
+    border: 1px solid #2a60eb;
+    &:hover {
+        background-color: #5987fb;
+        border: 1px solid #4578f8;
+    }
+}

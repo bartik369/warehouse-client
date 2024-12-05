@@ -1,0 +1,45 @@
+ @mixin border {
+     border: 1px solid #aab1b7;
+     outline: none;
+ }
+ 
+ .input {
+     display: flex;
+     border: 1px solid #dce4e8;
+     padding: 11px 14px;
+     border-radius: 20px;
+     margin-bottom: 22px;
+     position: relative;
+     transition: all .6s ease-in;
+     color: #15141f;
+     input {
+         width: 100%;
+         border: none;
+         font-size: 15px;
+         outline: none;
+     }
+     .label {
+         position: absolute;
+         background-color: #ffffff;
+         padding: 0 5px;
+         color: #9ba4a9;
+         font-size: 10px;
+         top: -7px;
+         left: 15px;
+     }
+      ::placeholder {
+         color: #9ba4a9;
+         font-size: 12px;
+         font-weight: 100;
+     }
+     &:focus {
+         @include border;
+     }
+     &:hover {
+         @include border;
+     }
+     .icon {
+         padding-right: 8px;
+         color: #dce4e8;
+     }
+ }

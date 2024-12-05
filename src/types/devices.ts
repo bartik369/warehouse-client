@@ -1,15 +1,14 @@
 export interface IDevice {
-    id?: number;
+    id?: string;
     serialNumber?: string;
     modelCode?: string;
     inventoryNumber?: string;
     title: string;
-    description: string;
     type: string;
     manufacturer?: string;
     weight?: number;
     media?: string;
-    state: string;
+    serviceable:boolean;
     assignedTo?: string;
     location: string;
     inStock: boolean;

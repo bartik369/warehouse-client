@@ -1,0 +1,11 @@
+export const loginLabel = 'Ваш логин';
+export const passwordLabel = 'Ваш пароль';
+export const signin = 'Войти';
+export const fillEmail = 'Укажите почту';
+export const fillPassword = 'Введите пароль';
+export const enterDashboard = 'Вход в систему';
+export const forgetPassword = 'Забыли пароль?';
+export const reset = 'Сбросить';
+export const email = 'Email';
+export const password  = 'Password';
+export const titleSignin = 'IT management';
