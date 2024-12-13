@@ -1,29 +1,34 @@
-import { RootState } from '../store';
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { useRefreshMutation } from './api/authApi';
+import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
-import { setCredentials, logOut, setAuth } from "./authSlice";
+import { setCredentials, logOut, setAuth } from "./slices/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
-  credentials: 'same-origin', 
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const token = localStorage.getItem('accessToken')
+    console.log(token);
      if (token) {
-            headers.set("authorization", `Bearer ${token}`);
-        }
-        return headers;
+            headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
   }
-})
+});
 
-const baseQueryWithReauth: BaseQueryFn<
+export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result.error && result.error.status === 403) {
-    const refreshResult:any = await baseQuery('/refresh-token/', api, extraOptions);
+  if (result.error && result.error.status === 401) {
+    
+
+    const refreshResult:any = await baseQuery(
+      import.meta.env.VITE_REFRESH_TOKEN, api, extraOptions
+    );
 
     if (refreshResult.data && refreshResult.data instanceof Object)  {
       localStorage.setItem('accessToken', refreshResult.data.token);
@@ -37,10 +42,3 @@ const baseQueryWithReauth: BaseQueryFn<
   }
   return result
 }
-
-export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({
-
-    })
-});

@@ -4,7 +4,6 @@ import {createSlice} from '@reduxjs/toolkit';
 type AuthState = {
     user: IUser;
     isAuth: boolean;
-    token: string | null;
     error: string | null;
 }
 
@@ -23,7 +22,6 @@ const initialState: AuthState = {
     updatedAt: null,
   },
   isAuth: false,
-  token: null,
   error: null,
 };
 
@@ -32,13 +30,11 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setCredentials:(state, action) => {
-            const {user, token} = action.payload
+            const {user, accessToken} = action.payload
             state.user = user;
-            state.token = token;
         },
         logOut:(state, action) => {
             state.user = action.payload
-            state.token = null;
             state.isAuth = false;
         },
         setAuth: (state, action) => {

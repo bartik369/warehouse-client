@@ -17,3 +17,8 @@ export interface ISignin {
     email: string;
     password: string;
 }
+
+export interface IAuthRes {
+    user: IUser;
+    token: string;
+}

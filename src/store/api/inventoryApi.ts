@@ -1,8 +1,9 @@
+import { baseQueryWithReauth } from './../baseQueryWithReauth';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const inventoryApi = createApi({
     reducerPath: 'inventoryApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'localhost'}),
+    baseQuery: baseQueryWithReauth,
     tagTypes: [],
     endpoints:(builder) => ({
         getgetInventorys: builder.query({

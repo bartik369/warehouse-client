@@ -1,14 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const devicesApi = createApi({
     reducerPath: 'devicesApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'localhost'}),
+    baseQuery: baseQueryWithReauth,
     tagTypes:[],
-    endpoints:(builder) => ({
-        getDevices: builder.query({
-            query: () => 'devices'
+    endpoints:(build) => ({
+        getDevices: build.query({
+            query: () => ({
+                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_GET_DEVICES}`
+            })
         }),
-        createDevice: builder.mutation({
+        getDevice: build.query({
+            query: (id: string) => ({
+                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_GET_DEVICE}`
+            })
+        }),
+        createDevice: build.mutation({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_ADD_DEVICE}`,
@@ -17,28 +25,11 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        // updateDevice: builder.mutation({
-        //     query(data) {
-        //         return {
-        //             const {id, ...body} = data;
-        //             url: `device/${id}`,
-        //             method: 'PUT',
-        //             body,
-        //         }
-        //     }
-        // }),
-        deleteDevice: builder.mutation({
-            query(id) {
-                return {
-                    url: `device/${id}`,
-                    method: 'DELETE',
-                }
-            }
-        }), 
     })
 })
 
 export const  {
     useCreateDeviceMutation,
+    useGetDevicesQuery
 
 } = devicesApi;

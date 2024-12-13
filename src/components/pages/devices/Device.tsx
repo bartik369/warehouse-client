@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 
-const Home:FC = () => {
+const Device:FC = () => {
     return (
         <div>
-            Welcome to dashboard
+            device
         </div>
     );
 };
 
-export default Home;
+export default Device;

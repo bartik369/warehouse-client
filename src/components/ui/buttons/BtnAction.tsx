@@ -6,7 +6,7 @@ interface IButtonProps {
     title: string;
 };
 
-const BtnAction:FC<IButtonProps> = ({type='button', title}) => {
+const BtnAction:FC<IButtonProps> = ({type='submit', title}) => {
     return (
         <button type={type} className={`${style.button} ${style.blue}`}>
             <p>{title}</p>

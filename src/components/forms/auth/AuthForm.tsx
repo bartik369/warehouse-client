@@ -1,6 +1,8 @@
 import React, {useState, FC} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ISignin } from '../../../types/user';
+import { useAppDispatch } from '../../../hooks/redux/useRedux';
+import { setCredentials } from '../../../store/slices/authSlice';
 import { useSigninMutation } from '../../../store/api/authApi';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Input from '../../ui/input/Input';
@@ -16,12 +18,17 @@ const AuthForm: FC = () => {
         password: ''
     });
     const [signinUser] = useSigninMutation();
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     
     const authHandler = async (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       try {
-        const data = await signinUser(authData);
-        console.log(data)
+        await signinUser(authData).unwrap().then((data) => {
+          dispatch(setCredentials(data))
+          localStorage.setItem('accessToken', data.token);
+          navigate('/')  
+        });
       } catch (error: unknown) {
         if (error instanceof Error) {
           console.log(error);
