@@ -1,8 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { logOut, setCredentials, setAuth } from '../slices/authSlice';
+import { logOut, setCredentials } from '../slices/authSlice';
 import { ISignin, IAuthRes } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { useNavigate } from 'react-router-dom';
 
 export const authApi = createApi({
     reducerPath:'authApi',
@@ -21,7 +20,6 @@ export const authApi = createApi({
                 url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_LOGOUT}`,
                 method: 'POST',
                 body: {id: id}
-
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
