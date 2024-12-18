@@ -1,21 +1,31 @@
-import './App.scss'
-import {Routes, Route} from 'react-router-dom'
-import Signin from './components/pages/signin/Signin'
-import ResetPassword from './components/pages/reset/ResetPassword'
-import PrivateRoutes from './routes/PrivateRoutes'
-import Home from './components/pages/home/Home'
-import Layout from './routes/Layout'
-import { useAppDispatch, useAppSelector } from './hooks/redux/useRedux'
-import PublicRoutes from './routes/PublicRoutes'
-import Profile from './components/pages/profile/Profile'
-import Device from './components/pages/devices/Device'
-import Devices from './components/pages/devices/Devices'
-import { useLogoutUserMutation } from './store/api/authApi';
+import { useEffect } from 'react';
+import {Routes, Route} from 'react-router-dom';
+import Signin from './components/pages/signin/Signin';
+import { useValidateQuery } from './store/api/authApi';
+import { useAppDispatch, useAppSelector } from './hooks/redux/useRedux';
+import { setCredentials } from './store/slices/authSlice';
+import ResetPassword from './components/pages/reset/ResetPassword';
+import PrivateRoutes from './routes/PrivateRoutes';
+import Home from './components/pages/home/Home';
+import Layout from './routes/Layout';
+import PublicRoutes from './routes/PublicRoutes';
+import Profile from './components/pages/profile/Profile';
+import Device from './components/pages/devices/Device';
+import Devices from './components/pages/devices/Devices';
+import './App.scss';
 
 function App() {
+  const {data: userInfo} = useValidateQuery({skip: true});
+  const user = useAppSelector(state => state.auth.user);
+  const dispatch = useAppDispatch();
 
-  const [logout] = useLogoutUserMutation();
-  const dispatch = useAppDispatch()
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      userInfo && dispatch(setCredentials(userInfo))
+    }
+  }, []);
+  
   return (
     <>
     <Routes>
@@ -32,8 +42,6 @@ function App() {
         <Route element={<ResetPassword />} path='/reset-password' />
       </Route>
     </Routes>
-
-    <button onClick={() => dispatch(logout)}>Test logout</button>
     </>
   )
 }

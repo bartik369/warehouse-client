@@ -9,15 +9,14 @@ type AuthState = {
 
 const initialState: AuthState = {
   user: {
-    userId: '',
+    id: '',
     workId: '',
     login: '',
     email: '',
     firstName: '',
     lastName: '',
     department: '',
-    location: '',
-    permissions: [],
+    locationId: '',
     createdAt: null,
     updatedAt: null,
   },
@@ -30,8 +29,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setCredentials:(state, action) => {
-            const {user, accessToken} = action.payload
-            state.user = user;
+            state.user = action.payload;
         },
         logOut:(state, action) => {
             state.user = action.payload

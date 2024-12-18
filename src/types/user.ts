@@ -1,16 +1,14 @@
 export interface IUser {
-    userId: string;
+    id: string;
     workId: string;
     login: string;
     email: string;
     firstName: string;
     lastName: string;
     department: string;
-    location: string;
-    permissions: string[];
+    locationId: string;
     createdAt: Date | null;
     updatedAt: Date | null;
-
 }
 
 export interface ISignin {

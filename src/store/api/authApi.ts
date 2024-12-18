@@ -1,7 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { logOut, setCredentials, setAuth } from '../slices/authSlice';
-import { IUser, ISignin, IAuthRes } from '../../types/user';
+import { ISignin, IAuthRes } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { useNavigate } from 'react-router-dom';
 
 export const authApi = createApi({
     reducerPath:'authApi',
@@ -15,16 +16,19 @@ export const authApi = createApi({
                 body: {...credentials},
             })
         }),
-        logoutUser: build.mutation({
-            query: () => ({
+        logoutUser: build.mutation<any, any>({
+            query: (id) => ({
                 url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_LOGOUT}`,
                 method: 'POST',
+                body: {id: id}
+
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
                     localStorage.removeItem('accessToken');
-                    dispatch(logOut(null))
+                    setCredentials(null);
+                    dispatch(logOut(null));
                 } catch (err) {
                     console.log(err)
                 }
@@ -36,11 +40,11 @@ export const authApi = createApi({
                 method: 'POST',
             }),
         }),
-        validToken: build.query({
+        validate: build.query({
             query:() => ({
-                url:import.meta.env.VITE_VALID_TOKEN
+                url: import.meta.env.VITE_VALIDATE,
             })
-        })
+        }),
     })
 });
 
@@ -48,4 +52,5 @@ export const {
     useSigninMutation, 
     useLogoutUserMutation,
     useRefreshMutation,
+    useValidateQuery
 } = authApi;

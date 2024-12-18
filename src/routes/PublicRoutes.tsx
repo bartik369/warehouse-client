@@ -8,7 +8,7 @@ const PublicRoutes = () => {
     return (
         <>
         {token
-        ? <Navigate to="/" state={{ from: location }} replace />
+        ? <Navigate to="/home" state={{ from: location }} replace />
         : <Outlet />
         }
         </>
