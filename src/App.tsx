@@ -22,10 +22,10 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      userInfo && dispatch(setCredentials(userInfo))
+      userInfo && dispatch(setCredentials(userInfo));
     }
   }, []);
-  
+
   return (
     <>
     <Routes>
