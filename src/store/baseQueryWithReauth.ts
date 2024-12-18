@@ -23,6 +23,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   api.dispatch(setCredentials(result.data));
 
   if (result.error && result.error.status === 401) {
+    
     const refreshResult:any = await baseQuery(
       import.meta.env.VITE_REFRESH_TOKEN,
       api,
@@ -40,3 +41,4 @@ export const baseQueryWithReauth: BaseQueryFn<
   }
   return result;
 };
+

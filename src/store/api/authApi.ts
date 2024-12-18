@@ -38,9 +38,10 @@ export const authApi = createApi({
                 method: 'POST',
             }),
         }),
-        validate: build.query({
+        validate: build.mutation({
             query:() => ({
                 url: import.meta.env.VITE_VALIDATE,
+                method: 'POST',
             })
         }),
     })
@@ -50,5 +51,5 @@ export const {
     useSigninMutation, 
     useLogoutUserMutation,
     useRefreshMutation,
-    useValidateQuery
+    useValidateMutation
 } = authApi;

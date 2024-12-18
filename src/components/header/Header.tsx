@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLogoutUserMutation } from '../../store/api/authApi';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux/useRedux';
 import { useNavigate } from 'react-router-dom';
