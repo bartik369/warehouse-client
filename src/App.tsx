@@ -17,17 +17,19 @@ import './App.scss';
 
 function App() {
   const dispatch = useAppDispatch();
+  const [validToken] = useValidateMutation();
   const token = localStorage.getItem('accessToken');
-  const [validToken] = useValidateMutation()
 
   useEffect(() => {
     if (token) {
       try {
        (async function() {
             const data = await validToken(null).unwrap();
-            dispatch(setCredentials(data));
-            dispatch(setAuth(true));
-          })()
+            if (data) {
+              dispatch(setCredentials(data));
+              dispatch(setAuth(true));
+            }
+          })();
       } catch (err) {
         if (isFetchBaseQueryError(err)) {
           const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
@@ -37,8 +39,9 @@ function App() {
         }
       }
     }
-  }, []);
-
+  }, [token]);
+  
+  
   return (
     <>
     <Routes>

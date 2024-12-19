@@ -1,0 +1,15 @@
+.burger {
+    font-size: 15px;
+    width: 45px;
+    height: 45px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: 1px solid #e3e6ec;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+    color: #99a2b3;
+    &:hover {
+        color: #808896;
+    }
+}

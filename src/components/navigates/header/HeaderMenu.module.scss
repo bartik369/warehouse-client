@@ -1,0 +1,15 @@
+.menu {
+    margin-right: 30px;
+    ul {
+        li {
+            margin-right: 10px;
+            display: inline-block;
+            a {
+                color: #292b38;
+                &:hover {
+                    color: rgb(48, 97, 189);
+                }
+            }
+        }
+    }
+}

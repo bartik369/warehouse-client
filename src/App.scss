@@ -3,13 +3,17 @@
     padding: 0;
 }
 
+li {
+    list-style-type: none;
+}
+
 body,
 html {
     width: 100%;
     height: 100vh;
-    background-color: #e4e7ed;
+    background-color: #f7f9fb;
     scrollbar-width: thin;
-    scrollbar-color: #282942 #161622;
+    scrollbar-color: #d2d4d7 #aeb1b6;
     font-family: "Roboto", serif;
 }
 

@@ -1,0 +1,21 @@
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 330px;
+    height: 24px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    padding: 7px 20px 7px 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px #8881a40d;
+    input {
+        width: 100%;
+        border: none;
+        outline: none;
+    }
+    .glass {
+        font-size: 18px;
+        margin-right: 12px;
+    }
+}

@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
+import style from './Logo.module.scss';
 
 const Logo:FC = () => {
     return (
-        <div>
-            
+        <div className={style.logo}>
+            LOGO
         </div>
     );
 };
