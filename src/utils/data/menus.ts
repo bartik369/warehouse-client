@@ -1,5 +1,9 @@
-import {faUser, faEnvelope, faLocationDot, faHandshake, 
-    faChartSimple, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import userIcon from '../../assets/elements/user-icon.svg';
+import MessageIcon from '../../assets/elements/messages-icon.svg';
+import LocationIcon from '../../assets/elements/location-icon.svg';
+import ContractorIcon from '../../assets/elements/contractor-icon.svg';
+import CalendarIcon from '../../assets/elements/calendar-icon.svg';
+import DiagramIcon from '../../assets/elements/diagram-icon.svg';
 
 
 export const headerMenuData = [
@@ -9,13 +13,18 @@ export const headerMenuData = [
     {id: 4, title: 'Ссылка 4', url: '#'},
 ];
 export const sidebarMenuData = [
-    {id: 1, title: 'Локации', url: '#', icon: faWarehouse, locations: [
-      { id: 1, subTitle: 'Московский офис', url: '#'},
-      { id: 2, subTitle: 'Екатеринбург', url: '#'},
-      { id: 3, subTitle: 'Красногорск', url: '#'},
+      { id: 1,  title: 'Локации', path: '#', icon: LocationIcon, subMenu: [
+      { id: 1, title: 'Московский офис', path: '#'},
+      { id: 2, title: 'Екатеринбург', path: '#'},
+      { id: 3, title: 'Красногорск', path: '#'},
     ]
 },
-    {id: 2, title: 'Сообщения', url: '#', icon: faEnvelope},
-    {id: 3, title: 'Пользователи', url: '#', icon: faUser},
-    {id: 3, title: 'Подрядчики', url: '#', icon: faHandshake},
+    {id: 2, title: 'Сообщения', path: '#', icon: MessageIcon},
+    {id: 3, title: 'Пользователи', path: '#', icon: userIcon},
+    {id: 4, title: 'Подрядчики', path: '#', icon: ContractorIcon},
+    {id: 5, title: 'Календарь', path: '#', icon: CalendarIcon},
+    {id: 6, title: 'Статистика', path: '#', icon: DiagramIcon},
 ];
+  
+  // Пример данных для меню
+  

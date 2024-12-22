@@ -10,8 +10,9 @@ interface ISidebarProps {
 
 const Sidebar:FC<ISidebarProps> = ({open}) => {
     return (
-        <div className={open ? style.active : style.notactive}>            <Logo />
-            <SidebarMenu />  
+        <div className={open ? style.active : style.notactive}>          
+        <Logo open={open} />
+        <SidebarMenu open={open}/>  
         </div>
     );
 };

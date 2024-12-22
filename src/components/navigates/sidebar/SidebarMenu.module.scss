@@ -1,12 +1,97 @@
-.nav {
-    .item {
-        display: flex;
-    }
+@mixin link {
+    color: #293d4f;
+    font-size: 13px;
+    font-weight: 300;
 }
 
-.submenu {
-    display: flex;
-    flex-direction: column;
+.nav {
+    position: relative;
+    li {
+        padding: 2px 12px 8px;
+    }
+    .item {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 5px 10px;
+        a {
+            color: #293d4f;
+            font-size: 13px;
+            font-weight: 600;
+            &:hover {
+                color: #4263eb;
+            }
+        }
+        .group {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            width: 21px;
+            margin-right: 2px;
+            border: none;
+            height: auto;
+            img {
+                width: 100%;
+            }
+        }
+        .arrow {
+            position: absolute;
+            right: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #171621;
+        }
+        .title {
+            color: #293d4f;
+            font-size: 13px;
+            font-weight: 600;
+        }
+    }
+    .closed {
+        display: flex;
+        justify-content: center;
+        .icon {
+            width: 22px;
+            border-radius: 8px;
+            height: auto;
+            padding: 2px 4px;
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .submenu {
+        li {
+            padding: 7px 12px 11px;
+            a {
+                @include link;
+                &:hover {
+                    color: #4263eb;
+                }
+            }
+            &:not(:last-child) {
+                border-bottom: 1px solid #e7ecf0;
+            }
+        }
+    }
+    .sub-hover {
+        background-color: #fff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        padding: 10px;
+        position: absolute;
+        left: 60px;
+        top: 0px;
+        width: 180px;
+        height: fit-content;
+        z-index: 10;
+        li {
+            background-color: transparent;
+        }
+        a {
+            @include link;
+        }
+    }
 }
 
 .hidden {

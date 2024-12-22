@@ -1,19 +1,21 @@
 @mixin commonSettings {
     background-color: rgb(255, 255, 255);
     z-index: 10;
-    transition: all .33s ease-in;
+    transition: all .2s ease-in;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    padding-top: 25px;
 }
 
 .active {
     @include commonSettings;
     width: 220px;
-    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .notactive {
     @include commonSettings;
     width: 70px;
-    overflow: hidden;
+    position: relative;
 }
