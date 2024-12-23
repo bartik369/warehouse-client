@@ -1,103 +1,106 @@
-.sidebar-content {
-    padding-left: 10px;
+.content {
     list-style: none;
-    padding: 0;
     position: relative;
-    .test {
-        position: absolute;
-        left: 67px;
-        width: 220px;
-        height: fit-content;
-        background-color: goldenrod;
-        z-index: 99;
+    width: 100%;
+    .menu-item {
+        position: relative;
+        .submenu-closed {
+            position: absolute;
+            top: 0;
+            left: 66px;
+            width: 190px;
+            background-color: #fdfeff;
+            box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
+            z-index: 99;
+            .wrapper {
+                position: relative;
+                border: 1px solid #e5e7eb;
+                .sub-title {
+                    color: #293d4f;
+                    font-size: 14px;
+                    padding: 13.5px 10px;
+                    background-color: #dee3f3;
+                }
+            }
+        }
     }
-}
-
-.menu-item {
-    margin-bottom: 10px;
-    color: brown;
-}
-
-.menu-item-header {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.menu-item-header:hover {
-    background-color: #444;
-}
-
-.icon {
-    width: 21px;
-    margin-right: 2px;
-    border: none;
-    height: auto;
-    img {
-        width: 100%;
-    }
-}
-
-.item-name {
-    display: inline-block;
-    color: rgb(23, 22, 22);
-    font-size: 16px;
-    transition: opacity 0.3s ease;
-}
-
-.submenu-toggle {
-    margin-left: auto;
-    color: rgb(156, 172, 9);
-    font-size: 14px;
 }
 
 .submenu {
     padding-left: 20px;
-    margin-top: 10px;
     list-style: none;
     padding: 0;
+    li {
+        padding: 10px;
+        a {
+            color: #293d4f;
+            font-size: 13px;
+            &:hover {
+                color: #4263eb;
+                ;
+            }
+        }
+    }
+    li:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb;
+    }
 }
 
-.submenu-item {
-    display: block;
-    color: rgb(39, 6, 82);
-    text-decoration: none;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    border-radius: 5px;
+.menu-item-header {
+    padding: 9px 22px;
+    display: flex;
+    align-items: center;
+    &:hover {
+        background-color: #dee3f3;
+    }
+    .sub-title,
+    a {
+        color: #293d4f;
+        font-size: 13px;
+        cursor: pointer;
+        &:hover {
+            color: #4263eb;
+        }
+    }
+    .title {
+        position: absolute;
+        left: 66px;
+        top: 0;
+        padding: 14px 10px;
+        font-size: 14px;
+        background-color: #dee3f3;
+        box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
+        border-radius: 0 8px 8px 0;
+        a {
+            color: #293d4f;
+            &:hover {
+                color: #273971;
+            }
+        }
+    }
+    .icon {
+        img {
+            width: 23px;
+            height: 100%;
+        }
+    }
+    .open-icon {
+        margin-right: 10px;
+        img {
+            width: 21px;
+            height: 100%;
+        }
+    }
 }
-
-.submenu-item:hover {
-    background-color: #555;
-}
-
-
-/* Всплывающее меню при наведении на иконки */
-
-.menu-item-header:hover .item-name {
-    display: inline-block;
-    position: absolute;
-    left: 90px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: rgb(108, 9, 9);
-    font-size: 14px;
-}
-
-
-/* Стрелочки для подменю */
 
 .submenu-toggle {
     margin-left: auto;
-    font-size: 14px;
-}
-
-.submenu-toggle {
-    color: rgb(18, 38, 188);
+    font-size: 12px;
+    color: #293d4f;
+    cursor: pointer;
+    &:hover {
+        color: #4263eb;
+    }
 }
 
 .sidebar.open .submenu-toggle {

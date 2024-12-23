@@ -9,18 +9,20 @@ interface ISubMenuProps {
 
 const SubMenu:FC<ISubMenuProps> = ({item, open}) => {
    return (
-     <>
-       {!open && item.title}
+     <div className={style.wrapper}>
+       <div className={style['sub-title']}>
+        {!open && item.title}
+       </div>
        <ul className={style.submenu}>
          {item.subMenu.map((subitem: any, subindex: any) => (
            <li key={subindex}>
-             <Link to={subitem.path} className={style["submenu-item"]}>
+             <Link to={subitem}>
                {subitem.title}
              </Link>
            </li>
          ))}
        </ul>
-     </>
+     </div>
    );
 };
 
