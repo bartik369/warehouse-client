@@ -9,97 +9,68 @@ import SubMenu from './SubMenu';
 interface ISidebarMenuProps {
     open: boolean;
 };
-
 const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
-  const [visible, setVisible] = useState(false);
-  const [subVisible, setSubVisible] = useState(false)
 
-  useEffect(() => {
-    !open && setVisible(false);
-  }, [open]);
+  const [openSubmenu, setOpenSubmenu] = useState(null);        
+  const [hoveredItem, setHoveredItem] = useState(null);       
 
-  const displayHandler = () => {
-    setVisible(!visible);
-  };
+  const toggleSubmenu = (index: any) => setOpenSubmenu(index === openSubmenu ? null : index);
+  const handleMouseEnter = (index: any) => setHoveredItem(index);
+  const handleMouseLeave = () => setHoveredItem(null);
 
   return (
-    <nav className={style.nav}>
-      <ul>
-        {sidebarMenuData && sidebarMenuData.map((item) => (
-            <li key={item.id} 
-              onMouseEnter={() => (item.subMenu && !open) && setVisible(true)}
-              onMouseLeave={() => (item.subMenu && !open) &&  setVisible(false)}>
-              <div className={open ? style.item : style.closed}>
-                 {(item.subMenu && !open)
-                  ?  <img className={style.icon} src={item.icon} alt=""/>
-                  : open
-                  ? <img className={style.icon} src={item.icon} alt=""/>
-                  : <Link to={item.path}>
-                      <img className={style.icon} src={item.icon} alt=""/>
+    <nav>
+      <ul className={style['sidebar-content']}>
+        {sidebarMenuData.map((item, index) => (
+          <Link to={item.path}>
+          <li key={index} className={style['menu-item']}>
+            <div
+              className={`${style['menu-item-header']} ${item.subMenu ? style['has-submenu'] : ''}`}
+              onClick={() => item.subMenu && toggleSubmenu(index)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <span className={style.icon}>
+                <img src={item.icon} alt="" />
+              </span>
+              {(!open && hoveredItem === index)
+               ? <span className={style['item-name']}>
+                    <Link to={item.path}>
+                      {item.title}
                     </Link>
-                 }
-                  <div className={!open ? style.hidden : style.item}>
-                    {item.subMenu
-                      ? <div className={style.title}>{item.title}</div>
-                      : <Link to={item.path}>
-                          {item.title}
-                        </Link>
-                   }
+                </span>
+                : open 
+                ? item.title
+                : ''
+            }
+            { (!open && hoveredItem === index && item.subMenu)
+                ? <div className={style.test}>
+                   <SubMenu item={item} open={open}/>
                   </div>
-                {item.subMenu && (
-                  <div className={open ? style.arrow : style.hidden}>
-                    {visible 
-                      ? <FontAwesomeIcon icon={faChevronUp} onClick={displayHandler} />
-                      : <FontAwesomeIcon icon={faChevronDown} onClick={displayHandler} />
-                    }
-                  </div>
-                )}
-              </div>
-              {item.subMenu && 
-              <div className={(!open && visible) ? style['sub-hover'] : ''}>
-              <SubMenu item={item} visible={visible} open={open}/>
-              </div>
-              }
-            </li>
-          ))}
+                : ''}
+              {item.subMenu && open &&(
+                <span className={style['submenu-toggle']}>
+                  {openSubmenu === index 
+                    ? <FontAwesomeIcon icon={faChevronUp} />
+                    : <FontAwesomeIcon icon={faChevronDown} />
+                  }
+                </span>
+              )}
+            </div>
+            {openSubmenu === index && item.subMenu && open && (
+              <SubMenu item={item} open={open}/>
+            )}
+          </li>
+          </Link>
+        ))}
       </ul>
     </nav>
   );
+  
 };
 
 export default SidebarMenu;
 
-
-
-
-
-// return (
-//   <nav className={style.nav}>
-//     <ul>
-//       {sidebarMenuData && sidebarMenuData.map((item) => (
-//           <li key={item.id}>
-//             <div className={open ? style.item : style.closed}>
-//               <Link className={style.group} to={item.url}>
-//                 <img className={style.icon} src={item.icon} alt="" />
-//                 <div className={!open ? style.hidden : style.item}>
-//                   {item.title}
-//                 </div>
-//               </Link>
-//               {item.subMenu && (
-//                 <div className={open ? style.arrow : style.hidden}>
-//                   {visible 
-//                     ? <FontAwesomeIcon icon={faChevronUp} onClick={displayHandler} />
-//                     : <FontAwesomeIcon icon={faChevronDown} onClick={displayHandler} />
-//                   }
-//                 </div>
-//               )}
-//             </div>
-//             {item.subMenu && <SubMenu item={item} visible={visible} />}
-//           </li>
-//         ))}
-//     </ul>
-//   </nav>
-// );
 
 
 

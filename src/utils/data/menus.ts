@@ -14,17 +14,23 @@ export const headerMenuData = [
 ];
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '#', icon: LocationIcon, subMenu: [
-      { id: 1, title: 'Московский офис', path: '#'},
-      { id: 2, title: 'Екатеринбург', path: '#'},
-      { id: 3, title: 'Красногорск', path: '#'},
+      { id: 1, title: 'Московский офис', path: '/moscow'},
+      { id: 2, title: 'Екатеринбург', path: '/ekb'},
+      { id: 3, title: 'Красногорск', path: '/krasnogrsk'},
     ]
 },
-    {id: 2, title: 'Сообщения', path: '#', icon: MessageIcon},
-    {id: 3, title: 'Пользователи', path: '#', icon: userIcon},
-    {id: 4, title: 'Подрядчики', path: '#', icon: ContractorIcon},
-    {id: 5, title: 'Календарь', path: '#', icon: CalendarIcon},
-    {id: 6, title: 'Статистика', path: '#', icon: DiagramIcon},
+{ id: 2,  title: 'Процессы', path: '#', icon: LocationIcon, subMenu: [
+    { id: 1, title: 'Перемещения', path: '/move'},
+    { id: 2, title: 'Выдача', path: '/take'},
+    { id: 3, title: 'Прием', path: '/get'},
+    { id: 4, title: 'Инвентаризация', path: '/inventory'},
+  ]
+},
+    {id: 3, title: 'Сообщения', path: '/messages', icon: MessageIcon},
+    {id: 4, title: 'Пользователи', path: '/users', icon: userIcon},
+    {id: 5, title: 'Подрядчики', path: '/contractors', icon: ContractorIcon},
+    {id: 6, title: 'Календарь', path: '/calendar', icon: CalendarIcon},
+    {id: 7, title: 'Статистика', path: '/sttistic', icon: DiagramIcon},
 ];
-  
-  // Пример данных для меню
+
   

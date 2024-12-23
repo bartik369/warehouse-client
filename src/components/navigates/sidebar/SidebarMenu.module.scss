@@ -1,99 +1,105 @@
-@mixin link {
-    color: #293d4f;
-    font-size: 13px;
-    font-weight: 300;
-}
-
-.nav {
+.sidebar-content {
+    padding-left: 10px;
+    list-style: none;
+    padding: 0;
     position: relative;
-    li {
-        padding: 2px 12px 8px;
-    }
-    .item {
-        display: flex;
-        align-items: center;
-        position: relative;
-        padding: 5px 10px;
-        a {
-            color: #293d4f;
-            font-size: 13px;
-            font-weight: 600;
-            &:hover {
-                color: #4263eb;
-            }
-        }
-        .group {
-            display: flex;
-            align-items: center;
-        }
-        .icon {
-            width: 21px;
-            margin-right: 2px;
-            border: none;
-            height: auto;
-            img {
-                width: 100%;
-            }
-        }
-        .arrow {
-            position: absolute;
-            right: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            color: #171621;
-        }
-        .title {
-            color: #293d4f;
-            font-size: 13px;
-            font-weight: 600;
-        }
-    }
-    .closed {
-        display: flex;
-        justify-content: center;
-        .icon {
-            width: 22px;
-            border-radius: 8px;
-            height: auto;
-            padding: 2px 4px;
-            img {
-                width: 100%;
-            }
-        }
-    }
-    .submenu {
-        li {
-            padding: 7px 12px 11px;
-            a {
-                @include link;
-                &:hover {
-                    color: #4263eb;
-                }
-            }
-            &:not(:last-child) {
-                border-bottom: 1px solid #e7ecf0;
-            }
-        }
-    }
-    .sub-hover {
-        background-color: #fff;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        padding: 10px;
+    .test {
         position: absolute;
-        left: 60px;
-        top: 0px;
-        width: 180px;
+        left: 67px;
+        width: 220px;
         height: fit-content;
-        z-index: 10;
-        li {
-            background-color: transparent;
-        }
-        a {
-            @include link;
-        }
+        background-color: goldenrod;
+        z-index: 99;
     }
 }
 
-.hidden {
-    display: none;
+.menu-item {
+    margin-bottom: 10px;
+    color: brown;
+}
+
+.menu-item-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item-header:hover {
+    background-color: #444;
+}
+
+.icon {
+    width: 21px;
+    margin-right: 2px;
+    border: none;
+    height: auto;
+    img {
+        width: 100%;
+    }
+}
+
+.item-name {
+    display: inline-block;
+    color: rgb(23, 22, 22);
+    font-size: 16px;
+    transition: opacity 0.3s ease;
+}
+
+.submenu-toggle {
+    margin-left: auto;
+    color: rgb(156, 172, 9);
+    font-size: 14px;
+}
+
+.submenu {
+    padding-left: 20px;
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.submenu-item {
+    display: block;
+    color: rgb(39, 6, 82);
+    text-decoration: none;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.submenu-item:hover {
+    background-color: #555;
+}
+
+
+/* Всплывающее меню при наведении на иконки */
+
+.menu-item-header:hover .item-name {
+    display: inline-block;
+    position: absolute;
+    left: 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(108, 9, 9);
+    font-size: 14px;
+}
+
+
+/* Стрелочки для подменю */
+
+.submenu-toggle {
+    margin-left: auto;
+    font-size: 14px;
+}
+
+.submenu-toggle {
+    color: rgb(18, 38, 188);
+}
+
+.sidebar.open .submenu-toggle {
+    transform: rotate(180deg);
 }

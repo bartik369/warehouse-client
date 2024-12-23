@@ -1,15 +1,21 @@
 .burger {
-    font-size: 15px;
-    width: 45px;
-    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
-    border: 1px solid #e3e6ec;
-    cursor: pointer;
+    border: none;
     margin-right: 20px;
     margin-left: 20px;
-    color: #99a2b3;
+    color: #293d4f;
+    cursor: pointer;
     &:hover {
         color: #808896;
+    }
+    img {
+        width: 20px;
+        height: auto;
     }
 }

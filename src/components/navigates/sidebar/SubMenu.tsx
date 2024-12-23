@@ -1,0 +1,27 @@
+import {FC} from 'react';
+import { Link } from 'react-router-dom';
+import style from './SidebarMenu.module.scss';
+
+interface ISubMenuProps {
+    item: any;
+    open: boolean;
+}
+
+const SubMenu:FC<ISubMenuProps> = ({item, open}) => {
+   return (
+     <>
+       {!open && item.title}
+       <ul className={style.submenu}>
+         {item.subMenu.map((subitem: any, subindex: any) => (
+           <li key={subindex}>
+             <Link to={subitem.path} className={style["submenu-item"]}>
+               {subitem.title}
+             </Link>
+           </li>
+         ))}
+       </ul>
+     </>
+   );
+};
+
+export default SubMenu;
