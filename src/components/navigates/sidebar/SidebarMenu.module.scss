@@ -1,5 +1,4 @@
 .content {
-    list-style: none;
     position: relative;
     width: 100%;
     .menu-item {
@@ -9,9 +8,9 @@
             top: 0;
             left: 66px;
             width: 190px;
+            z-index: 9;
             background-color: #fdfeff;
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
-            z-index: 99;
             .wrapper {
                 position: relative;
                 border: 1px solid #e5e7eb;
@@ -19,7 +18,7 @@
                     color: #293d4f;
                     font-size: 14px;
                     padding: 13.5px 10px;
-                    background-color: #dee3f3;
+                    background-color: #e7eaf7;
                 }
             }
         }
@@ -51,7 +50,7 @@
     display: flex;
     align-items: center;
     &:hover {
-        background-color: #dee3f3;
+        background-color: #e7eaf7;
     }
     .sub-title,
     a {
@@ -66,15 +65,15 @@
         position: absolute;
         left: 66px;
         top: 0;
-        padding: 14px 10px;
+        padding: 14px 18px 14px 10px;
         font-size: 14px;
-        background-color: #dee3f3;
+        background-color: #e7eaf7;
         box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
         border-radius: 0 8px 8px 0;
         a {
             color: #293d4f;
             &:hover {
-                color: #273971;
+                color: #4263eb;
             }
         }
     }

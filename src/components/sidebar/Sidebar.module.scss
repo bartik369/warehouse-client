@@ -1,10 +1,10 @@
 @mixin commonSettings {
-    background-color: rgb(255, 255, 255);
+    position: relative;
+    padding-top: 25px;
     z-index: 10;
     transition: all .2s ease-in;
-    position: relative;
+    background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-    padding-top: 25px;
 }
 
 .active {

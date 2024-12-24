@@ -1,21 +1,21 @@
-import {FC, useState, useEffect} from 'react';
+import {FC, useState} from 'react';
+import SubMenu from './SubMenu';
 import { Link } from 'react-router-dom';
 import { sidebarMenuData } from '../../../utils/data/menus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
 import style from './SidebarMenu.module.scss';
-import SubMenu from './SubMenu';
 
 interface ISidebarMenuProps {
     open: boolean;
 };
+
 const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
+  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);        
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);       
 
-  const [openSubmenu, setOpenSubmenu] = useState(null);        
-  const [hoveredItem, setHoveredItem] = useState(null);       
-
-  const toggleSubmenu = (index: any) => {
-    setOpenSubmenu(index === openSubmenu ? null : index)
+  const toggleSubmenu = (id: number) => {
+    setOpenSubmenu(id === openSubmenu ? null : id)
   };
   const handleMouseEnter = (index: any) => {
     setHoveredItem(index);
@@ -27,12 +27,12 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
   return (
     <nav>
       <ul className={style.content}>
-        {sidebarMenuData.map((item, index) => (
-          <li key={index} className={style["menu-item"]}>
+        {sidebarMenuData.map((item) => (
+          <li key={item.id} className={style["menu-item"]}>
             <div className={`${style["menu-item-header"]} ${
                 item.subMenu ? style["has-submenu"] : ""}`}
-              onClick={() => item.subMenu && toggleSubmenu(index)}
-              onMouseEnter={() => handleMouseEnter(index)}
+              onClick={() => item.subMenu && toggleSubmenu(item.id)}
+              onMouseEnter={() => handleMouseEnter(item.id)}
               onMouseLeave={handleMouseLeave}
             >
               <span className={!open ? style.icon : style['open-icon']}>
@@ -41,7 +41,7 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
                   : <img src={item.icon} alt="" />
                 }
               </span>
-              {(!open && hoveredItem === index && !item.subMenu) &&
+              {(!open && hoveredItem === item.id && !item.subMenu) &&
                 <div className={style.title}>
                     <Link to={item.path}>{item.title}</Link>
                 </div>
@@ -52,22 +52,22 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
                 ? <div className={style['sub-title']}>{item.title}</div>
                 : ""
               }
-              {(!open && hoveredItem === index && item.subMenu) && (
+              {(!open && hoveredItem === item.id && item.subMenu) && (
                 <div className={style['submenu-closed']}>
-                  <SubMenu item={item} open={open} />
+                  <SubMenu title={item.title} item={item} open={open} />
                 </div>
               )}
               {item.subMenu && open && (
                 <span className={style["submenu-toggle"]}>
-                  {openSubmenu === index 
+                  {openSubmenu === item.id 
                   ? <FontAwesomeIcon icon={faChevronUp} />
                   : <FontAwesomeIcon icon={faChevronDown} />
                   }
                 </span>
               )}
             </div>
-            {openSubmenu === index && item.subMenu && open && (
-              <SubMenu item={item} open={open} />
+            {openSubmenu === item.id && item.subMenu && open && (
+              <SubMenu title={item.title} item={item} open={open} />
             )}
           </li>
         ))}
