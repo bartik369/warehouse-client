@@ -1,5 +1,54 @@
-.profile {
-    position: absolute;
-    right: 0px;
-    display: flex;
+.content {
+    position: relative;
+    .icon {
+        padding: 6px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        background: transparent;
+        transition: all .2s ease-in;
+        &:hover {
+            background-color: #e1e7f2;
+            border: 1px solid #cacdd6;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    .menu {
+        position: absolute;
+        top: 50px;
+        width: 250px;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: rgba(62, 72, 81, 0.1) 0px 48px 100px 0px;
+        right: 0;
+        .username {
+            font-size: 18px;
+            color: #15141f;
+            font-weight: 600;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        li {
+            padding: 15px 10px;
+            &:hover {
+                background-color: #f5f7fe;
+            }
+            a {
+                color: #293d4f;
+                font-size: 15px;
+                &:hover {
+                    color: #4263eb;
+                }
+            }
+        }
+    }
+    .hidden {
+        display: none;
+    }
 }

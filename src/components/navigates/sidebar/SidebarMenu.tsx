@@ -17,7 +17,7 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
   const toggleSubmenu = (id: number) => {
     setOpenSubmenu(id === openSubmenu ? null : id)
   };
-  const handleMouseEnter = (index: any) => {
+  const handleMouseEnter = (index: number) => {
     setHoveredItem(index);
   };
   const handleMouseLeave = () => {

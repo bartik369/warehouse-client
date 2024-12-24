@@ -7,10 +7,16 @@ import DiagramIcon from '../../assets/elements/diagram-icon.svg';
 
 
 export const headerMenuData = [
-    {id: 1, title: 'Ссылка 1', url: '#'},
-    {id: 2, title: 'Ссылка 2', url: '#'},
-    {id: 3, title: 'Ссылка 3', url: '#'},
-    {id: 4, title: 'Ссылка 4', url: '#'},
+    {id: 1, title: 'Ссылка 1', path: '#'},
+    {id: 2, title: 'Ссылка 2', path: '#'},
+    {id: 3, title: 'Ссылка 3', path: '#'},
+    {id: 4, title: 'Ссылка 4', path: '#'},
+];
+export const profileMenuData = [
+    {id: 1, title: 'Профиль', path: '#'},
+    {id: 2, title: 'Ссылка 2', path: '#'},
+    {id: 3, title: 'Ссылка 3', path: '#'},
+    {id: 4, title: 'Ссылка 4', path: '#'},
 ];
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '#', icon: LocationIcon, subMenu: [

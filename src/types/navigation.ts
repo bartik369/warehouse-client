@@ -4,6 +4,7 @@ export interface ISubmenu {
     path: string;
 }
 export interface ISidebar {
+    [x: string]: any;
     id: number;
     title: string;
     path: string;
