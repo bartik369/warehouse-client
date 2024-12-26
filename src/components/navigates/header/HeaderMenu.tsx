@@ -7,12 +7,12 @@ const HeaderMenu:FC = () => {
     return (
       <nav className={style.menu}>
         <ul>
-          {headerMenuData &&
+          {/* {headerMenuData &&
             headerMenuData.map((item, key) => (
               <li key={item.id}>
                 <Link to={item.path}>{item.title}</Link>
               </li>
-            ))}
+            ))} */}
         </ul>
       </nav>
     );

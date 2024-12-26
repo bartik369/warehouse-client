@@ -56,13 +56,8 @@ const ProfileMenu:FC = () => {
                     )}
                 </ul>
             </nav>
-            <div className={style.logout}>
-                <BtnAction 
-                    title={signout} 
-                    click={logoutHandler} 
-                    type={'button'} 
-                    color={'grey'} 
-                />
+            <div className={style.logout} onClick={logoutHandler}>
+                <span>{signout}</span>
             </div>
             </div>
         </div>
