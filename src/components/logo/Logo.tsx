@@ -10,7 +10,7 @@ const Logo:FC<ILogoProps> = ({open}) => {
     return (
         <div className={style.logo}>
             <div className={style.title}>
-               <img src={WarehouseLogo} alt="" />
+               {/* <img src={WarehouseLogo} alt="" /> */}
                {open ? <p>management</p> : ''}
             </div>
             <img src="" alt="" />

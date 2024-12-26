@@ -1,6 +1,6 @@
 import {FC} from 'react';
-import menu from '../../../../assets/elements/menu.svg'
-import menuOpen from '../../../../assets/elements/menu-open.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import style from './BurgerBtn.module.scss';
 
 interface IBurgerBtn {
@@ -12,8 +12,8 @@ const BurgerBtn: FC<IBurgerBtn> = ({action, isActive}) => {
     return (
         <button className={style.burger} onClick={action}>
             {!isActive
-            ?  <img src={menu} alt="" />
-            :  <img src={menuOpen} alt="" />
+            ?  <FontAwesomeIcon className={style.icon} icon={faBars}/>
+            :  <FontAwesomeIcon className={style.icon} icon={faBarsStaggered}/>
             }
         </button>
     );

@@ -10,7 +10,7 @@ const HeaderMenu:FC = () => {
           {headerMenuData &&
             headerMenuData.map((item, key) => (
               <li key={item.id}>
-                <Link to={item.url}>{item.title}</Link>
+                <Link to={item.path}>{item.title}</Link>
               </li>
             ))}
         </ul>

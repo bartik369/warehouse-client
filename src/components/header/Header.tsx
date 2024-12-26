@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC} from 'react';
 import HeaderMenu from '../navigates/header/HeaderMenu';
 import style from './Header.module.scss';
 import Search from '../search/Search';
@@ -8,7 +8,7 @@ import Profile from '../profile/Profile';
 interface IHeaderProps {
   isActive: boolean;
   setIsActive: (isActive:boolean) => void;
-}
+};
 
 const Header:FC<IHeaderProps> = ({isActive, setIsActive}) => {
     return (

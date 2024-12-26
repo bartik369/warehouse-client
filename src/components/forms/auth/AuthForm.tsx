@@ -25,7 +25,7 @@ const AuthForm: FC = () => {
       e.preventDefault();
       try {
         await signinUser(authData).unwrap().then((data) => {
-          dispatch(setCredentials(data))
+          dispatch(setCredentials(data.user))
           localStorage.setItem('accessToken', data.token);
           navigate('/')  
         });
@@ -65,7 +65,7 @@ const AuthForm: FC = () => {
             icon={<FontAwesomeIcon icon={faLock} />}
             label={password}
           />
-          <BtnAction title={signin}/>
+          <BtnAction title={signin} type={'submit'} color={'blue'}/>
         </form>
         <div className={style.reset}>{forgetPassword}
           <Link to={import.meta.env.VITE_RESET_PASSWORD}>

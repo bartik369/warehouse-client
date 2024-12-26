@@ -3,12 +3,14 @@ import style from './Buttons.module.scss';
 
 interface IButtonProps {
     type?: 'submit' | 'button' | 'reset';
+    color: string;
     title: string;
+    click?:() => void;
 };
 
-const BtnAction:FC<IButtonProps> = ({type='submit', title}) => {
+const BtnAction:FC<IButtonProps> = ({type, title, click, color}) => {
     return (
-        <button type={type} className={`${style.button} ${style.blue}`}>
+        <button onClick={click} type={type} className={`${style.button} ${style[color]}`}>
             <p>{title}</p>
         </button>
     );

@@ -9,6 +9,7 @@ import { isFetchBaseQueryError, isErrorWithMessage } from '../../../helpers/erro
 import profileIcon from '../../../assets/elements/profile-icon.svg'
 import style from './ProfileMenu.module.scss';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
+import BtnAction from '../../ui/buttons/BtnAction';
 
 
 const ProfileMenu:FC = () => {
@@ -18,6 +19,7 @@ const ProfileMenu:FC = () => {
     const { isOpen, openModalHandler, modalRef } =  useOutsideClick();
     
      const logoutHandler = async () => {
+      console.log('click')
       try {
         await logout(user.id).unwrap();
         navigate("/");
@@ -33,7 +35,7 @@ const ProfileMenu:FC = () => {
     };
 
     return (
-        <div className={style.content}  ref={modalRef}>
+        <div className={style.content} ref={modalRef}>
             <button className={style.icon} onClick={openModalHandler}>
                 <img src={profileIcon} alt="" />
             </button>
@@ -54,7 +56,14 @@ const ProfileMenu:FC = () => {
                     )}
                 </ul>
             </nav>
-            <button onClick={logoutHandler}>{signout}</button>
+            <div className={style.logout}>
+                <BtnAction 
+                    title={signout} 
+                    click={logoutHandler} 
+                    type={'button'} 
+                    color={'grey'} 
+                />
+            </div>
             </div>
         </div>
     );

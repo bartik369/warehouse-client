@@ -1,4 +1,4 @@
-import React from 'react';
+import { search } from '../../utils/constants/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import style from './Search.module.scss';
@@ -9,7 +9,7 @@ const Search = () => {
             <div className={style.glass}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
             </div>
-            <input placeholder='search' type="text" />
+            <input placeholder={search} type="text" />
         </div>
     );
 };

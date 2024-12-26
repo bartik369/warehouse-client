@@ -20,8 +20,12 @@ export function useOutsideClick<T extends HTMLDivElement>() {
         };
     }, [isOpen]);
 
-    const openModalHandler = () => {setIsOpen(!isOpen)};
-    const closeModalHandler = () => setIsOpen(false);
+    const openModalHandler = () => {
+        setIsOpen(!isOpen);
+    };
+    const closeModalHandler = () => {
+        setIsOpen(false);
+    };
 
 
     return { isOpen, openModalHandler, modalRef };

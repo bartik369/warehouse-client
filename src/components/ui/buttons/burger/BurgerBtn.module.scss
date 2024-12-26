@@ -1,21 +1,24 @@
 .burger {
-    display: flex;
-    align-items: center;
+    width: 33px;
+    height: 33px;
+    display: inline-flex;
+    flex-shrink: 0;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background-color: rgb(255, 255, 255);
+    align-items: center;
+    box-sizing: border-box;
+    padding: 8px;
     border-radius: 50%;
     border: none;
     margin-right: 20px;
     margin-left: 20px;
-    color: #293d4f;
+    background-color: #e31450;
     cursor: pointer;
+    transition: all .5s ease-out;
     &:hover {
-        color: #808896;
+        background-color: #fa386f;
     }
-    img {
-        width: 20px;
-        height: auto;
+    .icon {
+        color: #fff;
+        font-size: 16px;
     }
 }

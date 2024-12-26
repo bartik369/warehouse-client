@@ -10,3 +10,4 @@ export const reset = 'Сбросить';
 export const email = 'Email';
 export const password  = 'Password';
 export const titleSignin = 'IT management';
+export const search = 'Поиск...';

@@ -1,11 +1,6 @@
 .button {
     outline: none;
     border: none;
-    padding: 12px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 400;
-    color: #ffffff;
     cursor: pointer;
     transition: all .6s ease-in;
 }
@@ -13,8 +8,27 @@
 .blue {
     background-color: #3f70ed;
     border: 1px solid #2a60eb;
+    padding: 12px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #ffffff;
     &:hover {
         background-color: #5987fb;
         border: 1px solid #4578f8;
+    }
+}
+
+.grey {
+    background-color: #f5f7fe;
+    padding: 12px 35px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #4263eb;
+    font-weight: 600;
+    &:hover {
+        background-color: #4263eb;
+        color: #fff;
     }
 }
