@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
-import SubMenu from './SubMenu';
 import { Link } from 'react-router-dom';
+import SubMenu from './SubMenu';
 import { sidebarMenuData } from '../../../utils/data/menus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';

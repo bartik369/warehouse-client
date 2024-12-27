@@ -1,25 +1,22 @@
-import {FC, useRef, useState} from 'react';
+import {FC} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import {useLogoutUserMutation} from '../../../store/api/authApi';
 import { profileMenuData } from '../../../utils/data/menus';
 import { signout } from '../../../utils/constants/constants';
+import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { isFetchBaseQueryError, isErrorWithMessage } from '../../../helpers/error-handling';
 import profileIcon from '../../../assets/elements/profile-icon.svg'
 import style from './ProfileMenu.module.scss';
-import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import BtnAction from '../../ui/buttons/BtnAction';
-
 
 const ProfileMenu:FC = () => {
     const user = useAppSelector(store => store.auth.user);
     const navigate = useNavigate();
     const [logout] = useLogoutUserMutation();
-    const { isOpen, openModalHandler, modalRef } =  useOutsideClick();
+    const { isOpen, openModalHandler, modalRef } = useOutsideClick();
     
      const logoutHandler = async () => {
-      console.log('click')
       try {
         await logout(user.id).unwrap();
         navigate("/");
@@ -56,8 +53,10 @@ const ProfileMenu:FC = () => {
                     )}
                 </ul>
             </nav>
-            <div className={style.logout} onClick={logoutHandler}>
-                <span>{signout}</span>
+            <div className={style.logout}>
+                <button onClick={logoutHandler}>
+                    {signout}
+                </button >
             </div>
             </div>
         </div>
