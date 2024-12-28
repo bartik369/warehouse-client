@@ -11,9 +11,10 @@ import Home from './components/pages/home/Home';
 import Layout from './routes/Layout';
 import PublicRoutes from './routes/PublicRoutes';
 import Profile from './components/pages/profile/Profile';
-import Device from './components/pages/devices/Device';
+import Device from './components/pages/device/Device';
 import Devices from './components/pages/devices/Devices';
 import './App.scss';
+import AddDevice from './components/pages/add-device/AddDevice';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ function App() {
         <Route element={<Profile />} path='/profile' />
         <Route element={<Device />} path='/device/:id'/>
         <Route element={<Devices />} path='/devices'/>
+        <Route element={<AddDevice />} path='/device/add'/>
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>

@@ -5,7 +5,7 @@ interface IInputProps {
     onChange:(e:React.ChangeEvent<HTMLInputElement>) => void;
     type: string;
     value: string;
-    placeholder: string;
+    placeholder?: string;
     icon?: React.ReactElement;
     label?: string
 };

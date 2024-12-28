@@ -28,5 +28,5 @@ export function useOutsideClick<T extends HTMLDivElement>() {
     };
 
 
-    return { isOpen, openModalHandler, modalRef };
+    return { isOpen, openModalHandler, setIsOpen, modalRef };
 }

@@ -49,3 +49,8 @@ export interface IContractor {
     address: string;
 
 }
+export interface IManufacturer {
+    id: number;
+    name: string
+    icon?: React.ReactElement;
+}
