@@ -1,6 +1,10 @@
 .select {
+    display: flex;
+    border: 1px solid #dce4e8;
+    padding: 13px 24px;
+    border-radius: 20px;
+    margin-bottom: 22px;
     position: relative;
-    width: 100%;
     .label {
         position: absolute;
         z-index: 9;
@@ -12,24 +16,14 @@
         background-color: #ffffff;
     }
     .header {
-        position: relative;
-        width: 100%;
         outline: none;
-        border: 1px solid #dce4e8;
-        border-radius: 20px;
         display: flex;
+        width: 100%;
         justify-content: space-between;
         align-items: center;
-        padding: 13px 24px;
-        margin-bottom: 22px;
         transition: all .3s ease-in;
         color: #15141f;
-        background-color: #fff;
         cursor: pointer;
-        &:focus {
-            outline: none;
-            border: 1px solid #aab1b7;
-        }
         .placeholder {
             color: #1a1f33;
             font-size: 15px;
@@ -47,7 +41,7 @@
 
 .menu {
     position: absolute;
-    top: 53px;
+    top: 50px;
     height: 350px;
     width: 100%;
     border-radius: 12px;

@@ -5,7 +5,8 @@ import { manufacturers } from '../../../utils/constants/device';
 import { manufacturersLabel, deviceType, deviceTypeLabel} from '../../../utils/constants/device';
 import Textarea from '../../ui/textarea/Textarea';
 import { yes, no } from '../../../utils/constants/constants';
-import Toggle from '../../ui/radio/Toggle';
+import Toggle from '../../ui/checkbox/Toggle';
+import Checkbox from '../../ui/checkbox/Checkbox';
 import style from './AddDeviceForm.module.scss';
 
 const AddDeviceForm:FC = () => {
@@ -42,6 +43,13 @@ const AddDeviceForm:FC = () => {
             value={device.inventoryNumber} 
             label={'Инвентарный номер'} 
            />
+           <Select setSelect={(item) => setDevice({
+               ...device,
+               manufacturer: item
+           })}
+           items={manufacturers} 
+           label={manufacturersLabel}
+           />
            <Select  setSelect={(item) => setDevice({
                ...device,
                type: item
@@ -67,24 +75,18 @@ const AddDeviceForm:FC = () => {
             value={device.location} 
             label={'Локация'} 
            />
-           <Select setSelect={(item) => setDevice({
-               ...device,
-               manufacturer: item
-           })}
-           items={manufacturers} 
-           label={manufacturersLabel}
-           />
-           <Textarea setText={(e) => setDevice({
-               ...device, description: e.target.value
-            })}
-            value={device.description}
-            label={'Oписание'}
-            />
             <Toggle 
                 checked={checked} 
                 setChecked={() => setChecked(!checked)}
                 leftPosition={no}
                 rightPosition={yes}
+            />
+            <Checkbox items={deviceType}/>
+            <Textarea setText={(e) => setDevice({
+               ...device, description: e.target.value
+            })}
+            value={device.description}
+            label={'Oписание'}
             />
         </form>
     );
