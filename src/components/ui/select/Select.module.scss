@@ -4,11 +4,11 @@
     .label {
         position: absolute;
         z-index: 9;
-        top: -6px;
+        top: -7px;
         left: 15px;
         padding: 0 5px;
         color: #9ba4a9;
-        font-size: 12px;
+        font-size: 11px;
         background-color: #ffffff;
     }
     .header {
@@ -20,7 +20,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 14px 19px;
+        padding: 13px 24px;
         margin-bottom: 22px;
         transition: all .3s ease-in;
         color: #15141f;

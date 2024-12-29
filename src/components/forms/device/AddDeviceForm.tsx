@@ -3,7 +3,9 @@ import Input from '../../ui/input/Input';
 import Select from '../../ui/select/Select';
 import { manufacturers } from '../../../utils/constants/device';
 import { manufacturersLabel, deviceType, deviceTypeLabel} from '../../../utils/constants/device';
-
+import Textarea from '../../ui/textarea/Textarea';
+import { yes, no } from '../../../utils/constants/constants';
+import Toggle from '../../ui/radio/Toggle';
 import style from './AddDeviceForm.module.scss';
 
 const AddDeviceForm:FC = () => {
@@ -16,10 +18,10 @@ const AddDeviceForm:FC = () => {
         media: '',
         location: '',
         manufacturer: '',
+        description: '',
     });
+    const [checked, setChecked] = useState(false);
 
-    console.log(device);
-    
     return (
         <form className={style.form}>
            <Input
@@ -40,10 +42,13 @@ const AddDeviceForm:FC = () => {
             value={device.inventoryNumber} 
             label={'Инвентарный номер'} 
            />
-           <Select items={deviceType} label={deviceTypeLabel} setSelect={(item) => setDevice({
+           <Select  setSelect={(item) => setDevice({
                ...device,
                type: item
-           })} />
+           })}
+           items={deviceType} 
+           label={deviceTypeLabel}
+           />
             <Input
             onChange={(e) => setDevice({...device, weight: e.target.value})}
             type={'text'} 
@@ -62,10 +67,25 @@ const AddDeviceForm:FC = () => {
             value={device.location} 
             label={'Локация'} 
            />
-           <Select items={manufacturers} label={manufacturersLabel} setSelect={(item) => setDevice({
+           <Select setSelect={(item) => setDevice({
                ...device,
                manufacturer: item
-           })} />
+           })}
+           items={manufacturers} 
+           label={manufacturersLabel}
+           />
+           <Textarea setText={(e) => setDevice({
+               ...device, description: e.target.value
+            })}
+            value={device.description}
+            label={'Oписание'}
+            />
+            <Toggle 
+                checked={checked} 
+                setChecked={() => setChecked(!checked)}
+                leftPosition={no}
+                rightPosition={yes}
+            />
         </form>
     );
 };

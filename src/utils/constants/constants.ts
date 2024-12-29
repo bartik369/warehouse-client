@@ -11,3 +11,5 @@ export const email = 'Email';
 export const password  = 'Password';
 export const titleSignin = 'IT management';
 export const search = 'Поиск...';
+export const yes = 'Да';
+export const no = 'Нет';

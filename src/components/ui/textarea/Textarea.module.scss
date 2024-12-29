@@ -1,0 +1,22 @@
+.textarea {
+    border: 1px solid #dce4e8;
+    border-radius: 20px;
+    padding: 15px;
+    position: relative;
+    textarea {
+        outline: none;
+        resize: none;
+        border: none;
+        width: 100%;
+    }
+    .label {
+        position: absolute;
+        z-index: 9;
+        top: -8px;
+        left: 15px;
+        padding: 0 5px;
+        color: #9ba4a9;
+        font-size: 11px;
+        background-color: #ffffff;
+    }
+}
