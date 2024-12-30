@@ -1,0 +1,48 @@
+.number {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    border: 1px solid #dce4e8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    position: relative;
+    transition: all .6s ease-in;
+    color: #15141f;
+    .value {
+        width: fit-content;
+        font-size: 22px;
+        font-weight: 600;
+        border: none;
+        outline: none;
+        text-align: center;
+    }
+    .btn {
+        padding: 5px;
+        color: #1a1f33;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color .3s ease-in;
+        &:hover {
+            color: #e41450;
+        }
+    }
+    .label {
+        position: absolute;
+        background-color: #ffffff;
+        padding: 0 5px;
+        color: #9ba4a9;
+        font-size: 11px;
+        top: -8px;
+        left: 18px;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
