@@ -53,6 +53,9 @@
     &:hover {
         background-color: #e7eaf7;
     }
+    &:hover .icon {
+        filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(7495%) hue-rotate(334deg) brightness(91%) contrast(97%);
+    }
     .sub-title,
     a {
         color: #293d4f;

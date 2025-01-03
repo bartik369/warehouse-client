@@ -1,26 +1,27 @@
 import {FC, useState} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
+import { Checked } from '../../../types/content';
+import { selectFromList } from '../../../utils/constants/device';
 import style from './Checkbox.module.scss';
 
 interface ICheckboxProps {
-    items: any[]
+    items: any[];
+    label: string;
 }
-type Checked = {
-    [index: number]: boolean;
-}
-const Checkbox:FC<ICheckboxProps> = ({items}) => {
+
+const Checkbox:FC<ICheckboxProps> = ({items, label}) => {
    const {isOpen, setIsOpen, modalRef} = useOutsideClick();
    const [list, setList] = useState<Checked>({});
 
     return (
       <div className={style.checkbox}>
-        <div className={style.label}>Производитель</div>
+        <div className={style.label}>{label}</div>
         <div
           className={style.header}
           onClick={() => setIsOpen(!isOpen)}
           role="button"
         >
-          <div className={style.placeholder}>Category</div>
+          <div className={style.placeholder}>{selectFromList}</div>
           <span className={style.arrow} />
         </div>
         {isOpen && (
@@ -31,7 +32,7 @@ const Checkbox:FC<ICheckboxProps> = ({items}) => {
                   type="checkbox"
                   id={item.id}
                   value={item.name}
-                  checked={list[item.id]}
+                  checked={list[item.id] || false}
                   onChange={(e) =>
                     setList({
                       ...list,

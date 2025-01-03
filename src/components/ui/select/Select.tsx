@@ -1,21 +1,22 @@
 import {FC, useState} from 'react';
-import { IManufacturer } from '../../../types/devices';
 import { selectFromList } from '../../../utils/constants/device';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
+import { ISelectedItem } from '../../../types/devices';
 import style from './Select.module.scss';
 
 interface ISelectProps {
-    items: IManufacturer[];
+    items: ISelectedItem[];
     label: string;
-    setSelect: (item: string) => void;
+    setSelect: (value: ISelectedItem) => void;
 }
 
 const Select:FC<ISelectProps> = ({items, label, setSelect}) => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
-    const handleOption = (item: string) => {
-      setSelectedOption(item);
+    const handleOption = (item:ISelectedItem) => {
+      item
+      setSelectedOption(item.name);
       setSelect(item);
       setIsOpen(false);
     };
@@ -40,7 +41,7 @@ const Select:FC<ISelectProps> = ({items, label, setSelect}) => {
               <div 
               className={style.item} 
               key={item.id}  
-              onClick={() => handleOption(item.name)}
+              onClick={() => handleOption(item)}
               >
                 {item.name}
               </div>

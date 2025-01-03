@@ -1,0 +1,23 @@
+.file {
+    display: flex;
+    align-items: center;
+    .icon {
+        width: 35px;
+        cursor: pointer;
+        img {
+            width: 100%;
+        }
+    }
+    span {
+        padding: 5px;
+        font-size: 13px;
+        color: #5c6174;
+        cursor: pointer;
+    }
+}
+
+.test {
+    &:hover {
+        filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(7495%) hue-rotate(334deg) brightness(91%) contrast(97%);
+    }
+}

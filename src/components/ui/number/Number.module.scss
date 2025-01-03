@@ -3,23 +3,27 @@
     width: fit-content;
     align-items: center;
     border: 1px solid #dce4e8;
-    padding: 6px 14px;
+    height: 45px;
     border-radius: 20px;
+    margin-bottom: 22px;
     position: relative;
     transition: all .6s ease-in;
     color: #15141f;
-    .value {
-        width: fit-content;
-        font-size: 22px;
-        font-weight: 600;
+    input {
+        width: 45px;
+        padding: 10px 15px;
         border: none;
         outline: none;
+    }
+    .value {
+        font-size: 22px;
+        font-weight: 600;
         text-align: center;
     }
     .btn {
-        padding: 5px;
+        padding: 12px;
         color: #1a1f33;
-        font-size: 24px;
+        font-size: 20px;
         cursor: pointer;
         transition: color .3s ease-in;
         &:hover {

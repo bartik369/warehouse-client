@@ -6,7 +6,7 @@
  .input {
      display: flex;
      border: 1px solid #dce4e8;
-     padding: 13px 24px;
+     height: 45px;
      border-radius: 20px;
      margin-bottom: 22px;
      position: relative;
@@ -16,7 +16,9 @@
          width: 100%;
          border: none;
          font-size: 15px;
+         padding: 13px 24px;
          outline: none;
+         background-color: transparent;
      }
      .label {
          position: absolute;

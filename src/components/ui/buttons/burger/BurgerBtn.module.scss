@@ -1,12 +1,10 @@
 .burger {
     width: 33px;
     height: 33px;
-    display: inline-flex;
-    flex-shrink: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 8px;
     border-radius: 50%;
     border: none;
     margin-right: 20px;
