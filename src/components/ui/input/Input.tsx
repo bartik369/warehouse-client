@@ -7,7 +7,7 @@ interface IInputProps {
     value: string;
     placeholder?: string;
     icon?: React.ReactElement;
-    label?: string
+    label?: string;
 };
 const Input:FC<IInputProps> = ({type, value, placeholder, onChange, icon, label}) => {
     return (

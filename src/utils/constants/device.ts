@@ -14,9 +14,15 @@ export const manufacturers = [
 ]
 
 export const manufacturersLabel = 'Производитель';
+export const deviceName = 'Название'
+export const serialNumber = 'Серийный номер'
+export const inventoryNumber = 'Инвентарный номер'
+export const location = 'Локация'
+export const description = 'Описание'
+export const modelCode = 'Код модели'
 export const deviceTypeLabel = 'Тип устройства';
 export const selectFromList = 'Выбрать из списка';
-export const deviceWeight = 'Вес устройства (кг)';
+export const deviceWeight = 'Вес устройства(кг)';
 export const kg = '(кг)';
 
 
@@ -45,14 +51,14 @@ export const deviceTypes:DeviceTypes = {
   laptop: {
     label: "Ноутбук",
     uniqueFields: [
-      { name: "screenSize", label: "Размер экрана", type: "number", step: 0.1 },
-      { name: "memorySize", label: "Оперативная память", type: "number", step: 1 },
+      { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
+      { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
     ],
   },
   monitor: {
     label: "Монитор",
     uniqueFields: [
-      { name: "screenSize", label: "Размер экрана", type: "number", step: 0.1},
+      { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1},
     ],
   },
   desktop: {
@@ -64,14 +70,15 @@ export const deviceTypes:DeviceTypes = {
   tv: {
     label: "Телевизор",
     uniqueFields: [
-      { name: "screenSize", label: "Размер экрана", type: "number", step: 0.1 },
+      { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
     ],
   },
   mobile: {
     label: "Мобильный телефон",
     uniqueFields: [
-        { name: "screenSize", label: "Размер экрана", type: "number", step: 0.1 },
-        { name: "memorySize", label: "Оперативная память", type: "number", step: 2 },
+        { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
+        { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
+        
     ],
   },
 };

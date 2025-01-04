@@ -1,9 +1,11 @@
 .info {
     display: flex;
+    margin-bottom: 25px;
     .picture {
-        position: relative;
+        position: sticky;
+        top: 100px;
         width: 350px;
-        height: auto;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -20,7 +22,7 @@
     .form {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 10px;
+        gap: 15px;
         width: 100%;
         margin: 0 auto;
     }
@@ -32,4 +34,8 @@
     font-weight: 600;
     margin-bottom: 40px;
     color: #1a1f33;
+}
+
+.action {
+    text-align: center;
 }

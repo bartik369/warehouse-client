@@ -5,6 +5,7 @@
  
  .input {
      display: flex;
+     align-items: center;
      border: 1px solid #dce4e8;
      height: 45px;
      border-radius: 20px;
@@ -41,7 +42,8 @@
          @include border;
      }
      .icon {
-         padding-right: 8px;
+         position: relative;
          color: #dce4e8;
+         left: 14px;
      }
  }

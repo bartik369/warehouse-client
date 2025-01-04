@@ -17,7 +17,7 @@
                 .sub-title {
                     color: #1a2034;
                     font-size: 14px;
-                    font-weight: 600;
+                    font-weight: 500;
                     padding: 16.6px 10px;
                     background-color: #e7eaf7;
                 }
@@ -35,7 +35,7 @@
         a {
             color: #1a2034;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             &:hover {
                 color: #4263eb;
             }
@@ -60,7 +60,7 @@
     a {
         color: #293d4f;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         cursor: pointer;
         &:hover {
             color: #4263eb;
@@ -78,7 +78,7 @@
         a {
             color: #1a2034;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             &:hover {
                 color: #4263eb;
             }
@@ -86,6 +86,7 @@
     }
     .icon {
         img {
+            filter: brightness(0) saturate(100%) invert(31%) sepia(3%) saturate(3393%) hue-rotate(191deg) brightness(89%) contrast(83%);
             width: 23px;
             height: 100%;
         }
@@ -93,6 +94,7 @@
     .open-icon {
         margin-right: 10px;
         img {
+            filter: brightness(0) saturate(100%) invert(31%) sepia(3%) saturate(3393%) hue-rotate(191deg) brightness(89%) contrast(83%);
             width: 21px;
             height: 100%;
         }

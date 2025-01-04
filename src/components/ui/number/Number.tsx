@@ -16,7 +16,6 @@ const Number:FC<INumberProps> = ({ device, setDevice}) => {
         step:0.1
     };
     
-
     const handleValueChange = (newValue:number) => {
         const parsedValue = parseFloat(newValue.toFixed(2));
         if (!isNaN(parsedValue)) {

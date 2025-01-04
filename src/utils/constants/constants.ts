@@ -14,3 +14,4 @@ export const search = 'Поиск...';
 export const yes = 'Да';
 export const no = 'Нет';
 export const selectPhoto = 'Выбрать фото';
+export const addNewDeviceTitle = 'Добавление нового устройства';

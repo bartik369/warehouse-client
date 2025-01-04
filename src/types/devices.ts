@@ -3,7 +3,7 @@ export interface IDevice {
     serialNumber?: string;
     modelCode?: string;
     inventoryNumber?: string;
-    title: string;
+    name: string;
     type: string;
     manufacturer?: string;
     weight?: number;

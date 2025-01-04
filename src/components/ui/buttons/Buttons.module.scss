@@ -27,6 +27,22 @@
     font-size: 13px;
     color: #1a1f33;
     font-weight: 600;
+    margin: 10px;
+    &:hover {
+        background-color: #2544bc;
+        color: #fff;
+    }
+}
+
+.red {
+    font-family: inherit;
+    background-color: #e41450;
+    padding: 13px 32px;
+    border-radius: 18px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    margin: 10px;
     &:hover {
         background-color: #2544bc;
         color: #fff;
