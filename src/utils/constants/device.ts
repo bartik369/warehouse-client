@@ -21,7 +21,8 @@ export const location = 'Локация'
 export const description = 'Описание'
 export const modelCode = 'Код модели'
 export const deviceTypeLabel = 'Тип устройства';
-export const selectFromList = 'Выбрать из списка';
+export const selectFromList = 'Выбрать из списка'
+export const noExistSelect = 'Нет доступных опций';
 export const deviceWeight = 'Вес устройства(кг)';
 export const kg = '(кг)';
 

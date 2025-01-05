@@ -1,19 +1,10 @@
 import { FC, useState } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import {
-  manufacturers,
-  manufacturersLabel,
-  deviceType,
-  deviceTypeLabel,
-  deviceName,
-  serialNumber,
-  inventoryNumber,
-  location,
-  description,
-  modelCode,
-} from "../../../utils/constants/device";
-import { addNewDeviceTitle } from "../../../utils/constants/constants";
+import { manufacturers, manufacturersLabel, deviceType, deviceTypeLabel,
+  deviceName, serialNumber, inventoryNumber, location, description,
+  modelCode } from "../../../utils/constants/device";
+import { addNewDeviceTitle, add, reset } from "../../../utils/constants/constants";
 import Textarea from "../../ui/textarea/Textarea";
 import { locations } from "../../../utils/constants/device";
 import Toggle from "../../ui/checkbox/Toggle";
@@ -23,24 +14,16 @@ import Preview from "../../ui/preview/Preview";
 import Number from "../../ui/number/Number";
 import { deviceTypes } from "../../../utils/constants/device";
 import CustomNumber from "../../ui/number/CustomNumber";
-import style from "./AddDeviceForm.module.scss";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
+import style from "./AddDeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
   const [checked, setChecked] = useState(false);
-  const {
-    device,
-    media,
-    itemType,
-    mediaHandler,
-    numberHandler,
-    extNumberHandler,
-    addDeviceHandler,
-    resetDeviceHandler,
-    setItemType,
-    updateDevice,
-  } = useAddDevice();
+  const { device, media, itemType,
+    mediaHandler,numberHandler, extNumberHandler, addDeviceHandler,
+    resetDeviceHandler, setItemType, updateDevice, selectedValues} = useAddDevice();
+
   return (
     <>
       <div className={style.title}>{addNewDeviceTitle}</div>
@@ -56,19 +39,23 @@ const AddDeviceForm: FC = () => {
             label={deviceName}
           />
           <Select
-            setSelect={(item) => {
-              updateDevice("type", item.value);
+            setValue={(item) => {
+              updateDevice("type", item.name);
               setItemType(item.value);
             }}
             items={deviceType}
             label={deviceTypeLabel}
-          />
+            value={selectedValues["type"]}
+
+            />
           <Select
-            setSelect={(item) => {
+            setValue={(item) => {
               updateDevice("manufacturer", item.name);
             }}
             items={manufacturers}
             label={manufacturersLabel}
+            value={selectedValues["manufacturer"]}
+            
           />
           <Input
             onChange={(e) => updateDevice("serialNumber", e.target.value)}
@@ -90,9 +77,7 @@ const AddDeviceForm: FC = () => {
             label={modelCode}
           />
           <Number device={device} setDevice={numberHandler} />
-          {itemType &&
-            deviceTypes &&
-            deviceTypes[itemType]?.uniqueFields?.map((item) => (
+          {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
               <CustomNumber
                 key={item.name}
                 device={device}
@@ -101,11 +86,12 @@ const AddDeviceForm: FC = () => {
               />
             ))}
           <Select
-            setSelect={(item) => {
+            setValue={(item) => {
               updateDevice("location", item.name);
             }}
             items={locations}
             label={location}
+            value={selectedValues["location"]}
           />
           <Textarea
             setText={(e) => updateDevice("description", e.target.value)}
@@ -115,18 +101,8 @@ const AddDeviceForm: FC = () => {
         </form>
       </div>
       <div className={style.action}>
-        <BtnAction
-          type="button"
-          color={"red"}
-          title="Сбросить"
-          click={resetDeviceHandler}
-        />
-        <BtnAction
-          type="submit"
-          color={"grey"}
-          title="Добавить"
-          click={addDeviceHandler}
-        />
+        <BtnAction type="button" color={"red"} title={reset} click={resetDeviceHandler}/>
+        <BtnAction type="submit" color={"grey"} title={add} click={addDeviceHandler}/>
       </div>
     </>
   );

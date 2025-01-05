@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect, useCallback } from "react";
+import { useState, ChangeEvent, useCallback } from "react";
 import { IDevice } from "../../types/devices";
 
 export function useAddDevice() {
@@ -22,7 +22,12 @@ export function useAddDevice() {
         file: '',
         prevImg: null,
     });
+    const [selectedOption, setSelectedOption] = useState({
+        id: null,
+        name: ''
+    });
     const [itemType, setItemType] = useState<string>('');
+    const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
 
     const mediaHandler = useCallback((e:ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -54,7 +59,7 @@ export function useAddDevice() {
             
         }
     }
-    const resetDeviceHandler = () => {
+    const resetDeviceHandler = useCallback(() => {
         setDevice({
             name: '',
             serialNumber: '',
@@ -70,19 +75,28 @@ export function useAddDevice() {
             manufacturer: '',
             inStock: true,
             description: ''
-        })
-    }
+        });
+        setSelectedValues({});
+        setItemType('');
+    }, []);
+
     const updateDevice = useCallback((field: keyof IDevice, value: any) => {
         setDevice((prev) => ({
             ...prev,
             [field]: value
-        }))
-    }, [])
-    
+        }));
+        setSelectedValues((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    }, []);
+
     return {
         device, 
         media,
         itemType, 
+        selectedOption,
+        selectedValues,
         setItemType,
         updateDevice,
         mediaHandler, 
@@ -90,5 +104,6 @@ export function useAddDevice() {
         extNumberHandler,
         addDeviceHandler,
         resetDeviceHandler,
+        setSelectedOption,
     }
 }

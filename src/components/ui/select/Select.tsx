@@ -1,54 +1,56 @@
-import {FC, useState} from 'react';
-import { selectFromList } from '../../../utils/constants/device';
+import {FC} from 'react';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
 import { ISelectedItem } from '../../../types/devices';
+import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import style from './Select.module.scss';
 
 interface ISelectProps {
     items: ISelectedItem[];
     label: string;
-    setSelect: (value: ISelectedItem) => void;
+    value: string;
+    setValue: (value: ISelectedItem) => void;
 }
 
-const Select:FC<ISelectProps> = ({items, label, setSelect}) => {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const { isOpen, setIsOpen, modalRef } = useOutsideClick();
+const Select:FC<ISelectProps> = ({items, label, value, setValue}) => {
+  const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
-    const handleOption = (item:ISelectedItem) => {
-      item
-      setSelectedOption(item.name);
-      setSelect(item);
-      setIsOpen(false);
-    };
+  const handleSelect = (option: ISelectedItem) => {
+    setIsOpen(false);
+    setValue(option);
+  };
 
     return (
-      <div className={style.select}>
-        <div className={style.label}>{label}</div>
-        <div
-          className={style.header}
-          onClick={() => setIsOpen(!isOpen)}
-          role="button"
-          tabIndex={0}
-        >
-          <div className={style.placeholder}>
-            {selectedOption ? selectedOption : selectFromList}
-          </div>
-          <span className={style.arrow} />
+      <div className={style.selectContainer} ref={modalRef}>
+            {label && <label className={style.label}>{label}</label>}
+            <input
+                type="text"
+                className={style.input}
+                value={value || ''}
+                onClick={() => setIsOpen(!isOpen)}
+                placeholder={selectFromList}
+                readOnly
+            />
+            <div className={style.arrow} onClick={() => setIsOpen(!isOpen)} />
+            {isOpen && (
+                <div className={style.dropdown}>
+                    {items.length > 0 
+                      ? (items.map((option) => (
+                            <div
+                                key={option.id}
+                                className={style.option}
+                                onClick={() => handleSelect(option)}
+                                role="button"
+                                tabIndex={0}
+                            >
+                                {option.name}
+                            </div>
+                        ))
+                    ) : (
+                        <div className={style['no-options']}>{noExistSelect}</div>
+                    )}
+                </div>
+            )}
         </div>
-        {isOpen && (
-          <div ref={modalRef} className={style.menu}>
-            {items.map((item) => (
-              <div 
-              className={style.item} 
-              key={item.id}  
-              onClick={() => handleOption(item)}
-              >
-                {item.name}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
     );
 };
 
