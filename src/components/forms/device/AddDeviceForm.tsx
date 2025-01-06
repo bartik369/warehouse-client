@@ -16,6 +16,7 @@ import { deviceTypes } from "../../../utils/constants/device";
 import CustomNumber from "../../ui/number/CustomNumber";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
+import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import style from "./AddDeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
@@ -101,8 +102,22 @@ const AddDeviceForm: FC = () => {
         </form>
       </div>
       <div className={style.action}>
-        <BtnAction type="button" color={"red"} title={reset} click={resetDeviceHandler}/>
-        <BtnAction type="submit" color={"grey"} title={add} click={addDeviceHandler}/>
+        <BtnAction 
+          icon={faCircleXmark}
+          type="button" 
+          size="lg"
+          color="red" 
+          title={reset} 
+          click={resetDeviceHandler}
+        />
+        <BtnAction 
+          icon={faPlus} 
+          type="submit" 
+          size="lg"
+          color="grey"
+          title={add} 
+          click={addDeviceHandler}
+        />
       </div>
     </>
   );

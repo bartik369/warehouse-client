@@ -1,18 +1,25 @@
 import {FC} from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import style from './Buttons.module.scss';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface IButtonProps {
-    type?: 'submit' | 'button' | 'reset';
+    icon?: IconProp;
+    size: 'sm' | 'md' | 'lg';
     color: string;
+    type?: 'submit' | 'button' | 'reset';
     title: string;
     click?:() => void;
 };
 
-const BtnAction:FC<IButtonProps> = ({type, title, click, color}) => {
+const BtnAction:FC<IButtonProps> = ({icon, size, type, title, color, click}) => {
     return (
-        <button onClick={click} type={type} className={`${style.button} ${style[color]}`}>
-            <p>{title}</p>
-        </button>
+        <>
+            <button onClick={click} type={type} className={`${style[size]} ${style[color]}`}>
+                <FontAwesomeIcon className={style.icon} icon={icon!} />
+                <p>{title}</p>
+            </button>
+        </>
     );
 };
 
