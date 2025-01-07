@@ -1,16 +1,17 @@
 import { DeviceTypes } from './../../types/devices';
 
 export const manufacturers = [
-    {id: 1, name: 'Apple', value: ''},
-    {id: 2, name: 'DELL', value: ''},
-    {id: 3, name: 'Check Point', value: ''},
-    {id: 4, name: 'Cisco', value: ''},
-    {id: 5, name: 'HP', value: ''},
-    {id: 6, name: 'Kyocera', value: ''},
-    {id: 7, name: 'Lenovo', value: ''},
-    {id: 8, name: 'Nokia', value: ''},
-    {id: 9, name: 'Philips', value: ''},
-    {id: 10, name: 'Sony', value: ''},
+    {id: 1, name: 'Неизвестный', value: 'unknown'},
+    {id: 2, name: 'Apple', value: 'apple'},
+    {id: 3, name: 'DELL', value: 'dell'},
+    {id: 4, name: 'Check Point', value: 'check_point'},
+    {id: 5, name: 'Cisco', value: 'cisco'},
+    {id: 6, name: 'HP', value: 'hp'},
+    {id: 7, name: 'Kyocera', value: 'kyocera'},
+    {id: 8, name: 'Lenovo', value: 'lenovo'},
+    {id: 9, name: 'Nokia', value: 'nokia'},
+    {id: 10, name: 'Philips', value: 'philips'},
+    {id: 11, name: 'Sony', value: 'sony'},
 ]
 
 export const manufacturersLabel = 'Производитель';

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
-import { ISelectedItem } from '../../../types/devices';
+import { IDevice, ISelectedItem, IValidationDeviceErrors  } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import style from './Select.module.scss';
 
@@ -8,10 +8,12 @@ interface ISelectProps {
     items: ISelectedItem[];
     label: string;
     value: string;
+    errors: IValidationDeviceErrors;
+    errorTrigger: string;
     setValue: (value: ISelectedItem) => void;
 }
 
-const Select:FC<ISelectProps> = ({items, label, value, setValue}) => {
+const Select:FC<ISelectProps> = ({items, label, value, setValue, errors, errorTrigger}) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
   const handleSelect = (option: ISelectedItem) => {
@@ -20,6 +22,12 @@ const Select:FC<ISelectProps> = ({items, label, value, setValue}) => {
   };
 
     return (
+      <div className={style.wrapper}>
+          <div className={style.error}>
+          {errors[errorTrigger as keyof IValidationDeviceErrors]?.length! > 0 && 
+      <div>{errors[errorTrigger as keyof IValidationDeviceErrors]}</div>
+      }
+          </div>
       <div className={style.selectContainer} ref={modalRef}>
             {label && <label className={style.label}>{label}</label>}
             <input
@@ -50,6 +58,7 @@ const Select:FC<ISelectProps> = ({items, label, value, setValue}) => {
                     )}
                 </div>
             )}
+        </div>
         </div>
     );
 };

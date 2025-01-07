@@ -1,8 +1,8 @@
 import React, {ChangeEvent, FC} from 'react';
 import { deviceWeight} from '../../../utils/constants/device';
+import { IDevice } from '../../../types/devices';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
-import { IDevice } from '../../../types/devices';
 import style from './Number.module.scss';
 
 interface INumberProps {
@@ -39,21 +39,25 @@ const Number:FC<INumberProps> = ({ device, setDevice}) => {
     };
     
     return (
-        <div className={style.number}>
-            <div className={style.label}>
-               {deviceWeight}
+        <div className={style.wrapper}>
+            <div className={style.error}>
             </div>
-            <FontAwesomeIcon className={style.btn} onClick={handleIncrease} icon={faMinus}/>
-            <input 
-                className={style.value} 
-                type="number"
-                value={device.weight}
-                step={data.step}
-                min={data.min}
-                max={data.max}
-                onChange={handleInputChange}
-            />
-            <FontAwesomeIcon className={style.btn} onClick={handleDecrease} icon={faPlus} />
+            <div className={style.number}>
+                <div className={style.label}>
+                {deviceWeight}
+                </div>
+                <FontAwesomeIcon className={style['btn-left']} onClick={handleIncrease} icon={faMinus}/>
+                <input 
+                    className={style.value} 
+                    type="number"
+                    value={device.weight}
+                    step={data.step}
+                    min={data.min}
+                    max={data.max}
+                    onChange={handleInputChange}
+                />
+                <FontAwesomeIcon className={style['btn-right']} onClick={handleDecrease} icon={faPlus} />
+            </div>
         </div>
     );
 };

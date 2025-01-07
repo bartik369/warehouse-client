@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
+import { FC} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturers, manufacturersLabel, deviceType, deviceTypeLabel,
   deviceName, serialNumber, inventoryNumber, location, description,
   modelCode } from "../../../utils/constants/device";
-import { addNewDeviceTitle, add, reset } from "../../../utils/constants/constants";
+import { addNewDeviceTitle, add, reset, yes, no, serviceable } from "../../../utils/constants/constants";
 import Textarea from "../../ui/textarea/Textarea";
 import { locations } from "../../../utils/constants/device";
 import Toggle from "../../ui/checkbox/Toggle";
@@ -20,10 +20,10 @@ import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import style from "./AddDeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
-  const [checked, setChecked] = useState(false);
-  const { device, media, itemType,
+  // const [checked, setChecked] = useState(false);
+  const { device, media, itemType, errors,  checked,
     mediaHandler,numberHandler, extNumberHandler, addDeviceHandler,
-    resetDeviceHandler, setItemType, updateDevice, selectedValues} = useAddDevice();
+    resetDeviceHandler, setItemType, updateDevice, setChecked, selectedValues} = useAddDevice();
 
   return (
     <>
@@ -32,12 +32,15 @@ const AddDeviceForm: FC = () => {
         <div className={style.picture}>
           <Preview setMedia={mediaHandler} prevImg={media?.prevImg} />
         </div>
+        <div className={style.forms}>
         <form className={style.form}>
           <Input
             onChange={(e) => updateDevice("name", e.target.value)}
             type={"text"}
             value={device.name}
             label={deviceName}
+            errorTrigger="name"
+            errors={errors}
           />
           <Select
             setValue={(item) => {
@@ -47,6 +50,8 @@ const AddDeviceForm: FC = () => {
             items={deviceType}
             label={deviceTypeLabel}
             value={selectedValues["type"]}
+            errorTrigger="type"
+            errors={errors}
 
             />
           <Select
@@ -56,6 +61,8 @@ const AddDeviceForm: FC = () => {
             items={manufacturers}
             label={manufacturersLabel}
             value={selectedValues["manufacturer"]}
+            errorTrigger="manufacturer"
+            errors={errors}
             
           />
           <Input
@@ -63,6 +70,8 @@ const AddDeviceForm: FC = () => {
             type={"text"}
             value={device.serialNumber || ""}
             label={serialNumber}
+            errorTrigger="serialNumber"
+            errors={errors}
           />
           {/* <Checkbox items={deviceType} label={deviceTypeLabel}/> */}
           <Input
@@ -70,22 +79,17 @@ const AddDeviceForm: FC = () => {
             type={"text"}
             value={device.inventoryNumber || ""}
             label={inventoryNumber}
+            errorTrigger="inventoryNumber"
+            errors={errors}
           />
           <Input
             onChange={(e) => updateDevice("modelCode", e.target.value)}
             type={"text"}
             value={device.modelCode || ""}
             label={modelCode}
+            errorTrigger="modelCode"
+            errors={errors}
           />
-          <Number device={device} setDevice={numberHandler} />
-          {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
-              <CustomNumber
-                key={item.name}
-                device={device}
-                setDevice={extNumberHandler}
-                item={item}
-              />
-            ))}
           <Select
             setValue={(item) => {
               updateDevice("location", item.name);
@@ -93,13 +97,36 @@ const AddDeviceForm: FC = () => {
             items={locations}
             label={location}
             value={selectedValues["location"]}
+            errorTrigger="location"
+            errors={errors}
           />
-          <Textarea
+           <Number device={device} setDevice={numberHandler} />
+           <Toggle 
+                checked={checked} 
+                setChecked={() => setChecked(!checked)}
+                label={serviceable}
+                leftPosition={no}
+                rightPosition={yes}
+            /> 
+        </form>
+        <form className={style.form4}>
+          {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
+              <CustomNumber
+                key={item.name}
+                device={device}
+                setDevice={extNumberHandler}
+                item={item}
+                errors={errors}
+         
+              />
+            ))}
+             <Textarea
             setText={(e) => updateDevice("description", e.target.value)}
             value={device.description || ""}
             label={description}
           />
-        </form>
+          </form>
+          </div>
       </div>
       <div className={style.action}>
         <BtnAction 
@@ -122,17 +149,7 @@ const AddDeviceForm: FC = () => {
     </>
   );
 };
-
 export default AddDeviceForm;
 
-{
   /* <File media={mediaHandler}/> */
-}
-{
-  /* <Toggle 
-                checked={checked} 
-                setChecked={() => setChecked(!checked)}
-                leftPosition={no}
-                rightPosition={yes}
-            /> */
-}
+

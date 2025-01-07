@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import { IValidationDeviceErrors } from '../../../types/devices';
 import style from './Input.module.scss';
 
 interface IInputProps {
@@ -8,10 +9,18 @@ interface IInputProps {
     placeholder?: string;
     icon?: React.ReactElement;
     label?: string;
+    errorTrigger: string;
+    errors: IValidationDeviceErrors;
 };
-const Input:FC<IInputProps> = ({type, value, placeholder, onChange, icon, label}) => {
+const Input:FC<IInputProps> = ({type, value, placeholder, onChange, icon, label, errors, errorTrigger}) => {
+
     return (
-        <div className={style.input}>
+        <div className={style.wrapper}>
+            <div className={style.error}>
+                {errors[errorTrigger as keyof IValidationDeviceErrors]?.length! > 0 && 
+                <div>{errors[errorTrigger as keyof IValidationDeviceErrors]}</div>}
+            </div>
+         <div className={style.input}>
                <div className={style.label}>{label}</div>
                { icon && <div className={style.icon}>{icon}</div> }
                 <input 
@@ -20,6 +29,7 @@ const Input:FC<IInputProps> = ({type, value, placeholder, onChange, icon, label}
                     onChange={onChange}
                     placeholder={placeholder}
                 />
+        </div>
         </div>
     );
 };

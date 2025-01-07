@@ -1,11 +1,20 @@
 .switch {
-    overflow: hidden;
     position: relative;
     display: inline-block;
     width: 60px;
     height: 30px;
+    margin-bottom: 25px;
     input {
         display: none;
+    }
+    .label {
+        position: absolute;
+        width: 140px;
+        padding: 0 5px;
+        color: #9ba4a9;
+        font-size: 11px;
+        top: -18px;
+        left: 18px;
     }
     .slider {
         position: absolute;
@@ -13,7 +22,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #8e91a0;
+        background-color: #e41450;
         border-radius: 40px;
         transition: 0.4s;
         cursor: pointer;
@@ -52,7 +61,7 @@
 }
 
 input:checked+.slider {
-    background-color: #29a744;
+    background-color: #4263eb;
 }
 
 input:checked+.slider:before {

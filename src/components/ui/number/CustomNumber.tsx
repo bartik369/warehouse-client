@@ -1,21 +1,24 @@
 import React, { ChangeEvent, FC} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Field, IDevice } from "../../../types/devices";
+import { Field, IDevice, IValidationDeviceErrors } from "../../../types/devices";
 import style from "./Number.module.scss";
 
 interface ICustomNumberProps {
   device: IDevice;
   setDevice: (entity: number, name: string) => void;
   item: Field;
+  errors: IValidationDeviceErrors;
 }
 
-const CustomNumber: FC<ICustomNumberProps> = ({ device, item, setDevice }) => {
+const CustomNumber: FC<ICustomNumberProps> = ({ device, item, errors, setDevice }) => {
   const data = {
     min: 0,
     max: 1000,
     step: item.step,
   };
+
+   
 
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
@@ -46,27 +49,34 @@ const CustomNumber: FC<ICustomNumberProps> = ({ device, item, setDevice }) => {
   };
 
   return (
-    <div className={style.number}>
-      <div className={style.label}>{item.label}</div>
-      <FontAwesomeIcon
-        className={style.btn}
-        onClick={handleDecrease}
-        icon={faMinus}
-      />
-      <input
-        className={style.value}
-        type={item.type}
-        value={Number(device[item.name as keyof IDevice] || "")}
-        step={data.step}
-        min={data.min}
-        max={data.max}
-        onChange={handleInputChange}
-      />
-      <FontAwesomeIcon
-        className={style.btn}
-        onClick={handleIncrease}
-        icon={faPlus}
-      />
+    <div className={style.wrapper}>
+      <div className={style.error}>
+        {errors[item.name as keyof IValidationDeviceErrors] &&
+        errors[item.name as keyof IValidationDeviceErrors]
+        }
+      </div>
+      <div className={style.number}>
+        <div className={style.label}>{item.label}</div>
+        <FontAwesomeIcon
+          className={style['btn-left']}
+          onClick={handleDecrease}
+          icon={faMinus}
+        />
+        <input
+          className={style.value}
+          type={item.type}
+          value={Number(device[item.name as keyof IDevice] || "")}
+          step={data.step}
+          min={data.min}
+          max={data.max}
+          onChange={handleInputChange}
+        />
+        <FontAwesomeIcon
+          className={style['btn-right']}
+          onClick={handleIncrease}
+          icon={faPlus}
+        />
+      </div>
     </div>
   );
 };

@@ -3,47 +3,57 @@
      outline: none;
  }
  
- .input {
-     display: flex;
-     align-items: center;
-     border: 1px solid #dce4e8;
-     height: 45px;
-     border-radius: 20px;
-     margin-bottom: 22px;
+ .wrapper {
      position: relative;
-     transition: all .6s ease-in;
-     color: #15141f;
-     input {
-         width: 100%;
-         border: none;
-         font-size: 15px;
-         padding: 13px 24px;
-         outline: none;
-         background-color: transparent;
-     }
-     .label {
+     .error {
          position: absolute;
-         background-color: #ffffff;
-         padding: 0 5px;
-         color: #9ba4a9;
+         color: #e41450;
          font-size: 11px;
-         top: -8px;
-         left: 18px;
+         right: 10px;
+         top: -18px;
      }
-      ::placeholder {
-         color: #9ba4a9;
-         font-size: 12px;
-         font-weight: 100;
-     }
-     &:focus {
-         @include border;
-     }
-     &:hover {
-         @include border;
-     }
-     .icon {
+     .input {
+         display: flex;
+         align-items: center;
+         border: 1px solid #dce4e8;
+         height: 45px;
+         border-radius: 20px;
+         margin-bottom: 22px;
          position: relative;
-         color: #dce4e8;
-         left: 14px;
+         transition: all .6s ease-in;
+         color: #15141f;
+         input {
+             width: 100%;
+             border: none;
+             font-size: 15px;
+             padding: 13px 24px;
+             outline: none;
+             background-color: transparent;
+         }
+         .label {
+             position: absolute;
+             background-color: #ffffff;
+             padding: 0 5px;
+             color: #9ba4a9;
+             font-size: 11px;
+             top: -8px;
+             left: 18px;
+         }
+          ::placeholder {
+             color: #9ba4a9;
+             font-size: 12px;
+             font-weight: 100;
+         }
+         &:focus {
+             @include border;
+         }
+         &:hover {
+             @include border;
+         }
+         .icon {
+             position: relative;
+             color: #dce4e8;
+             left: 14px;
+         }
      }
  }

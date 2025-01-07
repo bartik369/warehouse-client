@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, useCallback } from "react";
-import { IDevice } from "../../types/devices";
+import { DeviceFormValidation, DeviceValidateField } from "../../utils/validation/DeviceValidation";
+import { IDevice, IValidationDeviceErrors } from "../../types/devices";
 
 export function useAddDevice() {
     const [device, setDevice] = useState<IDevice>({
@@ -18,6 +19,9 @@ export function useAddDevice() {
         inStock: true,
         description: ''
     });
+    const [errors, setErrors] = useState<IValidationDeviceErrors>({});
+    const [checked, setChecked] = useState(true);
+    
     const [media, setMedia] = useState<{file: Blob | string, prevImg: string | null}>({
         file: '',
         prevImg: null,
@@ -42,7 +46,7 @@ export function useAddDevice() {
         setDevice((prev) => ({
             ...prev,
             weight: num,
-        }))
+        }));
     }, []);
 
     const extNumberHandler = useCallback((num: number, fieldName: string) => {
@@ -50,11 +54,23 @@ export function useAddDevice() {
             ...prev,
             [fieldName]: num,
         }));
+        const data = DeviceValidateField(fieldName, num);
+        setErrors((prev) => ({
+            ...prev,
+            [fieldName]: data
+        }));
     }, []);
 
-    const addDeviceHandler = () => {
+    const addDeviceHandler = async() => {
         try {
-            
+           const validationErrors = DeviceFormValidation(device, itemType);
+           setErrors(validationErrors);
+
+           if (Object.keys(validationErrors).length === 0) {
+               console.log('ok');       
+           } else {
+               console.log('there is error');
+           }
         } catch (error) {
             
         }
@@ -77,6 +93,17 @@ export function useAddDevice() {
             description: ''
         });
         setSelectedValues({});
+        setErrors({
+            name: '',
+            type: '',
+            manufacturer: '',
+            serviceable: '',
+            description: '',
+            location: '',
+            weight: '',
+            screenSize: '',
+            memorySize: '',
+        })
         setItemType('');
     }, []);
 
@@ -89,14 +116,21 @@ export function useAddDevice() {
             ...prev,
             [field]: value,
         }));
+        const data = DeviceValidateField(field, value);
+        setErrors((prev) => ({
+            ...prev,
+            [field]: data
+        }));
     }, []);
 
     return {
+        checked,
         device, 
         media,
         itemType, 
         selectedOption,
         selectedValues,
+        setChecked,
         setItemType,
         updateDevice,
         mediaHandler, 
@@ -105,5 +139,6 @@ export function useAddDevice() {
         addDeviceHandler,
         resetDeviceHandler,
         setSelectedOption,
+        errors,
     }
 }

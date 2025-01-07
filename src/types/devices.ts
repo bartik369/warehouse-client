@@ -20,7 +20,17 @@ export interface IDevice {
     createdBy?: string;
     updatedBy?: string;
 }
-
+export interface IValidationDeviceErrors {
+  name?: string;
+  type?: string;
+  serviceable?: string;
+  description?: string;
+  location?: string;
+  manufacturer?: string;
+  weight?: string;
+  screenSize?: string;
+  memorySize?: string;
+}
 
 export interface IInventory {
     id?: number,

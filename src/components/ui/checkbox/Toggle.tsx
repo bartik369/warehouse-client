@@ -3,15 +3,17 @@ import style from './Toggle.module.scss'
 
 interface IToggleProps {
     checked: boolean;
+    label: string;
     leftPosition: string;
     rightPosition: string;
     setChecked: () => void;
 }
 const Toggle: FC<IToggleProps> = (
-    {checked, leftPosition, rightPosition, setChecked}
+    {checked, leftPosition, rightPosition, label, setChecked}
     ) => {
     return (
         <div className={style.switch}>
+            <div className={style.label}>{label}</div>
             <input
                 type="checkbox"
                 id="checkbox"

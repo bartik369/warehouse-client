@@ -18,6 +18,7 @@ const Preview:FC<IPreviewProps> = ({setMedia, prevImg}) => {
             name="file"
             id="upload" 
             type="file"
+            accept='image/*'
             hidden
             onChange={(e) => setMedia(e)}
         />
