@@ -5,7 +5,7 @@ import { IValidationDeviceErrors } from './../../types/devices';
 type ValidationField = keyof IDevice;
 
 const fieldsMemoryScreen = ['laptop', 'mobile'];
-const fieldScreen = ['tv'];
+const fieldScreen = ['tv', 'monitor'];
 
 
 export const DeviceFormValidation = (formData: IDevice, itemType: string):IValidationDeviceErrors => {
@@ -18,12 +18,12 @@ export const DeviceFormValidation = (formData: IDevice, itemType: string):IValid
             errors[field as keyof IValidationDeviceErrors] = 'Обязательно к заполнению *';
         }
 
-        if (fieldsMemoryScreen.includes(itemType)) {
+        if (fieldsMemoryScreen.includes(itemType) || fieldScreen.includes(itemType)) {
             if (!formData.memorySize) {
-                errors.memorySize = 'Обязательно к заполнению *'
+                errors.memorySize = 'Обязательно к заполнению *';
             }
             if (!formData.screenSize) {
-                errors.screenSize = 'Обязательно к заполнению *'
+                errors.screenSize = 'Обязательно к заполнению *';
             }
         }
         if (formData.name && formData.name.length < 5) {
