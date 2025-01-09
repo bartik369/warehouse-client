@@ -10,6 +10,7 @@ import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, reset,
 import { AuthValidate} from '../../../utils/validation/AuthValidate';
 import { useAuth } from '../../../hooks/data/useAuth';
 import { faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import { ISignin } from '../../../types/user';
 import style from './AuthForm.module.scss';
 
 const AuthForm: FC = () => {
@@ -17,13 +18,17 @@ const AuthForm: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {authData, errors, setErrors, userHandler} = useAuth();
+
+    const checkErrors = (validationErrors:Partial<ISignin>) =>  {
+      return Object.values(validationErrors).every(item => !item)
+    }
     
     const authHandler = async (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const validationErrors = AuthValidate(authData);
-      setErrors(validationErrors);
-
-      if (Object.keys(validationErrors).length === 0) {
+      setErrors(validationErrors)
+     
+      if (checkErrors(validationErrors)) {
         try {
           await signinUser(authData).unwrap().then((data) => {
             dispatch(setCredentials(data.user))
@@ -37,6 +42,7 @@ const AuthForm: FC = () => {
           }
         }
       } else {
+        return null
       }
     };
     return (
@@ -62,7 +68,12 @@ const AuthForm: FC = () => {
             errors={errors}
             name='password'
           />
-          <BtnAction title={signin} size='lg' type='submit' color='blue'/>
+          <BtnAction 
+            title={signin} 
+            size='lg' 
+            type='submit' 
+            color='red'
+          />
         </form>
         <div className={style.reset}>{forgetPassword}
           <Link to={import.meta.env.VITE_RESET_PASSWORD}>
