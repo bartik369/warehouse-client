@@ -24,7 +24,10 @@ button {
 
 .blue {
     background-color: #3f70ed;
-    border: 1px solid #2a60eb;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 400;
+    margin: 10px;
     &:hover {
         background-color: #5987fb;
         border: 1px solid #4578f8;

@@ -39,8 +39,8 @@ const AddDeviceForm: FC = () => {
             type={"text"}
             value={device.name}
             label={deviceName}
-            errorTrigger="name"
             errors={errors}
+            name='name'
           />
           <Select
             setValue={(item) => {
@@ -50,8 +50,8 @@ const AddDeviceForm: FC = () => {
             items={deviceType}
             label={deviceTypeLabel}
             value={selectedValues["type"]}
-            errorTrigger="type"
             errors={errors}
+            name='type'
 
             />
           <Select
@@ -61,8 +61,8 @@ const AddDeviceForm: FC = () => {
             items={manufacturers}
             label={manufacturersLabel}
             value={selectedValues["manufacturer"]}
-            errorTrigger="manufacturer"
             errors={errors}
+            name='manufacturer'
             
           />
           <Input
@@ -70,8 +70,8 @@ const AddDeviceForm: FC = () => {
             type={"text"}
             value={device.serialNumber || ""}
             label={serialNumber}
-            errorTrigger="serialNumber"
             errors={errors}
+            name='serialNumber'
           />
           {/* <Checkbox items={deviceType} label={deviceTypeLabel}/> */}
           <Input
@@ -79,16 +79,16 @@ const AddDeviceForm: FC = () => {
             type={"text"}
             value={device.inventoryNumber || ""}
             label={inventoryNumber}
-            errorTrigger="inventoryNumber"
             errors={errors}
+            name='inventoryNumber'
           />
           <Input
             onChange={(e) => updateDevice("modelCode", e.target.value)}
             type={"text"}
             value={device.modelCode || ""}
             label={modelCode}
-            errorTrigger="modelCode"
             errors={errors}
+            name='modelCode'
           />
           <Select
             setValue={(item) => {
@@ -97,8 +97,8 @@ const AddDeviceForm: FC = () => {
             items={locations}
             label={location}
             value={selectedValues["location"]}
-            errorTrigger="location"
             errors={errors}
+            name='location'
           />
            <Number device={device} setDevice={numberHandler} />
            <Toggle 

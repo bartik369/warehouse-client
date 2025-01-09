@@ -19,7 +19,7 @@ export function useAddDevice() {
         inStock: true,
         description: ''
     });
-    const [errors, setErrors] = useState<IValidationDeviceErrors>({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [checked, setChecked] = useState(true);
     
     const [media, setMedia] = useState<{file: Blob | string, prevImg: string | null}>({
@@ -57,14 +57,14 @@ export function useAddDevice() {
         const data = DeviceValidateField(fieldName, num);
         setErrors((prev) => ({
             ...prev,
-            [fieldName]: data
+            [fieldName]: data as string
         }));
     }, []);
 
     const addDeviceHandler = async() => {
         try {
            const validationErrors = DeviceFormValidation(device, itemType);
-           setErrors(validationErrors);
+           setErrors(validationErrors as Record<string, string>);
 
            if (Object.keys(validationErrors).length === 0) {
                console.log('ok');       
@@ -116,10 +116,10 @@ export function useAddDevice() {
             ...prev,
             [field]: value,
         }));
-        const data = DeviceValidateField(field, value);
+        const validationErrors = DeviceValidateField(field, value);
         setErrors((prev) => ({
             ...prev,
-            [field]: data
+            [field]: validationErrors as string
         }));
     }, []);
 

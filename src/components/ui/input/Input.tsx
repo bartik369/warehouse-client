@@ -1,20 +1,17 @@
 import React, {FC} from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
-import { IValidationDeviceErrors } from '../../../types/devices';
 import style from './Input.module.scss';
 
 interface IInputProps {
     onChange:(e:React.ChangeEvent<HTMLInputElement>) => void;
     type: string;
-    name?: string;
+    name: string;
     value: string;
     placeholder?: string;
     icon?: IconProp;
     label?: string;
-    errorTrigger?: string;
-    errors: IValidationDeviceErrors;
+    errors: Record<string, string>;
 };
 const Input:FC<IInputProps> = ({
     type,
@@ -23,17 +20,15 @@ const Input:FC<IInputProps> = ({
     placeholder, 
     icon, 
     label, 
-    errors, 
-    errorTrigger, 
+    errors,
     onChange}) => {
+
+    const errorMessage = errors?.[name];
 
     return (
         <div className={style.wrapper}>
             <div className={style.error}>
-                {errors[errorTrigger as keyof IValidationDeviceErrors]?.length! > 0 && 
-                <div>
-                    {errors[errorTrigger as keyof IValidationDeviceErrors]}
-                </div>}
+                {errorMessage && errorMessage}
             </div>
          <div className={style.input}>
                <div className={style.label}>{label}</div>
