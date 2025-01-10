@@ -1,5 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import { useGetDevicesQuery } from '../../../store/api/devicesApi';
+import Filter from '../../filter/Filter';
+import style from './Devices.module.scss';
 
 const Devices: FC = () => {
 
@@ -9,8 +11,60 @@ const Devices: FC = () => {
     }, [])
 
     return (
-        <div>
-           devices 
+        <div className={style.wrapper}>
+          <Filter /> 
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
+          <p>text</p>
         </div>
     );
 };

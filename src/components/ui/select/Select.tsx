@@ -15,6 +15,7 @@ interface ISelectProps {
 
 const Select:FC<ISelectProps> = ({items, name, label, value, setValue, errors}) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
+  const errorMessage = errors[name as keyof IValidationDeviceErrors];
 
   const handleSelect = (option: ISelectedItem) => {
     setIsOpen(false);
@@ -24,9 +25,7 @@ const Select:FC<ISelectProps> = ({items, name, label, value, setValue, errors}) 
     return (
       <div className={style.wrapper}>
           <div className={style.error}>
-          {errors[name as keyof IValidationDeviceErrors]?.length! > 0 && 
-      <div>{errors[name as keyof IValidationDeviceErrors]}</div>
-      }
+            {errorMessage?.length! > 0 && errorMessage}
           </div>
       <div className={style.selectContainer} ref={modalRef}>
             {label && <label className={style.label}>{label}</label>}

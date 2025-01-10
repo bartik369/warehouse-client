@@ -14,7 +14,7 @@ export const headerMenuData = [
     {id: 4, title: 'Ссылка 4', path: '#'},
 ];
 export const profileMenuData = [
-    {id: 1, title: 'Админ-панель', path: '#'},
+    {id: 1, title: 'Админ-панель', path: '/device/add'},
     {id: 2, title: 'Профиль', path: '#'},
     {id: 3, title: 'Сброс пароля', path: '#'},
     {id: 4, title: 'Настройки', path: '#'},

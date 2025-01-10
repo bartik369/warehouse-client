@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {ChangeEvent, FC, useState} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { Checked } from '../../../types/content';
 import { selectFromList } from '../../../utils/constants/device';
@@ -7,11 +7,22 @@ import style from './Checkbox.module.scss';
 interface ICheckboxProps {
     items: any[];
     label: string;
+    name: string;
+    click:(e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const Checkbox:FC<ICheckboxProps> = ({items, label}) => {
+const Checkbox:FC<ICheckboxProps> = ({items, label, name, click}) => {
    const {isOpen, setIsOpen, modalRef} = useOutsideClick();
    const [list, setList] = useState<Checked>({});
+
+   const handleCheck = (e: ChangeEvent<HTMLInputElement>, id: any) => {
+    setList({
+      ...list,
+      [id]: e.target.checked,
+    });
+    click(e)
+
+   }
 
     return (
       <div className={style.checkbox}>
@@ -29,16 +40,12 @@ const Checkbox:FC<ICheckboxProps> = ({items, label}) => {
             {items.map((item) => (
               <label key={item.id} className={style.container}>
                 <input
+                  name={name}
                   type="checkbox"
                   id={item.id}
                   value={item.name}
                   checked={list[item.id] || false}
-                  onChange={(e) =>
-                    setList({
-                      ...list,
-                      [item.id]: e.target.checked,
-                    })
-                  }
+                  onChange={(e) => handleCheck(e, item.id)}
                 />
                 <span className={style.checkmark}/>
                 <label htmlFor={item.id}>

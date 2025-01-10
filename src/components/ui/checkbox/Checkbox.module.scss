@@ -1,9 +1,9 @@
 .checkbox {
     display: flex;
     border: 1px solid #a6adb3;
-    padding: 13px 24px;
+    padding: 8px 18px;
     border-radius: 20px;
-    margin-bottom: 22px;
+    margin-right: 10px;
     position: relative;
     .label {
         position: absolute;
@@ -12,7 +12,7 @@
         left: 15px;
         padding: 0 5px;
         color: #828890;
-        font-size: 11px;
+        font-size: 10px;
         background-color: #ffffff;
     }
     .header {
@@ -26,11 +26,11 @@
         cursor: pointer;
         .placeholder {
             color: #1a1c1e;
-            font-size: 15px;
+            font-size: 13px;
         }
         .arrow {
-            width: 7px;
-            height: 7px;
+            width: 4px;
+            height: 4px;
             border: solid #5c6174;
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
@@ -41,15 +41,19 @@
 
 .menu {
     position: absolute;
-    overflow-y: scroll;
-    top: 50px;
-    height: 350px;
+    overflow-y: auto;
+    top: 40px;
+    left: 0;
+    right: 0;
     width: 100%;
+    max-height: 250px;
     border-radius: 12px;
-    padding: 12px;
+    padding: 20px;
     z-index: 10;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    scrollbar-width: thin;
+    scrollbar-color: #d2d4d7 #aeb1b6;
+    background-color: #fff;
+    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 }
 
 .btn_checkbox {
@@ -79,7 +83,7 @@
     width: fit-content;
     align-items: center;
     position: relative;
-    margin-bottom: 23px;
+    margin-bottom: 18px;
     padding-left: 28px;
     cursor: pointer;
     font-family: inherit;
@@ -89,8 +93,8 @@
         display: none;
     }
     input:checked~.checkmark {
-        border: 1px solid #1a1c1e;
-        background-color: #fff;
+        border: 1px solid #e0e3ea;
+        background-color: #f1f3f7;
     }
     input:disabled~.checkmark {
         background-color: #8e91a0;
@@ -101,37 +105,37 @@
         display: block;
     }
     .checkmark:after {
-        width: 5px;
+        width: 4px;
         height: 11px;
-        top: 4px;
+        top: 1px;
         border: solid #1a1c1e;
-        border-width: 0 2px 2px 0;
+        border-width: 0 1.5px 1.5px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
     label {
         color: #1a1c1e;
-        margin-left: 5px;
+        font-size: 13px;
         cursor: pointer;
     }
 }
 
 .container:hover input~.checkmark {
-    border: 1px solid #8e91a0;
+    border: 1px solid #e0e3ea;
 }
 
 .checkmark {
     position: absolute;
     left: 0;
-    height: 24px;
-    width: 24px;
+    height: 18px;
+    width: 18px;
     border: 1px solid #d3d6e0;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 4px;
     &::after {
         content: "";
         position: absolute;
