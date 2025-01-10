@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, useCallback } from "react";
 import { DeviceFormValidation, DeviceValidateField } from "../../utils/validation/DeviceValidation";
-import { IDevice, IValidationDeviceErrors } from "../../types/devices";
+import { IDevice} from "../../types/devices";
 
 export function useAddDevice() {
     const [device, setDevice] = useState<IDevice>({
@@ -74,7 +74,7 @@ export function useAddDevice() {
         } catch (error) {
             
         }
-    }
+    };
     const resetDeviceHandler = useCallback(() => {
         setDevice({
             name: '',

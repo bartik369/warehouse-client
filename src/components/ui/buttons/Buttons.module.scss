@@ -32,7 +32,7 @@ button {
     color: #fff;
     margin: 10px;
     &:hover {
-        background-color: #5987fb;
+        background-color: #1a1c1e;
     }
 }
 
@@ -46,7 +46,7 @@ button {
 }
 
 .dark {
-    background-color: #1a1f33;
+    background-color: #1a1c1e;
     color: #fff;
     margin: 10px;
     &:hover {
@@ -57,10 +57,10 @@ button {
 .red {
     display: flex;
     font-family: inherit;
-    background-color: #e41450;
+    background-color: #dc3546;
     color: #fff;
     margin: 10px;
     &:hover {
-        background-color: rgb(255, 49, 107);
+        background-color: #fa4759;
     }
 }

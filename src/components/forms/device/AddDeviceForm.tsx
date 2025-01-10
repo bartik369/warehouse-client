@@ -109,7 +109,7 @@ const AddDeviceForm: FC = () => {
                 rightPosition={yes}
             /> 
         </form>
-        <form className={style.form4}>
+        <form className={style['additional-form']}>
           {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
               <CustomNumber
                 key={item.name}
@@ -151,5 +151,5 @@ const AddDeviceForm: FC = () => {
 };
 export default AddDeviceForm;
 
-  /* <File media={mediaHandler}/> */
+/* <File media={mediaHandler}/> */
 

@@ -21,9 +21,9 @@ const AuthForm: FC = () => {
 
     const checkErrors = (validationErrors:Partial<ISignin>) =>  {
       return Object.values(validationErrors).every(item => !item)
-    }
+    };
     
-    const authHandler = async (e:React.FormEvent<HTMLFormElement>) => {
+    const authHandler = async(e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const validationErrors = AuthValidate(authData);
       setErrors(validationErrors)
@@ -31,9 +31,9 @@ const AuthForm: FC = () => {
       if (checkErrors(validationErrors)) {
         try {
           await signinUser(authData).unwrap().then((data) => {
-            dispatch(setCredentials(data.user))
+            dispatch(setCredentials(data.user));
             localStorage.setItem('accessToken', data.token);
-            navigate('/')  
+            navigate('/');
           });
         } catch (error: unknown) {
   
@@ -72,7 +72,7 @@ const AuthForm: FC = () => {
             title={signin} 
             size='lg' 
             type='submit' 
-            color='red'
+            color='blue'
           />
         </form>
         <div className={style.reset}>{forgetPassword}

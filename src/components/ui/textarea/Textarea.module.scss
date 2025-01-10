@@ -3,6 +3,10 @@
     border-radius: 20px;
     padding: 15px;
     position: relative;
+    &:focus,
+    &:hover {
+        border: 1px solid #a6adb3;
+    }
     textarea {
         outline: none;
         resize: none;
@@ -15,7 +19,7 @@
         top: -8px;
         left: 15px;
         padding: 0 5px;
-        color: #9ba4a9;
+        color: #828890;
         font-size: 11px;
         background-color: #ffffff;
     }

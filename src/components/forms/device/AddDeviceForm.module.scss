@@ -26,15 +26,13 @@
     }
     .form {
         display: grid;
-        // background-color: chocolate;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 15px;
         width: 100%;
         margin: 0 auto;
     }
-    .form4 {
+    .additional-form {
         display: grid;
-        // background-color: darkslateblue;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;
         width: 100%;
@@ -47,7 +45,7 @@
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 40px;
-    color: #1a1f33;
+    color: #1a1c1e;
 }
 
 .action {

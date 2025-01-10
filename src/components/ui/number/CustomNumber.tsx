@@ -17,8 +17,7 @@ const CustomNumber: FC<ICustomNumberProps> = ({ device, item, errors, setDevice 
     max: 1000,
     step: item.step,
   };
-
-   
+  const errorMessage = errors[item.name as keyof IValidationDeviceErrors];
 
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
@@ -51,9 +50,7 @@ const CustomNumber: FC<ICustomNumberProps> = ({ device, item, errors, setDevice 
   return (
     <div className={style.wrapper}>
       <div className={style.error}>
-        {errors[item.name as keyof IValidationDeviceErrors] &&
-        errors[item.name as keyof IValidationDeviceErrors]
-        }
+        {errorMessage && errorMessage }
       </div>
       <div className={style.number}>
         <div className={style.label}>{item.label}</div>

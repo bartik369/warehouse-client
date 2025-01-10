@@ -11,7 +11,7 @@
         position: absolute;
         width: 140px;
         padding: 0 5px;
-        color: #9ba4a9;
+        color: #828890;
         font-size: 11px;
         top: -18px;
         left: 18px;
@@ -22,7 +22,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #e41450;
+        background-color: #484c50;
         border-radius: 40px;
         transition: 0.4s;
         cursor: pointer;
@@ -61,7 +61,7 @@
 }
 
 input:checked+.slider {
-    background-color: #4263eb;
+    background-color: #367afa;
 }
 
 input:checked+.slider:before {

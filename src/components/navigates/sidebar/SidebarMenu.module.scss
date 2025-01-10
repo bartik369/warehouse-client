@@ -6,7 +6,7 @@
         .submenu-closed {
             position: absolute;
             top: 0;
-            left: 66px;
+            left: 71px;
             width: 190px;
             z-index: 9;
             background-color: #fdfeff;
@@ -19,7 +19,7 @@
                     font-size: 14px;
                     font-weight: 500;
                     padding: 16.6px 10px;
-                    background-color: #e7eaf7;
+                    background-color: #eff1f4;
                 }
             }
         }
@@ -47,14 +47,14 @@
 }
 
 .menu-item-header {
-    padding: 12px 22px;
+    padding: 12px 23px;
     display: flex;
     align-items: center;
     &:hover {
-        background-color: #e7eaf7;
+        background-color: #eff1f4;
     }
     &:hover .icon {
-        filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(7495%) hue-rotate(334deg) brightness(91%) contrast(97%);
+        filter: brightness(0) saturate(100%) invert(39%) sepia(71%) saturate(3106%) hue-rotate(208deg) brightness(101%) contrast(96%);
     }
     .sub-title,
     a {
@@ -68,16 +68,29 @@
     }
     .title {
         position: absolute;
+        display: flex;
+        align-items: center;
         white-space: nowrap;
-        left: 66px;
-        top: 0;
-        padding: 16px 18px 16px 10px;
-        background-color: #e7eaf7;
+        left: 80px;
+        top: 10px;
+        padding: 8px 11px;
+        background-color: #1a1c1e;
         box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
-        border-radius: 0 8px 8px 0;
+        border-radius: 5px;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 12px solid #1a1c1e;
+            transform: rotate(-90deg);
+            left: -9px;
+        }
         a {
-            color: #1a2034;
-            font-size: 14px;
+            color: #ffffff;
+            font-size: 12px;
             font-weight: 500;
             &:hover {
                 color: #4263eb;

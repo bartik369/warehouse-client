@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import style from './Toggle.module.scss'
+import style from './Toggle.module.scss';
 
 interface IToggleProps {
     checked: boolean;

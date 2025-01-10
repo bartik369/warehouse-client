@@ -15,8 +15,14 @@ interface IButtonProps {
 const BtnAction:FC<IButtonProps> = ({icon, size, type, title, color, click}) => {
     return (
         <>
-            <button onClick={click} type={type} className={`${style[size]} ${style[color]}`}>
-                {icon && <FontAwesomeIcon className={style.icon} icon={icon} />}
+            <button 
+                onClick={click} 
+                type={type} 
+                className={`${style[size]} ${style[color]}`}
+            >
+                {icon && 
+                    <FontAwesomeIcon className={style.icon} icon={icon} />
+                }
                 <p>{title}</p>
             </button>
         </>

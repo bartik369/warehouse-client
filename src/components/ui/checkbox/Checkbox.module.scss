@@ -1,6 +1,6 @@
 .checkbox {
     display: flex;
-    border: 1px solid #dce4e8;
+    border: 1px solid #a6adb3;
     padding: 13px 24px;
     border-radius: 20px;
     margin-bottom: 22px;
@@ -11,7 +11,7 @@
         top: -7px;
         left: 15px;
         padding: 0 5px;
-        color: #9ba4a9;
+        color: #828890;
         font-size: 11px;
         background-color: #ffffff;
     }
@@ -25,7 +25,7 @@
         color: #15141f;
         cursor: pointer;
         .placeholder {
-            color: #1a1f33;
+            color: #1a1c1e;
             font-size: 15px;
         }
         .arrow {
@@ -64,12 +64,12 @@
     padding: 13px 24px;
     margin-bottom: 22px;
     transition: all .3s ease-in;
-    color: #1a1f33;
+    color: #1a1c1e;
     background-color: #fff;
     cursor: pointer;
     &:focus {
         outline: none;
-        border: 1px solid #1a1f33;
+        border: 1px solid #1a1c1e;
     }
 }
 
@@ -89,7 +89,7 @@
         display: none;
     }
     input:checked~.checkmark {
-        border: 1px solid #1a1f33;
+        border: 1px solid #1a1c1e;
         background-color: #fff;
     }
     input:disabled~.checkmark {
@@ -104,14 +104,14 @@
         width: 5px;
         height: 11px;
         top: 4px;
-        border: solid #1a1f33;
+        border: solid #1a1c1e;
         border-width: 0 2px 2px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
     label {
-        color: #1a1f33;
+        color: #1a1c1e;
         margin-left: 5px;
         cursor: pointer;
     }
