@@ -47,6 +47,10 @@ export const locations = [
   {id: 2, name: 'Московский офис 1эт', value:'msk_1floor'},
   {id: 3, name: 'Офис Санкт-Петербург', value:'spb'},
 ]
+export const serviceable = [
+  {id: 1, name: 'да', value: true},
+  {id: 2, name: 'нет', value: false},
+]
 
 
 export const deviceTypes:DeviceTypes = {

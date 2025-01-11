@@ -1,16 +1,19 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import Checkbox from "../ui/checkbox/Checkbox";
-import { manufacturers, locations, deviceType } from "../../utils/constants/device";
+import { manufacturers, locations, deviceType, serviceable } from "../../utils/constants/device";
 import { useSearchParams } from "react-router-dom";
 import { useStickyHeader } from "../../hooks/data/useStickyHeader";
 import style from "./Filter.module.scss";
 
 interface IFilterProps {}
+type FilterType = string | number | boolean
 interface IFilter {
     manufacturer: string[];
     type: string[];
     location: string[];
-  }
+    serviceable: string[];
+    [key: string]: FilterType[];
+}
 
 const Filter: FC<IFilterProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,23 +23,32 @@ const Filter: FC<IFilterProps> = () => {
     manufacturer: [],
     type: [],
     location: [],
+    serviceable: [],
   });
 
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (Array.isArray(filters[name as keyof IFilter])) {
-      const updateValues = filters[name as keyof IFilter].includes(value)
-        ? filters[name as keyof IFilter].filter((item) => item !== value)
-        : [...filters[name as keyof IFilter], value];
-      setFilters((prev) => ({
-        ...prev,
-        [name]: updateValues,
-      }));
-    } else {
-      setFilters((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+  console.log(filters);
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>, value: boolean) => {
+    
+    let { name} = e.target as { name: keyof IFilter}
+    
+    if (Array.isArray(filters[name])) {
+      if (name === "serviceable") {
+        const updatedValues = filters[name].includes(String(value))
+        ? filters[name].filter((item) => item !== String(value))
+        : [...filters[name], value];
+        setFilters((prev) => ({
+          ...prev,
+          [name]: updatedValues,
+        }));
+      } else {
+        const updateValues = filters[name].includes(value)
+          ? filters[name].filter((item) => item !== value)
+          : [...filters[name], value];
+        setFilters((prev) => ({
+          ...prev,
+          [name]: updateValues,
+        }));
+      }
     }
   };
 
@@ -45,31 +57,27 @@ const Filter: FC<IFilterProps> = () => {
       Object.entries(filters).forEach(([key, value]) => {
           if (Array.isArray(value) && value.length > 0) {
               newParams[key] = value.join(',')
-          } else if (value) {
-              newParams[key] = value
           }
       })
       setSearchParams(newParams);
   }, [filters]);
 
   useEffect(() => {
-      const currentParams = Object.fromEntries([...searchParams]);
-      const parsedFilters = {...filters};
-
-      Object.entries(currentParams).forEach(([key, value]) => {
-          if (filters[key as keyof IFilter] && Array.isArray(filters[key as keyof IFilter])) {
-            parsedFilters[key as keyof IFilter] = value.split(",");
-          } else {
-          parsedFilters[key] = value;
-          setFilters(parsedFilters);
-          }
-
-      })
-
-  }, [searchParams]);
-
-  console.log(isSticky);
+    const currentParams = Object.fromEntries([...searchParams]);
+    const parsedFilters: IFilter = { ...filters };
   
+    Object.entries(currentParams).forEach(([key, value]) => {
+      console.log(key);
+      
+      if (Array.isArray(filters[key])) {
+        parsedFilters[key] = value.split(",");
+      } else {
+        parsedFilters[key] = [value];
+      }
+    });
+  
+    setFilters(parsedFilters);
+  }, [searchParams]);
 
   return (
     <div className={`${style.filter} ${isSticky
@@ -79,36 +87,43 @@ const Filter: FC<IFilterProps> = () => {
         name="manufacturer"
         label={"Производитель"}
         items={manufacturers}
-        click={handleFilterChange}
+        onChange={handleFilterChange}
       />
       <Checkbox
         name="type"
         label={"Тип"}
         items={deviceType}
-        click={handleFilterChange}
+        onChange={handleFilterChange}
       />
       <Checkbox
         name="location"
         label={"Локация"}
         items={locations}
-        click={handleFilterChange}
+        onChange={handleFilterChange}
       />
-       {filters.type.includes('Мобильный телефон' || 'Ноутбук') && 
+       {filters.type.includes('Мобильный телефон') && 
        <>
          <Checkbox
             name="manufacturer"
             label={"Экран"}
             items={manufacturers}
-            click={handleFilterChange}
+            onChange={handleFilterChange}
         />
         <Checkbox
             name="type"
             label={"Память"}
             items={deviceType}
-            click={handleFilterChange}
+            onChange={handleFilterChange}
         />
        </>
+       
     }
+    <Checkbox
+        name="serviceable"
+        label={"Исправно"}
+        items={serviceable}
+        onChange={handleFilterChange}
+      />
     </div>
   );
 };

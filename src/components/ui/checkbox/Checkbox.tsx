@@ -8,19 +8,25 @@ interface ICheckboxProps {
     items: any[];
     label: string;
     name: string;
-    click:(e: ChangeEvent<HTMLInputElement>) => void
+    onChange:(e: ChangeEvent<HTMLInputElement>, item:any) => void
+}
+interface IFilterValues {
+  id: number;
+  name: string;
+  value: string;
 }
 
-const Checkbox:FC<ICheckboxProps> = ({items, label, name, click}) => {
+
+const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
    const {isOpen, setIsOpen, modalRef} = useOutsideClick();
    const [list, setList] = useState<Checked>({});
 
-   const handleCheck = (e: ChangeEvent<HTMLInputElement>, id: any) => {
+   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item:IFilterValues) => {
     setList({
       ...list,
-      [id]: e.target.checked,
+      [item.id]: e.target.checked,
     });
-    click(e)
+    onChange(e, item.value)
 
    }
 
@@ -45,7 +51,7 @@ const Checkbox:FC<ICheckboxProps> = ({items, label, name, click}) => {
                   id={item.id}
                   value={item.name}
                   checked={list[item.id] || false}
-                  onChange={(e) => handleCheck(e, item.id)}
+                  onChange={(e) => handleCheck(e, item)}
                 />
                 <span className={style.checkmark}/>
                 <label htmlFor={item.id}>
