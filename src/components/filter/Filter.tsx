@@ -6,7 +6,8 @@ import { useStickyHeader } from "../../hooks/data/useStickyHeader";
 import style from "./Filter.module.scss";
 
 interface IFilterProps {}
-type FilterType = string | number | boolean
+type FilterType = string | number | boolean;
+
 interface IFilter {
     manufacturer: string[];
     type: string[];
@@ -26,9 +27,7 @@ const Filter: FC<IFilterProps> = () => {
     serviceable: [],
   });
 
-  console.log(filters);
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>, value: boolean) => {
-    
     let { name} = e.target as { name: keyof IFilter}
     
     if (Array.isArray(filters[name])) {
@@ -67,15 +66,12 @@ const Filter: FC<IFilterProps> = () => {
     const parsedFilters: IFilter = { ...filters };
   
     Object.entries(currentParams).forEach(([key, value]) => {
-      console.log(key);
-      
       if (Array.isArray(filters[key])) {
         parsedFilters[key] = value.split(",");
       } else {
         parsedFilters[key] = [value];
       }
     });
-  
     setFilters(parsedFilters);
   }, [searchParams]);
 
@@ -101,7 +97,7 @@ const Filter: FC<IFilterProps> = () => {
         items={locations}
         onChange={handleFilterChange}
       />
-       {filters.type.includes('Мобильный телефон') && 
+       {filters.type.includes('mobile') && 
        <>
          <Checkbox
             name="manufacturer"

@@ -8,7 +8,7 @@ export const devicesApi = createApi({
     endpoints:(build) => ({
         getDevices: build.query({
             query: () => ({
-                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_GET_DEVICES}`
+                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_DEVICES}`
             })
         }),
         getDevice: build.query({
@@ -19,7 +19,7 @@ export const devicesApi = createApi({
         createDevice: build.mutation({
             query(body) {
                 return {
-                    url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_ADD_DEVICE}`,
+                    url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_DEVICES}`,
                     method: 'POST',
                     body,
                 }

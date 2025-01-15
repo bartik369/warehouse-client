@@ -23,11 +23,13 @@ const ProfileMenu:FC = () => {
       } catch (err) {
 
         if (isFetchBaseQueryError(err)) {
-          const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
-          console.log(errMsg);
-        } else if (isErrorWithMessage(err)) {
-          console.log(err);
-        }
+            const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
+            console.log("API Error:", errMsg);
+          } else if (isErrorWithMessage(err)) {
+            console.error("Unexpected Error:", err.message);
+          } else {
+            console.error("Unknown Error:", err);
+          }
       }
     };
 

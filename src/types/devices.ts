@@ -20,6 +20,14 @@ export interface IDevice {
     createdBy?: string;
     updatedBy?: string;
 }
+
+export interface IDeviceMedia {
+  file: Blob | string;
+  prevImg: string | null;
+}
+
+export type DeviceFormData = IDevice & IDeviceMedia;
+
 export interface IValidationDeviceErrors {
   name?: string;
   type?: string;
