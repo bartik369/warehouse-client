@@ -15,6 +15,7 @@ import Device from './components/pages/device/Device';
 import Devices from './components/pages/devices/Devices';
 import './App.scss';
 import AddDevice from './components/pages/add-device/AddDevice';
+import Admin from './components/pages/admin/Admin';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -53,6 +54,7 @@ function App() {
         <Route element={<Device />} path='/device/:id'/>
         <Route element={<Devices />} path='/devices'/>
         <Route element={<AddDevice />} path='/device/add'/>
+        <Route element={<Admin />} path='/admin'/>
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>

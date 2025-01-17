@@ -1,24 +1,25 @@
 export interface IDevice {
     id?: string;
-    serialNumber?: string;
-    modelCode?: string;
-    inventoryNumber?: string;
     name: string;
+    inventoryNumber?: string;
     type: string;
     manufacturer?: string;
+    modelCode?: string;
+    modelId?: string;
+    serialNumber?: string;
+    media?: string;
     weight?: number;
     screenSize?: number | null;
     memorySize?: number | null;
-    media?: string;
-    serviceable:boolean;
+    inStock: boolean,
+    isFunctional:boolean;
+    isAssigned: boolean;
+    warehouseId: string;
     description?: string;
-    assignedTo?: string;
-    location: string;
-    inStock: boolean;
+    addedById: string;
+    updatedById: string;
     createdAt?: Date;
     updatedAt?: Date;
-    createdBy?: string;
-    updatedBy?: string;
 }
 
 export interface IDeviceMedia {

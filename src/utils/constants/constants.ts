@@ -17,3 +17,5 @@ export const no = 'Нет';
 export const selectPhoto = 'Выбрать фото';
 export const serviceable = 'Устройство исправно?'
 export const addNewDeviceTitle = 'Добавление нового устройства';
+export const addDeviceModelTitle = 'Добавить новую модель';
+export const addDeviceModel = 'Нет доступной модели?';

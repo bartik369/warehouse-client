@@ -14,7 +14,7 @@ export const headerMenuData = [
     {id: 4, title: 'Ссылка 4', path: '#'},
 ];
 export const profileMenuData = [
-    {id: 1, title: 'Админ-панель', path: '/device/add'},
+    {id: 1, title: 'Админ-панель', path: '/admin'},
     {id: 2, title: 'Профиль', path: '#'},
     {id: 3, title: 'Сброс пароля', path: '#'},
     {id: 4, title: 'Настройки', path: '#'},
@@ -26,7 +26,6 @@ export const sidebarMenuData = [
       { id: 3, title: 'Красногорск', path: '/krasnogrsk'},
     ]
 },
-
     {id: 2, title: 'Сообщения', path: '/messages', icon: MessageIcon},
     {id: 3, title: 'Пользователи', path: '/users', icon: userIcon},
     {id: 4, title: 'Подрядчики', path: '/contractors', icon: ContractorIcon},

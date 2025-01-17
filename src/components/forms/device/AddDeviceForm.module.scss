@@ -6,7 +6,7 @@
         flex-direction: column;
         width: 100%;
     }
-    .picture {
+    .preview {
         position: sticky;
         top: 100px;
         width: 350px;
@@ -51,4 +51,25 @@
 .action {
     display: flex;
     justify-content: center;
+}
+
+.container {
+    position: relative;
+    .ask {
+        position: absolute;
+        right: 0;
+        top: -25px;
+        font-size: 11px;
+        color: #8e91a0;
+        text-align: right;
+        span {
+            font-size: 12px;
+            color: #1a1c1e;
+            margin-left: 5px;
+            cursor: pointer;
+            &:hover {
+                color: #5792ff;
+            }
+        }
+    }
 }

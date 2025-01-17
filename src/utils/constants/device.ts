@@ -15,6 +15,7 @@ export const manufacturers = [
 ]
 
 export const manufacturersLabel = 'Производитель';
+export const modelLabel = 'Модель устройства';
 export const deviceName = 'Название'
 export const serialNumber = 'Серийный номер'
 export const inventoryNumber = 'Инвентарный номер'
@@ -26,6 +27,7 @@ export const selectFromList = 'Выбрать из списка'
 export const noExistSelect = 'Нет доступных опций';
 export const deviceWeight = 'Вес устройства(кг)';
 export const kg = '(кг)';
+
 
 
 export const deviceType = [

@@ -14,19 +14,23 @@ import { IDevice } from "../../types/devices";
 export function useAddDevice() {
   const [device, setDevice] = useState<IDevice>({
     name: "",
-    serialNumber: "",
-    modelCode: "",
     inventoryNumber: "",
     type: "",
+    manufacturer: "",
+    modelCode: "",
+    modelId: "",
+    serialNumber: "",
+    media: "",
     weight: 0,
     screenSize: 0,
     memorySize: 0,
-    serviceable: true,
-    media: "",
-    location: "",
-    manufacturer: "",
     inStock: true,
+    isFunctional: true,
+    isAssigned: false,
+    warehouseId: "",
     description: "",
+    addedById: "",
+    updatedById: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
@@ -42,23 +46,23 @@ export function useAddDevice() {
   const [selectedValues, setSelectedValues] = useState<{[key: string]: string;}>({});
   const [create] = useCreateDeviceMutation();
 
-  const mediaHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleMedia = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const objectUrl = URL.createObjectURL(file);
-      setMedia({ file, prevImg: URL.createObjectURL(file) });
+      setMedia({ file, prevImg: objectUrl});
       return () => URL.revokeObjectURL(objectUrl);
     }
   }, []);
 
-  const numberHandler = useCallback((num: number) => {
+  const handleNumber = useCallback((num: number) => {
     setDevice((prev) => ({
       ...prev,
       weight: num,
     }));
   }, []);
 
-  const extNumberHandler = useCallback((num: number, fieldName: string) => {
+  const handleExtNumber = useCallback((num: number, fieldName: string) => {
     setDevice((prev) => ({
       ...prev,
       [fieldName]: num,
@@ -70,25 +74,26 @@ export function useAddDevice() {
     }));
   }, []);
 
-  const addDeviceHandler = async () => {
+  const handleAddDevice = async () => {
     try {
       const validationErrors = DeviceFormValidation(device, itemType);
       setErrors(validationErrors as Record<string, string>);
 
       if (Object.keys(validationErrors).length === 0) {
         const formData = new FormData();
-
         (Object.keys(device) as (keyof IDevice)[]).forEach((key) => {
           const value = device[key];
           if (value !== undefined && value !== null) {
-            formData.append(
-              key,
-              value instanceof Date ? value.toISOString() : value.toString()
+            formData.append(key, value instanceof Date 
+                ? value.toISOString() 
+                : value.toString()
             );
           }
         });
         media.file && formData.append("file", media.file);
         await create(formData).unwrap();
+        handleResetDevice();
+        setMedia({...media, prevImg: null});
       } else {
         console.error("Validation errors:", validationErrors);
       }
@@ -103,39 +108,43 @@ export function useAddDevice() {
       }
     }
 }
-    const resetDeviceHandler = useCallback(() => {
+    const handleResetDevice = useCallback(() => {
       setDevice({
         name: "",
-        serialNumber: "",
-        modelCode: "",
         inventoryNumber: "",
         type: "",
+        manufacturer: "",
+        modelCode: "",
+        modelId: "",
+        serialNumber: "",
+        media: "",
         weight: 0,
         screenSize: 0,
         memorySize: 0,
-        serviceable: true,
-        media: "",
-        location: "",
-        manufacturer: "",
         inStock: true,
+        isFunctional: true,
+        isAssigned: false,
+        warehouseId: "",
         description: "",
+        addedById: "",
+        updatedById: "",
       });
       setSelectedValues({});
       setErrors({
         name: "",
         type: "",
         manufacturer: "",
-        serviceable: "",
+        warehouseId: "",
         description: "",
-        location: "",
         weight: "",
         screenSize: "",
         memorySize: "",
       });
       setItemType("");
+      setMedia({...media, prevImg: null});
     }, []);
 
-    const updateDevice = useCallback((field: keyof IDevice, value: any) => {
+    const handleUpdateDevice = useCallback((field: keyof IDevice, value: any) => {
       setDevice((prev) => ({
         ...prev,
         [field]: value,
@@ -153,8 +162,19 @@ export function useAddDevice() {
       }));
     }, []);
 
+    const handleChecked = useCallback(() => {
+      setChecked(!checked);
+      setDevice((prev) => ({
+        ...prev,
+        isFunctional: !checked,
+      }))
+    }, [checked]);
+
+    console.log(device);
+    
+
     return { errors, checked, device, media, itemType, selectedOption, selectedValues,
-      setChecked, setItemType, updateDevice, mediaHandler, numberHandler, extNumberHandler,
-      addDeviceHandler, resetDeviceHandler, setSelectedOption,
+      handleChecked, setItemType, handleUpdateDevice, handleMedia, handleNumber, handleExtNumber,
+      handleAddDevice, handleResetDevice, setSelectedOption,
     };
 }
