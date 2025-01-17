@@ -21,6 +21,7 @@ export interface IDevice {
     createdAt?: Date;
     updatedAt?: Date;
 }
+export type IDeviceModel = Pick<IDevice, 'name' | 'manufacturer'>
 
 export interface IDeviceMedia {
   file: Blob | string;
@@ -40,6 +41,7 @@ export interface IValidationDeviceErrors {
   screenSize?: string;
   memorySize?: string;
 }
+
 
 export interface IInventory {
     id?: number,

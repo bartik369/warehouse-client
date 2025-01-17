@@ -109,9 +109,9 @@ const AddDeviceForm: FC = () => {
             <Select setValue={(item) => { handleUpdateDevice("warehouseId", item.name)}}
               items={locations}
               label={location}
-              value={selectedValues["location"]}
+              value={selectedValues["warehouseId"]}
               errors={errors}
-              name="location"
+              name="warehouseId"
             />
             <Number device={device} setDevice={handleNumber} />
             <Toggle

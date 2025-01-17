@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import style from './Buttons.module.scss';
@@ -9,7 +9,7 @@ interface IButtonProps {
     color: string;
     type?: 'submit' | 'button' | 'reset';
     title: string;
-    click?:() => void;
+    click:(e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const BtnAction:FC<IButtonProps> = ({icon, size, type, title, color, click}) => {

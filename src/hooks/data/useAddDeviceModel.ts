@@ -1,8 +1,9 @@
+import { DeviceModelValidation, DeviceModelValidationField, DeviceFormValidation } from './../../utils/validation/DeviceValidation';
 import { useState, useCallback } from "react";
-import { IDevice, IDeviceMedia } from "../../types/devices";
+import { IDevice, IDeviceMedia, IDeviceModel } from "../../types/devices";
 
 export const useAddDeviceModel = () => {
-    const [model, setModel] = useState<Pick<IDevice, 'name' | 'manufacturer'>>({
+    const [model, setModel] = useState<IDeviceModel>({
         name: '',
         manufacturer: '',
     });
@@ -10,6 +11,7 @@ export const useAddDeviceModel = () => {
         file: '',
         prevImg: null,
     });
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const handleMedia = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -20,13 +22,28 @@ export const useAddDeviceModel = () => {
         }
     }, []);
 
-    const handleCreateModel = useCallback(async () => {
-        try {
-            
-        } catch (error) {
-            
+    const handleCreateModel = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const validationErrors = DeviceModelValidation(model);
+        setErrors(validationErrors);
+        
+        if (Object.keys(model).length === 0) {
+            const formData = new FormData();
+            (Object.keys(model) as (keyof IDeviceModel)[]).forEach((key) => {
+                const value = model[key];
+                if (value !==undefined && value !== null) {
+                    formData.append(key, value)
+                }
+            });
+            media.file && formData.append('file', media.file);
         }
-    },[])
+        try {   
+
+        } catch (error) {
+            console.error(error);
+        }
+    }, [model]);
+
     const handleResetModel = useCallback(() => {
         setModel({
             ...model,
@@ -42,15 +59,24 @@ export const useAddDeviceModel = () => {
 
     const handleInputChange = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
+        const validationErrors = DeviceModelValidationField(name, value);
+        setErrors((prev) => ({
+            ...prev,
+            [name]: validationErrors as string
+        }));
         setModel((prev) => ({
             ...prev,
             [name]: value
         }));
     }, []);
 
+    console.log(errors);
+    
+
     return {
         model, 
-        media, 
+        media,
+        errors,
         setModel, 
         handleInputChange, 
         handleMedia, 
