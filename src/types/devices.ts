@@ -21,7 +21,10 @@ export interface IDevice {
     createdAt?: Date;
     updatedAt?: Date;
 }
-export type IDeviceModel = Pick<IDevice, 'name' | 'manufacturer'>
+export interface IDeviceModel {
+  name: string;
+  manufacturer: string;
+}
 
 export interface IDeviceMedia {
   file: Blob | string;
@@ -30,7 +33,7 @@ export interface IDeviceMedia {
 
 export type DeviceFormData = IDevice & IDeviceMedia;
 
-export interface IValidationDeviceErrors {
+export interface IValidationErrors {
   name?: string;
   type?: string;
   serviceable?: string;

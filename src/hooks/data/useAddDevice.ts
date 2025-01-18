@@ -1,10 +1,7 @@
-import { IDeviceMedia, DeviceFormData } from "./../../types/devices";
+import { IDeviceMedia} from "./../../types/devices";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
-import {
-  DeviceFormValidation,
-  DeviceValidateField,
-} from "../../utils/validation/DeviceValidation";
+import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {
   isFetchBaseQueryError,
   isErrorWithMessage,
@@ -67,7 +64,7 @@ export function useAddDevice() {
       ...prev,
       [fieldName]: num,
     }));
-    const data = DeviceValidateField(fieldName, num);
+    const data = ValidateField(fieldName, num);
     setErrors((prev) => ({
       ...prev,
       [fieldName]: data as string,
@@ -76,7 +73,7 @@ export function useAddDevice() {
 
   const handleAddDevice = async () => {
     try {
-      const validationErrors = DeviceFormValidation(device, itemType);
+      const validationErrors = FormValidation(device, itemType);
       setErrors(validationErrors as Record<string, string>);
 
       if (Object.keys(validationErrors).length === 0) {
@@ -155,7 +152,7 @@ export function useAddDevice() {
         [field]: value,
       }));
 
-      const validationErrors = DeviceValidateField(field, value);
+      const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
         [field]: validationErrors as string,

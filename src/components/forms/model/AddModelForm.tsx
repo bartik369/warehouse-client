@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Preview from '../../ui/preview/Preview';
 import { useAddDeviceModel } from '../../../hooks/data/useAddDeviceModel';
 import { manufacturersLabel, modelLabel } from '../../../utils/constants/device';
 import { add, addDeviceModelTitle, reset } from '../../../utils/constants/constants';
-import {faPlus, faCircleXmark, faLaptopFile} from "@fortawesome/free-solid-svg-icons";
-import style from './AddModalForm.module.scss';
+import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
+import style from './AddModelForm.module.scss';
 
 const AddModalForm:FC = () => {
     const {

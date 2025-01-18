@@ -11,7 +11,7 @@ import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
 import Preview from "../../ui/preview/Preview";
 import Number from "../../ui/number/Number";
-import AddModalForm from "../modal/AddModalForm";
+import AddModalForm from "../model/AddModelForm";
 import CustomNumber from "../../ui/number/CustomNumber";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";

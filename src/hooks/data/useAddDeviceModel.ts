@@ -1,6 +1,6 @@
-import { DeviceModelValidation, DeviceModelValidationField, DeviceFormValidation } from './../../utils/validation/DeviceValidation';
+import { ModelValidation, ModelValidationField} from './../../utils/validation/DeviceValidation';
 import { useState, useCallback } from "react";
-import { IDevice, IDeviceMedia, IDeviceModel } from "../../types/devices";
+import { IDeviceMedia, IDeviceModel } from "../../types/devices";
 
 export const useAddDeviceModel = () => {
     const [model, setModel] = useState<IDeviceModel>({
@@ -24,10 +24,10 @@ export const useAddDeviceModel = () => {
 
     const handleCreateModel = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const validationErrors = DeviceModelValidation(model);
+        const validationErrors = ModelValidation(model);
         setErrors(validationErrors);
         
-        if (Object.keys(model).length === 0) {
+        if (Object.keys(validationErrors).length === 0) {
             const formData = new FormData();
             (Object.keys(model) as (keyof IDeviceModel)[]).forEach((key) => {
                 const value = model[key];
@@ -58,8 +58,8 @@ export const useAddDeviceModel = () => {
     }, []);
 
     const handleInputChange = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
-        const validationErrors = DeviceModelValidationField(name, value);
+        const {name, value} = e.target as {name: keyof IDeviceModel, value: string};
+        const validationErrors = ModelValidationField(name, value);
         setErrors((prev) => ({
             ...prev,
             [name]: validationErrors as string
@@ -69,9 +69,6 @@ export const useAddDeviceModel = () => {
             [name]: value
         }));
     }, []);
-
-    console.log(errors);
-    
 
     return {
         model, 
