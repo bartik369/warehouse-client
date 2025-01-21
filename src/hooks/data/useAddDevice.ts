@@ -32,7 +32,7 @@ export function useAddDevice() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
   const [media, setMedia] = useState<IDeviceMedia>({
-    file: "",
+    file:    null,
     prevImg: null,
   });
   const [selectedOption, setSelectedOption] = useState({
@@ -40,7 +40,7 @@ export function useAddDevice() {
     name: "",
   });
   const [itemType, setItemType] = useState<string>("");
-  const [selectedValues, setSelectedValues] = useState<{[key: string]: string;}>({});
+  const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
   const [create] = useCreateDeviceMutation();
 
   const handleMedia = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -166,9 +166,6 @@ export function useAddDevice() {
         isFunctional: !checked,
       }))
     }, [checked]);
-
-    console.log(device);
-    
 
     return { errors, checked, device, media, itemType, selectedOption, selectedValues,
       handleChecked, setItemType, handleUpdateDevice, handleMedia, handleNumber, handleExtNumber,

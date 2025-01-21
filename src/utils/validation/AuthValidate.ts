@@ -8,7 +8,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const AuthValidate = (formData: ISignin) => {
     requidFields && requidFields.map((field) => {
 
-        if (formData[field].length === 0) {
+        if (formData[field].trim().length === 0) {
             errors[field] = 'Обязательно к заполнению';
         } else {
             errors[field] = '';
@@ -23,7 +23,7 @@ export const AuthValidate = (formData: ISignin) => {
 
 export const AuthValidateField = (field: string): null | undefined => {
 
-    if (field.length !== 0) {
+    if (field.trim().length !== 0) {
         return null;
     }
 }

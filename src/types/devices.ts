@@ -22,16 +22,17 @@ export interface IDevice {
     updatedAt?: Date;
 }
 export interface IDeviceModel {
+  id?: string;
   name: string;
+  type: string;
   manufacturer: string;
+  imagePath?: string;
 }
 
 export interface IDeviceMedia {
-  file: Blob | string;
+  file: File | null;
   prevImg: string | null;
 }
-
-export type DeviceFormData = IDevice & IDeviceMedia;
 
 export interface IValidationErrors {
   name?: string;

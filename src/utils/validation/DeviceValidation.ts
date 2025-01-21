@@ -1,12 +1,13 @@
-import { IDevice, IDeviceModel } from './../../types/devices';
+import { IDevice, IDeviceModel, ISelectedItem } from './../../types/devices';
 import { IValidationErrors } from './../../types/devices';
 
 type ValidationField = keyof IDevice;
-type ValidationModelField = keyof IDeviceModel
+type ValidationModelField = keyof IDeviceModel;
+type ValidationError = string | null;
 
 const fieldsMemoryScreen = ['laptop', 'mobile'];
 const fieldScreen = ['tv', 'monitor'];
-const modelFields = ['name', 'manufacturer'];
+const modelFields = ['name', 'manufacturer', 'type'];
 
 const validateRequiredFields = <T>(
   formData: T,
@@ -38,7 +39,7 @@ export const FormValidation = (formData: IDevice, itemType: string):IValidationE
 
 export const ModelValidation = (formData: IDeviceModel): Partial<IValidationErrors> => {
     const errors: Partial<IValidationErrors> = {};
-    const requiredFields: ValidationModelField[] = ['name', 'manufacturer'];
+    const requiredFields: ValidationModelField[] = ['name', 'manufacturer', 'type'];
   
     validateRequiredFields(formData, requiredFields, errors);
   
@@ -47,24 +48,30 @@ export const ModelValidation = (formData: IDeviceModel): Partial<IValidationErro
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
     const requiredMessage = 'Обязательно к заполнению';
-    const minLengthMessage = 'Не менее 5 символов';
   
     if (field === 'name') {
-      if (typeof value === 'string' && !value.trim()) return requiredMessage;
-      if (typeof value === 'string' && value.length < 5) return minLengthMessage;
+      if (typeof value === 'string' && value.length === 0) return requiredMessage;
     }
   
     if (modelFields.includes(field)) {
-
       if (typeof value === 'number' && value === 0) return requiredMessage;
     }
     return null;
   };
 
-  export const ModelValidationField = (field: ValidationModelField, value: string): string | null => {
-
-    if (modelFields.includes(field)) {
-      if (!value.trim()) return 'Обязательно к заполнению';
-    }
+  export const ModelValidationField = 
+  <T extends string | ISelectedItem>(field: ValidationModelField, value: T):ValidationError => {
+     if (typeof value === 'object') {
+      if (value.value.length === 0) return 'Обязательно к заполнению';
+     }
+     if (typeof value === 'string') {
+        if (modelFields.includes(field)) {
+          if (value.length === 0) return 'Обязательно к заполнению';
+        }
+     }
+    
+    // if (modelFields.includes(field)) {
+    //   if (value.length === 0) return 'Обязательно к заполнению';
+    // }
     return null;
   };
