@@ -1,8 +1,9 @@
-import { IDevice, IDeviceModel, ISelectedItem } from './../../types/devices';
+import { IDevice, IDeviceModel, ISelectedItem, IEntity } from './../../types/devices';
 import { IValidationErrors } from './../../types/devices';
 
 type ValidationField = keyof IDevice;
 type ValidationModelField = keyof IDeviceModel;
+type ValidationEntityField = keyof IEntity
 type ValidationError = string | null;
 
 const fieldsMemoryScreen = ['laptop', 'mobile'];
@@ -44,9 +45,28 @@ export const ModelValidation = (formData: IDeviceModel): Partial<IValidationErro
     validateRequiredFields(formData, requiredFields, errors);
   
     return errors;
+};
+
+
+
+  export const ModelValidationField = 
+  <T extends string | IEntity>(field: string, value: T):ValidationError => {
+     if (typeof value === 'object') {
+      if (value.slug.length === 0) return 'Обязательно к заполнению';
+     }
+     if (typeof value === 'string') {
+        if (modelFields.includes(field)) {
+          if (value.length === 0) return 'Обязательно к заполнению';
+        }
+     }
+    return null;
   };
 
-export const ValidateField = <T>(field: string, value: T): string | null => {
+
+
+
+
+  export const ValidateField = <T>(field: string, value: T): string | null => {
     const requiredMessage = 'Обязательно к заполнению';
   
     if (field === 'name') {
@@ -57,21 +77,13 @@ export const ValidateField = <T>(field: string, value: T): string | null => {
       if (typeof value === 'number' && value === 0) return requiredMessage;
     }
     return null;
-  };
+};
 
-  export const ModelValidationField = 
-  <T extends string | ISelectedItem>(field: ValidationModelField, value: T):ValidationError => {
-     if (typeof value === 'object') {
-      if (value.value.length === 0) return 'Обязательно к заполнению';
-     }
-     if (typeof value === 'string') {
-        if (modelFields.includes(field)) {
-          if (value.length === 0) return 'Обязательно к заполнению';
-        }
-     }
-    
-    // if (modelFields.includes(field)) {
-    //   if (value.length === 0) return 'Обязательно к заполнению';
-    // }
-    return null;
-  };
+  
+  export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> => {
+    const errors: Partial<IValidationErrors> = {};
+    const requiredFields: ValidationEntityField[] = ['name', 'slug'];
+
+    validateRequiredFields(formData, requiredFields, errors);
+    return errors;
+};

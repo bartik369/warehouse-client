@@ -1,23 +1,22 @@
 import {FC} from 'react';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
-import { IDevice, ISelectedItem, IValidationDeviceErrors  } from '../../../types/devices';
+import { IDevice, IEntity, ISelectedItem, IValidationErrors  } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import style from './Select.module.scss';
 
 interface ISelectProps {
-    items: ISelectedItem[];
+    items: IEntity[];
     label: string;
     name?: string;
     value: string;
-    errors: IValidationDeviceErrors;
-    setValue: (value: ISelectedItem) => void;
+    errors: IValidationErrors;
+    setValue: (value: IEntity) => void;
 }
 
 const Select:FC<ISelectProps> = ({items, name, label, value, setValue, errors}) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
-  const errorMessage = errors[name as keyof IValidationDeviceErrors];
-
-  const handleSelect = (option: ISelectedItem) => {
+  const errorMessage = errors[name as keyof IValidationErrors];
+  const handleSelect = (option:IEntity ) => {
     setIsOpen(false);
     setValue(option);
   };
@@ -41,7 +40,7 @@ const Select:FC<ISelectProps> = ({items, name, label, value, setValue, errors}) 
             <div className={style.arrow} onClick={() => setIsOpen(!isOpen)} />
             {isOpen && (
                 <div className={style.dropdown}>
-                    {items.length > 0 
+                    {items
                       ? (items.map((option) => (
                             <div
                                 key={option.id}

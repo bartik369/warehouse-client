@@ -35,7 +35,9 @@ export interface IDeviceMedia {
 }
 
 export interface IValidationErrors {
+  id?:   string;
   name?: string;
+  slug?: string;
   type?: string;
   serviceable?: string;
   description?: string;
@@ -104,7 +106,13 @@ export interface DeviceTypes {
 }
 
 export interface ISelectedItem {
-  id: number;
+  id: string;
   name: string;
   value: string;
+}
+
+export interface IEntity {
+  id?: string;
+  name: string;
+  slug: string;
 }

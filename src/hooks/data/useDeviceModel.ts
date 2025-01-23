@@ -1,11 +1,13 @@
+import { IEntity } from './../../types/devices';
 import { useState, useCallback, useRef } from "react";
-import { ModelValidation, ModelValidationField} from "./../../utils/validation/DeviceValidation";
+import { ModelValidation, ModelValidationField} from "../../utils/validation/DeviceValidation";
 import { useCreateDeviceModelMutation } from "../../store/api/devicesApi";
 import { IDeviceMedia, IDeviceModel, ISelectedItem } from "../../types/devices";
 import { isErrorWithMessage, isFetchBaseQueryError} from "../../helpers/error-handling";
 import { toast } from "react-toastify";
+import { faQuran } from "@fortawesome/free-solid-svg-icons";
 
-export const useAddDeviceModel = () => {
+export const useDeviceModel = () => {
   const [itemType, setItemType] = useState<string>("");
   const [selectedValues, setSelectedValues] = useState<{
     [key: string]: string;
@@ -88,7 +90,7 @@ export const useAddDeviceModel = () => {
       ...media,
       file: null,
       prevImg: null,
-    });
+    });faQuran
     setModel({
       ...model,
       name: "",
@@ -98,13 +100,16 @@ export const useAddDeviceModel = () => {
   }, []);
 
   const handleInputChange = useCallback(
-    <T extends string | ISelectedItem>(field: keyof IDeviceModel, value: T) => {
+    <T extends IEntity>(field: keyof IDeviceModel, value: T) => {
+      console.log(field);
+      console.log(value)
+      
       const validationErrors = ModelValidationField(field, value);
       setErrors((prev) => ({
         ...prev,
         [field]: validationErrors as string,
       }));
-      const inputValue = typeof value === "string" ? value : value.value;
+      const inputValue = typeof value === "string" ? value : value.name;
       const selectValue = typeof value === "string" ? value : value.name;
       setModel((prev) => ({
         ...prev,

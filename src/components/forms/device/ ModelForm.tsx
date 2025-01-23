@@ -4,11 +4,11 @@ import BtnAction from '../../ui/buttons/BtnAction';
 import Preview from '../../ui/preview/Preview';
 import Select from '../../ui/select/Select';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
-import { useAddDeviceModel } from '../../../hooks/data/useAddDeviceModel';
+import { useDeviceModel } from '../../../hooks/data/useDeviceModel';
 import { deviceType, deviceTypeLabel, manufacturersLabel, modelLabel } from '../../../utils/constants/device';
 import { add, addDeviceModelTitle, reset } from '../../../utils/constants/constants';
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
-import style from './AddModelForm.module.scss';
+import style from './AddDeviceForm.module.scss';
 
 const AddModalForm:FC = () => {
     const {
@@ -22,7 +22,7 @@ const AddModalForm:FC = () => {
       handleInputChange, 
       handleCreateModel, 
       handleResetModel,
-    } = useAddDeviceModel();
+    } = useDeviceModel();
 
     return (
       <>

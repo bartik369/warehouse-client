@@ -1,4 +1,4 @@
-import { IDeviceMedia} from "./../../types/devices";
+import { IDeviceMedia, IEntity} from "./../../types/devices";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
@@ -6,7 +6,7 @@ import {
   isFetchBaseQueryError,
   isErrorWithMessage,
 } from "../../helpers/error-handling";
-import { IDevice } from "../../types/devices";
+import { IDevice, ISelectedItem } from "../../types/devices";
 
 export function useAddDevice() {
   const [device, setDevice] = useState<IDevice>({
@@ -141,23 +141,35 @@ export function useAddDevice() {
       setMedia({...media, prevImg: null});
     }, []);
 
-    const handleUpdateDevice = useCallback((field: keyof IDevice, value: any) => {
-      setDevice((prev) => ({
-        ...prev,
-        [field]: value,
-      }));
+    const handleInputChange = useCallback(
+      <T extends string | IEntity>(field: keyof IDevice, value: T) => {
+        console.log(field);
+        console.log(value);
+        
+        const validationErrors = ValidateField(field, value);
+        setErrors((prev) => ({
+          ...prev,
+          [field]: validationErrors as string
+        }));
 
-      setSelectedValues((prev) => ({
-        ...prev,
-        [field]: value,
-      }));
+        // if (typeof value === 'object' && field === 'manufacturer') {
+        //   setDevice({...device, manufacturer: value.id});
+        // }
 
-      const validationErrors = ValidateField(field, value);
-      setErrors((prev) => ({
-        ...prev,
-        [field]: validationErrors as string,
-      }));
-    }, []);
+        const inputValue = typeof value === 'string' ? value : value.slug;
+        const selectValue = typeof value === 'string' ? value : value.name;
+
+        setDevice((prev) => ({
+          ...prev,
+          [field]: inputValue,
+        }));
+
+        setSelectedValues((prev) => ({
+          ...prev,
+          [field]: selectValue,
+        }));
+
+    }, [])
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -167,8 +179,11 @@ export function useAddDevice() {
       }))
     }, [checked]);
 
+  console.log(device);
+  
+
     return { errors, checked, device, media, itemType, selectedOption, selectedValues,
-      handleChecked, setItemType, handleUpdateDevice, handleMedia, handleNumber, handleExtNumber,
+      handleChecked, setItemType, handleInputChange, handleMedia, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setSelectedOption,
     };
 }
