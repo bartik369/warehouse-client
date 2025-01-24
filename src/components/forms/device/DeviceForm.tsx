@@ -1,4 +1,4 @@
-import { FC, useState} from "react";
+import { FC, useEffect, useState} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturersLabel, deviceType, deviceTypeLabel,
@@ -20,21 +20,39 @@ import { useModal } from "../../../hooks/data/useModal";
 import Modal from "../../modal/Modal";
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import style from "./DeviceForm.module.scss";
+import { useEntity } from "../../../hooks/data/useEntity";
 
 const AddDeviceForm: FC = () => {
   const { device, media, itemType, errors,  checked,
     handleMedia, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setItemType, handleInputChange, handleChecked, selectedValues} = useAddDevice();
+    handleResetDevice, setItemType, handleInputChange, handleChecked, selectedValues, typeId, setTypeId} = useAddDevice();
+
   const {isOpen, setIsOpen} = useModal(false);
   const {data: manufacturers} = useGetManufacturersQuery();
   const {data: types} = useGetTypesQuery();
   const [fieldType, setFieldType] = useState('');
-
+  const [title, setTitle] = useState('');
+  
+  useEffect(() => {
+    switch(fieldType) {
+      case 'manufacturer':
+        setTitle('Добавление нового производителя');
+        break
+      case 'type':
+        setTitle(`Добавление нового типа`);
+        break
+      case 'model':
+        setTitle(`Добавление новой модели ${selectedValues["type"]}`)
+        break
+    }
+  }, [fieldType]);
+  
+  
   return (
     <>
-      {isOpen && (
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-          <EntityForm fieldType={fieldType}/>
+      {isOpen &&  (
+        <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen}>
+          <EntityForm typeId={typeId} fieldType={fieldType}/>
         </Modal>
       )}
       <div className={style.title}>{addNewDeviceTitle}</div>
@@ -64,6 +82,7 @@ const AddDeviceForm: FC = () => {
               setValue={(item) => {
                 handleInputChange("type", item);
                 setItemType(item.slug);
+                setTypeId(item.id!)
               }}
               items={types || []}
               label={deviceTypeLabel}
@@ -83,7 +102,6 @@ const AddDeviceForm: FC = () => {
                 <Select
                   setValue={(item) => {
                     handleInputChange("manufacturer", item);
-                    setItemType(item.slug);
                   }}
                   items={manufacturers || []}
                   label={manufacturersLabel}
@@ -161,7 +179,7 @@ const AddDeviceForm: FC = () => {
                 />
               ))}
             <Textarea
-              setText={(e) => handleInputChange("description", e.target.name)}
+              setText={(e) => handleInputChange("description", e.target.value)}
               value={device.description || ""}
               label={description}
             />

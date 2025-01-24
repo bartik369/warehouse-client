@@ -1,15 +1,24 @@
-import { IEntity} from './../../types/devices';
-import { useState, useCallback} from "react";
+import { useState, useRef, useCallback } from 'react';
+import { IDeviceMedia, IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { isErrorWithMessage, isFetchBaseQueryError} from "../../helpers/error-handling";
 import { useCreateManufacturerMutation, useCreateTypeMutation, useCreateModelMutation } from "../../store/api/devicesApi";
 import { toast } from "react-toastify";
 
 export const useEntity = () => {
+
+  const [media, setMedia] = useState<IDeviceMedia>({
+    file: null,
+    prevImg: null,
+  });
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  
   const [entity, setEntity] = useState<IEntity>({
     id: '',
     name: '',
     slug: '',
+    imagePath: '',
+    typeId: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createManufacturer] = useCreateManufacturerMutation();
@@ -17,11 +26,27 @@ export const useEntity = () => {
   const [createModel] = useCreateModelMutation();
 
   // Mapping between field type and RTK Query API handlers
-  const entityPoolsFunctions: Record<string, (entity: IEntity) => { unwrap: () => Promise<any> }> = {
+  const entityPoolsFunctions: Record<string, (entity: any) => { unwrap: () => Promise<any> }> = {
     manufacturer: createManufacturer,
     type: createType,
     model: createModel,
   };
+
+  const handleMedia = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
+          const objectUrl = URL.createObjectURL(file);
+          setMedia({ file: file, prevImg: objectUrl });
+          return () => URL.revokeObjectURL(objectUrl);
+        } else {
+          toast("Выберите картинку!", { type: "error" });
+        }
+      }
+    },
+    [media]
+  );
 
   const handleCreateEntity = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>, fieldType:string) => {
@@ -32,7 +57,15 @@ export const useEntity = () => {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-          await createEntityFunction(entity).unwrap()
+          const formData = new FormData();
+          (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
+            const value = entity[key];
+            if (value !== undefined && value !== null) {
+              formData.append(key, value);
+            }
+          });
+          if (media.file) formData.append("file", media.file);
+          await createEntityFunction(formData).unwrap()
           .then((data) => {
             handleResetEntity();
             toast(data?.message, { type: "success" });
@@ -57,28 +90,40 @@ export const useEntity = () => {
 
   const handleResetEntity = useCallback(() => {
     setEntity({
-      ...entity,
       id: '',
       name: '',
-      slug: ''
+      slug: '',
+      imagePath: '',
+      typeId: '',
     });
   }, []);
 
-  const handleInputChange = useCallback((field: keyof IEntity, value: string) => {
+  const handleInputChange = useCallback(<T extends IEntity | string>(field: keyof IEntity, value: T) => {
       const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
         [field]: validationErrors as any,
       }));
-
-      setEntity((prev: any) => ({
+      setEntity((prev) => ({
         ...prev,
-        [field]: value,
+        [field]: value as string,
       }));
     },[]
   );
 
-  return {errors, entity, handleInputChange, 
-    handleCreateEntity, handleResetEntity};
+  console.log(entity);
+  
+  return {
+    errors, 
+    entity,
+    media,
+    fileInputRef,
+    setEntity,
+    handleMedia, 
+    handleInputChange, 
+    handleCreateEntity, 
+    handleResetEntity,
+  };
 };
+
 

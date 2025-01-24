@@ -11,11 +11,18 @@
     background-color: rgb(239, 241, 245, .98);
     .inner {
         display: flex;
+        align-items: center;
         flex-direction: column;
         position: relative;
         min-width: 200px;
         padding: 50px;
         background-color: #fff;
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
     }
     .icon {
         position: absolute;

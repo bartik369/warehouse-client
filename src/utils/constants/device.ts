@@ -69,19 +69,19 @@ export const deviceTypes:DeviceTypes = {
       { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1},
     ],
   },
-  desktop: {
-    label: "Стационарный компьютер",
-    uniqueFields: [
-      { name: "cpuCores", label: "Кол-во ядер процессора", type: "number", step: 1},
-    ],
-  },
+  // desktop: {
+  //   label: "Стационарный компьютер",
+  //   uniqueFields: [
+  //     { name: "cpuCores", label: "Кол-во ядер процессора", type: "number", step: 1},
+  //   ],
+  // },
   tv: {
     label: "Телевизор",
     uniqueFields: [
       { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
     ],
   },
-  mobile: {
+  mobile_phone: {
     label: "Мобильный телефон",
     uniqueFields: [
         { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },

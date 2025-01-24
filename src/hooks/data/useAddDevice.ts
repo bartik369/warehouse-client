@@ -9,6 +9,7 @@ import {
 import { IDevice, ISelectedItem } from "../../types/devices";
 
 export function useAddDevice() {
+  const [typeId, setTypeId] = useState('');
   const [device, setDevice] = useState<IDevice>({
     name: "",
     inventoryNumber: "",
@@ -143,9 +144,7 @@ export function useAddDevice() {
 
     const handleInputChange = useCallback(
       <T extends string | IEntity>(field: keyof IDevice, value: T) => {
-        console.log(field);
-        console.log(value);
-        
+
         const validationErrors = ValidateField(field, value);
         setErrors((prev) => ({
           ...prev,
@@ -179,10 +178,7 @@ export function useAddDevice() {
       }))
     }, [checked]);
 
-  console.log(device);
-  
-
-    return { errors, checked, device, media, itemType, selectedOption, selectedValues,
+    return { typeId, setTypeId, errors, checked, device, media, itemType, selectedOption, selectedValues,
       handleChecked, setItemType, handleInputChange, handleMedia, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setSelectedOption,
     };

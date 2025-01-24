@@ -1,20 +1,37 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import { ToastContainer, Bounce } from 'react-toastify';
 import { useEntity } from '../../../hooks/data/useEntity';
-import { add, addDeviceManufacturerTitle, reset } from '../../../utils/constants/constants';
+import { add, reset } from '../../../utils/constants/constants';
 import { manufacturersLabel} from '../../../utils/constants/device';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Input from '../../ui/input/Input';
+import Preview from '../../ui/preview/Preview';
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
-import style from './DeviceForm.module.scss';
+import style from './EntityForm.module.scss';
+import { IEntity } from '../../../types/devices';
 
 interface IEntityProps {
+  typeId: string;
   fieldType: string;
 };
 
-const EntityForm:FC<IEntityProps> = ({fieldType}) => { 
-    const {errors, entity, handleInputChange, handleCreateEntity, handleResetEntity,
+const EntityForm:FC<IEntityProps> = ({fieldType, typeId}) => { 
+    const {
+      entity,
+      errors, 
+      media,
+      fileInputRef,
+      handleMedia,
+      handleInputChange, 
+      handleCreateEntity, 
+      handleResetEntity,
     } = useEntity();
+
+    useEffect(() => {
+      if (fieldType === "model" && typeId) {
+        handleInputChange("typeId", typeId);
+      }
+    }, [fieldType, typeId]);
 
     return (
         <>
@@ -31,15 +48,12 @@ const EntityForm:FC<IEntityProps> = ({fieldType}) => {
             theme="light"
             transition={Bounce}
       />
-      <div className={style.inner}>
-          <div className={style.title}>{
-            fieldType === 'manufacturer'
-            ? 'Добавление нового производителя'
-            : fieldType === 'type'
-            ? 'Добавление нового типа'
-            : ''
-          }</div>
-            <div className={style.content}>
+          <div className={style.content}>
+            {fieldType === 'model' && 
+              <div className={style.preview}>
+              <Preview  prevImg={media.prevImg} ref={fileInputRef} setMedia={handleMedia} />
+              </div>
+            }
             <form>
               <Input
                 onChange={(e) => handleInputChange('name', e.target.value)}
@@ -77,8 +91,6 @@ const EntityForm:FC<IEntityProps> = ({fieldType}) => {
               </div>
             </form>
             </div>
-        </div>
-            
         </>
     );
 };

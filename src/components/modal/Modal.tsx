@@ -10,11 +10,12 @@ interface IModal {
     title?: string;
     setIsOpen:(isOpen:boolean) => void;
 }
-const Modal:FC<IModal> = ({children, isOpen, setIsOpen}) => {
+const Modal:FC<IModal> = ({children, isOpen, title, setIsOpen}) => {
     const modal = document.getElementById('portal') as HTMLElement;
     return ReactDOM.createPortal(
         <div className={style.wrapper}>
             <div className={style.inner}>
+                <div className={style.title}>{title}</div>
                 <div onClick={() => setIsOpen(!isOpen)}>
                     <FontAwesomeIcon className={style.icon} icon={faXmark}/>
                 </div>

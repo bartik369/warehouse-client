@@ -73,3 +73,11 @@
         }
     }
 }
+
+.inner {
+    background-color: #5792ff;
+    .content {
+        display: flex;
+        align-items: center;
+    }
+}

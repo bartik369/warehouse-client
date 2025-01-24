@@ -115,4 +115,6 @@ export interface IEntity {
   id?: string;
   name: string;
   slug: string;
+  imagePath?: string,
+  typeId?: string,
 }

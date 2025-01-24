@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    align-items: center;
+    .preview {
+        margin-right: 20px;
+        width: 250px;
+        border: 1px solid #e5ecef;
+        border-radius: 12px;
+        img {
+            width: 100%;
+        }
+    }
+    form {
+        width: 300px;
+    }
+}

@@ -28,15 +28,15 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        createDeviceModel: build.mutation<IDeviceModel & {message: string}, FormData>({
-            query(body) {
-                return {
-                    url:`${import.meta.env.VITE_MODELS}`,
-                    method: 'POST',
-                    body,
-                }
-            }
-        }),
+        // createDeviceModel: build.mutation<IDeviceModel & {message: string}, FormData>({
+        //     query(body) {
+        //         return {
+        //             url:`${import.meta.env.VITE_MODELS}`,
+        //             method: 'POST',
+        //             body,
+        //         }
+        //     }
+        // }),
         getManufacturers: build.query<IEntity[], void>({
             query() {
                 return {
@@ -46,7 +46,7 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        createManufacturer: build.mutation({
+        createManufacturer: build.mutation<any, FormData>({
             query(body) {
                 return {
                     url:`${import.meta.env.VITE_MANUFACTURERS}`,
@@ -55,7 +55,7 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        createModel: build.mutation({
+        createModel: build.mutation<any, FormData>({
             query(body) {
                 return {
                     url:`${import.meta.env.VITE_MODELS}`,
@@ -72,7 +72,7 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        createType: build.mutation({
+        createType: build.mutation<any, FormData>({
             query(body) {
                 return {
                     url:`${import.meta.env.VITE_TYPES}`,
@@ -87,7 +87,7 @@ export const devicesApi = createApi({
 export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
-    useCreateDeviceModelMutation,
+    // useCreateDeviceModelMutation,
     useGetManufacturersQuery,
     useCreateManufacturerMutation,
     useCreateModelMutation,
