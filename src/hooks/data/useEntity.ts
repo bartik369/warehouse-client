@@ -12,13 +12,13 @@ export const useEntity = () => {
     prevImg: null,
   });
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  
   const [entity, setEntity] = useState<IEntity>({
     id: '',
     name: '',
     slug: '',
     imagePath: '',
     typeId: '',
+    manufacturerId: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createManufacturer] = useCreateManufacturerMutation();
@@ -64,6 +64,7 @@ export const useEntity = () => {
               formData.append(key, value);
             }
           });
+
           if (media.file) formData.append("file", media.file);
           await createEntityFunction(formData).unwrap()
           .then((data) => {
@@ -113,17 +114,9 @@ export const useEntity = () => {
 
   console.log(entity);
   
-  return {
-    errors, 
-    entity,
-    media,
-    fileInputRef,
-    setEntity,
-    handleMedia, 
-    handleInputChange, 
-    handleCreateEntity, 
-    handleResetEntity,
-  };
+
+  return { errors, entity, media, fileInputRef, setEntity, handleMedia, 
+  handleInputChange,  handleCreateEntity, handleResetEntity };
 };
 
 

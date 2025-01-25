@@ -2,14 +2,14 @@ import { IDeviceMedia, IEntity} from "./../../types/devices";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
-import {
-  isFetchBaseQueryError,
-  isErrorWithMessage,
-} from "../../helpers/error-handling";
-import { IDevice, ISelectedItem } from "../../types/devices";
+import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
+import { IDevice} from "../../types/devices";
 
 export function useAddDevice() {
+  // Type ID and manufacturer ID for EntityForm(create new model)
   const [typeId, setTypeId] = useState('');
+  const [manufacturerId, setManufacturerId] = useState('');
+  
   const [device, setDevice] = useState<IDevice>({
     name: "",
     inventoryNumber: "",
@@ -61,11 +61,12 @@ export function useAddDevice() {
   }, []);
 
   const handleExtNumber = useCallback((num: number, fieldName: string) => {
+    const data = ValidateField(fieldName, num);
+    
     setDevice((prev) => ({
       ...prev,
       [fieldName]: num,
     }));
-    const data = ValidateField(fieldName, num);
     setErrors((prev) => ({
       ...prev,
       [fieldName]: data as string,
@@ -168,7 +169,10 @@ export function useAddDevice() {
           [field]: selectValue,
         }));
 
-    }, [])
+    }, []);
+
+    console.log(device);
+    
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -178,7 +182,7 @@ export function useAddDevice() {
       }))
     }, [checked]);
 
-    return { typeId, setTypeId, errors, checked, device, media, itemType, selectedOption, selectedValues,
+    return {typeId, setTypeId, manufacturerId, setManufacturerId, errors, checked, device, media, itemType, selectedOption, selectedValues,
       handleChecked, setItemType, handleInputChange, handleMedia, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setSelectedOption,
     };

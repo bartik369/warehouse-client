@@ -6,7 +6,7 @@ import { manufacturersLabel, deviceType, deviceTypeLabel,
   modelCode, modelLabel } from "../../../utils/constants/device";
 import { addNewDeviceTitle, add, reset, yes, 
 no, serviceable, addDeviceModel, addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
-import { useGetManufacturersQuery, useGetTypesQuery} from "../../../store/api/devicesApi";
+import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
 import { deviceTypes} from "../../../utils/constants/device";
 import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
@@ -23,16 +23,23 @@ import style from "./DeviceForm.module.scss";
 import { useEntity } from "../../../hooks/data/useEntity";
 
 const AddDeviceForm: FC = () => {
-  const { device, media, itemType, errors,  checked,
-    handleMedia, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setItemType, handleInputChange, handleChecked, selectedValues, typeId, setTypeId} = useAddDevice();
+  const {typeId, setTypeId, manufacturerId, setManufacturerId, device, media, itemType, errors,  checked, selectedValues, handleMedia, handleNumber, handleExtNumber, handleAddDevice,
+    handleResetDevice, setItemType, handleInputChange, handleChecked} = useAddDevice();
 
   const {isOpen, setIsOpen} = useModal(false);
-  const {data: manufacturers} = useGetManufacturersQuery();
-  const {data: types} = useGetTypesQuery();
   const [fieldType, setFieldType] = useState('');
   const [title, setTitle] = useState('');
-  
+  const {data: manufacturers} = useGetManufacturersQuery();
+  const {data: types} = useGetTypesQuery();
+  const {data: models} = useGetModelsQuery(
+    { manufacturer: device.manufacturer, type: device.type}
+    );
+
+  useEffect(() => {
+    if (device.manufacturer && device.type) {
+    }
+  }, [device]);
+
   useEffect(() => {
     switch(fieldType) {
       case 'manufacturer':
@@ -46,13 +53,15 @@ const AddDeviceForm: FC = () => {
         break
     }
   }, [fieldType]);
+
+  console.log( models);
   
   
   return (
     <>
       {isOpen &&  (
         <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen}>
-          <EntityForm typeId={typeId} fieldType={fieldType}/>
+          <EntityForm typeId={typeId} manufacturerId={manufacturerId} fieldType={fieldType}/>
         </Modal>
       )}
       <div className={style.title}>{addNewDeviceTitle}</div>
@@ -82,7 +91,7 @@ const AddDeviceForm: FC = () => {
               setValue={(item) => {
                 handleInputChange("type", item);
                 setItemType(item.slug);
-                setTypeId(item.id!)
+                setTypeId(item.id || '')
               }}
               items={types || []}
               label={deviceTypeLabel}
@@ -102,6 +111,7 @@ const AddDeviceForm: FC = () => {
                 <Select
                   setValue={(item) => {
                     handleInputChange("manufacturer", item);
+                    setManufacturerId(item.id || '')
                   }}
                   items={manufacturers || []}
                   label={manufacturersLabel}
@@ -110,7 +120,7 @@ const AddDeviceForm: FC = () => {
                   name="manufacturer"
                 />
             </div>
-            {device.type && device.manufacturer && (
+            {typeId && manufacturerId && (
               <div className={style.container}>
                 <div className={style.ask}>
                   {addDeviceModel}
@@ -120,16 +130,16 @@ const AddDeviceForm: FC = () => {
                   }}>{add}</span>
                 </div>
                 <Select setValue={(item) => {handleInputChange("modelId", item.name)}}
-                  items={manufacturers!}
+                  items={models || []}
                   label={modelLabel}
-                  value={selectedValues["model"]}
+                  value={selectedValues["modelId"]}
                   errors={errors}
-                  name="model"
+                  name="modelId"
                 />
               </div>
             )}
             <Input
-              onChange={(e) =>  handleInputChange("serialNumber", e.target.value)}
+              onChange={(e) => handleInputChange("serialNumber", e.target.value)}
               type={"text"}
               value={device.serialNumber || ""}
               label={serialNumber}

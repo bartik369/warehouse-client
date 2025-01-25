@@ -117,4 +117,5 @@ export interface IEntity {
   slug: string;
   imagePath?: string,
   typeId?: string,
+  manufacturerId?: string,
 }

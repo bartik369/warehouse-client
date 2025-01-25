@@ -64,6 +64,14 @@ export const devicesApi = createApi({
                 }
             }
         }),
+        getModels: build.query<any, any>({
+            query({manufacturer, type}) {
+                return {
+                    url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
+                    method: 'GET',
+                }
+            }
+        }),
         getTypes: build.query<IEntity[], void>({
             query() {
                 return {
@@ -87,6 +95,7 @@ export const devicesApi = createApi({
 export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
+    useGetModelsQuery,
     // useCreateDeviceModelMutation,
     useGetManufacturersQuery,
     useCreateManufacturerMutation,

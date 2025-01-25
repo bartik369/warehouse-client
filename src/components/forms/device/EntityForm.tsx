@@ -1,37 +1,31 @@
 import {FC, useEffect} from 'react';
 import { ToastContainer, Bounce } from 'react-toastify';
 import { useEntity } from '../../../hooks/data/useEntity';
-import { add, reset } from '../../../utils/constants/constants';
-import { manufacturersLabel} from '../../../utils/constants/device';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Input from '../../ui/input/Input';
 import Preview from '../../ui/preview/Preview';
+import { add, reset } from '../../../utils/constants/constants';
+import { manufacturersLabel} from '../../../utils/constants/device';
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import style from './EntityForm.module.scss';
 import { IEntity } from '../../../types/devices';
 
 interface IEntityProps {
   typeId: string;
+  manufacturerId: string;
   fieldType: string;
 };
 
-const EntityForm:FC<IEntityProps> = ({fieldType, typeId}) => { 
-    const {
-      entity,
-      errors, 
-      media,
-      fileInputRef,
-      handleMedia,
-      handleInputChange, 
-      handleCreateEntity, 
-      handleResetEntity,
-    } = useEntity();
+const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => { 
+    const { entity, errors, media, fileInputRef, handleMedia,
+    handleInputChange, handleCreateEntity, handleResetEntity} = useEntity();
 
     useEffect(() => {
-      if (fieldType === "model" && typeId) {
-        handleInputChange("typeId", typeId);
+      if (fieldType === "model" && (typeId && manufacturerId)) {
+        handleInputChange("typeId", typeId); 
+        handleInputChange("manufacturerId", manufacturerId); 
       }
-    }, [fieldType, typeId]);
+    }, [fieldType, typeId, manufacturerId]);
 
     return (
         <>
