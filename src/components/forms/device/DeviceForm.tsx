@@ -1,11 +1,10 @@
 import { FC, useEffect, useState} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import { manufacturersLabel, deviceType, deviceTypeLabel,
-  deviceName, serialNumber, inventoryNumber, location, description,
-  modelCode, modelLabel } from "../../../utils/constants/device";
-import { addNewDeviceTitle, add, reset, yes, 
-no, serviceable, addDeviceModel, addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
+import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
+  location, description, modelCode, modelLabel } from "../../../utils/constants/device";
+import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
+  addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
 import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
 import { deviceTypes} from "../../../utils/constants/device";
 import Textarea from "../../ui/textarea/Textarea";
@@ -19,26 +18,60 @@ import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import Modal from "../../modal/Modal";
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
+import { IEntity } from "../../../types/devices";
 import style from "./DeviceForm.module.scss";
-import { useEntity } from "../../../hooks/data/useEntity";
 
 const AddDeviceForm: FC = () => {
-  const {typeId, setTypeId, manufacturerId, setManufacturerId, device, media, itemType, errors,  checked, selectedValues, handleMedia, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setItemType, handleInputChange, handleChecked} = useAddDevice();
+  const {typeId, manufacturerId, device, media, itemType, errors,  checked, selectedValues, 
+    handleMedia, handleNumber, handleExtNumber, handleAddDevice,handleResetDevice, setMedia, 
+    setTypeId, setSelectedValues, setDevice,  setManufacturerId, setItemType, handleInputChange, handleChecked} = useAddDevice();
 
   const {isOpen, setIsOpen} = useModal(false);
   const [fieldType, setFieldType] = useState('');
   const [title, setTitle] = useState('');
+  const [skip, setSkip] = useState(true);
   const {data: manufacturers} = useGetManufacturersQuery();
   const {data: types} = useGetTypesQuery();
   const {data: models} = useGetModelsQuery(
-    { manufacturer: device.manufacturer, type: device.type}
-    );
+    { manufacturer: device.manufacturer, type: device.type}, 
+    {skip: skip}
+  );
+  const [devicePic, setDevicePic] = useState('');
 
+  const resetModelData = () => {
+      setDevice((prev) => ({
+        ...prev,
+        modelName: '',
+    }));
+    setSelectedValues((prev) => ({
+        ...prev,
+        modelName: '',
+    }));
+    setDevicePic('');
+  }
+
+  // Allow model query by manufacturer and type
+  useEffect(() => {
+    if (device.modelName) {
+      models && models.forEach((model:IEntity) => {
+        console.log(model.slug);
+        
+         if (model.name === device.modelName) {
+          setDevicePic(model.imagePath || '')
+         }
+      });
+    }
+  }, [device.modelName]);
+
+  // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
     if (device.manufacturer && device.type) {
+        setSkip(false); 
+        resetModelData();
+    } else {
+      setSkip(true); 
     }
-  }, [device]);
+}, [device.manufacturer, device.type, models]);
 
   useEffect(() => {
     switch(fieldType) {
@@ -54,9 +87,6 @@ const AddDeviceForm: FC = () => {
     }
   }, [fieldType]);
 
-  console.log( models);
-  
-  
   return (
     <>
       {isOpen &&  (
@@ -67,7 +97,7 @@ const AddDeviceForm: FC = () => {
       <div className={style.title}>{addNewDeviceTitle}</div>
       <div className={style.info}>
         <div className={style.preview}>
-          <Preview setMedia={handleMedia} prevImg={media?.prevImg} />
+          <Preview model={device.modelName || ''} setMedia={handleMedia} prevImg={devicePic}/>
         </div>
         <div className={style.forms}>
           <form className={style.form}>
@@ -129,12 +159,14 @@ const AddDeviceForm: FC = () => {
                     setFieldType('model')
                   }}>{add}</span>
                 </div>
-                <Select setValue={(item) => {handleInputChange("modelId", item.name)}}
+                <Select setValue={(item) => {
+                  handleInputChange("modelName", item.name || '') 
+                }}
                   items={models || []}
                   label={modelLabel}
-                  value={selectedValues["modelId"]}
+                  value={selectedValues["modelName"]}
                   errors={errors}
-                  name="modelId"
+                  name="modelName"
                 />
               </div>
             )}
@@ -197,8 +229,7 @@ const AddDeviceForm: FC = () => {
         </div>
       </div>
       <div className={style.action}>
-        <BtnAction
-          icon={faCircleXmark}
+        <BtnAction icon={faCircleXmark}
           type="button"
           size="lg"
           color="red"

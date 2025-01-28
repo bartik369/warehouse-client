@@ -5,9 +5,8 @@ export interface IDevice {
     type: string;
     manufacturer?: string;
     modelCode?: string;
-    modelId?: string;
+    modelName?: string;
     serialNumber?: string;
-    media?: string;
     weight?: number;
     screenSize?: number | null;
     memorySize?: number | null;

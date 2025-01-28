@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
 import { IDevice, IEntity, ISelectedItem, IValidationErrors  } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
@@ -13,7 +13,7 @@ interface ISelectProps {
     setValue: (value: IEntity) => void;
 }
 
-const Select:FC<ISelectProps> = ({items, name, label, value, setValue, errors}) => {
+const Select:FC<ISelectProps> = ({items, name, label, value, errors, setValue}) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name as keyof IValidationErrors];
   const handleSelect = (option:IEntity ) => {

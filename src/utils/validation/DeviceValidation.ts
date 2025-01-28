@@ -41,30 +41,22 @@ export const FormValidation = (formData: IDevice, itemType: string):IValidationE
 export const ModelValidation = (formData: IDeviceModel): Partial<IValidationErrors> => {
     const errors: Partial<IValidationErrors> = {};
     const requiredFields: ValidationModelField[] = ['name', 'manufacturer', 'type'];
-  
     validateRequiredFields(formData, requiredFields, errors);
-  
     return errors;
 };
 
-
-
   export const ModelValidationField = 
   <T extends string | IEntity>(field: string, value: T):ValidationError => {
-     if (typeof value === 'object') {
-      if (value.slug.length === 0) return 'Обязательно к заполнению';
+     const isEmpty = (val: string) => val.length === 0;
+
+     if (typeof value === 'object' && isEmpty(value.slug)) {
+        return 'Обязательно к заполнению';
      }
-     if (typeof value === 'string') {
-        if (modelFields.includes(field)) {
-          if (value.length === 0) return 'Обязательно к заполнению';
-        }
+     if (typeof value === 'string' && modelFields.includes(field) && isEmpty(value)) {
+      return 'Обязательно к заполнению'; 
      }
     return null;
   };
-
-
-
-
 
   export const ValidateField = <T>(field: string, value: T): string | null => {
     const requiredMessage = 'Обязательно к заполнению';
@@ -79,7 +71,6 @@ export const ModelValidation = (formData: IDeviceModel): Partial<IValidationErro
     return null;
 };
 
-  
   export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> => {
     const errors: Partial<IValidationErrors> = {};
     const requiredFields: ValidationEntityField[] = ['name', 'slug'];

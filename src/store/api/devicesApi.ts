@@ -64,7 +64,7 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        getModels: build.query<any, any>({
+        getModels: build.query<IEntity[], any>({
             query({manufacturer, type}) {
                 return {
                     url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,

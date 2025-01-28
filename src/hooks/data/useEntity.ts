@@ -6,7 +6,7 @@ import { useCreateManufacturerMutation, useCreateTypeMutation, useCreateModelMut
 import { toast } from "react-toastify";
 
 export const useEntity = () => {
-
+  // Device file and preview img for  Device form
   const [media, setMedia] = useState<IDeviceMedia>({
     file: null,
     prevImg: null,
@@ -31,18 +31,18 @@ export const useEntity = () => {
     type: createType,
     model: createModel,
   };
-
+  // Device media logic
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
+        console.log(file);
+        
         if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
-        } else {
-          toast("Выберите картинку!", { type: "error" });
-        }
+        } else { toast("Выберите картинку!", { type: "error" }); }
       }
     },
     [media]
@@ -60,23 +60,21 @@ export const useEntity = () => {
           const formData = new FormData();
           (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
             const value = entity[key];
-            if (value !== undefined && value !== null) {
-              formData.append(key, value);
-            }
+            if (value !== undefined && value !== null) formData.append(key, value);
           });
 
           if (media.file) formData.append("file", media.file);
-          await createEntityFunction(formData).unwrap()
-          .then((data) => {
+
+          await createEntityFunction(formData).unwrap().then((data) => {
             handleResetEntity();
             toast(data?.message, { type: "success" });
           });
         }
       } catch (err: unknown) {
-        
+
         if (isFetchBaseQueryError(err)) {
           const error = err as { data?: { message: string; error: string } };
-          const errMsg = error.data?.error;
+          const errMsg = error.data?.message;
           console.log("API Error", errMsg);
           toast(errMsg, { type: "error" });
         } else if (isErrorWithMessage(err)) {
@@ -90,13 +88,8 @@ export const useEntity = () => {
   );
 
   const handleResetEntity = useCallback(() => {
-    setEntity({
-      id: '',
-      name: '',
-      slug: '',
-      imagePath: '',
-      typeId: '',
-    });
+    setEntity({ id: '', name: '', slug: '', imagePath: '', typeId: ''});
+    setMedia({ file: null, prevImg: null})
   }, []);
 
   const handleInputChange = useCallback(<T extends IEntity | string>(field: keyof IEntity, value: T) => {
@@ -111,10 +104,6 @@ export const useEntity = () => {
       }));
     },[]
   );
-
-  console.log(entity);
-  
-
   return { errors, entity, media, fileInputRef, setEntity, handleMedia, 
   handleInputChange,  handleCreateEntity, handleResetEntity };
 };

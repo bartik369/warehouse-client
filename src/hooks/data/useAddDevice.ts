@@ -16,9 +16,8 @@ export function useAddDevice() {
     type: "",
     manufacturer: "",
     modelCode: "",
-    modelId: "",
+    modelName: "",
     serialNumber: "",
-    media: "",
     weight: 0,
     screenSize: 0,
     memorySize: 0,
@@ -114,9 +113,8 @@ export function useAddDevice() {
         type: "",
         manufacturer: "",
         modelCode: "",
-        modelId: "",
+        modelName: "",
         serialNumber: "",
-        media: "",
         weight: 0,
         screenSize: 0,
         memorySize: 0,
@@ -182,8 +180,8 @@ export function useAddDevice() {
       }))
     }, [checked]);
 
-    return {typeId, setTypeId, manufacturerId, setManufacturerId, errors, checked, device, media, itemType, selectedOption, selectedValues,
+    return {typeId, setTypeId, manufacturerId, device, setSelectedValues, setManufacturerId, setMedia, errors, checked, media, itemType, selectedOption, selectedValues,
       handleChecked, setItemType, handleInputChange, handleMedia, handleNumber, handleExtNumber,
-      handleAddDevice, handleResetDevice, setSelectedOption,
+      handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,
     };
 }
