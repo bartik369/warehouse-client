@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent, FC, memo} from 'react';
 import { deviceWeight} from '../../../utils/constants/device';
 import { IDevice } from '../../../types/devices';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -9,12 +9,15 @@ interface INumberProps {
     device: IDevice;
     setDevice: (entity:number) => void;
 }
-const Number:FC<INumberProps> = ({ device, setDevice}) => {
+const Number:FC<INumberProps> = memo(({ device, setDevice}) => {
     const data = {
         min: 0,
         max: 1000000,
         step:0.1
     };
+
+    console.log('number');
+    
     
     const handleValueChange = (newValue:number) => {
         const parsedValue = parseFloat(newValue.toFixed(2));
@@ -60,6 +63,6 @@ const Number:FC<INumberProps> = ({ device, setDevice}) => {
             </div>
         </div>
     );
-};
+});
 
 export default Number;

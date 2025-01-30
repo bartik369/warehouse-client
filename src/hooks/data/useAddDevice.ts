@@ -1,16 +1,18 @@
 import { IDeviceMedia, IEntity} from "./../../types/devices";
-import { useState, ChangeEvent, useCallback } from "react";
+import { useState, ChangeEvent, useCallback, useMemo, useEffect } from "react";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
+import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constants/constants";
 import { IDevice} from "../../types/devices";
 
 export function useAddDevice() {
   // Type ID and manufacturer ID for EntityForm(create new model)
-  const [typeId, setTypeId] = useState('');
-  const [manufacturerId, setManufacturerId] = useState('');
+  const [typeId, setTypeId] = useState(''); // For display select of model 
+  const [manufacturerId, setManufacturerId] = useState(''); // For display select of model 
   const [modelId, setModelId] = useState('');
-  
+  const [title, setTitle] = useState('');
+  const [fieldType, setFieldType] = useState('');
   const [device, setDevice] = useState<IDevice>({
     name: '',
     inventoryNumber: '',
@@ -35,6 +37,7 @@ export function useAddDevice() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
+  const [devicePic, setDevicePic] = useState(""); // Preview of device model
   const [media, setMedia] = useState<IDeviceMedia>({
     file:    null,
     prevImg: null,
@@ -46,16 +49,6 @@ export function useAddDevice() {
   const [itemType, setItemType] = useState<string>("");
   const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
   const [create] = useCreateDeviceMutation();
-
-  const handleMedia = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const objectUrl = URL.createObjectURL(file);
-      setMedia({ file, prevImg: objectUrl});
-      return () => URL.revokeObjectURL(objectUrl);
-    }
-  }, []);
-
   const handleNumber = useCallback((num: number) => {
     setDevice((prev) => ({
       ...prev,
@@ -83,18 +76,7 @@ export function useAddDevice() {
       setErrors(validationErrors as Record<string, string>);
 
       if (Object.keys(validationErrors).length === 0) {
-        const formData = new FormData();
-        (Object.keys(device) as (keyof IDevice)[]).forEach((key) => {
-          const value = device[key];
-          if (value !== undefined && value !== null) {
-            formData.append(key, value instanceof Date 
-                ? value.toISOString() 
-                : value.toString()
-            );
-          }
-        });
-        media.file && formData.append("file", media.file);
-        await create(formData).unwrap();
+        await create(device).unwrap();
         handleResetDevice();
         setMedia({...media, prevImg: null});
       } else {
@@ -133,8 +115,11 @@ export function useAddDevice() {
       ) as Record<string, string>
       );
       setSelectedValues({});
-      setItemType("");
-      setMedia({...media, prevImg: null});
+      setManufacturerId('');
+      setTypeId('');
+      setDevicePic('');
+      setItemType('');
+      setMedia((prev) => ({...prev, prevImg: null}));
     }, []);
 
     const handleInputChange = useCallback(
@@ -144,11 +129,6 @@ export function useAddDevice() {
           ...prev,
           [field]: validationErrors as string
         }));
-
-        // if (typeof value === 'object' && field === 'manufacturer') {
-        //   setDevice({...device, manufacturer: value.id});
-        // }
-
         const inputValue = typeof value === 'string' ? value : value.slug;
         const selectValue = typeof value === 'string' ? value : value.name;
 
@@ -170,9 +150,51 @@ export function useAddDevice() {
         isFunctional: !checked,
       }))
     }, [checked]);
+    
+    // Memoization of  device form fields (select)
+    const selectedValuesMemo = useMemo(() => selectedValues, [selectedValues]);
+    const handleTypeChange = useCallback((item: IEntity) => {
+      handleInputChange("type", item);
+      handleInputChange("typeId", item.id || '');
+      setItemType(item.slug);
+      setTypeId(item.id || '')
+    }, [handleInputChange, setItemType, setTypeId]);
+  
+    const handleModelChange = useCallback((item: IEntity) => {
+      handleInputChange("modelName", item.name || '');
+      handleInputChange("modelId", item.id || '');
+      setModelId(item.id || '');
+    }, [handleInputChange, setModelId]);
+  
+    const handleManufacturerChange = useCallback((item: IEntity) => {
+      handleInputChange("manufacturer", item);
+      setManufacturerId(item.id || '')
+    }, [handleInputChange, setManufacturerId]);
+    
+    const handleWarehouseChange = useCallback((item: IEntity) => {
+      handleInputChange("warehouseId", item.id || '')
+      handleInputChange("warehouseName", item.name || '')
+    }, [handleInputChange]);
 
-    return {typeId, modelId, manufacturerId, device, errors, checked, media, itemType, selectedOption, selectedValues,
-      setTypeId, setModelId, setSelectedValues, setManufacturerId, setMedia, handleChecked, setItemType, handleInputChange, 
-      handleMedia, handleNumber, handleExtNumber,handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,
+    useEffect(() => {
+      switch(fieldType) {
+        case 'manufacturer':
+          setTitle(addNewManufacturer);
+          break
+        case 'type':
+          setTitle(addNewType);
+          break
+        case 'model':
+          setTitle(`${addNewModel} (${selectedValues["type"]})`)
+          break
+      }
+    }, [fieldType]);
+
+    return {title, fieldType,  selectedValuesMemo, typeId, modelId, manufacturerId, device, 
+      errors, checked, media, devicePic, itemType, selectedOption, selectedValues, setTypeId, 
+      setFieldType, setTitle, setModelId, setSelectedValues, setManufacturerId, setDevicePic,
+      setMedia, handleChecked, setItemType, handleInputChange, handleNumber, handleExtNumber,
+      handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,handleModelChange, 
+      handleTypeChange, handleManufacturerChange, handleWarehouseChange
     };
 }

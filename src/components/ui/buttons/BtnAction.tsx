@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import style from './Buttons.module.scss';
@@ -12,7 +12,7 @@ interface IButtonProps {
     click:(e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const BtnAction:FC<IButtonProps> = ({icon, size, type, title, color, click}) => {
+const BtnAction:FC<IButtonProps> = memo(({icon, size, type, title, color, click}) => {
     return (
         <>
             <button 
@@ -27,6 +27,6 @@ const BtnAction:FC<IButtonProps> = ({icon, size, type, title, color, click}) => 
             </button>
         </>
     );
-};
+});
 
 export default BtnAction;

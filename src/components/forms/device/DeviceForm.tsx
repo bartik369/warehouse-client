@@ -1,4 +1,4 @@
-import { FC, useEffect, useState} from "react";
+import { FC, useCallback, useEffect, useMemo, useState} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
@@ -25,69 +25,53 @@ import style from "./DeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
   const {typeId, manufacturerId, device, itemType, errors,  checked, selectedValues, 
-    handleNumber, handleExtNumber, handleAddDevice,handleResetDevice, setTypeId,
-    setModelId, setSelectedValues, setDevice,  setManufacturerId, setItemType, 
-    handleInputChange, handleChecked} = useAddDevice();
+    selectedValuesMemo, devicePic, title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
+    handleResetDevice, setSelectedValues, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange, 
+    handleManufacturerChange, handleWarehouseChange, setDevicePic} = useAddDevice();
 
-  const {isOpen, setIsOpen} = useModal(false);
-  const [fieldType, setFieldType] = useState('');
-  const [title, setTitle] = useState('');
+  const { isOpen, setIsOpen } = useModal(false);
   const [skip, setSkip] = useState(true);
-  const {data: manufacturers} = useGetManufacturersQuery();
-  const {data: types} = useGetTypesQuery();
-  const {data: models} = useGetModelsQuery(
-    { manufacturer: device.manufacturer, type: device.type}, 
-    {skip: skip}
+  const { data: manufacturers } = useGetManufacturersQuery();
+  const { data: types } = useGetTypesQuery();
+  const { data: models } = useGetModelsQuery(
+    { manufacturer: device.manufacturer, type: device.type },
+    { skip: skip }
   );
-  const {data: warehouses} = useGetWarehousesQuery();
-  const [devicePic, setDevicePic] = useState('');
-
-  const resetModelData = () => {
-      setDevice((prev) => ({
-        ...prev,
-        modelName: '',
-    }));
-    setSelectedValues((prev) => ({
-        ...prev,
-        modelName: '',
-    }));
-    setDevicePic('');
-  }
+  const { data: warehouses } = useGetWarehousesQuery();
 
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (device.modelName) {
-      models && models.forEach((model:IEntity) => {
-         if (model.name === device.modelName) {
-          setDevicePic(model.imagePath || '')
-         }
-      });
+      models &&
+        models.forEach((model: IEntity) => {
+          if (model.name === device.modelName) {
+            setDevicePic(model.imagePath || "");
+          }
+        });
     }
   }, [device.modelName]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
     if (device.manufacturer && device.type) {
-        setSkip(false); 
-        resetModelData();
+      setSkip(false);
+      resetModelData();
     } else {
-      setSkip(true); 
+      setSkip(true);
     }
-}, [device.manufacturer, device.type, models]);
+  }, [device.manufacturer, device.type, models]);
 
-  useEffect(() => {
-    switch(fieldType) {
-      case 'manufacturer':
-        setTitle('Добавление нового производителя');
-        break
-      case 'type':
-        setTitle(`Добавление нового типа`);
-        break
-      case 'model':
-        setTitle(`Добавление новой модели (${selectedValues["type"]})`)
-        break
-    }
-  }, [fieldType]);
+  const resetModelData = () => {
+    setDevice((prev) => ({
+      ...prev,
+      modelName: "",
+    }));
+    setSelectedValues((prev) => ({
+      ...prev,
+      modelName: "",
+    }));
+    setDevicePic("");
+  };
 
   return (
     <>
@@ -123,15 +107,10 @@ const AddDeviceForm: FC = () => {
                   }}>{add}</span>
                 </div>
             <Select
-              setValue={(item) => {
-                handleInputChange("type", item);
-                handleInputChange("typeId", item.id || '');
-                setItemType(item.slug);
-                setTypeId(item.id || '')
-              }}
+              setValue={handleTypeChange}
               items={types || []}
               label={deviceTypeLabel}
-              value={selectedValues["type"]}
+              value={selectedValuesMemo["type"]}
               errors={errors}
               name="type"
             />
@@ -145,13 +124,10 @@ const AddDeviceForm: FC = () => {
                   }}>{add}</span>
                 </div>
                 <Select
-                  setValue={(item) => {
-                    handleInputChange("manufacturer", item);
-                    setManufacturerId(item.id || '')
-                  }}
+                  setValue={handleManufacturerChange}
                   items={manufacturers || []}
                   label={manufacturersLabel}
-                  value={selectedValues["manufacturer"]}
+                  value={selectedValuesMemo["manufacturer"]}
                   errors={errors}
                   name="manufacturer"
                 />
@@ -165,14 +141,10 @@ const AddDeviceForm: FC = () => {
                     setFieldType('model')
                   }}>{add}</span>
                 </div>
-                <Select setValue={(item) => {
-                  handleInputChange("modelName", item.name || '');
-                  handleInputChange("modelId", item.id || '');
-                  setModelId(item.id || '');
-                }}
+                <Select setValue={handleModelChange}
                   items={models || []}
                   label={modelLabel}
-                  value={selectedValues["modelName"]}
+                  value={selectedValuesMemo["modelName"]}
                   errors={errors}
                   name="modelName"
                 />
@@ -202,10 +174,7 @@ const AddDeviceForm: FC = () => {
               errors={errors}
               name="modelCode"
             />
-            <Select setValue={(item) => { 
-              handleInputChange("warehouseId", item.id || '')
-              handleInputChange("warehouseName", item.name || '')
-            }}
+            <Select setValue={handleWarehouseChange}
               items={warehouses || []}
               label={location}
               value={selectedValues["warehouseName"]}

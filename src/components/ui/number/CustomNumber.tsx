@@ -1,23 +1,25 @@
-import React, { ChangeEvent, FC} from "react";
+import React, { ChangeEvent, FC, memo} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Field, IDevice, IValidationDeviceErrors } from "../../../types/devices";
+import { Field, IDevice, IValidationErrors } from "../../../types/devices";
 import style from "./Number.module.scss";
 
 interface ICustomNumberProps {
   device: IDevice;
   setDevice: (entity: number, name: string) => void;
   item: Field;
-  errors: IValidationDeviceErrors;
+  errors: IValidationErrors;
 }
 
-const CustomNumber: FC<ICustomNumberProps> = ({ device, item, errors, setDevice }) => {
+const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDevice }) => {
   const data = {
     min: 0,
     max: 1000,
     step: item.step,
   };
-  const errorMessage = errors[item.name as keyof IValidationDeviceErrors];
+  console.log('custom number');
+  
+  const errorMessage = errors[item.name as keyof IValidationErrors];
 
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
@@ -76,6 +78,6 @@ const CustomNumber: FC<ICustomNumberProps> = ({ device, item, errors, setDevice 
       </div>
     </div>
   );
-};
+});
 
 export default CustomNumber;

@@ -19,7 +19,7 @@ export const devicesApi = createApi({
                 method: 'GET',
             })
         }),
-        createDevice: build.mutation<IDevice, FormData>({
+        createDevice: build.mutation<IDevice, IDevice>({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_DEVICES}`,
