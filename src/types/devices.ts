@@ -2,9 +2,8 @@ export interface IDevice {
     id?: string;
     name: string;
     inventoryNumber?: string;
-    type: string;
-    manufacturer?: string;
     modelCode?: string;
+    modelId: string;
     modelName?: string;
     serialNumber?: string;
     weight?: number;
@@ -14,7 +13,11 @@ export interface IDevice {
     isFunctional:boolean;
     isAssigned: boolean;
     warehouseId: string;
+    warehouseName: string;
     description?: string;
+    type: string;
+    typeId: string;
+    manufacturer: string;
     addedById: string;
     updatedById: string;
     createdAt?: Date;

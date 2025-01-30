@@ -22,3 +22,4 @@ export const addDeviceManufacturerTitle = 'Добавить нового про�
 export const addDeviceType = 'Нет в списке типа?';
 export const addDeviceModel = 'Нет в списке модели?';
 export const addDeviceManufacturer = 'Нет в списке производителя?';
+export const slugInfo = 'Если название, например, Dell 5490, то slug будет dell_5490'

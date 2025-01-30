@@ -24,13 +24,7 @@ export const useEntity = () => {
   const [createManufacturer] = useCreateManufacturerMutation();
   const [createType] = useCreateTypeMutation();
   const [createModel] = useCreateModelMutation();
-
-  // Mapping between field type and RTK Query API handlers
-  const entityPoolsFunctions: Record<string, (entity: any) => { unwrap: () => Promise<any> }> = {
-    manufacturer: createManufacturer,
-    type: createType,
-    model: createModel,
-  };
+  
   // Device media logic
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +41,13 @@ export const useEntity = () => {
     },
     [media]
   );
+  
+  // Mapping between field type and RTK Query API handlers
+  const entityPoolsFunctions: Record<string, (entity: any) => { unwrap: () => Promise<any> }> = {
+    manufacturer: createManufacturer,
+    type: createType,
+    model: createModel,
+  };
 
   const handleCreateEntity = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>, fieldType:string) => {

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import style from './Input.module.scss';
@@ -13,7 +13,7 @@ interface IInputProps {
     label?: string;
     errors: Record<string, string>;
 };
-const Input:FC<IInputProps> = ({
+const Input:FC<IInputProps> = memo(({
     type,
     name,
     value, 
@@ -24,6 +24,7 @@ const Input:FC<IInputProps> = ({
     onChange}) => {
 
     const errorMessage = errors?.[name];
+    console.log('input');
 
     return (
         <div className={style.wrapper}>
@@ -43,6 +44,6 @@ const Input:FC<IInputProps> = ({
         </div>
         </div>
     );
-};
+});
 
 export default Input;

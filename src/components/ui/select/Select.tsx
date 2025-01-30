@@ -1,6 +1,6 @@
-import {FC, useEffect} from 'react';
+import {FC, memo} from 'react';
 import {useOutsideClick} from '../../../hooks/data/useOutsideClick';
-import { IDevice, IEntity, ISelectedItem, IValidationErrors  } from '../../../types/devices';
+import { IEntity, IValidationErrors  } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import style from './Select.module.scss';
 
@@ -13,14 +13,15 @@ interface ISelectProps {
     setValue: (value: IEntity) => void;
 }
 
-const Select:FC<ISelectProps> = ({items, name, label, value, errors, setValue}) => {
+const Select:FC<ISelectProps> = memo(({items, name, label, value, errors, setValue}) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name as keyof IValidationErrors];
   const handleSelect = (option:IEntity ) => {
     setIsOpen(false);
     setValue(option);
   };
-
+  console.log('select');
+  
     return (
       <div className={style.wrapper}>
           <div className={style.error}>
@@ -60,6 +61,6 @@ const Select:FC<ISelectProps> = ({items, name, label, value, errors, setValue}) 
         </div>
         </div>
     );
-};
+});
 
 export default Select;

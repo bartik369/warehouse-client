@@ -5,6 +5,7 @@ import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventory
   location, description, modelCode, modelLabel } from "../../../utils/constants/device";
 import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
   addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
+import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
 import { deviceTypes} from "../../../utils/constants/device";
 import Textarea from "../../ui/textarea/Textarea";
@@ -17,14 +18,16 @@ import BtnAction from "../../ui/buttons/BtnAction";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import Modal from "../../modal/Modal";
+import previewPicture from '../../../assets/elements/default.png';
 import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import { IEntity } from "../../../types/devices";
 import style from "./DeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
-  const {typeId, manufacturerId, device, media, itemType, errors,  checked, selectedValues, 
-    handleMedia, handleNumber, handleExtNumber, handleAddDevice,handleResetDevice, setMedia, 
-    setTypeId, setSelectedValues, setDevice,  setManufacturerId, setItemType, handleInputChange, handleChecked} = useAddDevice();
+  const {typeId, manufacturerId, device, itemType, errors,  checked, selectedValues, 
+    handleNumber, handleExtNumber, handleAddDevice,handleResetDevice, setTypeId,
+    setModelId, setSelectedValues, setDevice,  setManufacturerId, setItemType, 
+    handleInputChange, handleChecked} = useAddDevice();
 
   const {isOpen, setIsOpen} = useModal(false);
   const [fieldType, setFieldType] = useState('');
@@ -36,6 +39,7 @@ const AddDeviceForm: FC = () => {
     { manufacturer: device.manufacturer, type: device.type}, 
     {skip: skip}
   );
+  const {data: warehouses} = useGetWarehousesQuery();
   const [devicePic, setDevicePic] = useState('');
 
   const resetModelData = () => {
@@ -54,8 +58,6 @@ const AddDeviceForm: FC = () => {
   useEffect(() => {
     if (device.modelName) {
       models && models.forEach((model:IEntity) => {
-        console.log(model.slug);
-        
          if (model.name === device.modelName) {
           setDevicePic(model.imagePath || '')
          }
@@ -82,7 +84,7 @@ const AddDeviceForm: FC = () => {
         setTitle(`Добавление нового типа`);
         break
       case 'model':
-        setTitle(`Добавление новой модели ${selectedValues["type"]}`)
+        setTitle(`Добавление новой модели (${selectedValues["type"]})`)
         break
     }
   }, [fieldType]);
@@ -97,7 +99,10 @@ const AddDeviceForm: FC = () => {
       <div className={style.title}>{addNewDeviceTitle}</div>
       <div className={style.info}>
         <div className={style.preview}>
-          <Preview model={device.modelName || ''} setMedia={handleMedia} prevImg={devicePic}/>
+          <img src={devicePic
+            ? `${import.meta.env.VITE_API_MODELS}${devicePic}`
+            : previewPicture
+          } alt="" />
         </div>
         <div className={style.forms}>
           <form className={style.form}>
@@ -120,6 +125,7 @@ const AddDeviceForm: FC = () => {
             <Select
               setValue={(item) => {
                 handleInputChange("type", item);
+                handleInputChange("typeId", item.id || '');
                 setItemType(item.slug);
                 setTypeId(item.id || '')
               }}
@@ -160,7 +166,9 @@ const AddDeviceForm: FC = () => {
                   }}>{add}</span>
                 </div>
                 <Select setValue={(item) => {
-                  handleInputChange("modelName", item.name || '') 
+                  handleInputChange("modelName", item.name || '');
+                  handleInputChange("modelId", item.id || '');
+                  setModelId(item.id || '');
                 }}
                   items={models || []}
                   label={modelLabel}
@@ -194,23 +202,17 @@ const AddDeviceForm: FC = () => {
               errors={errors}
               name="modelCode"
             />
-            <Select setValue={(item) => { handleInputChange("warehouseId", item.name)}}
-              items={manufacturers!}
+            <Select setValue={(item) => { 
+              handleInputChange("warehouseId", item.id || '')
+              handleInputChange("warehouseName", item.name || '')
+            }}
+              items={warehouses || []}
               label={location}
-              value={selectedValues["warehouseId"]}
+              value={selectedValues["warehouseName"]}
               errors={errors}
-              name="warehouseId"
+              name="warehouseName"
             />
             <Number device={device} setDevice={handleNumber} />
-            <Toggle
-              checked={checked}
-              setChecked={handleChecked}
-              label={serviceable}
-              leftPosition={no}
-              rightPosition={yes}
-            />
-          </form>
-          <form className={style["additional-form"]}>
             {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
                 <CustomNumber
                   key={item.name}
@@ -220,30 +222,39 @@ const AddDeviceForm: FC = () => {
                   errors={errors}
                 />
               ))}
+              <Toggle
+              checked={checked}
+              setChecked={handleChecked}
+              label={serviceable}
+              leftPosition={no}
+              rightPosition={yes}
+            />
+          </form>
+          <form className={style["additional-form"]}>
             <Textarea
               setText={(e) => handleInputChange("description", e.target.value)}
               value={device.description || ""}
               label={description}
             />
+             <div className={style.action}>
+              <BtnAction icon={faCircleXmark}
+                type="button"
+                size="lg"
+                color="red"
+                title={reset}
+                click={handleResetDevice}
+              />
+              <BtnAction
+                icon={faPlus}
+                type="submit"
+                size="lg"
+                color="grey"
+                title={add}
+                click={handleAddDevice}
+              />
+      </div>
           </form>
         </div>
-      </div>
-      <div className={style.action}>
-        <BtnAction icon={faCircleXmark}
-          type="button"
-          size="lg"
-          color="red"
-          title={reset}
-          click={handleResetDevice}
-        />
-        <BtnAction
-          icon={faPlus}
-          type="submit"
-          size="lg"
-          color="grey"
-          title={add}
-          click={handleAddDevice}
-        />
       </div>
     </>
   );

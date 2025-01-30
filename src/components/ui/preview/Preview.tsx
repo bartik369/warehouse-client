@@ -1,29 +1,21 @@
 import React, {FC, forwardRef} from 'react';
-import previewPicture from '../../../assets/elements/default.png';
 import loadIcon from '../../../assets/elements/load.svg';
-import BtnAction from '../buttons/BtnAction';
+import previewPicture from '../../../assets/elements/default.png';
 import style from './Preview.module.scss';
 
 interface IPreviewProps {
-    prevImg: string;
-    model: string;
+    media: string;
     ref?: React.RefObject<HTMLInputElement>
     setMedia: (e:React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ model, prevImg, setMedia }, ref) => {    
-    console.log( prevImg);
-    
+const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ media, setMedia }, ref) => {    
     return (
         <label className={style.file} htmlFor={"upload"}>
            <div className={style.icon}>
                <img src={loadIcon} alt="" />
            </div>
-        <img src={prevImg 
-            ? `http://localhost:5000/api/models/${prevImg}`
-            :  previewPicture
-            } alt="Preview" 
-        />
-        {!model && <input
+        <img src={media || previewPicture} />
+        {<input
             ref={ref}
             name="file"
             id="upload" 
@@ -31,8 +23,7 @@ const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ model, prevImg, s
             accept='image/*'
             hidden
             onChange={setMedia}
-        />}
-        
+        />} 
      </label>
     )
 });

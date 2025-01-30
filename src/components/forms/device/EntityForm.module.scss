@@ -2,15 +2,53 @@
     display: flex;
     align-items: center;
     .preview {
+        position: relative;
         margin-right: 20px;
         width: 250px;
         border: 1px solid #e5ecef;
         border-radius: 12px;
         img {
             width: 100%;
+            cursor: pointer;
         }
     }
     form {
         width: 300px;
+    }
+    .tooltip {
+        position: relative;
+        cursor: pointer;
+        font-size: 24px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: end;
+        .icon {
+            font-size: 20px;
+        }
+        &::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            width: 300px;
+            background: rgb(245, 245, 245);
+            color: #1a1c1e;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+        }
+        &:hover::after {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    .actions {
+        display: flex;
+        justify-content: center;
     }
 }

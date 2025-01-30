@@ -9,25 +9,29 @@ export function useAddDevice() {
   // Type ID and manufacturer ID for EntityForm(create new model)
   const [typeId, setTypeId] = useState('');
   const [manufacturerId, setManufacturerId] = useState('');
+  const [modelId, setModelId] = useState('');
   
   const [device, setDevice] = useState<IDevice>({
-    name: "",
-    inventoryNumber: "",
-    type: "",
-    manufacturer: "",
-    modelCode: "",
-    modelName: "",
-    serialNumber: "",
+    name: '',
+    inventoryNumber: '',
+    modelId: '',
+    modelName: '',
+    modelCode: '',
+    serialNumber: '',
     weight: 0,
     screenSize: 0,
     memorySize: 0,
     inStock: true,
     isFunctional: true,
     isAssigned: false,
-    warehouseId: "",
-    description: "",
-    addedById: "",
-    updatedById: "",
+    warehouseId: '',
+    warehouseName: '',
+    description: '',
+    type: '',
+    typeId: '',
+    manufacturer: '',
+    addedById:'',
+    updatedById: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
@@ -72,7 +76,8 @@ export function useAddDevice() {
     }));
   }, []);
 
-  const handleAddDevice = async () => {
+  const handleAddDevice = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
       const validationErrors = FormValidation(device, itemType);
       setErrors(validationErrors as Record<string, string>);
@@ -107,43 +112,33 @@ export function useAddDevice() {
     }
 }
     const handleResetDevice = useCallback(() => {
-      setDevice({
-        name: "",
-        inventoryNumber: "",
-        type: "",
-        manufacturer: "",
-        modelCode: "",
-        modelName: "",
-        serialNumber: "",
-        weight: 0,
-        screenSize: 0,
-        memorySize: 0,
-        inStock: true,
-        isFunctional: true,
-        isAssigned: false,
-        warehouseId: "",
-        description: "",
-        addedById: "",
-        updatedById: "",
-      });
+      // Reset device state
+      setDevice((prev) => 
+        Object.fromEntries(
+          Object.entries(prev).map(([key, value]) => {
+            if (typeof value === 'string') return [key, ''];
+            if (typeof value === 'number') return [key, 0];
+            if (typeof value === 'boolean' && key === 'isFunctional') return [key, true]
+            return [key, value];
+          })
+        ) as IDevice
+      );
+      // Reset errors state
+      setErrors((prev) => 
+      Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => {
+          if (typeof value === 'string') return [key, ''];
+          return [key, value];
+        })
+      ) as Record<string, string>
+      );
       setSelectedValues({});
-      setErrors({
-        name: "",
-        type: "",
-        manufacturer: "",
-        warehouseId: "",
-        description: "",
-        weight: "",
-        screenSize: "",
-        memorySize: "",
-      });
       setItemType("");
       setMedia({...media, prevImg: null});
     }, []);
 
     const handleInputChange = useCallback(
       <T extends string | IEntity>(field: keyof IDevice, value: T) => {
-
         const validationErrors = ValidateField(field, value);
         setErrors((prev) => ({
           ...prev,
@@ -166,11 +161,7 @@ export function useAddDevice() {
           ...prev,
           [field]: selectValue,
         }));
-
     }, []);
-
-    console.log(device);
-    
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -180,8 +171,8 @@ export function useAddDevice() {
       }))
     }, [checked]);
 
-    return {typeId, setTypeId, manufacturerId, device, setSelectedValues, setManufacturerId, setMedia, errors, checked, media, itemType, selectedOption, selectedValues,
-      handleChecked, setItemType, handleInputChange, handleMedia, handleNumber, handleExtNumber,
-      handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,
+    return {typeId, modelId, manufacturerId, device, errors, checked, media, itemType, selectedOption, selectedValues,
+      setTypeId, setModelId, setSelectedValues, setManufacturerId, setMedia, handleChecked, setItemType, handleInputChange, 
+      handleMedia, handleNumber, handleExtNumber,handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,
     };
 }

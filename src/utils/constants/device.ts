@@ -16,6 +16,8 @@ export const manufacturers = [
 
 export const manufacturersLabel = 'Производитель';
 export const modelLabel = 'Модель устройства';
+export const nameLabel = 'Название'
+export const slugLabel = 'Slug'
 export const deviceName = 'Название'
 export const serialNumber = 'Серийный номер'
 export const inventoryNumber = 'Инвентарный номер'

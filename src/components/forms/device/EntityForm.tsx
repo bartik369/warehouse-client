@@ -1,14 +1,14 @@
 import {FC, useEffect} from 'react';
-import { ToastContainer, Bounce } from 'react-toastify';
 import { useEntity } from '../../../hooks/data/useEntity';
-import BtnAction from '../../ui/buttons/BtnAction';
 import Input from '../../ui/input/Input';
+import BtnAction from '../../ui/buttons/BtnAction';
 import Preview from '../../ui/preview/Preview';
-import { add, reset } from '../../../utils/constants/constants';
-import { manufacturersLabel} from '../../../utils/constants/device';
-import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
+import { add, reset, slugInfo } from '../../../utils/constants/constants';
+import { ToastContainer, Bounce } from 'react-toastify';
+import {slugLabel, nameLabel} from '../../../utils/constants/device';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPlus, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
 import style from './EntityForm.module.scss';
-import { IEntity } from '../../../types/devices';
 
 interface IEntityProps {
   typeId: string;
@@ -17,8 +17,8 @@ interface IEntityProps {
 };
 
 const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => { 
-    const { entity, errors, media, fileInputRef, handleMedia,
-    handleInputChange, handleCreateEntity, handleResetEntity} = useEntity();
+    const { entity, errors, media, fileInputRef, handleMedia, handleInputChange, 
+    handleCreateEntity, handleResetEntity} = useEntity();
 
     useEffect(() => {
       if (fieldType === "model" && (typeId && manufacturerId)) {
@@ -45,7 +45,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
           <div className={style.content}>
             {fieldType === 'model' && 
               <div className={style.preview}>
-              <Preview  prevImg={media.prevImg} ref={fileInputRef} setMedia={handleMedia} />
+                <Preview media={media.prevImg || ''} ref={fileInputRef} setMedia={handleMedia} />
               </div>
             }
             <form>
@@ -53,15 +53,18 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 type={"text"}
                 value={entity.name || ''}
-                label={manufacturersLabel}
+                label={nameLabel}
                 errors={errors}
                 name="name"
-              />
+              /> 
+               <div className={style.tooltip} data-tooltip={slugInfo}>
+                  <FontAwesomeIcon className={style.icon} icon={faCircleQuestion} />
+               </div>
                <Input
                 onChange={(e) => handleInputChange('slug', e.target.value)}
                 type={"text"}
                 value={entity.slug || ''}
-                label={manufacturersLabel}
+                label={slugLabel}
                 errors={errors}
                 name="slug"
               />
