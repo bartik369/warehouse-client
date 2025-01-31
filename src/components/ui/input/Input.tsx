@@ -22,10 +22,7 @@ const Input:FC<IInputProps> = memo(({
     label, 
     errors,
     onChange}) => {
-
     const errorMessage = errors?.[name];
-    console.log('input');
-
     return (
         <div className={style.wrapper}>
             <div className={style.error}>

@@ -1,5 +1,6 @@
 import { IDeviceMedia, IEntity} from "./../../types/devices";
-import { useState, ChangeEvent, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
+import { useAppSelector } from "../redux/useRedux";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
@@ -7,7 +8,7 @@ import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constan
 import { IDevice} from "../../types/devices";
 
 export function useAddDevice() {
-  // Type ID and manufacturer ID for EntityForm(create new model)
+  const user = useAppSelector((state) => state.auth.user);
   const [typeId, setTypeId] = useState(''); // For display select of model 
   const [manufacturerId, setManufacturerId] = useState(''); // For display select of model 
   const [modelId, setModelId] = useState('');
@@ -58,7 +59,6 @@ export function useAddDevice() {
 
   const handleExtNumber = useCallback((num: number, fieldName: string) => {
     const data = ValidateField(fieldName, num);
-    
     setDevice((prev) => ({
       ...prev,
       [fieldName]: num,
@@ -74,11 +74,18 @@ export function useAddDevice() {
     try {
       const validationErrors = FormValidation(device, itemType);
       setErrors(validationErrors as Record<string, string>);
-
       if (Object.keys(validationErrors).length === 0) {
-        await create(device).unwrap();
+
+        if (!user) return;
+        const updatedData = {
+          ...device,
+          addedById: user.id,
+          updatedById: user.id
+        };
+        console.log( 'update', updatedData)
+        await create(updatedData).unwrap();
         handleResetDevice();
-        setMedia({...media, prevImg: null});
+        setMedia((prev) => ({...prev, prevImg: null}));
       } else {
         console.error("Validation errors:", validationErrors);
       }

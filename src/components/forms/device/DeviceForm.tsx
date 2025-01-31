@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState} from "react";
+import { FC, useEffect, useState, memo} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
@@ -10,7 +10,6 @@ import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "..
 import { deviceTypes} from "../../../utils/constants/device";
 import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
-import Preview from "../../ui/preview/Preview";
 import Number from "../../ui/number/Number";
 import EntityForm from "./EntityForm";
 import CustomNumber from "../../ui/number/CustomNumber";
@@ -38,7 +37,7 @@ const AddDeviceForm: FC = () => {
     { skip: skip }
   );
   const { data: warehouses } = useGetWarehousesQuery();
-
+  
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (device.modelName) {

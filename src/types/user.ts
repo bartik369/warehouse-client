@@ -20,3 +20,7 @@ export interface IAuthRes {
     user: IUser;
     token: string;
 }
+export interface RefreshTokenResponse {
+    token: string;
+    user: IUser;
+  }

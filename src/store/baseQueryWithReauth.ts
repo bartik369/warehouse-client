@@ -1,3 +1,4 @@
+import { IUser, RefreshTokenResponse } from './../types/user';
 import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
 import { setCredentials, logOut, setAuth } from "./slices/authSlice";
@@ -20,15 +21,13 @@ export const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  api.dispatch(setCredentials(result.data));
-
   if (result.error && result.error.status === 401) {
     
-    const refreshResult:any = await baseQuery(
+    const refreshResult = await baseQuery(
       import.meta.env.VITE_REFRESH_TOKEN,
       api,
       extraOptions
-    );
+    ) as  {data?: RefreshTokenResponse};
   
     if (refreshResult.data) {
       localStorage.setItem("accessToken", refreshResult.data.token);

@@ -20,8 +20,7 @@ const Select:FC<ISelectProps> = memo(({items, name, label, value, errors, setVal
     setIsOpen(false);
     setValue(option);
   };
-  console.log('select');
-  
+
     return (
       <div className={style.wrapper}>
           <div className={style.error}>

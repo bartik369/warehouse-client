@@ -15,9 +15,6 @@ const Number:FC<INumberProps> = memo(({ device, setDevice}) => {
         max: 1000000,
         step:0.1
     };
-
-    console.log('number');
-    
     
     const handleValueChange = (newValue:number) => {
         const parsedValue = parseFloat(newValue.toFixed(2));

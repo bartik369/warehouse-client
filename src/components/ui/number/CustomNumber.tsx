@@ -17,10 +17,8 @@ const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDe
     max: 1000,
     step: item.step,
   };
-  console.log('custom number');
-  
-  const errorMessage = errors[item.name as keyof IValidationErrors];
 
+  const errorMessage = errors[item.name as keyof IValidationErrors];
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
     

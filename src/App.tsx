@@ -28,7 +28,7 @@ function App() {
        (async function() {
             const data = await validToken(null).unwrap();
             if (data) {
-              dispatch(setCredentials(data));
+              dispatch(setCredentials(data));          
               dispatch(setAuth(true));
             }
           })();
@@ -42,7 +42,6 @@ function App() {
       }
     }
   }, [token]);
-  
   
   return (
     <>

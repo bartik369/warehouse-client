@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { logOut, setCredentials } from '../slices/authSlice';
-import { ISignin, IAuthRes } from '../../types/user';
+import { ISignin, IAuthRes, IUser } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const authApi = createApi({
@@ -38,7 +38,7 @@ export const authApi = createApi({
                 method: 'POST',
             }),
         }),
-        validate: build.mutation({
+        validate: build.mutation<IUser, null>({
             query:() => ({
                 url: import.meta.env.VITE_VALIDATE,
                 method: 'POST',
