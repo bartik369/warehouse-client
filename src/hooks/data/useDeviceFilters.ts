@@ -63,32 +63,32 @@ export const useDeviceFilters = () => {
         type: device.model.manufacturer.slug,
         slug: device.model.manufacturer.slug,
       })),
-      isFunctional: devices.map((device: IFilters, index: number = 1000) => ({
-        id: index + 1,
+      isFunctional: devices.map((device: IFilters, index: number) => ({
+        id: index + 1000,
         name: device.isFunctional ? 'Да' : 'Нет',
         type: 'isFunctional',
         value: device.isFunctional ? 'true' : 'false',
       })),
-      type: devices.map((device: IFilters, index: number = 2000) => ({
-        id: index + 1,
+      type: devices.map((device: IFilters, index: number) => ({
+        id: index + 2000,
         name: device.model.type.name,
         type: device.model.type.slug,
         value: device.model.type.slug,
       })),
-      memorySize: devices.map((device: IFilters, index: number = 3000) => ({
-        id: index + 1,
+      memorySize: devices.map((device: IFilters, index: number) => ({
+        id: index + 3000,
         name: String(device.memorySize),
         type: 'memorySize',
         value: device.memorySize,
       })),
-      screenSize: devices.map((device: IFilters, index: number = 4000) => ({
-        id: index + 1,
+      screenSize: devices.map((device: IFilters, index: number) => ({
+        id: index + 4000,
         name: String(device.screenSize),
         type: 'screenSize',
         value: device.screenSize,
       })),
-      model: devices.map((device: IFilters, index: number = 5000) => ({
-        id: index + 1,
+      model: devices.map((device: IFilters, index: number) => ({
+        id: index + 5000,
         name: device.model.name,
         type: device.model.slug,
         value: device.model.slug,
@@ -96,11 +96,11 @@ export const useDeviceFilters = () => {
     };
 
     const uniqueOptions = optionsMap[key].reduce((acc, value) => {
-        acc.has(value.name)
-        ? acc
-        : acc.set(value.name, value)
-        return acc
-    }, new Map())
+        if (!acc.has(value.name)) {
+            acc.set(value.name, value);
+        }
+        return acc;
+    }, new Map());
 
 
     return Array.from(uniqueOptions.values());
