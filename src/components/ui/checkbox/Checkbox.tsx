@@ -4,31 +4,31 @@ import { Checked } from '../../../types/content';
 import { selectFromList } from '../../../utils/constants/device';
 import style from './Checkbox.module.scss';
 
+type Check = {
+  id: number;
+  name: number;
+  type: string;
+  value: string;
+}
+
 interface ICheckboxProps {
-    items: any[];
+    items: Check[];
     label: string;
     name: string;
     onChange:(e: ChangeEvent<HTMLInputElement>, item:any) => void
 }
-interface IFilterValues {
-  id: number;
-  name: string;
-  value: string;
-}
-
 
 const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
    const {isOpen, setIsOpen, modalRef} = useOutsideClick();
    const [list, setList] = useState<Checked>({});
 
-   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item:IFilterValues) => {
-    setList({
-      ...list,
+   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: Check) => {
+    setList((prev) => ({
+      ...prev,
       [item.id]: e.target.checked,
-    });
-    onChange(e, item.value)
-
-   }
+    }));
+    onChange(e, item.value);
+  };
 
     return (
       <div className={style.checkbox}>
@@ -43,18 +43,18 @@ const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
         </div>
         {isOpen && (
           <div ref={modalRef} className={style.menu}>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <label key={item.id} className={style.container}>
                 <input
                   name={name}
                   type="checkbox"
-                  id={item.id}
+                  id={String(item.id)}
                   value={item.name}
                   checked={list[item.id] || false}
                   onChange={(e) => handleCheck(e, item)}
                 />
                 <span className={style.checkmark}/>
-                <label htmlFor={item.id}>
+                <label htmlFor={String(item.id)}>
                     {item.name}
                 </label>
               </label>

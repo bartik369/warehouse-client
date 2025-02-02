@@ -82,7 +82,7 @@ export function useAddDevice() {
           addedById: user.id,
           updatedById: user.id
         };
-        console.log( 'update', updatedData)
+      
         await create(updatedData).unwrap();
         handleResetDevice();
         setMedia((prev) => ({...prev, prevImg: null}));

@@ -1,4 +1,4 @@
-import { IDevice,IEntity } from './../../types/devices';
+import { IDevice,IEntity, IFilters } from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -8,15 +8,11 @@ export const devicesApi = createApi({
     tagTypes:[],
     endpoints:(build) => ({
         getDevices: build.query({
-            query: () => ({
-                url: `${import.meta.env.VITE_DEVICES}`,
-                method: 'GET',
-            })
+            query: (queryParams) => `/devices?${queryParams}`,
         }),
         getDevice: build.query({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_DEVICE}/${id}`,
-                method: 'GET',
             })
         }),
         createDevice: build.mutation<IDevice, IDevice>({
@@ -41,7 +37,6 @@ export const devicesApi = createApi({
             query() {
                 return {
                     url:`${import.meta.env.VITE_MANUFACTURERS}`,
-                    method: 'GET',
                     refetchOnMountOrArgChange: true,
                 }
             }
@@ -68,7 +63,6 @@ export const devicesApi = createApi({
             query({manufacturer, type}) {
                 return {
                     url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
-                    method: 'GET',
                 }
             }
         }),
@@ -76,7 +70,6 @@ export const devicesApi = createApi({
             query() {
                 return {
                     url:`${import.meta.env.VITE_TYPES}`,
-                    method: 'GET',
                 }
             }
         }),

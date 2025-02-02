@@ -88,3 +88,54 @@
         text-align: center;
     }
 }
+
+.devicesContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.devicesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    th,
+    td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+    .deviceRow:hover {
+        background-color: #f5f5f5;
+    }
+}
+
+.multiSelectContainer {
+    margin-bottom: 16px;
+    .label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+    .select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        font-size: 14px;
+        &:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    }
+    .option {
+        padding: 8px;
+    }
+}

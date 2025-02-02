@@ -121,3 +121,29 @@ export interface IEntity {
   typeId?: string,
   manufacturerId?: string,
 }
+
+export interface IFilters {
+  id?: string;
+  name: string;
+  inventoryNumber: string;
+  isAssigned: boolean;
+  isFunctional: boolean;
+  memorySize: number;
+  screenSize: number;
+  model: {
+      name: string;
+      slug: string;
+      manufacturer: {
+          name: string;
+          slug: string;
+      },
+      type: {
+          name: string;
+          slug: string;
+      }
+  },
+  warehouse: {
+    name: string;
+    slug: string;
+  };
+}
