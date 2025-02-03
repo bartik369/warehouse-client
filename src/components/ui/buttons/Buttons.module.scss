@@ -29,20 +29,20 @@ button {
 }
 
 .blue {
-    background-color: #3f70ed;
+    background-color: #3c52d6;
     color: #fff;
     margin: 10px;
     &:hover {
-        background-color: #1a1c1e;
+        background-color: #2e42b8;
     }
 }
 
-.grey {
-    background-color: #8e91a0;
-    color: #fff;
+.white {
+    background-color: #84868c;
+    color: #ffffff;
     margin: 10px;
     &:hover {
-        background-color: #a2a6b7;
+        background-color: #656569;
     }
 }
 
@@ -52,16 +52,5 @@ button {
     margin: 10px;
     &:hover {
         background-color: #a2a6b7;
-    }
-}
-
-.red {
-    display: flex;
-    font-family: inherit;
-    background-color: #dc3546;
-    color: #fff;
-    margin: 10px;
-    &:hover {
-        background-color: #fa4759;
     }
 }

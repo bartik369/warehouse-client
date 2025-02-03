@@ -19,7 +19,7 @@
                     font-size: 14px;
                     font-weight: 500;
                     padding: 16.6px 10px;
-                    background-color: #eff1f4;
+                    background-color: #f6faff;
                 }
             }
         }
@@ -35,9 +35,9 @@
         a {
             color: #1a2034;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 400;
             &:hover {
-                color: #4263eb;
+                color: #3f52dd;
             }
         }
     }
@@ -51,19 +51,19 @@
     display: flex;
     align-items: center;
     &:hover {
-        background-color: #eff1f4;
+        background-color: #f6faff;
     }
     &:hover .icon {
-        filter: brightness(0) saturate(100%) invert(39%) sepia(71%) saturate(3106%) hue-rotate(208deg) brightness(101%) contrast(96%);
+        filter: brightness(0) saturate(100%) invert(51%) sepia(76%) saturate(7377%) hue-rotate(228deg) brightness(90%) contrast(91%);
     }
     .sub-title,
     a {
-        color: #293d4f;
-        font-size: 14px;
-        font-weight: 500;
+        color: #656569;
+        font-size: 13px;
+        font-weight: 400;
         cursor: pointer;
         &:hover {
-            color: #4263eb;
+            color: #3f52dd;
         }
     }
     .title {
@@ -74,7 +74,7 @@
         left: 80px;
         top: 10px;
         padding: 8px 11px;
-        background-color: #1a1c1e;
+        background-color: #3f53d7;
         box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
         border-radius: 5px;
         &::after {
@@ -84,7 +84,7 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 12px solid #1a1c1e;
+            border-bottom: 12px solid #3f53d7;
             transform: rotate(-90deg);
             left: -9px;
         }
@@ -93,21 +93,21 @@
             font-size: 12px;
             font-weight: 500;
             &:hover {
-                color: #4263eb;
+                color: #3f52dd;
             }
         }
     }
     .icon {
         img {
-            filter: brightness(0) saturate(100%) invert(31%) sepia(3%) saturate(3393%) hue-rotate(191deg) brightness(89%) contrast(83%);
-            width: 23px;
+            filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(259%) hue-rotate(201deg) brightness(86%) contrast(88%);
+            width: 22px;
             height: 100%;
         }
     }
     .open-icon {
         margin-right: 10px;
         img {
-            filter: brightness(0) saturate(100%) invert(31%) sepia(3%) saturate(3393%) hue-rotate(191deg) brightness(89%) contrast(83%);
+            filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(259%) hue-rotate(201deg) brightness(86%) contrast(88%);
             width: 21px;
             height: 100%;
         }
@@ -120,7 +120,7 @@
     color: #1a2034;
     cursor: pointer;
     &:hover {
-        color: #4263eb;
+        color: #3f52dd;
     }
 }
 

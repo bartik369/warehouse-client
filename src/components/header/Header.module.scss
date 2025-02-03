@@ -6,6 +6,7 @@
     align-items: center;
     padding: 5px 10px;
     background-color: #ffffff;
+    border-bottom: 1px solid #e1e4e3;
     transition: background-color 0.1s ease-in-out, top 0.1s ease-in-out;
 }
 
@@ -14,7 +15,6 @@
     top: 0;
     z-index: 97;
     background-color: #367afa;
-    border-bottom: 1px solid #e0e4ee;
 }
 
 .relative {

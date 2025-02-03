@@ -122,7 +122,7 @@ export interface IEntity {
   manufacturerId?: string,
 }
 
-export interface IFilters {
+export interface IFilteredDevicesFromBack {
   id?: string;
   name: string;
   inventoryNumber: string;
@@ -146,4 +146,13 @@ export interface IFilters {
     name: string;
     slug: string;
   };
+}
+export interface IDeviceFilters {
+  manufacturer: string[];
+  isFunctional: string[];
+  type: string[];
+  memorySize: string[];
+  screenSize: string[];
+  model: string[];
+  warehouse: [],
 }

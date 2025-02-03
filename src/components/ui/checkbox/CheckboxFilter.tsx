@@ -1,28 +1,22 @@
 import {ChangeEvent, FC, useState} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { Checked } from '../../../types/content';
+import { Checked, CheckedDeviceOptions } from '../../../types/content';
 import { selectFromList } from '../../../utils/constants/device';
-import style from './Checkbox.module.scss';
-
-type Check = {
-  id: number;
-  name: number;
-  type: string;
-  value: string;
-}
+import filterIcon from '../../../assets/elements/filter-icon.svg'
+import style from './CheckboxFilter.module.scss';
 
 interface ICheckboxProps {
-    items: Check[];
+    items: CheckedDeviceOptions[];
     label: string;
     name: string;
-    onChange:(e: ChangeEvent<HTMLInputElement>, item:any) => void
+    onChange:(e: ChangeEvent<HTMLInputElement>, item:string) => void
 }
 
-const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
+const CheckboxFilter:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
    const {isOpen, setIsOpen, modalRef} = useOutsideClick();
    const [list, setList] = useState<Checked>({});
 
-   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: Check) => {
+   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => {
     setList((prev) => ({
       ...prev,
       [item.id]: e.target.checked,
@@ -32,18 +26,13 @@ const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
 
     return (
       <div className={style.checkbox}>
-        <div className={style.label}>{label}</div>
-        <div
-          className={style.header}
-          onClick={() => setIsOpen(!isOpen)}
-          role="button"
-        >
-          <div className={style.placeholder}>{selectFromList}</div>
-          <span className={style.arrow} />
+        <div className={style.header} onClick={() => setIsOpen(!isOpen)} role="button">
+          <div className={style.placeholder}>{label}</div>
+          <img src={filterIcon} alt="" />
         </div>
         {isOpen && (
           <div ref={modalRef} className={style.menu}>
-            {items.map((item, index) => (
+            {items.map((item) => (
               <label key={item.id} className={style.container}>
                 <input
                   name={name}
@@ -65,4 +54,4 @@ const Checkbox:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
     );
 };
 
-export default Checkbox;
+export default CheckboxFilter;

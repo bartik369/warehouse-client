@@ -208,7 +208,7 @@ const AddDeviceForm: FC = () => {
               <BtnAction icon={faCircleXmark}
                 type="button"
                 size="lg"
-                color="red"
+                color="white"
                 title={reset}
                 click={handleResetDevice}
               />
@@ -216,7 +216,7 @@ const AddDeviceForm: FC = () => {
                 icon={faPlus}
                 type="submit"
                 size="lg"
-                color="grey"
+                color="blue"
                 title={add}
                 click={handleAddDevice}
               />

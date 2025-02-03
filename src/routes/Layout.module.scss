@@ -2,15 +2,16 @@
     display: flex;
     .not-active,
     .active {
-        width: 100%;
         overflow-x: clip;
         transition: all .08s ease-in;
     }
     .not-active {
         margin-left: 70px;
+        width: calc(100% - 70px);
     }
     .active {
         margin-left: 220px;
+        width: calc(100% - 220px);
     }
     .outlet {
         margin: 20px;

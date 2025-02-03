@@ -73,7 +73,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                   icon={faCircleXmark} 
                   type='button' 
                   size='lg' 
-                  color='grey' 
+                  color='white' 
                   title={reset}
                   click={handleResetEntity}
                 />   
@@ -81,7 +81,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                   icon={faPlus} 
                   type='submit' 
                   size='lg' 
-                  color='red' 
+                  color='blue' 
                   title={add} 
                   click={(e) => handleCreateEntity(e, fieldType)}
                 />
