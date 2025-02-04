@@ -24,14 +24,12 @@ export const useEntity = () => {
   const [createManufacturer] = useCreateManufacturerMutation();
   const [createType] = useCreateTypeMutation();
   const [createModel] = useCreateModelMutation();
-  
+
   // Device media logic
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        console.log(file);
-        
         if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
@@ -63,9 +61,7 @@ export const useEntity = () => {
             const value = entity[key];
             if (value !== undefined && value !== null) formData.append(key, value);
           });
-
           if (media.file) formData.append("file", media.file);
-
           await createEntityFunction(formData).unwrap().then((data) => {
             handleResetEntity();
             toast(data?.message, { type: "success" });

@@ -17,8 +17,8 @@ import { DeviceTypes } from './../../types/devices';
 export const manufacturersLabel = 'Производитель';
 export const modelLabel = 'Модель';
 export const nameLabel = 'Название';
-export const screenSizeLabel = 'Диагональ(дюйм)';
-export const memorySizeLabel = 'Память(гб)';
+export const screenSizeLabel = 'Диагональ';
+export const memorySizeLabel = 'Память';
 export const isFunctionalLabel = 'Исправность';
 export const slugLabel = 'Slug';
 export const deviceName = 'Название';
@@ -72,12 +72,12 @@ export const deviceTypes:DeviceTypes = {
       { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1},
     ],
   },
-  // desktop: {
-  //   label: "Стационарный компьютер",
-  //   uniqueFields: [
-  //     { name: "cpuCores", label: "Кол-во ядер процессора", type: "number", step: 1},
-  //   ],
-  // },
+  desktop: {
+    label: "Стационарный компьютер",
+    uniqueFields: [
+      { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
+    ],
+  },
   tv: {
     label: "Телевизор",
     uniqueFields: [

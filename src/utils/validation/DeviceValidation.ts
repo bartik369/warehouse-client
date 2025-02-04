@@ -27,8 +27,11 @@ export const FormValidation = (formData: IDevice, itemType: string):IValidationE
     const requiedField: ValidationField[] = ['name', 'type', 'manufacturer', 'warehouseId'];
     validateRequiredFields(formData, requiedField, errors);
 
-    if (fieldsMemoryScreen.includes(itemType) || fieldScreen.includes(itemType)) {
+    if (fieldsMemoryScreen.includes(itemType)) {
         validateRequiredFields(formData, ['memorySize', 'screenSize'], errors);
+    }
+    if (fieldScreen.includes(itemType)) {
+      validateRequiredFields(formData, ['screenSize'], errors);
     }
 
     if (formData.name && formData.name.length < 5) {

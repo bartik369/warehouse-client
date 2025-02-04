@@ -126,6 +126,7 @@ export interface IFilteredDevicesFromBack {
   id?: string;
   name: string;
   inventoryNumber: string;
+  serialNumber: string;
   isAssigned: boolean;
   isFunctional: boolean;
   memorySize: number;
@@ -150,9 +151,10 @@ export interface IFilteredDevicesFromBack {
 export interface IDeviceFilters {
   manufacturer: string[];
   isFunctional: string[];
+  isAssigned: string[];
   type: string[];
   memorySize: string[];
   screenSize: string[];
   model: string[];
-  warehouse: [],
+  warehouse: string[],
 }

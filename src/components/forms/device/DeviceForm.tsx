@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, memo} from "react";
+import { FC, useEffect, useState} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
