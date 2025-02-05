@@ -89,8 +89,12 @@ const Devices: FC = () => {
                   onChange={handleFilterChange}
                 />
               </th>
-              <th className={styles['column-title']}>Инвентарный номер</th>
-              <th className={styles['column-title']}>Серийный номер</th>
+              <th>
+                <div className={styles['column-title']}> Инвентарный номер</div>
+               </th>
+              <th>
+                <div className={styles['column-title']}>Серийный номер</div>
+                </th>
             </tr>
           </thead>
           <tbody>
@@ -128,14 +132,14 @@ const Devices: FC = () => {
                   : <div className={styles.instock}>На складе</div>
                   }</td>
                   <td>
-                    <span className={styles["column-title"]}>
+                    
                       {device.inventoryNumber ? device.inventoryNumber : '—'}
-                    </span>
+
                   </td>
                   <td>
-                    <span className={styles["column-title"]}>
+         
                       {device.serialNumber ? device.serialNumber : '—'}
-                    </span>
+            
                   </td>
                 </tr>
               ))}

@@ -1,4 +1,4 @@
-import { IDevice,IEntity, IFilters } from './../../types/devices';
+import { IDevice,IEntity} from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -8,7 +8,17 @@ export const devicesApi = createApi({
     tagTypes:[],
     endpoints:(build) => ({
         getDevices: build.query({
-            query: (queryParams) => `/devices?${queryParams}`,
+            query: (queryParams) => {
+                const params = new URLSearchParams();
+                Object.entries(queryParams).forEach(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        params.append(key, value.join(",")); 
+                    } else {
+                        params.append(key, String(value));
+                    }
+                });
+                return `/devices?${params.toString()}`;
+            },
         }),
         getDevice: build.query({
             query: (id: string) => ({

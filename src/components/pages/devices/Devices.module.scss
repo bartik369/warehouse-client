@@ -6,14 +6,17 @@
     margin: 20px auto;
     text-align: center;
     overflow-x: auto;
-    border: 1px solid #dce4e8;
+    // border: 1px solid #dce4e8;
     border-bottom: none;
-    border-radius: 8px;
+    // border-radius: 8px;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
+    scrollbar-width: thin;
+    scrollbar-color: #d2d4d7 #aeb1b6;
+    background-color: #fff;
     td {
         padding: 10px 6px;
         text-align: center;
@@ -22,7 +25,8 @@
         border-bottom: 1px solid #dce4e8;
     }
     th {
-        padding: 20px 6px 10px;
+        // padding: 20px 6px 10px;
+        padding: 0px 6px 10px;
         text-align: center;
     }
     th:not(.checkbox-column),
@@ -33,9 +37,15 @@
         background-color: #fafbff;
     }
     .column-title {
+        display: flex;
+        justify-content: center;
+        background-color: #f8faff;
+        padding: 6px 0;
+        border: 1px solid #dce4e8;
+        border-radius: 20px;
         color: #48474c;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 600;
     }
 }
 
@@ -50,7 +60,7 @@
     cursor: pointer;
     font-family: inherit;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 14px;
     input {
         display: none;
     }
@@ -70,7 +80,7 @@
     .checkmark:after {
         width: 3px;
         height: 8px;
-        top: 1px;
+        top: 2px;
         border: solid #fff;
         border-width: 0 1.5px 1.5px 0;
         -webkit-transform: rotate(45deg);
@@ -86,8 +96,8 @@
 .checkmark {
     position: absolute;
     left: 7px;
-    height: 14px;
-    width: 14px;
+    height: 15px;
+    width: 15px;
     border: 1px solid #d3d6e0;
     background-color: #fff;
     display: flex;

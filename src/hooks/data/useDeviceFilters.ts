@@ -108,7 +108,7 @@ export const useDeviceFilters = () => {
       isAssigned: devices.map(
         (device: IFilteredDevicesFromBack, index: number) => ({
           id: index + 7000,
-          name: device.isAssigned ? "Да" : "Нет",
+          name: device.isAssigned ? "Используется" : "На складе",
           type: "isAssigned",
           value: device.isAssigned ? "true" : "false",
         })
