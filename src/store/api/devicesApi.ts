@@ -1,4 +1,4 @@
-import { IDevice,IEntity} from './../../types/devices';
+import { IDevice, IEntity, IFilterDeviceOptions } from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -19,6 +19,11 @@ export const devicesApi = createApi({
                 });
                 return `/devices?${params.toString()}`;
             },
+        }),
+        getDeviceOptions: build.query<IFilterDeviceOptions, void>({
+            query:() => ({
+                url:`${import.meta.env.VITE_OPTIONS}`,
+            })
         }),
         getDevice: build.query({
             query: (id: string) => ({
@@ -99,6 +104,7 @@ export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
     useGetModelsQuery,
+    useGetDeviceOptionsQuery,
     // useCreateDeviceModelMutation,
     useGetManufacturersQuery,
     useCreateManufacturerMutation,

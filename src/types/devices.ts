@@ -148,6 +148,38 @@ export interface IFilteredDevicesFromBack {
     slug: string;
   };
 }
+
+export interface IFilterDeviceOptions {
+  isAssigned: { 
+    isAssigned: boolean 
+  }[];
+  isFunctional: { 
+    isFunctional: boolean 
+  }[];
+  manufacturer: {
+    name: string;
+    slug: string;
+  }[];
+  memorySize: {
+    memorySize: number;
+  }[];
+  screenSize: {
+    screenSize: number;
+  }[];
+  model: {
+    name: string;
+    slug: string;
+  }[];
+  type: {
+    name: string;
+    slug: string;
+  }[];
+  warehouse: {
+    name: string;
+    slug: string;
+  }[];
+}
+
 export interface IDeviceFilters {
   manufacturer: string[];
   isFunctional: string[];

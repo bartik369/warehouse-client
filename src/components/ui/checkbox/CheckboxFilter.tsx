@@ -1,11 +1,11 @@
 import {ChangeEvent, FC, useState} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { Checked, CheckedDeviceOptions } from '../../../types/content';
-import { selectFromList } from '../../../utils/constants/device';
 import filterIcon from '../../../assets/elements/filter-icon.svg'
 import style from './CheckboxFilter.module.scss';
 
 interface ICheckboxProps {
+
     items: CheckedDeviceOptions[];
     label: string;
     name: string;
@@ -40,6 +40,7 @@ const CheckboxFilter:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
                   id={String(item.id)}
                   value={item.name}
                   checked={list[item.id] || false}
+                  disabled={item.disabled}
                   onChange={(e) => handleCheck(e, item)}
                 />
                 <span className={style.checkmark}/>

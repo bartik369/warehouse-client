@@ -11,4 +11,5 @@ export type CheckedDeviceOptions = {
     name: number;
     type: string;
     value: string;
+    disabled: boolean;
   }

@@ -8,14 +8,17 @@ import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import styles from "./Devices.module.scss";
 
 const Devices: FC = () => {
-  const { devices, handleFilterChange, getUniqueOptions } = useDeviceFilters();
+  const { devices, options, handleFilterChange, getUniqueOptions } = useDeviceFilters();
 
   const handleCheck = (device:IFilteredDevicesFromBack) => {
     console.log(device);
   };
 
+  if (!devices) {
+    return <div>загрузка</div>
+  }
+
   return (
-    <div className={styles["wrapper-tab"]}>
       <div className={styles.container}>
         <table className={styles.table}>
           <thead>
@@ -146,7 +149,6 @@ const Devices: FC = () => {
           </tbody>
         </table>
       </div>
-    </div>
   );
 };
 
