@@ -85,7 +85,7 @@
         transition: background-color .5s ease-in-out;
     }
     input:disabled~.checkmark {
-        background-color: #0ca0c9;
+        background-color: #edf0f7;
         border: 1px solid #dbdbdb;
         cursor: not-allowed;
     }
