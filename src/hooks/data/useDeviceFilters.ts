@@ -1,11 +1,15 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
+import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from "../../types/content";
-import { IDeviceFilters, IFilterDeviceOptions, IFilteredDevicesFromBack } from './../../types/devices';
+import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
 
 export const useDeviceFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [disabledOptions, setDisabledOptions] = useState<Record<string, string[]>>({});
+  const { data: devices } = useGetDevicesQuery(Object.fromEntries(searchParams));
+  const { data: options } = useGetDeviceOptionsQuery();
+
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
     isFunctional: [],
@@ -16,13 +20,11 @@ export const useDeviceFilters = () => {
     model: [],
     warehouse: [],
   });
-  const [disabledOptions, setDisabledOptions] = useState<Record<string, string[]>>({});
-  const { data: devices } = useGetDevicesQuery(Object.fromEntries(searchParams));
-  const { data: options } = useGetDeviceOptionsQuery();
+
+  console.log(devices)
 
   useEffect(() => {
     if (!options) return;
-    
     const disabledOptions: Record<string, string[]> = {
       manufacturer: [],
       type: [],
@@ -51,7 +53,7 @@ export const useDeviceFilters = () => {
         // Creating temporary filters with the addition current option
         const tempFilters = { ...filters, [key]: [...filters[key as keyof IDeviceFilters], option] }; 
         // Checking some device which matches all current filters
-        const isOptionAvailable = devices?.some((device: IFilteredDevicesFromBack) => {
+        const isOptionAvailable = devices && devices.some((device: IFilteredDevicesFromBack) => {
           const matchesFilters = Object.entries(tempFilters).every(([key, values]) => {
             if (values.length === 0) return true;
              //Get the value of device for filter 
@@ -67,10 +69,8 @@ export const useDeviceFilters = () => {
               undefined;
             return values.includes(deviceValue as keyof IDeviceFilters);
           });
-
           return matchesFilters;
         });
-
         return !isOptionAvailable;
       });
     });
@@ -167,7 +167,6 @@ export const useDeviceFilters = () => {
         disabled: disabledOptions?.isAssigned?.includes(String(option.isAssigned)),
       })),
     };
-
     return optionsMap[key] || [];
   };
 
