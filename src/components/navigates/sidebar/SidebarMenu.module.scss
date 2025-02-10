@@ -6,19 +6,18 @@
         .submenu-closed {
             position: absolute;
             top: 0;
-            left: 71px;
+            left: 66px;
             width: 190px;
             z-index: 9;
             background-color: #fdfeff;
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
             .wrapper {
                 position: relative;
-                border: 1px solid #e5e7eb;
                 .sub-title {
-                    color: #1a2034;
-                    font-size: 14px;
+                    color: #070707;
+                    font-size: 13px;
                     font-weight: 500;
-                    padding: 16.6px 10px;
+                    padding: 15.5px 20px;
                     background-color: #f6faff;
                 }
             }
@@ -31,10 +30,10 @@
     list-style: none;
     padding: 5px 15px 12px;
     li {
-        padding: 12px 5px;
+        padding: 10px 5px;
         a {
-            color: #1a2034;
-            font-size: 13px;
+            color: #070707;
+            font-size: 12px;
             font-weight: 400;
             &:hover {
                 color: #3f52dd;
@@ -47,7 +46,7 @@
 }
 
 .menu-item-header {
-    padding: 12px 23px;
+    padding: 12px 26px;
     display: flex;
     align-items: center;
     &:hover {
@@ -58,7 +57,7 @@
     }
     .sub-title,
     a {
-        color: #656569;
+        color: #070707;
         font-size: 13px;
         font-weight: 400;
         cursor: pointer;
@@ -98,25 +97,20 @@
         }
     }
     .icon {
-        img {
-            filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(259%) hue-rotate(201deg) brightness(86%) contrast(88%);
-            width: 22px;
-            height: 100%;
+        font-size: 18px;
+        color: #3b3844;
+        &:hover {
+            color: #3c53d7;
         }
     }
     .open-icon {
         margin-right: 10px;
-        img {
-            filter: brightness(0) saturate(100%) invert(44%) sepia(5%) saturate(259%) hue-rotate(201deg) brightness(86%) contrast(88%);
-            width: 21px;
-            height: 100%;
-        }
     }
 }
 
 .submenu-toggle {
     margin-left: auto;
-    font-size: 12px;
+    font-size: 15px;
     color: #1a2034;
     cursor: pointer;
     &:hover {

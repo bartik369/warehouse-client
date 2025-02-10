@@ -15,15 +15,15 @@
         color: #15141f;
         cursor: pointer;
         .placeholder {
-            color: #48474c;
+            color: #070707;
             font-size: 12px;
             font-weight: 600;
         }
     }
-    img {
+    .icon {
         margin-left: 5px;
-        width: 16px;
-        filter: brightness(0) saturate(100%) invert(72%) sepia(14%) saturate(252%) hue-rotate(187deg) brightness(90%) contrast(89%);
+        font-size: 14px;
+        color: #0f0f0f;
     }
 }
 
@@ -103,7 +103,7 @@
         transform: rotate(45deg);
     }
     label {
-        color: #1a1c1e;
+        color: #070707;
         font-size: 13px;
         cursor: pointer;
     }

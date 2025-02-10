@@ -8,7 +8,7 @@ export type Checked = {
 
 export type CheckedDeviceOptions = {
     id: number;
-    name: number;
+    name: string;
     type: string;
     value: string;
     disabled: boolean;

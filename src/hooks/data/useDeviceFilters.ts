@@ -1,14 +1,17 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from "../../types/content";
 import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
 
 export const useDeviceFilters = () => {
+  const [resetFilters, setResetFilters] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
+  const [activeLink, setActiveLink] = useState(false)
   const [disabledOptions, setDisabledOptions] = useState<Record<string, string[]>>({});
   const { data: devices } = useGetDevicesQuery(Object.fromEntries(searchParams));
   const { data: options } = useGetDeviceOptionsQuery();
+  const [page, setPage] = useState();
 
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
@@ -20,8 +23,21 @@ export const useDeviceFilters = () => {
     model: [],
     warehouse: [],
   });
+  const [labels, setLabels] = useState<IDeviceFilters>({
+    manufacturer: [],
+    isFunctional: [],
+    isAssigned: [],
+    type: [],
+    memorySize: [],
+    screenSize: [],
+    model: [],
+    warehouse: [],
+  });
 
-  console.log(devices)
+  console.log(labels);
+  
+
+  const [list, setList] = useState<Record<number, boolean>>({})
 
   useEffect(() => {
     if (!options) return;
@@ -87,23 +103,64 @@ export const useDeviceFilters = () => {
       }
     });
     setSearchParams(params);
+
   }, [filters, setSearchParams]);
 
-  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>, value: string) => {
+  const handleFilterChange = (e: ChangeEvent<HTMLInputElement>, item:CheckedDeviceOptions) => {
     const { name } = e.target;
+
     if (!(name in filters)) return;
 
     if (Array.isArray(filters[name as keyof IDeviceFilters])) {
       const key = name as keyof IDeviceFilters;
-      const updatedValues = filters[key].includes(String(value))
-        ? filters[key].filter((item) => item !== String(value))
-        : [...filters[key], String(value)];
+      const updatedValues = filters[key].includes(String(item.value))
+        ? filters[key].filter((value) => value !== String(item.value))
+        : [...filters[key], String(item.value)];
       setFilters((prev) => ({
         ...prev,
         [key]: updatedValues,
       }));
     }
+    if (Array.isArray(labels[name as keyof IDeviceFilters])) {
+      const key = name as keyof IDeviceFilters;
+      const updatedLabels = labels[key].includes(String(item.name))
+        ? labels[key].filter((value) => value !== String(item.name))
+        : [...labels[key], String(item.name)];
+      setLabels((prev) => ({
+        ...prev,
+        [key]: updatedLabels,
+      }));
+    }
   };
+
+  
+  // Reset all filter
+  const handleResetFilter = useCallback(() => {
+    if (!filters) return;
+    setFilters(() => ({
+      manufacturer: [],
+      isFunctional: [],
+      isAssigned: [],
+      type: [],
+      memorySize: [],
+      screenSize: [],
+      model: [],
+      warehouse: [],
+    }));
+    setLabels(() => ({
+      manufacturer: [],
+      isFunctional: [],
+      isAssigned: [],
+      type: [],
+      memorySize: [],
+      screenSize: [],
+      model: [],
+      warehouse: [],
+    }));
+    setSearchParams({});
+    setResetFilters({});
+    setActiveLink(false)
+  }, [filters]);
   
   // Disabled options of the checkboxes
   const getUniqueOptions = (key: keyof IDeviceFilters): CheckedDeviceOptions[] => {
@@ -170,6 +227,8 @@ export const useDeviceFilters = () => {
     return optionsMap[key] || [];
   };
 
-  return { devices, options, filters, searchParams, handleFilterChange, getUniqueOptions };
+  return { devices, list, labels, setList, options, filters, activeLink, searchParams, disabledOptions, resetFilters, 
+    handleResetFilter, handleFilterChange, getUniqueOptions 
+  };
 };
 

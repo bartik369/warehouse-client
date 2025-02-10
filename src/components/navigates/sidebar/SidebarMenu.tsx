@@ -2,9 +2,8 @@ import {FC, useState} from 'react';
 import { Link } from 'react-router-dom';
 import SubMenu from './SubMenu';
 import { sidebarMenuData } from '../../../utils/data/menus';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
-import style from './SidebarMenu.module.scss';
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import styles from './SidebarMenu.module.scss';
 
 interface ISidebarMenuProps {
     open: boolean;
@@ -26,42 +25,42 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
 
   return (
     <nav>
-      <ul className={style.content}>
+      <ul className={styles.content}>
         {sidebarMenuData.map((item) => (
-          <li key={item.id} className={style["menu-item"]}>
-            <div className={`${style["menu-item-header"]} ${
-                item.subMenu ? style["has-submenu"] : ""}`}
+          <li key={item.id} className={styles["menu-item"]}>
+            <div className={`${styles["menu-item-header"]} ${
+                item.subMenu ? styles["has-submenu"] : ""}`}
               onClick={() => item.subMenu && toggleSubmenu(item.id)}
               onMouseEnter={() => handleMouseEnter(item.id)}
               onMouseLeave={handleMouseLeave}
             >
-              <span className={!open ? style.icon : style['open-icon']}>
-                {!item.subMenu 
-                  ? <Link to={item.path}><img src={item.icon} alt="" /></Link>
-                  : <img src={item.icon} alt="" />
-                }
+              <span className={!open ? styles.icon : styles['open-icon']}>
+              {!item.subMenu 
+                ? <Link to={item.path}>{item.icon && <item.icon className={styles.icon} />}</Link>
+                : item.icon && <item.icon className={styles.icon} />
+              }
               </span>
               {(!open && hoveredItem === item.id && !item.subMenu) &&
-                <div className={style.title}>
+                <div className={styles.title}>
                     <Link to={item.path}>{item.title}</Link>
                 </div>
               }
               {(open && !item.subMenu)
                 ? <Link to={item.path}>{item.title}</Link>
                 : open && item.subMenu 
-                ? <div className={style['sub-title']}>{item.title}</div>
+                ? <div className={styles['sub-title']}>{item.title}</div>
                 : ""
               }
               {(!open && hoveredItem === item.id && item.subMenu) && (
-                <div className={style['submenu-closed']}>
+                <div className={styles['submenu-closed']}>
                   <SubMenu title={item.title} item={item} open={open} />
                 </div>
               )}
               {item.subMenu && open && (
-                <span className={style["submenu-toggle"]}>
+                <span className={styles["submenu-toggle"]}>
                   {openSubmenu === item.id 
-                  ? <FontAwesomeIcon icon={faChevronUp} />
-                  : <FontAwesomeIcon icon={faChevronDown} />
+                  ? <IoIosArrowUp />
+                  : <IoIosArrowDown />
                   }
                 </span>
               )}

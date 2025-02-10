@@ -1,58 +1,71 @@
-import {ChangeEvent, FC, useState} from 'react';
-import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { Checked, CheckedDeviceOptions } from '../../../types/content';
-import filterIcon from '../../../assets/elements/filter-icon.svg'
-import style from './CheckboxFilter.module.scss';
+import { ChangeEvent, FC} from "react";
+import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
+import { Checked, CheckedDeviceOptions } from "../../../types/content";
+import { LuListFilter } from "react-icons/lu";
+
+
+import styles from "./CheckboxFilter.module.scss";
 
 interface ICheckboxProps {
-
-    items: CheckedDeviceOptions[];
-    label: string;
-    name: string;
-    onChange:(e: ChangeEvent<HTMLInputElement>, item:string) => void
+  items: CheckedDeviceOptions[];
+  label: string;
+  name: string;
+  list: Checked
+  setList: (list: Checked | ((prev: Checked) => Checked)) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => void;
 }
 
-const CheckboxFilter:FC<ICheckboxProps> = ({items, label, name, onChange}) => {
-   const {isOpen, setIsOpen, modalRef} = useOutsideClick();
-   const [list, setList] = useState<Checked>({});
+const CheckboxFilter: FC<ICheckboxProps> = ({
+  items,
+  label,
+  name,
+  list,
+  setList,
+  onChange,
+}) => {
+  const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
-   const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => {
+  const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => {
+    console.log(item);
+    
     setList((prev) => ({
       ...prev,
       [item.id]: e.target.checked,
     }));
-    onChange(e, item.value);
+    onChange(e, item);
   };
 
-    return (
-      <div className={style.checkbox}>
-        <div className={style.header} onClick={() => setIsOpen(!isOpen)} role="button">
-          <div className={style.placeholder}>{label}</div>
-          <img src={filterIcon} alt="" />
-        </div>
-        {isOpen && (
-          <div ref={modalRef} className={style.menu}>
-            {items.map((item) => (
-              <label key={item.id} className={style.container}>
-                <input
-                  name={name}
-                  type="checkbox"
-                  id={String(item.id)}
-                  value={item.name}
-                  checked={list[item.id] || false}
-                  disabled={item.disabled}
-                  onChange={(e) => handleCheck(e, item)}
-                />
-                <span className={style.checkmark}/>
-                <label htmlFor={String(item.id)}>
-                    {item.name}
-                </label>
-              </label>
-            ))}
-          </div>
-        )}
+  return (
+    <div className={styles.checkbox}>
+      <div
+        className={styles.header}
+        onClick={() => setIsOpen(!isOpen)}
+        role="button"
+      >
+        <div className={styles.placeholder}>{label}</div>
+        <LuListFilter className={styles.icon} />
       </div>
-    );
+      {isOpen && (
+        <div ref={modalRef} className={styles.menu}>
+          {items.map((item) => (
+            <label key={item.id} className={styles.container}>
+              <input
+                name={name}
+                type="checkbox"
+                id={String(item.id)}
+                value={item.name}
+                checked={list[item.id] || false}
+                disabled={item.disabled}
+                onChange={(e) => handleCheck(e, item)}
+              />
+              <span className={styles.checkmark} />
+              <label htmlFor={String(item.id)}>{item.name}</label>
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default CheckboxFilter;

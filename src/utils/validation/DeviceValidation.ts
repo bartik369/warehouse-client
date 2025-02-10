@@ -1,4 +1,4 @@
-import { IDevice, IDeviceModel, ISelectedItem, IEntity } from './../../types/devices';
+import { IDevice, IDeviceModel, IEntity } from './../../types/devices';
 import { IValidationErrors } from './../../types/devices';
 
 type ValidationField = keyof IDevice;

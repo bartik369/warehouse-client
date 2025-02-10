@@ -1,6 +1,6 @@
 import {FC} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faBars, faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
+import { TbMenu2 } from "react-icons/tb";
+import { TbMenu4 } from "react-icons/tb";
 import style from './BurgerBtn.module.scss';
 
 interface IBurgerBtn {
@@ -12,8 +12,8 @@ const BurgerBtn: FC<IBurgerBtn> = ({action, isActive}) => {
     return (
         <button className={style.burger} onClick={action}>
             {!isActive
-            ?  <FontAwesomeIcon className={style.icon} icon={faBars}/>
-            :  <FontAwesomeIcon className={style.icon} icon={faBarsStaggered}/>
+            ?  <TbMenu2 className={style.icon}/>
+            :  <TbMenu4 className={style.icon}/>
             }
         </button>
     );
