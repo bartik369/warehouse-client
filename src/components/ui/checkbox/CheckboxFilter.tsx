@@ -69,3 +69,4 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
 };
 
 export default CheckboxFilter;
+ 

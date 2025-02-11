@@ -2,6 +2,7 @@ import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from "../../types/content";
+import { yes, no, inStock, inUse } from "../../utils/constants/constants";
 import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
 
 export const useDeviceFilters = () => {
@@ -129,8 +130,6 @@ export const useDeviceFilters = () => {
       }));
     }
   };
-
-  
   // Reset all filter
   const handleResetFilter = useCallback(() => {
     if (!filters) return;
@@ -203,12 +202,12 @@ export const useDeviceFilters = () => {
             option.name ??
             (key === "isFunctional"
               ? option.isFunctional
-                ? "Да"
-                : "Нет"
+                ? yes
+                : no
               : key === "isAssigned"
               ? option.isAssigned
-                ? "Используется"
-                : "На складе"
+                ? inUse
+                : inStock
               : commonProps.value),
           type: key,
         };

@@ -190,3 +190,19 @@ export interface IDeviceFilters {
   model: string[];
   warehouse: string[],
 }
+
+type FilterLabelsKeys = 
+'manufacturer' | 
+'type' | 
+'model' | 
+'warehouse' | 
+'screenSize' | 
+'memorySize' | 
+'isFunctional' | 
+'isAssigned';
+
+export type FilterLabel = {
+  key: FilterLabelsKeys;
+  label: string;
+}
+
