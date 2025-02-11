@@ -34,9 +34,6 @@ export const useDeviceFilters = () => {
     warehouse: [],
   });
 
-  console.log(labels);
-  
-
   const [list, setList] = useState<Record<number, boolean>>({})
 
   useEffect(() => {
@@ -160,75 +157,67 @@ export const useDeviceFilters = () => {
     setSearchParams({});
     setResetFilters({});
     setActiveLink(false)
-  }, [filters]);
+    setList({})
+  }, [filters, labels]);
   
   // Disabled options of the checkboxes
   const getUniqueOptions = (key: keyof IDeviceFilters): CheckedDeviceOptions[] => {
     if (!options) return [];
 
-    const optionsMap: Record<keyof IDeviceFilters, any[]> = {
-      manufacturer: options.manufacturer?.map((option: any, index: number) => ({
-        id: index + 1,
-        name: option.name,
-        type: option.slug,
-        value: option.slug,
-        disabled: disabledOptions?.manufacturer?.includes(option.slug),
-      })),
-      isFunctional: options.isFunctional?.map((option: any, index: number) => ({
-        id: index + 1000,
-        name: option.isFunctional ? "Да" : "Нет",
-        type: "isFunctional",
-        value: String(option.isFunctional),
-        disabled: disabledOptions?.isFunctional?.includes(String(option.isFunctional)),
-      })),
-      type: options.type?.map((option: any, index: number) => ({
-        id: index + 2000,
-        name: option.name,
-        type: option.slug,
-        value: option.slug,
-        disabled: disabledOptions?.type?.includes(option.slug),
-      })),
-      memorySize: options.memorySize?.map((option: any, index: number) => ({
-        id: index + 3000,
-        name: option.memorySize,
-        type: "memorySize",
-        value: String(option.memorySize),
-        disabled: disabledOptions?.memorySize?.includes(String(option.memorySize)),
-      })),
-      screenSize: options.screenSize?.map((option: any, index: number) => ({
-        id: index + 4000,
-        name: option.screenSize,
-        type: "screenSize",
-        value: String(option.screenSize),
-        disabled: disabledOptions?.screenSize?.includes(String(option.screenSize)),
-      })),
-      model: options.model?.map((option: any, index: number) => ({
-        id: index + 5000,
-        name: option.name,
-        type: option.slug,
-        value: option.slug,
-        disabled: disabledOptions?.model?.includes(option.slug),
-      })),
-      warehouse: options.warehouse?.map((option: any, index: number) => ({
-        id: index + 6000,
-        name: option.name,
-        type: option.slug,
-        value: option.slug,
-        disabled: disabledOptions?.warehouse?.includes(option.slug),
-      })),
-      isAssigned: options.isAssigned?.map((option: any, index: number) => ({
-        id: index + 7000,
-        name: option.isAssigned ? "Используется" : "На складе",
-        type: "isAssigned",
-        value: String(option.isAssigned),
-        disabled: disabledOptions?.isAssigned?.includes(String(option.isAssigned)),
-      })),
+    const idOptionsOffsets: Record<keyof IDeviceFilters, number> = {
+      manufacturer: 1,
+      isFunctional: 1000,
+      type: 2000,
+      memorySize: 3000,
+      screenSize: 4000,
+      model: 5000,
+      warehouse: 6000,
+      isAssigned: 7000,
     };
-    return optionsMap[key] || [];
-  };
 
-  return { devices, list, labels, setList, options, filters, activeLink, searchParams, disabledOptions, resetFilters, 
-    handleResetFilter, handleFilterChange, getUniqueOptions 
+    return (
+      options[key]?.map((option: any, index: number) => {
+        const commonProps = {
+          id: index + idOptionsOffsets[key],
+          value: String(
+            option.slug ??
+              option.memorySize ??
+              option.screenSize ??
+              option.isFunctional ??
+              option.isAssigned
+          ),
+          disabled: disabledOptions?.[key]?.includes(
+            String(
+              option.slug ??
+                option.memorySize ??
+                option.screenSize ??
+                option.isFunctional ??
+                option.isAssigned
+            )
+          ),
+        };
+
+        return {
+          ...commonProps,
+          name:
+            option.name ??
+            (key === "isFunctional"
+              ? option.isFunctional
+                ? "Да"
+                : "Нет"
+              : key === "isAssigned"
+              ? option.isAssigned
+                ? "Используется"
+                : "На складе"
+              : commonProps.value),
+          type: key,
+        };
+      }) || []
+    );
+  };
+  
+  return { devices, list, labels, options, filters, activeLink, searchParams, disabledOptions, resetFilters, 
+    setList, handleResetFilter, handleFilterChange, getUniqueOptions 
   };
 };
 

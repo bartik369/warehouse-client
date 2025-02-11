@@ -36,9 +36,12 @@ const Devices: FC = () => {
             </th>
             <th>
               <div className={styles.selectes}>
-                {labels && labels['manufacturer'].slice(0, 3).map((item) =>
+                {labels && labels['manufacturer'].slice(0, 2).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                  {labels && labels['manufacturer'].length > 2 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="manufacturer"
@@ -52,9 +55,12 @@ const Devices: FC = () => {
             </th>
             <th>
             <div className={styles.selectes}>
-                {labels && labels['type'].slice(0, 3).map((item) =>
+                {labels && labels['type'].slice(0, 2).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                 {labels && labels['type'].length > 2 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="type"
@@ -68,9 +74,12 @@ const Devices: FC = () => {
             </th>
             <th>
             <div className={styles.selectes}>
-                {labels && labels['model'].slice(0, 3).map((item) =>
+                {labels && labels['model'].slice(0, 2).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                  {labels && labels['model'].length > 2 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="model"
@@ -84,9 +93,12 @@ const Devices: FC = () => {
             </th>
             <th>
             <div className={styles.selectes}>
-                {labels && labels['warehouse'].slice(0, 2).map((item) =>
+                {labels && labels['warehouse'].slice(0, 1).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                  {labels && labels['warehouse'].length > 1 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="warehouse"
@@ -100,9 +112,12 @@ const Devices: FC = () => {
             </th>
             <th>
             <div className={styles.selectes}>
-                {labels && labels['screenSize'].slice(0, 3).map((item) =>
+                {labels && labels['screenSize'].slice(0, 4).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                  {labels && labels['screenSize'].length > 4 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="screenSize"
@@ -116,9 +131,12 @@ const Devices: FC = () => {
             </th>
             <th>
             <div className={styles.selectes}>
-                {labels && labels['memorySize'].slice(0, 3).map((item) =>
+                {labels && labels['memorySize'].slice(0, 4).map((item) =>
                   <span className={styles.item}>{item}</span>
                 )}
+                  {labels && labels['memorySize'].length > 4 &&
+                  <span className={styles.item2}>...</span>
+                }
               </div>
               <CheckboxFilter
                 name="memorySize"
@@ -131,6 +149,11 @@ const Devices: FC = () => {
               />
             </th>
             <th>
+            <div className={styles.selectes}>
+                {labels && labels['isFunctional'].slice(0, 2).map((item) =>
+                  <span className={styles.item}>{item}</span>
+                )}
+              </div>
               <CheckboxFilter
                 name="isFunctional"
                 label={isFunctionalLabel}
@@ -142,6 +165,11 @@ const Devices: FC = () => {
               />
             </th>
             <th>
+            <div className={styles.selectes}>
+                {labels && labels['isAssigned'].slice(0, 2).map((item) =>
+                  <span className={styles.item}>{item}</span>
+                )}
+              </div>
               <CheckboxFilter
                 name="isAssigned"
                 label={"Доступность"}

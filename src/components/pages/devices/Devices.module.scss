@@ -44,6 +44,16 @@
                 font-weight: 200;
                 color: #fff;
             }
+            .item2 {
+                display: inline-block;
+                overflow: hidden;
+                margin-right: 5px;
+                padding: 2px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-weight: 200;
+                color: rgb(0, 0, 0);
+            }
         }
         th:not(.checkbox-column),
         td:not(.checkbox-column) {
