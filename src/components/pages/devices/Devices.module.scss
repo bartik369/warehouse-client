@@ -16,6 +16,9 @@
         border-collapse: collapse;
         scrollbar-width: thin;
         scrollbar-color: #d2d4d7 #aeb1b6;
+        .row {
+            cursor: pointer;
+        }
         td {
             padding: 10px 6px;
             text-align: center;
@@ -37,10 +40,10 @@
                 display: inline-block;
                 overflow: hidden;
                 margin-right: 5px;
-                background-color: #3c52d6;
+                background-color: #3c53d7;
                 padding: 3px 7px;
                 border-radius: 8px;
-                font-size: 11px;
+                font-size: 10px;
                 font-weight: 200;
                 color: #fff;
             }
@@ -186,5 +189,25 @@
         &::after {
             background-color: #fd6967;
         }
+    }
+}
+
+.extra-checkbox {
+    display: flex;
+    justify-content: center;
+    background-color: #f8faff;
+    padding: 6px 0;
+    border: 1px solid #dce4e8;
+    border-radius: 20px;
+    position: relative;
+    .placeholder {
+        color: #070707;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .icon {
+        margin-left: 5px;
+        font-size: 14px;
+        color: #0f0f0f;
     }
 }

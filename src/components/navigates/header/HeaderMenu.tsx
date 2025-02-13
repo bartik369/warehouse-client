@@ -1,18 +1,32 @@
 import {FC} from 'react';
-import { Link } from 'react-router-dom';
-import { headerMenuData } from '../../../utils/data/menus';
-import style from './HeaderMenu.module.scss';
+import { IDeviceInfo } from '../../../types/devices';
+import { deviceActionsMenu } from '../../../utils/data/menus';
+import styles from './HeaderMenu.module.scss';
 
-const HeaderMenu:FC = () => {
+interface IHeaderMenuProps {
+  device: IDeviceInfo | null;
+}
+
+const HeaderMenu:FC<IHeaderMenuProps> = ({device}) => {
+  const filteredMenu = deviceActionsMenu.filter((item) => {
+    if (device?.isAssigned) {
+      return item.title === 'Принять'
+    } else {
+      return item.title !== 'Принять'
+    }
+  })
     return (
-      <nav className={style.menu}>
+      <nav className={styles.menu}>
         <ul>
-          {/* {headerMenuData &&
-            headerMenuData.map((item, key) => (
-              <li key={item.id}>
-                <Link to={item.path}>{item.title}</Link>
+          {filteredMenu &&
+            filteredMenu.map((item) => (
+              <li key={item.id} title={item.title}>
+                <div className={styles.item}>
+                  {item.icon && <item.icon className={styles.icon} />}
+                  <span>{item.title}</span>
+                </div>
               </li>
-            ))} */}
+            ))}
         </ul>
       </nav>
     );

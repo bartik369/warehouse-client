@@ -96,4 +96,9 @@ export const deviceTypes:DeviceTypes = {
   },
 };
 
+export const extraOptions = [
+  {id: 1, name: 'inventoryNumber', label: 'Инвентарный номер' },
+  {id: 2, name: 'serialNumber', label: 'Серийный номер' },
+]
+
 

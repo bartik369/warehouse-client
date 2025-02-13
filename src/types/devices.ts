@@ -123,7 +123,7 @@ export interface IEntity {
 }
 
 export interface IFilteredDevicesFromBack {
-  id?: string;
+  id: string;
   name: string;
   inventoryNumber: string;
   serialNumber: string;
@@ -199,10 +199,19 @@ type FilterLabelsKeys =
 'screenSize' | 
 'memorySize' | 
 'isFunctional' | 
-'isAssigned';
+'isAssigned' ;
 
 export type FilterLabel = {
   key: FilterLabelsKeys;
   label: string;
+}
+
+export interface IDeviceInfo {
+  id: string;
+  isAssigned: boolean;
+  warehouse: {
+      name: string;
+      slug: string;
+  }
 }
 

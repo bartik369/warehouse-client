@@ -1,4 +1,5 @@
-import {FC} from 'react';
+import {ChangeEvent, FC} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { yes, no } from "../../../utils/constants/constants";
 import { IFilteredDevicesFromBack } from '../../../types/devices';
 import styles from "./Devices.module.scss";
@@ -6,20 +7,26 @@ import styles from "./Devices.module.scss";
 
 interface IDeviceItemsProps {
     devices: IFilteredDevicesFromBack[];
-    handleCheck:(device:IFilteredDevicesFromBack) => void;
+    handleCheck:(device:IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const DeviceItems:FC<IDeviceItemsProps> = ({devices, handleCheck}) => {
+  const navigate = useNavigate();
     return (
         <>
           {devices && devices.map((device) => (
-              <tr key={device.id} className={styles.deviceRow}>
-                <td className={styles["checkbox-column"]}>
+              <tr 
+                key={device.id} 
+                className={styles.row}
+                onClick={() => navigate(`/devices/${device.id}`)}
+              >
+                <td className={styles["checkbox-column"]} 
+                  onClick={(e) => e.stopPropagation()}>
                   <label key={device.id} className={styles.checkbox}>
                     <input
                       type="checkbox"
                       id={device.id}
-                      onChange={() => handleCheck(device)}
+                      onChange={(e) => handleCheck(device, e)}
                     />
                     <span className={styles.checkmark} />
                   </label>

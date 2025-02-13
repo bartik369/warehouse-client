@@ -3,6 +3,10 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { IoStatsChartOutline } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
+import { BsArrowsMove } from "react-icons/bs";
+
+import { FiUserPlus } from "react-icons/fi";
+import { FiUserMinus } from "react-icons/fi";
 import { LuHandshake } from "react-icons/lu";
 import { LuWarehouse } from "react-icons/lu";
 
@@ -34,5 +38,10 @@ export const sidebarMenuData = [
     {id: 6, title: 'Статистика', path: '/statistic', icon: IoStatsChartOutline},
     {id: 7, title: 'База знаний', path: '/library', icon: MdOutlineLibraryAddCheck},
 ];
+export const deviceActionsMenu = [
+    {id: 1, title: 'Выдать', icon: FiUserPlus},
+    {id: 2, title: 'Принять', icon: FiUserMinus},
+    {id: 3, title: 'Переместить', icon: BsArrowsMove},
+]
 
   
