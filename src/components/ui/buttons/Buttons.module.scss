@@ -16,7 +16,16 @@ button {
     font-weight: 400;
 }
 
-.md {}
+.md {
+    padding: 9px 20px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 400;
+    .icon {
+        font-size: 18px;
+        margin-right: 6px;
+    }
+}
 
 .lg {
     padding: 12px 18px;

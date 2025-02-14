@@ -146,49 +146,27 @@
         margin: 0 auto;
     }
     .instock {
-        background-color: #f2fff6;
-        border: 1px solid #bdd8ca;
-        color: #3a9d70;
+        background-color: #ebfff7;
+        border: 1px solid #8fc8a6;
+        color: #42a680;
     }
     .inuse {
-        background-color: #f4f7fd;
-        border: 1px solid #d8d8d8;
-        color: #5f6571;
+        background-color: #e7f3ff;
+        border: 1px solid #afc8e2;
+        color: #566980;
     }
     .serviceable,
     .not-serviceable {
-        position: relative;
-        margin: 0 auto;
-        padding: 4px 8px 4px 20px;
+        font-size: 22px;
         display: flex;
-        justify-content: center;
         align-items: center;
-        font-size: 11px;
-        border-radius: 9px;
-        width: fit-content;
-        &::after {
-            content: "";
-            position: absolute;
-            left: 5px;
-            width: 11px;
-            height: 11px;
-            margin-right: 5px;
-            border-radius: 50%;
-        }
+        justify-content: center;
     }
     .serviceable {
-        border: 1px solid #bdd8ca;
-        color: #3a9d70;
-        &::after {
-            background-color: #57cf99;
-        }
+        color: #42a680;
     }
     .not-serviceable {
-        border: 1px solid #d8bdbd;
-        color: #9d3a3a;
-        &::after {
-            background-color: #fd6967;
-        }
+        color: #cf2a49;
     }
 }
 

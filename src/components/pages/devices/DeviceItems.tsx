@@ -2,15 +2,18 @@ import {ChangeEvent, FC} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { yes, no } from "../../../utils/constants/constants";
 import { IFilteredDevicesFromBack } from '../../../types/devices';
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import styles from "./Devices.module.scss";
 
 
 interface IDeviceItemsProps {
     devices: IFilteredDevicesFromBack[];
+    checks: Record<string, boolean>
     handleCheck:(device:IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DeviceItems:FC<IDeviceItemsProps> = ({devices, handleCheck}) => {
+const DeviceItems:FC<IDeviceItemsProps> = ({devices, checks, handleCheck}) => {
   const navigate = useNavigate();
     return (
         <>
@@ -24,6 +27,7 @@ const DeviceItems:FC<IDeviceItemsProps> = ({devices, handleCheck}) => {
                   onClick={(e) => e.stopPropagation()}>
                   <label key={device.id} className={styles.checkbox}>
                     <input
+                      checked={checks[device.id] || false}
                       type="checkbox"
                       id={device.id}
                       onChange={(e) => handleCheck(device, e)}
@@ -39,9 +43,13 @@ const DeviceItems:FC<IDeviceItemsProps> = ({devices, handleCheck}) => {
                 <td>{device.memorySize ? device.memorySize : "—"}</td>
                 <td>
                   {device.isFunctional ? (
-                    <div className={styles.serviceable}>{yes}</div>
+                    <div className={styles.serviceable}>
+                      <IoIosCheckmarkCircleOutline />
+                    </div>
                   ) : (
-                    <div className={styles["not-serviceable"]}>{no}</div>
+                    <div className={styles["not-serviceable"]}>
+                      <IoIosCloseCircleOutline />
+                    </div>
                   )}
                 </td>
                 <td>

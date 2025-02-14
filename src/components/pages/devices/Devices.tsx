@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback } from "react";
+import { ChangeEvent, FC, useCallback, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
 import { FilterLabel } from "../../../types/devices";
@@ -16,7 +16,9 @@ import styles from "./Devices.module.scss";
 const Devices: FC = () => {
   const {labels, devices, list, searchParams, handleResetFilter, handleFilterChange,
     getUniqueOptions, setList} = useDeviceFilters();
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+
+    const [checks, setChecks] = useState({})
 
   const handleCheck = useCallback((
     device: IFilteredDevicesFromBack,
@@ -35,7 +37,9 @@ const Devices: FC = () => {
       }
       dispatch(setDeviceInfo(data));
     }
-  
+    setChecks({
+      [device.id]:e.target.checked,
+    })
   
   }, []);
 
@@ -99,7 +103,7 @@ const Devices: FC = () => {
           </tr>
         </thead>
         <tbody>
-          <DeviceItems devices={devices || []} handleCheck={handleCheck} />
+          <DeviceItems checks={checks} devices={devices || []} handleCheck={handleCheck} />
         </tbody>
       </table>
     </div>

@@ -1,13 +1,15 @@
 import {FC} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import BtnAction from '../../ui/buttons/BtnAction';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import {useLogoutUserMutation} from '../../../store/api/authApi';
 import { profileMenuData } from '../../../utils/data/menus';
 import { signout } from '../../../utils/constants/constants';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { isFetchBaseQueryError, isErrorWithMessage } from '../../../helpers/error-handling';
-import profileIcon from '../../../assets/elements/profile-icon.svg'
+import { LuCircleUser } from "react-icons/lu";
+
 import style from './ProfileMenu.module.scss';
 
 const ProfileMenu:FC = () => {
@@ -18,7 +20,7 @@ const ProfileMenu:FC = () => {
     
      const logoutHandler = async () => {
       try {
-        await logout(user.id).unwrap();
+        await logout(user?.id).unwrap();
         navigate("/");
       } catch (err) {
 
@@ -36,7 +38,7 @@ const ProfileMenu:FC = () => {
     return (
         <div className={style.content} ref={modalRef}>
             <button className={style.icon} onClick={openModalHandler}>
-                <img src={profileIcon} alt="" />
+                <LuCircleUser />
             </button>
             <div className={isOpen
                 ? style.menu 
@@ -56,9 +58,7 @@ const ProfileMenu:FC = () => {
                 </ul>
             </nav>
             <div className={style.logout}>
-                <button onClick={logoutHandler}>
-                    {signout}
-                </button >
+            <BtnAction color='blue' title={signout} size='md' click={logoutHandler}/>
             </div>
             </div>
         </div>

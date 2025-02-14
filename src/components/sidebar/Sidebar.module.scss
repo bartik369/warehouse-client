@@ -1,6 +1,6 @@
 @mixin commonSettings {
     position: fixed;
-    height: 100vh;
+    height: 100dvh;
     padding-top: 25px;
     z-index: 10;
     transition: all .08s ease-in;
