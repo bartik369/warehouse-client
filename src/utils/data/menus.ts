@@ -26,9 +26,9 @@ export const profileMenuData = [
 ];
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '#', icon: LuWarehouse, subMenu: [
-      { id: 1, title: 'Московский офис', path: '/moscow'},
-      { id: 2, title: 'Екатеринбург', path: '/ekb'},
-      { id: 3, title: 'Красногорск', path: '/krasnogrsk'},
+      { id: 1, title: 'Московский офис', path: 'msk'},
+      { id: 2, title: 'Санкт-Петербург', path: 'spb'},
+      { id: 3, title: 'Екатеринбург', path: 'ekb'},
     ]
 },
     {id: 2, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},

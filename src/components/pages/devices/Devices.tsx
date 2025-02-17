@@ -75,10 +75,10 @@ const Devices: FC = () => {
             <th key={key}>
                <div className={styles.selectes}>
                 {labels && labels[key].slice(0, 2).map((item) =>
-                  <span className={styles.item}>{item}</span>
+                  <span key={key} className={styles.item}>{item}</span>
                 )}
                   {labels && labels[key].length > 2 &&
-                  <span className={styles.item2}>...</span>
+                  <span key={key} className={styles.item2}>...</span>
                 }
               </div>
               <CheckboxFilter

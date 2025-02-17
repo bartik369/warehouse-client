@@ -4,6 +4,8 @@ import { yes, no } from "../../../utils/constants/constants";
 import { IFilteredDevicesFromBack } from '../../../types/devices';
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { CgUnavailable } from "react-icons/cg";
+import { FcProcess } from "react-icons/fc";
 import styles from "./Devices.module.scss";
 
 
@@ -45,18 +47,26 @@ const DeviceItems:FC<IDeviceItemsProps> = ({devices, checks, handleCheck}) => {
                   {device.isFunctional ? (
                     <div className={styles.serviceable}>
                       <IoIosCheckmarkCircleOutline />
+                      <span>{yes}</span>
                     </div>
                   ) : (
                     <div className={styles["not-serviceable"]}>
                       <IoIosCloseCircleOutline />
+                      <span>{no}</span>
                     </div>
                   )}
                 </td>
                 <td>
                   {device.isAssigned ? (
-                    <div className={styles.inuse}>Используется</div>
+                    <div className={styles.inuse}>
+                    <CgUnavailable/>
+                    <span>{'Используется'}</span>
+                  </div>
                   ) : (
-                    <div className={styles.instock}>На складе</div>
+                    <div className={styles.instock}>
+                    <IoIosCheckmarkCircleOutline />
+                    <span>{'На складе'}</span>
+                  </div>
                   )}
                 </td>
                 <td>{device.inventoryNumber ? device.inventoryNumber : "—"}</td>

@@ -51,7 +51,7 @@ function App() {
         <Route element={<Home />} path='/' />
         <Route element={<Profile />} path='/profile' />
         <Route element={<Device />} path='/device/:id'/>
-        <Route element={<Devices />} path='/devices'/>
+        <Route element={<Devices />} path='/devices/locations/:city'/>
         <Route element={<AddDevice />} path='/device/add'/>
         <Route element={<Admin />} path='/admin'/>
       </Route>

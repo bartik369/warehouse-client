@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
 import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from "../../types/content";
+import { useSearchParams, useParams } from "react-router-dom";
 import { yes, no, inStock, inUse } from "../../utils/constants/constants";
 import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
 
@@ -10,8 +10,10 @@ export const useDeviceFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeLink, setActiveLink] = useState(false)
   const [disabledOptions, setDisabledOptions] = useState<Record<string, string[]>>({});
-  const { data: devices } = useGetDevicesQuery(Object.fromEntries(searchParams));
   const { data: options } = useGetDeviceOptionsQuery();
+  const {city} = useParams();
+  const params = Object.fromEntries(searchParams);
+  const { data: devices } = useGetDevicesQuery(city && {...params, city});
   const [page, setPage] = useState();
 
   const [filters, setFilters] = useState<IDeviceFilters>({
@@ -34,8 +36,11 @@ export const useDeviceFilters = () => {
     model: [],
     warehouse: [],
   });
-
   const [list, setList] = useState<Record<number, boolean>>({})
+
+  useEffect(() => {
+    handleResetFilter();
+  }, [city])
 
   useEffect(() => {
     if (!options) return;

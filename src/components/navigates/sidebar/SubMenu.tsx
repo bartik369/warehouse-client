@@ -20,7 +20,7 @@ const SubMenu:FC<ISubMenuProps> = ({item, open, title}) => {
        <ul className={style.submenu}>
          {item.subMenu.map((subItem: ISubmenu) => (
            <li key={subItem.id}>
-             <Link to={subItem.path}>
+             <Link to={`/devices/locations/${subItem.path}`}>
                {subItem.title}
              </Link>
            </li>

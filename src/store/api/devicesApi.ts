@@ -9,15 +9,20 @@ export const devicesApi = createApi({
     endpoints:(build) => ({
         getDevices: build.query({
             query: (queryParams) => {
-                const params = new URLSearchParams();
-                Object.entries(queryParams).forEach(([key, value]) => {
+                const { city, ...params } = queryParams;
+                console.log(city);
+                
+                const urlParams = new URLSearchParams();
+        
+                Object.entries(params).forEach(([key, value]) => {
                     if (Array.isArray(value)) {
-                        params.append(key, value.join(",")); 
+                        urlParams.append(key, value.join(","));
                     } else {
-                        params.append(key, String(value));
+                        urlParams.append(key, String(value));
                     }
                 });
-                return `/devices?${params.toString()}`;
+                const cityUrl = city ? `/locations/${city}` : '/locations';
+                return `/devices${cityUrl}?${urlParams.toString()}`;
             },
         }),
         getDeviceOptions: build.query<IFilterDeviceOptions, void>({
