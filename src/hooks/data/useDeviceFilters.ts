@@ -13,8 +13,9 @@ export const useDeviceFilters = () => {
   const { data: options } = useGetDeviceOptionsQuery();
   const {city} = useParams();
   const params = Object.fromEntries(searchParams);
-  const { data: devices } = useGetDevicesQuery(city && {...params, city});
-  const [page, setPage] = useState();
+  const [page, setPage] = useState<number>(1);
+  const perPage = 10;
+  const { data: devices } = useGetDevicesQuery({...params, city, page});
 
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
@@ -40,6 +41,7 @@ export const useDeviceFilters = () => {
 
   useEffect(() => {
     handleResetFilter();
+    setPage(1);
   }, [city])
 
   useEffect(() => {
@@ -72,7 +74,7 @@ export const useDeviceFilters = () => {
         // Creating temporary filters with the addition current option
         const tempFilters = { ...filters, [key]: [...filters[key as keyof IDeviceFilters], option] }; 
         // Checking some device which matches all current filters
-        const isOptionAvailable = devices && devices.some((device: IFilteredDevicesFromBack) => {
+        const isOptionAvailable = devices && devices?.devices.some((device: IFilteredDevicesFromBack) => {
           const matchesFilters = Object.entries(tempFilters).every(([key, values]) => {
             if (values.length === 0) return true;
              //Get the value of device for filter 
@@ -105,9 +107,12 @@ export const useDeviceFilters = () => {
         params[key] = filters[key as keyof IDeviceFilters].join(",");
       }
     });
+
+    params.page = String(page);
+    params.limit = String(perPage)
     setSearchParams(params);
 
-  }, [filters, setSearchParams]);
+  }, [filters, setSearchParams, page]);
 
   const handleFilterChange = (e: ChangeEvent<HTMLInputElement>, item:CheckedDeviceOptions) => {
     const { name } = e.target;
@@ -219,9 +224,16 @@ export const useDeviceFilters = () => {
       }) || []
     );
   };
+
+  const handlePrevPage = () => {
+    setPage((prev) => prev - 1);
+  }
+  const handleNextPage = () => {
+    setPage((prev) => prev + 1);
+  }
   
-  return { devices, list, labels, options, filters, activeLink, searchParams, disabledOptions, resetFilters, 
-    setList, handleResetFilter, handleFilterChange, getUniqueOptions 
-  };
+  return { devices, list, labels, options, filters, activeLink, searchParams, disabledOptions, 
+    resetFilters, page, setPage, setList, handleResetFilter, handleFilterChange, getUniqueOptions, 
+    handlePrevPage, handleNextPage };
 };
 

@@ -12,10 +12,12 @@ import { manufacturersLabel, deviceTypeLabel, modelLabel, screenSizeLabel,
   memorySizeLabel, isFunctionalLabel, isAssignedLabel, warehouseLabel} from "../../../utils/constants/device";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import styles from "./Devices.module.scss";
+import Pagination from "../../pagination/Pagination";
 
 const Devices: FC = () => {
-  const {labels, devices, list, searchParams, handleResetFilter, handleFilterChange,
-    getUniqueOptions, setList} = useDeviceFilters();
+  const {labels, devices, list, searchParams, page, setPage, handleResetFilter, 
+    handleFilterChange,getUniqueOptions, setList, handlePrevPage, 
+    handleNextPage} = useDeviceFilters();
     const dispatch = useAppDispatch();
 
     const [checks, setChecks] = useState({})
@@ -59,12 +61,14 @@ const Devices: FC = () => {
   ]
 
   return (
+    <>
     <div className={styles.container}>
       <table className={styles.table}>
         <thead>
           <tr>
             <th className={styles["checkbox-column"]}>
-            {[...searchParams.keys()].length > 0 && (
+            {[...searchParams.keys()]
+            .filter(key => !['limit', 'page'].includes(key)).length > 0 && (
               <MdFilterListOff
               className={styles.reset}
               onClick={handleResetFilter} 
@@ -103,10 +107,22 @@ const Devices: FC = () => {
           </tr>
         </thead>
         <tbody>
-          <DeviceItems checks={checks} devices={devices || []} handleCheck={handleCheck} />
+          <DeviceItems checks={checks} devices={devices.devices || []} handleCheck={handleCheck} />
         </tbody>
       </table>
     </div>
+    <Pagination 
+        page={page}
+        totalPages={devices.totalPages || 0}
+        disabled={{
+          left: page === 1,
+          right: page === devices?.totalPages
+        }}
+        prev={handlePrevPage} 
+        next={handleNextPage}
+        setPage={setPage}
+      />
+    </>
   );
 };
 

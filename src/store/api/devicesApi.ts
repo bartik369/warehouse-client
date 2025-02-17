@@ -10,8 +10,6 @@ export const devicesApi = createApi({
         getDevices: build.query({
             query: (queryParams) => {
                 const { city, ...params } = queryParams;
-                console.log(city);
-                
                 const urlParams = new URLSearchParams();
         
                 Object.entries(params).forEach(([key, value]) => {

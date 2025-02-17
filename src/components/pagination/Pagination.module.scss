@@ -1,0 +1,56 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .list {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 12px;
+            list-style: none;
+            .li {
+                display: flex;
+                align-items: center;
+                &.active {
+                    background-color: hotpink;
+                }
+                &:hover {
+                    background-color: #3c53d7;
+                    color: #fff;
+                }
+                &.active {
+                    background-color: #3c53d7;
+                    color: #fff;
+                }
+                &:not(.active) {
+                    background-color: transparent;
+                    color: #9598a7;
+                }
+            }
+        }
+        button {
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            &:hover {
+                background-color: #3c53d7;
+                color: #fff;
+            }
+            &:hover:not(:disabled) {
+                background-color: #3c53d7;
+                color: #fff;
+                border-color: #3c53d7;
+            }
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
