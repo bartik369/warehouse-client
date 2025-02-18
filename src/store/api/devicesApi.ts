@@ -33,7 +33,7 @@ export const devicesApi = createApi({
                 url: `${import.meta.env.VITE_DEVICE}/${id}`,
             })
         }),
-        createDevice: build.mutation<IDevice, IDevice>({
+        createDevice: build.mutation<any, IDevice>({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_DEVICES}`,

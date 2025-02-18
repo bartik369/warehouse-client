@@ -1,6 +1,7 @@
 .wrapper {
     display: flex;
     justify-content: center;
+    margin: 25px 0 10px;
     .pagination {
         display: flex;
         align-items: center;
@@ -8,47 +9,53 @@
         .list {
             display: flex;
             flex-wrap: nowrap;
-            gap: 12px;
+            gap: 6px;
             list-style: none;
-            .li {
+            li {
                 display: flex;
                 align-items: center;
-                &.active {
-                    background-color: hotpink;
-                }
+                padding: 3px 10px;
+                font-size: 12px;
+                font-weight: 400;
+                border-radius: 4px;
+                border: 1px solid #dbdbdb;
+                cursor: pointer;
                 &:hover {
                     background-color: #3c53d7;
+                    border: 1px solid #cacaca;
                     color: #fff;
                 }
                 &.active {
                     background-color: #3c53d7;
+                    border: 1px solid #384ece;
                     color: #fff;
                 }
                 &:not(.active) {
                     background-color: transparent;
-                    color: #9598a7;
+                    color: #727179;
                 }
             }
         }
         button {
             font-size: 14px;
-            padding: 4px 8px;
+            padding: 3px 5px;
             border-radius: 4px;
-            border: 1px solid #ddd;
+            border: 1px solid #dbdbdb;
+            color: rgb(130, 130, 130);
             background-color: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
             &:hover {
-                background-color: #3c53d7;
-                color: #fff;
+                border: 1px solid #cdcdcd;
+                color: rgb(122, 122, 122);
             }
             &:hover:not(:disabled) {
-                background-color: #3c53d7;
-                color: #fff;
-                border-color: #3c53d7;
+                border: 1px solid #cdcdcd;
+                color: rgb(122, 122, 122);
             }
             &:disabled {
-                opacity: 0.5;
+                color: #e9e9e9;
+                border: 1px solid #e9e9e9;
                 cursor: not-allowed;
             }
         }

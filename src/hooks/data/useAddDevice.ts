@@ -1,11 +1,11 @@
-import { IDeviceMedia, IEntity} from "./../../types/devices";
 import { useState, useCallback, useMemo, useEffect } from "react";
+import { toast } from "react-toastify";
 import { useAppSelector } from "../redux/useRedux";
+import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
 import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constants/constants";
-import { IDevice} from "../../types/devices";
 
 export function useAddDevice() {
   const user = useAppSelector((state) => state.auth.user);
@@ -83,9 +83,11 @@ export function useAddDevice() {
           updatedById: user.id
         };
       
-        await create(updatedData).unwrap();
-        handleResetDevice();
-        setMedia((prev) => ({...prev, prevImg: null}));
+        await create(updatedData).unwrap().then((data) => {
+          toast(data?.message, { type: "success" });
+          handleResetDevice();
+          setMedia((prev) => ({...prev, prevImg: null}));
+        });
       } else {
         console.error("Validation errors:", validationErrors);
       }

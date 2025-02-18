@@ -14,8 +14,8 @@ export const useDeviceFilters = () => {
   const {city} = useParams();
   const params = Object.fromEntries(searchParams);
   const [page, setPage] = useState<number>(1);
-  const perPage = 10;
-  const { data: devices } = useGetDevicesQuery({...params, city, page});
+  const[limit, setLimit] = useState(20)
+  const { data: devices } = useGetDevicesQuery({...params, city, page, limit});
 
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
@@ -109,7 +109,7 @@ export const useDeviceFilters = () => {
     });
 
     params.page = String(page);
-    params.limit = String(perPage)
+    params.limit = String(limit)
     setSearchParams(params);
 
   }, [filters, setSearchParams, page]);
@@ -225,15 +225,14 @@ export const useDeviceFilters = () => {
     );
   };
 
-  const handlePrevPage = () => {
+  const handlePrevPage = useCallback(() => {
     setPage((prev) => prev - 1);
-  }
-  const handleNextPage = () => {
+  }, []);
+  const handleNextPage = useCallback(() => {
     setPage((prev) => prev + 1);
-  }
+  }, []);
   
   return { devices, list, labels, options, filters, activeLink, searchParams, disabledOptions, 
     resetFilters, page, setPage, setList, handleResetFilter, handleFilterChange, getUniqueOptions, 
     handlePrevPage, handleNextPage };
 };
-

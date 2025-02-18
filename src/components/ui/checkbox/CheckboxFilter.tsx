@@ -1,8 +1,7 @@
-import { ChangeEvent, FC} from "react";
+import { ChangeEvent, FC, useEffect, useRef } from "react";
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
 import { Checked, CheckedDeviceOptions } from "../../../types/content";
 import { LuListFilter } from "react-icons/lu";
-
 
 import styles from "./CheckboxFilter.module.scss";
 
@@ -10,9 +9,12 @@ interface ICheckboxProps {
   items: CheckedDeviceOptions[];
   label: string;
   name: string;
-  list: Checked
+  list: Checked;
   setList: (list: Checked | ((prev: Checked) => Checked)) => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => void;
+  onChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    item: CheckedDeviceOptions
+  ) => void;
 }
 
 const CheckboxFilter: FC<ICheckboxProps> = ({
@@ -25,9 +27,10 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
 }) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
-  const handleCheck = (e: ChangeEvent<HTMLInputElement>, item: CheckedDeviceOptions) => {
-    console.log(item);
-    
+  const handleCheck = (
+    e: ChangeEvent<HTMLInputElement>,
+    item: CheckedDeviceOptions
+  ) => {
     setList((prev) => ({
       ...prev,
       [item.id]: e.target.checked,
@@ -36,15 +39,13 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
   };
 
   return (
-    <div className={styles.checkbox}>
-      <div
-        className={styles.header}
-        onClick={() => setIsOpen(!isOpen)}
-        role="button"
-      >
-        <div className={styles.placeholder}>{label}</div>
-        <LuListFilter className={styles.icon} />
-      </div>
+    <div className={styles.wrapper}>
+      <button className={styles.checkbox} onClick={() => setIsOpen(!isOpen)}>
+        <div className={styles.header}>
+          <div className={styles.placeholder}>{label}</div>
+          <LuListFilter className={styles.icon} />
+        </div>
+      </button>
       {isOpen && (
         <div ref={modalRef} className={styles.menu}>
           {items.map((item) => (
@@ -58,8 +59,19 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
                 disabled={item.disabled}
                 onChange={(e) => handleCheck(e, item)}
               />
-              <span className={styles.checkmark} />
-              <label htmlFor={String(item.id)}>{item.name}</label>
+              <span
+                role={'checkbox'}
+                aria-checked={list[item.id] || false}
+                className={styles.checkmark}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault(); // disable scroll
+                    e.currentTarget.click();
+                  }
+                }}
+              />
+              <span className={styles.title}>{item.name}</span>
             </label>
           ))}
         </div>
@@ -69,4 +81,3 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
 };
 
 export default CheckboxFilter;
- 
