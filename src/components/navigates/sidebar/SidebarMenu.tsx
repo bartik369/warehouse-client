@@ -36,8 +36,8 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
             >
               <span className={!open ? styles.icon : styles['open-icon']}>
               {!item.subMenu 
-                ? <Link to={item.path}>{item.icon && <item.icon className={styles.icon} />}</Link>
-                : item.icon && <item.icon className={styles.icon} />
+                ? <Link to={item.path}>{item.icon && <item.icon className={styles.icon} aria-label={item.title}/>}</Link>
+                : item.icon && <item.icon className={styles.icon} aria-label={item.title}/>
               }
               </span>
               {(!open && hoveredItem === item.id && !item.subMenu) &&

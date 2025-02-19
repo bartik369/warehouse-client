@@ -3,23 +3,24 @@ import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
   location, description, modelCode, modelLabel } from "../../../utils/constants/device";
-import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
-  addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
-import { deviceTypes} from "../../../utils/constants/device";
 import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
 import Number from "../../ui/number/Number";
 import EntityForm from "./EntityForm";
 import CustomNumber from "../../ui/number/CustomNumber";
 import BtnAction from "../../ui/buttons/BtnAction";
+import Modal from "../../modal/Modal";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
-import Modal from "../../modal/Modal";
-import previewPicture from '../../../assets/elements/default.png';
-import {faPlus, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import { IEntity } from "../../../types/devices";
+import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
+  addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
+import { deviceTypes} from "../../../utils/constants/device";
+import previewPicture from '../../../assets/elements/default.png';
+import { GoPlus } from "react-icons/go";
+import { HiMiniXMark } from "react-icons/hi2";
 import style from "./DeviceForm.module.scss";
 
 const AddDeviceForm: FC = () => {
@@ -33,15 +34,12 @@ const AddDeviceForm: FC = () => {
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: types } = useGetTypesQuery();
   const { data: models } = useGetModelsQuery(
-    { manufacturer: device.manufacturer, type: device.type },
-    { skip: skip }
-  );
+    { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
   const { data: warehouses } = useGetWarehousesQuery();
   
   // Allow model query by manufacturer and type
   useEffect(() => {
-    if (device.modelName) {
-      models &&
+    if (device.modelName && models) {
         models.forEach((model: IEntity) => {
           if (model.name === device.modelName) {
             setDevicePic(model.imagePath || "");
@@ -49,6 +47,9 @@ const AddDeviceForm: FC = () => {
         });
     }
   }, [device.modelName]);
+
+  console.log(device);
+  
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
@@ -178,7 +179,7 @@ const AddDeviceForm: FC = () => {
               label={location}
               value={selectedValues["warehouseName"]}
               errors={errors}
-              name="warehouseName"
+              name="warehouseId"
             />
             <Number device={device} setDevice={handleNumber} />
             {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
@@ -205,15 +206,16 @@ const AddDeviceForm: FC = () => {
               label={description}
             />
              <div className={style.action}>
-              <BtnAction icon={faCircleXmark}
+              <BtnAction 
+                icon={<HiMiniXMark />}
                 type="button"
                 size="lg"
-                color="white"
+                color="grey"
                 title={reset}
                 click={handleResetDevice}
               />
               <BtnAction
-                icon={faPlus}
+                icon={<GoPlus />}
                 type="submit"
                 size="lg"
                 color="blue"

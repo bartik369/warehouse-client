@@ -6,8 +6,9 @@ import Preview from '../../ui/preview/Preview';
 import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import { ToastContainer, Bounce } from 'react-toastify';
 import {slugLabel, nameLabel} from '../../../utils/constants/device';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPlus, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import { GoPlus } from "react-icons/go";
+import { HiMiniXMark } from "react-icons/hi2";
+import { BsQuestionSquare } from "react-icons/bs";
 import style from './EntityForm.module.scss';
 
 interface IEntityProps {
@@ -58,7 +59,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 name="name"
               /> 
                <div className={style.tooltip} data-tooltip={slugInfo}>
-                  <FontAwesomeIcon className={style.icon} icon={faCircleQuestion} />
+                  <BsQuestionSquare className={style.icon}/>
                </div>
                <Input
                 onChange={(e) => handleInputChange('slug', e.target.value)}
@@ -70,7 +71,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
               />
               <div className={style.actions}>
                 <BtnAction 
-                  icon={faCircleXmark} 
+                  icon={<HiMiniXMark />} 
                   type='button' 
                   size='lg' 
                   color='white' 
@@ -78,7 +79,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                   click={handleResetEntity}
                 />   
                 <BtnAction 
-                  icon={faPlus} 
+                  icon={<GoPlus />} 
                   type='submit' 
                   size='lg' 
                   color='blue' 

@@ -8,22 +8,25 @@ interface IToggleProps {
     rightPosition: string;
     setChecked: () => void;
 }
-const Toggle: FC<IToggleProps> = (
-    {checked, leftPosition, rightPosition, label, setChecked}
-    ) => {
+const Toggle: FC<IToggleProps> = 
+({checked, leftPosition, rightPosition, label, setChecked}) => {
     return (
-        <div className={style.switch}>
+        <div 
+        className={style.switch} 
+        tabIndex={0} 
+        onKeyDown={(e) => { 
+            if (e.key === 'Enter' || e.key === ' ') setChecked() 
+        }}>
             <div className={style.label}>{label}</div>
-            <input
-                type="checkbox"
-                id="checkbox"
-                checked={checked}
-                onChange={setChecked}
-            />
+            <input type="checkbox" id="checkbox" checked={checked} />
             <label className={style.slider} htmlFor="checkbox">
                 <div className={style.labels}>
-                    <span className={style.yes}>{rightPosition}</span>
-                    <span className={style.no}>{leftPosition}</span>
+                    <span className={style.yes}>
+                        {rightPosition}
+                    </span>
+                    <span className={style.no}>
+                        {leftPosition}
+                    </span>
                 </div>
             </label>
         </div> 

@@ -1,6 +1,4 @@
 import React, {FC, memo} from 'react';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import style from './Input.module.scss';
 
 interface IInputProps {
@@ -9,7 +7,6 @@ interface IInputProps {
     name: string;
     value: string;
     placeholder?: string;
-    icon?: IconProp;
     label?: string;
     errors: Record<string, string>;
 };
@@ -18,27 +15,32 @@ const Input:FC<IInputProps> = memo(({
     name,
     value, 
     placeholder, 
-    icon, 
     label, 
     errors,
     onChange}) => {
     const errorMessage = errors?.[name];
+
     return (
         <div className={style.wrapper}>
             <div className={style.error}>
-                {errorMessage && errorMessage}
+                {errorMessage && 
+                <div className={style.error}>
+                    {errorMessage}
+                </div>
+                }
             </div>
-         <div className={style.input}>
-               <div className={style.label}>{label}</div>
-               {icon && <FontAwesomeIcon icon={icon} className={style.icon} /> }
-                <input 
-                    name={name}
-                    value={value} 
-                    type={type} 
-                    onChange={onChange}
-                    placeholder={placeholder}
-                />
-        </div>
+            <div className={style.input}>
+            <input 
+                name={name} 
+                value={value}   
+                type={type} 
+                onChange={onChange}
+                placeholder={placeholder} 
+                className={style.input} 
+                tabIndex={0} 
+            />
+             <div className={style.label}>{label}</div>
+            </div> 
         </div>
     );
 });

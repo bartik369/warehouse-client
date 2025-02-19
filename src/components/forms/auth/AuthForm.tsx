@@ -1,60 +1,23 @@
-import React, {FC} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/redux/useRedux';
-import { setCredentials } from '../../../store/slices/authSlice';
-import { useSigninMutation } from '../../../store/api/authApi';
-import BtnAction from '../../ui/buttons/BtnAction';
+import {FC} from 'react';
+import { Link} from 'react-router-dom';
 import Input from '../../ui/input/Input';
-import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, reset,
-  password, email } from '../../../utils/constants/constants';
-import { AuthValidate} from '../../../utils/validation/AuthValidate';
+import BtnAction from '../../ui/buttons/BtnAction';
 import { useAuth } from '../../../hooks/data/useAuth';
-import { faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
-import { ISignin } from '../../../types/user';
+import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, 
+  reset, password, email } from '../../../utils/constants/constants';
 import style from './AuthForm.module.scss';
 
 const AuthForm: FC = () => {
-    const [signinUser] = useSigninMutation();
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    const {authData, errors, setErrors, userHandler} = useAuth();
-
-    const checkErrors = (validationErrors:Partial<ISignin>) =>  {
-      return Object.values(validationErrors).every(item => !item)
-    };
-    
-    const authHandler = async(e:React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const validationErrors = AuthValidate(authData);
-      setErrors(validationErrors)
-     
-      if (checkErrors(validationErrors)) {
-        try {
-          await signinUser(authData).unwrap().then((data) => {
-            dispatch(setCredentials(data.user));
-            localStorage.setItem('accessToken', data.token);
-            navigate('/');
-          });
-        } catch (error: unknown) {
-  
-          if (error instanceof Error) {
-            console.log(error);
-          }
-        }
-      } else {
-        return null
-      }
-    };
+    const {authData, errors, userHandler, authHandler} = useAuth();
     return (
       <div className={style.auth}>
         <div className={style.title}>{enterDashboard}</div>
-        <form onSubmit={authHandler}>
+        <form onSubmit={authHandler} >
           <Input
             onChange={userHandler}
             type="text"
             value={authData.email}
             placeholder={fillEmail}
-            icon={faEnvelope}
             label={email}
             errors={errors}
             name='email'
@@ -63,15 +26,14 @@ const AuthForm: FC = () => {
             type="password"
             value={authData.password}
             placeholder={fillPassword}
-            icon={faLock}
             label={password}
             errors={errors}
             name='password'
           />
           <BtnAction 
             title={signin} 
-            size='lg' 
-            type='submit' 
+            size='lg'
+            type='submit'
             color='blue'
           />
         </form>

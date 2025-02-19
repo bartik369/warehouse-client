@@ -1,9 +1,9 @@
-button {
+.button {
+    border: none;
     outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
     transition: background-color .3s ease-in;
     cursor: pointer;
 }
@@ -23,7 +23,6 @@ button {
     font-weight: 400;
     .icon {
         font-size: 18px;
-        margin-right: 6px;
     }
 }
 
@@ -34,26 +33,32 @@ button {
     font-size: 13px;
     font-weight: 400;
     .icon {
-        font-size: 18px;
-        margin-right: 6px;
+        font-size: 25px;
+        height: 25px;
     }
 }
 
 .blue {
     background-color: #3c53d7;
     color: #fff;
-    margin: 10px;
     &:hover {
         background-color: #2e43b8;
     }
+    &:focus {
+        background-color: #17288a;
+    }
 }
 
-.white {
+.grey {
+    box-sizing: border-box;
     background-color: #84868c;
     color: #ffffff;
     margin: 10px;
     &:hover {
         background-color: #656569;
+    }
+    &:focus {
+        background-color: #383c48;
     }
 }
 
@@ -61,9 +66,7 @@ button {
     background-color: #ff6a73;
     color: #ffffff;
     margin: 10px;
-    &:hover {
-        background-color: #656569;
-    }
+    &:hover {}
 }
 
 .dark {
@@ -72,5 +75,8 @@ button {
     margin: 10px;
     &:hover {
         background-color: #a2a6b7;
+    }
+    &:focus {
+        border: 2px solid #000000;
     }
 }
