@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import ReactDOM from 'react-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark} from '@fortawesome/free-solid-svg-icons';
+import { IoCloseCircleOutline } from "react-icons/io5";
 import style from './Modal.module.scss';
 
 interface IModal {
@@ -16,9 +15,15 @@ const Modal:FC<IModal> = ({children, isOpen, title, setIsOpen}) => {
         <div className={style.wrapper}>
             <div className={style.inner}>
                 <div className={style.title}>{title}</div>
-                <div onClick={() => setIsOpen(!isOpen)}>
-                    <FontAwesomeIcon className={style.icon} icon={faXmark}/>
-                </div>
+                <IoCloseCircleOutline
+                    tabIndex={0}
+                    role='button'
+                    className={style.icon} 
+                    onClick={() => setIsOpen(!isOpen)}
+                    onKeyDown={(e) => { 
+                        if (e.key === 'Enter' || e.key === ' ') setIsOpen(!isOpen) 
+                    }}
+                />
                 {children}
             </div>
         </div>,
@@ -26,4 +31,4 @@ const Modal:FC<IModal> = ({children, isOpen, title, setIsOpen}) => {
     );
 };
 
-export default Modal;
+export default Modal;   

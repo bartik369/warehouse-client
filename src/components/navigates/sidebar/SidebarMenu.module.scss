@@ -15,9 +15,9 @@
                 position: relative;
                 .sub-title {
                     color: #070707;
-                    font-size: 13px;
+                    font-size: 16px;
                     font-weight: 500;
-                    padding: 15.5px 20px;
+                    padding: 18.2px;
                     background-color: #f6faff;
                 }
             }
@@ -46,15 +46,13 @@
 }
 
 .menu-item-header {
-    padding: 12px 26px;
+    padding: 15px 24.5px;
     display: flex;
     align-items: center;
     &:hover {
         background-color: #f6faff;
     }
-    &:hover .icon {
-        filter: brightness(0) saturate(100%) invert(51%) sepia(76%) saturate(7377%) hue-rotate(228deg) brightness(90%) contrast(91%);
-    }
+    &:hover .icon {}
     .sub-title,
     a {
         color: #070707;
@@ -70,12 +68,15 @@
         display: flex;
         align-items: center;
         white-space: nowrap;
-        left: 80px;
-        top: 10px;
+        left: 75px;
+        top: 14px;
         padding: 8px 11px;
-        background-color: #3f53d7;
+        background-color: #3d42bc;
         box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
         border-radius: 5px;
+        &:hover {
+            background-color: #4a4fd4;
+        }
         &::after {
             content: "";
             position: absolute;
@@ -83,21 +84,21 @@
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 12px solid #3f53d7;
+            border-bottom: 12px solid #3d42bc;
             transform: rotate(-90deg);
             left: -9px;
+        }
+        &:hover::after {
+            border-bottom: 12px solid #4a4fd4;
         }
         a {
             color: #ffffff;
             font-size: 12px;
             font-weight: 500;
-            &:hover {
-                color: #3f52dd;
-            }
         }
     }
     .icon {
-        font-size: 18px;
+        font-size: 21px;
         color: #383d44;
         &:hover {
             color: #3c53d7;

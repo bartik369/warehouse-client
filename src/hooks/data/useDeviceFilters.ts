@@ -10,13 +10,13 @@ export const useDeviceFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeLink, setActiveLink] = useState(false)
   const [disabledOptions, setDisabledOptions] = useState<Record<string, string[]>>({});
-  const { data: options } = useGetDeviceOptionsQuery();
   const {city} = useParams();
   const params = Object.fromEntries(searchParams);
   const [page, setPage] = useState<number>(1);
   const[limit, setLimit] = useState(20)
+  const { data: options } = useGetDeviceOptionsQuery(city!);
   const { data: devices } = useGetDevicesQuery({...params, city, page, limit});
-
+  
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
     isFunctional: [],

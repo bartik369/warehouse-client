@@ -31,41 +31,52 @@
     border-radius: 20px;
     height: 45px;
     font-size: 13px;
-    font-weight: 400;
     .icon {
-        font-size: 25px;
-        height: 25px;
+        display: flex;
+        align-items: center;
+        font-size: 23px;
+    }
+}
+
+.blue-green {
+    background-color: #81c4db;
+    color: #fff;
+    &:hover {
+        background-color: #60abc5;
+    }
+    &:focus {
+        background-color: #60abc5;
     }
 }
 
 .blue {
-    background-color: #3c53d7;
+    background-color: #4046c8;
     color: #fff;
     &:hover {
-        background-color: #2e43b8;
+        background-color: #4a4fd4;
     }
     &:focus {
-        background-color: #17288a;
+        background-color: #3437a7;
     }
 }
 
 .grey {
     box-sizing: border-box;
-    background-color: #84868c;
-    color: #ffffff;
-    margin: 10px;
+    background-color: #f2f2ff;
+    color: #070707;
     &:hover {
         background-color: #656569;
+        color: #ffff;
     }
     &:focus {
         background-color: #383c48;
+        color: #ffff;
     }
 }
 
 .red {
     background-color: #ff6a73;
     color: #ffffff;
-    margin: 10px;
     &:hover {}
 }
 

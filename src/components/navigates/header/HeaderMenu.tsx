@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import { IDeviceInfo } from '../../../types/devices';
+import { accept, deviceInfo } from '../../../utils/constants/device';
 import { deviceActionsMenu } from '../../../utils/data/menus';
 import styles from './HeaderMenu.module.scss';
 
@@ -10,9 +11,9 @@ interface IHeaderMenuProps {
 const HeaderMenu:FC<IHeaderMenuProps> = ({device}) => {
   const filteredMenu = deviceActionsMenu.filter((item) => {
     if (device?.isAssigned) {
-      return item.title === 'Принять'
+      return [accept, deviceInfo].includes(item.title)
     } else {
-      return item.title !== 'Принять'
+      return item.title !== accept
     }
   })
     return (

@@ -17,7 +17,6 @@
     }
     .tooltip {
         position: relative;
-        background-color: cadetblue;
         margin-bottom: 5px;
         display: flex;
         justify-content: flex-end;
@@ -28,7 +27,7 @@
             content: attr(data-tooltip);
             position: absolute;
             width: 300px;
-            background: rgb(245, 245, 245);
+            background: #f8faff;
             color: #1a1c1e;
             padding: 15px 20px;
             border-radius: 5px;
@@ -40,6 +39,23 @@
             left: 50%;
             transform: translateX(-50%) translateY(15px);
         }
+        &::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            width: 300px;
+            background: #f8faff;
+            color: #1a1c1e;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+        }
+        &:focus::after,
         &:hover::after {
             visibility: visible;
             opacity: 1;
@@ -49,5 +65,7 @@
     .actions {
         display: flex;
         justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
     }
 }

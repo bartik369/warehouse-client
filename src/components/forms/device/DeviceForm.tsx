@@ -1,10 +1,6 @@
 import { FC, useEffect, useState} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
-  location, description, modelCode, modelLabel } from "../../../utils/constants/device";
-import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
 import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
 import Number from "../../ui/number/Number";
@@ -17,6 +13,10 @@ import { useModal } from "../../../hooks/data/useModal";
 import { IEntity } from "../../../types/devices";
 import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
   addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
+import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
+    location, description, modelCode, modelLabel } from "../../../utils/constants/device";
+import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
+import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
 import { deviceTypes} from "../../../utils/constants/device";
 import previewPicture from '../../../assets/elements/default.png';
 import { GoPlus } from "react-icons/go";
@@ -28,14 +28,14 @@ const AddDeviceForm: FC = () => {
     selectedValuesMemo, devicePic, title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
     handleResetDevice, setSelectedValues, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange, 
     handleManufacturerChange, handleWarehouseChange, setDevicePic} = useAddDevice();
-
-  const { isOpen, setIsOpen } = useModal(false);
+  
   const [skip, setSkip] = useState(true);
+  const { isOpen, setIsOpen } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
+  const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
   const { data: models } = useGetModelsQuery(
     { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
-  const { data: warehouses } = useGetWarehousesQuery();
   
   // Allow model query by manufacturer and type
   useEffect(() => {
@@ -47,9 +47,6 @@ const AddDeviceForm: FC = () => {
         });
     }
   }, [device.modelName]);
-
-  console.log(device);
-  
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
@@ -92,7 +89,7 @@ const AddDeviceForm: FC = () => {
           <form className={style.form}>
             <Input
               onChange={(e) => handleInputChange("name", e.target.value)}
-              type={"text"}
+              type="text"
               value={device.name}
               label={deviceName}
               errors={errors}
@@ -103,7 +100,7 @@ const AddDeviceForm: FC = () => {
                   {addDeviceType}
                   <span onClick={() => {
                     setIsOpen(!isOpen)
-                    setFieldType('type')
+                    setFieldType("type")
                   }}>{add}</span>
                 </div>
             <Select
@@ -120,7 +117,7 @@ const AddDeviceForm: FC = () => {
                   {addDeviceManufacturer}
                   <span onClick={() => {
                     setIsOpen(!isOpen)
-                    setFieldType('manufacturer')
+                    setFieldType("manufacturer")
                   }}>{add}</span>
                 </div>
                 <Select
@@ -138,7 +135,7 @@ const AddDeviceForm: FC = () => {
                   {addDeviceModel}
                   <span onClick={() => {
                     setIsOpen(!isOpen)
-                    setFieldType('model')
+                    setFieldType("model")
                   }}>{add}</span>
                 </div>
                 <Select setValue={handleModelChange}
@@ -218,7 +215,7 @@ const AddDeviceForm: FC = () => {
                 icon={<GoPlus />}
                 type="submit"
                 size="lg"
-                color="blue"
+                color="blue-green"
                 title={add}
                 click={handleAddDevice}
               />

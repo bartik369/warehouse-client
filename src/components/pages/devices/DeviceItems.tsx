@@ -1,13 +1,10 @@
 import {ChangeEvent, FC} from 'react';
-import { useNavigate } from 'react-router-dom';
-import { yes, no } from "../../../utils/constants/constants";
+import { yes, no, inStock, inUse } from "../../../utils/constants/constants";
 import { IFilteredDevicesFromBack } from '../../../types/devices';
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { CgUnavailable } from "react-icons/cg";
-import { FcProcess } from "react-icons/fc";
 import styles from "./Devices.module.scss";
-
 
 interface IDeviceItemsProps {
     devices: IFilteredDevicesFromBack[];
@@ -16,15 +13,10 @@ interface IDeviceItemsProps {
 }
 
 const DeviceItems:FC<IDeviceItemsProps> = ({devices, checks, handleCheck}) => {
-  const navigate = useNavigate();
     return (
         <>
           {devices && devices.map((device) => (
-              <tr 
-                key={device.id} 
-                className={styles.row}
-                onClick={() => navigate(`/devices/${device.id}`)}
-              >
+              <tr key={device.id} className={styles.row}>
                 <td className={styles["checkbox-column"]} 
                   onClick={(e) => e.stopPropagation()}>
                   <label key={device.id} className={styles.checkbox}>
@@ -60,12 +52,12 @@ const DeviceItems:FC<IDeviceItemsProps> = ({devices, checks, handleCheck}) => {
                   {device.isAssigned ? (
                     <div className={styles.inuse}>
                     <CgUnavailable/>
-                    <span>{'Используется'}</span>
+                    <span>{inUse}</span>
                   </div>
                   ) : (
                     <div className={styles.instock}>
                     <IoIosCheckmarkCircleOutline />
-                    <span>{'На складе'}</span>
+                    <span>{inStock}</span>
                   </div>
                   )}
                 </td>

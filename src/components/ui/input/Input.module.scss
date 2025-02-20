@@ -1,5 +1,5 @@
  @mixin border {
-     border: 1px solid #070707;
+     border: 1px solid #5a5cac;
      outline: none;
  }
  
@@ -37,7 +37,8 @@
              border-radius: 20px;
              padding: 0px 24px;
              margin: 0;
-             transition: border-color .6s ease-in;
+             transition: border-color .4s ease-in;
+             font-size: 14px;
              color: #15141f;
              &:focus {
                  @include border;

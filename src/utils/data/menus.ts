@@ -1,8 +1,8 @@
 import { LuUsers } from "react-icons/lu";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import { IoCalendarNumberOutline } from "react-icons/io5";
-import { IoStatsChartOutline } from "react-icons/io5";
+import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
+import { TbFileDescription } from "react-icons/tb"
 import { BsArrowsMove } from "react-icons/bs";
 
 import { FiUserPlus } from "react-icons/fi";
@@ -42,6 +42,7 @@ export const deviceActionsMenu = [
     {id: 1, title: 'Выдать', icon: FiUserPlus},
     {id: 2, title: 'Принять', icon: FiUserMinus},
     {id: 3, title: 'Переместить', icon: BsArrowsMove},
+    {id: 4, title: 'Информация', icon: TbFileDescription},
 ]
 
   

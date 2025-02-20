@@ -22,8 +22,8 @@
         td {
             padding: 10px 6px;
             text-align: center;
-            font-size: 11px;
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 400;
             color: #302f36;
             border-bottom: 1px solid #dce4e8;
         }
@@ -41,11 +41,11 @@
                 display: inline-block;
                 overflow: hidden;
                 margin-right: 5px;
-                background-color: #3c53d7;
+                background-color: #9f9fe6;
                 padding: 3px 7px;
                 border-radius: 8px;
                 font-size: 10px;
-                font-weight: 200;
+                font-weight: 400;
                 color: #fff;
             }
             .item2 {
@@ -93,8 +93,8 @@
             display: none;
         }
         input:checked~.checkmark {
-            border: 1px solid #3c52d6;
-            background-color: #3c52d6;
+            border: 1px solid #4348c6;
+            background-color: #4a4fd4;
             transition: background-color .5s ease-in-out;
         }
         input:disabled~.checkmark {
@@ -141,14 +141,13 @@
     .not-serviceable,
     .instock,
     .inuse {
-        font-size: 21px;
+        font-size: 22px;
         display: flex;
         align-items: center;
         justify-content: center;
         span {
-            font-size: 10px;
+            font-size: 12px;
             margin-left: 1px;
-            font-weight: 500;
         }
     }
     .serviceable {
@@ -176,7 +175,7 @@
     .placeholder {
         color: #070707;
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 400;
     }
     .icon {
         margin-left: 5px;

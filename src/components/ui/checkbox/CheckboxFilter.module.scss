@@ -1,11 +1,13 @@
 .checkbox {
     display: flex;
+    position: relative;
     width: 100%;
-    background-color: #f8faff;
+    outline: none;
     padding: 6px 0;
     border: 1px solid #dce4e8;
     border-radius: 20px;
-    position: relative;
+    background-color: #f8faff;
+    transition: border-color .5s ease-in-out;
     &:focus {
         border: 1px solid #5e5a68;
     }
@@ -21,8 +23,7 @@
         cursor: pointer;
         .placeholder {
             color: #070707;
-            font-size: 11.5px;
-            font-weight: 600;
+            font-size: 12px;
         }
     }
     .icon {
@@ -66,7 +67,7 @@
     cursor: pointer;
     &:focus {
         outline: none;
-        border: 1px solid #1a1c1e;
+        border: 1px solid #81c4db;
     }
 }
 
@@ -83,8 +84,8 @@
         display: none;
     }
     input:checked~.checkmark {
-        border: 1px solid #6c6978;
-        background-color: #6c6978;
+        border: 1px solid #81c4db;
+        background-color: #9bcfe3;
         transition: background-color .5s ease-in-out;
     }
     input:disabled~.checkmark {
@@ -107,14 +108,14 @@
     }
     .title {
         color: #070707;
-        font-size: 11px;
-        font-weight: 500;
+        font-size: 12px;
+        font-weight: 400;
         cursor: pointer;
     }
 }
 
 .container:hover input~.checkmark {
-    border: 1px solid #6c6978;
+    border: 1px solid #81c4db;
 }
 
 .checkmark {

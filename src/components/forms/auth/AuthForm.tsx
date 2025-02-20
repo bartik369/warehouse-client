@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { useAuth } from '../../../hooks/data/useAuth';
@@ -20,7 +20,7 @@ const AuthForm: FC = () => {
             placeholder={fillEmail}
             label={email}
             errors={errors}
-            name='email'
+            name="email"
           />
           <Input onChange={userHandler}
             type="password"
@@ -28,13 +28,13 @@ const AuthForm: FC = () => {
             placeholder={fillPassword}
             label={password}
             errors={errors}
-            name='password'
+            name="password"
           />
           <BtnAction 
             title={signin} 
-            size='lg'
-            type='submit'
-            color='blue'
+            size="lg"
+            type="submit"
+            color="blue"
           />
         </form>
         <div className={style.reset}>{forgetPassword}

@@ -15,10 +15,10 @@ const Toggle: FC<IToggleProps> =
         className={style.switch} 
         tabIndex={0} 
         onKeyDown={(e) => { 
-            if (e.key === 'Enter' || e.key === ' ') setChecked() 
+            if (e.key === 'Enter' || e.key === ' ') setChecked()
         }}>
             <div className={style.label}>{label}</div>
-            <input type="checkbox" id="checkbox" checked={checked} />
+            <input onClick={setChecked} type="checkbox" id="checkbox" checked={checked} />
             <label className={style.slider} htmlFor="checkbox">
                 <div className={style.labels}>
                     <span className={style.yes}>

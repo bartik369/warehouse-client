@@ -23,9 +23,9 @@ export const devicesApi = createApi({
                 return `/devices${cityUrl}?${urlParams.toString()}`;
             },
         }),
-        getDeviceOptions: build.query<IFilterDeviceOptions, void>({
-            query:() => ({
-                url:`${import.meta.env.VITE_OPTIONS}`,
+        getDeviceOptions: build.query<IFilterDeviceOptions, string>({
+            query:(city) => ({
+                url:`${import.meta.env.VITE_OPTIONS}${city}`,
             })
         }),
         getDevice: build.query({

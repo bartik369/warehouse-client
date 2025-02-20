@@ -26,14 +26,15 @@
     }
     .icon {
         position: absolute;
-        top: -30px;
-        right: -30px;
-        font-size: 30px;
+        top: -35px;
+        right: -45px;
+        font-size: 35px;
         color: #1a1c1e;
         transition: color .3s ease-in;
         cursor: pointer;
-        &:hover {
-            color: #272a2c;
+        &:hover,
+        &:focus {
+            color: #3c53d7;
         }
     }
 }

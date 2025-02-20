@@ -9,7 +9,7 @@ interface ITextareaProps {
 
 const Textarea:FC<ITextareaProps> = ({setText, value, label}) => {
     return (
-        <div className={style.textarea}>
+        <div className={style.textarea} tabIndex={0}>
             <div className={style.label}>{label}</div>
             <textarea
                 value={value}
