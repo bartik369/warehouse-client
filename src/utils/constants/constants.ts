@@ -33,3 +33,4 @@ export const slugInfo = `Если модель, например, Dell 5490, т�
 export const addNewManufacturer = 'Добавление нового производителя';
 export const addNewModel = 'Добавление новой модели';
 export const addNewType = 'Добавление нового типа';
+export const noOptions = 'Нет доступных опций';

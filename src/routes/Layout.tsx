@@ -7,6 +7,7 @@ import style from './Layout.module.scss';
 
 const Layout = () => {
     const [isActive, setIsActive] = useState(false);
+
     return (
         <div className={style.wrapper}>
             <Sidebar open={isActive} />
@@ -20,5 +21,6 @@ const Layout = () => {
         </div>
     );
 };
+
 
 export default Layout;

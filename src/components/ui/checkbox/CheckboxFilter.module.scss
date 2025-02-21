@@ -35,19 +35,24 @@
 
 .menu {
     position: absolute;
-    overflow-y: auto;
-    margin-top: 10px;
-    left: 0;
-    right: 0;
     width: 100%;
     max-height: 250px;
-    border-radius: 12px;
     padding: 20px;
+    left: 0;
+    right: 0;
+    margin-top: 10px;
     z-index: 10;
+    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #d2d4d7 #aeb1b6;
+    border-radius: 12px;
     background-color: #fff;
     box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+    .info {
+        color: #070707;
+        font-size: 12px;
+        font-weight: 400;
+    }
 }
 
 .btn_checkbox {

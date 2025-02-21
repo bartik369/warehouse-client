@@ -23,8 +23,6 @@ const Select: FC<ISelectProps> = memo(
     };
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
-    console.log(errors)
-
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (!isOpen) return;
       if (e.key === "ArrowDown") {

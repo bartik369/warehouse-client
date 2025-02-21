@@ -51,7 +51,7 @@ const ProfileMenu:FC = () => {
             <nav>
                 <ul>
                     {profileMenuData.map(item => 
-                        <li key={item.id}>
+                        <li key={item.id} onClick={openModalHandler}>
                             <Link to={item.path}>{item.title}</Link>
                         </li>
                     )}

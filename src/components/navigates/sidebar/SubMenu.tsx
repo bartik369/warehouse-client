@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import { Link } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {ISubmenu } from '../../../types/navigation';
-import style from './SidebarMenu.module.scss';
+import styles from './SidebarMenu.module.scss';
 
 interface ISubMenuProps {
     item: {
@@ -13,16 +13,18 @@ interface ISubMenuProps {
 
 const SubMenu:FC<ISubMenuProps> = ({item, open, title}) => {
    return (
-     <div className={style.wrapper}>
-       <div className={style['sub-title']}>
+     <div className={styles.wrapper}>
+       <div className={styles['sub-title']}>
         {!open && title}
        </div>
-       <ul className={style.submenu}>
+       <ul className={styles.submenu}>
          {item.subMenu.map((subItem: ISubmenu) => (
            <li key={subItem.id}>
-             <Link to={`/devices/locations/${subItem.path}`}>
-               {subItem.title}
-             </Link>
+            <NavLink 
+              className={({isActive}) => `${isActive && styles.active}`} 
+              to={`/devices/locations/${subItem.path}`}>
+              {subItem.title}
+             </NavLink>
            </li>
          ))}
        </ul>

@@ -1,8 +1,8 @@
-import { ChangeEvent, FC, useEffect, useRef } from "react";
+import { ChangeEvent, FC} from "react";
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
 import { Checked, CheckedDeviceOptions } from "../../../types/content";
+import { noOptions } from "../../../utils/constants/constants";
 import { LuListFilter } from "react-icons/lu";
-
 import styles from "./CheckboxFilter.module.scss";
 
 interface ICheckboxProps {
@@ -48,7 +48,8 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
       </button>
       {isOpen && (
         <div ref={modalRef} className={styles.menu}>
-          {items.map((item) => (
+          {items.length
+            ? items.map((item) => (
             <label key={item.id} className={styles.container}>
               <input
                 name={name}
@@ -73,7 +74,9 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
               />
               <span className={styles.title}>{item.name}</span>
             </label>
-          ))}
+          ))
+          : <div className={styles.info}>{noOptions}</div>
+        }
         </div>
       )}
     </div>
