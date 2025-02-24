@@ -22,6 +22,7 @@ export const deviceWeight = 'Вес устройства(кг)';
 export const kg = '(кг)';
 export const move = "Переместить";
 export const accept = "Принять";
+export const issue = 'Выдать';
 export const deviceInfo = "Информация";
 
 

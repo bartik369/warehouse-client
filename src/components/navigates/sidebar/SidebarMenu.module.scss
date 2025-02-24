@@ -20,8 +20,20 @@
                 color: #3f52dd;
             }
         }
+        .item {
+            color: #070707;
+            font-size: 13px;
+            font-weight: 400;
+            &:hover,
+            &.active {
+                color: #3f52dd;
+            }
+        }
         .title {
             position: absolute;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 500;
             display: flex;
             align-items: center;
             white-space: nowrap;
@@ -98,15 +110,12 @@
     padding: 5px 15px 12px;
     li {
         padding: 10px 5px;
-        a {
-            color: #070707;
-            font-size: 12px;
-            font-weight: 400;
-            &:hover {
-                color: #3f52dd;
-            }
-        }
-        .active {
+        color: #070707;
+        font-size: 12px;
+        font-weight: 400;
+        cursor: pointer;
+        &:hover,
+        &.active {
             color: #3f52dd;
         }
     }
