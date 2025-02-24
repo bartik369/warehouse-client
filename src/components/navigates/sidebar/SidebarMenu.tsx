@@ -1,27 +1,27 @@
-import {FC, useState} from 'react';
-import { NavLink,} from 'react-router-dom';
-import SubMenu from './SubMenu';
-import { sidebarMenuData } from '../../../utils/data/menus';
+import { FC, useState } from "react";
+import { NavLink } from "react-router-dom";
+import SubMenu from "./SubMenu";
+import { sidebarMenuData } from "../../../utils/data/menus";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import styles from './SidebarMenu.module.scss';
+import styles from "./SidebarMenu.module.scss";
 
 interface ISidebarMenuProps {
-    open: boolean;
-};
+  open: boolean;
+}
 
 const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
-  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);        
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);       
+  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   const toggleSubmenu = (id: number) => {
-    setOpenSubmenu(id === openSubmenu ? null : id)
+    setOpenSubmenu(id === openSubmenu ? null : id);
   };
   const handleMouseEnter = (index: number) => {
     setHoveredItem(index);
   };
   const handleMouseLeave = () => {
     setHoveredItem(null);
-  }
+  };
 
   return (
     <nav>
@@ -31,41 +31,38 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
             <NavLink
               to={item.subMenu ? "" : item.path}
               className={({ isActive }) =>
-             `${styles["menu-item-header"]} ${isActive 
-                ? styles["active-menu"] 
-                : item.subMenu 
-                ? styles["has-submenu"] 
-                : ""}`}
-                onClick={() => item.subMenu && toggleSubmenu(item.id)}
-                onMouseEnter={() => handleMouseEnter(item.id)}
-                onMouseLeave={handleMouseLeave}
+                `${styles["menu-item-header"]} ${
+                  isActive
+                    ? styles["active-menu"]
+                    : item.subMenu
+                    ? styles["has-submenu"]
+                    : ""
+                }`
+              }
+              onClick={() => item.subMenu && toggleSubmenu(item.id)}
+              onMouseEnter={() => handleMouseEnter(item.id)}
+              onMouseLeave={handleMouseLeave}
             >
               <span className={!open ? styles.icon : styles["open-icon"]}>
-                {!item.subMenu ? (
-                  <NavLink to={item.path}>
-                    {item.icon && (
+                {!item.subMenu
+                  ? item.icon && (
+                      <item.icon
+                        className={styles.icon}
+                        aria-label={item.title}
+                      />
+                    )
+                  : item.icon && (
                       <item.icon
                         className={styles.icon}
                         aria-label={item.title}
                       />
                     )}
-                  </NavLink>
-                ) : (
-                  item.icon && (
-                    <item.icon
-                      className={styles.icon}
-                      aria-label={item.title}
-                    />
-                  )
-                )}
               </span>
               {!open && hoveredItem === item.id && !item.subMenu && (
-                <div className={styles.title}>
-                  <NavLink to={item.path}>{item.title}</NavLink>
-                </div>
+                <div className={styles.title}>{item.title}</div>
               )}
               {open && !item.subMenu ? (
-                <NavLink to={item.path}>{item.title}</NavLink>
+                <div className={styles.item}>{item.title}</div>
               ) : open && item.subMenu ? (
                 <div className={styles["sub-title"]}>{item.title}</div>
               ) : (
@@ -94,12 +91,6 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
       </ul>
     </nav>
   );
-  
 };
 
 export default SidebarMenu;
-
-
-
-
-
