@@ -1,4 +1,4 @@
-import { IDevice, IEntity, IFilterDeviceOptions } from './../../types/devices';
+import { IDevice, IEntity, IFilterDeviceOptions, IAggregateDeviceInfo } from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -28,9 +28,9 @@ export const devicesApi = createApi({
                 url:`${import.meta.env.VITE_OPTIONS}${city}`,
             })
         }),
-        getDevice: build.query({
+        getDevice: build.query<IAggregateDeviceInfo, string>({
             query: (id: string) => ({
-                url: `${import.meta.env.VITE_DEVICE}/${id}`,
+                url: `${import.meta.env.VITE_DEVICES}${id}`,
             })
         }),
         createDevice: build.mutation<any, IDevice>({
@@ -106,6 +106,7 @@ export const devicesApi = createApi({
 export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
+    useGetDeviceQuery,
     useGetModelsQuery,
     useGetDeviceOptionsQuery,
     // useCreateDeviceModelMutation,

@@ -23,6 +23,24 @@ export interface IDevice {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface IAggregateDeviceInfo extends IDevice {
+  warehouse: {
+    name: string;
+    slug: string;
+  },
+  model: {
+    name: string;
+    imagePath: string;
+    manufacturer: {
+      name: string;
+    }
+  }
+  deviceIssues: any[]
+}
+
+
+
 export interface IDeviceModel {
   id?: string;
   name: string;

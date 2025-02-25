@@ -25,6 +25,7 @@ const Devices: FC = () => {
   const handleCheck = useCallback((
     device: IFilteredDevicesFromBack,
     e: ChangeEvent<HTMLInputElement>) => {
+    console.log(device)
     if (device && e.target) {
       const data = {
         device: {
