@@ -20,31 +20,30 @@ const Devices: FC = () => {
     handleFilterChange,getUniqueOptions, setList, handlePrevPage,
     handleNextPage} = useDeviceFilters();
   const dispatch = useAppDispatch();
-  const [checks, setChecks] = useState({})
+  const [checks, setChecks] = useState({});
 
-  const handleCheck = useCallback((
-    device: IFilteredDevicesFromBack,
-    e: ChangeEvent<HTMLInputElement>) => {
-    console.log(device)
-    if (device && e.target) {
-      const data = {
-        device: {
-          id: device.id,
-          warehouse: {
-            name:device.warehouse.name,
-            slug:device.warehouse.slug,
-          },
-          isAssigned: device.isAssigned,
-        },
-        status: e.target.checked,
+  const handleCheck = useCallback(
+    (device: IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
+      if (device && e.target) {
+        dispatch(
+          setDeviceInfo({
+            device: {
+              id: device.id,
+              warehouse: {
+                name: device.warehouse.name,
+                slug: device.warehouse.slug,
+              },
+              isAssigned: device.isAssigned,
+            },
+            status: e.target.checked,
+          })
+        );
       }
-      dispatch(setDeviceInfo(data));
-    }
-    setChecks({
-      [device.id]:e.target.checked,
-    })
-  
-  }, []);
+      setChecks({
+        [device.id]: e.target.checked,
+      });
+    },
+  [dispatch]);
 
   if (!devices) {
     return <Loader size='lg' color='grey' />;

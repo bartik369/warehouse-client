@@ -1,5 +1,6 @@
-import { DeviceTypes } from './../../types/devices';
+import { DeviceTypes, DevicePrices } from './../../types/devices';
 
+export const selectDate = 'Укажите дату';
 export const manufacturersLabel = 'Производитель';
 export const modelLabel = 'Модель';
 export const nameLabel = 'Название';
@@ -8,6 +9,8 @@ export const memorySizeLabel = 'Память';
 export const isFunctionalLabel = 'Исправность';
 export const isAssignedLabel = 'Доступность';
 export const warehouseLabel = 'Склад';
+export const startWarrantyLabel = 'Начало гарантии';
+export const endWarrantyLabel = 'Завершение гарантии';
 export const slugLabel = 'Slug';
 export const deviceName = 'Название';
 export const serialNumber = 'Серийный номер';
@@ -15,6 +18,7 @@ export const inventoryNumber = 'Инвентарный номер';
 export const location = 'Локация';
 export const description = 'Описание';
 export const modelCode = 'Код модели';
+export const contractor = "Подрядчик";
 export const deviceTypeLabel = 'Тип устройства';
 export const selectFromList = 'Выбрать из списка';
 export const noExistSelect = 'Нет доступных опций';
@@ -60,6 +64,15 @@ export const deviceTypes:DeviceTypes = {
         
     ],
   },
+};
+
+
+export const devicePrices:DevicePrices = {
+    uniqueFields: [
+      { name: "price_with_vat", label: "Цена с НДС (руб)", type: "number", step: 1 },
+      { name: "price_without_vat", label: "Цена без НДС (руб)", type: "number", step: 1 },
+      { name: "residual_price", label: "Остаточная цена (руб)", type: "number", step: 1 },
+    ],
 };
 
 export const extraOptions = [

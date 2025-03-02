@@ -13,9 +13,9 @@ const Layout = () => {
             <Sidebar open={isActive} />
             <div className={isActive ? style.active : style['not-active']}>
                 <Header isActive={isActive} setIsActive={setIsActive}/>
-                <div className={style.outlet}>
+                <main className={style.outlet}>
                     <Outlet /> 
-                </div>
+                </main>
                 <Footer />
             </div>
         </div>

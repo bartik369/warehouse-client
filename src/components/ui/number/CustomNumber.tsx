@@ -14,7 +14,7 @@ interface ICustomNumberProps {
 const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDevice }) => {
   const data = {
     min: 0,
-    max: 1000,
+    max: 9999999,
     step: item.step,
   };
 

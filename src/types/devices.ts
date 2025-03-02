@@ -1,3 +1,4 @@
+
 export interface IDevice {
     id?: string;
     name: string;
@@ -22,9 +23,27 @@ export interface IDevice {
     updatedById: string;
     createdAt?: Date;
     updatedAt?: Date;
+    price_with_vat?: number;
+    price_without_vat?: number;
+    residual_price?: number;
+    warrantyNumber: string;
+    startWarrantyDate: Date | null;
+    endWarrantyDate:   Date | null;
+    provider:string;
+    contractorId: string;
+    warrantyStatus:   string;
+    isExpired: boolean;  
 }
 
 export interface IAggregateDeviceInfo extends IDevice {
+addedBy: {
+  firstName: string; 
+  lastName: string;
+},
+updatedBy: {
+  firstName: string; 
+  lastName: string;
+},
   warehouse: {
     name: string;
     slug: string;
@@ -124,6 +143,9 @@ export interface DeviceType {
 export interface DeviceTypes {
   [key: string]: DeviceType;
 }
+export interface DevicePrices {
+  uniqueFields: Field[];
+}
 
 export interface ISelectedItem {
   id: string;
@@ -138,6 +160,11 @@ export interface IEntity {
   imagePath?: string,
   typeId?: string,
   manufacturerId?: string,
+}
+export interface IContractor {
+  name:        string;
+  phoneNumber: string;
+  address: string;
 }
 
 export interface IFilteredDevicesFromBack {
@@ -232,4 +259,3 @@ export interface IDeviceInfo {
       slug: string;
   }
 }
-

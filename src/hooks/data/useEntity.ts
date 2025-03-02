@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { IDeviceMedia, IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
-import { isErrorWithMessage, isFetchBaseQueryError} from "../../helpers/error-handling";
+import { isErrorWithMessage, isFetchBaseQueryError} from "../../utils/errors/error-handling";
 import { useCreateManufacturerMutation, useCreateTypeMutation, useCreateModelMutation } from "../../store/api/devicesApi";
 import { toast } from "react-toastify";
 
@@ -81,7 +81,7 @@ export const useEntity = () => {
         }
       }
     },
-    [entity]
+    [entity, EntityValidation]
   );
 
   const handleResetEntity = useCallback(() => {

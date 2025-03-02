@@ -22,12 +22,14 @@ export const inStock = 'Cклад';
 export const inUse = 'Oфис';
 export const selectPhoto = 'Выбрать фото';
 export const serviceable = 'Устройство исправно?'
-export const addNewDeviceTitle = 'Добавление нового устройства';
+export const technicalOptions = 'Технические характеристики';
+export const financialOptions = 'Финансовая часть';
 export const addDeviceModelTitle = 'Добавить новую модель';
 export const addDeviceManufacturerTitle = 'Добавить нового производителя';
 export const addDeviceType = 'Нет в списке типа?';
 export const addDeviceModel = 'Нет в списке модели?';
 export const addDeviceManufacturer = 'Нет в списке производителя?';
+export const addContractor = 'Нет в списке подрядчика?';
 export const slugInfo = `Если модель, например, Dell 5490, то slug будет 5490. 
 Если тип Ноутбук, то slug будет laptop. Slug указывать прописными буквами`;
 export const addNewManufacturer = 'Добавление нового производителя';

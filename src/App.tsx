@@ -6,7 +6,7 @@ import { useAppDispatch} from './hooks/redux/useRedux';
 import { setCredentials, setAuth } from './store/slices/authSlice';
 import ResetPassword from './components/pages/reset/ResetPassword';
 import PrivateRoutes from './routes/PrivateRoutes';
-import { isFetchBaseQueryError, isErrorWithMessage} from './helpers/error-handling';
+import { isFetchBaseQueryError, isErrorWithMessage} from './utils/errors/error-handling';
 import Home from './components/pages/home/Home';
 import Layout from './routes/Layout';
 import PublicRoutes from './routes/PublicRoutes';

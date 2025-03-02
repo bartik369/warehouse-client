@@ -1,6 +1,40 @@
+@mixin table-view {
+    .input {
+        display: flex;
+        align-items: center;
+        position: relative;
+        box-sizing: border-box;
+        border: 1px solid #dce4e8;
+        width: 100%;
+        border-radius: 20px;
+        height: 45px;
+        padding: 2px 15px;
+        transition: border-color .4s ease-in;
+        .icon {
+            position: relative;
+            font-size: 25px;
+            margin-right: 8px;
+            background-color: bisque;
+        }
+        .label {
+            position: absolute;
+            background-color: #ffffff;
+            padding: 0 5px;
+            color: #828890;
+            font-size: 11px;
+            top: -6px;
+            left: 18px;
+        }
+         ::placeholder {
+            font-weight: 400;
+            font-size: 14px
+        }
+    }
+}
+
 .info {
     display: flex;
-    margin-bottom: 25px;
+    margin: 20px 0;
     .forms {
         display: flex;
         flex-direction: column;
@@ -28,6 +62,15 @@
         gap: 15px;
         width: 100%;
         margin: 0 auto;
+        @include table-view;
+    }
+    .form4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        width: 100%;
+        margin: 0 auto;
+        @include table-view;
     }
     .additional-form {
         display: grid;

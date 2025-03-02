@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authApi } from './api/authApi';
 import { devicesApi } from './api/devicesApi';
+import { contractorApi } from './api/contractorApi';
 import { warehousesApi } from './api/warehousesApi';
 import { userApi } from './api/userApi';
 import authReducer from './slices/authSlice';
@@ -12,6 +13,7 @@ const store = configureStore({
     device: deviceReducer,
     [authApi.reducerPath]: authApi.reducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
+    [contractorApi.reducerPath]: contractorApi.reducer,
     [warehousesApi.reducerPath]: warehousesApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
@@ -21,6 +23,7 @@ const store = configureStore({
       .concat(
         authApi.middleware,
         devicesApi.middleware,
+        contractorApi.middleware,
         warehousesApi.middleware,
         userApi.middleware,
       ),

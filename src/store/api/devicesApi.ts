@@ -42,15 +42,6 @@ export const devicesApi = createApi({
                 }
             }
         }),
-        // createDeviceModel: build.mutation<IDeviceModel & {message: string}, FormData>({
-        //     query(body) {
-        //         return {
-        //             url:`${import.meta.env.VITE_MODELS}`,
-        //             method: 'POST',
-        //             body,
-        //         }
-        //     }
-        // }),
         getManufacturers: build.query<IEntity[], void>({
             query() {
                 return {
@@ -109,7 +100,6 @@ export const  {
     useGetDeviceQuery,
     useGetModelsQuery,
     useGetDeviceOptionsQuery,
-    // useCreateDeviceModelMutation,
     useGetManufacturersQuery,
     useCreateManufacturerMutation,
     useCreateModelMutation,

@@ -4,7 +4,7 @@ import { useAppSelector } from "../redux/useRedux";
 import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
-import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
+import {isFetchBaseQueryError, isErrorWithMessage} from "../../utils/errors/error-handling";
 import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constants/constants";
 
 export function useAddDevice() {
@@ -35,6 +35,16 @@ export function useAddDevice() {
     manufacturer: '',
     addedById:'',
     updatedById: '',
+    price_with_vat: 0,
+    price_without_vat: 0,
+    residual_price: 0,
+    warrantyNumber: '',
+    startWarrantyDate: null, // startDate.toISOString();
+    endWarrantyDate:  null,
+    provider: '',
+    contractorId: '',
+    warrantyStatus: '',      
+    isExpired: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
@@ -57,6 +67,8 @@ export function useAddDevice() {
     }));
   }, []);
 
+  console.log(device)
+
   const handleExtNumber = useCallback((num: number, fieldName: string) => {
     const data = ValidateField(fieldName, num);
     setDevice((prev) => ({
@@ -67,7 +79,7 @@ export function useAddDevice() {
       ...prev,
       [fieldName]: data as string,
     }));
-  }, []);
+  }, [ValidateField]);
 
   const handleAddDevice = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -133,8 +145,7 @@ export function useAddDevice() {
       setMedia((prev) => ({...prev, prevImg: null}));
     }, []);
 
-    const handleInputChange = useCallback(
-      <T extends string | IEntity>(field: keyof IDevice, value: T) => {
+    const handleInputChange = (<T extends string | IEntity>(field: keyof IDevice, value: T) => {
         const validationErrors = ValidateField(field, value);
         setErrors((prev) => ({
           ...prev,
@@ -152,7 +163,7 @@ export function useAddDevice() {
           ...prev,
           [field]: selectValue,
         }));
-    }, []);
+    });
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -164,6 +175,7 @@ export function useAddDevice() {
     
     // Memoization of  device form fields (select)
     const selectedValuesMemo = useMemo(() => selectedValues, [selectedValues]);
+    
     const handleTypeChange = useCallback((item: IEntity) => {
       handleInputChange("type", item);
       handleInputChange("typeId", item.id || '');

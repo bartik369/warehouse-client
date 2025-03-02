@@ -1,4 +1,4 @@
-import { FC, useEffect, useState} from "react";
+import { FC, useEffect, useState } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -8,43 +8,50 @@ import EntityForm from "./EntityForm";
 import CustomNumber from "../../ui/number/CustomNumber";
 import BtnAction from "../../ui/buttons/BtnAction";
 import Modal from "../../modal/Modal";
+import PriceForm from "./PriceForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import { IEntity } from "../../../types/devices";
-import { addNewDeviceTitle, add, reset, yes, no, serviceable, addDeviceModel, 
-  addDeviceType, addDeviceManufacturer } from "../../../utils/constants/constants";
-import { manufacturersLabel, deviceTypeLabel,deviceName, serialNumber, inventoryNumber, 
-    location, description, modelCode, modelLabel } from "../../../utils/constants/device";
+import WarrantyForm from "./WarrantyForm";
+import {
+  add, reset, yes, no, serviceable, addDeviceModel, technicalOptions, financialOptions,
+  addDeviceType, addDeviceManufacturer
+} from "../../../utils/constants/constants";
+import {
+  manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
+  location, description, modelCode, modelLabel
+} from "../../../utils/constants/device";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery} from "../../../store/api/devicesApi";
-import { deviceTypes} from "../../../utils/constants/device";
+import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery } from "../../../store/api/devicesApi";
+import { deviceTypes } from "../../../utils/constants/device";
 import previewPicture from '../../../assets/elements/default.png';
 import { GoPlus } from "react-icons/go";
 import { HiMiniXMark } from "react-icons/hi2";
-import style from "./DeviceForm.module.scss";
+import styles from "./DeviceForm.module.scss";
+import ContractorForm from "../contractor/ContractorForm";
 
 const AddDeviceForm: FC = () => {
-  const {typeId, manufacturerId, device, itemType, errors,  checked, selectedValues, 
+  const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
     selectedValuesMemo, devicePic, title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setSelectedValues, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange, 
-    handleManufacturerChange, handleWarehouseChange, setDevicePic} = useAddDevice();
-  
+    handleResetDevice, setSelectedValues, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange,
+    handleManufacturerChange, handleWarehouseChange, setDevicePic } = useAddDevice();
+
   const [skip, setSkip] = useState(true);
-  const { isOpen, setIsOpen } = useModal(false);
+  const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
   const { data: models } = useGetModelsQuery(
     { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
-  
+
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (device.modelName && models) {
-        models.forEach((model: IEntity) => {
-          if (model.name === device.modelName) {
-            setDevicePic(model.imagePath || "");
-          }
-        });
+      models.forEach((model: IEntity) => {
+        if (model.name === device.modelName) {
+          setDevicePic(model.imagePath || "");
+        }
+      });
     }
   }, [device.modelName]);
 
@@ -72,21 +79,28 @@ const AddDeviceForm: FC = () => {
 
   return (
     <>
-      {isOpen &&  (
+      {isOpen && (
         <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen}>
-          <EntityForm typeId={typeId} manufacturerId={manufacturerId} fieldType={fieldType}/>
+          {entity !== "contactor"
+            ? <EntityForm
+                typeId={typeId}
+                manufacturerId={manufacturerId}
+                fieldType={fieldType}
+            />
+            : <ContractorForm />
+          }
         </Modal>
       )}
-      <div className={style.title}>{addNewDeviceTitle}</div>
-      <div className={style.info}>
-        <div className={style.preview}>
+      <article className={styles.info}>
+        <figure className={styles.preview}>
           <img src={devicePic
             ? `${import.meta.env.VITE_API_MODELS}${devicePic}`
             : previewPicture
           } alt="" />
-        </div>
-        <div className={style.forms}>
-          <form className={style.form}>
+        </figure>
+        <div className={styles.forms}>
+          <div className={styles.title}>{technicalOptions}</div>
+          <form className={styles.form}>
             <Input
               onChange={(e) => handleInputChange("name", e.target.value)}
               type="text"
@@ -95,50 +109,54 @@ const AddDeviceForm: FC = () => {
               errors={errors}
               name="name"
             />
-             <div className={style.container}>
-                <div className={style.ask}>
-                  {addDeviceType}
-                  <span onClick={() => {
-                    setIsOpen(!isOpen)
-                    setFieldType("type")
-                  }}>{add}</span>
-                </div>
-            <Select
-              setValue={handleTypeChange}
-              items={types || []}
-              label={deviceTypeLabel}
-              value={selectedValuesMemo["type"]}
-              errors={errors}
-              name="type"
-            />
+            <div className={styles.container}>
+              <div className={styles.ask}>
+                {addDeviceType}
+                <span onClick={() => {
+                  setIsOpen(!isOpen)
+                  setFieldType("type")
+                  setEntity("type")
+                }}>{add}</span>
+              </div>
+              <Select
+                setValue={handleTypeChange}
+                items={types || []}
+                label={deviceTypeLabel}
+                value={selectedValuesMemo["type"]}
+                errors={errors}
+                name="type"
+              />
             </div>
-             <div className={style.container}>
-                <div className={style.ask}>
-                  {addDeviceManufacturer}
-                  <span onClick={() => {
-                    setIsOpen(!isOpen)
-                    setFieldType("manufacturer")
-                  }}>{add}</span>
-                </div>
-                <Select
-                  setValue={handleManufacturerChange}
-                  items={manufacturers || []}
-                  label={manufacturersLabel}
-                  value={selectedValuesMemo["manufacturer"]}
-                  errors={errors}
-                  name="manufacturer"
-                />
+            <div className={styles.container}>
+              <div className={styles.ask}>
+                {addDeviceManufacturer}
+                <span onClick={() => {
+                  setIsOpen(!isOpen)
+                  setFieldType("manufacturer")
+                  setEntity("manufacturer")
+                }}>{add}</span>
+              </div>
+              <Select
+                setValue={handleManufacturerChange}
+                items={manufacturers || []}
+                label={manufacturersLabel}
+                value={selectedValuesMemo["manufacturer"]}
+                errors={errors}
+                name="manufacturer"
+              />
             </div>
             {typeId && manufacturerId && (
-              <div className={style.container}>
-                <div className={style.ask}>
+              <div className={styles.container}>
+                <div className={styles.ask}>
                   {addDeviceModel}
                   <span onClick={() => {
                     setIsOpen(!isOpen)
                     setFieldType("model")
+                    setEntity("model")
                   }}>{add}</span>
                 </div>
-                <Select setValue={handleModelChange}
+                <Select
+                  setValue={handleModelChange}
                   items={models || []}
                   label={modelLabel}
                   value={selectedValuesMemo["modelName"]}
@@ -171,7 +189,8 @@ const AddDeviceForm: FC = () => {
               errors={errors}
               name="modelCode"
             />
-            <Select setValue={handleWarehouseChange}
+            <Select
+              setValue={handleWarehouseChange}
               items={warehouses || []}
               label={location}
               value={selectedValues["warehouseName"]}
@@ -180,15 +199,15 @@ const AddDeviceForm: FC = () => {
             />
             <Number device={device} setDevice={handleNumber} />
             {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
-                <CustomNumber
-                  key={item.name}
-                  device={device}
-                  setDevice={handleExtNumber}
-                  item={item}
-                  errors={errors}
-                />
-              ))}
-              <Toggle
+              <CustomNumber
+                key={item.name}
+                device={device}
+                setDevice={handleExtNumber}
+                item={item}
+                errors={errors}
+              />
+            ))}
+            <Toggle
               checked={checked}
               setChecked={handleChecked}
               label={serviceable}
@@ -196,14 +215,23 @@ const AddDeviceForm: FC = () => {
               rightPosition={yes}
             />
           </form>
-          <form className={style["additional-form"]}>
+          <div className={styles.title}>{financialOptions}</div>
+          <PriceForm />
+          <div className={styles.title}>Опции гарантии</div>
+          <WarrantyForm 
+            entity={entity} 
+            isOpen={isOpen}
+            setIsOpen={setIsOpen} 
+            setEntity={setEntity} 
+          />
+          <form className={styles["additional-form"]}>
             <Textarea
               setText={(e) => handleInputChange("description", e.target.value)}
               value={device.description || ""}
               label={description}
             />
-             <div className={style.action}>
-              <BtnAction 
+            <div className={styles.action}>
+              <BtnAction
                 icon={<HiMiniXMark />}
                 type="button"
                 size="lg"
@@ -219,10 +247,10 @@ const AddDeviceForm: FC = () => {
                 title={add}
                 click={handleAddDevice}
               />
-      </div>
+            </div>
           </form>
         </div>
-      </div>
+      </article>
     </>
   );
 };
