@@ -9,7 +9,7 @@ import {slugLabel, nameLabel} from '../../../utils/constants/device';
 import { GoPlus } from "react-icons/go";
 import { HiMiniXMark } from "react-icons/hi2";
 import { BsQuestionSquare } from "react-icons/bs";
-import style from './EntityForm.module.scss';
+import styles from './EntityForm.module.scss';
 
 interface IEntityProps {
   typeId: string;
@@ -43,9 +43,9 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
             theme="light"
             transition={Bounce}
       />
-          <div className={style.content}>
+          <div className={styles.content}>
             {fieldType === "model" && 
-              <div className={style.preview}>
+              <div className={styles.preview}>
                 <Preview media={media.prevImg || ""} ref={fileInputRef} setMedia={handleMedia} />
               </div>
             }
@@ -58,9 +58,9 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 errors={errors}
                 name="name"
               /> 
-               <div className={style.tooltip}>
-               <span className={style.tooltip} data-tooltip={slugInfo} tabIndex={0}>
-                  <BsQuestionSquare className={style.icon}/>
+               <div className={styles.tooltip}>
+               <span className={styles.tooltip} data-tooltip={slugInfo} tabIndex={0}>
+                  <BsQuestionSquare className={styles.icon}/>
                </span>
                </div>
                <Input
@@ -71,7 +71,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 errors={errors}
                 name="slug"
               />
-              <div className={style.actions}>
+              <div className={styles.actions}>
                 <BtnAction 
                   icon={<HiMiniXMark />} 
                   type="button" 

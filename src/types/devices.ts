@@ -1,4 +1,5 @@
 
+
 export interface IDevice {
     id?: string;
     name: string;
@@ -85,6 +86,8 @@ export interface IValidationErrors {
   weight?: string;
   screenSize?: string;
   memorySize?: string;
+  phoneNumber?: string;
+  address?: string;
 }
 
 
@@ -112,11 +115,13 @@ export interface IDeviceRepair {
 }
 
 export interface IContractor {
-    id: number;
-    contractorId: string;
+    id?: number;
+    contractorId?: string;
     name: string;
-    phone: string,
+    phoneNumber: string,
     address: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 
 }
 export interface IManufacturer {
@@ -160,11 +165,6 @@ export interface IEntity {
   imagePath?: string,
   typeId?: string,
   manufacturerId?: string,
-}
-export interface IContractor {
-  name:        string;
-  phoneNumber: string;
-  address: string;
 }
 
 export interface IFilteredDevicesFromBack {

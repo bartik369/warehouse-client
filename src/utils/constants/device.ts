@@ -1,6 +1,7 @@
 import { DeviceTypes, DevicePrices } from './../../types/devices';
 
 export const selectDate = 'Укажите дату';
+export const select = "Укажите";
 export const manufacturersLabel = 'Производитель';
 export const modelLabel = 'Модель';
 export const nameLabel = 'Название';
@@ -11,6 +12,10 @@ export const isAssignedLabel = 'Доступность';
 export const warehouseLabel = 'Склад';
 export const startWarrantyLabel = 'Начало гарантии';
 export const endWarrantyLabel = 'Завершение гарантии';
+export const phoneNumberLabel = 'Номер телефона';
+export const contractorNameLabel = 'Имя подрядчика';
+export const contractorAddressLabel = 'Адресс подрядчика';
+export const warrantyNumber = 'Номер гарантии';
 export const slugLabel = 'Slug';
 export const deviceName = 'Название';
 export const serialNumber = 'Серийный номер';

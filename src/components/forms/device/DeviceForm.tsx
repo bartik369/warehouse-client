@@ -14,15 +14,15 @@ import { useModal } from "../../../hooks/data/useModal";
 import { IEntity } from "../../../types/devices";
 import WarrantyForm from "./WarrantyForm";
 import {
-  add, reset, yes, no, serviceable, addDeviceModel, technicalOptions, financialOptions,
-  addDeviceType, addDeviceManufacturer
+  add, reset, yes, no, serviceable, isExistingInList, technicalOptions, financialOptions
 } from "../../../utils/constants/constants";
 import {
   manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
   location, description, modelCode, modelLabel
 } from "../../../utils/constants/device";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery } from "../../../store/api/devicesApi";
+import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery 
+} from "../../../store/api/devicesApi";
 import { deviceTypes } from "../../../utils/constants/device";
 import previewPicture from '../../../assets/elements/default.png';
 import { GoPlus } from "react-icons/go";
@@ -111,7 +111,7 @@ const AddDeviceForm: FC = () => {
             />
             <div className={styles.container}>
               <div className={styles.ask}>
-                {addDeviceType}
+                {isExistingInList}
                 <span onClick={() => {
                   setIsOpen(!isOpen)
                   setFieldType("type")
@@ -129,7 +129,7 @@ const AddDeviceForm: FC = () => {
             </div>
             <div className={styles.container}>
               <div className={styles.ask}>
-                {addDeviceManufacturer}
+                {isExistingInList}
                 <span onClick={() => {
                   setIsOpen(!isOpen)
                   setFieldType("manufacturer")
@@ -148,7 +148,7 @@ const AddDeviceForm: FC = () => {
             {typeId && manufacturerId && (
               <div className={styles.container}>
                 <div className={styles.ask}>
-                  {addDeviceModel}
+                  {isExistingInList}
                   <span onClick={() => {
                     setIsOpen(!isOpen)
                     setFieldType("model")
@@ -228,9 +228,11 @@ const AddDeviceForm: FC = () => {
             <Textarea
               setText={(e) => handleInputChange("description", e.target.value)}
               value={device.description || ""}
-              label={description}
-            />
-            <div className={styles.action}>
+              label={description} 
+              errors={errors} 
+              name="description"
+              />
+            <div className={styles.actions}>
               <BtnAction
                 icon={<HiMiniXMark />}
                 type="button"

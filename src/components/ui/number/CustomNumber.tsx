@@ -49,9 +49,6 @@ const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDe
 
   return (
     <div className={style.wrapper}>
-      <div className={style.error}>
-        {errorMessage && errorMessage }
-      </div>
       <div className={style.number}>
         <div className={style.label}>{item.label}</div>
         <FontAwesomeIcon
@@ -73,6 +70,9 @@ const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDe
           onClick={handleIncrease}
           icon={faPlus}
         />
+      </div>
+      <div className={style.error}>
+        {errorMessage && errorMessage }
       </div>
     </div>
   );

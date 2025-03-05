@@ -26,13 +26,11 @@ export const technicalOptions = 'Технические характеристи
 export const financialOptions = 'Финансовая часть';
 export const addDeviceModelTitle = 'Добавить новую модель';
 export const addDeviceManufacturerTitle = 'Добавить нового производителя';
-export const addDeviceType = 'Нет в списке типа?';
-export const addDeviceModel = 'Нет в списке модели?';
-export const addDeviceManufacturer = 'Нет в списке производителя?';
-export const addContractor = 'Нет в списке подрядчика?';
+export const isExistingInList = 'Нет в списке?';
 export const slugInfo = `Если модель, например, Dell 5490, то slug будет 5490. 
 Если тип Ноутбук, то slug будет laptop. Slug указывать прописными буквами`;
 export const addNewManufacturer = 'Добавление нового производителя';
 export const addNewModel = 'Добавление новой модели';
 export const addNewType = 'Добавление нового типа';
 export const noOptions = 'Нет доступных опций';
+export const phoneMaskPlaceholder = '+7 (___) ___-__-__';

@@ -112,8 +112,6 @@ export function useAddDevice() {
       } else {
         console.error("Unknown Error:", err);
       }
-    } finally {
-
     }
 }
     const handleResetDevice = useCallback(() => {

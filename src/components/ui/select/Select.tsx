@@ -43,11 +43,6 @@ const Select: FC<ISelectProps> = memo(
 
     return (
       <div className={style.wrapper} onKeyDown={handleKeyDown} ref={modalRef}>
-        {errorMessage && 
-          <div className={style.error}>
-            {errorMessage}
-          </div>
-        }
         {label && 
           <span className={style.label}>
             {label}
@@ -61,6 +56,11 @@ const Select: FC<ISelectProps> = memo(
           {value ? value : selectFromList}
           <span className={style.arrow} />
         </button>
+        {errorMessage && 
+          <div className={style.error}>
+            {errorMessage}
+          </div>
+        }
 
         {isOpen && (
           <div className={style.dropdown}>

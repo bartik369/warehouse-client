@@ -93,7 +93,7 @@ export const useEntity = () => {
       const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
-        [field]: validationErrors as any,
+        [field]: validationErrors as string,
       }));
       setEntity((prev) => ({
         ...prev,
