@@ -1,10 +1,16 @@
 import { devicePrices } from '../../../utils/constants/device';
 import CustomNumber from '../../ui/number/CustomNumber';
-import { useAddDevice } from '../../../hooks/data/useAddDevice';
 import styles from './DeviceForm.module.scss'
+import { IDevice } from '../../../types/devices';
+import { FC } from 'react';
 
-const PriceForm = () => {
-    const {device, handleExtNumber, errors} =  useAddDevice();
+interface IPriceFormProps {
+  device: IDevice;
+  handleExtNumber: (entity: number, name: string) => void;
+  errors: Record<string, string>;
+}
+
+const PriceForm:FC<IPriceFormProps> = ({device, errors,handleExtNumber}) => {
     return (
         <form className={styles.form}>
             {devicePrices?.uniqueFields?.map((item) => (

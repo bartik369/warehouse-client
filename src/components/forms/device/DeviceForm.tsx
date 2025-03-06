@@ -18,7 +18,7 @@ import {
 } from "../../../utils/constants/constants";
 import {
   manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
-  location, description, modelCode, modelLabel
+  description, modelCode, modelLabel, location
 } from "../../../utils/constants/device";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery 
@@ -118,13 +118,14 @@ const AddDeviceForm: FC = () => {
                   setEntity("type")
                 }}>{add}</span>
               </div>
-              <Select
+              <Select<IEntity>
                 setValue={handleTypeChange}
                 items={types || []}
                 label={deviceTypeLabel}
                 value={selectedValuesMemo["type"]}
                 errors={errors}
                 name="type"
+                getId={(item:IEntity) => item.id}
               />
             </div>
             <div className={styles.container}>
@@ -136,13 +137,14 @@ const AddDeviceForm: FC = () => {
                   setEntity("manufacturer")
                 }}>{add}</span>
               </div>
-              <Select
+              <Select<IEntity>
                 setValue={handleManufacturerChange}
                 items={manufacturers || []}
                 label={manufacturersLabel}
                 value={selectedValuesMemo["manufacturer"]}
                 errors={errors}
                 name="manufacturer"
+                getId={(item:IEntity) => item.id}
               />
             </div>
             {typeId && manufacturerId && (
@@ -155,13 +157,14 @@ const AddDeviceForm: FC = () => {
                     setEntity("model")
                   }}>{add}</span>
                 </div>
-                <Select
+                <Select<IEntity>
                   setValue={handleModelChange}
                   items={models || []}
                   label={modelLabel}
                   value={selectedValuesMemo["modelName"]}
                   errors={errors}
                   name="modelName"
+                  getId={(item:IEntity) => item.id}
                 />
               </div>
             )}
@@ -189,13 +192,14 @@ const AddDeviceForm: FC = () => {
               errors={errors}
               name="modelCode"
             />
-            <Select
+            <Select<IEntity>
               setValue={handleWarehouseChange}
               items={warehouses || []}
               label={location}
               value={selectedValues["warehouseName"]}
               errors={errors}
               name="warehouseId"
+              getId={(item:IEntity) => item.id}
             />
             <Number device={device} setDevice={handleNumber} />
             {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
@@ -216,7 +220,7 @@ const AddDeviceForm: FC = () => {
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm />
+          <PriceForm device={device} handleExtNumber={handleExtNumber} errors={errors}/>
           <div className={styles.title}>Опции гарантии</div>
           <WarrantyForm 
             entity={entity} 

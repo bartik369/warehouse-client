@@ -59,7 +59,7 @@ const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDe
         <input
           className={style.value}
           type={item.type}
-          value={Number(device[item.name as keyof IDevice] || "")}
+          value={Number(device[item.name as keyof IDevice] || 0)}
           step={data.step}
           min={data.min}
           max={data.max}

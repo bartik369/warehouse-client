@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../redux/useRedux";
-import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
+import { IDeviceMedia, IEntity, IDevice, IContractor} from "./../../types/devices";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {isFetchBaseQueryError, isErrorWithMessage} from "../../utils/errors/error-handling";
@@ -39,7 +39,7 @@ export function useAddDevice() {
     price_without_vat: 0,
     residual_price: 0,
     warrantyNumber: '',
-    startWarrantyDate: null, // startDate.toISOString();
+    startWarrantyDate: null, // will change startDate.toISOString();
     endWarrantyDate:  null,
     provider: '',
     contractorId: '',
@@ -116,16 +116,18 @@ export function useAddDevice() {
 }
     const handleResetDevice = useCallback(() => {
       // Reset device state
-      setDevice((prev) => 
-        Object.fromEntries(
+      setDevice((prev) => ({
+        ...Object.fromEntries(
           Object.entries(prev).map(([key, value]) => {
             if (typeof value === 'string') return [key, ''];
             if (typeof value === 'number') return [key, 0];
-            if (typeof value === 'boolean' && key === 'isFunctional') return [key, true]
+            if (typeof value === 'boolean' && key === 'isFunctional') return [key, true];
+            if (key === 'startWarrantyDate' || key === 'endWarrantyDate') return [key, null];
             return [key, value];
           })
-        ) as IDevice
-      );
+        ) as IDevice,
+      }));
+      
       // Reset errors state
       setErrors((prev) => 
       Object.fromEntries(
@@ -141,15 +143,20 @@ export function useAddDevice() {
       setDevicePic('');
       setItemType('');
       setMedia((prev) => ({...prev, prevImg: null}));
-    }, []);
-
-    const handleInputChange = (<T extends string | IEntity>(field: keyof IDevice, value: T) => {
+    }, [device, setDevice]);
+    
+    const handleInputChange = (<T extends string | IEntity | IContractor>(field: keyof IDevice, value: T) => {
         const validationErrors = ValidateField(field, value);
         setErrors((prev) => ({
           ...prev,
           [field]: validationErrors as string
         }));
-        const inputValue = typeof value === 'string' ? value : value.slug;
+        const isEntity = (obj: any): obj is IEntity => "slug" in obj;
+        const inputValue = typeof value === "string" 
+          ? value 
+          : isEntity(value) 
+          ? value.slug 
+          : "";
         const selectValue = typeof value === 'string' ? value : value.name;
 
         setDevice((prev) => ({
@@ -196,6 +203,10 @@ export function useAddDevice() {
       handleInputChange("warehouseId", item.id || '')
       handleInputChange("warehouseName", item.name || '')
     }, [handleInputChange]);
+    const handleContractorChange = useCallback((item: IContractor) => {
+      handleInputChange("provider", item.id || '')
+      handleInputChange("provider", item.name || '')
+    }, [handleInputChange]);
 
     useEffect(() => {
       switch(fieldType) {
@@ -216,6 +227,6 @@ export function useAddDevice() {
       setFieldType, setTitle, setModelId, setSelectedValues, setManufacturerId, setDevicePic,
       setMedia, handleChecked, setItemType, handleInputChange, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,handleModelChange, 
-      handleTypeChange, handleManufacturerChange, handleWarehouseChange
+      handleTypeChange, handleManufacturerChange, handleWarehouseChange, handleContractorChange
     };
 }

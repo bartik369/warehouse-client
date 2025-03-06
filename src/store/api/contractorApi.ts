@@ -7,7 +7,7 @@ export const contractorApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: [],
     endpoints:(build) => ({
-        getContractor: build.query<IContractor, void>({
+        getContractor: build.query<IContractor[], void>({
             query: () => ({
                 url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_CONTRACTORS}`,
             })

@@ -1,44 +1,55 @@
-import { FC, memo, useState } from "react";
+import { useState } from "react";
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
-import { IEntity, IValidationErrors } from "../../../types/devices";
+import { IValidationErrors } from "../../../types/devices";
 import { selectFromList, noExistSelect } from "../../../utils/constants/device";
 import style from "./Select.module.scss";
 
-interface ISelectProps {
-  items: IEntity[];
+interface ISelectProps<T> {
+  items: T[];
   label: string;
   name?: string;
   value: string;
   errors: IValidationErrors;
-  setValue: (value: IEntity) => void;
+  setValue: (value: T) => void;
+  getId: (item: T) => void;
 }
 
-const Select: FC<ISelectProps> = memo(
-  ({ items, name, label, value, errors, setValue }) => {
+const Select = <T,>({
+  items,
+  name,
+  label,
+  value,
+  errors,
+  setValue,
+  getId,
+}: ISelectProps<T>) => {
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
     const errorMessage = errors[name as keyof IValidationErrors];
     
-    const handleSelect = (option: IEntity) => {
+    const handleSelect = (option: T) => {
       setIsOpen(false);
       setValue(option);
     };
+    console.log(value);
+    
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (!isOpen) return;
-      if (e.key === "ArrowDown") {
-        setFocusedIndex((prev) =>
-          prev === null || prev >= items.length - 1 ? 0 : prev + 1
-        );
-      } else if (e.key === "ArrowUp") {
-        setFocusedIndex((prev) =>
-          prev === null || prev <= 0 ? items.length - 1 : prev - 1
-        );
-      } else if (e.key === "Enter" && focusedIndex !== null) {
-        handleSelect(items[focusedIndex]);
-      } else if (e.key === "Escape") {
-        setIsOpen(false);
-      }
+      e.preventDefault()
+      // if (!isOpen) return;
+      // if (e.key === "ArrowDown") {
+      //   setFocusedIndex((prev) =>
+      //     prev === null || prev >= items.length - 1 ? 0 : prev + 1
+      //   );
+      // } else if (e.key === "ArrowUp") {
+      //   setFocusedIndex((prev) =>
+      //     prev === null || prev <= 0 ? items.length - 1 : prev - 1
+      //   );
+      // } else if (e.key === "Enter" && focusedIndex !== null) {
+      //   handleSelect(items[focusedIndex]);
+      // } else if (e.key === "Escape") {
+      //   setIsOpen(false);
+      // }
     };
 
     return (
@@ -67,7 +78,7 @@ const Select: FC<ISelectProps> = memo(
             {items.length > 0 ? (
               items.map((option, index) => (
                 <div
-                  key={option.id}
+                  key={getId(option)}
                   className={`${style.option} ${
                     focusedIndex === index ? style.focused : ""
                   }`}
@@ -87,6 +98,5 @@ const Select: FC<ISelectProps> = memo(
         )}
       </div>
     );
-  }
-);
+  };
 export default Select;

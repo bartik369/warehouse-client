@@ -115,15 +115,15 @@ export interface IDeviceRepair {
 }
 
 export interface IContractor {
-    id?: number;
+    id?: string;
     contractorId?: string;
     name: string;
     phoneNumber: string,
     address: string;
     createdAt?: Date;
     updatedAt?: Date;
-
 }
+
 export interface IManufacturer {
     id: number;
     name: string

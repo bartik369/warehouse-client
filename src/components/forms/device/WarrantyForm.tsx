@@ -1,15 +1,21 @@
 import { FC} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import { useGetContractorQuery } from "../../../store/api/contractorApi";
 import { add, isExistingInList} from "../../../utils/constants/constants";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { contractor } from "../../../utils/constants/device";
 import { startWarrantyLabel, endWarrantyLabel, selectDate, 
   warrantyNumber } from "../../../utils/constants/device";
+import { IContractor } from "../../../types/devices";
 import DatePicker from "react-datepicker";
+import { registerLocale } from "react-datepicker";
+import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
+import { useGetContractorQuery } from "../../../store/api/contractorApi";
 import styles from "./DeviceForm.module.scss";
+
+registerLocale("ru", ru);
+
 interface IWarrantyFormProps {
   isOpen: boolean;
   entity: string;
@@ -28,10 +34,10 @@ const WarrantyForm: FC<IWarrantyFormProps> = ({
     selectedValuesMemo,
     setDevice,
     handleInputChange,
-    handleManufacturerChange,
+    handleContractorChange,
     setFieldType,
   } = useAddDevice();
-  // const { data: contactors } = useGetContractorQuery();
+  const { data: contractors } = useGetContractorQuery();
   return (
     <form className={styles.form4}>
       <Input
@@ -55,22 +61,24 @@ const WarrantyForm: FC<IWarrantyFormProps> = ({
             {add}
           </span>
         </div>
-        <Select
-          setValue={handleManufacturerChange}
+        <Select<IContractor>
+          setValue={handleContractorChange}
           items={contractors || []}
           label={contractor}
-          value={selectedValuesMemo["warehouse"]}
+          value={selectedValuesMemo["provider"]}
           errors={errors}
-          name="warehouse"
+          name="provider"
+          getId={(item:IContractor) => item.id}
         />
       </div>
 
       <div className={styles.input}>
         <div className={styles.icon}><CiCalendar/></div>
         <DatePicker
+          locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={device.startWarrantyDate}
+          selected={device.startWarrantyDate ? new Date(device.startWarrantyDate) : null}
           onChange={(date) =>
             setDevice((prev) => ({
               ...prev,
@@ -85,9 +93,10 @@ const WarrantyForm: FC<IWarrantyFormProps> = ({
       <div className={styles.input}>
       <div className={styles.icon}><CiCalendar/></div>
         <DatePicker
+          locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={device.endWarrantyDate}
+          selected={device.endWarrantyDate ? new Date(device.startWarrantyDate) : null}
           onChange={(date) =>
             setDevice((prev) => ({
               ...prev,
