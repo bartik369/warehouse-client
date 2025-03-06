@@ -30,8 +30,7 @@ const Select = <T,>({
       setIsOpen(false);
       setValue(option);
     };
-    console.log(value);
-    
+
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

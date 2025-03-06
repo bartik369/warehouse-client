@@ -146,7 +146,7 @@ export function useAddDevice() {
     }, [device, setDevice]);
     
     const handleInputChange = (<T extends string | IEntity | IContractor>(field: keyof IDevice, value: T) => {
-        const validationErrors = ValidateField(field, value);
+        const validationErrors = ValidateField(field as keyof IDevice, value);
         setErrors((prev) => ({
           ...prev,
           [field]: validationErrors as string
@@ -203,7 +203,10 @@ export function useAddDevice() {
       handleInputChange("warehouseId", item.id || '')
       handleInputChange("warehouseName", item.name || '')
     }, [handleInputChange]);
+
     const handleContractorChange = useCallback((item: IContractor) => {
+      console.log(item);
+      
       handleInputChange("provider", item.id || '')
       handleInputChange("provider", item.name || '')
     }, [handleInputChange]);

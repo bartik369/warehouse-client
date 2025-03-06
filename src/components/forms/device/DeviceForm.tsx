@@ -11,7 +11,7 @@ import Modal from "../../modal/Modal";
 import PriceForm from "./PriceForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
-import { IEntity } from "../../../types/devices";
+import { IContractor, IEntity } from "../../../types/devices";
 import WarrantyForm from "./WarrantyForm";
 import {
   add, reset, yes, no, serviceable, isExistingInList, technicalOptions, financialOptions
@@ -34,7 +34,7 @@ const AddDeviceForm: FC = () => {
   const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
     selectedValuesMemo, devicePic, title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
     handleResetDevice, setSelectedValues, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange,
-    handleManufacturerChange, handleWarehouseChange, setDevicePic } = useAddDevice();
+    handleManufacturerChange, handleWarehouseChange, setDevicePic, handleContractorChange } = useAddDevice();
 
   const [skip, setSkip] = useState(true);
   const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
@@ -220,13 +220,23 @@ const AddDeviceForm: FC = () => {
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm device={device} handleExtNumber={handleExtNumber} errors={errors}/>
+          <PriceForm 
+            device={device} 
+            handleExtNumber={handleExtNumber} 
+            errors={errors}
+          />
           <div className={styles.title}>Опции гарантии</div>
-          <WarrantyForm 
+          <WarrantyForm
+            getId={(item:IContractor) => item.id}
+            device={device}
             entity={entity} 
             isOpen={isOpen}
             setIsOpen={setIsOpen} 
             setEntity={setEntity} 
+            setValue={handleContractorChange}
+            handleInputChange={handleInputChange}
+            setDevice={setDevice}
+            selectedValuesMemo={selectedValuesMemo["provider"]}
           />
           <form className={styles["additional-form"]}>
             <Textarea
