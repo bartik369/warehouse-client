@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 export interface ISubmenu {
     id: number;
     title: string;
@@ -10,4 +12,9 @@ export interface ISidebar {
     path: string;
     icon: string;
     subMenu?: ISubmenu[];
+}
+export interface ITab {
+  id: number;
+  label: string;
+  component: FC;
 }

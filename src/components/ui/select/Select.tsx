@@ -35,20 +35,20 @@ const Select = <T,>({
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
       e.preventDefault()
-      // if (!isOpen) return;
-      // if (e.key === "ArrowDown") {
-      //   setFocusedIndex((prev) =>
-      //     prev === null || prev >= items.length - 1 ? 0 : prev + 1
-      //   );
-      // } else if (e.key === "ArrowUp") {
-      //   setFocusedIndex((prev) =>
-      //     prev === null || prev <= 0 ? items.length - 1 : prev - 1
-      //   );
-      // } else if (e.key === "Enter" && focusedIndex !== null) {
-      //   handleSelect(items[focusedIndex]);
-      // } else if (e.key === "Escape") {
-      //   setIsOpen(false);
-      // }
+      if (!isOpen) return;
+      if (e.key === "ArrowDown") {
+        setFocusedIndex((prev) =>
+          prev === null || prev >= items.length - 1 ? 0 : prev + 1
+        );
+      } else if (e.key === "ArrowUp") {
+        setFocusedIndex((prev) =>
+          prev === null || prev <= 0 ? items.length - 1 : prev - 1
+        );
+      } else if (e.key === "Enter" && focusedIndex !== null) {
+        handleSelect(items[focusedIndex]);
+      } else if (e.key === "Escape") {
+        setIsOpen(false);
+      }
     };
 
     return (
@@ -77,7 +77,7 @@ const Select = <T,>({
             {items.length > 0 ? (
               items.map((option, index) => (
                 <div
-                  key={getId(option)}
+                  key={getId(option)!}
                   className={`${style.option} ${
                     focusedIndex === index ? style.focused : ""
                   }`}

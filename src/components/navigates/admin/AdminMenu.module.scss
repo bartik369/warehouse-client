@@ -1,0 +1,49 @@
+@mixin item {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background-color .1s ease;
+}
+
+.menu {
+    display: flex;
+    position: sticky;
+    top: 95px;
+    margin-right: 15px;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid #dedfe1;
+    ul {
+        .default {
+            @include item;
+            color: #070707;
+            background-color: #fff;
+            .icon {
+                font-size: 20px;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                margin-right: 8px;
+            }
+            &:hover {
+                color: #fff;
+                background-color: #3d3dbf;
+            }
+        }
+        .active {
+            @include item;
+            color: #fff;
+            background-color: #3d3dbf;
+            .icon {
+                font-size: 20px;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                margin-right: 5px;
+            }
+        }
+    }
+}

@@ -3,6 +3,8 @@ import { authApi } from './api/authApi';
 import { devicesApi } from './api/devicesApi';
 import { contractorApi } from './api/contractorApi';
 import { warehousesApi } from './api/warehousesApi';
+import { locationApi } from './api/locationApi';
+import { departmentApi } from './api/departmentApi';
 import { userApi } from './api/userApi';
 import authReducer from './slices/authSlice';
 import deviceReducer from './slices/deviceSlice';
@@ -16,6 +18,8 @@ const store = configureStore({
     [contractorApi.reducerPath]: contractorApi.reducer,
     [warehousesApi.reducerPath]: warehousesApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [locationApi.reducerPath]: locationApi.reducer,
+    [departmentApi.reducerPath]: departmentApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -25,7 +29,9 @@ const store = configureStore({
         devicesApi.middleware,
         contractorApi.middleware,
         warehousesApi.middleware,
+        locationApi.middleware,
         userApi.middleware,
+        departmentApi.middleware,
       ),
 });
 

@@ -5,6 +5,7 @@ import {
   IContractor,
 } from "./../../types/devices";
 import { IValidationErrors } from "./../../types/devices";
+import { requiredFieldText, requiredFieldFive } from "../constants/constants";
 
 type ValidationField = keyof IDevice;
 type ValidationModelField = keyof IDeviceModel;
@@ -24,23 +25,20 @@ const validateRequiredFields = <T>(
 ): void => {
   fields.forEach((field) => {
     if (!formData[field]) {
-      errors[field as string] = "Обязательно к заполнению";
+      errors[field as string] = requiredFieldText;
     }
   });
 };
 
-export const FormValidation = (
-  formData: IDevice,
-  itemType: string
-): IValidationErrors => {
+export const FormValidation = (formData: IDevice, itemType: string): IValidationErrors => {
   const errors: Record<string, string> = {};
-  const requiedField: ValidationField[] = [
+  const requiredField: ValidationField[] = [
     "name",
     "type",
     "manufacturer",
     "warehouseId",
   ];
-  validateRequiredFields(formData, requiedField, errors);
+  validateRequiredFields(formData, requiredField, errors);
 
   if (fieldsMemoryScreen.includes(itemType)) {
     validateRequiredFields(formData, ["memorySize", "screenSize"], errors);
@@ -50,7 +48,7 @@ export const FormValidation = (
   }
 
   if (formData.name && formData.name.length < 5) {
-    errors.name = "Не менее 5 символов";
+    errors.name = requiredFieldFive;
   }
   return errors;
 };
@@ -75,20 +73,20 @@ export const ModelValidationField = <T extends string | IEntity>(
   const isEmpty = (val: string) => val.length === 0;
 
   if (typeof value === "object" && isEmpty(value.slug)) {
-    return "Обязательно к заполнению";
+    return requiredFieldText;
   }
   if (
     typeof value === "string" &&
     modelFields.includes(field) &&
     isEmpty(value)
   ) {
-    return "Обязательно к заполнению";
+    return requiredFieldText;
   }
   return null;
 };
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
-  const requiredMessage = "Обязательно к заполнению";
+  const requiredMessage = requiredFieldText;
 
   if (field === "name") {
     if (typeof value === "string" && value.length === 0) return requiredMessage;
@@ -104,9 +102,7 @@ export const ValidateField = <T>(field: string, value: T): string | null => {
   return null;
 };
 
-export const EntityValidation = (
-  formData: IEntity
-): Partial<IValidationErrors> => {
+export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> => {
   const errors: Partial<IValidationErrors> = {};
   const requiredFields: ValidationEntityField[] = ["name", "slug"];
 

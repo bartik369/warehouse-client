@@ -12,6 +12,8 @@ import PriceForm from "./PriceForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import { IContractor, IEntity } from "../../../types/devices";
+import ContractorForm from "../contractor/ContractorForm";
+import { Bounce, ToastContainer } from "react-toastify";
 import WarrantyForm from "./WarrantyForm";
 import {
   add, reset, yes, no, serviceable, isExistingInList, technicalOptions, financialOptions
@@ -28,7 +30,6 @@ import previewPicture from '../../../assets/elements/default.png';
 import { GoPlus } from "react-icons/go";
 import { HiMiniXMark } from "react-icons/hi2";
 import styles from "./DeviceForm.module.scss";
-import ContractorForm from "../contractor/ContractorForm";
 
 const AddDeviceForm: FC = () => {
   const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
@@ -79,6 +80,19 @@ const AddDeviceForm: FC = () => {
 
   return (
     <>
+    <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+      />
       {isOpen && (
         <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen}>
           {entity !== "contactor"
@@ -91,7 +105,7 @@ const AddDeviceForm: FC = () => {
           }
         </Modal>
       )}
-      <article className={styles.info}>
+      <article className={styles.wrapper}>
         <figure className={styles.preview}>
           <img src={devicePic
             ? `${import.meta.env.VITE_API_MODELS}${devicePic}`

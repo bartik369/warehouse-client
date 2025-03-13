@@ -1,16 +1,34 @@
+import React from "react";
 import { LuUsers } from "react-icons/lu";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
 import { TbFileDescription } from "react-icons/tb"
 import { BsArrowsMove } from "react-icons/bs";
-
 import { FiUserPlus } from "react-icons/fi";
 import { FiUserMinus } from "react-icons/fi";
 import { LuHandshake } from "react-icons/lu";
 import { LuWarehouse } from "react-icons/lu";
+import { TbLocationPlus } from "react-icons/tb";
+import { TbDeviceDesktopPlus } from "react-icons/tb";
+import { LiaCitySolid } from "react-icons/lia";
+import { AiOutlineUnlock } from "react-icons/ai";
+import { TbBrandComedyCentral } from "react-icons/tb";
 
 
+
+
+import { MdSupportAgent } from "react-icons/md";
+
+
+
+
+
+
+
+
+const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
+const  Another = React.lazy(() => import('../../components/pages/device/Another'));
 
 export const headerMenuData = [
     {id: 1, title: 'Ссылка 1', path: '#'},
@@ -19,7 +37,7 @@ export const headerMenuData = [
     {id: 4, title: 'Ссылка 4', path: '#'},
 ];
 export const profileMenuData = [
-    {id: 1, title: 'Админ-панель', path: '/admin'},
+    {id: 1, title: 'Админ-панель', path: '/admin/add-device'},
     {id: 2, title: 'Профиль', path: '#'},
     {id: 3, title: 'Сброс пароля', path: '#'},
     {id: 4, title: 'Настройки', path: '#'},
@@ -43,6 +61,21 @@ export const deviceActionsMenu = [
     {id: 2, title: 'Принять', icon: FiUserMinus},
     {id: 3, title: 'Переместить', icon: BsArrowsMove},
     {id: 4, title: 'Информация', icon: TbFileDescription},
+]
+
+export const deviceTabsMenu = [
+    {id: 1, label: 'История', component: DeviceHistory },
+    {id: 2, label: 'Другое', component: Another },
+]
+export const adminMenu = [
+    {id: 1, title: 'Добавить пользователя', path: '/admin/add-user', icon: FiUserPlus},
+    {id: 2, title: 'Добавить склад', path: '', icon: TbLocationPlus},
+    {id: 3, title: 'Добавить устройство', path: '/admin/add-device', icon: TbDeviceDesktopPlus},
+    {id: 4, title: 'Добавить город', path: '', icon: LiaCitySolid},
+    {id: 5, title: 'Добавить отдел', path: '', icon: BiMessageSquareDetail},
+    {id: 6, title: 'Добавить подрядчика', path: '', icon: MdSupportAgent},
+    {id: 7, title: 'Добавить роль', path: '', icon: AiOutlineUnlock},
+    {id: 4, title: 'Добавить производителя', path: '', icon: TbBrandComedyCentral},
 ]
 
   

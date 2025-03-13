@@ -34,3 +34,5 @@ export const addNewModel = 'Добавление новой модели';
 export const addNewType = 'Добавление нового типа';
 export const noOptions = 'Нет доступных опций';
 export const phoneMaskPlaceholder = '+7 (___) ___-__-__';
+export const requiredFieldText = 'Обязательно к заполнению';
+export const requiredFieldFive = 'Не менее 5 символов';

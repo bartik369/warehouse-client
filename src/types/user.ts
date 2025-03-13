@@ -1,14 +1,15 @@
 export interface IUser {
     id: string;
-    workId: string;
-    login: string;
+    userName: string;
     email: string;
+    workId: string;
     firstName: string;
     lastName: string;
     department: string;
+    isActive: boolean;
     locationId: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
+    createdAt?: Date | null;
+    updatedAt?: Date | null;
 }
 
 export interface ISignin {
@@ -23,4 +24,14 @@ export interface IAuthRes {
 export interface RefreshTokenResponse {
     token: string;
     user: IUser;
-  }
+}
+export interface IValidateUserErrors {
+    id?: string;
+    userName?: string;      
+    email?: string;
+    workId?: string;      
+    firstName?: string;
+    lastName?: string
+    department?: string;
+    locationId?: string;
+}

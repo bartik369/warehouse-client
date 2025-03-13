@@ -1,37 +1,118 @@
-.title {
-    display: flex;
-    justify-content: center;
-    color: #070707;
-    font-size: 25px;
-    font-weight: 600;
-    margin-top: 20px;
-}
-
 .wrapper {
-    position: relative;
-    display: flex;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: 300px auto 350px;
+    gap: 15px;
     .picture {
-        position: sticky;
-        top: 100px;
-        display: flex;
-        width: 250px;
-        height: 100%;
-        margin-right: 20px;
-        padding: 10px;
-        border: 1px solid #e5ecef;
-        border-radius: 12px;
         img {
             width: 100%;
         }
     }
-    .text {
+    .title {
+        font-size: 15px;
+        // border-bottom: 1px dashed #070707;
+        width: fit-content;
+        margin: 10px 0;
+        font-weight: 600;
         display: flex;
         align-items: center;
-        font-size: 14px;
-        span {
+        .icon {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+        }
+        span {}
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+    }
+    .property {
+        display: grid;
+        grid-template-columns: auto 1fr min-content;
+        white-space: nowrap;
+        padding: 3px 0;
+        .name {
+            text-align: left;
+            white-space: nowrap;
+            color: #727179;
+            font-size: 13px;
+        }
+        .dots {
+            margin: 0 15px 0 10px;
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                border-bottom: 1px dotted rgba(204, 214, 228);
+                height: 1px;
+            }
+        }
+        .value {
+            text-align: left;
+            white-space: nowrap;
+            min-width: 150px;
+            color: #070707;
             font-size: 14px;
-            font-weight: 600;
-            margin-left: 10px;
+        }
+    }
+    .price {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .block {
+            display: flex;
+            align-items: baseline;
+            .value {
+                font-size: 25px;
+                font-weight: 800;
+                color: #070707;
+                span {
+                    font-size: 12px;
+                    font-weight: 300;
+                    margin: 0 5px;
+                }
+            }
+            .name {
+                font-size: 12px;
+                display: flex;
+                align-items: last baseline;
+                color: #727179;
+            }
+        }
+    }
+    .warranty {
+        display: flex;
+        align-items: center;
+    }
+    .warranty,
+    .user {
+        .active {
+            background-color: #72c448;
+            color: #fff;
+            font-size: 12px;
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 8px;
+        }
+        .block {
+            display: flex;
+            padding: 3px;
+            .value {
+                font-size: 14px;
+                color: #070707;
+            }
+            .name {
+                font-size: 12px;
+                display: flex;
+                align-items: last baseline;
+                margin: 0 8px;
+                color: #727179;
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import Device from './components/pages/device/Device';
 import Devices from './components/pages/devices/Devices';
 import AddDevice from './components/pages/add-device/AddDevice';
 import Admin from './components/pages/admin/Admin';
+import AddUser from './components/pages/admin/user/AddUser';
 import Users from './components/pages/users/Users';
 import './App.scss';
 
@@ -53,9 +54,10 @@ function App() {
         <Route element={<Profile />} path='/profile' />
         <Route element={<Device />} path='/devices/:id'/>
         <Route element={<Devices />} path='/devices/locations/:city'/>
-        <Route element={<AddDevice />} path='/device/add'/>
+        <Route element={<AddDevice />} path='/admin/add-device'/>
+        <Route element={<AddUser />} path='/admin/add-user'/>
         <Route element={<Users />} path='/users' />
-        <Route element={<Admin />} path='/admin'/>
+        {/* <Route element={<Admin />} path='/admin'/> */}
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>

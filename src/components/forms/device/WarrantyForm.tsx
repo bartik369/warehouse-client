@@ -87,13 +87,13 @@ const WarrantyForm = <T,>({
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={
-            device.startWarrantyDate ? new Date(device.startWarrantyDate) : null
-          }
+          selected={device.startWarrantyDate 
+            ? new Date(device.startWarrantyDate) 
+            : null}
           onChange={(date) => {
             setDevice((prev) => ({
               ...prev,
-              startWarrantyDate: date,
+              startWarrantyDate: date.toISOString() ?? null,
             }));
           }}
           maxDate={device.endWarrantyDate ?? undefined}
@@ -115,7 +115,7 @@ const WarrantyForm = <T,>({
           onChange={(date) =>
             setDevice((prev) => ({
               ...prev,
-              endWarrantyDate: date,
+              endWarrantyDate: date.toISOString() ?? null,
             }))
           }
           minDate={device.startWarrantyDate ?? undefined}

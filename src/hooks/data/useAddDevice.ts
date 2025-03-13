@@ -35,16 +35,14 @@ export function useAddDevice() {
     manufacturer: '',
     addedById:'',
     updatedById: '',
-    price_with_vat: 0,
-    price_without_vat: 0,
-    residual_price: 0,
+    price_with_vat: null,
+    price_without_vat: null,
+    residual_price: null,
     warrantyNumber: '',
-    startWarrantyDate: null, // will change startDate.toISOString();
+    startWarrantyDate: null,
     endWarrantyDate:  null,
     provider: '',
-    contractorId: '',
-    warrantyStatus: '',      
-    isExpired: false,
+    contractorId: '', 
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
@@ -66,9 +64,7 @@ export function useAddDevice() {
       weight: num,
     }));
   }, []);
-
-  console.log(device)
-
+  
   const handleExtNumber = useCallback((num: number, fieldName: string) => {
     const data = ValidateField(fieldName, num);
     setDevice((prev) => ({
@@ -105,8 +101,17 @@ export function useAddDevice() {
       }
     } catch (err) {
       if (isFetchBaseQueryError(err)) {
-        const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
-        console.log("API Error:", errMsg);
+        let errMsg: string;
+        if ('error' in err) {
+          errMsg = err.error;
+        } else {
+          if (err.data && typeof err.data === "object" && "message" in err.data) {
+            errMsg = (err.data as { message: string }).message;
+          } else {
+            errMsg = JSON.stringify(err.data);
+          }
+        }
+        toast(errMsg, {type: "error"})
       } else if (isErrorWithMessage(err)) {
         console.error("Unexpected Error:", err.message);
       } else {
@@ -205,9 +210,7 @@ export function useAddDevice() {
     }, [handleInputChange]);
 
     const handleContractorChange = useCallback((item: IContractor) => {
-      console.log(item);
-      
-      handleInputChange("provider", item.id || '')
+      handleInputChange("contractorId", item.id || '')
       handleInputChange("provider", item.name || '')
     }, [handleInputChange]);
 
