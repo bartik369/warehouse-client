@@ -13,10 +13,15 @@ import PublicRoutes from './routes/PublicRoutes';
 import Profile from './components/pages/profile/Profile';
 import Device from './components/pages/device/Device';
 import Devices from './components/pages/devices/Devices';
-import AddDevice from './components/pages/add-device/AddDevice';
-import Admin from './components/pages/admin/Admin';
+import AddDevice from './components/pages/admin/add-device/AddDevice';
 import AddUser from './components/pages/admin/user/AddUser';
 import Users from './components/pages/users/Users';
+import AddCity from './components/pages/admin/location/AddCity';
+import AddDepartment from './components/pages/admin/location/AddDepartment';
+import AddWarehouse from './components/pages/admin/location/AddWarehouse';
+import AddContractor from './components/pages/admin/contractor/AddContractor';
+import AddRoles from './components/pages/admin/roles/AddRoles';
+import AddManufacturer from './components/pages/admin/manufacturer/AddManufacturer';
 import './App.scss';
 
 function App() {
@@ -57,7 +62,12 @@ function App() {
         <Route element={<AddDevice />} path='/admin/add-device'/>
         <Route element={<AddUser />} path='/admin/add-user'/>
         <Route element={<Users />} path='/users' />
-        {/* <Route element={<Admin />} path='/admin'/> */}
+        <Route element={<AddCity />} path='/admin/add-city' />
+        <Route element={<AddWarehouse/>} path='/admin/add-warehouse' />
+        <Route element={<AddDepartment />} path='/admin/add-department' />
+        <Route element={<AddContractor />} path='/admin/add-contractor' />
+        <Route element={<AddRoles />} path='/admin/add-roles' />
+        <Route element={<AddManufacturer />} path='/admin/add-manufacturer' />
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>

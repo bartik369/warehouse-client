@@ -11,14 +11,17 @@ export const useAddUser = () => {
     userName: "",
     email: "",
     workId: "",
-    firstName: "",
+    firstNameRu: "",
+    lastNameRu: "",
+    firstNameEn: "",
+    lastNameEn: "",
     isActive: true,
-    lastName: "",
     department: "",
     locationId: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createUser] = useCreateUserMutation();
+  const [checked, setChecked] = useState(true);
 
   const handleInputChange = useCallback(
     <T extends string | IUser>(field: keyof IUser, value: T) => {
@@ -83,6 +86,14 @@ export const useAddUser = () => {
      const handleDepartmentChange = useCallback((item: any) => {
           handleInputChange("department", item.name || '');
     }, [handleInputChange]);
+
+    const handleChecked = useCallback(() => {
+      setChecked(!checked);
+      setUser((prev) => ({
+        ...prev,
+        isActive: !checked,
+      }));
+    }, [checked]);
     
-  return { user, errors, handleInputChange, handleCreateUser, resetUser, handleDepartmentChange };
+  return { user, errors, checked, handleChecked, handleInputChange, handleCreateUser, resetUser, handleDepartmentChange };
 };

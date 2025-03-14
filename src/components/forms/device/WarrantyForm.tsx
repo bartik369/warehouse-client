@@ -47,38 +47,6 @@ const WarrantyForm = <T,>({
   const { data: contractors } = useGetContractorQuery();
   return (
     <form className={styles.form4}>
-      <Input
-        type="text"
-        name="warrantyNumber"
-        value={device.warrantyNumber || ""}
-        label={warrantyNumber}
-        errors={errors}
-        onChange={(e) => handleInputChange("warrantyNumber", e.target.value)}
-      />
-      <div className={styles.container}>
-        <div className={styles.ask}>
-          {isExistingInList}
-          <span
-            onClick={() => {
-              setIsOpen(!isOpen);
-              setFieldType("contactor");
-              setEntity("contactor");
-            }}
-          >
-            {add}
-          </span>
-        </div>
-        <Select<IContractor>
-          setValue={setValue}
-          items={contractors || []}
-          label={contractor}
-          value={selectedValuesMemo}
-          errors={errors}
-          name="provider"
-          getId={(item: IContractor) => item.id}
-        />
-      </div>
-
       <div className={styles.input}>
         <div className={styles.icon}>
           <CiCalendar />
@@ -123,6 +91,37 @@ const WarrantyForm = <T,>({
         />
         <div className={styles.label}>{endWarrantyLabel}</div>
       </div>
+      <div className={styles.container}>
+        <div className={styles.ask}>
+          {isExistingInList}
+          <span
+            onClick={() => {
+              setIsOpen(!isOpen);
+              setFieldType("contactor");
+              setEntity("contactor");
+            }}
+          >
+            {add}
+          </span>
+        </div>
+        <Select<IContractor>
+          setValue={setValue}
+          items={contractors || []}
+          label={contractor}
+          value={selectedValuesMemo}
+          errors={errors}
+          name="provider"
+          getId={(item: IContractor) => item.id}
+        />
+      </div>
+      <Input
+        type="text"
+        name="warrantyNumber"
+        value={device.warrantyNumber || ""}
+        label={warrantyNumber}
+        errors={errors}
+        onChange={(e) => handleInputChange("warrantyNumber", e.target.value)}
+      />
     </form>
   );
 };

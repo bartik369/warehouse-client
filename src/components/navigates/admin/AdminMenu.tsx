@@ -1,11 +1,13 @@
-import React from "react";
-import { adminMenu } from "../../../utils/data/menus";
 import { NavLink } from "react-router-dom";
+// import { adminPanel } from "../../../utils/constants/constants";
+import { adminMenu } from "../../../utils/data/menus";
 import styles from "./AdminMenu.module.scss";
 
 const AdminMenu = () => {
   return (
-    <nav className={styles.menu}>
+    <div className={styles.menu}>
+    {/* <div className={styles.title}>{adminPanel}</div> */}
+    <nav>
       <ul>
         {adminMenu
           ? adminMenu.map((item) => (
@@ -24,6 +26,7 @@ const AdminMenu = () => {
           : "Меню недоступно"}
       </ul>
     </nav>
+    </div>
   );
 };
 

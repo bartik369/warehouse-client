@@ -3,8 +3,10 @@ export interface IUser {
     userName: string;
     email: string;
     workId: string;
-    firstName: string;
-    lastName: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
     department: string;
     isActive: boolean;
     locationId: string;

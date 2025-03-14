@@ -1,30 +1,15 @@
 import React from "react";
-import { LuUsers } from "react-icons/lu";
-import { BiMessageSquareDetail } from "react-icons/bi";
-import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
-import { MdOutlineLibraryAddCheck } from "react-icons/md";
-import { TbFileDescription } from "react-icons/tb"
 import { BsArrowsMove } from "react-icons/bs";
-import { FiUserPlus } from "react-icons/fi";
-import { FiUserMinus } from "react-icons/fi";
-import { LuHandshake } from "react-icons/lu";
-import { LuWarehouse } from "react-icons/lu";
-import { TbLocationPlus } from "react-icons/tb";
-import { TbDeviceDesktopPlus } from "react-icons/tb";
 import { LiaCitySolid } from "react-icons/lia";
 import { AiOutlineUnlock } from "react-icons/ai";
-import { TbBrandComedyCentral } from "react-icons/tb";
-
-
-
-
-import { MdSupportAgent } from "react-icons/md";
-
-
-
-
-
-
+import { BiMessageSquareDetail } from "react-icons/bi";
+import { TbArrowsMove } from "react-icons/tb";
+import { FiUserPlus, FiUserMinus } from "react-icons/fi";
+import { LuUsers, LuHandshake, LuWarehouse } from "react-icons/lu";
+import { MdOutlineLibraryAddCheck, MdSupportAgent  } from "react-icons/md";
+import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
+import { TbFileDescription, TbBrandComedyCentral, TbLocationPlus, 
+TbDeviceDesktopPlus } from "react-icons/tb"
 
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
@@ -68,14 +53,14 @@ export const deviceTabsMenu = [
     {id: 2, label: 'Другое', component: Another },
 ]
 export const adminMenu = [
-    {id: 1, title: 'Добавить пользователя', path: '/admin/add-user', icon: FiUserPlus},
-    {id: 2, title: 'Добавить склад', path: '', icon: TbLocationPlus},
-    {id: 3, title: 'Добавить устройство', path: '/admin/add-device', icon: TbDeviceDesktopPlus},
-    {id: 4, title: 'Добавить город', path: '', icon: LiaCitySolid},
-    {id: 5, title: 'Добавить отдел', path: '', icon: BiMessageSquareDetail},
-    {id: 6, title: 'Добавить подрядчика', path: '', icon: MdSupportAgent},
-    {id: 7, title: 'Добавить роль', path: '', icon: AiOutlineUnlock},
-    {id: 4, title: 'Добавить производителя', path: '', icon: TbBrandComedyCentral},
+    {id: 1, title: 'Пользователи', path: '/admin/add-user', icon: FiUserPlus},
+    {id: 2, title: 'Склады', path: '/admin/add-warehouse', icon: TbLocationPlus},
+    {id: 3, title: 'Устройства', path: '/admin/add-device', icon: TbDeviceDesktopPlus},
+    {id: 4, title: 'Города', path: '/admin/add-city', icon: LiaCitySolid},
+    {id: 5, title: 'Отделы', path: '/admin/add-department', icon: TbArrowsMove},
+    {id: 6, title: 'Подрядчики', path: '/admin/add-contractor', icon: MdSupportAgent},
+    {id: 7, title: 'Доступ', path: '/admin/add-roles', icon: AiOutlineUnlock},
+    {id: 4, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
 ]
 
   

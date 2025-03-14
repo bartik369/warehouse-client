@@ -46,7 +46,7 @@ const ProfileMenu:FC = () => {
                 }
                 >
             <div className={style.username}>
-                {user && `${user.firstName} ${user.lastName}`}
+                {user && `${user.firstNameEn} ${user.lastNameEn}`}
             </div>
             <nav>
                 <ul>

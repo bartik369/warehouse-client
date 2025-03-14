@@ -1,18 +1,19 @@
 import Input from '../../ui/input/Input';
 import { useAddUser } from '../../../hooks/data/useAddUser';
 import { useGetLocationsQuery } from '../../../store/api/locationApi';
-import styles from "./UserForm.module.scss";
 import BtnAction from '../../ui/buttons/BtnAction';
 import { HiMiniXMark } from 'react-icons/hi2';
-import { add, reset } from '../../../utils/constants/constants';
+import { add, no, reset, accountIsActive, yes } from '../../../utils/constants/constants';
 import { GoPlus } from 'react-icons/go';
 import Select from '../../ui/select/Select';
 import { ILocation } from '../../../types/locations';
+import Toggle from '../../ui/checkbox/Toggle';
+import styles from "./UserForm.module.scss";
     
     const UserForm = () => {
-        const { user, errors, handleInputChange, handleCreateUser, resetUser, handleDepartmentChange } = useAddUser();
+        const { user, errors, checked, handleInputChange, handleCreateUser, 
+            resetUser, handleDepartmentChange, handleChecked } = useAddUser();
         const {data: locations } = useGetLocationsQuery();
-        console.log(locations);
         
         const departments = [
             {id: 1, name: 'Бухгалтерия', slug: 'finance'},
@@ -47,6 +48,13 @@ import { ILocation } from '../../../types/locations';
                     placeholder="input workId"
                     errors={errors}
                     onChange={(e) => handleInputChange("workId", e.target.value)}
+                />
+                <Toggle
+                  checked={checked}
+                  setChecked={handleChecked}
+                  label={accountIsActive}
+                  leftPosition={no}
+                  rightPosition={yes}
                 />
                 <Input 
                     label='Имя'
