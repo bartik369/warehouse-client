@@ -3,16 +3,19 @@ import { useAddUser } from '../../../hooks/data/useAddUser';
 import { useGetLocationsQuery } from '../../../store/api/locationApi';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { HiMiniXMark } from 'react-icons/hi2';
-import { add, no, reset, accountIsActive, yes } from '../../../utils/constants/constants';
-import { GoPlus } from 'react-icons/go';
 import Select from '../../ui/select/Select';
-import { ILocation } from '../../../types/locations';
 import Toggle from '../../ui/checkbox/Toggle';
+import { add, no, reset, accountIsActive, yes, addUserTitle } from '../../../utils/constants/constants';
+import { labelFirstNameEn, labelFirstNameRu, labelLastNameEn, labelLastNameRu, 
+    labelUserLogin, labelEmail,  labelUserId, labelDepartment, labelCity
+} from '../../../utils/constants/user';
+import { GoPlus } from 'react-icons/go';
+import { ILocation } from '../../../types/locations';
 import styles from "./UserForm.module.scss";
     
     const UserForm = () => {
         const { user, errors, checked, handleInputChange, handleCreateUser, 
-            resetUser, handleDepartmentChange, handleChecked } = useAddUser();
+            resetUser, handleDepartmentChange, handleChecked, handleLocationChange } = useAddUser();
         const {data: locations } = useGetLocationsQuery();
         
         const departments = [
@@ -21,76 +24,89 @@ import styles from "./UserForm.module.scss";
         ]
         return (
             <div className={styles.container}>
+            <div className={styles.title}>{addUserTitle}</div>
             <form className={styles.form}>
+            <Input 
+                    label={labelFirstNameRu}
+                    type="text" 
+                    name="firstNameRu" 
+                    value={user.firstNameRu || ""}
+                    errors={errors}
+                    onChange={(e) => handleInputChange("firstNameRu", e.target.value)}
+                />
+                 <Input 
+                    label={labelLastNameRu}
+                    type="text" 
+                    name="lastNameRu" 
+                    value={user.lastNameRu || ""}
+                    errors={errors}
+                    onChange={(e) => handleInputChange("lastNameRu", e.target.value)}
+                />
+
+                <Input 
+                    label={labelFirstNameEn}
+                    type="text" 
+                    name="firstNameEn" 
+                    value={user.firstNameEn || ""}
+                    errors={errors}
+                    onChange={(e) => handleInputChange("firstNameEn", e.target.value)}
+                />
+                 <Input 
+                    label={labelLastNameEn}
+                    type="text" 
+                    name="lastNameEn" 
+                    value={user.lastNameEn || ""}
+                    errors={errors}
+                    onChange={(e) => handleInputChange("lastNameEn", e.target.value)}
+                />
                 <Input
-                    label='Логин'
+                    label={labelUserLogin}
                     type="text" 
                     name="userName" 
                     value={user.userName || ""}
-                    placeholder="input username"
                     errors={errors}
                     onChange={(e) => handleInputChange("userName", e.target.value)}
                 />
                 <Input 
-                    label='Почта'
+                    label={labelEmail}
                     type="text" 
                     name="email" 
                     value={user.email || ""}
-                    placeholder="input email"
                     errors={errors}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                 />
                 <Input
-                    label='SAP-id'
+                    label={labelUserId}
                     type="text" 
                     name="workId" 
                     value={user.workId || ""}
-                    placeholder="input workId"
                     errors={errors}
                     onChange={(e) => handleInputChange("workId", e.target.value)}
                 />
-                <Toggle
+                <Select<ILocation>
+                    setValue={handleDepartmentChange}
+                    items={departments || []}
+                    label={labelDepartment}
+                    name='department'
+                    value={user.department || ""}
+                    errors={errors}
+                    getId={(item:ILocation) => item.id}
+                />
+                <Select<ILocation>
+                    setValue={handleLocationChange}
+                    items={locations || []}
+                    label={labelCity}
+                    name='location'
+                    value={user.location || ""}
+                    errors={errors}
+                    getId={(item:ILocation) => item.id}
+                />
+                 <Toggle
                   checked={checked}
                   setChecked={handleChecked}
                   label={accountIsActive}
                   leftPosition={no}
                   rightPosition={yes}
-                />
-                <Input 
-                    label='Имя'
-                    type="text" 
-                    name="firstName" 
-                    value={user.firstName || ""}
-                    placeholder="input firstName"
-                    errors={errors}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
-                />
-                 <Input 
-                    label='Фамилия'
-                    type="text" 
-                    name="lastName" 
-                    value={user.lastName || ""}
-                    placeholder="input lastName"
-                    errors={errors}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
-                />
-                <Select<ILocation>
-                    setValue={handleDepartmentChange}
-                    items={locations || []}
-                    label='Отдел'
-                    name='department'
-                    value={user.department || ""}
-                    errors={errors}
-                    getId={(item:ILocation) => item.id}
-                />
-                <Select<ILocation>
-                    setValue={handleDepartmentChange}
-                    items={departments || []}
-                    label='Город'
-                    name='department'
-                    value={user.department || ""}
-                    errors={errors}
-                    getId={(item:ILocation) => item.id}
                 />
             </form>
             <div className={styles.actions}>

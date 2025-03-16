@@ -53,14 +53,20 @@ export const deviceTabsMenu = [
     {id: 2, label: 'Другое', component: Another },
 ]
 export const adminMenu = [
-    {id: 1, title: 'Пользователи', path: '/admin/add-user', icon: FiUserPlus},
+    {id: 1, title: 'Пользователи', path: '#', icon: FiUserPlus, subMenu: [
+      {id: 1, title: 'Добавить', path: '/admin/add-user'},
+      {id: 2, title: 'Редактировать', path: '/admin/edit-user'},
+    ]},
     {id: 2, title: 'Склады', path: '/admin/add-warehouse', icon: TbLocationPlus},
-    {id: 3, title: 'Устройства', path: '/admin/add-device', icon: TbDeviceDesktopPlus},
+    {id: 3, title: 'Устройства', path: '#', icon: TbDeviceDesktopPlus, subMenu: [
+        {id: 1, title: 'Добавить', path: '/admin/add-device'},
+        {id: 2, title: 'Редактировать', path: '/admin/edit-device'},
+      ]},
     {id: 4, title: 'Города', path: '/admin/add-city', icon: LiaCitySolid},
     {id: 5, title: 'Отделы', path: '/admin/add-department', icon: TbArrowsMove},
     {id: 6, title: 'Подрядчики', path: '/admin/add-contractor', icon: MdSupportAgent},
     {id: 7, title: 'Доступ', path: '/admin/add-roles', icon: AiOutlineUnlock},
-    {id: 4, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
+    {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
 ]
 
   

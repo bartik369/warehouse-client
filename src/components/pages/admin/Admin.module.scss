@@ -1,0 +1,13 @@
+.inner {
+    display: flex;
+    padding: 15px;
+    .form {
+        width: 100%;
+        max-width: 380px;
+        padding: 10px;
+    }
+    .list {
+        flex-grow: 2;
+        padding: 10px;
+    }
+}

@@ -1,33 +1,79 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 // import { adminPanel } from "../../../utils/constants/constants";
 import { adminMenu } from "../../../utils/data/menus";
 import styles from "./AdminMenu.module.scss";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const AdminMenu = () => {
+  const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+
+  const toggleSubmenu = (id: number) => {
+    setOpenSubmenu(id === openSubmenu ? null : id);
+  };
+  const handleMouseEnter = (index: number) => {
+    setHoveredItem(index);
+  };
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
+  
+
   return (
     <div className={styles.menu}>
-    {/* <div className={styles.title}>{adminPanel}</div> */}
-    <nav>
-      <ul>
-        {adminMenu
-          ? adminMenu.map((item) => (
+      <nav>
+        <ul>
+          {adminMenu.map((item) => {
+            const isCurrentActive = location.pathname === item.path;
+            const isSubmenuActive = item.subMenu?.some((subItem) => location.pathname === subItem.path
+            );
+            return (
               <li key={item.id}>
-                <NavLink to={item.path} className={({ isActive }) => (isActive 
-                ? styles.active 
-                : styles.default)}
-              >
+                <NavLink
+                  onClick={() => toggleSubmenu(item.id)}
+                  onMouseEnter={() => handleMouseEnter(item.id)}
+                  onMouseLeave={handleMouseLeave}
+                  to={!item.subMenu ? item.path : "#"}
+                  className={
+                    isCurrentActive || isSubmenuActive ? styles.active : styles.default
+                  }
+                >
                   <div className={styles.icon}>
                     <item.icon />
                   </div>
                   {item.title}
+                  {item.subMenu && (
+                    <span className={styles["submenu-toggle"]}>
+                      {openSubmenu === item.id ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                    </span>
+                  )}
                 </NavLink>
+  
+                {item.subMenu && openSubmenu === item.id && (
+                  <ul className={styles.submenu}>
+                    {item.subMenu.map((subItem) => (
+                      <li key={subItem.id}>
+                        <NavLink
+                          to={subItem.path}
+                          className={({ isActive }) =>
+                            isActive ? styles["submenu-active"] : styles["submenu-default"]
+                          }
+                        >
+                          {subItem.title}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
-            ))
-          : "Меню недоступно"}
-      </ul>
-    </nav>
+            );
+          })}
+        </ul>
+      </nav>
     </div>
   );
 };
 
 export default AdminMenu;
+

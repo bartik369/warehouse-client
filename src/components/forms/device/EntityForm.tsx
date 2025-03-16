@@ -58,11 +58,9 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 errors={errors}
                 name="name"
               /> 
-               <div className={styles.tooltip}>
                <span className={styles.tooltip} data-tooltip={slugInfo} tabIndex={0}>
                   <BsQuestionSquare className={styles.icon}/>
                </span>
-               </div>
                <Input
                 onChange={(e) => handleInputChange("slug", e.target.value)}
                 type="text"

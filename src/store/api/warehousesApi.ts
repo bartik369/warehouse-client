@@ -11,8 +11,15 @@ export const warehousesApi = createApi({
                 url: `${import.meta.env.VITE_WAREHOUSES}`,
                 method: 'GET',
             })
+        }),
+        createWarehouse: build.mutation({
+            query:(body) => ({
+                url: `${import.meta.env.VITE_WAREHOUSES}`,
+                method: "POST",
+                body,
+            })
         })
     })
 });
 
-export const {useGetWarehousesQuery} = warehousesApi
+export const { useGetWarehousesQuery, useCreateWarehouseMutation } = warehousesApi

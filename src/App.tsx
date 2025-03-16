@@ -13,12 +13,14 @@ import PublicRoutes from './routes/PublicRoutes';
 import Profile from './components/pages/profile/Profile';
 import Device from './components/pages/device/Device';
 import Devices from './components/pages/devices/Devices';
-import AddDevice from './components/pages/admin/add-device/AddDevice';
+import AddDevice from './components/pages/admin/device/AddDevice';
+import EditDevice from './components/pages/admin/device/EditDevice';
 import AddUser from './components/pages/admin/user/AddUser';
+import EditUser from './components/pages/admin/user/EditUser';
 import Users from './components/pages/users/Users';
-import AddCity from './components/pages/admin/location/AddCity';
-import AddDepartment from './components/pages/admin/location/AddDepartment';
-import AddWarehouse from './components/pages/admin/location/AddWarehouse';
+import AddCity from './components/pages/admin/city/AddCity';
+import AddDepartment from './components/pages/admin/department/AddDepartment';
+import AddWarehouse from './components/pages/admin/warehouse/AddWarehouse';
 import AddContractor from './components/pages/admin/contractor/AddContractor';
 import AddRoles from './components/pages/admin/roles/AddRoles';
 import AddManufacturer from './components/pages/admin/manufacturer/AddManufacturer';
@@ -60,7 +62,9 @@ function App() {
         <Route element={<Device />} path='/devices/:id'/>
         <Route element={<Devices />} path='/devices/locations/:city'/>
         <Route element={<AddDevice />} path='/admin/add-device'/>
+        <Route element={<EditDevice />} path='/admin/edit-device'/>
         <Route element={<AddUser />} path='/admin/add-user'/>
+        <Route element={<EditUser />} path='/admin/edit-user'/>
         <Route element={<Users />} path='/users' />
         <Route element={<AddCity />} path='/admin/add-city' />
         <Route element={<AddWarehouse/>} path='/admin/add-warehouse' />

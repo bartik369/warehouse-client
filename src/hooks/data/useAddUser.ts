@@ -17,7 +17,7 @@ export const useAddUser = () => {
     lastNameEn: "",
     isActive: true,
     department: "",
-    locationId: "",
+    location: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createUser] = useCreateUserMutation();
@@ -25,9 +25,6 @@ export const useAddUser = () => {
 
   const handleInputChange = useCallback(
     <T extends string | IUser>(field: keyof IUser, value: T) => {
-        console.log(field);
-        console.log(value);
-        
       const validateErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
@@ -56,9 +53,12 @@ export const useAddUser = () => {
             userName: user.userName,
             email: user.email,
             workId: user.workId,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstNameRu: user.firstNameRu,
+            lastNameRu: user.lastNameRu,
+            firstNameEn: user.firstNameEn,
+            lastNameEn: user.lastNameEn,
             department: user.department,
+            location: user.location,
           };
           await createUser(updateData)
             .unwrap()
@@ -83,9 +83,13 @@ export const useAddUser = () => {
     const resetUser = () => {
 
     }
-     const handleDepartmentChange = useCallback((item: any) => {
+    const handleDepartmentChange = useCallback((item: any) => {
           handleInputChange("department", item.name || '');
     }, [handleInputChange]);
+
+    const handleLocationChange = useCallback((item: any) => {
+      handleInputChange("location", item.name || '');
+}, [handleInputChange]);
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -95,5 +99,6 @@ export const useAddUser = () => {
       }));
     }, [checked]);
     
-  return { user, errors, checked, handleChecked, handleInputChange, handleCreateUser, resetUser, handleDepartmentChange };
+  return { user, errors, checked, handleChecked, handleInputChange, 
+    handleCreateUser, resetUser, handleDepartmentChange, handleLocationChange };
 };

@@ -9,7 +9,7 @@ export interface IUser {
     lastNameEn: string;
     department: string;
     isActive: boolean;
-    locationId: string;
+    location: string;
     createdAt?: Date | null;
     updatedAt?: Date | null;
 }

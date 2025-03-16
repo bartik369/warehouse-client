@@ -77,6 +77,9 @@ a {
     position: relative;
     line-height: initial;
     padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 99;
     box-shadow: rgba(62, 72, 81, 0.1) 0px 48px 100px 0px;
 }
 

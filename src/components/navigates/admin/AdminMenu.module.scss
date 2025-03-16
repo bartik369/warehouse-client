@@ -1,16 +1,16 @@
 @mixin item {
-    font-size: 12px;
+    font-size: 13px;
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
-    padding: 8px 10px;
-    border-radius: 4px;
+    margin-bottom: 5px;
+    padding: 11px 15px 11px 10px;
+    border-radius: 6px;
     border: 1px solid #fff;
     transition: background-color .1s ease;
 }
 
 @mixin active {
-    color: #3a3dbe;
+    color: #3d3dbf;
     background-color: #f8faff;
     border: 1px solid #eaeefc;
 }
@@ -29,6 +29,9 @@
         padding: 10px 0;
     }
     ul {
+        li {
+            position: relative;
+        }
         .default {
             @include item;
             color: #37363b;
@@ -51,8 +54,62 @@
                 width: fit-content;
                 display: flex;
                 align-items: center;
-                margin-right: 5px;
+                margin-right: 6px;
             }
+        }
+        .submenu {
+            padding-left: 15px;
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 16px;
+                border: .3px solid #dde2ed;
+                height: 100%;
+            }
+            .submenu-default {
+                position: relative;
+                display: block;
+                padding: 8px 0px 8px 12px;
+                color: #37363b;
+                font-size: 12px;
+                &:hover {}
+            }
+            .submenu-active {
+                position: relative;
+                display: block;
+                padding: 8px 0px 8px 12px;
+                color: #3d3dbf;
+                font-size: 12px;
+                &:hover {
+                    color: #3d3dbf;
+                }
+            }
+            .submenu-default,
+            .submenu-active {
+                &::after {
+                    content: "";
+                    top: 50%;
+                    left: 2px;
+                    position: absolute;
+                    height: 1px;
+                    width: 8px;
+                    transform: translateY(-50%);
+                    background-color: #dde2ed;
+                }
+            }
+        }
+    }
+    .submenu-toggle {
+        display: flex;
+        font-size: 12px;
+        position: absolute;
+        right: 7px;
+        color: #070707;
+        cursor: pointer;
+        &:hover {
+            color: #3d3dbf;
         }
     }
 }

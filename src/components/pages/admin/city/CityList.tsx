@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddLocationForm = () => {
+const CityList = () => {
     return (
         <div>
-            Input
+            city list
         </div>
     );
 };
 
-export default AddLocationForm;
+export default CityList;

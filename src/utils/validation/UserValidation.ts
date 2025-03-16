@@ -6,10 +6,12 @@ const requiredUserFields = [
   "userName",
   "email",
   "workId",
-  "firstName",
-  "lastName",
+  "firstNameRu",
+  "lastNameRu",
+  "firstNameEn",
+  "lastNameEn",
   "department",
-  "locationId",
+  "location",
 ];
 type ValidationFields = keyof IUser;
 
@@ -31,10 +33,12 @@ export const FormValidation = (formData: IUser): IValidateUserErrors => {
     "userName",
     "email",
     "workId",
-    "firstName",
-    "lastName",
+    "firstNameRu",
+    "lastNameRu",
+    "firstNameEn",
+    "lastNameEn",
     "department",
-    "locationId",
+    "location",
   ];
   validateRequiredFields(formData, requiredFields, errors);
   return errors;

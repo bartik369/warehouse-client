@@ -3,6 +3,7 @@ import { ILocation } from "../../types/locations";
 import { FormValidation, ValidateField } from "../../utils/validation/LocationValidation";
 import { useCreateDepartmentMutation } from "../../store/api/departmentApi";
 import { useCreateLocationMutation } from "../../store/api/locationApi";
+import { useCreateWarehouseMutation } from "../../store/api/warehousesApi";
 import { toast } from "react-toastify";
 import { isErrorWithMessage, isFetchBaseQueryError } from "../../utils/errors/error-handling";
 
@@ -10,14 +11,21 @@ export const useAddLocation = () => {
     const [location, setLocation] = useState<ILocation>({
         id: "",
         name: "",
+        slug: "",
+        locationName: '',
+        locationId: "",
         comment: "",
     });
+    console.log(location)
     const [errors, setErrors] = useState<Record<string, string>>({});
+
     const [createDepartment] = useCreateDepartmentMutation();
     const [createLocation] = useCreateLocationMutation();
-    const locationPoolsFunctions: Record<string, (item:any) => {unwrap:() => Promise<any>}> = {
+    const [createWarehouse] = useCreateWarehouseMutation();
+    const locationPoolsFunctions: Record<string, (item:any) => { unwrap:() => Promise<any> }> = {
         department: createDepartment,
-        location: createLocation,
+        warehouse: createWarehouse,
+        city: createLocation,
     }
 
     const handleInputChange = useCallback(<T extends string | ILocation>(field: keyof ILocation, value: T) => {
@@ -32,11 +40,11 @@ export const useAddLocation = () => {
         }))
     }, []);
 
-    const handleCreateDepartment = useCallback(
-        async(e: React.MouseEvent<HTMLButtonElement>, fieldTyle: string) => {
+    const handleCreateLocation = useCallback(
+        async(e: React.MouseEvent<HTMLButtonElement>, fieldType: string) => {
         e.preventDefault();
         try {
-            const createLocationFunction = locationPoolsFunctions[fieldTyle];
+            const createLocationFunction = locationPoolsFunctions[fieldType];
             const validationErrors = FormValidation(location);
             setErrors(validationErrors as Record<string, string>);
             if (Object.keys(validationErrors).length === 0) {
@@ -63,5 +71,16 @@ export const useAddLocation = () => {
                     }
         }
     }, [location, FormValidation]);
-    return { location, errors, setLocation, handleCreateDepartment, handleInputChange }
+
+    const handleResetUser = useCallback(() => {
+
+    }, []);
+
+    const handleCityChange = useCallback((item: any) => {
+        handleInputChange("locationName", item.name || '');
+  }, [handleInputChange]);
+
+    return { location, errors, handleCityChange, setLocation, handleCreateLocation,
+        handleInputChange, handleResetUser 
+    }
 }

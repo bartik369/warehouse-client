@@ -1,3 +1,7 @@
+export const city = 'Город';
+export const description = 'Описание';
+export const name = 'Название';
+export const slug = 'slug';
 export const loginLabel = 'Ваш логин';
 export const passwordLabel = 'Ваш пароль';
 export const signin = 'Войти';
@@ -30,6 +34,8 @@ export const addDeviceManufacturerTitle = 'Добавить нового про�
 export const isExistingInList = 'Нет в списке?';
 export const slugInfo = `Если модель, например, Dell 5490, то slug будет 5490. 
 Если тип Ноутбук, то slug будет laptop. Slug указывать прописными буквами`;
+export const slugLocation = `Если название, например, "Склад 1 этаж", то slug будет sklad_1_etazge. 
+Если город "Москва", то slug будет moscow. Slug указывать прописными буквами`;
 export const addNewManufacturer = 'Добавление нового производителя';
 export const addNewModel = 'Добавление новой модели';
 export const addNewType = 'Добавление нового типа';
@@ -38,3 +44,7 @@ export const phoneMaskPlaceholder = '+7 (___) ___-__-__';
 export const requiredFieldText = 'Обязательно к заполнению';
 export const requiredFieldFive = 'Не менее 5 символов';
 export const adminPanel = 'Панель администратора';
+export const addUserTitle = 'Добавить пользователя';
+export const addWarehouseTitle = 'Добавить склад';
+export const addCityTitle = 'Добавить город';
+export const addDepartmentTitle = 'Добавить отдел';

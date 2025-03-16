@@ -2,6 +2,7 @@ export interface ILocation {
     id: string;
     name: string;
     slug: string;
+    locationName?: string;
     locationId?: string;
     comment?: string;
 }

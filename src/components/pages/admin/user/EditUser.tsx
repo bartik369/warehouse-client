@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddWarehouse = () => {
+const EditUser = () => {
     return (
         <div>
-            warehouse
+            edit user
         </div>
     );
 };
 
-export default AddWarehouse;
+export default EditUser;
