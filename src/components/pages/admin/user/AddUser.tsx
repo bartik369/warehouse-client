@@ -1,10 +1,11 @@
-import React from 'react';
 import UserForm from '../../../forms/user/UserForm';
+import { useGetDepartmentsQuery } from '../../../../store/api/departmentApi';
 
 const AddUser = () => {
+    const { data:departments } = useGetDepartmentsQuery();
     return (
         <div>
-            <UserForm />   
+            <UserForm departments={departments || []} />   
         </div>
     );
 };

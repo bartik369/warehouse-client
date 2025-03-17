@@ -37,7 +37,7 @@ const LocationForm = () => {
   }, [locationType]);
 
   const { location, errors, handleCityChange, handleInputChange, handleCreateLocation,
-    handleResetUser } = useAddLocation();
+    handleResetLocation } = useAddLocation();
   return (
     <form>
       <div className={styles.title}>{title}</div>
@@ -49,9 +49,11 @@ const LocationForm = () => {
         errors={errors}
         onChange={(e) => handleInputChange("name", e.target.value)}
       />
-      <span className={styles.tooltip} data-tooltip={slugLocation} tabIndex={0}>
-        <BsQuestionSquare className={styles.icon} />
-      </span>
+      <div className={styles["tooltip-wrapper"]}>
+        <span className={styles.tooltip} data-tooltip={slugLocation} tabIndex={0}>
+          <BsQuestionSquare className={styles.icon} />
+        </span>
+      </div>
       <Input
         label={slug}
         type="text"
@@ -85,7 +87,7 @@ const LocationForm = () => {
           size="lg"
           color="grey"
           title={reset}
-          click={handleResetUser}
+          click={handleResetLocation}
         />
         <BtnAction
           icon={<GoPlus />}

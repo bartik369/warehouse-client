@@ -12,8 +12,7 @@ export const useAddLocation = () => {
         id: "",
         name: "",
         slug: "",
-        locationName: '',
-        locationId: "",
+        locationName: "",
         comment: "",
     });
     console.log(location)
@@ -52,11 +51,14 @@ export const useAddLocation = () => {
                 const updateData = {
                     ...location,
                     name: location.name,
+                    slug: location.slug,
                     comment: location.comment,
+                    locationName: location.locationName,
                 };
                 await createLocationFunction(updateData).unwrap().then((data) => {
                     toast(data?.message, {type: "success"});
-                })
+                });
+                handleResetLocation();
             }
         } catch (err: unknown) {
             if (isFetchBaseQueryError(err)) {
@@ -72,15 +74,26 @@ export const useAddLocation = () => {
         }
     }, [location, FormValidation]);
 
-    const handleResetUser = useCallback(() => {
-
+    const handleResetLocation = useCallback(() => {
+        setLocation({
+            id: "",
+            name: "",
+            slug: "",
+            locationName: "",
+            comment: "",
+        });
     }, []);
+
+    const handleUpdateLocation = useCallback(() => {
+        console.log("update");
+        
+    }, [])
 
     const handleCityChange = useCallback((item: any) => {
         handleInputChange("locationName", item.name || '');
   }, [handleInputChange]);
 
     return { location, errors, handleCityChange, setLocation, handleCreateLocation,
-        handleInputChange, handleResetUser 
+        handleInputChange, handleResetLocation, handleUpdateLocation
     }
 }

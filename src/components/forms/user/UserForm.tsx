@@ -1,3 +1,4 @@
+import {FC} from "react";
 import Input from '../../ui/input/Input';
 import { useAddUser } from '../../../hooks/data/useAddUser';
 import { useGetLocationsQuery } from '../../../store/api/locationApi';
@@ -12,16 +13,15 @@ import { labelFirstNameEn, labelFirstNameRu, labelLastNameEn, labelLastNameRu,
 import { GoPlus } from 'react-icons/go';
 import { ILocation } from '../../../types/locations';
 import styles from "./UserForm.module.scss";
+
+interface IUserFormProps {
+    departments: ILocation[];
+}
     
-    const UserForm = () => {
+    const UserForm:FC<IUserFormProps> = ({ departments }) => {
         const { user, errors, checked, handleInputChange, handleCreateUser, 
             resetUser, handleDepartmentChange, handleChecked, handleLocationChange } = useAddUser();
         const {data: locations } = useGetLocationsQuery();
-        
-        const departments = [
-            {id: 1, name: 'Бухгалтерия', slug: 'finance'},
-            {id: 2, name: 'Айти отдел', slug: 'it'}
-        ]
         return (
             <div className={styles.container}>
             <div className={styles.title}>{addUserTitle}</div>

@@ -19,7 +19,7 @@ const validateRequiredFields = <T>(
 
 export const FormValidation = (formData: ILocation): IValidateLocationErrors => {
     const errors: Record<string, string> = {};
-    const requiredFields:ValidationFields[] = ["name"];
+    const requiredFields:ValidationFields[] = ["name", "slug"];
     validateRequiredFields(formData, requiredFields, errors);
     return errors;
 }

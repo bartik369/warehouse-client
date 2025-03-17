@@ -1,13 +1,41 @@
 .inner {
     display: flex;
     padding: 15px;
+    gap: 30px;
     .form {
         width: 100%;
         max-width: 380px;
         padding: 10px;
     }
     .list {
-        flex-grow: 2;
-        padding: 10px;
+        display: flex;
+        justify-content: center;
+        max-height: 350px;
+        padding: 20px;
+        overflow-x: auto;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #070707;
+            padding: 9px 18px;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8ef;
+            border-radius: 6px;
+            .btn {
+                display: flex;
+                align-items: center;
+                font-size: 15px;
+                color: #070707;
+                margin-left: 15px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                &:hover {
+                    color: #3d3dbf;
+                }
+            }
+        }
     }
 }

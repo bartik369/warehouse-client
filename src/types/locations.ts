@@ -3,7 +3,6 @@ export interface ILocation {
     name: string;
     slug: string;
     locationName?: string;
-    locationId?: string;
     comment?: string;
 }
 export interface IValidateLocationErrors {

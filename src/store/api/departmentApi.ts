@@ -1,15 +1,23 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
+import { ILocation } from "../../types/locations";
 
 export const departmentApi = createApi({
   reducerPath: "departmentApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: [],
+  tagTypes: ["Department"],
   endpoints: (build) => ({
-    getDepartments: build.query({
+    getDepartments: build.query<ILocation[], void>({
       query: () => ({
-        url: ``,
+        url: `${import.meta.env.VITE_DEPARTMENTS}`,
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "Department" as const, id })),
+              { type: "Department", id: "LIST" },
+            ]
+          : [{ type: "Department", id: "LIST" }],
     }),
     getDepartment: build.query({
       query: () => ({
@@ -18,10 +26,11 @@ export const departmentApi = createApi({
     }),
     createDepartment: build.mutation({
       query: (body) => ({
-        url: ``,
+        url: `${import.meta.env.VITE_DEPARTMENTS}`,
         method: "POST",
         body,
       }),
+      invalidatesTags: ['Department'],
     }),
     updateDepartment: build.mutation({
       query: (body) => ({
