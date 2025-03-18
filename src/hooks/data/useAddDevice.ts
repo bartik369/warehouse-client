@@ -1,7 +1,8 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../redux/useRedux";
-import { IDeviceMedia, IEntity, IDevice, IContractor} from "./../../types/devices";
+import { IContractor } from "../../types/content";
+import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
 import { useCreateDeviceMutation } from "../../store/api/devicesApi";
 import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
 import {isFetchBaseQueryError, isErrorWithMessage} from "../../utils/errors/error-handling";

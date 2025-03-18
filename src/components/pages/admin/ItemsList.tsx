@@ -1,14 +1,15 @@
-import { FC } from 'react';
-import { ILocation } from '../../../types/locations';
-import styles from "./Admin.module.scss";
+import {FC} from "react"
+import { IAdminEntity } from "../../../types/content";
 import { BsPencilSquare } from 'react-icons/bs';
+import styles from "./Admin.module.scss";
 
 interface IItemsListProps {
-    items: ILocation[];
-    handle: () => void;
+    field: string;
+    items: IAdminEntity[]
+    handle: (id: string, field: string) => void;
 }
-const ItemsList:FC<IItemsListProps> = ({items, handle}) => {
-    if (!items) return <div>net info</div>
+const ItemsList: FC<IItemsListProps> = ({field, items, handle}) => {
+    if (items.length === 0) return <div>net info</div>
     return (
         <ul>
             {items.map((item) =>
@@ -16,7 +17,7 @@ const ItemsList:FC<IItemsListProps> = ({items, handle}) => {
                     <span className={styles.name}>{item.name}</span>
                     <button 
                         className={styles.btn}
-                        onClick={handle}
+                        onClick={() => handle(item.id, field)}
                     >
                         <BsPencilSquare />
                     </button>

@@ -20,6 +20,7 @@ export const useInputMask = () => {
     return formatted;
   };
   const changeFormatPhone = (phone: string) => {
+    if (phone.trim().length === 0) return
     return phone.replace(/[^\d+]/g, "");
   };
 

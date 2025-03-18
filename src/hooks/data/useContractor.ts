@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
-import { IContractor } from "../../types/devices";
+import { IContractor } from "../../types/content";
 import { useCreateContractorMutation } from "../../store/api/contractorApi";
 import {
   isErrorWithMessage,
@@ -59,9 +59,8 @@ export const useContactor = () => {
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length === 0) {
           const contractorData = {
-            name: contractor.name,
+            ...contractor,
             phoneNumber: changeFormatPhone(contractor.phoneNumber),
-            address: contractor.address
           }
           await createContractor(contractorData)
             .unwrap()

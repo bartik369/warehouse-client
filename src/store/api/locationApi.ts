@@ -1,20 +1,20 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { ILocation } from "../../types/locations";
+import { IAdminEntity } from "../../types/content";
 
 export const locationApi = createApi({
   reducerPath: "locationApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: [],
   endpoints: (build) => ({
-    getLocations: build.query<ILocation[], void>({
+    getLocations: build.query<IAdminEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
       }),
     }),
-    getLocation: build.query({
-      query: () => ({
-        url: ``,
+    getLocation: build.query<IAdminEntity, string>({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),
     }),
     createLocation: build.mutation({
@@ -41,7 +41,7 @@ export const locationApi = createApi({
 
 export const {
   useGetLocationsQuery,
-  useGetLocationQuery,
+  useLazyGetLocationQuery,
   useCreateLocationMutation,
   useUpdateLocationMutation,
   useDeleteLocationQuery,

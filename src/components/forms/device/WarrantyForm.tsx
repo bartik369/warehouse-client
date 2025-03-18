@@ -1,4 +1,3 @@
-import { FC } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { add, isExistingInList } from "../../../utils/constants/constants";
@@ -10,12 +9,13 @@ import {
   selectDate,
   warrantyNumber,
 } from "../../../utils/constants/device";
-import { IContractor, IDevice } from "../../../types/devices";
+import { IDevice } from "../../../types/devices";
+import { IContractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
-import { useGetContractorQuery } from "../../../store/api/contractorApi";
+import { useGetContractorsQuery } from "../../../store/api/contractorApi";
 import styles from "./DeviceForm.module.scss";
 
 registerLocale("ru", ru);
@@ -44,7 +44,7 @@ const WarrantyForm = <T,>({
   setValue,
 }: IWarrantyFormProps<T>) => {
   const { errors,  setFieldType } = useAddDevice();
-  const { data: contractors } = useGetContractorQuery();
+  const { data: contractors } = useGetContractorsQuery();
   return (
     <form className={styles.form4}>
       <div className={styles.input}>

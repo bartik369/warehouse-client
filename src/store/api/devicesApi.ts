@@ -42,6 +42,11 @@ export const devicesApi = createApi({
                 }
             }
         }),
+        getManufacturer: build.query({
+            query:(id:string) => ({
+                url:`${import.meta.env.VITE_MANUFACTURERS}${id}`,  
+            })
+        }),
         getManufacturers: build.query<IEntity[], void>({
             query() {
                 return {
@@ -105,4 +110,5 @@ export const  {
     useCreateModelMutation,
     useCreateTypeMutation,
     useGetTypesQuery,
+    useLazyGetManufacturerQuery,
 } = devicesApi;

@@ -20,6 +20,11 @@ export const warehousesApi = createApi({
             ]
           : [{ type: "Warehouse", id: "LIST" }],
     }),
+    getWarehouse: build.query<ILocation, string>({
+      query: (id:string) => ({
+        url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
+      })
+    }),
     createWarehouse: build.mutation({
       query: (body) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}`,
@@ -31,5 +36,9 @@ export const warehousesApi = createApi({
   }),
 });
 
-export const { useGetWarehousesQuery, useCreateWarehouseMutation } =
+export const { 
+  useGetWarehousesQuery, 
+  useCreateWarehouseMutation,
+  useLazyGetWarehouseQuery,
+ } =
   warehousesApi;

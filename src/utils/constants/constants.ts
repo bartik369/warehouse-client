@@ -48,3 +48,5 @@ export const addUserTitle = 'Добавить пользователя';
 export const addWarehouseTitle = 'Добавить склад';
 export const addCityTitle = 'Добавить город';
 export const addDepartmentTitle = 'Добавить отдел';
+export const addContractorTitle = 'Добавить подрядчика';
+export const addManufacturerTitle = 'Добавить производителя';

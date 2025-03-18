@@ -50,15 +50,6 @@ export const useAddUser = () => {
           if (!user) return;
           const updateData = {
             ...user,
-            userName: user.userName,
-            email: user.email,
-            workId: user.workId,
-            firstNameRu: user.firstNameRu,
-            lastNameRu: user.lastNameRu,
-            firstNameEn: user.firstNameEn,
-            lastNameEn: user.lastNameEn,
-            department: user.department,
-            location: user.location,
           };
           await createUser(updateData)
             .unwrap()

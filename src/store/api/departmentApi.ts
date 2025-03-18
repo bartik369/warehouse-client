@@ -1,13 +1,13 @@
+import { IAdminEntity } from "../../types/content";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { ILocation } from "../../types/locations";
 
 export const departmentApi = createApi({
   reducerPath: "departmentApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Department"],
   endpoints: (build) => ({
-    getDepartments: build.query<ILocation[], void>({
+    getDepartments: build.query<IAdminEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
       }),
@@ -20,8 +20,8 @@ export const departmentApi = createApi({
           : [{ type: "Department", id: "LIST" }],
     }),
     getDepartment: build.query({
-      query: () => ({
-        url: ``,
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
       }),
     }),
     createDepartment: build.mutation({
@@ -48,7 +48,7 @@ export const departmentApi = createApi({
 });
 
 export const {
-  useGetDepartmentQuery,
+  useLazyGetDepartmentQuery,
   useGetDepartmentsQuery,
   useCreateDepartmentMutation,
   useUpdateDepartmentMutation,

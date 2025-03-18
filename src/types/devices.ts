@@ -117,17 +117,6 @@ export interface IDeviceRepair {
   contractorId: string;
   dateTransfer: Date;
 }
-
-export interface IContractor {
-  id?: string;
-  contractorId?: string;
-  name: string;
-  phoneNumber: string;
-  address: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
 export interface IManufacturer {
   id: number;
   name: string;
@@ -162,7 +151,7 @@ export interface ISelectedItem {
 }
 
 export interface IEntity {
-  id?: string;
+  id: string;
   name: string;
   slug: string;
   imagePath?: string;

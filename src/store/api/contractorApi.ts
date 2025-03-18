@@ -7,15 +7,20 @@ export const contractorApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: [],
     endpoints:(build) => ({
-        getContractor: build.query<IContractor[], void>({
+        getContractors: build.query<IContractor[], void>({
             query: () => ({
-                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_CONTRACTORS}`,
+                url: `${import.meta.env.VITE_CONTRACTORS}`,
+            })
+        }),
+        getContractor: build.query({
+            query:(id:string) => ({
+                url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
             })
         }),
         createContractor: build.mutation({
             query(body) {
                 return {
-                    url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_CONTRACTORS}`,
+                    url: `${import.meta.env.VITE_CONTRACTORS}`,
                     method: "POST",
                     body,
                 }
@@ -24,4 +29,8 @@ export const contractorApi = createApi({
     })
 });
 
-export const { useCreateContractorMutation, useGetContractorQuery } = contractorApi;
+export const { 
+    useCreateContractorMutation, 
+    useGetContractorsQuery,
+    useLazyGetContractorQuery,
+ } = contractorApi;

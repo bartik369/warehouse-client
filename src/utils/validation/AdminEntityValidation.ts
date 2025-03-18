@@ -1,9 +1,9 @@
-import { ILocation } from './../../types/locations';
+import { IAdminEntity } from '../../types/locations';
 import { requiredFieldText } from "../constants/constants";
 import { IValidateLocationErrors } from '../../types/locations';
 
 const locationFields = ['name'];
-type ValidationFields = keyof ILocation;
+type ValidationFields = keyof IAdminEntity;
 
 const validateRequiredFields = <T>(
     formData: T,
@@ -17,9 +17,9 @@ const validateRequiredFields = <T>(
     });
 }
 
-export const FormValidation = (formData: ILocation): IValidateLocationErrors => {
+export const FormValidation = (formData: IAdminEntity): IValidateLocationErrors => {
     const errors: Record<string, string> = {};
-    const requiredFields:ValidationFields[] = ["name", "slug"];
+    const requiredFields:ValidationFields[] = ["name", "slug", "locationName", "phoneNumber"];
     validateRequiredFields(formData, requiredFields, errors);
     return errors;
 }
