@@ -5,7 +5,7 @@ import { baseQueryWithReauth } from '../baseQueryWithReauth';
 export const devicesApi = createApi({
     reducerPath: 'devicesApi',
     baseQuery: baseQueryWithReauth,
-    tagTypes:[],
+    tagTypes:["Manufacturer"],
     endpoints:(build) => ({
         getDevices: build.query({
             query: (queryParams) => {
@@ -53,7 +53,14 @@ export const devicesApi = createApi({
                     url:`${import.meta.env.VITE_MANUFACTURERS}`,
                     refetchOnMountOrArgChange: true,
                 }
-            }
+            },
+            providesTags: (result) =>
+                result
+                  ? [
+                      ...result.map(({ id }) => ({ type: "Manufacturer" as const, id })),
+                      { type: "Manufacturer", id: "LIST" },
+                    ]
+                  : [{ type: "Manufacturer", id: "LIST" }],
         }),
         createManufacturer: build.mutation<any, FormData>({
             query(body) {
@@ -62,7 +69,16 @@ export const devicesApi = createApi({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['Manufacturer'],
+        }),
+        updateManufacturer:build.mutation({
+            query:({id, ...body}) => ({
+                url:`${import.meta.env.VITE_MANUFACTURERS}${id}`,
+                method: 'PUT',
+                body,
+            }),
+            invalidatesTags: ['Manufacturer'],
         }),
         createModel: build.mutation<any, FormData>({
             query(body) {
@@ -109,6 +125,7 @@ export const  {
     useCreateManufacturerMutation,
     useCreateModelMutation,
     useCreateTypeMutation,
+    useUpdateManufacturerMutation,
     useGetTypesQuery,
     useLazyGetManufacturerQuery,
 } = devicesApi;

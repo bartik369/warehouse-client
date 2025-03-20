@@ -9,7 +9,7 @@ import { GoPlus } from 'react-icons/go';
 import styles from "./ContractorForm.module.scss";
 
 const ContractorForm = () => {
-    const {contractor, handleInputChange, handleReset, handleCreateContractor,  errors} = useContactor();
+    const {contractor, errors,  handleInputChange, handleReset, handleCreateContractor} = useContactor();
     return (
         <form>
           <Input 

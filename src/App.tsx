@@ -18,14 +18,14 @@ import EditDevice from './components/pages/admin/device/EditDevice';
 import AddUser from './components/pages/admin/user/AddUser';
 import EditUser from './components/pages/admin/user/EditUser';
 import Users from './components/pages/users/Users';
-import AddCity from './components/pages/admin/city/AddCity';
 import AddDepartment from './components/pages/admin/department/AddDepartment';
 import AddWarehouse from './components/pages/admin/warehouse/AddWarehouse';
 import AddContractor from './components/pages/admin/contractor/AddContractor';
 import AddRoles from './components/pages/admin/roles/AddRoles';
 import AddManufacturer from './components/pages/admin/manufacturer/AddManufacturer';
-import './App.scss';
+import AddLocation from './components/pages/admin/city/AddLocation';
 
+import './App.scss';
 function App() {
   const dispatch = useAppDispatch();
   const [validToken] = useValidateMutation();
@@ -66,7 +66,7 @@ function App() {
         <Route element={<AddUser />} path='/admin/add-user'/>
         <Route element={<EditUser />} path='/admin/edit-user'/>
         <Route element={<Users />} path='/users' />
-        <Route element={<AddCity />} path='/admin/add-city' />
+        <Route element={<AddLocation />} path='/admin/add-location' />
         <Route element={<AddWarehouse/>} path='/admin/add-warehouse' />
         <Route element={<AddDepartment />} path='/admin/add-department' />
         <Route element={<AddContractor />} path='/admin/add-contractor' />

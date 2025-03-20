@@ -5,12 +5,19 @@ import { IAdminEntity } from "../../types/content";
 export const locationApi = createApi({
   reducerPath: "locationApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: [],
+  tagTypes: ["Location"],
   endpoints: (build) => ({
     getLocations: build.query<IAdminEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "Location" as const, id })),
+              { type: "Location", id: "LIST" },
+            ]
+          : [{ type: "Location", id: "LIST" }],
     }),
     getLocation: build.query<IAdminEntity, string>({
       query: (id: string) => ({
@@ -23,13 +30,15 @@ export const locationApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ['Location'],
     }),
     updateLocation: build.mutation({
-      query: (body) => ({
-        url: ``,
-        method: "PATCH",
+      query: ({id, ...body}) => ({
+        url: `${import.meta.env.VITE_LOCATIONS}${id}${id}`,
+        method: "PUT",
         body,
       }),
+      invalidatesTags: ['Location'],
     }),
     deleteLocation: build.query({
       query: () => ({

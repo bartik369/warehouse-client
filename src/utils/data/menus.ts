@@ -62,7 +62,7 @@ export const adminMenu = [
         {id: 1, title: 'Добавить', path: '/admin/add-device'},
         {id: 2, title: 'Редактировать', path: '/admin/edit-device'},
       ]},
-    {id: 4, title: 'Города', path: '/admin/add-city', icon: LiaCitySolid},
+    {id: 4, title: 'Города', path: '/admin/add-location', icon: LiaCitySolid},
     {id: 5, title: 'Отделы', path: '/admin/add-department', icon: TbArrowsMove},
     {id: 6, title: 'Подрядчики', path: '/admin/add-contractor', icon: MdSupportAgent},
     {id: 7, title: 'Доступ', path: '/admin/add-roles', icon: AiOutlineUnlock},

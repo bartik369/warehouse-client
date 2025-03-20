@@ -1,10 +1,10 @@
 import ItemsList from "../ItemsList";
 import MultiForm from "../../../forms/multi/MultiForm";
+import { useGetLocationsQuery } from "../../../../store/api/locationApi";
 import { useAddAdminEntities } from "../../../../hooks/data/useAddAdminEntities";
-import { useGetManufacturersQuery } from "../../../../store/api/devicesApi";
 import styles from "../Admin.module.scss";
 
-const AddManufacturer = () => {
+const AddLocation = () => {
   const {
     entity,
     errors,
@@ -15,7 +15,7 @@ const AddManufacturer = () => {
     handleResetEntity,
     handleGetEntity,
   } = useAddAdminEntities();
-  const { data: manufacturers } = useGetManufacturersQuery();
+  const { data: cities } = useGetLocationsQuery();
   return (
     <section className={styles.inner}>
       <div className={styles.form}>
@@ -31,8 +31,8 @@ const AddManufacturer = () => {
       </div>
       <aside className={styles.list}>
         <ItemsList
-          field="manufacturer"
-          items={manufacturers || []}
+          field="location"
+          items={cities || []}
           handle={(id, field) => handleGetEntity(id, field)}
         />
       </aside>
@@ -40,4 +40,4 @@ const AddManufacturer = () => {
   );
 };
 
-export default AddManufacturer;
+export default AddLocation;

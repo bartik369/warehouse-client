@@ -33,6 +33,14 @@ export const warehousesApi = createApi({
       }),
       invalidatesTags: ["Warehouse"],
     }),
+    updateWarehouse: build.mutation({
+      query: ({id, ...body}) => ({
+        url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Warehouse"],
+    }),
   }),
 });
 
@@ -40,5 +48,6 @@ export const {
   useGetWarehousesQuery, 
   useCreateWarehouseMutation,
   useLazyGetWarehouseQuery,
+  useUpdateWarehouseMutation,
  } =
   warehousesApi;

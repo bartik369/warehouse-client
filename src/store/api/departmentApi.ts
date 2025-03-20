@@ -33,11 +33,12 @@ export const departmentApi = createApi({
       invalidatesTags: ['Department'],
     }),
     updateDepartment: build.mutation({
-      query: (body) => ({
-        url: ``,
-        method: "PATCH",
+      query: ({id, ...body}) => ({
+        url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
+        method: "PUT",
         body,
       }),
+      invalidatesTags: ['Department'],
     }),
     deleteDepartment: build.query({
       query: () => ({

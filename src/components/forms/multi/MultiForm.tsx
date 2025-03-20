@@ -1,13 +1,12 @@
-import { useMemo} from "react";
+import { useMemo, FC} from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
 import { useLocation } from "react-router-dom";
-import { useAddAdminEntities } from "../../../hooks/data/useAddAdminEntities";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { IAdminEntity } from "../../../types/content";
-import { add, addCityTitle, addWarehouseTitle, addDepartmentTitle, reset,
+import { add, update, addLocationTitle, addWarehouseTitle, addDepartmentTitle, reset,
   slugLocation, name, slug, city, description, addContractorTitle, addManufacturerTitle,
   phoneMaskPlaceholder,
 } from "../../../utils/constants/constants";
@@ -17,15 +16,27 @@ import { BsQuestionSquare } from "react-icons/bs";
 import { phoneNumberLabel } from "../../../utils/constants/device";
 import styles from "./MultiForm.module.scss";
 
-const MultiForm = () => {
+interface IMultiFormProps {
+  entity: IAdminEntity;
+  isUpdate: boolean;
+  errors: Record<string, string>,
+  handleCity: (item: any) => void;
+  handleInput: (name: keyof IAdminEntity, e:string) => void;
+  handleCreate: (e:React.MouseEvent<HTMLButtonElement>, type:string) => void;
+  handleReset: () => void;
+}
+
+const MultiForm: FC<IMultiFormProps> = ({
+  entity, isUpdate, errors, handleCity, handleInput, handleCreate, handleReset}) => {
   const locationPath = useLocation();
   const locationType = locationPath.pathname.split("/")[2]?.split("-")[1] || "";
   const { data: cities } = useGetLocationsQuery();
+
   
   const title = useMemo(() => {
     switch (locationType) {
       case "warehouse": return addWarehouseTitle;
-      case "city": return addCityTitle;
+      case "location": return addLocationTitle;
       case "department": return addDepartmentTitle;
       case "contractor": return addContractorTitle;
       case "manufacturer": return addManufacturerTitle;
@@ -33,10 +44,7 @@ const MultiForm = () => {
     }
   }, [locationType]);
 
-  const { entity, errors, handleCityChange, handleInputChange, handleCreateEntity,
-    handleResetEntity } = useAddAdminEntities();
   const isContractor = locationPath.pathname.endsWith("contractor");
-  
   return (
     <form>
       <div className={styles.title}>{title}</div>
@@ -46,7 +54,7 @@ const MultiForm = () => {
         name="name"
         value={entity.name}
         errors={errors}
-        onChange={(e) => handleInputChange("name", e.target.value)}
+        onChange={(e) => handleInput("name", e.target.value)}
       />
       <div className={styles["tooltip-wrapper"]}>
         <span
@@ -63,7 +71,7 @@ const MultiForm = () => {
         name="slug"
         value={entity.slug}
         errors={errors}
-        onChange={(e) => handleInputChange("slug", e.target.value)}
+        onChange={(e) => handleInput("slug", e.target.value)}
       />
       {locationPath.pathname.endsWith("contractor") && (
         <Input 
@@ -71,14 +79,14 @@ const MultiForm = () => {
           name='phoneNumber' 
           value={entity.phoneNumber || ""}
           placeholder={phoneMaskPlaceholder}
-          onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
+          onChange={(e) => handleInput("phoneNumber", e.target.value)}
           label={phoneNumberLabel}
           errors={errors}
       />
       )}
       {locationPath.pathname.endsWith("add-warehouse") && (
         <Select<IAdminEntity>
-          setValue={handleCityChange}
+          setValue={handleCity}
           items={cities || []}
           label={city}
           value={entity.locationName || ""}
@@ -92,7 +100,7 @@ const MultiForm = () => {
         errors={errors}
         label={description}
         name={isContractor ? "address" : "comment"}
-        setText={(e) => handleInputChange(isContractor
+        setText={(e) => handleInput(isContractor
             ? "address" 
             : "comment", 
           e.target.value)}
@@ -104,15 +112,15 @@ const MultiForm = () => {
           size="lg"
           color="grey"
           title={reset}
-          click={handleResetEntity}
+          click={handleReset}
         />
         <BtnAction
           icon={<GoPlus />}
           type="submit"
           size="lg"
           color="blue-green"
-          title={add}
-          click={(e) => handleCreateEntity(e, locationType)}
+          title={isUpdate ? update : add}
+          click={(e) => handleCreate(e, locationType)}
         />
       </div>
     </form>
