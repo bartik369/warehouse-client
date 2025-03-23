@@ -1,44 +1,44 @@
-import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
-import { IAdminEntity } from "../../types/content";
-import { useInputMask } from "./useInputMask";
-import { isErrorWithMessage, isFetchBaseQueryError } from "../../utils/errors/error-handling";
-import { FormValidation, ValidateField } from "../../utils/validation/AdminEntityValidation";
+import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+import { IAdminEntity } from '../../types/content';
+import { useInputMask } from './useInputMask';
+import { isErrorWithMessage, isFetchBaseQueryError } from '../../utils/errors/error-handling';
+import { FormValidation, ValidateField } from '../../utils/validation/AdminEntityValidation';
 import { 
     useLazyGetManufacturerQuery, 
     useCreateManufacturerMutation, 
     useUpdateManufacturerMutation 
-} from "../../store/api/devicesApi";
+} from '../../store/api/devicesApi';
 import {
   useCreateDepartmentMutation,
   useLazyGetDepartmentQuery,
   useUpdateDepartmentMutation,
-} from "../../store/api/departmentApi";
+} from '../../store/api/departmentApi';
 import {
   useCreateLocationMutation,
   useLazyGetLocationQuery,
   useUpdateLocationMutation,
-} from "../../store/api/locationApi";
+} from '../../store/api/locationApi';
 import {
   useCreateWarehouseMutation,
   useLazyGetWarehouseQuery,
   useUpdateWarehouseMutation,
-} from "../../store/api/warehousesApi";
+} from '../../store/api/warehousesApi';
 import {
   useCreateContractorMutation,
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
-} from "../../store/api/contractorApi";
+} from '../../store/api/contractorApi';
 
 export const useAddAdminEntities = () => {
   const [entity, setEntity] = useState<IAdminEntity>({
-    id: "",
-    name: "",
-    slug: "",
-    locationName: "",
-    comment: "",
-    phoneNumber: "",
-    address: "",
+    id: '',
+    name: '',
+    slug: '',
+    locationName: '',
+    comment: '',
+    phoneNumber: '',
+    address: '',
   });
 
   const [isUpdate, setIsUpdate] = useState(false);
@@ -84,14 +84,14 @@ export const useAddAdminEntities = () => {
     <T extends string | IAdminEntity>(field: keyof IAdminEntity, value: T) => {
       setErrors((prev) => ({
         ...prev,
-        [field]: ValidateField(field, value) || "",
+        [field]: ValidateField(field, value) || '',
       }));
       setEntity((prev) => {
         const updateEntity = {
           ...prev,
           [field]:
-            field === "phoneNumber"
-              ? formatPhone(value as string, prev.phoneNumber || "")
+            field === 'phoneNumber'
+              ? formatPhone(value as string, prev.phoneNumber || '')
               : value,
         };
         return updateEntity;
@@ -112,12 +112,12 @@ export const useAddAdminEntities = () => {
           if (!entity) return;
           const updateData = {
             ...entity,
-            phoneNumber: changeFormatPhone(entity.phoneNumber || ""),
+            phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
           };
           await createEntityFunction(updateData)
             .unwrap()
             .then((data) => {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
             });
           handleResetEntity();
         }
@@ -125,12 +125,12 @@ export const useAddAdminEntities = () => {
         if (isFetchBaseQueryError(err)) {
           const error = err as { data?: { message: string; error: string } };
           const errMsg = error.data?.message;
-          console.log("API Error", errMsg);
-          toast(errMsg, { type: "error" });
+          console.log('API Error', errMsg);
+          toast(errMsg, { type: 'error' });
         } else if (isErrorWithMessage(err)) {
-          console.log("Unexpected Error:", err.message);
+          console.log('Unexpected Error:', err.message);
         } else {
-          console.error("Unknown Error:", err);
+          console.error('Unknown Error:', err);
         }
       }
     },
@@ -139,13 +139,13 @@ export const useAddAdminEntities = () => {
 
   const handleResetEntity = useCallback(() => {
     setEntity({
-      id: "",
-      name: "",
-      slug: "",
-      locationName: "",
-      comment: "",
-      phoneNumber: "",
-      address: "",
+      id: '',
+      name: '',
+      slug: '',
+      locationName: '',
+      comment: '',
+      phoneNumber: '',
+      address: '',
     });
     setIsUpdate(false);
   }, []);
@@ -166,19 +166,19 @@ export const useAddAdminEntities = () => {
       if (isFetchBaseQueryError(err)) {
         const error = err as { data?: { message: string; error: string } };
         const errMsg = error.data?.message;
-        console.log("API Error", errMsg);
-        toast(errMsg, { type: "error" });
+        console.log('API Error', errMsg);
+        toast(errMsg, { type: 'error' });
       } else if (isErrorWithMessage(err)) {
-        console.log("Unexpected Error:", err.message);
+        console.log('Unexpected Error:', err.message);
       } else {
-        console.error("Unknown Error:", err);
+        console.error('Unknown Error:', err);
       }
     }
   }, []);
 
   const handleCityChange = useCallback(
     (item: any) => {
-      handleInputChange("locationName", item.name || "");
+      handleInputChange('locationName', item.name || '');
     },
     [handleInputChange]
   );

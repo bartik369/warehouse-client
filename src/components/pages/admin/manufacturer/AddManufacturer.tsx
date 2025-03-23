@@ -1,8 +1,8 @@
-import ItemsList from "../ItemsList";
-import MultiForm from "../../../forms/multi/MultiForm";
-import { useAddAdminEntities } from "../../../../hooks/data/useAddAdminEntities";
-import { useGetManufacturersQuery } from "../../../../store/api/devicesApi";
-import styles from "../Admin.module.scss";
+import ItemsList from '../ItemsList';
+import MultiForm from '../../../forms/multi/MultiForm';
+import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { useGetManufacturersQuery } from '../../../../store/api/devicesApi';
+import styles from '../Admin.module.scss';
 
 const AddManufacturer = () => {
   const {

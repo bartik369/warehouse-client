@@ -1,7 +1,7 @@
-import { FC, Suspense, useState } from "react";
-import Loader from "../ui/loader/Loader";
-import { ITab } from "../../types/navigation";
-import styles from "./Tabs.module.scss";
+import { FC, Suspense, useState } from 'react';
+import Loader from '../ui/loader/Loader';
+import { ITab } from '../../types/navigation';
+import styles from './Tabs.module.scss';
 
 interface ITabsProps {
   tabs: ITab[];

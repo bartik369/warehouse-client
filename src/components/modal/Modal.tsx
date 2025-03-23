@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import ReactDOM from 'react-dom';
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoCloseCircleOutline } from 'react-icons/io5';
 import style from './Modal.module.scss';
 
 interface IModal {
@@ -17,11 +17,11 @@ const Modal:FC<IModal> = ({children, isOpen, title, setIsOpen}) => {
                 <div className={style.title}>{title}</div>
                 <IoCloseCircleOutline
                     tabIndex={0}
-                    role='button'
+                    role="button"
                     className={style.icon} 
                     onClick={() => setIsOpen(!isOpen)}
                     onKeyDown={(e) => { 
-                        if (e.key === 'Enter' || e.key === ' ') setIsOpen(!isOpen) 
+                        if (e.key === "Enter" || e.key === " ")setIsOpen(!isOpen) 
                     }}
                 />
                 {children}

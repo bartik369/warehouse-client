@@ -7,7 +7,7 @@ interface IHeaderMenuProps {
   device: IDeviceInfo | null;
 }
 
-const HeaderMenu:FC<IHeaderMenuProps> = ({}) => {
+const HeaderMenu:FC<IHeaderMenuProps> = ({ }) => {
   const {filteredMenu, handleDeviceAction} = useDevice();
 
     return (

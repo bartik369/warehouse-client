@@ -1,20 +1,21 @@
-import { IDevice, IEntity, IFilterDeviceOptions, IAggregateDeviceInfo } from './../../types/devices';
+import { IDevice, IEntity, IFilterDeviceOptions, 
+    IAggregateDeviceInfo, QueryParams } from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const devicesApi = createApi({
     reducerPath: 'devicesApi',
     baseQuery: baseQueryWithReauth,
-    tagTypes:["Manufacturer"],
+    tagTypes:['Device', 'Manufacturer', 'Model', 'Type'],
     endpoints:(build) => ({
-        getDevices: build.query({
+        getDevices: build.query<any, QueryParams>({
             query: (queryParams) => {
                 const { city, ...params } = queryParams;
                 const urlParams = new URLSearchParams();
         
                 Object.entries(params).forEach(([key, value]) => {
                     if (Array.isArray(value)) {
-                        urlParams.append(key, value.join(","));
+                        urlParams.append(key, value.join(','));
                     } else {
                         urlParams.append(key, String(value));
                     }
@@ -22,6 +23,13 @@ export const devicesApi = createApi({
                 const cityUrl = city ? `/locations/${city}` : '/locations';
                 return `/devices${cityUrl}?${urlParams.toString()}`;
             },
+            // providesTags: (result) =>
+            //     result
+            //       ? [
+            //           ...result.map(({ id }) => ({ type: 'Device' as const, id })),
+            //           { type: 'Device', id: 'LIST' },
+            //         ]
+            //       : [{ type: 'Device', id: 'LIST' }],
         }),
         getDeviceOptions: build.query<IFilterDeviceOptions, string>({
             query:(city) => ({
@@ -40,7 +48,8 @@ export const devicesApi = createApi({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            // invalidatesTags: ['Device'],
         }),
         getManufacturer: build.query({
             query:(id:string) => ({
@@ -57,10 +66,10 @@ export const devicesApi = createApi({
             providesTags: (result) =>
                 result
                   ? [
-                      ...result.map(({ id }) => ({ type: "Manufacturer" as const, id })),
-                      { type: "Manufacturer", id: "LIST" },
+                      ...result.map(({ id }) => ({ type: 'Manufacturer' as const, id })),
+                      { type: 'Manufacturer', id: 'LIST' },
                     ]
-                  : [{ type: "Manufacturer", id: "LIST" }],
+                  : [{ type: 'Manufacturer', id: 'LIST' }],
         }),
         createManufacturer: build.mutation<any, FormData>({
             query(body) {
@@ -80,6 +89,20 @@ export const devicesApi = createApi({
             }),
             invalidatesTags: ['Manufacturer'],
         }),
+        getModels: build.query<IEntity[], any>({
+            query({manufacturer, type}) {
+                return {
+                    url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
+                }
+            },
+            providesTags: (result) =>
+                result
+                  ? [
+                      ...result.map(({ id }) => ({ type: 'Model' as const, id })),
+                      { type: 'Model', id: 'LIST' },
+                    ]
+                  : [{ type: 'Model', id: 'LIST' }],
+        }),
         createModel: build.mutation<any, FormData>({
             query(body) {
                 return {
@@ -87,21 +110,22 @@ export const devicesApi = createApi({
                     method: 'POST',
                     body,
                 }
-            }
-        }),
-        getModels: build.query<IEntity[], any>({
-            query({manufacturer, type}) {
-                return {
-                    url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
-                }
-            }
+            },
+            invalidatesTags: ['Model'],
         }),
         getTypes: build.query<IEntity[], void>({
             query() {
                 return {
                     url:`${import.meta.env.VITE_TYPES}`,
                 }
-            }
+            },
+            providesTags: (result) =>
+                result
+                  ? [
+                      ...result.map(({ id }) => ({ type: 'Type' as const, id })),
+                      { type: 'Type', id: 'LIST' },
+                    ]
+                  : [{ type: 'Type', id: 'LIST' }],
         }),
         createType: build.mutation<any, FormData>({
             query(body) {
@@ -110,7 +134,8 @@ export const devicesApi = createApi({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['Type'],
         })
     })
 })

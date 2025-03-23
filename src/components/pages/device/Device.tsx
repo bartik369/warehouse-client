@@ -1,18 +1,18 @@
-import { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useGetDeviceQuery } from "../../../store/api/devicesApi";
-import { setDeviceInfo } from "../../../store/slices/deviceSlice";
-import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import styles from "./Device.module.scss";
-import TechnicalInfo from "./TechnicalInfo";
-import PriceInfo from "./PriceInfo";
-import WarrantyInfo from "./WarrantyInfo";
-import UserInfo from "./UserInfo";
-import Tabs from "../../tabs/Tabs";
-import { deviceTabsMenu } from "../../../utils/data/menus";
+import { FC, useEffect, useState } from 'react';
+import TechnicalInfo from './TechnicalInfo';
+import PriceInfo from './PriceInfo';
+import WarrantyInfo from './WarrantyInfo';
+import UserInfo from './UserInfo';
+import Tabs from '../../tabs/Tabs';
+import { useParams } from 'react-router-dom';
+import { useGetDeviceQuery } from '../../../store/api/devicesApi';
+import { setDeviceInfo } from '../../../store/slices/deviceSlice';
+import { useAppDispatch } from '../../../hooks/redux/useRedux';
+import { deviceTabsMenu } from '../../../utils/data/menus';
+import styles from './Device.module.scss';
 
 const Device: FC = () => {
-  const [deviceId, setDeviceId] = useState<string>("");
+  const [deviceId, setDeviceId] = useState<string>('');
   const params = useParams();
   const [skip, setSkip] = useState(true);
   const { data: device } = useGetDeviceQuery(deviceId, { skip: skip });
@@ -24,6 +24,7 @@ const Device: FC = () => {
       setSkip(false);
     }
   }, [params.id]);
+
   useEffect(() => {
     if (device?.id) {
       dispatch(
@@ -32,8 +33,8 @@ const Device: FC = () => {
             id: device.id,
             isAssigned: device.isAssigned,
             warehouse: {
-              name: device.warehouse?.name || "",
-              slug: device.warehouse?.slug || "",
+              name: device.warehouse?.name || '',
+              slug: device.warehouse?.slug || '',
             },
           },
         })

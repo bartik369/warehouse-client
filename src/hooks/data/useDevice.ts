@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../redux/useRedux";
-import { deviceActionsMenu } from "../../utils/data/menus";
-import { accept, deviceInfo, move, issue } from "../../utils/constants/device";
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../redux/useRedux';
+import { deviceActionsMenu } from '../../utils/data/menus';
+import { accept, deviceInfo, move, issue } from '../../utils/constants/device';
 
 export const useDevice = () => {
     const navigate = useNavigate();

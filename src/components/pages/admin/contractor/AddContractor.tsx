@@ -1,8 +1,8 @@
-import ItemsList from "../ItemsList";
-import { useAddAdminEntities } from "../../../../hooks/data/useAddAdminEntities";
-import { useGetContractorsQuery } from "../../../../store/api/contractorApi";
-import styles from "../Admin.module.scss";
-import MultiForm from "../../../forms/multi/MultiForm";
+import ItemsList from '../ItemsList';
+import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { useGetContractorsQuery } from '../../../../store/api/contractorApi';
+import MultiForm from '../../../forms/multi/MultiForm';
+import styles from '../Admin.module.scss';
 
 const AddContractor = () => {
   const { data: contractors } = useGetContractorsQuery();

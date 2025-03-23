@@ -1,6 +1,6 @@
 import AuthForm from '../../forms/auth/AuthForm';
-import pic from '../../../assets/elements/pic.jpg'
 import { titleSignin } from '../../../utils/constants/constants';
+import pic from '../../../assets/elements/pic.jpg'
 import style from './Signin.module.scss';
 
 const Signin = () => {

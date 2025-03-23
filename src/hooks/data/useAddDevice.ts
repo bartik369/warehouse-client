@@ -1,12 +1,12 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
-import { toast } from "react-toastify";
-import { useAppSelector } from "../redux/useRedux";
-import { IContractor } from "../../types/content";
-import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
-import { useCreateDeviceMutation } from "../../store/api/devicesApi";
-import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
-import {isFetchBaseQueryError, isErrorWithMessage} from "../../utils/errors/error-handling";
-import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constants/constants";
+import { useState, useCallback, useMemo, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useAppSelector } from '../redux/useRedux';
+import { IContractor } from '../../types/content';
+import { IDeviceMedia, IEntity, IDevice} from './../../types/devices';
+import { useCreateDeviceMutation } from '../../store/api/devicesApi';
+import {FormValidation, ValidateField} from '../../utils/validation/DeviceValidation';
+import {isFetchBaseQueryError, isErrorWithMessage} from '../../utils/errors/error-handling';
+import { addNewManufacturer, addNewType, addNewModel } from '../../utils/constants/constants';
 
 export function useAddDevice() {
   const user = useAppSelector((state) => state.auth.user);
@@ -47,16 +47,16 @@ export function useAddDevice() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
-  const [devicePic, setDevicePic] = useState(""); // Preview of device model
+  const [devicePic, setDevicePic] = useState(''); // Preview of device model
   const [media, setMedia] = useState<IDeviceMedia>({
     file:    null,
     prevImg: null,
   });
   const [selectedOption, setSelectedOption] = useState({
     id: null,
-    name: "",
+    name: '',
   });
-  const [itemType, setItemType] = useState<string>("");
+  const [itemType, setItemType] = useState<string>('');
   const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
   const [create] = useCreateDeviceMutation();
   const handleNumber = useCallback((num: number) => {
@@ -93,12 +93,12 @@ export function useAddDevice() {
         };
       
         await create(updatedData).unwrap().then((data) => {
-          toast(data?.message, { type: "success" });
+          toast(data?.message, { type: 'success' });
           handleResetDevice();
           setMedia((prev) => ({...prev, prevImg: null}));
         });
       } else {
-        console.error("Validation errors:", validationErrors);
+        console.error('Validation errors:', validationErrors);
       }
     } catch (err) {
       if (isFetchBaseQueryError(err)) {
@@ -106,17 +106,17 @@ export function useAddDevice() {
         if ('error' in err) {
           errMsg = err.error;
         } else {
-          if (err.data && typeof err.data === "object" && "message" in err.data) {
+          if (err.data && typeof err.data === 'object' && 'message' in err.data) {
             errMsg = (err.data as { message: string }).message;
           } else {
             errMsg = JSON.stringify(err.data);
           }
         }
-        toast(errMsg, {type: "error"})
+        toast(errMsg, {type: 'error'})
       } else if (isErrorWithMessage(err)) {
-        console.error("Unexpected Error:", err.message);
+        console.error('Unexpected Error:', err.message);
       } else {
-        console.error("Unknown Error:", err);
+        console.error('Unknown Error:', err);
       }
     }
 }
@@ -157,12 +157,12 @@ export function useAddDevice() {
           ...prev,
           [field]: validationErrors as string
         }));
-        const isEntity = (obj: any): obj is IEntity => "slug" in obj;
-        const inputValue = typeof value === "string" 
+        const isEntity = (obj: any): obj is IEntity => 'slug' in obj;
+        const inputValue = typeof value === 'string' 
           ? value 
           : isEntity(value) 
           ? value.slug 
-          : "";
+          : '';
         const selectValue = typeof value === 'string' ? value : value.name;
 
         setDevice((prev) => ({
@@ -188,31 +188,31 @@ export function useAddDevice() {
     const selectedValuesMemo = useMemo(() => selectedValues, [selectedValues]);
     
     const handleTypeChange = useCallback((item: IEntity) => {
-      handleInputChange("type", item);
-      handleInputChange("typeId", item.id || '');
+      handleInputChange('type', item);
+      handleInputChange('typeId', item.id || '');
       setItemType(item.slug);
       setTypeId(item.id || '')
     }, [handleInputChange, setItemType, setTypeId]);
   
     const handleModelChange = useCallback((item: IEntity) => {
-      handleInputChange("modelName", item.name || '');
-      handleInputChange("modelId", item.id || '');
+      handleInputChange('modelName', item.name || '');
+      handleInputChange('modelId', item.id || '');
       setModelId(item.id || '');
     }, [handleInputChange, setModelId]);
   
     const handleManufacturerChange = useCallback((item: IEntity) => {
-      handleInputChange("manufacturer", item);
+      handleInputChange('manufacturer', item);
       setManufacturerId(item.id || '')
     }, [handleInputChange, setManufacturerId]);
     
     const handleWarehouseChange = useCallback((item: IEntity) => {
-      handleInputChange("warehouseId", item.id || '')
-      handleInputChange("warehouseName", item.name || '')
+      handleInputChange('warehouseId', item.id || '')
+      handleInputChange('warehouseName', item.name || '')
     }, [handleInputChange]);
 
     const handleContractorChange = useCallback((item: IContractor) => {
-      handleInputChange("contractorId", item.id || '')
-      handleInputChange("provider", item.name || '')
+      handleInputChange('contractorId', item.id || '')
+      handleInputChange('provider', item.name || '')
     }, [handleInputChange]);
 
     useEffect(() => {
@@ -224,7 +224,7 @@ export function useAddDevice() {
           setTitle(addNewType);
           break
         case 'model':
-          setTitle(`${addNewModel} (${selectedValues["type"]})`)
+          setTitle(`${addNewModel} (${selectedValues['type']})`)
           break
       }
     }, [fieldType]);

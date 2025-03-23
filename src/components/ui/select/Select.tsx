@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
-import { IValidationErrors } from "../../../types/devices";
-import { selectFromList, noExistSelect } from "../../../utils/constants/device";
-import style from "./Select.module.scss";
+import { useState } from 'react';
+import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
+import { IValidationErrors } from '../../../types/devices';
+import { selectFromList, noExistSelect } from '../../../utils/constants/device';
+import style from './Select.module.scss';
 
 interface ISelectProps<T> {
   items: T[];
@@ -36,17 +36,17 @@ const Select = <T,>({
     const handleKeyDown = (e: React.KeyboardEvent) => {
       e.preventDefault()
       if (!isOpen) return;
-      if (e.key === "ArrowDown") {
+      if (e.key === 'ArrowDown') {
         setFocusedIndex((prev) =>
           prev === null || prev >= items.length - 1 ? 0 : prev + 1
         );
-      } else if (e.key === "ArrowUp") {
+      } else if (e.key === 'ArrowUp') {
         setFocusedIndex((prev) =>
           prev === null || prev <= 0 ? items.length - 1 : prev - 1
         );
-      } else if (e.key === "Enter" && focusedIndex !== null) {
+      } else if (e.key === 'Enter' && focusedIndex !== null) {
         handleSelect(items[focusedIndex]);
-      } else if (e.key === "Escape") {
+      } else if (e.key === 'Escape') {
         setIsOpen(false);
       }
     };
@@ -59,7 +59,7 @@ const Select = <T,>({
           </span>
         }
         <button
-          type={'button'}
+          type="button"
           className={style.container}
           onClick={() => setIsOpen(!isOpen)}
         >

@@ -1,11 +1,11 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IAdminEntity } from "../../types/content";
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { IAdminEntity } from '../../types/content';
 
 export const locationApi = createApi({
-  reducerPath: "locationApi",
+  reducerPath: 'locationApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Location"],
+  tagTypes: ['Location'],
   endpoints: (build) => ({
     getLocations: build.query<IAdminEntity[], void>({
       query: () => ({
@@ -14,10 +14,10 @@ export const locationApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Location" as const, id })),
-              { type: "Location", id: "LIST" },
+              ...result.map(({ id }) => ({ type: 'Location' as const, id })),
+              { type: 'Location', id: 'LIST' },
             ]
-          : [{ type: "Location", id: "LIST" }],
+          : [{ type: 'Location', id: 'LIST' }],
     }),
     getLocation: build.query<IAdminEntity, string>({
       query: (id: string) => ({
@@ -27,15 +27,15 @@ export const locationApi = createApi({
     createLocation: build.mutation({
       query: (body) => ({
         url: ``,
-        method: "POST",
+        method: 'POST',
         body,
       }),
       invalidatesTags: ['Location'],
     }),
     updateLocation: build.mutation({
       query: ({id, ...body}) => ({
-        url: `${import.meta.env.VITE_LOCATIONS}${id}${id}`,
-        method: "PUT",
+        url: `${import.meta.env.VITE_LOCATIONS}${id}`,
+        method: 'PUT',
         body,
       }),
       invalidatesTags: ['Location'],

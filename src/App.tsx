@@ -43,7 +43,7 @@ function App() {
           })();
       } catch (err) {
         if (isFetchBaseQueryError(err)) {
-          const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
+          const errMsg = 'error' in err ? err.error : JSON.stringify(err.data);
           console.log(errMsg);
         } else if (isErrorWithMessage(err)) {
           console.log(err);

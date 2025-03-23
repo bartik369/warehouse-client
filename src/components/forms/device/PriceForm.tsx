@@ -1,8 +1,8 @@
+import { FC } from 'react';
 import { devicePrices } from '../../../utils/constants/device';
 import CustomNumber from '../../ui/number/CustomNumber';
-import styles from './DeviceForm.module.scss'
 import { IDevice } from '../../../types/devices';
-import { FC } from 'react';
+import styles from './DeviceForm.module.scss'
 
 interface IPriceFormProps {
   device: IDevice;
@@ -10,7 +10,7 @@ interface IPriceFormProps {
   errors: Record<string, string>;
 }
 
-const PriceForm:FC<IPriceFormProps> = ({device, errors,handleExtNumber}) => {
+const PriceForm:FC<IPriceFormProps> = ({ device, errors, handleExtNumber }) => {
     return (
         <form className={styles.form}>
             {devicePrices?.uniqueFields?.map((item) => (

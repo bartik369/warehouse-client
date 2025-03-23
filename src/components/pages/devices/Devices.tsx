@@ -1,19 +1,18 @@
-import { ChangeEvent, FC, useCallback, useState } from "react";
-import DeviceItems from "./DeviceItems";
-import Loader from "../../ui/loader/Loader";
-import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
-import { MdFilterListOff } from "react-icons/md";
-import { FilterLabel } from "../../../types/devices";
-import Pagination from "../../pagination/Pagination";
-import { IFilteredDevicesFromBack } from "../../../types/devices";
-import { extraOptions } from "../../../utils/constants/device";
-import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { setDeviceInfo} from "../../../store/slices/deviceSlice";
-import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
-import { resetFilter } from "../../../utils/constants/constants";
+import { ChangeEvent, FC, useCallback, useState } from 'react';
+import DeviceItems from './DeviceItems';
+import Loader from '../../ui/loader/Loader';
+import CheckboxFilter from '../../ui/checkbox/CheckboxFilter';
+import Pagination from '../../pagination/Pagination';
+import { IFilteredDevicesFromBack, FilterLabel } from '../../../types/devices';
+import { useAppDispatch } from '../../../hooks/redux/useRedux';
+import { setDeviceInfo} from '../../../store/slices/deviceSlice';
+import { useDeviceFilters } from '../../../hooks/data/useDeviceFilters';
+import { resetFilter } from '../../../utils/constants/constants';
 import { manufacturersLabel, deviceTypeLabel, modelLabel, screenSizeLabel,
-  memorySizeLabel, isFunctionalLabel, isAssignedLabel, warehouseLabel} from "../../../utils/constants/device";
-import styles from "./Devices.module.scss";
+  memorySizeLabel, isFunctionalLabel, isAssignedLabel, 
+  warehouseLabel, extraOptions} from '../../../utils/constants/device';
+import { MdFilterListOff } from 'react-icons/md';
+import styles from './Devices.module.scss';
 
 const Devices: FC = () => {
   const {labels, devices, list, searchParams, page, setPage, handleResetFilter, 
@@ -46,7 +45,7 @@ const Devices: FC = () => {
   [dispatch]);
 
   if (!devices) {
-    return <Loader size='lg' color='grey' />;
+    return <Loader size="lg" color="grey" />;
   }
   
   //Fitler labels
@@ -69,9 +68,9 @@ const Devices: FC = () => {
           <tr>
             <th className={styles["checkbox-column"]}>
             {[...searchParams.keys()]
-            .filter(key => !['limit', 'page'].includes(key)).length > 0 && (
+            .filter(key => !["limit", "page"].includes(key)).length > 0 && (
               <MdFilterListOff
-              role='button'
+              role="button"
               className={styles.reset}
               onClick={handleResetFilter}
               aria-label={resetFilter}
@@ -100,7 +99,7 @@ const Devices: FC = () => {
             )}
             {extraOptions && extraOptions.map((option) => 
             <th key={option.id}>
-              <div className={styles['extra-checkbox']}>
+              <div className={styles["extra-checkbox"]}>
               <div className={styles.placeholder}>
                 {option.label}
                 </div>

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ISubmenu } from '../../../types/navigation';
+import { ISubmenu } from '../../../types/navigation';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './SidebarMenu.module.scss';
 
@@ -22,7 +22,7 @@ const SubMenu:FC<ISubMenuProps> = ({item, open, title}) => {
 
    return (
      <div className={styles.wrapper}>
-       <div className={styles['sub-title']}>
+       <div className={styles["sub-title"]}>
         {!open && title}
        </div>
        <ul className={styles.submenu}>

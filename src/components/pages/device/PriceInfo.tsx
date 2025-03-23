@@ -1,5 +1,7 @@
 import {FC} from 'react';
 import { IAggregateDeviceInfo } from '../../../types/devices';
+import { financialOptions, priceWithVat, priceWithoutVat, 
+  ruble } from '../../../utils/constants/constants';
 import { PiMoneyWavyLight } from "react-icons/pi";
 import styles from './Device.module.scss';
 
@@ -13,21 +15,21 @@ const PriceInfo: FC<IPriceInfoProps> = ({device}) => {
                 <div className={styles.icon}>
                 <PiMoneyWavyLight />
                 </div>
-                <span>Финансовая часть</span>
+                <span>{financialOptions}</span>
             </div>
           <div className={styles.block}>
                 <div className={styles.value}>
                   {device.price_with_vat}
-                  <span>руб.</span>
+                  <span>{ruble}</span>
                 </div>
-                <div className={styles.name}>Цена с НДС</div>
+                <div className={styles.name}>{priceWithVat}</div>
           </div>
           <div className={styles.block}>
                 <div className={styles.value}>
                   {device.price_without_vat}
-                  <span>руб.</span>
+                  <span>{ruble}</span>
                 </div>
-                <div className={styles.name}>Цена без НДС</div>
+                <div className={styles.name}>{priceWithoutVat}</div>
           </div>
 
           </div>

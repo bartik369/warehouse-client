@@ -1,13 +1,14 @@
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import { add, isExistingInList } from "../../../utils/constants/constants";
+import { useGetContractorsQuery } from "../../../store/api/contractorApi";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
-import { contractor } from "../../../utils/constants/device";
+import { add, isExistingInList } from "../../../utils/constants/constants";
 import {
   startWarrantyLabel,
   endWarrantyLabel,
   selectDate,
   warrantyNumber,
+  contractor,
 } from "../../../utils/constants/device";
 import { IDevice } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
@@ -15,10 +16,9 @@ import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
-import { useGetContractorsQuery } from "../../../store/api/contractorApi";
 import styles from "./DeviceForm.module.scss";
 
-registerLocale("ru", ru);
+registerLocale('ru', ru);
 
 interface IWarrantyFormProps<T> {
   selectedValuesMemo: string;
@@ -97,8 +97,8 @@ const WarrantyForm = <T,>({
           <span
             onClick={() => {
               setIsOpen(!isOpen);
-              setFieldType("contactor");
-              setEntity("contactor");
+              setFieldType('contactor');
+              setEntity('contactor');
             }}
           >
             {add}
@@ -120,7 +120,7 @@ const WarrantyForm = <T,>({
         value={device.warrantyNumber || ""}
         label={warrantyNumber}
         errors={errors}
-        onChange={(e) => handleInputChange("warrantyNumber", e.target.value)}
+        onChange={(e) => handleInputChange('warrantyNumber', e.target.value)}
       />
     </form>
   );

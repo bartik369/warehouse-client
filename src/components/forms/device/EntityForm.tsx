@@ -1,13 +1,13 @@
-import {FC, useEffect} from 'react';
+import { FC, useEffect } from 'react';
 import { useEntity } from '../../../hooks/data/useEntity';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Preview from '../../ui/preview/Preview';
-import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import { ToastContainer, Bounce } from 'react-toastify';
+import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import {slugLabel, nameLabel} from '../../../utils/constants/device';
-import { GoPlus } from "react-icons/go";
-import { HiMiniXMark } from "react-icons/hi2";
+import { GoPlus } from 'react-icons/go';
+import { HiMiniXMark } from 'react-icons/hi2';
 import { BsQuestionSquare } from "react-icons/bs";
 import styles from './EntityForm.module.scss';
 
@@ -17,14 +17,14 @@ interface IEntityProps {
   fieldType: string;
 };
 
-const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => { 
+const EntityForm:FC<IEntityProps> = ({ fieldType, typeId, manufacturerId }) => { 
     const { entity, errors, media, fileInputRef, handleMedia, handleInputChange, 
     handleCreateEntity, handleResetEntity} = useEntity();
 
     useEffect(() => {
-      if (fieldType === "model" && (typeId && manufacturerId)) {
-        handleInputChange("typeId", typeId); 
-        handleInputChange("manufacturerId", manufacturerId); 
+      if (fieldType === 'model' && (typeId && manufacturerId)) {
+        handleInputChange('typeId', typeId); 
+        handleInputChange('manufacturerId', manufacturerId); 
       }
     }, [fieldType, typeId, manufacturerId]);
 

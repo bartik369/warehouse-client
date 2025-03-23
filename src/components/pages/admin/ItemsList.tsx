@@ -1,7 +1,7 @@
-import {FC} from "react"
-import { IAdminEntity } from "../../../types/content";
+import { FC } from 'react'
+import { IAdminEntity } from '../../../types/content';
 import { BsPencilSquare } from 'react-icons/bs';
-import styles from "./Admin.module.scss";
+import styles from './Admin.module.scss';
 
 interface IItemsListProps {
     field: string;

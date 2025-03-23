@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import Footer from "../components/footer/Footer";
-import Header from "../components/header/Header";
-import Sidebar from "../components/sidebar/Sidebar";
-import AdminMenu from "../components/navigates/admin/AdminMenu";
-import styles from "./Layout.module.scss";
+import { useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Footer from '../components/footer/Footer';
+import Header from '../components/header/Header';
+import Sidebar from '../components/sidebar/Sidebar';
+import AdminMenu from '../components/navigates/admin/AdminMenu';
+import styles from './Layout.module.scss';
 
 const Layout = () => {
   const [isActive, setIsActive] = useState(false);

@@ -6,23 +6,23 @@ import { add, reset, phoneMaskPlaceholder } from '../../../utils/constants/const
 import { phoneNumberLabel, contractorNameLabel, contractorAddressLabel} from '../../../utils/constants/device';
 import { HiMiniXMark } from 'react-icons/hi2';
 import { GoPlus } from 'react-icons/go';
-import styles from "./ContractorForm.module.scss";
+import styles from './ContractorForm.module.scss';
 
 const ContractorForm = () => {
     const {contractor, errors,  handleInputChange, handleReset, handleCreateContractor} = useContactor();
     return (
         <form>
           <Input 
-            type='string' 
-            name='name' 
+            type="string" 
+            name="name" 
             value={contractor.name} 
             onChange={(e) => handleInputChange("name", e.target.value)}
             label={contractorNameLabel}
             errors={errors}
           />
           <Input 
-            type='tel' 
-            name='phoneNumber' 
+            type="tel" 
+            name="phoneNumber" 
             value={contractor.phoneNumber}
             placeholder={phoneMaskPlaceholder}
             onChange={(e) => handleInputChange("phoneNumber", e.target.value)}

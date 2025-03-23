@@ -6,26 +6,27 @@ import Toggle from "../../ui/checkbox/Toggle";
 import Number from "../../ui/number/Number";
 import EntityForm from "./EntityForm";
 import CustomNumber from "../../ui/number/CustomNumber";
+import ContractorForm from "../contractor/ContractorForm";
 import BtnAction from "../../ui/buttons/BtnAction";
 import Modal from "../../modal/Modal";
 import PriceForm from "./PriceForm";
+import WarrantyForm from "./WarrantyForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
-import { IContractor, IEntity } from "../../../types/devices";
-import ContractorForm from "../contractor/ContractorForm";
-import { Bounce, ToastContainer } from "react-toastify";
-import WarrantyForm from "./WarrantyForm";
-import {
-  add, reset, yes, no, serviceable, isExistingInList, technicalOptions, financialOptions
-} from "../../../utils/constants/constants";
-import {
-  manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
-  description, modelCode, modelLabel, location
-} from "../../../utils/constants/device";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery 
 } from "../../../store/api/devicesApi";
-import { deviceTypes } from "../../../utils/constants/device";
+import { IEntity } from "../../../types/devices";
+import { IContractor } from "../../../types/content";
+import { Bounce, ToastContainer } from "react-toastify";
+import {
+  add, reset, yes, no, serviceable, isExistingInList, technicalOptions, financialOptions,
+  warrantyOptions
+} from "../../../utils/constants/constants";
+import {
+  manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
+  description, modelCode, modelLabel, location, deviceTypes
+} from "../../../utils/constants/device";
 import previewPicture from '../../../assets/elements/default.png';
 import { GoPlus } from "react-icons/go";
 import { HiMiniXMark } from "react-icons/hi2";
@@ -69,13 +70,13 @@ const AddDeviceForm: FC = () => {
   const resetModelData = () => {
     setDevice((prev) => ({
       ...prev,
-      modelName: "",
+      modelName: '',
     }));
     setSelectedValues((prev) => ({
       ...prev,
-      modelName: "",
+      modelName: '',
     }));
-    setDevicePic("");
+    setDevicePic('');
   };
 
   return (
@@ -239,7 +240,7 @@ const AddDeviceForm: FC = () => {
             handleExtNumber={handleExtNumber} 
             errors={errors}
           />
-          <div className={styles.title}>Опции гарантии</div>
+          <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
             device={device}

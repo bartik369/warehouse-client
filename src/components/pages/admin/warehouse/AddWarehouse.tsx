@@ -1,8 +1,8 @@
-import ItemsList from "../ItemsList";
-import { useGetWarehousesQuery } from "../../../../store/api/warehousesApi";
-import MultiForm from "../../../forms/multi/MultiForm";
-import { useAddAdminEntities } from "../../../../hooks/data/useAddAdminEntities";
-import styles from "../Admin.module.scss";
+import ItemsList from '../ItemsList';
+import { useGetWarehousesQuery } from '../../../../store/api/warehousesApi';
+import MultiForm from '../../../forms/multi/MultiForm';
+import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import styles from '../Admin.module.scss';
 
 const AddWarehouse = () => {
   const { data: warehouses } = useGetWarehousesQuery();

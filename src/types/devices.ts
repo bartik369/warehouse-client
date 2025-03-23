@@ -62,7 +62,10 @@ export interface IAggregateDeviceInfo extends IDevice {
       name: string;
     };
   };
-  deviceIssues: any[];
+  deviceIssues: {
+    firstNameEn: string;
+    lastNameEn: string;
+  }[];
 }
 
 export interface IDeviceModel {
@@ -251,3 +254,4 @@ export interface IDeviceInfo {
     slug: string;
   };
 }
+export type QueryParams = Record<string, string | number | boolean>

@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-// import { adminPanel } from "../../../utils/constants/constants";
-import { adminMenu } from "../../../utils/data/menus";
-import styles from "./AdminMenu.module.scss";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { adminMenu } from '../../../utils/data/menus';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import styles from './AdminMenu.module.scss';
 
 const AdminMenu = () => {
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
@@ -19,7 +18,6 @@ const AdminMenu = () => {
     setHoveredItem(null);
   };
   
-
   return (
     <div className={styles.menu}>
       <nav>

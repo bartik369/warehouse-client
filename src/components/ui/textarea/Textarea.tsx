@@ -28,8 +28,7 @@ const Textarea:FC<ITextareaProps> = ({value, label, errors, name, setText}) => {
                     onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => setText(e)} 
                     name="" 
                     id="" 
-                    rows={6}
-                   
+                    rows={6}  
                 >
                 </textarea>
             </div>

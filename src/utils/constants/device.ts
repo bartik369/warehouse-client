@@ -34,13 +34,12 @@ export const accept = "Принять";
 export const issue = 'Выдать';
 export const deviceInfo = "Информация";
 
-
 export const deviceTypes:DeviceTypes = {
   laptop: {
     label: "Ноутбук",
     uniqueFields: [
       { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
-      { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
+      { name: "memorySize", label: "Память(гб)", type: "number", step: 2 },
     ],
   },
   monitor: {
@@ -70,8 +69,6 @@ export const deviceTypes:DeviceTypes = {
     ],
   },
 };
-
-
 export const devicePrices:DevicePrices = {
     uniqueFields: [
       { name: "price_with_vat", label: "Цена с НДС (руб)", type: "number", step: 1 },
@@ -79,7 +76,6 @@ export const devicePrices:DevicePrices = {
       { name: "residual_price", label: "Остаточная цена (руб)", type: "number", step: 1 },
     ],
 };
-
 export const extraOptions = [
   {id: 1, name: 'inventoryNumber', label: 'Инвентарный номер' },
   {id: 2, name: 'serialNumber', label: 'Серийный номер' },

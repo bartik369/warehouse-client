@@ -21,10 +21,10 @@ export interface ISignin {
 
 export interface IAuthRes {
     user: IUser;
-    token: string;
+    accessToken: string;
 }
 export interface RefreshTokenResponse {
-    token: string;
+    accessToken: string;
     user: IUser;
 }
 export interface IValidateUserErrors {

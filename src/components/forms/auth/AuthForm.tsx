@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {Link} from 'react-router-dom';
 import Input from '../../ui/input/Input';
-import BtnAction from '../../ui/buttons/BtnAction';
 import { useAuth } from '../../../hooks/data/useAuth';
+import BtnAction from '../../ui/buttons/BtnAction';
 import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, 
   reset, password, email } from '../../../utils/constants/constants';
 import style from './AuthForm.module.scss';

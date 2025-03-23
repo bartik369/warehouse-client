@@ -1,8 +1,8 @@
-import ItemsList from "../ItemsList";
-import MultiForm from "../../../forms/multi/MultiForm";
-import { useGetLocationsQuery } from "../../../../store/api/locationApi";
-import { useAddAdminEntities } from "../../../../hooks/data/useAddAdminEntities";
-import styles from "../Admin.module.scss";
+import ItemsList from '../ItemsList';
+import MultiForm from '../../../forms/multi/MultiForm';
+import { useGetLocationsQuery } from '../../../../store/api/locationApi';
+import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import styles from '../Admin.module.scss';
 
 const AddLocation = () => {
   const {
