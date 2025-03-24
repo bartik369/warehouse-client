@@ -2,7 +2,7 @@ import { ChangeEvent, FC} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { Checked, CheckedDeviceOptions } from '../../../types/content';
 import { noOptions } from '../../../utils/constants/constants';
-import { LuListFilter } from 'react-icons/lu';
+import { CgOptions } from "react-icons/cg";
 import styles from './CheckboxFilter.module.scss';
 
 interface ICheckboxProps {
@@ -43,7 +43,7 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
       <button className={styles.checkbox} onClick={() => setIsOpen(!isOpen)}>
         <div className={styles.header}>
           <div className={styles.placeholder}>{label}</div>
-          <LuListFilter className={styles.icon} />
+          <CgOptions className={styles.icon} />
         </div>
       </button>
       {isOpen && (

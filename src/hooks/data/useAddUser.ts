@@ -1,23 +1,23 @@
-import { useCallback, useState } from "react";
-import { IUser } from "../../types/user";
-import { toast } from "react-toastify";
-import { useCreateUserMutation } from "../../store/api/userApi";
-import { FormValidation, ValidateField } from "../../utils/validation/UserValidation";
-import { isErrorWithMessage, isFetchBaseQueryError} from "../../utils/errors/error-handling";
+import { useCallback, useState } from 'react';
+import { IUser } from '../../types/user';
+import { toast } from 'react-toastify';
+import { useCreateUserMutation } from '../../store/api/userApi';
+import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
+import { isErrorWithMessage, isFetchBaseQueryError} from '../../utils/errors/error-handling';
 
 export const useAddUser = () => {
   const [user, setUser] = useState<IUser>({
-    id: "",
-    userName: "",
-    email: "",
-    workId: "",
-    firstNameRu: "",
-    lastNameRu: "",
-    firstNameEn: "",
-    lastNameEn: "",
+    id: '',
+    userName: '',
+    email: '',
+    workId: '',
+    firstNameRu: '',
+    lastNameRu: '',
+    firstNameEn: '',
+    lastNameEn: '',
     isActive: true,
-    department: "",
-    location: "",
+    department: '',
+    location: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [createUser] = useCreateUserMutation();
@@ -54,19 +54,19 @@ export const useAddUser = () => {
           await createUser(updateData)
             .unwrap()
             .then((data) => {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
             });
         }
       } catch (err) {
         if (isFetchBaseQueryError(err)) {
           const error = err as { data?: { message: string; error: string } };
           const errMsg = error.data?.message;
-          console.log("API Error", errMsg);
-          toast(errMsg, { type: "error" });
+          console.log('API Error', errMsg);
+          toast(errMsg, { type: 'error' });
         } else if (isErrorWithMessage(err)) {
-          console.log("Unexpected Error:", err.message);
+          console.log('Unexpected Error:', err.message);
         } else {
-          console.error("Unknown Error:", err);
+          console.error('Unknown Error:', err);
         }
       }
     },[]);
@@ -75,11 +75,11 @@ export const useAddUser = () => {
 
     }
     const handleDepartmentChange = useCallback((item: any) => {
-          handleInputChange("department", item.name || '');
+          handleInputChange('department', item.name || '');
     }, [handleInputChange]);
 
     const handleLocationChange = useCallback((item: any) => {
-      handleInputChange("location", item.name || '');
+      handleInputChange('location', item.name || '');
 }, [handleInputChange]);
 
     const handleChecked = useCallback(() => {

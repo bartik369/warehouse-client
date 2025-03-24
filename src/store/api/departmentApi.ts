@@ -1,11 +1,11 @@
-import { IAdminEntity } from "../../types/content";
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
+import { IAdminEntity } from '../../types/content';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const departmentApi = createApi({
-  reducerPath: "departmentApi",
+  reducerPath: 'departmentApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Department"],
+  tagTypes: ['Department'],
   endpoints: (build) => ({
     getDepartments: build.query<IAdminEntity[], void>({
       query: () => ({
@@ -14,10 +14,10 @@ export const departmentApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Department" as const, id })),
-              { type: "Department", id: "LIST" },
+              ...result.map(({ id }) => ({ type: 'Department' as const, id })),
+              { type: 'Department', id: 'LIST' },
             ]
-          : [{ type: "Department", id: "LIST" }],
+          : [{ type: 'Department', id: 'LIST' }],
     }),
     getDepartment: build.query({
       query: (id: string) => ({
@@ -27,7 +27,7 @@ export const departmentApi = createApi({
     createDepartment: build.mutation({
       query: (body) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
       invalidatesTags: ['Department'],
@@ -35,7 +35,7 @@ export const departmentApi = createApi({
     updateDepartment: build.mutation({
       query: ({id, ...body}) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
       invalidatesTags: ['Department'],

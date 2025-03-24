@@ -1,10 +1,10 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IAdminEntity } from "../../types/content";
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { IAdminEntity } from '../../types/content';
 export const contractorApi = createApi({
     reducerPath: 'contractorApi',
     baseQuery: baseQueryWithReauth,
-    tagTypes: ["Contractor"],
+    tagTypes: ['Contractor'],
     endpoints:(build) => ({
         getContractors: build.query<IAdminEntity[], void>({
             query: () => ({
@@ -13,10 +13,10 @@ export const contractorApi = createApi({
             providesTags: (result) =>
                 result
                   ? [
-                      ...result.map(({ id }) => ({ type: "Contractor" as const, id })),
-                      { type: "Contractor", id: "LIST" },
+                      ...result.map(({ id }) => ({ type: 'Contractor' as const, id })),
+                      { type: 'Contractor', id: 'LIST' },
                     ]
-                  : [{ type: "Contractor", id: "LIST" }],
+                  : [{ type: 'Contractor', id: 'LIST' }],
         }),
         getContractor: build.query({
             query:(id:string) => ({
@@ -27,7 +27,7 @@ export const contractorApi = createApi({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_CONTRACTORS}`,
-                    method: "POST",
+                    method: 'POST',
                     body,
                 }
             },
@@ -36,7 +36,7 @@ export const contractorApi = createApi({
         updateContractor: build.mutation({
             query:({id, ...body}) => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
-                method: "PUT",
+                method: 'PUT',
                 body: body,
             }),
             invalidatesTags: ['Contractor'],

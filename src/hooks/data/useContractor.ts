@@ -1,24 +1,24 @@
-import { useCallback, useState } from "react";
-import { toast } from "react-toastify";
-import { IContractor } from "../../types/content";
-import { useCreateContractorMutation } from "../../store/api/contractorApi";
+import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+import { IContractor } from '../../types/content';
+import { useCreateContractorMutation } from '../../store/api/contractorApi';
 import {
   isErrorWithMessage,
   isFetchBaseQueryError,
-} from "../../utils/errors/error-handling";
+} from '../../utils/errors/error-handling';
 import {
   ContractorValidation,
   ValidateField,
-} from "../../utils/validation/DeviceValidation";
-import { useInputMask } from "./useInputMask";
+} from '../../utils/validation/DeviceValidation';
+import { useInputMask } from './useInputMask';
 
 export const useContactor = () => {
   const { formatPhone, changeFormatPhone } = useInputMask();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [contractor, setContactor] = useState({
-    name: "",
-    phoneNumber: "",
-    address: "",
+    name: '',
+    phoneNumber: '',
+    address: '',
   });
   const [createContractor] = useCreateContractorMutation();
 
@@ -34,7 +34,7 @@ export const useContactor = () => {
       setContactor((prev) => {
         const updateContactor = {
             ...prev,
-            [field]: field === "phoneNumber" 
+            [field]: field === 'phoneNumber' 
               ? formatPhone(value as string, prev.phoneNumber) 
               : value
         }
@@ -46,9 +46,9 @@ export const useContactor = () => {
 
   const handleReset = useCallback(() => {
     setContactor({
-      name: "",
-      phoneNumber: "",
-      address: "",
+      name: '',
+      phoneNumber: '',
+      address: '',
     });
   }, []);
   const handleCreateContractor = useCallback(
@@ -65,7 +65,7 @@ export const useContactor = () => {
           await createContractor(contractorData)
             .unwrap()
             .then((data) => {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
               handleReset();
             });
         }
@@ -73,12 +73,12 @@ export const useContactor = () => {
         if (isFetchBaseQueryError(err)) {
           const error = err as { data?: { message: string; error: string } };
           const errMsg = error?.data?.message;
-          console.log("API Error", errMsg);
-          toast(errMsg, { type: "error" });
+          console.log('API Error', errMsg);
+          toast(errMsg, { type: 'error' });
         } else if (isErrorWithMessage(err)) {
-          console.log("Unexpected Error:", err.message);
+          console.log('Unexpected Error:', err.message);
         } else {
-          console.error("Unknown Error:", err);
+          console.error('Unknown Error:', err);
         }
       }
     },

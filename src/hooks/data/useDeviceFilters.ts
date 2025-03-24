@@ -1,9 +1,9 @@
-import { useState, useEffect, ChangeEvent, useCallback } from "react";
+import { useState, useEffect, ChangeEvent, useCallback } from 'react';
 import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
-import { CheckedDeviceOptions } from "../../types/content";
-import { useSearchParams, useParams } from "react-router-dom";
-import { yes, no, inStock, inUse } from "../../utils/constants/constants";
-import { useGetDevicesQuery, useGetDeviceOptionsQuery } from "../../store/api/devicesApi";
+import { CheckedDeviceOptions } from '../../types/content';
+import { useSearchParams, useParams } from 'react-router-dom';
+import { yes, no, inStock, inUse } from '../../utils/constants/constants';
+import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '../../store/api/devicesApi';
 
 export const useDeviceFilters = () => {
   const [resetFilters, setResetFilters] = useState<Record<string, boolean>>({});
@@ -13,7 +13,7 @@ export const useDeviceFilters = () => {
   const {city} = useParams();
   const params = Object.fromEntries(searchParams);
   const [page, setPage] = useState<number>(1);
-  const[limit, setLimit] = useState(20)
+  const [limit, setLimit] = useState(20)
   const { data: options } = useGetDeviceOptionsQuery(city!);
   const { data: devices } = useGetDevicesQuery({...params, city, page, limit});
   
@@ -64,8 +64,8 @@ export const useDeviceFilters = () => {
       memorySize: options.memorySize?.map((item) => String(item.memorySize)) || [],
       screenSize: options.screenSize?.map((item) => String(item.screenSize)) || [],
       warehouse: options.warehouse?.map((item) => item.slug) || [],
-      isFunctional: ["true", "false"],
-      isAssigned: ["true", "false"],
+      isFunctional: ['true', 'false'],
+      isAssigned: ['true', 'false'],
     };
     //Checking available options by selected filters
     Object.entries(devicesOptions).forEach(([key, optionList]) => {
@@ -79,14 +79,14 @@ export const useDeviceFilters = () => {
             if (values.length === 0) return true;
              //Get the value of device for filter 
             const deviceValue =
-              key === "manufacturer" ? device.model.manufacturer?.slug :
-              key === "type" ? device.model.type?.slug :
-              key === "model" ? device.model.slug :
-              key === "warehouse" ? device.warehouse?.slug :
-              key === "memorySize" ? String(device.memorySize) :
-              key === "screenSize" ? String(device.screenSize) :
-              key === "isFunctional" ? String(device.isFunctional) :
-              key === "isAssigned" ? String(device.isAssigned) :
+              key === 'manufacturer' ? device.model.manufacturer?.slug :
+              key === 'type' ? device.model.type?.slug :
+              key === 'model' ? device.model.slug :
+              key === 'warehouse' ? device.warehouse?.slug :
+              key === 'memorySize' ? String(device.memorySize) :
+              key === 'screenSize' ? String(device.screenSize) :
+              key === 'isFunctional' ? String(device.isFunctional) :
+              key === 'isAssigned' ? String(device.isAssigned) :
               undefined;
             return values.includes(deviceValue as keyof IDeviceFilters);
           });
@@ -104,7 +104,7 @@ export const useDeviceFilters = () => {
     const params: Record<string, string> = {};
     Object.keys(filters).forEach((key: string) => {
       if (filters[key as keyof IDeviceFilters].length) {
-        params[key] = filters[key as keyof IDeviceFilters].join(",");
+        params[key] = filters[key as keyof IDeviceFilters].join(',');
       }
     });
 
@@ -210,11 +210,11 @@ export const useDeviceFilters = () => {
           ...commonProps,
           name:
             option.name ??
-            (key === "isFunctional"
+            (key === 'isFunctional'
               ? option.isFunctional
                 ? yes
                 : no
-              : key === "isAssigned"
+              : key === 'isAssigned'
               ? option.isAssigned
                 ? inUse
                 : inStock
