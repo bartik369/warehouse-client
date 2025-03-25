@@ -14,8 +14,8 @@ import WarrantyForm from "./WarrantyForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetManufacturersQuery, useGetTypesQuery, useGetModelsQuery 
-} from "../../../store/api/devicesApi";
+import { useGetTypesQuery, useGetModelsQuery } from "../../../store/api/devicesApi";
+import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IEntity } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
 import { Bounce, ToastContainer } from "react-toastify";

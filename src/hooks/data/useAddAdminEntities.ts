@@ -5,10 +5,10 @@ import { useInputMask } from './useInputMask';
 import { isErrorWithMessage, isFetchBaseQueryError } from '../../utils/errors/error-handling';
 import { FormValidation, ValidateField } from '../../utils/validation/AdminEntityValidation';
 import { 
-    useLazyGetManufacturerQuery, 
-    useCreateManufacturerMutation, 
-    useUpdateManufacturerMutation 
-} from '../../store/api/devicesApi';
+  useLazyGetManufacturerQuery, 
+  useCreateManufacturerMutation, 
+  useUpdateManufacturerMutation  
+} from '../../store/api/manufacturersApi';
 import {
   useCreateDepartmentMutation,
   useLazyGetDepartmentQuery,

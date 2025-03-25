@@ -23,13 +23,6 @@ export const devicesApi = createApi({
                 const cityUrl = city ? `/locations/${city}` : '/locations';
                 return `/devices${cityUrl}?${urlParams.toString()}`;
             },
-            // providesTags: (result) =>
-            //     result
-            //       ? [
-            //           ...result.map(({ id }) => ({ type: 'Device' as const, id })),
-            //           { type: 'Device', id: 'LIST' },
-            //         ]
-            //       : [{ type: 'Device', id: 'LIST' }],
         }),
         getDeviceOptions: build.query<IFilterDeviceOptions, string>({
             query:(city) => ({
@@ -50,44 +43,6 @@ export const devicesApi = createApi({
                 }
             },
             // invalidatesTags: ['Device'],
-        }),
-        getManufacturer: build.query({
-            query:(id:string) => ({
-                url:`${import.meta.env.VITE_MANUFACTURERS}${id}`,  
-            })
-        }),
-        getManufacturers: build.query<IEntity[], void>({
-            query() {
-                return {
-                    url:`${import.meta.env.VITE_MANUFACTURERS}`,
-                    refetchOnMountOrArgChange: true,
-                }
-            },
-            providesTags: (result) =>
-                result
-                  ? [
-                      ...result.map(({ id }) => ({ type: 'Manufacturer' as const, id })),
-                      { type: 'Manufacturer', id: 'LIST' },
-                    ]
-                  : [{ type: 'Manufacturer', id: 'LIST' }],
-        }),
-        createManufacturer: build.mutation<any, FormData>({
-            query(body) {
-                return {
-                    url:`${import.meta.env.VITE_MANUFACTURERS}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: ['Manufacturer'],
-        }),
-        updateManufacturer:build.mutation({
-            query:({id, ...body}) => ({
-                url:`${import.meta.env.VITE_MANUFACTURERS}${id}`,
-                method: 'PUT',
-                body,
-            }),
-            invalidatesTags: ['Manufacturer'],
         }),
         getModels: build.query<IEntity[], any>({
             query({manufacturer, type}) {
@@ -146,11 +101,7 @@ export const  {
     useGetDeviceQuery,
     useGetModelsQuery,
     useGetDeviceOptionsQuery,
-    useGetManufacturersQuery,
-    useCreateManufacturerMutation,
     useCreateModelMutation,
     useCreateTypeMutation,
-    useUpdateManufacturerMutation,
     useGetTypesQuery,
-    useLazyGetManufacturerQuery,
 } = devicesApi;

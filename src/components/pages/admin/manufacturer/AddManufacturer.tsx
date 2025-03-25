@@ -1,7 +1,7 @@
 import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
-import { useGetManufacturersQuery } from '../../../../store/api/devicesApi';
+import { useGetManufacturersQuery } from '../../../../store/api/manufacturersApi';
 import styles from '../Admin.module.scss';
 
 const AddManufacturer = () => {
@@ -9,7 +9,6 @@ const AddManufacturer = () => {
     entity,
     errors,
     isUpdate,
-    handleCityChange,
     handleInputChange,
     handleCreateEntity,
     handleResetEntity,
@@ -23,7 +22,6 @@ const AddManufacturer = () => {
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}
-          handleCity={handleCityChange}
           handleInput={(name, e) => handleInputChange(name, e)}
           handleCreate={(e, type) => handleCreateEntity(e, type)}
           handleReset={handleResetEntity}

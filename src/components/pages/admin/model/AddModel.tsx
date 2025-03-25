@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddRoles = () => {
+const AddModel = () => {
     return (
         <div>
-            roles
+            add model
         </div>
     );
 };
 
-export default AddRoles;
+export default AddModel;

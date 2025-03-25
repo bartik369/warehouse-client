@@ -52,6 +52,8 @@ export const addLocationTitle = 'Добавить город';
 export const addDepartmentTitle = 'Добавить отдел';
 export const addContractorTitle = 'Добавить подрядчика';
 export const addManufacturerTitle = 'Добавить производителя';
+export const addRoleTitle = 'Добавить роль';
+export const addPermissionTitle = 'Добавить разрешение';
 
 export const priceWithVat = 'Цена с НДС';
 export const priceWithoutVat = 'Цена без НДС';
@@ -70,3 +72,5 @@ export const startWarranty = 'Начало гарантии';
 export const endWarranty = 'Конец гарантии';
 export const activeWarranty = 'Активна';
 export const notActiveWarranty = 'Неактивна';
+
+export const selectPic = 'Выберите картинку!';

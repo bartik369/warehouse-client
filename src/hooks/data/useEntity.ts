@@ -2,7 +2,9 @@ import { useState, useRef, useCallback } from 'react';
 import { IDeviceMedia, IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { isErrorWithMessage, isFetchBaseQueryError} from '../../utils/errors/error-handling';
-import { useCreateManufacturerMutation, useCreateTypeMutation, useCreateModelMutation } from '../../store/api/devicesApi';
+import { useCreateTypeMutation, useCreateModelMutation } from '../../store/api/devicesApi';
+import { useCreateManufacturerMutation } from '../../store/api/manufacturersApi';
+import { selectPic } from '../../utils/constants/constants';
 import { toast } from 'react-toastify';
 
 export const useEntity = () => {
@@ -34,7 +36,7 @@ export const useEntity = () => {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
-        } else { toast('Выберите картинку!', { type: 'error' }); }
+        } else { toast(selectPic, { type: 'error' }); }
       }
     },
     [media]

@@ -10,7 +10,6 @@ const AddContractor = () => {
     entity,
     errors,
     isUpdate,
-    handleCityChange,
     handleInputChange,
     handleCreateEntity,
     handleResetEntity,
@@ -23,7 +22,6 @@ const AddContractor = () => {
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}
-          handleCity={handleCityChange}
           handleInput={(name, e) => handleInputChange(name, e)}
           handleCreate={(e, type) => handleCreateEntity(e, type)}
           handleReset={handleResetEntity}

@@ -71,7 +71,7 @@ a {
 .react-datepicker {
     font-family: inherit;
     font-size: 13px;
-    color: #070707;
+    color: #1a202c;
     border-radius: 16px;
     display: inline-block;
     position: relative;
@@ -125,7 +125,7 @@ input:-webkit-autofill {
 .react-datepicker__year-text--keyboard-selected {
     border-radius: 0.3rem;
     background-color: #edf0f7;
-    color: #070707 !important;
+    color: #1a202c !important;
 }
 
 .react-datepicker__day--keyboard-selected:not([aria-disabled=true]):hover,

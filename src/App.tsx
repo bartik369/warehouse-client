@@ -6,7 +6,8 @@ import { useAppDispatch} from './hooks/redux/useRedux';
 import { setCredentials, setAuth } from './store/slices/authSlice';
 import ResetPassword from './components/pages/reset/ResetPassword';
 import PrivateRoutes from './routes/PrivateRoutes';
-import { isFetchBaseQueryError, isErrorWithMessage} from './utils/errors/error-handling';
+import { isFetchBaseQueryError, 
+  isErrorWithMessage} from './utils/errors/error-handling';
 import Home from './components/pages/home/Home';
 import Layout from './routes/Layout';
 import PublicRoutes from './routes/PublicRoutes';
@@ -21,11 +22,14 @@ import Users from './components/pages/users/Users';
 import AddDepartment from './components/pages/admin/department/AddDepartment';
 import AddWarehouse from './components/pages/admin/warehouse/AddWarehouse';
 import AddContractor from './components/pages/admin/contractor/AddContractor';
-import AddRoles from './components/pages/admin/roles/AddRoles';
+import AddRole from './components/pages/admin/permission/AddRole';
+import AddPermission from './components/pages/admin/permission/AddPermission';
 import AddManufacturer from './components/pages/admin/manufacturer/AddManufacturer';
 import AddLocation from './components/pages/admin/city/AddLocation';
-
+import AddModel from './components/pages/admin/model/AddModel';
+import AddType from './components/pages/admin/type/AddType';
 import './App.scss';
+
 function App() {
   const dispatch = useAppDispatch();
   const [validToken] = useValidateMutation();
@@ -70,8 +74,11 @@ function App() {
         <Route element={<AddWarehouse/>} path='/admin/add-warehouse' />
         <Route element={<AddDepartment />} path='/admin/add-department' />
         <Route element={<AddContractor />} path='/admin/add-contractor' />
-        <Route element={<AddRoles />} path='/admin/add-roles' />
+        <Route element={<AddRole />} path='/admin/add-role' />
+        <Route element={<AddPermission />} path='/admin/add-permission' />
         <Route element={<AddManufacturer />} path='/admin/add-manufacturer' />
+        <Route element={<AddModel />} path='/admin/add-model' />
+        <Route element={<AddType />} path='/admin/add-type' />
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>

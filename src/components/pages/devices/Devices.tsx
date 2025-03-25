@@ -20,7 +20,6 @@ import {
   extraOptions,
 } from "../../../utils/constants/device";
 import { MdFilterListOff } from "react-icons/md";
-import { CgOptions } from "react-icons/cg";
 import styles from "./Devices.module.scss";
 
 const Devices: FC = () => {

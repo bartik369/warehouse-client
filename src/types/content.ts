@@ -17,7 +17,7 @@ export type CheckedDeviceOptions = {
 export interface IAdminEntity  {
         id: string;
         name: string;
-        slug: string;
+        slug?: string;
         locationName?: string;
         comment?: string;
         phoneNumber?: string;
