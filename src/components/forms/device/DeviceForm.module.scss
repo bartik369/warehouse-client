@@ -1,6 +1,44 @@
-.info {
+@mixin table-view {
+    .input {
+        display: flex;
+        align-items: center;
+        position: relative;
+        box-sizing: border-box;
+        border: 1px solid #dce4e8;
+        width: 100%;
+        border-radius: 20px;
+        height: 45px;
+        padding: 2px 15px;
+        transition: border-color .4s ease-in;
+        .icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-right: 8px;
+            font-size: 22px;
+            color: #1a202c;
+        }
+        .label {
+            position: absolute;
+            background-color: #ffffff;
+            padding: 0 5px;
+            color: #828890;
+            font-size: 11px;
+            top: -6px;
+            left: 18px;
+        }
+         ::placeholder {
+            font-weight: 400;
+            font-size: 14px;
+            color: #1a202c;
+        }
+    }
+}
+
+.wrapper {
+    max-width: 1600px;
     display: flex;
-    margin-bottom: 25px;
+    position: relative;
     .forms {
         display: flex;
         flex-direction: column;
@@ -12,7 +50,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 350px;
+        width: 300px;
         height: 300px;
         margin-right: 20px;
         padding: 10px;
@@ -24,10 +62,19 @@
     }
     .form {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;
         width: 100%;
         margin: 0 auto;
+        @include table-view;
+    }
+    .form4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 15px;
+        width: 100%;
+        margin: 0 auto;
+        @include table-view;
     }
     .additional-form {
         display: grid;
@@ -46,7 +93,7 @@
     color: #060606;
 }
 
-.action {
+.actions {
     display: flex;
     gap: 15px;
     align-items: center;
@@ -60,8 +107,8 @@
         color: #8e91a0;
         position: absolute;
         right: 0;
-        top: -30px;
-        text-align: right;
+        top: -20px;
+        z-index: 1;
         span {
             font-size: 12px;
             color: #060606;

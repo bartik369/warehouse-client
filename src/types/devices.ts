@@ -1,28 +1,73 @@
 export interface IDevice {
-    id?: string;
-    name: string;
-    inventoryNumber?: string;
-    modelCode?: string;
-    modelId: string;
-    modelName?: string;
-    serialNumber?: string;
-    weight?: number;
-    screenSize?: number | null;
-    memorySize?: number | null;
-    inStock: boolean,
-    isFunctional:boolean;
-    isAssigned: boolean;
-    warehouseId: string;
-    warehouseName: string;
-    description?: string;
-    type: string;
-    typeId: string;
-    manufacturer: string;
-    addedById: string;
-    updatedById: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+  id?: string;
+  name: string;
+  inventoryNumber?: string;
+  modelCode?: string;
+  modelId: string;
+  modelName?: string;
+  serialNumber?: string;
+  weight?: number;
+  screenSize?: number | null;
+  memorySize?: number | null;
+  inStock: boolean;
+  isFunctional: boolean;
+  isAssigned: boolean;
+  warehouseId: string;
+  warehouseName: string;
+  description?: string;
+  type: string;
+  typeId: string;
+  manufacturer: string;
+  addedById: string;
+  updatedById: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  price_with_vat?: number | null;
+  price_without_vat?: number | null;
+  residual_price?: number | null;
+  warrantyNumber: string;
+  startWarrantyDate: Date | null;
+  endWarrantyDate: Date | null;
+  provider: string;
+  contractorId: string;
 }
+
+export interface IAggregateDeviceInfo extends IDevice {
+  addedBy: {
+    firstName: string;
+    lastName: string;
+  };
+  updatedBy: {
+    firstName: string;
+    lastName: string;
+  };
+  warehouse: {
+    name: string;
+    slug: string;
+  };
+  model: {
+    name: string;
+    imagePath: string;
+    manufacturer: {
+      name: string;
+    };
+  };
+  warranty?: {
+    warrantyNumber: string;
+    startWarrantyDate: Date;
+    endWarrantyDate: Date;
+    warrantyStatus: string;
+    isExpired: boolean;
+    contractor: {
+      name: string;
+    };
+  };
+  deviceIssues: {
+    firstNameEn: string;
+    lastNameEn: string;
+  }[];
+}
+
 export interface IDeviceModel {
   id?: string;
   name: string;
@@ -37,7 +82,7 @@ export interface IDeviceMedia {
 }
 
 export interface IValidationErrors {
-  id?:   string;
+  id?: string;
   name?: string;
   slug?: string;
   type?: string;
@@ -48,46 +93,38 @@ export interface IValidationErrors {
   weight?: string;
   screenSize?: string;
   memorySize?: string;
+  phoneNumber?: string;
+  address?: string;
 }
 
 
 export interface IInventory {
-    id?: number,
-    place: string;
-    responsibleUser: string;
-    startDate: Date;
-    endDate: Date;
-    completed: boolean;
-    result: IInventoryResult;
+  id?: number;
+  place: string;
+  responsibleUser: string;
+  startDate: Date;
+  endDate: Date;
+  completed: boolean;
+  result: IInventoryResult;
 }
 
 export interface IInventoryResult {
-    id?: number;
-    inventoryId: number;
-    found: string[];
-    lost: string[];
+  id?: number;
+  inventoryId: number;
+  found: string[];
+  lost: string[];
 }
 export interface IDeviceRepair {
-    id?:number;
-    serialNumber?: string;
-    contractorId: string;
-    dateTransfer: Date;
-}
-
-export interface IContractor {
-    id: number;
-    contractorId: string;
-    name: string;
-    phone: string,
-    address: string;
-
+  id?: number;
+  serialNumber?: string;
+  contractorId: string;
+  dateTransfer: Date;
 }
 export interface IManufacturer {
-    id: number;
-    name: string
-    icon?: React.ReactElement;
+  id: number;
+  name: string;
+  icon?: React.ReactElement;
 }
-
 
 export type FieldType = "text" | "number";
 
@@ -106,6 +143,9 @@ export interface DeviceType {
 export interface DeviceTypes {
   [key: string]: DeviceType;
 }
+export interface DevicePrices {
+  uniqueFields: Field[];
+}
 
 export interface ISelectedItem {
   id: string;
@@ -114,12 +154,12 @@ export interface ISelectedItem {
 }
 
 export interface IEntity {
-  id?: string;
+  id: string;
   name: string;
   slug: string;
-  imagePath?: string,
-  typeId?: string,
-  manufacturerId?: string,
+  imagePath?: string;
+  typeId?: string;
+  manufacturerId?: string;
 }
 
 export interface IFilteredDevicesFromBack {
@@ -132,17 +172,17 @@ export interface IFilteredDevicesFromBack {
   memorySize: number;
   screenSize: number;
   model: {
+    name: string;
+    slug: string;
+    manufacturer: {
       name: string;
       slug: string;
-      manufacturer: {
-          name: string;
-          slug: string;
-      },
-      type: {
-          name: string;
-          slug: string;
-      }
-  },
+    };
+    type: {
+      name: string;
+      slug: string;
+    };
+  };
   warehouse: {
     name: string;
     slug: string;
@@ -150,11 +190,11 @@ export interface IFilteredDevicesFromBack {
 }
 
 export interface IFilterDeviceOptions {
-  isAssigned: { 
-    isAssigned: boolean 
+  isAssigned: {
+    isAssigned: boolean;
   }[];
-  isFunctional: { 
-    isFunctional: boolean 
+  isFunctional: {
+    isFunctional: boolean;
   }[];
   manufacturer: {
     name: string;
@@ -188,30 +228,30 @@ export interface IDeviceFilters {
   memorySize: string[];
   screenSize: string[];
   model: string[];
-  warehouse: string[],
+  warehouse: string[];
 }
 
-type FilterLabelsKeys = 
-'manufacturer' | 
-'type' | 
-'model' | 
-'warehouse' | 
-'screenSize' | 
-'memorySize' | 
-'isFunctional' | 
-'isAssigned' ;
+type FilterLabelsKeys =
+  | "manufacturer"
+  | "type"
+  | "model"
+  | "warehouse"
+  | "screenSize"
+  | "memorySize"
+  | "isFunctional"
+  | "isAssigned";
 
 export type FilterLabel = {
   key: FilterLabelsKeys;
   label: string;
-}
+};
 
 export interface IDeviceInfo {
   id: string;
   isAssigned: boolean;
   warehouse: {
-      name: string;
-      slug: string;
-  }
+    name: string;
+    slug: string;
+  };
 }
-
+export type QueryParams = Record<string, string | number | boolean>

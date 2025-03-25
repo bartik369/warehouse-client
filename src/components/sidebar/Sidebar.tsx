@@ -1,6 +1,5 @@
-import React, {FC, useState} from 'react';
+import { FC } from 'react';
 import Logo from '../logo/Logo';
-import BurgerBtn from '../ui/buttons/burger/BurgerBtn';
 import SidebarMenu from '../navigates/sidebar/SidebarMenu';
 import style from './Sidebar.module.scss';
 

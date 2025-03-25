@@ -1,10 +1,9 @@
 import {ChangeEvent, FC} from 'react';
-import { yes, no, inStock, inUse } from "../../../utils/constants/constants";
 import { IFilteredDevicesFromBack } from '../../../types/devices';
-import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { CgUnavailable } from "react-icons/cg";
-import styles from "./Devices.module.scss";
+import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
+import { CgUnavailable } from 'react-icons/cg';
+import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
+import styles from './Devices.module.scss';
 
 interface IDeviceItemsProps {
     devices: IFilteredDevicesFromBack[];

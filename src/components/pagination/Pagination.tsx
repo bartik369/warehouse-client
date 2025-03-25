@@ -1,7 +1,7 @@
-import { FC } from "react";
-import {prevPage, nextPage } from "../../utils/constants/constants";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import styles from "./Pagination.module.scss";
+import { FC } from 'react';
+import {prevPage, nextPage } from '../../utils/constants/constants';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import styles from './Pagination.module.scss';
 
 interface IPaginationProps {
   page: number;
@@ -22,7 +22,7 @@ const Pagination: FC<IPaginationProps> = ({
   next,
   setPage,
 }) => {
-  const paginationsNumber = [];
+  const paginationsNumber: number[] = [];
 
   for (let x = 1; x <= totalPages; x++) {
     paginationsNumber.push(x);

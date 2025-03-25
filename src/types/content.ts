@@ -1,3 +1,4 @@
+import { IEntity } from "./devices";
 
 export type IListRefObj = {
     [index: string]: HTMLDivElement | null;
@@ -13,3 +14,19 @@ export type CheckedDeviceOptions = {
     value: string;
     disabled: boolean;
   }
+export interface IAdminEntity  {
+        id: string;
+        name: string;
+        slug?: string;
+        locationName?: string;
+        comment?: string;
+        phoneNumber?: string;
+        address?: string;
+}
+export interface IContractor extends IEntity {
+    contractorId?: string;
+    phoneNumber: string;
+    address: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}

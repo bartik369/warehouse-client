@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import { Link } from 'react-router-dom';
-import style from './Admin.module.scss';
 
 const Admin:FC = () => {
     return (
         <div>
-            <Link to={`/device/add`}>Добавить устройство</Link>
+            <Link to={`/admin/add-device`}>Добавить устройство</Link>
+            <Link to={`/admin/add-user`}>Добавить пользователя</Link>
         </div>
     );
 };

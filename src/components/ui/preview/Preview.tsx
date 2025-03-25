@@ -1,4 +1,4 @@
-import React, {FC, forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 import loadIcon from '../../../assets/elements/load.svg';
 import previewPicture from '../../../assets/elements/default.png';
 import style from './Preview.module.scss';

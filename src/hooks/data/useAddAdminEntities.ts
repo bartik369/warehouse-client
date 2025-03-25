@@ -1,0 +1,188 @@
+import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+import { IAdminEntity } from '../../types/content';
+import { useInputMask } from './useInputMask';
+import { isErrorWithMessage, isFetchBaseQueryError } from '../../utils/errors/error-handling';
+import { FormValidation, ValidateField } from '../../utils/validation/AdminEntityValidation';
+import { 
+  useLazyGetManufacturerQuery, 
+  useCreateManufacturerMutation, 
+  useUpdateManufacturerMutation  
+} from '../../store/api/manufacturersApi';
+import {
+  useCreateDepartmentMutation,
+  useLazyGetDepartmentQuery,
+  useUpdateDepartmentMutation,
+} from '../../store/api/departmentApi';
+import {
+  useCreateLocationMutation,
+  useLazyGetLocationQuery,
+  useUpdateLocationMutation,
+} from '../../store/api/locationApi';
+import {
+  useCreateWarehouseMutation,
+  useLazyGetWarehouseQuery,
+  useUpdateWarehouseMutation,
+} from '../../store/api/warehousesApi';
+import {
+  useCreateContractorMutation,
+  useLazyGetContractorQuery,
+  useUpdateContractorMutation,
+} from '../../store/api/contractorApi';
+
+export const useAddAdminEntities = () => {
+  const [entity, setEntity] = useState<IAdminEntity>({
+    id: '',
+    name: '',
+    slug: '',
+    locationName: '',
+    comment: '',
+    phoneNumber: '',
+    address: '',
+  });
+
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const { formatPhone, changeFormatPhone } = useInputMask();
+
+  const [getWarehouse] = useLazyGetWarehouseQuery();
+  const [getLocation] = useLazyGetLocationQuery();
+  const [getDepartment] = useLazyGetDepartmentQuery();
+  const [getContractor] = useLazyGetContractorQuery();
+  const [getManufacturer] = useLazyGetManufacturerQuery();
+
+  const [createDepartment] = useCreateDepartmentMutation();
+  const [createLocation] = useCreateLocationMutation();
+  const [createWarehouse] = useCreateWarehouseMutation();
+  const [createManufacturer] = useCreateManufacturerMutation();
+  const [createContractor] = useCreateContractorMutation();
+
+  const [updateContractor] = useUpdateContractorMutation();
+  const [updateManufacturer] = useUpdateManufacturerMutation();
+  const [updateWarehouse] = useUpdateWarehouseMutation();
+  const [updateLocation] = useUpdateLocationMutation();
+  const [updateDepartment] = useUpdateDepartmentMutation();
+
+  const entityCreateFunctions: Record<string,(item: any) => 
+    { unwrap: () => Promise<any> }> = {
+    department: isUpdate ? updateDepartment : createDepartment,
+    warehouse: isUpdate ? updateWarehouse : createWarehouse,
+    location: isUpdate ? updateLocation : createLocation,
+    manufacturer: isUpdate ? updateManufacturer : createManufacturer,
+    contractor: isUpdate ? updateContractor : createContractor,
+  };
+  const entityById: Record<string, (item: any) => 
+    { unwrap: () => Promise<any> }> = {
+    department: getDepartment,
+    warehouse: getWarehouse,
+    location: getLocation,
+    manufacturer: getManufacturer,
+    contractor: getContractor,
+  };
+
+  const handleInputChange = useCallback(
+    <T extends string | IAdminEntity>(field: keyof IAdminEntity, value: T) => {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: ValidateField(field, value) || '',
+      }));
+      setEntity((prev) => {
+        const updateEntity = {
+          ...prev,
+          [field]:
+            field === 'phoneNumber'
+              ? formatPhone(value as string, prev.phoneNumber || '')
+              : value,
+        };
+        return updateEntity;
+      });
+    },
+    []
+  );
+
+  const handleCreateEntity = useCallback(
+    async (e: React.MouseEvent<HTMLButtonElement>, fieldType: string) => {
+      e.preventDefault();
+      try {
+        const createEntityFunction = entityCreateFunctions[fieldType];
+        const validationErrors = FormValidation(entity, fieldType);
+        setErrors(validationErrors as Record<string, string>);
+
+        if (Object.keys(validationErrors).length === 0) {
+          if (!entity) return;
+          const updateData = {
+            ...entity,
+            phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
+          };
+          await createEntityFunction(updateData)
+            .unwrap()
+            .then((data) => {
+              toast(data?.message, { type: 'success' });
+            });
+          handleResetEntity();
+        }
+      } catch (err: unknown) {
+        if (isFetchBaseQueryError(err)) {
+          const error = err as { data?: { message: string; error: string } };
+          const errMsg = error.data?.message;
+          console.log('API Error', errMsg);
+          toast(errMsg, { type: 'error' });
+        } else if (isErrorWithMessage(err)) {
+          console.log('Unexpected Error:', err.message);
+        } else {
+          console.error('Unknown Error:', err);
+        }
+      }
+    },
+    [entity, FormValidation, isUpdate]
+  );
+
+  const handleResetEntity = useCallback(() => {
+    setEntity({
+      id: '',
+      name: '',
+      slug: '',
+      locationName: '',
+      comment: '',
+      phoneNumber: '',
+      address: '',
+    });
+    setIsUpdate(false);
+  }, []);
+
+  const handleGetEntity = useCallback(async (id: string, field: string) => {
+    try {
+      const getEntityByIdFunction = entityById[field];
+      await getEntityByIdFunction(id)
+        .unwrap()
+        .then((data) => {
+          setEntity((prev) => ({
+            ...prev,
+            ...data,
+          }));
+        });
+      setIsUpdate(true);
+    } catch (err: unknown) {
+      if (isFetchBaseQueryError(err)) {
+        const error = err as { data?: { message: string; error: string } };
+        const errMsg = error.data?.message;
+        console.log('API Error', errMsg);
+        toast(errMsg, { type: 'error' });
+      } else if (isErrorWithMessage(err)) {
+        console.log('Unexpected Error:', err.message);
+      } else {
+        console.error('Unknown Error:', err);
+      }
+    }
+  }, []);
+
+  const handleCityChange = useCallback(
+    (item: any) => {
+      handleInputChange('locationName', item.name || '');
+    },
+    [handleInputChange]
+  );
+
+  return { entity, errors, isUpdate, handleCityChange, setEntity, handleCreateEntity, handleInputChange,
+    handleResetEntity, handleGetEntity };
+};

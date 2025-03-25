@@ -1,8 +1,7 @@
-import React, { ChangeEvent, FC, memo} from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Field, IDevice, IValidationErrors } from "../../../types/devices";
-import style from "./Number.module.scss";
+import React, { ChangeEvent, FC, memo} from 'react';
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
+import { Field, IDevice, IValidationErrors } from '../../../types/devices';
+import style from './Number.module.scss';
 
 interface ICustomNumberProps {
   device: IDevice;
@@ -14,7 +13,7 @@ interface ICustomNumberProps {
 const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDevice }) => {
   const data = {
     min: 0,
-    max: 1000,
+    max: 9999999,
     step: item.step,
   };
 
@@ -49,30 +48,28 @@ const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDe
 
   return (
     <div className={style.wrapper}>
-      <div className={style.error}>
-        {errorMessage && errorMessage }
-      </div>
       <div className={style.number}>
         <div className={style.label}>{item.label}</div>
-        <FontAwesomeIcon
-          className={style['btn-left']}
+        <CiSquareMinus
+          className={style["btn-left"]}
           onClick={handleDecrease}
-          icon={faMinus}
         />
         <input
           className={style.value}
           type={item.type}
-          value={Number(device[item.name as keyof IDevice] || "")}
+          value={Number(device[item.name as keyof IDevice] || 0)}
           step={data.step}
           min={data.min}
           max={data.max}
           onChange={handleInputChange}
         />
-        <FontAwesomeIcon
-          className={style['btn-right']}
+        <CiSquarePlus
+          className={style["btn-right"]}
           onClick={handleIncrease}
-          icon={faPlus}
         />
+      </div>
+      <div className={style.error}>
+        {errorMessage && errorMessage }
       </div>
     </div>
   );

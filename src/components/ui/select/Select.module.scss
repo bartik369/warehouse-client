@@ -1,11 +1,15 @@
 .wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
     .error {
-        position: absolute;
+        white-space: nowrap;
         color: #dc3546;
         font-size: 11px;
-        right: 10px;
-        top: -16px;
+        text-align: end;
+        padding: 2px;
     }
     .container {
         display: flex;
@@ -17,7 +21,6 @@
         height: 45px;
         background-color: transparent;
         border-radius: 20px;
-        margin-bottom: 22px;
         position: relative;
         &:focus {
             border: 1px solid #5a5cac;
@@ -28,7 +31,7 @@
     }
     .label {
         position: absolute;
-        z-index: 9;
+        z-index: 1;
         top: -7px;
         left: 15px;
         padding: 0 5px;

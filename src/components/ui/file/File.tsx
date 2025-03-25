@@ -1,6 +1,6 @@
 import {ChangeEvent, FC} from 'react';
-import fileIcon from '../../../assets/elements/file-icon.svg';
 import { selectPhoto } from '../../../utils/constants/constants';
+import fileIcon from '../../../assets/elements/file-icon.svg';
 import style from './File.module.scss';
 
 interface IFileProps {
@@ -9,7 +9,7 @@ interface IFileProps {
 const File:FC<IFileProps> = ({media}) => {
     return (
         <div>
-             <label className={style['file']} htmlFor={"upload"}>
+             <label className={style["file"]} htmlFor={"upload"}>
                  <div className={style.icon}>
                      <img className={style.test} src={fileIcon} alt="" />
                  </div>

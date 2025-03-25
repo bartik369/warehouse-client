@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     transition: background-color .3s ease-in;
+    margin-top: 25px;
     cursor: pointer;
 }
 
@@ -63,7 +64,7 @@
 .grey {
     box-sizing: border-box;
     background-color: #f2f2ff;
-    color: #070707;
+    color: #1a202c;
     &:hover {
         background-color: #656569;
         color: #ffff;

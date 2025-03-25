@@ -1,27 +1,49 @@
-.textarea {
-    border: 1px solid #dce4e8;
-    border-radius: 20px;
-    padding: 15px;
+.wrapper {
     position: relative;
-    transition: border-color .4s ease-in-out;
-    &:focus,
-    &:hover {
-        border: 1px solid #5a5cac;
-    }
-    textarea {
-        outline: none;
-        resize: none;
-        border: none;
-        width: 100%;
-    }
-    .label {
+    width: 100%;
+    .error {
         position: absolute;
-        z-index: 9;
-        top: -8px;
-        left: 15px;
-        padding: 0 5px;
-        color: #828890;
+        white-space: nowrap;
+        color: #dc3546;
         font-size: 11px;
-        background-color: #ffffff;
+        right: 10px;
+        top: -8px;
+    }
+    .textarea {
+        border: 1px solid #dce4e8;
+        border-radius: 20px;
+        padding: 15px;
+        position: relative;
+        transition: border-color .4s ease-in-out;
+        &:focus,
+        &:hover {
+            border: 1px solid #5a5cac;
+        }
+         ::placeholder {
+            font-weight: 400;
+            font-size: 14px
+        }
+        .icon {
+            position: relative;
+            font-size: 25px;
+            margin-right: 8px;
+            background-color: bisque;
+        }
+        textarea {
+            outline: none;
+            resize: none;
+            border: none;
+            width: 100%;
+        }
+        .label {
+            position: absolute;
+            z-index: 1;
+            top: -8px;
+            left: 15px;
+            padding: 0 5px;
+            color: #828890;
+            font-size: 11px;
+            background-color: #ffffff;
+        }
     }
 }

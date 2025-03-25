@@ -1,11 +1,12 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
-import { toast } from "react-toastify";
-import { useAppSelector } from "../redux/useRedux";
-import { IDeviceMedia, IEntity, IDevice} from "./../../types/devices";
-import { useCreateDeviceMutation } from "../../store/api/devicesApi";
-import {FormValidation, ValidateField} from "../../utils/validation/DeviceValidation";
-import {isFetchBaseQueryError, isErrorWithMessage} from "../../helpers/error-handling";
-import { addNewManufacturer, addNewType, addNewModel } from "../../utils/constants/constants";
+import { useState, useCallback, useMemo, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useAppSelector } from '../redux/useRedux';
+import { IContractor } from '../../types/content';
+import { IDeviceMedia, IEntity, IDevice} from './../../types/devices';
+import { useCreateDeviceMutation } from '../../store/api/devicesApi';
+import {FormValidation, ValidateField} from '../../utils/validation/DeviceValidation';
+import {isFetchBaseQueryError, isErrorWithMessage} from '../../utils/errors/error-handling';
+import { addNewManufacturer, addNewType, addNewModel } from '../../utils/constants/constants';
 
 export function useAddDevice() {
   const user = useAppSelector((state) => state.auth.user);
@@ -35,19 +36,27 @@ export function useAddDevice() {
     manufacturer: '',
     addedById:'',
     updatedById: '',
+    price_with_vat: null,
+    price_without_vat: null,
+    residual_price: null,
+    warrantyNumber: '',
+    startWarrantyDate: null,
+    endWarrantyDate:  null,
+    provider: '',
+    contractorId: '', 
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
-  const [devicePic, setDevicePic] = useState(""); // Preview of device model
+  const [devicePic, setDevicePic] = useState(''); // Preview of device model
   const [media, setMedia] = useState<IDeviceMedia>({
     file:    null,
     prevImg: null,
   });
   const [selectedOption, setSelectedOption] = useState({
     id: null,
-    name: "",
+    name: '',
   });
-  const [itemType, setItemType] = useState<string>("");
+  const [itemType, setItemType] = useState<string>('');
   const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
   const [create] = useCreateDeviceMutation();
   const handleNumber = useCallback((num: number) => {
@@ -56,7 +65,7 @@ export function useAddDevice() {
       weight: num,
     }));
   }, []);
-
+  
   const handleExtNumber = useCallback((num: number, fieldName: string) => {
     const data = ValidateField(fieldName, num);
     setDevice((prev) => ({
@@ -67,7 +76,7 @@ export function useAddDevice() {
       ...prev,
       [fieldName]: data as string,
     }));
-  }, []);
+  }, [ValidateField]);
 
   const handleAddDevice = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -84,38 +93,47 @@ export function useAddDevice() {
         };
       
         await create(updatedData).unwrap().then((data) => {
-          toast(data?.message, { type: "success" });
+          toast(data?.message, { type: 'success' });
           handleResetDevice();
           setMedia((prev) => ({...prev, prevImg: null}));
         });
       } else {
-        console.error("Validation errors:", validationErrors);
+        console.error('Validation errors:', validationErrors);
       }
     } catch (err) {
       if (isFetchBaseQueryError(err)) {
-        const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
-        console.log("API Error:", errMsg);
+        let errMsg: string;
+        if ('error' in err) {
+          errMsg = err.error;
+        } else {
+          if (err.data && typeof err.data === 'object' && 'message' in err.data) {
+            errMsg = (err.data as { message: string }).message;
+          } else {
+            errMsg = JSON.stringify(err.data);
+          }
+        }
+        toast(errMsg, {type: 'error'})
       } else if (isErrorWithMessage(err)) {
-        console.error("Unexpected Error:", err.message);
+        console.error('Unexpected Error:', err.message);
       } else {
-        console.error("Unknown Error:", err);
+        console.error('Unknown Error:', err);
       }
-    } finally {
-
     }
 }
     const handleResetDevice = useCallback(() => {
       // Reset device state
-      setDevice((prev) => 
-        Object.fromEntries(
+      setDevice((prev) => ({
+        ...Object.fromEntries(
           Object.entries(prev).map(([key, value]) => {
             if (typeof value === 'string') return [key, ''];
             if (typeof value === 'number') return [key, 0];
-            if (typeof value === 'boolean' && key === 'isFunctional') return [key, true]
+            if (typeof value === 'boolean' && key === 'isFunctional') return [key, true];
+            if (key === 'startWarrantyDate' || key === 'endWarrantyDate') return [key, null];
             return [key, value];
           })
-        ) as IDevice
-      );
+        ) as IDevice,
+      }));
+      
       // Reset errors state
       setErrors((prev) => 
       Object.fromEntries(
@@ -131,16 +149,20 @@ export function useAddDevice() {
       setDevicePic('');
       setItemType('');
       setMedia((prev) => ({...prev, prevImg: null}));
-    }, []);
-
-    const handleInputChange = useCallback(
-      <T extends string | IEntity>(field: keyof IDevice, value: T) => {
-        const validationErrors = ValidateField(field, value);
+    }, [device, setDevice]);
+    
+    const handleInputChange = (<T extends string | IEntity | IContractor>(field: keyof IDevice, value: T) => {
+        const validationErrors = ValidateField(field as keyof IDevice, value);
         setErrors((prev) => ({
           ...prev,
           [field]: validationErrors as string
         }));
-        const inputValue = typeof value === 'string' ? value : value.slug;
+        const isEntity = (obj: any): obj is IEntity => 'slug' in obj;
+        const inputValue = typeof value === 'string' 
+          ? value 
+          : isEntity(value) 
+          ? value.slug 
+          : '';
         const selectValue = typeof value === 'string' ? value : value.name;
 
         setDevice((prev) => ({
@@ -152,7 +174,7 @@ export function useAddDevice() {
           ...prev,
           [field]: selectValue,
         }));
-    }, []);
+    });
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -164,27 +186,33 @@ export function useAddDevice() {
     
     // Memoization of  device form fields (select)
     const selectedValuesMemo = useMemo(() => selectedValues, [selectedValues]);
+    
     const handleTypeChange = useCallback((item: IEntity) => {
-      handleInputChange("type", item);
-      handleInputChange("typeId", item.id || '');
+      handleInputChange('type', item);
+      handleInputChange('typeId', item.id || '');
       setItemType(item.slug);
       setTypeId(item.id || '')
     }, [handleInputChange, setItemType, setTypeId]);
   
     const handleModelChange = useCallback((item: IEntity) => {
-      handleInputChange("modelName", item.name || '');
-      handleInputChange("modelId", item.id || '');
+      handleInputChange('modelName', item.name || '');
+      handleInputChange('modelId', item.id || '');
       setModelId(item.id || '');
     }, [handleInputChange, setModelId]);
   
     const handleManufacturerChange = useCallback((item: IEntity) => {
-      handleInputChange("manufacturer", item);
+      handleInputChange('manufacturer', item);
       setManufacturerId(item.id || '')
     }, [handleInputChange, setManufacturerId]);
     
     const handleWarehouseChange = useCallback((item: IEntity) => {
-      handleInputChange("warehouseId", item.id || '')
-      handleInputChange("warehouseName", item.name || '')
+      handleInputChange('warehouseId', item.id || '')
+      handleInputChange('warehouseName', item.name || '')
+    }, [handleInputChange]);
+
+    const handleContractorChange = useCallback((item: IContractor) => {
+      handleInputChange('contractorId', item.id || '')
+      handleInputChange('provider', item.name || '')
     }, [handleInputChange]);
 
     useEffect(() => {
@@ -196,7 +224,7 @@ export function useAddDevice() {
           setTitle(addNewType);
           break
         case 'model':
-          setTitle(`${addNewModel} (${selectedValues["type"]})`)
+          setTitle(`${addNewModel} (${selectedValues['type']})`)
           break
       }
     }, [fieldType]);
@@ -206,6 +234,6 @@ export function useAddDevice() {
       setFieldType, setTitle, setModelId, setSelectedValues, setManufacturerId, setDevicePic,
       setMedia, handleChecked, setItemType, handleInputChange, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,handleModelChange, 
-      handleTypeChange, handleManufacturerChange, handleWarehouseChange
+      handleTypeChange, handleManufacturerChange, handleWarehouseChange, handleContractorChange
     };
 }

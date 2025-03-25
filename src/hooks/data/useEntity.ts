@@ -1,9 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
 import { IDeviceMedia, IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
-import { isErrorWithMessage, isFetchBaseQueryError} from "../../helpers/error-handling";
-import { useCreateManufacturerMutation, useCreateTypeMutation, useCreateModelMutation } from "../../store/api/devicesApi";
-import { toast } from "react-toastify";
+import { isErrorWithMessage, isFetchBaseQueryError} from '../../utils/errors/error-handling';
+import { useCreateTypeMutation, useCreateModelMutation } from '../../store/api/devicesApi';
+import { useCreateManufacturerMutation } from '../../store/api/manufacturersApi';
+import { selectPic } from '../../utils/constants/constants';
+import { toast } from 'react-toastify';
 
 export const useEntity = () => {
   // Device file and preview img for  Device form
@@ -30,11 +32,11 @@ export const useEntity = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
+        if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
-        } else { toast("Выберите картинку!", { type: "error" }); }
+        } else { toast(selectPic, { type: 'error' }); }
       }
     },
     [media]
@@ -61,10 +63,10 @@ export const useEntity = () => {
             const value = entity[key];
             if (value !== undefined && value !== null) formData.append(key, value);
           });
-          if (media.file) formData.append("file", media.file);
+          if (media.file) formData.append('file', media.file);
           await createEntityFunction(formData).unwrap().then((data) => {
             handleResetEntity();
-            toast(data?.message, { type: "success" });
+            toast(data?.message, { type: 'success' });
           });
         }
       } catch (err: unknown) {
@@ -72,16 +74,16 @@ export const useEntity = () => {
         if (isFetchBaseQueryError(err)) {
           const error = err as { data?: { message: string; error: string } };
           const errMsg = error.data?.message;
-          console.log("API Error", errMsg);
-          toast(errMsg, { type: "error" });
+          console.log('API Error', errMsg);
+          toast(errMsg, { type: 'error' });
         } else if (isErrorWithMessage(err)) {
-          console.log("Unexpected Error:", err.message);
+          console.log('Unexpected Error:', err.message);
         } else {
-          console.error("Unknown Error:", err);
+          console.error('Unknown Error:', err);
         }
       }
     },
-    [entity]
+    [entity, EntityValidation]
   );
 
   const handleResetEntity = useCallback(() => {
@@ -93,7 +95,7 @@ export const useEntity = () => {
       const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
-        [field]: validationErrors as any,
+        [field]: validationErrors as string,
       }));
       setEntity((prev) => ({
         ...prev,

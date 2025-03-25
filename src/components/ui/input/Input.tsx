@@ -15,32 +15,32 @@ const Input:FC<IInputProps> = memo(({
     name,
     value, 
     placeholder, 
-    label, 
+    label,
     errors,
     onChange}) => {
     const errorMessage = errors?.[name];
 
     return (
         <div className={style.wrapper}>
-            <div className={style.error}>
-                {errorMessage && 
-                <div className={style.error}>
-                    {errorMessage}
-                </div>
-                }
-            </div>
             <div className={style.input}>
             <input 
                 name={name} 
                 value={value}   
-                type={type} 
+                type={type}
                 onChange={onChange}
                 placeholder={placeholder} 
                 className={style.input} 
                 tabIndex={0} 
             />
              <div className={style.label}>{label}</div>
-            </div> 
+            </div>
+            {errorMessage && 
+            <div className={style.error}>
+                <div className={style.error}>
+                    {errorMessage}
+                </div>
+            </div>
+            }
         </div>
     );
 });

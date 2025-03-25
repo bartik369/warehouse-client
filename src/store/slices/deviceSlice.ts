@@ -1,10 +1,9 @@
 import { IDeviceInfo } from './../../types/devices';
-import { IUser } from "../../types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type IDeviceAction =  {
     device: IDeviceInfo | null;
-    status: boolean;
+    status?: boolean;
 }
 const initialState:IDeviceAction = {
     device: {
@@ -22,9 +21,9 @@ const deviceSlice = createSlice({
     name: 'device',
     initialState,
     reducers: {
-        setDeviceInfo:(state, action:PayloadAction<{device: IDeviceInfo, status: boolean}>) => {
+        setDeviceInfo:(state, action:PayloadAction<{device: IDeviceInfo, status?: boolean}>) => {
             state.device = action.payload.device;
-            state.status = action.payload.status;
+            state.status = action.payload.status; 
         },
     }
 });

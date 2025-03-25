@@ -1,15 +1,14 @@
 import {FC} from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import {useLogoutUserMutation} from '../../../store/api/authApi';
+import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { profileMenuData } from '../../../utils/data/menus';
 import { signout } from '../../../utils/constants/constants';
-import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { isFetchBaseQueryError, isErrorWithMessage } from '../../../helpers/error-handling';
-import { LuCircleUser } from "react-icons/lu";
-
+import { isFetchBaseQueryError, isErrorWithMessage } from '../../../utils/errors/error-handling';
+import { LuCircleUser } from 'react-icons/lu';
 import style from './ProfileMenu.module.scss';
 
 const ProfileMenu:FC = () => {
@@ -21,16 +20,16 @@ const ProfileMenu:FC = () => {
      const logoutHandler = async () => {
       try {
         await logout(user?.id).unwrap();
-        navigate("/");
+        navigate('/');
       } catch (err) {
 
         if (isFetchBaseQueryError(err)) {
-            const errMsg = "error" in err ? err.error : JSON.stringify(err.data);
-            console.log("API Error:", errMsg);
+            const errMsg = 'error' in err ? err.error : JSON.stringify(err.data);
+            console.log('API Error:', errMsg);
           } else if (isErrorWithMessage(err)) {
-            console.error("Unexpected Error:", err.message);
+            console.error('Unexpected Error:', err.message);
           } else {
-            console.error("Unknown Error:", err);
+            console.error('Unknown Error:', err);
           }
       }
     };
@@ -46,7 +45,7 @@ const ProfileMenu:FC = () => {
                 }
                 >
             <div className={style.username}>
-                {user && `${user.firstName} ${user.lastName}`}
+                {user && `${user.firstNameEn} ${user.lastNameEn}`}
             </div>
             <nav>
                 <ul>
@@ -58,7 +57,7 @@ const ProfileMenu:FC = () => {
                 </ul>
             </nav>
             <div className={style.logout}>
-            <BtnAction color='blue' title={signout} size='md' click={logoutHandler}/>
+            <BtnAction color="blue" title={signout} size="md" click={logoutHandler}/>
             </div>
             </div>
         </div>

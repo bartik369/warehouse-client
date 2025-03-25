@@ -1,5 +1,4 @@
-.wrapper {
-    display: flex;
+.main {
     .not-active,
     .active {
         overflow-x: clip;
@@ -14,10 +13,20 @@
         width: calc(100% - 220px);
     }
     .outlet {
+        max-width: 1980px;
         margin: 20px;
-        padding: 2px 25px 25px;
+        padding: 25px;
         border-radius: 8px;
         background-color: #fff;
         box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        .content {
+            flex-grow: 1;
+            min-height: calc(100vh - 140px);
+            overflow-y: hidden;
+            overflow-x: auto;
+        }
     }
 }

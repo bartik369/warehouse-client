@@ -1,14 +1,17 @@
 export interface IUser {
     id: string;
-    workId: string;
-    login: string;
+    userName: string;
     email: string;
-    firstName: string;
-    lastName: string;
+    workId: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
     department: string;
-    locationId: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
+    isActive: boolean;
+    location: string;
+    createdAt?: Date | null;
+    updatedAt?: Date | null;
 }
 
 export interface ISignin {
@@ -18,9 +21,19 @@ export interface ISignin {
 
 export interface IAuthRes {
     user: IUser;
-    token: string;
+    accessToken: string;
 }
 export interface RefreshTokenResponse {
-    token: string;
+    accessToken: string;
     user: IUser;
-  }
+}
+export interface IValidateUserErrors {
+    id?: string;
+    userName?: string;      
+    email?: string;
+    workId?: string;      
+    firstName?: string;
+    lastName?: string
+    department?: string;
+    locationId?: string;
+}

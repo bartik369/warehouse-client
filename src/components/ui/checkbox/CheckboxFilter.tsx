@@ -1,9 +1,9 @@
-import { ChangeEvent, FC} from "react";
-import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
-import { Checked, CheckedDeviceOptions } from "../../../types/content";
-import { noOptions } from "../../../utils/constants/constants";
-import { LuListFilter } from "react-icons/lu";
-import styles from "./CheckboxFilter.module.scss";
+import { ChangeEvent, FC} from 'react';
+import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
+import { Checked, CheckedDeviceOptions } from '../../../types/content';
+import { noOptions } from '../../../utils/constants/constants';
+import { CgOptions } from "react-icons/cg";
+import styles from './CheckboxFilter.module.scss';
 
 interface ICheckboxProps {
   items: CheckedDeviceOptions[];
@@ -43,7 +43,7 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
       <button className={styles.checkbox} onClick={() => setIsOpen(!isOpen)}>
         <div className={styles.header}>
           <div className={styles.placeholder}>{label}</div>
-          <LuListFilter className={styles.icon} />
+          <CgOptions className={styles.icon} />
         </div>
       </button>
       {isOpen && (
@@ -67,7 +67,7 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault(); // disable scroll
+                    e.preventDefault();
                     e.currentTarget.click();
                   }
                 }}

@@ -11,8 +11,15 @@ export const userApi = createApi({
                 url: `${import.meta.env.VITE_USER_PROFILE}/${id}`,
                 method: 'GET',
             })
-        })
+        }),
+        createUser: build.mutation({
+            query:(body) => ({
+                url: ``,
+                method: 'POST',
+                body,
+            })
+        }),
     })
 });
 
-export const {useProfileQuery} = userApi;
+export const {useProfileQuery, useCreateUserMutation} = userApi;

@@ -1,26 +1,30 @@
-import {useState} from 'react';
-import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Sidebar from '../components/sidebar/Sidebar';
-import style from './Layout.module.scss';
+import AdminMenu from '../components/navigates/admin/AdminMenu';
+import styles from './Layout.module.scss';
 
 const Layout = () => {
-    const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const location = useLocation();
 
-    return (
-        <div className={style.wrapper}>
-            <Sidebar open={isActive} />
-            <div className={isActive ? style.active : style['not-active']}>
-                <Header isActive={isActive} setIsActive={setIsActive}/>
-                <div className={style.outlet}>
-                    <Outlet /> 
-                </div>
-                <Footer />
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.main}>
+      <Sidebar open={isActive} />
+      <div className={isActive ? styles.active : styles["not-active"]}>
+        <Header isActive={isActive} setIsActive={setIsActive} />
+        <main className={styles.outlet}>
+          {location.pathname.startsWith("/admin") && <AdminMenu />}
+          <div className={styles.content}>
+            <Outlet />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  );
 };
-
 
 export default Layout;

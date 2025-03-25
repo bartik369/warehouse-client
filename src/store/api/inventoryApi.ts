@@ -1,5 +1,5 @@
 import { baseQueryWithReauth } from './../baseQueryWithReauth';
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 export const inventoryApi = createApi({
     reducerPath: 'inventoryApi',

@@ -1,15 +1,15 @@
-import {FC, useEffect} from 'react';
+import { FC, useEffect } from 'react';
 import { useEntity } from '../../../hooks/data/useEntity';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Preview from '../../ui/preview/Preview';
-import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import { ToastContainer, Bounce } from 'react-toastify';
+import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import {slugLabel, nameLabel} from '../../../utils/constants/device';
-import { GoPlus } from "react-icons/go";
-import { HiMiniXMark } from "react-icons/hi2";
+import { GoPlus } from 'react-icons/go';
+import { HiMiniXMark } from 'react-icons/hi2';
 import { BsQuestionSquare } from "react-icons/bs";
-import style from './EntityForm.module.scss';
+import styles from './EntityForm.module.scss';
 
 interface IEntityProps {
   typeId: string;
@@ -17,14 +17,14 @@ interface IEntityProps {
   fieldType: string;
 };
 
-const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => { 
+const EntityForm:FC<IEntityProps> = ({ fieldType, typeId, manufacturerId }) => { 
     const { entity, errors, media, fileInputRef, handleMedia, handleInputChange, 
     handleCreateEntity, handleResetEntity} = useEntity();
 
     useEffect(() => {
-      if (fieldType === "model" && (typeId && manufacturerId)) {
-        handleInputChange("typeId", typeId); 
-        handleInputChange("manufacturerId", manufacturerId); 
+      if (fieldType === 'model' && (typeId && manufacturerId)) {
+        handleInputChange('typeId', typeId); 
+        handleInputChange('manufacturerId', manufacturerId); 
       }
     }, [fieldType, typeId, manufacturerId]);
 
@@ -43,9 +43,9 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
             theme="light"
             transition={Bounce}
       />
-          <div className={style.content}>
+          <div className={styles.content}>
             {fieldType === "model" && 
-              <div className={style.preview}>
+              <div className={styles.preview}>
                 <Preview media={media.prevImg || ""} ref={fileInputRef} setMedia={handleMedia} />
               </div>
             }
@@ -58,11 +58,9 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 errors={errors}
                 name="name"
               /> 
-               <div className={style.tooltip}>
-               <span className={style.tooltip} data-tooltip={slugInfo} tabIndex={0}>
-                  <BsQuestionSquare className={style.icon}/>
+               <span className={styles.tooltip} data-tooltip={slugInfo} tabIndex={0}>
+                  <BsQuestionSquare className={styles.icon}/>
                </span>
-               </div>
                <Input
                 onChange={(e) => handleInputChange("slug", e.target.value)}
                 type="text"
@@ -71,7 +69,7 @@ const EntityForm:FC<IEntityProps> = ({fieldType, typeId, manufacturerId}) => {
                 errors={errors}
                 name="slug"
               />
-              <div className={style.actions}>
+              <div className={styles.actions}>
                 <BtnAction 
                   icon={<HiMiniXMark />} 
                   type="button" 

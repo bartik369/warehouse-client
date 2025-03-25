@@ -1,8 +1,8 @@
 import React, {ChangeEvent, FC, memo} from 'react';
 import { deviceWeight} from '../../../utils/constants/device';
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { IDevice } from '../../../types/devices';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
+
 import style from './Number.module.scss';
 
 interface INumberProps {
@@ -46,7 +46,7 @@ const Number:FC<INumberProps> = memo(({ device, setDevice}) => {
                 <div className={style.label}>
                 {deviceWeight}
                 </div>
-                <FontAwesomeIcon className={style['btn-left']} onClick={handleIncrease} icon={faMinus}/>
+                <CiSquareMinus className={style["btn-left"]} onClick={handleIncrease} />
                 <input 
                     className={style.value} 
                     type="number"
@@ -56,7 +56,7 @@ const Number:FC<INumberProps> = memo(({ device, setDevice}) => {
                     max={data.max}
                     onChange={handleInputChange}
                 />
-                <FontAwesomeIcon className={style['btn-right']} onClick={handleDecrease} icon={faPlus} />
+                <CiSquarePlus className={style["btn-right"]} onClick={handleDecrease} />
             </div>
         </div>
     );
