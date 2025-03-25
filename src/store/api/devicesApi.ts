@@ -1,4 +1,4 @@
-import { IDevice, IEntity, IFilterDeviceOptions, 
+import { IDevice, IFilterDeviceOptions, 
     IAggregateDeviceInfo, QueryParams } from './../../types/devices';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
@@ -44,54 +44,6 @@ export const devicesApi = createApi({
             },
             // invalidatesTags: ['Device'],
         }),
-        getModels: build.query<IEntity[], any>({
-            query({manufacturer, type}) {
-                return {
-                    url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
-                }
-            },
-            providesTags: (result) =>
-                result
-                  ? [
-                      ...result.map(({ id }) => ({ type: 'Model' as const, id })),
-                      { type: 'Model', id: 'LIST' },
-                    ]
-                  : [{ type: 'Model', id: 'LIST' }],
-        }),
-        createModel: build.mutation<any, FormData>({
-            query(body) {
-                return {
-                    url:`${import.meta.env.VITE_MODELS}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: ['Model'],
-        }),
-        getTypes: build.query<IEntity[], void>({
-            query() {
-                return {
-                    url:`${import.meta.env.VITE_TYPES}`,
-                }
-            },
-            providesTags: (result) =>
-                result
-                  ? [
-                      ...result.map(({ id }) => ({ type: 'Type' as const, id })),
-                      { type: 'Type', id: 'LIST' },
-                    ]
-                  : [{ type: 'Type', id: 'LIST' }],
-        }),
-        createType: build.mutation<any, FormData>({
-            query(body) {
-                return {
-                    url:`${import.meta.env.VITE_TYPES}`,
-                    method: 'POST',
-                    body,
-                }
-            },
-            invalidatesTags: ['Type'],
-        })
     })
 })
 
@@ -99,9 +51,5 @@ export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
     useGetDeviceQuery,
-    useGetModelsQuery,
     useGetDeviceOptionsQuery,
-    useCreateModelMutation,
-    useCreateTypeMutation,
-    useGetTypesQuery,
 } = devicesApi;

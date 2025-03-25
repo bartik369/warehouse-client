@@ -6,7 +6,7 @@ import style from './Preview.module.scss';
 interface IPreviewProps {
     media: string;
     ref?: React.RefObject<HTMLInputElement>
-    setMedia: (e:React.ChangeEvent<HTMLInputElement>) => void;
+    setMedia: () => void;
 }
 const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ media, setMedia }, ref) => {    
     return (

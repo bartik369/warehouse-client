@@ -6,7 +6,7 @@ export const inventoryApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: [],
     endpoints:(builder) => ({
-        getgetInventorys: builder.query({
+        getInventorys: builder.query({
             query: () => 'inventorys'
         }),
         getInventory: builder.query({

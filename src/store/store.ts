@@ -8,6 +8,8 @@ import { departmentApi } from './api/departmentApi';
 import { permissionApi } from './api/permissionApi';
 import { userApi } from './api/userApi';
 import { manufacturersApi } from './api/manufacturersApi';
+import { typesApi } from './api/typesApi';
+import { modelsApi } from './api/modelsApi';
 import authReducer from './slices/authSlice';
 import deviceReducer from './slices/deviceSlice';
 
@@ -21,6 +23,8 @@ const store = configureStore({
     [warehousesApi.reducerPath]: warehousesApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [manufacturersApi.reducerPath]: manufacturersApi.reducer,
+    [typesApi.reducerPath]: typesApi.reducer,
+    [modelsApi.reducerPath]: modelsApi.reducer,
     [locationApi.reducerPath]: locationApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
     [permissionApi.reducerPath]: permissionApi.reducer,
@@ -36,6 +40,8 @@ const store = configureStore({
         locationApi.middleware,
         userApi.middleware,
         manufacturersApi.middleware,
+        typesApi.middleware,
+        modelsApi.middleware,
         departmentApi.middleware,
         permissionApi.middleware,
       ),

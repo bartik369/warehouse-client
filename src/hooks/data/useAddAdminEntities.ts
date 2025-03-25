@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { IAdminEntity } from '../../types/content';
 import { useInputMask } from './useInputMask';
@@ -29,6 +29,8 @@ import {
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
 } from '../../store/api/contractorApi';
+import { IDeviceMedia } from '../../types/devices';
+import { selectPic } from '../../utils/constants/constants';
 
 export const useAddAdminEntities = () => {
   const [entity, setEntity] = useState<IAdminEntity>({
@@ -36,11 +38,20 @@ export const useAddAdminEntities = () => {
     name: '',
     slug: '',
     locationName: '',
-    comment: '',
+    typeId: '',
+    type: '',
+    manufacturerId: '',
+    manufacturer: '',
     phoneNumber: '',
+    comment: '',
     address: '',
   });
+  const [media, setMedia] = useState<IDeviceMedia>({
+    file: null,
+    prevImg: null,
+  });
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { formatPhone, changeFormatPhone } = useInputMask();
@@ -182,7 +193,37 @@ export const useAddAdminEntities = () => {
     },
     [handleInputChange]
   );
+  const handleManufacturerChange = useCallback(
+    (item: any) => {
+      handleInputChange('manufacturerId', item.id || '');
+      handleInputChange('manufacturer', item.name || '');
+    },
+    [handleInputChange]
+  );
+  const handleTypeChange = useCallback(
+    (item: any) => {
+      handleInputChange('typeId', item.id || '');
+      handleInputChange('type', item.name || '');
+    },
+    [handleInputChange]
+  );
 
-  return { entity, errors, isUpdate, handleCityChange, setEntity, handleCreateEntity, handleInputChange,
-    handleResetEntity, handleGetEntity };
+  const handleMedia = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
+            const objectUrl = URL.createObjectURL(file);
+            setMedia({ file: file, prevImg: objectUrl });
+            return () => URL.revokeObjectURL(objectUrl);
+          } else { toast(selectPic, { type: 'error' }); }
+        }
+      },
+      [media]
+    );
+
+  return { entity, errors, isUpdate, media, fileInputRef, handleMedia, handleCityChange, 
+    setEntity, handleCreateEntity, handleInputChange, handleResetEntity, handleGetEntity,
+    handleManufacturerChange, handleTypeChange
+   };
 };

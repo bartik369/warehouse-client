@@ -1,0 +1,55 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { IAdminEntity } from '../../types/content';
+
+export const typesApi = createApi({
+  reducerPath: 'typesApi',
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ['Type'],
+  endpoints: (build) => ({
+    getTypes: build.query<IAdminEntity[], void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_TYPES}`,
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Type' as const, id })),
+              { type: 'Type', id: 'LIST' },
+            ]
+          : [{ type: 'Type', id: 'LIST' }],
+    }),
+    getType: build.query({
+        query: (id: string) => ({
+            url: `${import.meta.env.VITE_TYPES}${id}`,
+        }),
+    }),
+    createType: build.mutation<any, FormData>({
+        query:(body) => ({
+            url: `${import.meta.env.VITE_TYPES}`,
+            method: 'POST',
+            body,
+        }),
+        invalidatesTags: ['Type']
+    }),
+    updateType: build.mutation<any, FormData>({
+        query: (body) => {
+            const id = body.get('id') as string;
+            if (!id) throw new Error('Something went wrong')
+            return {
+                url: `${import.meta.env.VITE_TYPES}${id}`,
+                method: 'PUT',
+                body: body
+            };
+        },
+        invalidatesTags: ['Type']
+    })
+  }),
+});
+
+export const { 
+    useGetTypesQuery, 
+    useGetTypeQuery, 
+    useCreateTypeMutation, 
+    useUpdateTypeMutation 
+} = typesApi;

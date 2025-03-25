@@ -22,6 +22,10 @@ export interface IAdminEntity  {
         comment?: string;
         phoneNumber?: string;
         address?: string;
+        typeId?: string;
+        type?: string;
+        manufacturer?: string;
+        manufacturerId?: string;
 }
 export interface IContractor extends IEntity {
     contractorId?: string;

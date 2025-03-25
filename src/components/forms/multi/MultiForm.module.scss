@@ -6,6 +6,29 @@
     color: #060606;
 }
 
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: fit-content;
+    .preview {
+        display: flex;
+        align-items: center;
+        width: 300px;
+        box-sizing: border-box;
+        img {
+            width: 100%;
+            border: 1px solid #e5ecef;
+            border-radius: 12px;
+        }
+    }
+    form {
+        padding: 10px;
+        width: 350px;
+    }
+}
+
 .tooltip-wrapper {
     position: relative;
     margin-bottom: 5px;
