@@ -275,7 +275,7 @@ const AddDeviceForm: FC = () => {
                 icon={<GoPlus />}
                 type="submit"
                 size="lg"
-                color="blue-green"
+                color="blue"
                 title={add}
                 click={handleAddDevice}
               />

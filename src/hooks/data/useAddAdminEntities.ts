@@ -2,12 +2,18 @@ import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { IAdminEntity } from '../../types/content';
 import { useInputMask } from './useInputMask';
-import { isErrorWithMessage, isFetchBaseQueryError } from '../../utils/errors/error-handling';
-import { FormValidation, ValidateField } from '../../utils/validation/AdminEntityValidation';
-import { 
-  useLazyGetManufacturerQuery, 
-  useCreateManufacturerMutation, 
-  useUpdateManufacturerMutation  
+import {
+  isErrorWithMessage,
+  isFetchBaseQueryError,
+} from '../../utils/errors/error-handling';
+import {
+  FormValidation,
+  ValidateField,
+} from '../../utils/validation/AdminEntityValidation';
+import {
+  useLazyGetManufacturerQuery,
+  useCreateManufacturerMutation,
+  useUpdateManufacturerMutation,
 } from '../../store/api/manufacturersApi';
 import {
   useCreateDepartmentMutation,
@@ -29,6 +35,16 @@ import {
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
 } from '../../store/api/contractorApi';
+import { 
+  useCreateModelMutation, 
+  useLazyGetModelQuery, 
+  useUpdateModelMutation,
+} from '../../store/api/modelsApi';
+import { 
+  useCreateTypeMutation, 
+  useLazyGetTypeQuery,
+  useUpdateTypeMutation,
+ } from '../../store/api/typesApi';
 import { IDeviceMedia } from '../../types/devices';
 import { selectPic } from '../../utils/constants/constants';
 
@@ -61,34 +77,45 @@ export const useAddAdminEntities = () => {
   const [getDepartment] = useLazyGetDepartmentQuery();
   const [getContractor] = useLazyGetContractorQuery();
   const [getManufacturer] = useLazyGetManufacturerQuery();
+  const [getModel] = useLazyGetModelQuery();
+  const [getType] = useLazyGetTypeQuery();
 
   const [createDepartment] = useCreateDepartmentMutation();
   const [createLocation] = useCreateLocationMutation();
   const [createWarehouse] = useCreateWarehouseMutation();
   const [createManufacturer] = useCreateManufacturerMutation();
   const [createContractor] = useCreateContractorMutation();
+  const [createModel] = useCreateModelMutation();
+  const [createType] = useCreateTypeMutation();
 
   const [updateContractor] = useUpdateContractorMutation();
   const [updateManufacturer] = useUpdateManufacturerMutation();
   const [updateWarehouse] = useUpdateWarehouseMutation();
   const [updateLocation] = useUpdateLocationMutation();
   const [updateDepartment] = useUpdateDepartmentMutation();
+  const [updateModel] = useUpdateModelMutation();
+  const [updateType] = useUpdateTypeMutation();
 
-  const entityCreateFunctions: Record<string,(item: any) => 
-    { unwrap: () => Promise<any> }> = {
+
+  const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }
+  > = {
     department: isUpdate ? updateDepartment : createDepartment,
     warehouse: isUpdate ? updateWarehouse : createWarehouse,
     location: isUpdate ? updateLocation : createLocation,
     manufacturer: isUpdate ? updateManufacturer : createManufacturer,
     contractor: isUpdate ? updateContractor : createContractor,
+    model: isUpdate ? updateModel : createModel,
+    type: isUpdate ? updateType : createType,
   };
-  const entityById: Record<string, (item: any) => 
-    { unwrap: () => Promise<any> }> = {
+  const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }
+  > = {
     department: getDepartment,
     warehouse: getWarehouse,
     location: getLocation,
     manufacturer: getManufacturer,
     contractor: getContractor,
+    model: getModel,
+    type: getType,
   };
 
   const handleInputChange = useCallback(
@@ -121,16 +148,33 @@ export const useAddAdminEntities = () => {
 
         if (Object.keys(validationErrors).length === 0) {
           if (!entity) return;
-          const updateData = {
-            ...entity,
-            phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
-          };
-          await createEntityFunction(updateData)
-            .unwrap()
-            .then((data) => {
-              toast(data?.message, { type: 'success' });
+          if (fieldType === 'model') {
+            const formData = new FormData();
+            (Object.keys(entity) as (keyof IAdminEntity)[]).forEach((key) => {
+              const value = entity[key];
+              if (value !== undefined && value !== null)
+                formData.append(key, value);
             });
-          handleResetEntity();
+
+            if (media.file) formData.append('file', media.file);
+            await createEntityFunction(formData)
+              .unwrap()
+              .then((data) => {
+                handleResetEntity();
+                toast(data?.message, { type: 'success' });
+              });
+          } else {
+            const updateData = {
+              ...entity,
+              phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
+            };
+            await createEntityFunction(updateData)
+              .unwrap()
+              .then((data) => {
+                toast(data?.message, { type: 'success' });
+              });
+            handleResetEntity();
+          }
         }
       } catch (err: unknown) {
         if (isFetchBaseQueryError(err)) {
@@ -157,6 +201,10 @@ export const useAddAdminEntities = () => {
       comment: '',
       phoneNumber: '',
       address: '',
+      type: '',
+      typeId: '',
+      manufacturer: '',
+      manufacturerId: ''
     });
     setIsUpdate(false);
   }, []);
@@ -209,21 +257,35 @@ export const useAddAdminEntities = () => {
   );
 
   const handleMedia = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-          const file = e.target.files[0];
-          if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
-            const objectUrl = URL.createObjectURL(file);
-            setMedia({ file: file, prevImg: objectUrl });
-            return () => URL.revokeObjectURL(objectUrl);
-          } else { toast(selectPic, { type: 'error' }); }
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
+          const objectUrl = URL.createObjectURL(file);
+          setMedia({ file: file, prevImg: objectUrl });
+          return () => URL.revokeObjectURL(objectUrl);
+        } else {
+          toast(selectPic, { type: 'error' });
         }
-      },
-      [media]
-    );
+      }
+    },
+    [media]
+  );
 
-  return { entity, errors, isUpdate, media, fileInputRef, handleMedia, handleCityChange, 
-    setEntity, handleCreateEntity, handleInputChange, handleResetEntity, handleGetEntity,
-    handleManufacturerChange, handleTypeChange
-   };
+  return {
+    entity,
+    errors,
+    isUpdate,
+    media,
+    fileInputRef,
+    handleMedia,
+    handleCityChange,
+    setEntity,
+    handleCreateEntity,
+    handleInputChange,
+    handleResetEntity,
+    handleGetEntity,
+    handleManufacturerChange,
+    handleTypeChange,
+  };
 };

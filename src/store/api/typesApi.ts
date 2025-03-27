@@ -24,7 +24,7 @@ export const typesApi = createApi({
             url: `${import.meta.env.VITE_TYPES}${id}`,
         }),
     }),
-    createType: build.mutation<any, FormData>({
+    createType: build.mutation<IAdminEntity, IAdminEntity>({
         query:(body) => ({
             url: `${import.meta.env.VITE_TYPES}`,
             method: 'POST',
@@ -32,16 +32,12 @@ export const typesApi = createApi({
         }),
         invalidatesTags: ['Type']
     }),
-    updateType: build.mutation<any, FormData>({
-        query: (body) => {
-            const id = body.get('id') as string;
-            if (!id) throw new Error('Something went wrong')
-            return {
-                url: `${import.meta.env.VITE_TYPES}${id}`,
-                method: 'PUT',
-                body: body
-            };
-        },
+    updateType: build.mutation<IAdminEntity, IAdminEntity>({
+        query: ({id, ...body}) => ({
+          url: `${import.meta.env.VITE_TYPES}${id}`,
+          method: 'PUT',
+          body,
+        }),
         invalidatesTags: ['Type']
     })
   }),
@@ -49,7 +45,7 @@ export const typesApi = createApi({
 
 export const { 
     useGetTypesQuery, 
-    useGetTypeQuery, 
+    useLazyGetTypeQuery, 
     useCreateTypeMutation, 
     useUpdateTypeMutation 
 } = typesApi;
