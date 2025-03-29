@@ -9,7 +9,7 @@ import { LuUsers, LuHandshake, LuWarehouse } from "react-icons/lu";
 import { MdOutlineLibraryAddCheck, MdSupportAgent  } from "react-icons/md";
 import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
 import { TbFileDescription, TbBrandComedyCentral, TbLocationPlus, 
-TbDeviceDesktopPlus } from "react-icons/tb"
+TbDeviceDesktopPlus } from "react-icons/tb";
 
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));

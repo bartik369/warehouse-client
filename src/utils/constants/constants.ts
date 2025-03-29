@@ -28,7 +28,7 @@ export const inUse = 'Oфис';
 export const selectPhoto = 'Выбрать фото';
 export const serviceable = 'Устройство исправно?'
 export const accountIsActive = 'Учетная запись активна?'
-export const technicalOptions = 'Технические характеристики';
+export const technicalOptions = 'Характеристики';
 export const warrantyOptions = 'Опции гарантии';
 export const financialOptions = 'Финансовая часть';
 export const addDeviceModelTitle = 'Добавить новую модель';
@@ -68,6 +68,7 @@ export const updatedBy = 'Обновил(а)';
 export const wasAdded = 'Дата добавления';
 export const wasUpdated = 'Дата обновления';
 
+export const contractor = 'Подрядчик';
 export const warranty = 'Гарантия';
 export const warrantyNumber = 'Номер гарантии';
 export const startWarranty = 'Начало гарантии';

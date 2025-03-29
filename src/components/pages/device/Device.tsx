@@ -10,6 +10,7 @@ import { setDeviceInfo } from '../../../store/slices/deviceSlice';
 import { useAppDispatch } from '../../../hooks/redux/useRedux';
 import { deviceTabsMenu } from '../../../utils/data/menus';
 import styles from './Device.module.scss';
+import LocationInfo from './LocationInfo';
 
 const Device: FC = () => {
   const [deviceId, setDeviceId] = useState<string>('');
@@ -42,8 +43,13 @@ const Device: FC = () => {
     }
   }, [device]);
   return (
-    <section>
+    <section className={styles.comm}>
       {device && (
+        <>
+        <div className={styles.h1}>
+          {device.name}
+          {device.inventoryNumber && <span>{device.inventoryNumber}</span>}
+          </div>
         <article className={styles.wrapper}>
           <figure className={styles.picture}>
             <img
@@ -53,14 +59,19 @@ const Device: FC = () => {
               alt=""
             />
           </figure>
+            <div className={styles.info}>
             <TechnicalInfo device={device} />
+            </div>
             <div className={styles.info}>
             <PriceInfo device={device} />
-            <WarrantyInfo device={device} />
+             <WarrantyInfo device={device} />
+          </div>
+          <div className={styles.info}>
+            <LocationInfo device={device} />
             <UserInfo device={device} />
           </div>
         </article>
-      )}
+        </>)}
     <Tabs tabs={deviceTabsMenu}/>
     </section>
   );

@@ -34,12 +34,16 @@ export interface IDevice {
 
 export interface IAggregateDeviceInfo extends IDevice {
   addedBy: {
-    firstName: string;
-    lastName: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
   };
   updatedBy: {
-    firstName: string;
-    lastName: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
   };
   warehouse: {
     name: string;
