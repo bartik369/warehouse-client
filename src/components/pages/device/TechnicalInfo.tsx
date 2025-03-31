@@ -6,10 +6,8 @@ import {
   inch,
   gb,
 } from "../../../utils/constants/constants";
-import { BiArea } from "react-icons/bi";
 import {
   inventoryNumber,
-  location,
   manufacturersLabel,
   memorySizeLabel,
   modelCode,
@@ -17,8 +15,10 @@ import {
   screenSizeLabel,
   serialNumber,
 } from "../../../utils/constants/device";
+import { BiArea } from "react-icons/bi";
+import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import styles from "./Device.module.scss";
-import { IoIosCheckmarkCircle } from "react-icons/io";
+
 
 interface ITechnicalInfoProps {
   device: IAggregateDeviceInfo;
@@ -101,7 +101,7 @@ const TechnicalInfo: FC<ITechnicalInfoProps> = ({ device }) => {
             </div>
           ) : (
             <div className={`${styles.status} ${styles.unavailable}`}>
-              <IoIosCheckmarkCircle />
+              <IoIosCloseCircle />
               <span>Неисправно</span>
             </div>
           )}

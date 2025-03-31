@@ -38,9 +38,9 @@ export const slugInfo = `Если модель, например, Dell 5490, т�
 Если тип Ноутбук, то slug будет laptop. Slug указывать прописными буквами`;
 export const slugLocation = `Если название, например, "Склад 1 этаж", то slug будет sklad_1_etazge. 
 Если город "Москва", то slug будет moscow. Slug указывать прописными буквами`;
-export const addNewManufacturer = 'Добавление нового производителя';
-export const addNewModel = 'Добавление новой модели';
-export const addNewType = 'Добавление нового типа';
+export const addNewManufacturer = 'Добавление производителя';
+export const addNewModel = 'Добавление модели';
+export const addNewType = 'Добавление типа';
 export const noOptions = 'Нет доступных опций';
 export const phoneMaskPlaceholder = '+7 (___) ___-__-__';
 export const requiredFieldText = 'Обязательно к заполнению';
@@ -77,3 +77,5 @@ export const activeWarranty = 'Активна';
 export const notActiveWarranty = 'Неактивна';
 
 export const selectPic = 'Выберите картинку!';
+export const edit = 'Редактировать';
+export const editDevice = 'Редактирование устройства';

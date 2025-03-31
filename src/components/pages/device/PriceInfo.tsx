@@ -35,6 +35,7 @@ const PriceInfo: FC<IPriceInfoProps> = ({ device }) => {
         </div>
         <div className={styles.name}>{priceWithoutVat}</div>
       </div>
+      <div className={styles.separate}></div>
     </div>
   );
 };

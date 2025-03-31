@@ -50,6 +50,6 @@ export const devicesApi = createApi({
 export const  {
     useCreateDeviceMutation,
     useGetDevicesQuery,
-    useGetDeviceQuery,
+    useLazyGetDeviceQuery,
     useGetDeviceOptionsQuery,
 } = devicesApi;

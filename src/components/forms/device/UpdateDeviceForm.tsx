@@ -4,39 +4,59 @@ import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
 import Number from "../../ui/number/Number";
-import EntityForm from "./EntityForm";
 import CustomNumber from "../../ui/number/CustomNumber";
-import ContractorForm from "../contractor/ContractorForm";
-import Actions from "./Actions";
-import Modal from "../../modal/Modal";
+import BtnAction from "../../ui/buttons/BtnAction";
 import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
-import { useAppDispatch } from "../../../hooks/redux/useRedux";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { IEntity } from "../../../types/devices";
-import DevicePreview from "./DevicePreview";
-import Ask from "./Ask";
+import { IDevice, IEntity } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
 import { Bounce, ToastContainer } from "react-toastify";
-import { yes, no, serviceable, technicalOptions, financialOptions,
+import { add, reset, yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions } from "../../../utils/constants/constants";
-import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
-  description, modelCode, modelLabel, location, deviceTypes } from "../../../utils/constants/device";
+import {
+  manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
+  description, modelCode, modelLabel, location, deviceTypes
+} from "../../../utils/constants/device";
+import previewPicture from '../../../assets/elements/default.png';
+import { GoPlus } from "react-icons/go";
+import { HiMiniXMark } from "react-icons/hi2";
 import styles from "./DeviceForm.module.scss";
 
+interface IUpdateDeviceFormProps {
+  device: IDevice;
+  selectedValues: Record<string, string>;
+  modelFields: Record<string, string>,
+  setSelectedValues:(item: Record<string, string>) => void;
+  handleType:(item: IEntity) => void
+  handleModel:(item: IEntity) => void
+  handleManufacturer:(item: IEntity) => void
+  handleWarehouse:(item: IEntity) => void
+  handleContractor:(item: IContractor) => void
+  handleInputChange: (name: keyof IDevice, e:any) => void
+}
+const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ 
+  device, 
+  selectedValues,
+  setSelectedValues,
+  handleType,
+  handleModel,
+  handleManufacturer,
+  handleWarehouse,
+  handleContractor,
+  handleInputChange,
+}) => {
 
 
-const DeviceForm: FC = () => {
-  const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
-    selectedValuesMemo,title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange,
-    handleManufacturerChange, handleWarehouseChange, handleContractorChange, resetModelData } = useAddDevice();
+  const {itemType, errors, checked, handleNumber, handleExtNumber, handleAddDevice,
+    handleResetDevice, setDevice,  handleChecked} = useAddDevice();
 
   const [skip, setSkip] = useState(true);
   const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
@@ -46,7 +66,7 @@ const DeviceForm: FC = () => {
   const { data: models } = useGetModelsQuery(
     { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
   const dispatch = useAppDispatch();
-  // const devicePic = useAppSelector(state => state.device.device?.prevImg);
+  const prevImg = useAppSelector(state => state.device.device?.prevImg);
 
   // Allow model query by manufacturer and type
   useEffect(() => {
@@ -54,26 +74,33 @@ const DeviceForm: FC = () => {
       models.forEach((model: IEntity) => {
         if (model.name === device.modelName) {
           dispatch(setDevicePic(model.imagePath || ''))
-          // setDevicePic(model.imagePath || "");
         }
       });
     }
-  }, [device.modelName]);
+  }, [device.modelName, models, prevImg]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (device.manufacturer && device.type) {
+    if (device.manufacturer &&  device.type) {
       setSkip(false);
       resetModelData();
     } else {
       setSkip(true);
     }
-  }, [device.manufacturer, device.type, models]);
-  // Reset image state after unmount 
-  useEffect(() => {
-    dispatch(setDevicePic(''))
-  }, [dispatch]);
+  }, [device]);
 
+  const resetModelData = () => {
+    setDevice((prev) => ({
+      ...prev,
+      modelName: '',
+    }));
+    // setSelectedValues((prev) => ({
+    //   ...prev,
+    //   modelName: '',
+    // }));
+    // setDevicePic('');
+  };
+  
   return (
     <>
     <ToastContainer
@@ -89,20 +116,13 @@ const DeviceForm: FC = () => {
             theme="light"
             transition={Bounce}
       />
-      {isOpen && (
-        <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
-          {entity !== "contactor"
-            ? <EntityForm
-                typeId={typeId}
-                manufacturerId={manufacturerId}
-                fieldType={fieldType}
-            />
-            : <ContractorForm />
-          }
-        </Modal>
-      )}
       <article className={styles.wrapper}>
-        <DevicePreview />
+        <figure className={styles.preview}>
+          <img src={prevImg
+            ? `${import.meta.env.VITE_API_MODELS}${prevImg}`
+            : previewPicture
+          } alt="" />
+        </figure>
         <div className={styles.forms}>
           <div className={styles.title}>{technicalOptions}</div>
           <form className={styles.form}>
@@ -115,37 +135,34 @@ const DeviceForm: FC = () => {
               name="name"
             />
             <div className={styles.container}>
-            <Ask title="type" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
               <Select<IEntity>
-                setValue={handleTypeChange}
+                setValue={handleType}
                 items={types || []}
                 label={deviceTypeLabel}
-                value={selectedValuesMemo["type"]}
+                value={selectedValues["type"]}
                 errors={errors}
                 name="type"
                 getId={(item:IEntity) => item.id}
               />
             </div>
             <div className={styles.container}>
-              <Ask title="manufacturer" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
               <Select<IEntity>
-                setValue={handleManufacturerChange}
+                setValue={handleManufacturer}
                 items={manufacturers || []}
                 label={manufacturersLabel}
-                value={selectedValuesMemo["manufacturer"]}
+                value={selectedValues["manufacturer"]}
                 errors={errors}
                 name="manufacturer"
                 getId={(item:IEntity) => item.id}
               />
             </div>
-            {typeId && manufacturerId && (
+            {(selectedValues['manufacturer'] && selectedValues['type']) && (
               <div className={styles.container}>
-                <Ask title="model" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
                 <Select<IEntity>
-                  setValue={handleModelChange}
+                  setValue={handleModel}
                   items={models || []}
                   label={modelLabel}
-                  value={selectedValuesMemo["modelName"]}
+                  value={selectedValues["modelName"]}
                   errors={errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
@@ -177,7 +194,7 @@ const DeviceForm: FC = () => {
               name="modelCode"
             />
             <Select<IEntity>
-              setValue={handleWarehouseChange}
+              setValue={handleWarehouse}
               items={warehouses || []}
               label={location}
               value={selectedValues["warehouseName"]}
@@ -217,10 +234,10 @@ const DeviceForm: FC = () => {
             isOpen={isOpen}
             setIsOpen={setIsOpen} 
             setEntity={setEntity} 
-            setValue={handleContractorChange}
+            setValue={handleContractor}
             handleInputChange={handleInputChange}
             setDevice={setDevice}
-            selectedValuesMemo={selectedValuesMemo["provider"]}
+            selectedValuesMemo={device.provider || ""}
           />
           <form className={styles["additional-form"]}>
             <Textarea
@@ -230,12 +247,29 @@ const DeviceForm: FC = () => {
               errors={errors} 
               name="description"
               />
-            <Actions resetDevice={handleResetDevice} addDevice={handleAddDevice}/>
+            <div className={styles.actions}>
+              <BtnAction
+                icon={<HiMiniXMark />}
+                type="button"
+                size="lg"
+                color="grey"
+                title={reset}
+                click={handleResetDevice}
+              />
+              <BtnAction
+                icon={<GoPlus />}
+                type="submit"
+                size="lg"
+                color="blue"
+                title={add}
+                click={handleAddDevice}
+              />
+            </div>
           </form>
         </div>
       </article>
     </>
   );
 };
-export default DeviceForm;
+export default UpdateDeviceForm;
 

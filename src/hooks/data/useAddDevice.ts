@@ -1,14 +1,17 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useAppDispatch } from '../redux/useRedux';
+import { setDevicePic } from '../../store/slices/deviceSlice';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../redux/useRedux';
 import { IContractor } from '../../types/content';
 import { IDeviceMedia, IEntity, IDevice} from './../../types/devices';
-import { useCreateDeviceMutation } from '../../store/api/devicesApi';
+import { useCreateDeviceMutation, useLazyGetDeviceQuery } from '../../store/api/devicesApi';
 import {FormValidation, ValidateField} from '../../utils/validation/DeviceValidation';
 import {isFetchBaseQueryError, isErrorWithMessage} from '../../utils/errors/error-handling';
 import { addNewManufacturer, addNewType, addNewModel } from '../../utils/constants/constants';
 
 export function useAddDevice() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const [typeId, setTypeId] = useState(''); // For display select of model 
   const [manufacturerId, setManufacturerId] = useState(''); // For display select of model 
@@ -47,9 +50,8 @@ export function useAddDevice() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
-  const [devicePic, setDevicePic] = useState(''); // Preview of device model
-  const [media, setMedia] = useState<IDeviceMedia>({
-    file:    null,
+    const [media, setMedia] = useState<IDeviceMedia>({ 
+    file:null,
     prevImg: null,
   });
   const [selectedOption, setSelectedOption] = useState({
@@ -58,7 +60,13 @@ export function useAddDevice() {
   });
   const [itemType, setItemType] = useState<string>('');
   const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
+  const [modelFields, setModelFields] = useState<Pick<IDevice, 'type' | 'manufacturer'>>({
+    type: '',
+    manufacturer: '',
+  })
+
   const [create] = useCreateDeviceMutation();
+  const [getDevice] = useLazyGetDeviceQuery();
   const handleNumber = useCallback((num: number) => {
     setDevice((prev) => ({
       ...prev,
@@ -229,11 +237,54 @@ export function useAddDevice() {
       }
     }, [fieldType]);
 
+    const handleGetDevice = async (id: string) => {
+      try {
+        const data = await getDevice(id).unwrap();
+        setDevice(prev => ({
+          ...prev,
+          ...data,
+          startWarrantyDate: data.warranty?.startWarrantyDate ?? null,
+          endWarrantyDate: data.warranty?.endWarrantyDate ?? null,
+          provider: data.warranty?.contractor?.name ?? '',
+          warrantyNumber: data.warranty?.warrantyNumber ?? '',
+          manufacturer: data.model?.manufacturer?.slug ?? '',
+          type: data.model?.type?.slug ?? '',
+
+        }));
+        setSelectedValues({
+          warehouseName: data.warehouse?.name ?? '',
+          modelName: data.model?.name ?? '',
+          manufacturer: data.model?.manufacturer?.name ?? '',
+          type: data.model?.type?.name ?? '',
+        });
+        dispatch(setDevicePic(data.model.imagePath))
+        setModelFields((prev) => ({
+          ...prev,
+          type: data.model?.type?.slug ?? '',
+          manufacturer: data.model?.manufacturer?.slug ?? '',
+        }));
+      } catch (error) {
+        console.error('Error fetching device:', error);
+      }
+    }
+    const resetModelData = () => {
+      setDevice((prev) => ({
+        ...prev,
+        modelName: '',
+      }));
+      setSelectedValues((prev) => ({
+        ...prev,
+        modelName: '',
+      }));
+      setDevicePic('');
+    };
+
     return {title, fieldType,  selectedValuesMemo, typeId, modelId, manufacturerId, device, 
-      errors, checked, media, devicePic, itemType, selectedOption, selectedValues, setTypeId, 
+      errors, checked, media, itemType, selectedOption, selectedValues, modelFields, setTypeId, 
       setFieldType, setTitle, setModelId, setSelectedValues, setManufacturerId, setDevicePic,
       setMedia, handleChecked, setItemType, handleInputChange, handleNumber, handleExtNumber,
       handleAddDevice, handleResetDevice, setDevice,  setSelectedOption,handleModelChange, 
-      handleTypeChange, handleManufacturerChange, handleWarehouseChange, handleContractorChange
+      handleTypeChange, handleManufacturerChange, handleWarehouseChange, handleContractorChange,
+      handleGetDevice, resetModelData
     };
 }

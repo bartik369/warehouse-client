@@ -25,10 +25,10 @@ export interface IDevice {
   price_with_vat?: number | null;
   price_without_vat?: number | null;
   residual_price?: number | null;
-  warrantyNumber: string;
-  startWarrantyDate: Date | null;
-  endWarrantyDate: Date | null;
-  provider: string;
+  warrantyNumber?: string;
+  startWarrantyDate?: Date | null;
+  endWarrantyDate?: Date | null;
+  provider?: string;
   contractorId: string;
 }
 
@@ -54,6 +54,11 @@ export interface IAggregateDeviceInfo extends IDevice {
     imagePath: string;
     manufacturer: {
       name: string;
+      slug: string;
+    };
+    type: {
+      name: string;
+      slug: string;
     };
   };
   warranty?: {
@@ -257,5 +262,6 @@ export interface IDeviceInfo {
     name: string;
     slug: string;
   };
+  prevImg: string;
 }
 export type QueryParams = Record<string, string | number | boolean>

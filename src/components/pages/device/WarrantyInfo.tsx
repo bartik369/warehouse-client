@@ -21,7 +21,6 @@ interface IWarrantyInfoProps {
 const WarrantyInfo: FC<IWarrantyInfoProps> = ({ device }) => {
   return (
     <div className={styles.warranty}>
-
         <div className={styles.options}>
         <div className={styles.title}>
           <div className={styles.icon}>

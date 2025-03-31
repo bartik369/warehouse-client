@@ -13,6 +13,7 @@ const initialState:IDeviceAction = {
             name: '',
             slug: ''
         },
+        prevImg: '',
     },
     status: false,
 }
@@ -25,8 +26,11 @@ const deviceSlice = createSlice({
             state.device = action.payload.device;
             state.status = action.payload.status; 
         },
+        setDevicePic:(state, action: PayloadAction<string>) => {
+            if (state.device) state.device.prevImg = action.payload;
+        },
     }
 });
 
 export default deviceSlice.reducer
-export const {setDeviceInfo} = deviceSlice.actions;
+export const {setDeviceInfo, setDevicePic} = deviceSlice.actions;
