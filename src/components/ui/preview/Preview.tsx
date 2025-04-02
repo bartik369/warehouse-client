@@ -8,7 +8,7 @@ interface IPreviewProps {
     ref?: React.RefObject<HTMLInputElement>
     setMedia: () => void;
 }
-const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ media, setMedia }, ref) => {    
+const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ media, setMedia }, ref) => {  
     return (
         <label className={style.file} htmlFor={"upload"}>
            <div className={style.icon}>

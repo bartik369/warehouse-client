@@ -44,12 +44,20 @@ export const devicesApi = createApi({
             },
             // invalidatesTags: ['Device'],
         }),
+        updateDevice: build.mutation<any, any>({
+            query: ({ id, body }) => ({
+                url: `${import.meta.env.VITE_DEVICES}${id}`,
+                method: 'PUT',
+                body,
+            })
+        })
     })
 })
 
 export const  {
     useCreateDeviceMutation,
+    useUpdateDeviceMutation,
     useGetDevicesQuery,
-    useGetDeviceQuery,
+    useLazyGetDeviceQuery,
     useGetDeviceOptionsQuery,
 } = devicesApi;

@@ -1,31 +1,32 @@
 import React, {FC} from 'react';
 import ReactDOM from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
-import style from './Modal.module.scss';
+import modalStyles from './Modal.module.scss';
 
 interface IModal {
     children: React.ReactNode;
     isOpen: boolean;
     title?: string;
+    maxWidth?: number;
     setIsOpen:(isOpen:boolean) => void;
 }
-const Modal:FC<IModal> = ({children, isOpen, title, setIsOpen}) => {
+const Modal:FC<IModal> = ({children, isOpen, title, maxWidth, setIsOpen}) => {
     const modal = document.getElementById('portal') as HTMLElement;
     return ReactDOM.createPortal(
-        <div className={style.wrapper}>
-            <div className={style.inner}>
-                <div className={style.title}>{title}</div>
-                <IoCloseCircleOutline
+        <div className={modalStyles.wrapper}>
+            <div className={modalStyles.inner} style={{ maxWidth: maxWidth ? `${maxWidth}px` : 'auto' }}>
+                <div className={modalStyles.title}>{title}</div>
+                {children}
+            </div>
+            <IoCloseCircleOutline
                     tabIndex={0}
                     role="button"
-                    className={style.icon} 
+                    className={modalStyles.icon} 
                     onClick={() => setIsOpen(!isOpen)}
                     onKeyDown={(e) => { 
                         if (e.key === "Enter" || e.key === " ")setIsOpen(!isOpen) 
                     }}
                 />
-                {children}
-            </div>
         </div>,
         modal
     );

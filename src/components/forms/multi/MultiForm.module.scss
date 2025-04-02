@@ -15,16 +15,17 @@
     .preview {
         display: flex;
         align-items: center;
-        width: 300px;
-        box-sizing: border-box;
+        width: 260px;
         img {
             width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
             border: 1px solid #e5ecef;
             border-radius: 12px;
         }
     }
     form {
-        padding: 10px;
+        padding: 16px;
         width: 350px;
     }
 }

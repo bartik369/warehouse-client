@@ -10,7 +10,7 @@ export const modelsApi = createApi({
         getModels: build.query<IAdminEntity[], any>({
             query({manufacturer, type}) {
                 return {
-                    url: `${import.meta.env.VITE_MODELS}${manufacturer}/${type}`,
+                    url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturer}/${type}`,
                 }
             },
           providesTags: (result) =>
@@ -26,9 +26,9 @@ export const modelsApi = createApi({
                 url: `${import.meta.env.VITE_MODELS_ALL}`,
             })
         }),
-        getModel: build.query({
+        getModel: build.query<IAdminEntity, string>({
             query: (id: string) => ({
-                url: `${import.meta.env.VITE_MODELS}${id}`,
+                url: `${import.meta.env.VITE_MODEL}${id}`,
             }),
         }),
         createModel: build.mutation<any, FormData>({
@@ -55,8 +55,8 @@ export const modelsApi = createApi({
 });
 
 export const {
-    useGetModelsQuery,
-    useGetModelQuery,
+    useLazyGetModelsQuery,
+    useLazyGetModelQuery,
     useCreateModelMutation,
     useUpdateModelMutation,
     useGetAllModelsQuery,

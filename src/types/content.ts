@@ -19,6 +19,7 @@ export interface IAdminEntity  {
         name: string;
         slug?: string;
         locationName?: string;
+        imagePath?: string;
         comment?: string;
         phoneNumber?: string;
         address?: string;

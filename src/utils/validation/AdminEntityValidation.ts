@@ -17,7 +17,10 @@ const validateRequiredFields = <T>(
     });
 }
 
-export const FormValidation = (formData: IAdminEntity, fieldType: string): IValidateLocationErrors => {
+export const FormValidation = (
+    formData: IAdminEntity, 
+    fieldType: string
+): IValidateLocationErrors => {
     const errors: Record<string, string> = {};
     const fieldMap: Record<string, ValidationFields[]> = {
         role: ['name'],
@@ -26,7 +29,9 @@ export const FormValidation = (formData: IAdminEntity, fieldType: string): IVali
         manufacturer: ['name', 'slug'],
         department: ['name', 'slug'],
         contractor: ['name', 'slug', 'phoneNumber'],
-        warehouse: ['name', 'slug', 'locationName']
+        warehouse: ['name', 'slug', 'locationName'],
+        model: ['name', 'slug', 'manufacturer', 'type'],
+        type: ['name', 'slug']
     }
     const requiredFields:ValidationFields[] = fieldMap[fieldType];
     validateRequiredFields(formData, requiredFields, errors);

@@ -74,7 +74,7 @@ const Select = <T,>({
 
         {isOpen && (
           <div className={style.dropdown}>
-            {items.length > 0 ? (
+            {items.length ? (
               items.map((option, index) => (
                 <div
                   key={getId(option)!}

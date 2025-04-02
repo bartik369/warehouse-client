@@ -1,4 +1,4 @@
-import { useMemo, FC } from "react";
+import { FC } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -55,16 +55,20 @@ const MultiForm: FC<IMultiFormProps> = ({
   const locationType = locationPath.pathname.split('/')[2]?.split('-')[1] || '';
   const { data: cities } = useGetLocationsQuery();
   const { data : manufacturers } = useGetManufacturersQuery();
-  const {data: types } = useGetTypesQuery();
-  const exceptionPath = !/add-(model|type)$/.test(locationPath.pathname);
+  const { data: types } = useGetTypesQuery();
 
+  const exceptionPath = !/add-(model|type)$/.test(locationPath.pathname);
   const isContractor = locationPath.pathname.endsWith("contractor");
+  const isEntityImg = entity.imagePath 
+    ? `${import.meta.env.VITE_API_MODELS}${entity.imagePath}`
+    : media?.prevImg;
+
   return (
     <div className={styles.wrapper}>
       {fieldType === "model" && (
         <div className={styles.preview}>
           <Preview
-            media={media?.prevImg || ""}
+            media={isEntityImg || ""}
             ref={fileInputRef}
             setMedia={setMedia}
           />
@@ -170,7 +174,7 @@ const MultiForm: FC<IMultiFormProps> = ({
             icon={<GoPlus />}
             type="submit"
             size="lg"
-            color="blue-green"
+            color="blue"
             title={isUpdate ? update : add}
             click={(e) => handleCreate(e, locationType)}
           />

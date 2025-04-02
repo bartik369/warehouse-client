@@ -7,27 +7,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
-    background-color: rgb(239, 241, 245, .98);
+    z-index: 998;
+    background-color: rgba(197, 198, 212, 0.98);
     .inner {
         display: flex;
         align-items: center;
         flex-direction: column;
         position: relative;
-        min-width: 200px;
-        padding: 50px;
+        max-height: 80vh;
+        width: 100%;
+        padding: 50px 30px;
         background-color: #fff;
+        border-radius: 12px;
+        overflow-y: auto;
         .title {
             text-align: center;
-            font-size: 22px;
+            font-size: 26px;
             font-weight: 600;
             margin-bottom: 40px;
         }
     }
     .icon {
         position: absolute;
-        top: -35px;
-        right: -45px;
+        top: 15px;
+        right: 15px;
         font-size: 35px;
         color: #1a1c1e;
         transition: color .3s ease-in;
