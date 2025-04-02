@@ -9,52 +9,46 @@ import CustomNumber from "../../ui/number/CustomNumber";
 import ContractorForm from "../contractor/ContractorForm";
 import Actions from "./Actions";
 import Modal from "../../modal/Modal";
+import Ask from "./Ask";
 import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
+import { ToastContainer } from "react-toastify";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetModelsQuery } from "../../../store/api/modelsApi";
+import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IEntity } from "../../../types/devices";
-import DevicePreview from "./DevicePreview";
-import Ask from "./Ask";
-import { IContractor } from "../../../types/content";
-import { Bounce, ToastContainer } from "react-toastify";
+import { IAdminEntity, IContractor } from "../../../types/content";
 import { yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions } from "../../../utils/constants/constants";
 import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
   description, modelCode, modelLabel, location, deviceTypes } from "../../../utils/constants/device";
+  import DevicePreview from "./DevicePreview";
 import styles from "./DeviceForm.module.scss";
-
-
 
 const DeviceForm: FC = () => {
   const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
     selectedValuesMemo,title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
     handleResetDevice, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange,
     handleManufacturerChange, handleWarehouseChange, handleContractorChange, resetModelData } = useAddDevice();
-
-  const [skip, setSkip] = useState(true);
   const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
-  const { data: models } = useGetModelsQuery(
-    { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
+  const [getModels, { data: models }] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
   // const devicePic = useAppSelector(state => state.device.device?.prevImg);
 
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (device.modelName && models) {
-      models.forEach((model: IEntity) => {
+      models.forEach((model: IAdminEntity) => {
         if (model.name === device.modelName) {
           dispatch(setDevicePic(model.imagePath || ''))
-          // setDevicePic(model.imagePath || "");
         }
       });
     }
@@ -63,11 +57,9 @@ const DeviceForm: FC = () => {
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
     if (device.manufacturer && device.type) {
-      setSkip(false);
+      getModels({ manufacturer: device.manufacturer, type: device.type });
       resetModelData();
-    } else {
-      setSkip(true);
-    }
+    } 
   }, [device.manufacturer, device.type, models]);
   // Reset image state after unmount 
   useEffect(() => {
@@ -76,27 +68,11 @@ const DeviceForm: FC = () => {
 
   return (
     <>
-    <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition={Bounce}
-      />
+    <ToastContainer position="top-center" theme="light" />
       {isOpen && (
         <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
           {entity !== "contactor"
-            ? <EntityForm
-                typeId={typeId}
-                manufacturerId={manufacturerId}
-                fieldType={fieldType}
-            />
+            ? <EntityForm typeId={typeId} manufacturerId={manufacturerId} fieldType={fieldType} />
             : <ContractorForm />
           }
         </Modal>
@@ -115,7 +91,7 @@ const DeviceForm: FC = () => {
               name="name"
             />
             <div className={styles.container}>
-            <Ask title="type" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
+            <Ask title="type" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity} />
               <Select<IEntity>
                 setValue={handleTypeChange}
                 items={types || []}
@@ -127,7 +103,7 @@ const DeviceForm: FC = () => {
               />
             </div>
             <div className={styles.container}>
-              <Ask title="manufacturer" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
+              <Ask title="manufacturer" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity} />
               <Select<IEntity>
                 setValue={handleManufacturerChange}
                 items={manufacturers || []}
@@ -204,11 +180,7 @@ const DeviceForm: FC = () => {
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm 
-            device={device} 
-            handleExtNumber={handleExtNumber} 
-            errors={errors}
-          />
+          <PriceForm device={device} errors={errors} handleExtNumber={handleExtNumber} />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}

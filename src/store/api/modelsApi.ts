@@ -55,7 +55,7 @@ export const modelsApi = createApi({
 });
 
 export const {
-    useGetModelsQuery,
+    useLazyGetModelsQuery,
     useLazyGetModelQuery,
     useCreateModelMutation,
     useUpdateModelMutation,

@@ -1,15 +1,16 @@
 import { FC } from 'react';
 import BtnAction from '../../ui/buttons/BtnAction';
-import { add, reset } from '../../../utils/constants/constants';
+import { add, reset, update } from '../../../utils/constants/constants';
 import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
 import styles from "./DeviceForm.module.scss";
 
 interface IActionsProps {
+    isUpdate?: boolean;
     resetDevice: () => void;
     addDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
-const Actions:FC<IActionsProps> = ({ resetDevice, addDevice}) => {
+const Actions:FC<IActionsProps> = ({ isUpdate, resetDevice, addDevice}) => {
     return (
         <div className={styles.actions}>
         <BtnAction
@@ -25,7 +26,7 @@ const Actions:FC<IActionsProps> = ({ resetDevice, addDevice}) => {
           type="submit"
           size="lg"
           color="blue"
-          title={add}
+          title={isUpdate ? update : add}
           click={addDevice}
         />
       </div>

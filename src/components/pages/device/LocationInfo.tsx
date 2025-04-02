@@ -1,15 +1,13 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { IAggregateDeviceInfo } from "../../../types/devices";
 import { TbLocationCheck } from "react-icons/tb";
-
 import styles from "./Device.module.scss";
-import { Link } from "react-router-dom";
 
 interface ILocationInfoProps {
   device: IAggregateDeviceInfo;
 }
 const LocationInfo: FC<ILocationInfoProps> = ({ device }) => {
-  console.log(device);
   return (
     <div className={styles.options}>
       <div className={styles.title}>

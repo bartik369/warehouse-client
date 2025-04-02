@@ -88,8 +88,7 @@ const Devices: FC = () => {
             <tr>
               <th className={styles["checkbox-column"]}>
                 {[...searchParams.keys()].filter(
-                  (key) => !["limit", "page"].includes(key)
-                ).length > 0 && (
+                  (key) => !["limit", "page"].includes(key)).length > 0 && (
                   <MdFilterListOff
                     role="button"
                     className={styles.reset}

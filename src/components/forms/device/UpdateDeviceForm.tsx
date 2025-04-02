@@ -5,124 +5,94 @@ import Textarea from "../../ui/textarea/Textarea";
 import Toggle from "../../ui/checkbox/Toggle";
 import Number from "../../ui/number/Number";
 import CustomNumber from "../../ui/number/CustomNumber";
-import BtnAction from "../../ui/buttons/BtnAction";
+import Actions from "./Actions";
+import DevicePreview from "./DevicePreview";
 import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useModal } from "../../../hooks/data/useModal";
-import { useAppSelector, useAppDispatch } from "../../../hooks/redux/useRedux";
+import { useAppDispatch } from "../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useGetModelsQuery } from "../../../store/api/modelsApi";
+import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IDevice, IEntity } from "../../../types/devices";
-import { IContractor } from "../../../types/content";
+import { IAdminEntity, IContractor } from "../../../types/content";
 import { Bounce, ToastContainer } from "react-toastify";
-import { add, reset, yes, no, serviceable, technicalOptions, financialOptions,
+import { yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions } from "../../../utils/constants/constants";
 import {
   manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
   description, modelCode, modelLabel, location, deviceTypes
 } from "../../../utils/constants/device";
-import previewPicture from '../../../assets/elements/default.png';
-import { GoPlus } from "react-icons/go";
-import { HiMiniXMark } from "react-icons/hi2";
 import styles from "./DeviceForm.module.scss";
 
 interface IUpdateDeviceFormProps {
+  itemType: string;
+  isUpdate: boolean;
   device: IDevice;
   selectedValues: Record<string, string>;
   modelFields: Record<string, string>,
-  setSelectedValues:(item: Record<string, string>) => void;
   handleType:(item: IEntity) => void
   handleModel:(item: IEntity) => void
   handleManufacturer:(item: IEntity) => void
   handleWarehouse:(item: IEntity) => void
   handleContractor:(item: IContractor) => void
   handleInputChange: (name: keyof IDevice, e:any) => void
+  resetModel: () => void;
+  handleNumber: (num: number) => void;
+  setDevice: (item: IDevice) => void;
 }
 const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ 
+  itemType,
+  isUpdate,
   device, 
   selectedValues,
-  setSelectedValues,
   handleType,
   handleModel,
   handleManufacturer,
   handleWarehouse,
   handleContractor,
   handleInputChange,
+  resetModel,
+  handleNumber,
+  setDevice,
 }) => {
+  const {errors, checked, handleExtNumber, handleAddDevice,
+    handleResetDevice,handleChecked } = useAddDevice();
 
-
-  const {itemType, errors, checked, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setDevice,  handleChecked} = useAddDevice();
-
-  const [skip, setSkip] = useState(true);
   const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
-  const { data: models } = useGetModelsQuery(
-    { manufacturer: device.manufacturer, type: device.type }, { skip: skip });
+  const[ getModels, { data: models } ] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
-  const prevImg = useAppSelector(state => state.device.device?.prevImg);
 
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (device.modelName && models) {
-      models.forEach((model: IEntity) => {
+      models.forEach((model: IAdminEntity) => {
         if (model.name === device.modelName) {
           dispatch(setDevicePic(model.imagePath || ''))
         }
       });
     }
-  }, [device.modelName, models, prevImg]);
+  }, [device.modelName, models]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (device.manufacturer &&  device.type) {
-      setSkip(false);
-      resetModelData();
-    } else {
-      setSkip(true);
+    if (device.manufacturer && device.type) {
+      getModels({ manufacturer: device.manufacturer, type: device.type })
+      resetModel();
     }
-  }, [device]);
+  }, [device.manufacturer, device.type]);
 
-  const resetModelData = () => {
-    setDevice((prev) => ({
-      ...prev,
-      modelName: '',
-    }));
-    // setSelectedValues((prev) => ({
-    //   ...prev,
-    //   modelName: '',
-    // }));
-    // setDevicePic('');
-  };
-  
   return (
     <>
-    <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition={Bounce}
-      />
+    <ToastContainer position="top-center" theme="light" transition={Bounce} />
       <article className={styles.wrapper}>
-        <figure className={styles.preview}>
-          <img src={prevImg
-            ? `${import.meta.env.VITE_API_MODELS}${prevImg}`
-            : previewPicture
-          } alt="" />
-        </figure>
+        <DevicePreview />
         <div className={styles.forms}>
           <div className={styles.title}>{technicalOptions}</div>
           <form className={styles.form}>
@@ -221,11 +191,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm 
-            device={device} 
-            handleExtNumber={handleExtNumber} 
-            errors={errors}
-          />
+          <PriceForm  device={device} errors={errors} handleExtNumber={handleExtNumber} />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
@@ -247,24 +213,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({
               errors={errors} 
               name="description"
               />
-            <div className={styles.actions}>
-              <BtnAction
-                icon={<HiMiniXMark />}
-                type="button"
-                size="lg"
-                color="grey"
-                title={reset}
-                click={handleResetDevice}
-              />
-              <BtnAction
-                icon={<GoPlus />}
-                type="submit"
-                size="lg"
-                color="blue"
-                title={add}
-                click={handleAddDevice}
-              />
-            </div>
+            <Actions isUpdate={isUpdate} resetDevice={handleResetDevice} addDevice={handleAddDevice} />
           </form>
         </div>
       </article>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TechnicalInfo from './TechnicalInfo';
 import PriceInfo from './PriceInfo';
@@ -19,78 +19,78 @@ import { editDevice } from '../../../utils/constants/constants';
 import { CiEdit } from "react-icons/ci";
 import styles from './Device.module.scss';
 
-
-
 const Device: FC = () => {
-  const [deviceId, setDeviceId] = useState<string>('');
   const params = useParams();
-  const [getDevice, { data: device2 }] = useLazyGetDeviceQuery();
+  const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
   const dispatch = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { device, selectedValues, modelFields, handleTypeChange, 
-    handleGetDevice, handleInputChange, handleModelChange,
-    handleManufacturerChange, handleWarehouseChange, 
-    handleContractorChange, setSelectedValues } = useAddDevice();
+  const { itemType, device, selectedValues, modelFields, isUpdate, handleTypeChange, 
+    handleGetDevice, handleInputChange, handleModelChange, handleManufacturerChange, 
+    handleWarehouseChange, handleContractorChange, setIsUpdate, resetModelData, 
+    handleNumber, setDevice,
+  } = useAddDevice();
 
   useEffect(() => {
     if (params.id) {
-      setDeviceId(params.id);
+      getDevice(params.id);
     }
-    if (deviceId) {
-      getDevice(deviceId)
+  }, [params.id]);
+
+  useEffect(() => {
+    if (itemDevice?.id) {
+      dispatch(
+        setDeviceInfo({
+          device: {
+            id: itemDevice.id,
+            isAssigned: device.isAssigned,
+            warehouse: {
+              name: itemDevice.warehouse?.name || '',
+              slug: itemDevice.warehouse?.slug || '',
+            },
+            prevImg: itemDevice.model.imagePath || '',
+          },
+        })
+      );
     }
-  }, [params.id, deviceId]);
+  }, [itemDevice]);
 
-  // useEffect(() => {
-  //   if (device2?.id) {
-  //     dispatch(
-  //       setDeviceInfo({
-  //         device: {
-  //           id: device2.id,
-  //           isAssigned: device.isAssigned,
-  //           warehouse: {
-  //             name: device2.warehouse?.name || '',
-  //             slug: device2.warehouse?.slug || '',
-  //           },
-  //           prevImg: device2.model.imagePath || '',
-  //         },
-  //       })
-  //     );
-  //   }
-  // }, [device]);
-
-  const handleActions = (id: string) => {
-    handleGetDevice(id)
-    setIsOpen(true)
-  }
+  const handleActions = async (id: string) => {
+    await handleGetDevice(id);
+    setIsUpdate(true);
+    setIsOpen(true);
+  };
 
   return (
     <>
     {isOpen && (
       <Modal title={editDevice} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
-      <UpdateDeviceForm 
+      <UpdateDeviceForm
+        itemType={itemType}
         device={device}
+        isUpdate={isUpdate}
         selectedValues={selectedValues}
         modelFields={modelFields}
-        setSelectedValues={setSelectedValues}
-        handleInputChange={(name: keyof IDevice, e: any) => handleInputChange(name, e)}
         handleType={handleTypeChange}
         handleModel={handleModelChange}
         handleManufacturer={handleManufacturerChange}
         handleWarehouse={handleWarehouseChange}
         handleContractor={handleContractorChange}
+        resetModel={resetModelData}
+        handleNumber={handleNumber}
+        setDevice={setDevice}
+        handleInputChange={(name: keyof IDevice, e: any) => handleInputChange(name, e)}
       />
       </Modal>
     )}
     <section className={styles.section}>
-      {device2 && (
+      {itemDevice && (
         <>
         <div className={styles.header}>
           <div className={styles.name}>
-          {device2.name}
-          {device2.inventoryNumber && <span>{device2.inventoryNumber}</span>}
+          {itemDevice.name}
+          {itemDevice.inventoryNumber && <span>{itemDevice.inventoryNumber}</span>}
           </div>
-          <div className={styles.icon} onClick={() => handleActions(device2.id || "")}>
+          <div className={styles.icon} onClick={() => handleActions(itemDevice.id || "")}>
           <CiEdit title={editDevice}/>
           </div>
         </div>
@@ -98,21 +98,21 @@ const Device: FC = () => {
           <figure className={styles.picture}>
             <img
               src={`${import.meta.env.VITE_API_MODELS}${
-                device2.model.imagePath
+                itemDevice.model.imagePath
               }`}
               alt=""
             />
           </figure>
             <div className={styles.info}>
-            <TechnicalInfo device={device2} />
+            <TechnicalInfo device={itemDevice} />
             </div>
             <div className={styles.info}>
-            <PriceInfo device={device2} />
-             <WarrantyInfo device={device2} />
+            <PriceInfo device={itemDevice} />
+             <WarrantyInfo device={itemDevice} />
           </div>
           <div className={styles.info}>
-            <LocationInfo device={device2} />
-            <UserInfo device={device2} />
+            <LocationInfo device={itemDevice} />
+            <UserInfo device={itemDevice} />
           </div>
         </article>
         </>)}
