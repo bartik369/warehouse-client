@@ -35,6 +35,7 @@ const Device: FC = () => {
       getDevice(params.id);
     }
   }, [params.id]);
+  
 
   useEffect(() => {
     if (itemDevice?.id) {
@@ -57,6 +58,7 @@ const Device: FC = () => {
   const handleActions = async (id: string) => {
     await handleGetDevice(id);
     setIsUpdate(true);
+    // setIsUpdate(true);
     setIsOpen(true);
   };
 
