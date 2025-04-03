@@ -9,65 +9,17 @@ import {
   useLazyGetDeviceQuery,
   useUpdateDeviceMutation,
 } from '../../store/api/devicesApi';
-import {
-  FormValidation,
-  ValidateField,
-} from '../../utils/validation/DeviceValidation';
-import {
-  isFetchBaseQueryError,
-  isErrorWithMessage,
-} from '../../utils/errors/error-handling';
-import {
-  addNewManufacturer,
-  addNewType,
-  addNewModel,
-} from '../../utils/constants/constants';
+import { FormValidation,ValidateField } from '../../utils/validation/DeviceValidation';
+import { isFetchBaseQueryError, isErrorWithMessage } from '../../utils/errors/error-handling';
+import { addNewManufacturer, addNewType, addNewModel } from '../../utils/constants/constants';
 import { useLocation } from 'react-router-dom';
 import { deviceReducer, initialState } from '../../reducers/device/deviceReducer';
 import { DeviceActionTypes } from '../../reducers/device/deviceTypes';
 
 export function useAddDevice() {
-
-  const [ state, dispatch] = useReducer(deviceReducer, initialState);
+  const [state, dispatch] = useReducer(deviceReducer, initialState);
   const user = useAppSelector((state) => state.auth.user);
-  const { fieldType, checked, itemType } = state;
-  // const [typeId, setTypeId] = useState(''); // For display select of model
-  // const [manufacturerId, setManufacturerId] = useState(''); // For display select of model
-  // const [modelId, setModelId] = useState('');
-  // const [title, setTitle] = useState('');
-  // const [fieldType, setFieldType] = useState('');
-  const [device, setDevice] = useState<IDevice>({
-    name: '',
-    inventoryNumber: '',
-    modelId: '',
-    modelName: '',
-    modelCode: '',
-    serialNumber: '',
-    weight: 0,
-    screenSize: 0,
-    memorySize: 0,
-    inStock: true,
-    isFunctional: true,
-    isAssigned: false,
-    warehouseId: '',
-    warehouseName: '',
-    description: '',
-    type: '',
-    typeId: '',
-    manufacturer: '',
-    addedById: '',
-    updatedById: '',
-    price_with_vat: null,
-    price_without_vat: null,
-    residual_price: null,
-    warrantyNumber: '',
-    startWarrantyDate: null,
-    endWarrantyDate: null,
-    provider: '',
-    contractorId: '',
-  });
-  // const [errors, setErrors] = useState<Record<string, string>>({});
-  // const [checked, setChecked] = useState(true);
+  const { fieldType, checked, itemType, selectedValues, device } = state;
   const [media, setMedia] = useState<IDeviceMedia>({
     file: null,
     prevImg: null,
@@ -76,14 +28,6 @@ export function useAddDevice() {
     id: null,
     name: '',
   });
-  // const [itemType, setItemType] = useState<string>('');
-  const [selectedValues, setSelectedValues] = useState<{[key: string]: string}>({});
-  const [modelFields, setModelFields] = useState<Pick<IDevice, 'type' | 'manufacturer'>>({
-    type: '',
-    manufacturer: '',
-  });
-
-  // const dispatch = useAppDispatch();
   const locationPath = useLocation();
   const exceptionPath = !/add-device$/.test(locationPath.pathname);
 
@@ -91,59 +35,49 @@ export function useAddDevice() {
   const [getDevice] = useLazyGetDeviceQuery();
   const [updateDevice] = useUpdateDeviceMutation();
 
-  
   useEffect(() => {
     switch (fieldType) {
       case 'manufacturer':
-        dispatch({ type: DeviceActionTypes.SET_TITLE, payload: addNewManufacturer });
+        dispatch({
+          type: DeviceActionTypes.SET_TITLE,
+          payload: addNewManufacturer,
+        });
         break;
       case 'type':
         dispatch({ type: DeviceActionTypes.SET_TITLE, payload: addNewType });
         break;
       case 'model':
-        dispatch({ 
-          type: DeviceActionTypes.SET_TITLE, 
-          payload: `${addNewModel} (${selectedValues['type']})` 
+        dispatch({
+          type: DeviceActionTypes.SET_TITLE,
+          payload: `${addNewModel} (${selectedValues['type']})`,
         });
         break;
     }
   }, [fieldType]);
 
   const handleNumber = useCallback((num: number) => {
-    console.log('1');
-    
-    setDevice((prev) => ({
-      ...prev,
-      weight: num,
-    }));
+    dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: {weight: num}});
   }, []);
 
   const handleExtNumber = useCallback(
     (num: number, fieldName: string) => {
       const data = ValidateField(fieldName, num);
-      setDevice((prev) => ({
-        ...prev,
-        [fieldName]: num,
-      }));
-      setErrors((prev) => ({
-        ...prev,
-        [fieldName]: data as string,
-      }));
+      dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: {[fieldName]: num}});
+      dispatch({type: DeviceActionTypes.SET_ERROR, payload: { [fieldName]: data as string }});
     },
     [ValidateField]
   );
 
-  console.log(device)
+  console.log(device);
 
   const handleAddDevice = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const validationErrors = FormValidation(device, itemType);
-      // setErrors(validationErrors as Record<string, string>);
       dispatch({
-        type: DeviceActionTypes.SET_ERROR, 
-        payload: validationErrors as Record<string, string>
-      })
+        type: DeviceActionTypes.SET_ERROR,
+        payload: validationErrors as Record<string, string>,
+      });
       if (Object.keys(validationErrors).length === 0) {
         if (!user) return;
         const updatedData = {
@@ -154,14 +88,14 @@ export function useAddDevice() {
 
         if (exceptionPath) {
           await createDevice(updatedData)
-          .unwrap()
-          .then((data) => {
-            toast(data?.message, { type: 'success' });
-            handleResetDevice();
-            setMedia((prev) => ({ ...prev, prevImg: null }));
-          });
+            .unwrap()
+            .then((data) => {
+              toast(data?.message, { type: 'success' });
+              handleResetDevice();
+              setMedia((prev) => ({ ...prev, prevImg: null }));
+            });
         } else {
-          console.log('test')
+          console.log('test');
         }
       } else {
         console.error('Validation errors:', validationErrors);
@@ -192,42 +126,17 @@ export function useAddDevice() {
   };
   const handleResetDevice = useCallback(() => {
     // Reset device state
-    setDevice((prev) => ({
-      ...(Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => {
-          if (typeof value === 'string') return [key, ''];
-          if (typeof value === 'number') return [key, 0];
-          if (typeof value === 'boolean' && key === 'isFunctional')
-            return [key, true];
-          if (key === 'startWarrantyDate' || key === 'endWarrantyDate')
-            return [key, null];
-          return [key, value];
-        })
-      ) as IDevice),
-    }));
-    // Reset errors state
-    // setErrors(
-    //   (prev) =>
-    //     Object.fromEntries(
-    //       Object.entries(prev).map(([key, value]) => {
-    //         if (typeof value === 'string') return [key, ''];
-    //         return [key, value];
-    //       })
-    //     ) as Record<string, string>
-    // );
-    setSelectedValues({});
-    dispatch({type: DeviceActionTypes.SET_MANUFACTURER_ID, payload: ''});
-    // setManufacturerId('');
-    dispatch({ type: DeviceActionTypes.SET_TYPE_ID, payload: ''});
-    // setTypeId('');
+    dispatch({ type: DeviceActionTypes.RESET_DEVICE })
+    dispatch({ type: DeviceActionTypes.RESET_ERROR});
+    dispatch({ type: DeviceActionTypes.RESET_SELECTED_VALUES });
+    dispatch({ type: DeviceActionTypes.SET_MANUFACTURER_ID, payload: '' });
+    dispatch({ type: DeviceActionTypes.SET_TYPE_ID, payload: '' });
     setDevicePic('');
-    dispatch({ type: DeviceActionTypes.SET_ITEM_TYPE, payload: ''});
-    // setItemType('');
+    dispatch({ type: DeviceActionTypes.SET_ITEM_TYPE, payload: '' });
     setMedia((prev) => ({ ...prev, prevImg: null }));
     // dispatch(setDevicePic(''));
-  }, [device, setDevice]);
+  }, [device]);
 
-  
   const handleInputChange = <T extends string | IEntity | IContractor>(
     field: keyof IDevice,
     value: T
@@ -235,36 +144,22 @@ export function useAddDevice() {
     const validationErrors = ValidateField(field as keyof IDevice, value);
     dispatch({
       type: DeviceActionTypes.SET_ERROR,
-      payload: {[field]: validationErrors as string}
-    })
-    // setErrors((prev) => ({
-    //   ...prev,
-    //   [field]: validationErrors as string,
-    // }));
+      payload: { [field]: validationErrors as string },
+    });
     const isEntity = (obj: any): obj is IEntity => 'slug' in obj;
     const inputValue =
       typeof value === 'string' ? value : isEntity(value) ? value.slug : '';
     const selectValue = typeof value === 'string' ? value : value.name;
-
-    setDevice((prev) => ({
-      ...prev,
-      [field]: inputValue,
-    }));
-
-    setSelectedValues((prev) => ({
-      ...prev,
-      [field]: selectValue,
-    }));
+    dispatch({type: DeviceActionTypes.SET_DEVICE, payload: {[field]: inputValue}})
+    dispatch({
+      type: DeviceActionTypes.SET_SELECTED_VALUES,
+      payload: { [field]: selectValue },
+    });
   };
 
   const handleChecked = useCallback(() => {
-
-    // setChecked(!checked);
-    dispatch({ type: DeviceActionTypes.SET_CHECKED, payload: !checked});
-    setDevice((prev) => ({
-      ...prev,
-      isFunctional: !checked,
-    }));
+    dispatch({ type: DeviceActionTypes.SET_CHECKED, payload: !checked });
+    dispatch({type: DeviceActionTypes.SET_DEVICE, payload: {isFunctional: !checked}});
   }, [checked]);
 
   // Memoization of  device form fields (select)
@@ -275,18 +170,19 @@ export function useAddDevice() {
       handleInputChange('type', item);
       handleInputChange('typeId', item.id || '');
       dispatch({ type: DeviceActionTypes.SET_ITEM_TYPE, payload: item.slug });
-      // setItemType(item.slug);
-      dispatch({ type: DeviceActionTypes.SET_TYPE_ID, payload: item.id || ''});
-      // setTypeId(item.id || '');
+      dispatch({ type: DeviceActionTypes.SET_TYPE_ID, payload: item.id || '' });
     },
-    [handleInputChange]);
+    [handleInputChange]
+  );
 
   const handleModelChange = useCallback(
     (item: IEntity) => {
       handleInputChange('modelName', item.name || '');
       handleInputChange('modelId', item.id || '');
-      dispatch({ type: DeviceActionTypes.SET_MODEL_ID, payload: item.id || ''});
-      // setModelId(item.id || '');
+      dispatch({
+        type: DeviceActionTypes.SET_MODEL_ID,
+        payload: item.id || '',
+      });
     },
     [handleInputChange]
   );
@@ -294,8 +190,10 @@ export function useAddDevice() {
   const handleManufacturerChange = useCallback(
     (item: IEntity) => {
       handleInputChange('manufacturer', item);
-      dispatch({type: DeviceActionTypes.SET_MANUFACTURER_ID, payload: item.id || ''});
-      // setManufacturerId(item.id || '');
+      dispatch({
+        type: DeviceActionTypes.SET_MANUFACTURER_ID,
+        payload: item.id || '',
+      });
     },
     [handleInputChange]
   );
@@ -308,68 +206,73 @@ export function useAddDevice() {
     [handleInputChange]
   );
 
-  const handleContractorChange = useCallback((item: IContractor) => {
+  const handleContractorChange = useCallback(
+    (item: IContractor) => {
       handleInputChange('contractorId', item.id || '');
       handleInputChange('provider', item.name || '');
     },
-  [handleInputChange]);
+    [handleInputChange]
+  );
 
-  const handleGetDevice = useCallback(async(id: string) => {
+  const handleGetDevice = useCallback(async (id: string) => {
     try {
       if (!id) return;
       const data = await getDevice(id).unwrap();
-      const { warehouse, model, warranty, contractor, addedBy, updatedBy,
-        deviceIssues, ...rest } = data;
-      setDevice((prev) => ({
-        ...prev,
-        ...rest,
-        warehouseName: warehouse.name ?? '',
-        warrantyNumber: warranty?.warrantyNumber ?? '',
-        startWarrantyDate: warranty?.startWarrantyDate ?? null,
-        endWarrantyDate: warranty?.endWarrantyDate ?? null,
-        provider: warranty?.contractor?.name ?? '',
-      }));
-      setSelectedValues({
-        warehouseName: warehouse?.name ?? '',
-        modelName: model?.name ?? '',
-        manufacturer: model?.manufacturer?.name ?? '',
-        type: model?.type?.name ?? '',
+      const { warehouse, model, warranty, contractor, addedBy,
+        updatedBy, deviceIssues, ...rest } = data;
+
+      dispatch({
+        type: DeviceActionTypes.SET_DEVICE, payload: {
+          ...rest,
+          warehouseName: warehouse.name ?? '',
+          warrantyNumber: warranty?.warrantyNumber ?? '',
+          startWarrantyDate: warranty?.startWarrantyDate ?? null,
+          endWarrantyDate: warranty?.endWarrantyDate ?? null,
+          provider: warranty?.contractor?.name ?? '',
+        },
+      });
+      dispatch({ type: DeviceActionTypes.SET_SELECTED_VALUES, payload: {
+          warehouseName: warehouse?.name ?? '',
+          modelName: model?.name ?? '',
+          manufacturer: model?.manufacturer?.name ?? '',
+          type: model?.type?.name ?? '',
+        },
       });
       // dispatch(setDevicePic(data.model.imagePath));
-      setModelFields((prev) => ({
-        ...prev,
+      dispatch({type:DeviceActionTypes.SET_MODEL_FIELDS, payload: {
         type: model?.type?.slug ?? '',
         manufacturer: model?.manufacturer?.slug ?? '',
-      }));
-      dispatch({ type: DeviceActionTypes.SET_ITEM_TYPE, payload: data.model?.type?.slug ?? '' });
-      // setItemType(data.model?.type?.slug ?? '')
+      }});
+      dispatch({
+        type: DeviceActionTypes.SET_ITEM_TYPE,
+        payload: data.model?.type?.slug ?? '',
+      });
     } catch (error) {
       console.error('Error fetching device:', error);
     }
   }, []);
 
   const resetModelData = useCallback(() => {
-    setDevice((prev) => ({
-      ...prev,
-      modelName: '',
-    }));
-    setSelectedValues((prev) => ({
-      ...prev,
-      modelName: '',
-    }));
+    dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: { modelName: ''}});
+    dispatch({type: DeviceActionTypes.SET_SELECTED_VALUES, payload: {modelName: ''}});
     setDevicePic('');
   }, []);
   
-  
-  return { isUpdate: state.isUpdate, title:state.title, fieldType: state.fieldType, selectedValuesMemo, typeId:state.typeId, modelId:state.modelId,
-    manufacturerId:state.manufacturerId,
-    device, errors: state.errors, checked, media, itemType:state.itemType, selectedOption, selectedValues, modelFields,
-    setSelectedValues,
-    setDevicePic, setMedia, handleChecked, handleInputChange,
-    handleNumber,handleExtNumber, handleAddDevice, handleResetDevice, setDevice,
-    setSelectedOption, handleModelChange, handleTypeChange, handleManufacturerChange,
-    handleWarehouseChange, handleContractorChange, handleGetDevice, resetModelData,
-    setIsUpdate: (value: boolean) => dispatch({ type: DeviceActionTypes.SET_IS_UPDATE, payload: value }),
-    setFieldType: (value: string) => dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: value })
+  return {
+    isUpdate: state.isUpdate, title: state.title, fieldType: state.fieldType,
+    typeId: state.typeId, modelId: state.modelId, manufacturerId: state.manufacturerId,
+    device: state.device, errors: state.errors, checked: state.checked,
+    selectedValues:state.selectedValues, itemType: state.itemType,
+    selectedValuesMemo, media, selectedOption, modelFields:state.modelFields, setDevicePic,
+    setMedia, handleChecked, handleInputChange, handleNumber, handleExtNumber,
+    handleAddDevice, handleResetDevice, setSelectedOption, handleModelChange,
+    handleTypeChange, handleManufacturerChange, handleWarehouseChange, handleGetDevice,
+    handleContractorChange, resetModelData,
+    setIsUpdate: (value: boolean) =>
+      dispatch({ type: DeviceActionTypes.SET_IS_UPDATE, payload: value }),
+    setFieldType: (value: string) =>
+      dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: value }),
+    setDevice: (value: Partial<IDevice>) => 
+      dispatch({type: DeviceActionTypes.SET_DEVICE, payload: value}),
   };
 }

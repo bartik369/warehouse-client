@@ -58,13 +58,16 @@ const DeviceForm: FC = () => {
   useEffect(() => {
     if (device.manufacturer && device.type) {
       getModels({ manufacturer: device.manufacturer, type: device.type });
-      resetModelData();
+      // resetModelData();
     } 
   }, [device.manufacturer, device.type, models]);
   // Reset image state after unmount 
   useEffect(() => {
     dispatch(setDevicePic(''))
   }, [dispatch]);
+
+  console.log(selectedValues);
+  
 
   return (
     <>
