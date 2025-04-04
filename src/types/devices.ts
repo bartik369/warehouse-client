@@ -1,3 +1,5 @@
+import { IContractor } from "./content";
+
 export interface IDevice {
   id?: string;
   name: string;
@@ -28,7 +30,7 @@ export interface IDevice {
   warrantyNumber?: string;
   startWarrantyDate?: Date | null;
   endWarrantyDate?: Date | null;
-  provider?: string;
+  provider: string;
   contractorId: string;
 }
 
@@ -86,8 +88,8 @@ export interface IDeviceModel {
 }
 
 export interface IDeviceMedia {
-  file: File | null;
-  prevImg: string | null;
+  file?: File | null;
+  prevImg?: string | null;
 }
 
 export interface IValidationErrors {
@@ -262,6 +264,54 @@ export interface IDeviceInfo {
     name: string;
     slug: string;
   };
-  prevImg: string;
 }
 export type QueryParams = Record<string, string | number | boolean>
+
+export interface IUpdateDeviceFormState {
+  itemType: string;
+  isUpdate: boolean;
+  device: IDevice;
+  selectedValues: Record<string, string>;
+  modelFields: Record<string, string>,
+  checked: boolean;
+  errors: Record<string, string>;
+}
+
+
+export interface IUpdateDeviceFormActions {
+  handleTypeChange:(item: IEntity) => void
+  handleModelChange:(item: IEntity) => void
+  handleManufacturerChange:(item: IEntity) => void
+  handleWarehouseChange:(item: IEntity) => void
+  handleContractorChange:(item: IContractor) => void
+  handleInputChange: (name: keyof IDevice, e:any) => void
+  handleNumber: (num: number) => void;
+  handleExtNumber: (num: number, fieldName: string) => void;
+  handleChecked: (checked: boolean) => void;
+  handleAddDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleResetDevice: () => void;
+  resetModelData: () => void;
+}
+export interface IUpdateDeviceFormSetters {
+  setDevice: (item: IDevice) => void;
+}
+
+export interface IWarrantyFormState {
+  selectedValuesMemo: string;
+  device: IDevice;
+  isOpen: boolean;
+}
+
+export interface IWarrantyFormActions {
+  handleInputChange: (name: keyof IDevice, value: string) => void;
+}
+export interface IWarrantyFormSetters {
+  setValue: (value: T) => void;
+  setDevice: (device: IDevice) => void;
+}
+// export interface IUpdateDeviceFormSetters {
+//   setDevice: (item: IDevice) => void;
+//   resetModel: () => void;
+// }
+
+

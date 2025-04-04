@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -31,51 +31,48 @@ import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventor
 import styles from "./DeviceForm.module.scss";
 
 const DeviceForm: FC = () => {
-  const { typeId, manufacturerId, device, itemType, errors, checked, selectedValues,
-    selectedValuesMemo,title, fieldType, setFieldType, handleNumber, handleExtNumber, handleAddDevice,
-    handleResetDevice, setDevice, handleInputChange, handleChecked, handleModelChange, handleTypeChange,
-    handleManufacturerChange, handleWarehouseChange, handleContractorChange, resetModelData } = useAddDevice();
+  const { state, actions, setters } = useAddDevice();
   const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
   const [getModels, { data: models }] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
-  // const devicePic = useAppSelector(state => state.device.device?.prevImg);
 
   // Allow model query by manufacturer and type
   useEffect(() => {
-    if (device.modelName && models) {
+    if (state.device.modelName && models) {
       models.forEach((model: IAdminEntity) => {
-        if (model.name === device.modelName) {
+        if (model.name === state.device.modelName) {
           dispatch(setDevicePic(model.imagePath || ''))
         }
       });
     }
-  }, [device.modelName]);
+  }, [state.device.modelName, models, dispatch]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (device.manufacturer && device.type) {
-      getModels({ manufacturer: device.manufacturer, type: device.type });
-      // resetModelData();
+    if (state.device.manufacturer && state.device.type) {
+      getModels({ manufacturer: state.device.manufacturer, type: state.device.type });
+      // resetModel();
     } 
-  }, [device.manufacturer, device.type, models]);
+  }, [state.device.manufacturer, state.device.type, models]);
   // Reset image state after unmount 
   useEffect(() => {
     dispatch(setDevicePic(''))
   }, [dispatch]);
 
-  console.log(selectedValues);
-  
-
   return (
     <>
     <ToastContainer position="top-center" theme="light" />
       {isOpen && (
-        <Modal title={title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
+        <Modal title={state.title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
           {entity !== "contactor"
-            ? <EntityForm typeId={typeId} manufacturerId={manufacturerId} fieldType={fieldType} />
+            ? <EntityForm 
+                typeId={state.typeId} 
+                manufacturerId={state.manufacturerId} 
+                fieldType={state.fieldType} 
+            />
             : <ContractorForm />
           }
         </Modal>
@@ -86,126 +83,144 @@ const DeviceForm: FC = () => {
           <div className={styles.title}>{technicalOptions}</div>
           <form className={styles.form}>
             <Input
-              onChange={(e) => handleInputChange("name", e.target.value)}
+              onChange={(e) => actions.handleInputChange("name", e.target.value)}
               type="text"
-              value={device.name}
+              value={state.device.name}
               label={deviceName}
-              errors={errors}
+              errors={state.errors}
               name="name"
             />
             <div className={styles.container}>
-            <Ask title="type" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity} />
+            <Ask 
+              title="type" 
+              isOpen={isOpen} 
+              setIsOpen={setIsOpen} 
+              setFieldType={setters.setFieldType} 
+              setEntity={setEntity} 
+            />
               <Select<IEntity>
-                setValue={handleTypeChange}
+                setValue={actions.handleTypeChange}
                 items={types || []}
                 label={deviceTypeLabel}
-                value={selectedValuesMemo["type"]}
-                errors={errors}
+                value={state.selectedValuesMemo["type"]}
+                errors={state.errors}
                 name="type"
                 getId={(item:IEntity) => item.id}
               />
             </div>
             <div className={styles.container}>
-              <Ask title="manufacturer" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity} />
+              <Ask 
+                title="manufacturer" 
+                isOpen={isOpen} 
+                setIsOpen={setIsOpen} 
+                setFieldType={setters.setFieldType} 
+                setEntity={setEntity} 
+              />
               <Select<IEntity>
-                setValue={handleManufacturerChange}
+                setValue={actions.handleManufacturerChange}
                 items={manufacturers || []}
                 label={manufacturersLabel}
-                value={selectedValuesMemo["manufacturer"]}
-                errors={errors}
+                value={state.selectedValuesMemo["manufacturer"]}
+                errors={state.errors}
                 name="manufacturer"
                 getId={(item:IEntity) => item.id}
               />
             </div>
-            {typeId && manufacturerId && (
+            {state.typeId && state.manufacturerId && (
               <div className={styles.container}>
-                <Ask title="model" isOpen={isOpen} setIsOpen={setIsOpen} setFieldType={setFieldType} setEntity={setEntity}/>
+                <Ask 
+                  title="model" 
+                  isOpen={isOpen} 
+                  setIsOpen={setIsOpen} 
+                  setFieldType={setters.setFieldType} 
+                  setEntity={setEntity}
+                />
                 <Select<IEntity>
-                  setValue={handleModelChange}
+                  setValue={actions.handleModelChange}
                   items={models || []}
                   label={modelLabel}
-                  value={selectedValuesMemo["modelName"]}
-                  errors={errors}
+                  value={state.selectedValuesMemo["modelName"]}
+                  errors={state.errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
                 />
               </div>
             )}
             <Input
-              onChange={(e) => handleInputChange("serialNumber", e.target.value)}
+              onChange={(e) => actions.handleInputChange("serialNumber", e.target.value)}
               type={"text"}
-              value={device.serialNumber || ""}
+              value={state.device.serialNumber || ""}
               label={serialNumber}
-              errors={errors}
+              errors={state.errors}
               name="serialNumber"
             />
             <Input
-              onChange={(e) => handleInputChange("inventoryNumber", e.target.value)}
+              onChange={(e) => actions.handleInputChange("inventoryNumber", e.target.value)}
               type={"text"}
-              value={device.inventoryNumber || ""}
+              value={state.device.inventoryNumber || ""}
               label={inventoryNumber}
-              errors={errors}
+              errors={state.errors}
               name="inventoryNumber"
             />
             <Input
-              onChange={(e) => handleInputChange("modelCode", e.target.value)}
+              onChange={(e) => actions.handleInputChange("modelCode", e.target.value)}
               type={"text"}
-              value={device.modelCode || ""}
+              value={state.device.modelCode || ""}
               label={modelCode}
-              errors={errors}
+              errors={state.errors}
               name="modelCode"
             />
             <Select<IEntity>
-              setValue={handleWarehouseChange}
+              setValue={actions.handleWarehouseChange}
               items={warehouses || []}
               label={location}
-              value={selectedValues["warehouseName"]}
-              errors={errors}
+              value={state.selectedValues["warehouseName"]}
+              errors={state.errors}
               name="warehouseId"
               getId={(item:IEntity) => item.id}
             />
-            <Number device={device} setDevice={handleNumber} />
-            {itemType && deviceTypes[itemType]?.uniqueFields?.map((item) => (
+            <Number device={state.device} setDevice={actions.handleNumber} />
+            {state.itemType && deviceTypes[state.itemType]?.uniqueFields?.map((item) => (
               <CustomNumber
                 key={item.name}
-                device={device}
-                setDevice={handleExtNumber}
+                device={state.device}
+                setDevice={actions.handleExtNumber}
                 item={item}
-                errors={errors}
+                errors={state.errors}
               />
             ))}
             <Toggle
-              checked={checked}
-              setChecked={handleChecked}
+              checked={state.checked}
+              setChecked={actions.handleChecked}
               label={serviceable}
               leftPosition={no}
               rightPosition={yes}
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm device={device} errors={errors} handleExtNumber={handleExtNumber} />
+          <PriceForm device={state.device} errors={state.errors} handleExtNumber={actions.handleExtNumber} />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
-            device={device}
+            device={state.device}
             entity={entity} 
             isOpen={isOpen}
             setIsOpen={setIsOpen} 
             setEntity={setEntity} 
-            setValue={handleContractorChange}
-            handleInputChange={handleInputChange}
-            setDevice={setDevice}
-            selectedValuesMemo={selectedValuesMemo["provider"]}
+            setValue={actions.handleContractorChange}
+            handleInputChange={actions.handleInputChange}
+            setDevice={setters.setDevice}
+            selectedValuesMemo={state.selectedValuesMemo["provider"]}
           />
           <form className={styles["additional-form"]}>
             <Textarea
-              setText={(e) => handleInputChange("description", e.target.value)}
-              value={device.description || ""}
+              setText={(e) => actions.handleInputChange("description", e.target.value)}
+              value={state.device.description || ""}
               label={description} 
-              errors={errors} 
+              errors={state.errors} 
               name="description"
               />
-            <Actions resetDevice={handleResetDevice} addDevice={handleAddDevice}/>
+            <Actions resetDevice={actions.handleResetDevice} addDevice={actions.handleAddDevice}/>
           </form>
         </div>
       </article>

@@ -43,7 +43,7 @@ const WarrantyForm = <T,>({
   handleInputChange,
   setValue,
 }: IWarrantyFormProps<T>) => {
-  const { errors,  setFieldType } = useAddDevice();
+  const {state, setters } = useAddDevice();
   const { data: contractors } = useGetContractorsQuery();
   return (
     <form className={styles.form4}>
@@ -97,7 +97,7 @@ const WarrantyForm = <T,>({
           <span
             onClick={() => {
               setIsOpen(!isOpen);
-              setFieldType('contactor');
+              setters.setFieldType('contactor');
               setEntity('contactor');
             }}
           >
@@ -109,7 +109,7 @@ const WarrantyForm = <T,>({
           items={contractors || []}
           label={contractor}
           value={selectedValuesMemo}
-          errors={errors}
+          errors={state.errors}
           name="provider"
           getId={(item: IContractor) => item.id}
         />
@@ -119,7 +119,7 @@ const WarrantyForm = <T,>({
         name="warrantyNumber"
         value={device.warrantyNumber || ""}
         label={warrantyNumber}
-        errors={errors}
+        errors={state.errors}
         onChange={(e) => handleInputChange('warrantyNumber', e.target.value)}
       />
     </form>

@@ -48,4 +48,4 @@ export type DeviceAction =
  | { type: DeviceActionTypes.SET_CHECKED, payload: boolean }
  | { type: DeviceActionTypes.SET_SELECTED_VALUES, payload: Record<string, string>}
  | { type: DeviceActionTypes.RESET_SELECTED_VALUES }
- | { type: DeviceActionTypes.SET_MODEL_FIELDS, payload: Pick<IDevice, 'type' | 'manufacturer'>;}
+ | { type: DeviceActionTypes.SET_MODEL_FIELDS, payload: Pick<IDevice, 'type' | 'manufacturer'> }

@@ -1,8 +1,9 @@
-import { IDeviceInfo } from './../../types/devices';
+import { IDeviceInfo, IDeviceMedia } from './../../types/devices';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type IDeviceAction =  {
     device: IDeviceInfo | null;
+    media: IDeviceMedia;
     status?: boolean;
 }
 const initialState:IDeviceAction = {
@@ -13,7 +14,10 @@ const initialState:IDeviceAction = {
             name: '',
             slug: ''
         },
+    },
+    media: {
         prevImg: '',
+        file: null,
     },
     status: false,
 }
@@ -27,10 +31,15 @@ const deviceSlice = createSlice({
             state.status = action.payload.status; 
         },
         setDevicePic:(state, action: PayloadAction<string>) => {
-            if (state.device) state.device.prevImg = action.payload;
+            if (state?.media) state.media.prevImg = action.payload;
+        },
+        setDeviceFile:(state, action: PayloadAction<File | null>) => {
+            if (state?.media) state.media.file = action.payload 
+              ? new File([action.payload], action.payload.name) 
+              : null;
         },
     }
 });
 
 export default deviceSlice.reducer
-export const {setDeviceInfo, setDevicePic} = deviceSlice.actions;
+export const {setDeviceInfo, setDevicePic, setDeviceFile} = deviceSlice.actions;
