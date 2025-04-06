@@ -5,7 +5,8 @@ export interface IDevice {
   name: string;
   inventoryNumber?: string;
   modelCode?: string;
-  modelId: string;
+  modelId?: string;
+  modelSlug?: string;
   modelName?: string;
   serialNumber?: string;
   weight?: number;
@@ -15,11 +16,14 @@ export interface IDevice {
   isFunctional: boolean;
   isAssigned: boolean;
   warehouseId: string;
+  warehouseSlug?: string;
   warehouseName: string;
   description?: string;
-  type: string;
+  typeSlug: string;
+  typeName: string;
   typeId: string;
-  manufacturer: string;
+  manufacturerSlug?: string;
+  manufacturerName: string;
   addedById: string;
   updatedById: string;
   createdAt?: Date;
@@ -30,7 +34,8 @@ export interface IDevice {
   warrantyNumber?: string;
   startWarrantyDate?: Date | null;
   endWarrantyDate?: Date | null;
-  provider: string;
+  providerName: string;
+  providerSlug: string;
   contractorId: string;
 }
 
@@ -71,6 +76,7 @@ export interface IAggregateDeviceInfo extends IDevice {
     isExpired: boolean;
     contractor: {
       name: string;
+      slug: string;
     };
   };
   deviceIssues: {
@@ -291,9 +297,12 @@ export interface IUpdateDeviceFormActions {
   handleAddDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleResetDevice: () => void;
   resetModelData: () => void;
+  handleStartDateChange: (item:Date) => void;
+  handleEndDateChange: (item:Date) => void;
 }
 export interface IUpdateDeviceFormSetters {
   setDevice: (item: IDevice) => void;
+  setFieldType: (item: string) => void;
 }
 
 export interface IWarrantyFormState {

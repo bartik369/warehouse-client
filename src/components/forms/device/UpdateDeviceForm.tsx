@@ -39,7 +39,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
   const [ getModels, { data: models } ] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
   
-  // Allow model query by manufacturer and type
+  // Models list query by manufacturer and type
   useEffect(() => {
     if (state.device.modelName && models) {
       models.forEach((model: IAdminEntity) => {
@@ -52,11 +52,11 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (state.device.manufacturer && state.device.type) {
-      getModels({ manufacturer: state.device.manufacturer, type: state.device.type })
+    if (state.device.manufacturerSlug && state.device.typeSlug) {
+      getModels({ manufacturer: state.device.manufacturerSlug, type: state.device.typeSlug })
       // resetModel();
     }
-  }, [state.device.manufacturer, state.device.type]);
+  }, [state.device.manufacturerSlug, state.device.typeSlug]);
 
   return (
     <>
@@ -79,7 +79,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
                 setValue={actions.handleTypeChange}
                 items={types || []}
                 label={deviceTypeLabel}
-                value={state.selectedValues["type"]}
+                value={state.device.typeName || ""}
                 errors={state.errors}
                 name="type"
                 getId={(item:IEntity) => item.id}
@@ -90,19 +90,19 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
                 setValue={actions.handleManufacturerChange}
                 items={manufacturers || []}
                 label={manufacturersLabel}
-                value={state.selectedValues["manufacturer"]}
+                value={state.device.manufacturerName || ""}
                 errors={state.errors}
                 name="manufacturer"
                 getId={(item:IEntity) => item.id}
               />
             </div>
-            {(state.selectedValues['manufacturer'] && state.selectedValues['type']) && (
+            {(state.device.manufacturerName && state.device.typeName) && (
               <div className={styles.container}>
                 <Select<IEntity>
                   setValue={actions.handleModelChange}
                   items={models || []}
                   label={modelLabel}
-                  value={state.selectedValues["modelName"]}
+                  value={state.device.modelName || ''}
                   errors={state.errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
@@ -137,7 +137,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
               setValue={actions.handleWarehouseChange}
               items={warehouses || []}
               label={location}
-              value={state.selectedValues["warehouseName"]}
+              value={state.device.warehouseName || ''}
               errors={state.errors}
               name="warehouseId"
               getId={(item:IEntity) => item.id}
@@ -161,19 +161,21 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm  device={state.device} errors={state.errors} handleExtNumber={actions.handleExtNumber} />
+          <PriceForm 
+            device={state.device} 
+            errors={state.errors} 
+            handleExtNumber={actions.handleExtNumber} 
+          />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
-            device={state.device}
             entity={entity} 
             isOpen={isOpen}
+            state={state}
+            actions={actions}
+            setters={setters}
             setIsOpen={setIsOpen} 
             setEntity={setEntity} 
-            setValue={actions.handleContractorChange}
-            handleInputChange={actions.handleInputChange}
-            setDevice={setters.setDevice}
-            selectedValuesMemo={state.device.provider || ""}
           />
           <form className={styles["additional-form"]}>
             <Textarea
@@ -183,7 +185,11 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
               errors={state.errors} 
               name="description"
               />
-            <Actions isUpdate={state.isUpdate} resetDevice={actions.handleResetDevice} addDevice={actions.handleAddDevice} />
+            <Actions 
+              isUpdate={state.isUpdate} 
+              resetDevice={actions.handleResetDevice} 
+              addDevice={actions.handleAddDevice} 
+            />
           </form>
         </div>
       </article>

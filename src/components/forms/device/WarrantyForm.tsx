@@ -1,16 +1,11 @@
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { useGetContractorsQuery } from "../../../store/api/contractorApi";
-import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { add, isExistingInList } from "../../../utils/constants/constants";
-import {
-  startWarrantyLabel,
-  endWarrantyLabel,
-  selectDate,
-  warrantyNumber,
-  contractor,
-} from "../../../utils/constants/device";
-import { IDevice } from "../../../types/devices";
+import { startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
+  contractor } from "../../../utils/constants/device";
+import { IUpdateDeviceFormActions, IUpdateDeviceFormSetters, 
+  IUpdateDeviceFormState } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
@@ -21,29 +16,23 @@ import styles from "./DeviceForm.module.scss";
 registerLocale('ru', ru);
 
 interface IWarrantyFormProps<T> {
-  selectedValuesMemo: string;
-  device: IDevice;
   isOpen: boolean;
   entity: string;
-  setValue: (value: T) => void;
-  setDevice: (device: IDevice) => void;
-  handleInputChange: (name: keyof IDevice, value: string) => void;
   setIsOpen: (isOpen: boolean) => void;
   setEntity: (entity: string) => void;
   getId: (item: T) => void;
+  state: IUpdateDeviceFormState;
+  setters: IUpdateDeviceFormSetters;
+  actions: IUpdateDeviceFormActions;
 }
-
 const WarrantyForm = <T,>({
-  selectedValuesMemo,
   isOpen,
-  device,
-  setDevice,
+  state,
+  actions,
+  setters,
   setIsOpen,
   setEntity,
-  handleInputChange,
-  setValue,
 }: IWarrantyFormProps<T>) => {
-  const {state, setters } = useAddDevice();
   const { data: contractors } = useGetContractorsQuery();
   return (
     <form className={styles.form4}>
@@ -55,16 +44,11 @@ const WarrantyForm = <T,>({
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={device.startWarrantyDate 
-            ? new Date(device.startWarrantyDate) 
+          selected={state.device.startWarrantyDate 
+            ? new Date(state.device.startWarrantyDate ) 
             : null}
-          onChange={(date) => {
-            setDevice((prev) => ({
-              ...prev,
-              startWarrantyDate: date.toISOString() ?? null,
-            }));
-          }}
-          maxDate={device.endWarrantyDate ?? undefined}
+            onChange={(date) => actions.handleStartDateChange(date)}
+          maxDate={state.device.endWarrantyDate ?? undefined}
           placeholderText={selectDate}
         />
         <div className={styles.label}>{startWarrantyLabel}</div>
@@ -78,15 +62,10 @@ const WarrantyForm = <T,>({
           showIcon
           dateFormat="dd.MM.yyyy"
           selected={
-            device.endWarrantyDate ? new Date(device.endWarrantyDate) : null
+            state.device.endWarrantyDate  ? new Date(state.device.endWarrantyDate) : null
           }
-          onChange={(date) =>
-            setDevice((prev) => ({
-              ...prev,
-              endWarrantyDate: date.toISOString() ?? null,
-            }))
-          }
-          minDate={device.startWarrantyDate ?? undefined}
+          onChange={(date) => actions.handleEndDateChange(date)}
+          minDate={state.device.startWarrantyDate ?? undefined}
           placeholderText={selectDate}
         />
         <div className={styles.label}>{endWarrantyLabel}</div>
@@ -105,10 +84,10 @@ const WarrantyForm = <T,>({
           </span>
         </div>
         <Select<IContractor>
-          setValue={setValue}
+          setValue={actions.handleContractorChange}
           items={contractors || []}
           label={contractor}
-          value={selectedValuesMemo}
+          value={state.device.providerName}
           errors={state.errors}
           name="provider"
           getId={(item: IContractor) => item.id}
@@ -117,10 +96,10 @@ const WarrantyForm = <T,>({
       <Input
         type="text"
         name="warrantyNumber"
-        value={device.warrantyNumber || ""}
+        value={state.device.warrantyNumber || ""}
         label={warrantyNumber}
         errors={state.errors}
-        onChange={(e) => handleInputChange('warrantyNumber', e.target.value)}
+        onChange={(e) => actions.handleInputChange('warrantyNumber', e.target.value)}
       />
     </form>
   );

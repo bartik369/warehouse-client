@@ -36,7 +36,7 @@ const DeviceForm: FC = () => {
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
-  const [getModels, { data: models }] = useLazyGetModelsQuery();
+  const [ getModels, { data: models }] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
 
   // Allow model query by manufacturer and type
@@ -52,11 +52,11 @@ const DeviceForm: FC = () => {
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (state.device.manufacturer && state.device.type) {
-      getModels({ manufacturer: state.device.manufacturer, type: state.device.type });
+    if (state.device.manufacturerSlug && state.device.typeSlug) {
+      getModels({ manufacturer: state.device.manufacturerSlug, type: state.device.typeSlug });
       // resetModel();
     } 
-  }, [state.device.manufacturer, state.device.type, models]);
+  }, [state.device.manufacturerSlug, state.device.typeSlug, models]);
   // Reset image state after unmount 
   useEffect(() => {
     dispatch(setDevicePic(''))
@@ -102,7 +102,7 @@ const DeviceForm: FC = () => {
                 setValue={actions.handleTypeChange}
                 items={types || []}
                 label={deviceTypeLabel}
-                value={state.selectedValuesMemo["type"]}
+                value={state.device.typeName || ""}
                 errors={state.errors}
                 name="type"
                 getId={(item:IEntity) => item.id}
@@ -120,13 +120,13 @@ const DeviceForm: FC = () => {
                 setValue={actions.handleManufacturerChange}
                 items={manufacturers || []}
                 label={manufacturersLabel}
-                value={state.selectedValuesMemo["manufacturer"]}
+                value={state.device.manufacturerName || ""}
                 errors={state.errors}
                 name="manufacturer"
                 getId={(item:IEntity) => item.id}
               />
             </div>
-            {state.typeId && state.manufacturerId && (
+            {state.device.typeSlug && state.device.manufacturerSlug && (
               <div className={styles.container}>
                 <Ask 
                   title="model" 
@@ -139,7 +139,7 @@ const DeviceForm: FC = () => {
                   setValue={actions.handleModelChange}
                   items={models || []}
                   label={modelLabel}
-                  value={state.selectedValuesMemo["modelName"]}
+                  value={state.device.modelName || ""}
                   errors={state.errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
@@ -174,13 +174,13 @@ const DeviceForm: FC = () => {
               setValue={actions.handleWarehouseChange}
               items={warehouses || []}
               label={location}
-              value={state.selectedValues["warehouseName"]}
+              value={state.device.warehouseName || ""}
               errors={state.errors}
               name="warehouseId"
               getId={(item:IEntity) => item.id}
             />
             <Number device={state.device} setDevice={actions.handleNumber} />
-            {state.itemType && deviceTypes[state.itemType]?.uniqueFields?.map((item) => (
+            {state.device.typeSlug && deviceTypes[state.device.typeSlug]?.uniqueFields?.map((item) => (
               <CustomNumber
                 key={item.name}
                 device={state.device}
@@ -202,15 +202,13 @@ const DeviceForm: FC = () => {
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
-            device={state.device}
             entity={entity} 
             isOpen={isOpen}
+            state={state}
+            actions={actions}
+            setters={setters}
             setIsOpen={setIsOpen} 
             setEntity={setEntity} 
-            setValue={actions.handleContractorChange}
-            handleInputChange={actions.handleInputChange}
-            setDevice={setters.setDevice}
-            selectedValuesMemo={state.selectedValuesMemo["provider"]}
           />
           <form className={styles["additional-form"]}>
             <Textarea

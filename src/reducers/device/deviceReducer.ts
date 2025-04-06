@@ -6,6 +6,7 @@ export const initialState: IDeviceState = {
     inventoryNumber: '',
     modelId: '',
     modelName: '',
+    modelSlug: '',
     modelCode: '',
     serialNumber: '',
     weight: 0,
@@ -16,10 +17,13 @@ export const initialState: IDeviceState = {
     isAssigned: false,
     warehouseId: '',
     warehouseName: '',
+    warehouseSlug: '',
     description: '',
-    type: '',
+    typeName: '',
+    typeSlug: '',
     typeId: '',
-    manufacturer: '',
+    manufacturerName: '',
+    manufacturerSlug: '',
     addedById: '',
     updatedById: '',
     price_with_vat: null,
@@ -28,23 +32,16 @@ export const initialState: IDeviceState = {
     warrantyNumber: '',
     startWarrantyDate: null,
     endWarrantyDate: null,
-    provider: '',
+    providerName: '',
+    providerSlug: '',
     contractorId: '',
   },
-  modelFields: {
-    type: '',
-    manufacturer: '',
-  },
   errors: {},
-  typeId: '',
-  manufacturerId: '',
-  modelId: '',
   title: '',
   fieldType: '',
   itemType: '',
   isUpdate: false,
   checked: true,
-  selectedValues: {},
 };
 
 export function deviceReducer(
@@ -56,37 +53,14 @@ export function deviceReducer(
       return { ...state, errors: action.payload };
     case DeviceActionTypes.RESET_ERROR:
       return { ...state, errors: {} };
-    case DeviceActionTypes.SET_TYPE_ID:
-      return { ...state, typeId: action.payload };
     case DeviceActionTypes.SET_IS_UPDATE:
       return { ...state, isUpdate: action.payload };
-    case DeviceActionTypes.SET_MANUFACTURER_ID:
-      return { ...state, manufacturerId: action.payload };
-    case DeviceActionTypes.SET_MODEL_ID:
-      return { ...state, modelId: action.payload };
-    case DeviceActionTypes.SET_MODEL_FIELDS:
-      return {
-        ...state,
-        modelFields: { ...state.modelFields, ...action.payload },
-      };
     case DeviceActionTypes.SET_TITLE:
       return { ...state, title: action.payload };
     case DeviceActionTypes.SET_FIELD_TYPE:
       return { ...state, fieldType: action.payload };
     case DeviceActionTypes.SET_CHECKED:
       return { ...state, checked: action.payload };
-    case DeviceActionTypes.SET_ITEM_TYPE:
-      return { ...state, itemType: action.payload };
-    case DeviceActionTypes.SET_SELECTED_VALUES:
-      return {
-        ...state,
-        selectedValues: {
-          ...state.selectedValues,
-          ...action.payload,
-        },
-      };
-    case DeviceActionTypes.RESET_SELECTED_VALUES:
-      return { ...state, selectedValues: {} };
     case DeviceActionTypes.SET_DEVICE:
       return { ...state, device: { ...state.device, ...action.payload } };
     case DeviceActionTypes.RESET_DEVICE:

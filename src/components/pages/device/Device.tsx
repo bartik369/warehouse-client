@@ -60,12 +60,7 @@ const Device: FC = () => {
   return (
     <>
       {isOpen && (
-        <Modal
-          title={editDevice}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          maxWidth={1000}
-        >
+        <Modal title={editDevice} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
           <UpdateDeviceForm state={state} actions={actions} setters={setters} />
         </Modal>
       )}
@@ -88,11 +83,10 @@ const Device: FC = () => {
             </div>
             <article className={styles.wrapper}>
               <figure className={styles.picture}>
-                <img
-                  src={`${import.meta.env.VITE_API_MODELS}${
-                    itemDevice.model.imagePath
+                <img src={`${import.meta.env.VITE_API_MODELS}${
+                  itemDevice.model.imagePath
                   }`}
-                  alt=""
+                alt=""
                 />
               </figure>
               <div className={styles.info}>

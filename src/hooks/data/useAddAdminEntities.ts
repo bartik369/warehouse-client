@@ -3,10 +3,6 @@ import { toast } from 'react-toastify';
 import { IAdminEntity } from '../../types/content';
 import { useInputMask } from './useInputMask';
 import {
-  isErrorWithMessage,
-  isFetchBaseQueryError,
-} from '../../utils/errors/error-handling';
-import {
   FormValidation,
   ValidateField,
 } from '../../utils/validation/AdminEntityValidation';
@@ -46,6 +42,7 @@ import {
   useUpdateTypeMutation,
  } from '../../store/api/typesApi';
 import { IDeviceMedia } from '../../types/devices';
+import { handleApiError } from '../../utils/errors/handleApiError';
 import { selectPic } from '../../utils/constants/constants';
 
 export const useAddAdminEntities = () => {
@@ -177,16 +174,7 @@ export const useAddAdminEntities = () => {
           }
         }
       } catch (err: unknown) {
-        if (isFetchBaseQueryError(err)) {
-          const error = err as { data?: { message: string; error: string } };
-          const errMsg = error.data?.message;
-          console.log('API Error', errMsg);
-          toast(errMsg, { type: 'error' });
-        } else if (isErrorWithMessage(err)) {
-          console.log('Unexpected Error:', err.message);
-        } else {
-          console.error('Unknown Error:', err);
-        }
+        handleApiError(err);
       }
     },
     [entity, FormValidation, isUpdate]
@@ -222,16 +210,7 @@ export const useAddAdminEntities = () => {
         });
       setIsUpdate(true);
     } catch (err: unknown) {
-      if (isFetchBaseQueryError(err)) {
-        const error = err as { data?: { message: string; error: string } };
-        const errMsg = error.data?.message;
-        console.log('API Error', errMsg);
-        toast(errMsg, { type: 'error' });
-      } else if (isErrorWithMessage(err)) {
-        console.log('Unexpected Error:', err.message);
-      } else {
-        console.error('Unknown Error:', err);
-      }
+      handleApiError(err);
     }
   }, []);
 

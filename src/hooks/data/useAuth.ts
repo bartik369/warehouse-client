@@ -5,8 +5,7 @@ import { setCredentials } from '../../store/slices/authSlice';
 import { ISignin } from '../../types/user';
 import { AuthValidate, AuthValidateField } from '../../utils/validation/AuthValidate';
 import { useAppDispatch } from '../redux/useRedux';
-import { isErrorWithMessage, isFetchBaseQueryError } from '../../utils/errors/error-handling';
-import { toast } from 'react-toastify';
+import { handleApiError } from '../../utils/errors/handleApiError';
 
 export const useAuth = () => {
     const [authData, setAuthData] = useState<ISignin>({
@@ -49,23 +48,7 @@ export const useAuth = () => {
               navigate('/');
             });
           } catch (err) {
-                if (isFetchBaseQueryError(err)) {
-                  let errMsg: string;
-                  if ('error' in err) {
-                    errMsg = err.error;
-                  } else {
-                    if (err.data && typeof err.data === 'object' && 'message' in err.data) {
-                      errMsg = (err.data as { message: string }).message;
-                    } else {
-                      errMsg = JSON.stringify(err.data);
-                    }
-                  }
-                  toast(errMsg, {type: 'error'})
-                } else if (isErrorWithMessage(err)) {
-                  console.error('Unexpected Error:', err.message);
-                } else {
-                  console.error('Unknown Error:', err);
-                }
+            handleApiError(err);
           }
         }
       };

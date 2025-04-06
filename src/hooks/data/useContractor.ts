@@ -3,14 +3,11 @@ import { toast } from 'react-toastify';
 import { IContractor } from '../../types/content';
 import { useCreateContractorMutation } from '../../store/api/contractorApi';
 import {
-  isErrorWithMessage,
-  isFetchBaseQueryError,
-} from '../../utils/errors/error-handling';
-import {
   ContractorValidation,
   ValidateField,
 } from '../../utils/validation/DeviceValidation';
 import { useInputMask } from './useInputMask';
+import { handleApiError } from '../../utils/errors/handleApiError';
 
 export const useContactor = () => {
   const { formatPhone, changeFormatPhone } = useInputMask();
@@ -70,16 +67,7 @@ export const useContactor = () => {
             });
         }
       } catch (err) {
-        if (isFetchBaseQueryError(err)) {
-          const error = err as { data?: { message: string; error: string } };
-          const errMsg = error?.data?.message;
-          console.log('API Error', errMsg);
-          toast(errMsg, { type: 'error' });
-        } else if (isErrorWithMessage(err)) {
-          console.log('Unexpected Error:', err.message);
-        } else {
-          console.error('Unknown Error:', err);
-        }
+        handleApiError(err);
       }
     },
     [handleReset, createContractor, contractor]
