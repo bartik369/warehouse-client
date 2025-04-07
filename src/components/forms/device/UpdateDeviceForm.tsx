@@ -1,4 +1,4 @@
-import { FC, useEffect} from "react";
+import { FC, useEffect } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -16,7 +16,7 @@ import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { IEntity, IUpdateDeviceFormActions, IUpdateDeviceFormSetters, IUpdateDeviceFormState } from "../../../types/devices";
+import { IEntity, IUpdateDeviceFormActions, IUpdateDeviceFormState } from "../../../types/devices";
 import { IAdminEntity, IContractor } from "../../../types/content";
 import { Bounce, ToastContainer } from "react-toastify";
 import { yes, no, serviceable, technicalOptions, financialOptions,
@@ -29,26 +29,25 @@ import styles from "./DeviceForm.module.scss";
 interface IUpdateDeviceFormProps {
   state: IUpdateDeviceFormState
   actions: IUpdateDeviceFormActions;
-  setters: IUpdateDeviceFormSetters;
 }
-const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters }) => {
-  const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
+const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
+  const { isOpen, entity, setIsOpen } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
   const [ getModels, { data: models } ] = useLazyGetModelsQuery();
-  const dispatch = useAppDispatch();
+  const dispatchDeviceInfo = useAppDispatch();
   
   // Models list query by manufacturer and type
   useEffect(() => {
     if (state.device.modelName && models) {
       models.forEach((model: IAdminEntity) => {
         if (model.name === state.device.modelName) {
-          dispatch(setDevicePic(model.imagePath || ''))
+          dispatchDeviceInfo(setDevicePic(model.imagePath || ''))
         }
       });
     }
-  }, [state.device.modelName, models, dispatch]);
+  }, [state.device.modelName, models, dispatchDeviceInfo]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
@@ -143,7 +142,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
               getId={(item:IEntity) => item.id}
             />
             <Number device={state.device} setDevice={actions.handleNumber} />
-            {state.itemType && deviceTypes[state.itemType]?.uniqueFields?.map((item) => (
+            {state.device.typeSlug && deviceTypes[state.device.typeSlug]?.uniqueFields?.map((item) => (
               <CustomNumber
                 key={item.name}
                 device={state.device}
@@ -173,9 +172,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions, setters 
             isOpen={isOpen}
             state={state}
             actions={actions}
-            setters={setters}
-            setIsOpen={setIsOpen} 
-            setEntity={setEntity} 
+            setIsOpen={setIsOpen}
           />
           <form className={styles["additional-form"]}>
             <Textarea

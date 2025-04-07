@@ -21,9 +21,9 @@ import styles from './Device.module.scss';
 const Device: FC = () => {
   const params = useParams();
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
-  const dispatch = useAppDispatch();
+  const dispatchDeviceInfo = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { state, actions, setters } = useAddDevice();
+  const { state, actions, setters, dispatch } = useAddDevice();
 
   useEffect(() => {
     if (params.id) getDevice(params.id);
@@ -31,7 +31,7 @@ const Device: FC = () => {
   
   useEffect(() => {
     if (itemDevice?.id) {
-      dispatch(
+      dispatchDeviceInfo(
         setDeviceInfo({
           device: {
             id: itemDevice.id,
@@ -43,12 +43,12 @@ const Device: FC = () => {
           },
         })
       );
-      dispatch(setDevicePic(itemDevice.model.imagePath || ''))
+      dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ''))
     }
   }, [itemDevice]);
 
   useEffect(() => {
-    return () => { dispatch(setDevicePic('')); }
+    return () => { dispatchDeviceInfo(setDevicePic('')); }
   }, []);
 
   const handleActions = async (id: string) => {
@@ -60,8 +60,11 @@ const Device: FC = () => {
   return (
     <>
       {isOpen && (
-        <Modal title={editDevice} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
-          <UpdateDeviceForm state={state} actions={actions} setters={setters} />
+        <Modal title={state.fieldType} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
+          <UpdateDeviceForm 
+            state={state} 
+            actions={actions} 
+          />
         </Modal>
       )}
       <section className={styles.section}>

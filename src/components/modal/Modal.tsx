@@ -10,7 +10,7 @@ interface IModal {
     maxWidth?: number;
     setIsOpen:(isOpen:boolean) => void;
 }
-const Modal:FC<IModal> = ({children, isOpen, title, maxWidth, setIsOpen}) => {
+const Modal:FC<IModal> = ({ children, isOpen, title, maxWidth, setIsOpen }) => {
     const modal = document.getElementById('portal') as HTMLElement;
     return ReactDOM.createPortal(
         <div className={modalStyles.wrapper}>

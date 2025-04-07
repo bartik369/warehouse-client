@@ -24,15 +24,18 @@ import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IEntity } from "../../../types/devices";
 import { IAdminEntity, IContractor } from "../../../types/content";
 import { yes, no, serviceable, technicalOptions, financialOptions,
-  warrantyOptions } from "../../../utils/constants/constants";
+  warrantyOptions, 
+  addNewType,
+  addNewModel,
+  addNewManufacturer} from "../../../utils/constants/constants";
 import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
   description, modelCode, modelLabel, location, deviceTypes } from "../../../utils/constants/device";
   import DevicePreview from "./DevicePreview";
 import styles from "./DeviceForm.module.scss";
 
 const DeviceForm: FC = () => {
-  const { state, actions, setters } = useAddDevice();
-  const { isOpen, entity, setIsOpen, setEntity } = useModal(false);
+  const { state, actions  } = useAddDevice();
+  const { isOpen, entity, setIsOpen  } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
@@ -67,7 +70,7 @@ const DeviceForm: FC = () => {
     <ToastContainer position="top-center" theme="light" />
       {isOpen && (
         <Modal title={state.title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
-          {entity !== "contactor"
+          {state.fieldType !== "contractor"
             ? <EntityForm 
                 typeId={state.typeId} 
                 manufacturerId={state.manufacturerId} 
@@ -92,11 +95,11 @@ const DeviceForm: FC = () => {
             />
             <div className={styles.container}>
             <Ask 
-              title="type" 
+              title={addNewType}
+              type="type"
               isOpen={isOpen} 
-              setIsOpen={setIsOpen} 
-              setFieldType={setters.setFieldType} 
-              setEntity={setEntity} 
+              setIsOpen={setIsOpen}
+              actions={actions}
             />
               <Select<IEntity>
                 setValue={actions.handleTypeChange}
@@ -110,11 +113,11 @@ const DeviceForm: FC = () => {
             </div>
             <div className={styles.container}>
               <Ask 
-                title="manufacturer" 
+                title={addNewManufacturer}
+                type="manufacturer"
                 isOpen={isOpen} 
                 setIsOpen={setIsOpen} 
-                setFieldType={setters.setFieldType} 
-                setEntity={setEntity} 
+                actions={actions}
               />
               <Select<IEntity>
                 setValue={actions.handleManufacturerChange}
@@ -129,11 +132,11 @@ const DeviceForm: FC = () => {
             {state.device.typeSlug && state.device.manufacturerSlug && (
               <div className={styles.container}>
                 <Ask 
-                  title="model" 
+                  title={addNewModel} 
+                  type="model"
                   isOpen={isOpen} 
                   setIsOpen={setIsOpen} 
-                  setFieldType={setters.setFieldType} 
-                  setEntity={setEntity}
+                  actions={actions}
                 />
                 <Select<IEntity>
                   setValue={actions.handleModelChange}
@@ -206,9 +209,7 @@ const DeviceForm: FC = () => {
             isOpen={isOpen}
             state={state}
             actions={actions}
-            setters={setters}
             setIsOpen={setIsOpen} 
-            setEntity={setEntity} 
           />
           <form className={styles["additional-form"]}>
             <Textarea

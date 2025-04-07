@@ -24,6 +24,7 @@ export const initialState: IDeviceState = {
     typeId: '',
     manufacturerName: '',
     manufacturerSlug: '',
+    manufacturerId: '',
     addedById: '',
     updatedById: '',
     price_with_vat: null,

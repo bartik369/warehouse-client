@@ -40,6 +40,7 @@ export const slugLocation = `Если название, например, "Ск�
 Если город "Москва", то slug будет moscow. Slug указывать прописными буквами`;
 export const addNewManufacturer = 'Добавление производителя';
 export const addNewModel = 'Добавление модели';
+export const addNewContractor = 'Добавление подрядчика';
 export const addNewType = 'Добавление типа';
 export const noOptions = 'Нет доступных опций';
 export const phoneMaskPlaceholder = '+7 (___) ___-__-__';

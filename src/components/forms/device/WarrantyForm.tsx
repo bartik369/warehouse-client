@@ -1,11 +1,11 @@
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
+import Ask from "./Ask";
 import { useGetContractorsQuery } from "../../../store/api/contractorApi";
-import { add, isExistingInList } from "../../../utils/constants/constants";
-import { startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
+import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
   contractor } from "../../../utils/constants/device";
-import { IUpdateDeviceFormActions, IUpdateDeviceFormSetters, 
-  IUpdateDeviceFormState } from "../../../types/devices";
+import { addNewContractor } from "../../../utils/constants/constants";
+import { IUpdateDeviceFormActions, IUpdateDeviceFormState } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
@@ -13,25 +13,21 @@ import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
 import styles from "./DeviceForm.module.scss";
 
-registerLocale('ru', ru);
+registerLocale("ru", ru);
 
 interface IWarrantyFormProps<T> {
   isOpen: boolean;
   entity: string;
-  setIsOpen: (isOpen: boolean) => void;
-  setEntity: (entity: string) => void;
-  getId: (item: T) => void;
   state: IUpdateDeviceFormState;
-  setters: IUpdateDeviceFormSetters;
   actions: IUpdateDeviceFormActions;
+  setIsOpen: (isOpen: boolean) => void;
+  getId: (item: T) => void;
 }
 const WarrantyForm = <T,>({
   isOpen,
   state,
   actions,
-  setters,
   setIsOpen,
-  setEntity,
 }: IWarrantyFormProps<T>) => {
   const { data: contractors } = useGetContractorsQuery();
   return (
@@ -44,10 +40,12 @@ const WarrantyForm = <T,>({
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={state.device.startWarrantyDate 
-            ? new Date(state.device.startWarrantyDate ) 
-            : null}
-            onChange={(date) => actions.handleStartDateChange(date)}
+          selected={
+            state.device.startWarrantyDate
+              ? new Date(state.device.startWarrantyDate)
+              : null
+          }
+          onChange={(date) => actions.handleStartDateChange(date)}
           maxDate={state.device.endWarrantyDate ?? undefined}
           placeholderText={selectDate}
         />
@@ -62,7 +60,9 @@ const WarrantyForm = <T,>({
           showIcon
           dateFormat="dd.MM.yyyy"
           selected={
-            state.device.endWarrantyDate  ? new Date(state.device.endWarrantyDate) : null
+            state.device.endWarrantyDate
+              ? new Date(state.device.endWarrantyDate)
+              : null
           }
           onChange={(date) => actions.handleEndDateChange(date)}
           minDate={state.device.startWarrantyDate ?? undefined}
@@ -71,18 +71,13 @@ const WarrantyForm = <T,>({
         <div className={styles.label}>{endWarrantyLabel}</div>
       </div>
       <div className={styles.container}>
-        <div className={styles.ask}>
-          {isExistingInList}
-          <span
-            onClick={() => {
-              setIsOpen(!isOpen);
-              setters.setFieldType('contactor');
-              setEntity('contactor');
-            }}
-          >
-            {add}
-          </span>
-        </div>
+        <Ask
+          title={addNewContractor}
+          type="contractor"
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          actions={actions}
+        />
         <Select<IContractor>
           setValue={actions.handleContractorChange}
           items={contractors || []}
@@ -99,7 +94,9 @@ const WarrantyForm = <T,>({
         value={state.device.warrantyNumber || ""}
         label={warrantyNumber}
         errors={state.errors}
-        onChange={(e) => actions.handleInputChange('warrantyNumber', e.target.value)}
+        onChange={(e) =>
+          actions.handleInputChange("warrantyNumber", e.target.value)
+        }
       />
     </form>
   );

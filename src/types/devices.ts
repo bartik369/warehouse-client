@@ -22,8 +22,9 @@ export interface IDevice {
   typeSlug: string;
   typeName: string;
   typeId: string;
-  manufacturerSlug?: string;
+  manufacturerSlug: string;
   manufacturerName: string;
+  manufacturerId: string;
   addedById: string;
   updatedById: string;
   createdAt?: Date;
@@ -277,8 +278,7 @@ export interface IUpdateDeviceFormState {
   itemType: string;
   isUpdate: boolean;
   device: IDevice;
-  selectedValues: Record<string, string>;
-  modelFields: Record<string, string>,
+  modelFields?: Record<string, string>,
   checked: boolean;
   errors: Record<string, string>;
 }
@@ -299,10 +299,13 @@ export interface IUpdateDeviceFormActions {
   resetModelData: () => void;
   handleStartDateChange: (item:Date) => void;
   handleEndDateChange: (item:Date) => void;
+  handleSetTitle: (item: string) => void;
+  handleSetType: (item: string) => void;
 }
 export interface IUpdateDeviceFormSetters {
   setDevice: (item: IDevice) => void;
   setFieldType: (item: string) => void;
+  setEntity: (item:string) => void;
 }
 
 export interface IWarrantyFormState {
