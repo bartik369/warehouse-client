@@ -19,11 +19,6 @@ import {
   FormValidation,
   ValidateField,
 } from "../../utils/validation/DeviceValidation";
-import {
-  addNewManufacturer,
-  addNewType,
-  addNewModel,
-} from "../../utils/constants/constants";
 import { handleApiError } from "../../utils/errors/handleApiError";
 
 export function useAddDevice() {
@@ -33,7 +28,7 @@ export function useAddDevice() {
   const { fieldType, checked, itemType, device, title } = state;
 
   const locationPath = useLocation();
-  const exceptionPath = !/add-device$/.test(locationPath.pathname);
+  const exceptionPath = /add-device$/.test(locationPath.pathname);
 
   const [createDevice] = useCreateDeviceMutation();
   const [getDevice] = useLazyGetDeviceQuery();
@@ -72,7 +67,9 @@ export function useAddDevice() {
 
   const handleExtNumber = useCallback(
     (num: number, fieldName: string) => {
+
       const data = ValidateField(fieldName, num);
+      console.log(num)
       dispatch({
         type: DeviceActionTypes.SET_DEVICE,
         payload: { [fieldName]: num },
@@ -109,7 +106,15 @@ export function useAddDevice() {
               dispatchDeviceData(setDevicePic(""));
             });
         } else {
-          console.log("test");
+          console.log(updatedData);
+          
+          await updateDevice(updatedData)
+            .unwrap()
+            .then((data) => {
+              toast(data?.message, { type: "success" });
+              handleResetDevice();
+              dispatchDeviceData(setDevicePic(""));
+            });
         }
       } else {
         console.error("Validation errors:", validationErrors);
@@ -196,13 +201,13 @@ export function useAddDevice() {
     },
     [handleInputChange]
   );
-  const handleStartDateChange = (item: Date) => {
+  const handleStartDateChange = (item: Date | null) => {
     dispatch({
       type: DeviceActionTypes.SET_DEVICE,
       payload: { startWarrantyDate: item },
     });
   };
-  const handleEndDateChange = (item: Date) => {
+  const handleEndDateChange = (item: Date | null) => {
     dispatch({
       type: DeviceActionTypes.SET_DEVICE,
       payload: { endWarrantyDate: item },
@@ -213,18 +218,8 @@ export function useAddDevice() {
     try {
       if (!id) return;
       const data = await getDevice(id).unwrap();
-      console.log(data);
-
-      const {
-        warehouse,
-        model,
-        warranty,
-        contractor,
-        addedBy,
-        updatedBy,
-        deviceIssues,
-        ...rest
-      } = data;
+      const { warehouse, model, warranty,  contractor, addedBy, updatedBy,
+        deviceIssues, ...rest } = data;
       dispatch({
         type: DeviceActionTypes.SET_DEVICE,
         payload: {
@@ -233,10 +228,14 @@ export function useAddDevice() {
           warehouseSlug: warehouse.slug ?? "",
           providerName: warranty?.contractor?.name ?? "",
           providerSlug: warranty?.contractor?.slug ?? "",
+          contractorId: data.contractorId ?? '',
           manufacturerName: model?.manufacturer?.name ?? "",
           manufacturerSlug: model?.manufacturer?.slug ?? "",
           typeName: model?.type.name ?? "",
           typeSlug: model?.type.slug ?? "",
+          price_with_vat:  Number(data.price_with_vat ?? 0),
+          price_without_vat:  Number(data.price_without_vat ?? 0),
+          residual_price: Number(data.residual_price ?? 0),
           warrantyNumber: warranty?.warrantyNumber ?? "",
           startWarrantyDate: warranty?.startWarrantyDate ?? null,
           endWarrantyDate: warranty?.endWarrantyDate ?? null,
@@ -265,8 +264,6 @@ export function useAddDevice() {
     dispatch({ type: DeviceActionTypes.SET_TITLE, payload: item});
   }
   const handleSetType = (item: string) => {
-    console.log(item);
-    
     dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: item});
   }
 
@@ -308,8 +305,6 @@ export function useAddDevice() {
     setters: {
       setIsUpdate: (value: boolean) =>
         dispatch({ type: DeviceActionTypes.SET_IS_UPDATE, payload: value }),
-      // setFieldType: (value: string) =>
-      //   dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: value }),
       setDevice: (value: Partial<IDevice>) =>
         dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: value }),
     },

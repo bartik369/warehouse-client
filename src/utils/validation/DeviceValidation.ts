@@ -15,7 +15,7 @@ type ValidationError = string | null;
 
 const fieldsMemoryScreen = ["laptop", "mobile"];
 const fieldScreen = ["tv", "monitor"];
-const modelFields = ["name", "manufacturer", "type"];
+const modelFields = ["name", "manufacturerName", "typeName"];
 const contactorFields = ["name", "phoneNumber", "address"];
 
 const validateRequiredFields = <T>(
@@ -34,8 +34,8 @@ export const FormValidation = (formData: IDevice, itemType: string): IValidation
   const errors: Record<string, string> = {};
   const requiredField: ValidationField[] = [
     "name",
-    "type",
-    "manufacturer",
+    "typeSlug",
+    "manufacturerSlug",
     "warehouseId",
   ];
   validateRequiredFields(formData, requiredField, errors);

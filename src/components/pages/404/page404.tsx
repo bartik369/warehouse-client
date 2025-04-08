@@ -1,20 +1,11 @@
-import { useState } from "react";
+import React from 'react';
 
-export default function App() {
-  const [form, setForm] = useState({ name: '', email: '' });
-
+const Page404 = () => {
   return (
-    <form>
-      <input
-        value={form.name || ""}
-        type="text"
-        onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
-      />
-      <input
-        value={form.email || ""}
-        type="email"
-        onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
-      />
-    </form>
+    <div>
+      there is nothing
+    </div>
   );
-}
+};
+
+export default Page404;

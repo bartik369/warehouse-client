@@ -23,7 +23,7 @@ const Device: FC = () => {
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
   const dispatchDeviceInfo = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { state, actions, setters, dispatch } = useAddDevice();
+  const { state, actions, setters } = useAddDevice();
 
   useEffect(() => {
     if (params.id) getDevice(params.id);

@@ -35,7 +35,7 @@ import styles from "./DeviceForm.module.scss";
 
 const DeviceForm: FC = () => {
   const { state, actions  } = useAddDevice();
-  const { isOpen, entity, setIsOpen  } = useModal(false);
+  const { isOpen, setIsOpen  } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
@@ -205,7 +205,6 @@ const DeviceForm: FC = () => {
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
-            entity={entity} 
             isOpen={isOpen}
             state={state}
             actions={actions}

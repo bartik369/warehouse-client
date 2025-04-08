@@ -12,7 +12,6 @@ import WarrantyForm from "./WarrantyForm";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useModal } from "../../../hooks/data/useModal";
-import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
@@ -22,7 +21,7 @@ import { Bounce, ToastContainer } from "react-toastify";
 import { yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions } from "../../../utils/constants/constants";
 import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventoryNumber,
-  description, modelCode, modelLabel, location, deviceTypes
+  description, modelCode, modelLabel, deviceTypes
 } from "../../../utils/constants/device";
 import styles from "./DeviceForm.module.scss";
 
@@ -33,7 +32,6 @@ interface IUpdateDeviceFormProps {
 const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
   const { isOpen, entity, setIsOpen } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
-  const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
   const [ getModels, { data: models } ] = useLazyGetModelsQuery();
   const dispatchDeviceInfo = useAppDispatch();
@@ -131,15 +129,6 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
               label={modelCode}
               errors={state.errors}
               name="modelCode"
-            />
-            <Select<IEntity>
-              setValue={actions.handleWarehouseChange}
-              items={warehouses || []}
-              label={location}
-              value={state.device.warehouseName || ''}
-              errors={state.errors}
-              name="warehouseId"
-              getId={(item:IEntity) => item.id}
             />
             <Number device={state.device} setDevice={actions.handleNumber} />
             {state.device.typeSlug && deviceTypes[state.device.typeSlug]?.uniqueFields?.map((item) => (

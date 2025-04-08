@@ -29,6 +29,7 @@ import AddLocation from './components/pages/admin/city/AddLocation';
 import AddModel from './components/pages/admin/model/AddModel';
 import AddType from './components/pages/admin/type/AddType';
 import './App.scss';
+import Page404 from './components/pages/404/page404';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -85,6 +86,7 @@ function App() {
         <Route element={<Signin />} path='/signin' />
         <Route element={<ResetPassword />} path='/reset-password' />
       </Route>
+      <Route element={<Page404 />} path='*' />
     </Routes>
     </>
   )

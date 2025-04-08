@@ -17,7 +17,6 @@ registerLocale("ru", ru);
 
 interface IWarrantyFormProps<T> {
   isOpen: boolean;
-  entity: string;
   state: IUpdateDeviceFormState;
   actions: IUpdateDeviceFormActions;
   setIsOpen: (isOpen: boolean) => void;
@@ -59,10 +58,9 @@ const WarrantyForm = <T,>({
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={
-            state.device.endWarrantyDate
-              ? new Date(state.device.endWarrantyDate)
-              : null
+          selected={state.device.endWarrantyDate
+            ? new Date(state.device.endWarrantyDate)
+            : null
           }
           onChange={(date) => actions.handleEndDateChange(date)}
           minDate={state.device.startWarrantyDate ?? undefined}
@@ -71,13 +69,15 @@ const WarrantyForm = <T,>({
         <div className={styles.label}>{endWarrantyLabel}</div>
       </div>
       <div className={styles.container}>
-        <Ask
+        {!state.isUpdate &&
+          <Ask
           title={addNewContractor}
           type="contractor"
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           actions={actions}
-        />
+       />
+        }
         <Select<IContractor>
           setValue={actions.handleContractorChange}
           items={contractors || []}
