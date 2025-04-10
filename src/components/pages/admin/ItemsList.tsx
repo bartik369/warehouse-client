@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { IAdminEntity } from '../../../types/content';
+import { FC } from 'react';
+import { IEntity } from '../../../types/devices';
 import { BsPencilSquare } from 'react-icons/bs';
 import styles from './Admin.module.scss';
 
 interface IItemsListProps {
     field: string;
-    items: IAdminEntity[]
+    items: IEntity[]
     handle: (id: string, field: string) => void;
 }
 const ItemsList: FC<IItemsListProps> = ({field, items, handle}) => {

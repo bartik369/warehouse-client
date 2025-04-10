@@ -78,7 +78,13 @@ export const useEntity = () => {
   );
 
   const handleResetEntity = useCallback(() => {
-    setEntity({ id: '', name: '', slug: '', imagePath: '', typeId: ''});
+    setEntity({ 
+      id: '', 
+      name: '', 
+      slug: '', 
+      imagePath: '', 
+      typeId: '',
+    });
     setMedia({ file: null, prevImg: null})
   }, []);
 

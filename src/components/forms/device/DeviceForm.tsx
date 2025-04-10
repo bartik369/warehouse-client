@@ -22,7 +22,7 @@ import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IEntity } from "../../../types/devices";
-import { IAdminEntity, IContractor } from "../../../types/content";
+import { IContractor } from "../../../types/content";
 import { yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions, 
   addNewType,
@@ -45,7 +45,7 @@ const DeviceForm: FC = () => {
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (state.device.modelName && models) {
-      models.forEach((model: IAdminEntity) => {
+      models.forEach((model: IEntity) => {
         if (model.name === state.device.modelName) {
           dispatch(setDevicePic(model.imagePath || ''))
         }

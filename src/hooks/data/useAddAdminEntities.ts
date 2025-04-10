@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { IAdminEntity } from '../../types/content';
 import { useInputMask } from './useInputMask';
 import {
   FormValidation,
@@ -41,12 +40,12 @@ import {
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
  } from '../../store/api/typesApi';
-import { IDeviceMedia } from '../../types/devices';
+import { IDeviceMedia, IEntity } from '../../types/devices';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { selectPic } from '../../utils/constants/constants';
 
 export const useAddAdminEntities = () => {
-  const [entity, setEntity] = useState<IAdminEntity>({
+  const [entity, setEntity] = useState<IEntity>({
     id: '',
     name: '',
     slug: '',
@@ -116,7 +115,7 @@ export const useAddAdminEntities = () => {
   };
 
   const handleInputChange = useCallback(
-    <T extends string | IAdminEntity>(field: keyof IAdminEntity, value: T) => {
+    <T extends string | IEntity>(field: keyof IEntity, value: T) => {
       setErrors((prev) => ({
         ...prev,
         [field]: ValidateField(field, value) || '',
@@ -147,7 +146,7 @@ export const useAddAdminEntities = () => {
           if (!entity) return;
           if (fieldType === 'model') {
             const formData = new FormData();
-            (Object.keys(entity) as (keyof IAdminEntity)[]).forEach((key) => {
+            (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
               const value = entity[key];
               if (value !== undefined && value !== null)
                 formData.append(key, value);
@@ -215,20 +214,20 @@ export const useAddAdminEntities = () => {
   }, []);
 
   const handleCityChange = useCallback(
-    (item: any) => {
+    (item: IEntity) => {
       handleInputChange('locationName', item.name || '');
     },
     [handleInputChange]
   );
   const handleManufacturerChange = useCallback(
-    (item: any) => {
+    (item: IEntity) => {
       handleInputChange('manufacturerId', item.id || '');
       handleInputChange('manufacturer', item.name || '');
     },
     [handleInputChange]
   );
   const handleTypeChange = useCallback(
-    (item: any) => {
+    (item:IEntity) => {
       handleInputChange('typeId', item.id || '');
       handleInputChange('type', item.name || '');
     },

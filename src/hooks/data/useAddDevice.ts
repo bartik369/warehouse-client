@@ -121,8 +121,8 @@ export function useAddDevice() {
   const handleTypeChange = useCallback(
     (item: IEntity) => {
       console.log(item);
-      handleInputChange('typeSlug', item.slug);
-      handleInputChange('typeName', item.name);
+      handleInputChange('typeSlug', item.slug || '');
+      handleInputChange('typeName', item.name || '');
       handleInputChange('typeId', item.id || '');
     },
     [handleInputChange]
@@ -140,7 +140,7 @@ export function useAddDevice() {
   const handleManufacturerChange = useCallback(
     (item: IEntity) => {
       handleInputChange('manufacturerName', item.name);
-      handleInputChange('manufacturerSlug', item.slug);
+      handleInputChange('manufacturerSlug', item.slug || '');
       handleInputChange('manufacturerId', item.id || '');
     },
     [handleInputChange]
@@ -220,11 +220,11 @@ export function useAddDevice() {
   }, []);
   
   const handleSetTitle = useCallback((item: string) => {
-    dispatch({ type: DeviceActionTypes.SET_TITLE, payload: item});
+    dispatch({ type: DeviceActionTypes.SET_TITLE, payload: item });
   }, [dispatch]);
 
   const handleSetType = useCallback((item: string) => {
-    dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: item});
+    dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: item });
   }, [dispatch]);
 
   return {

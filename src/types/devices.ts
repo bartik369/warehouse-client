@@ -173,9 +173,15 @@ export interface ISelectedItem {
 export interface IEntity {
   id: string;
   name: string;
-  slug: string;
+  slug?: string;
+  locationName?: string;
   imagePath?: string;
+  comment?: string;
+  phoneNumber?: string;
+  address?: string;
   typeId?: string;
+  type?: string;
+  manufacturer?: string;
   manufacturerId?: string;
 }
 

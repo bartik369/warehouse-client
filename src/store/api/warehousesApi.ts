@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IAdminEntity } from '../../types/content';
+import { IEntity } from '../../types/devices';
 
 export const warehousesApi = createApi({
   reducerPath: 'warehousesApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Warehouse'],
   endpoints: (build) => ({
-    getWarehouses: build.query<IAdminEntity[], void>({
+    getWarehouses: build.query<IEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_WAREHOUSES}`,
         method: 'GET',
@@ -20,7 +20,7 @@ export const warehousesApi = createApi({
             ]
           : [{ type: 'Warehouse', id: 'LIST' }],
     }),
-    getWarehouse: build.query<IAdminEntity, string>({
+    getWarehouse: build.query<IEntity, string>({
       query: (id:string) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
       })

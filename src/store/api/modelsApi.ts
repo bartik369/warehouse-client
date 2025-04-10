@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IAdminEntity } from '../../types/content';
+import { IEntity } from '../../types/devices';
 
 export const modelsApi = createApi({
     reducerPath: 'modelsApi',
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Model'],
     endpoints: (build) => ({
-        getModels: build.query<IAdminEntity[], any>({
+        getModels: build.query<IEntity[], any>({
             query({manufacturer, type}) {
                 return {
                     url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturer}/${type}`,
@@ -21,12 +21,12 @@ export const modelsApi = createApi({
                 ]
               : [{ type: 'Model', id: 'LIST' }],
         }),
-        getAllModels: build.query<IAdminEntity[], void>({
+        getAllModels: build.query<IEntity[], void>({
             query:() => ({
                 url: `${import.meta.env.VITE_MODELS_ALL}`,
             })
         }),
-        getModel: build.query<IAdminEntity, string>({
+        getModel: build.query<IEntity, string>({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_MODEL}${id}`,
             }),

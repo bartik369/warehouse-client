@@ -16,7 +16,7 @@ import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { IEntity, IUpdateDeviceFormActions, IUpdateDeviceFormState } from "../../../types/devices";
-import { IAdminEntity, IContractor } from "../../../types/content";
+import { IContractor } from "../../../types/content";
 import { Bounce, ToastContainer } from "react-toastify";
 import { yes, no, serviceable, technicalOptions, financialOptions,
   warrantyOptions } from "../../../utils/constants/constants";
@@ -39,7 +39,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
   // Models list query by manufacturer and type
   useEffect(() => {
     if (state.device.modelName && models) {
-      models.forEach((model: IAdminEntity) => {
+      models.forEach((model: IEntity) => {
         if (model.name === state.device.modelName) {
           dispatchDeviceInfo(setDevicePic(model.imagePath || ''))
         }
