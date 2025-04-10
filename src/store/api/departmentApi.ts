@@ -1,13 +1,13 @@
-import { IAdminEntity } from '../../types/content';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { IEntity } from '../../types/devices';
 
 export const departmentApi = createApi({
   reducerPath: 'departmentApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Department'],
   endpoints: (build) => ({
-    getDepartments: build.query<IAdminEntity[], void>({
+    getDepartments: build.query<IEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
       }),

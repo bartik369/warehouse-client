@@ -3,7 +3,7 @@ import { IUser } from '../../types/user';
 import { toast } from 'react-toastify';
 import { useCreateUserMutation } from '../../store/api/userApi';
 import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
-import { isErrorWithMessage, isFetchBaseQueryError} from '../../utils/errors/error-handling';
+import { handleApiError } from '../../utils/errors/handleApiError';
 
 export const useAddUser = () => {
   const [user, setUser] = useState<IUser>({
@@ -58,16 +58,7 @@ export const useAddUser = () => {
             });
         }
       } catch (err) {
-        if (isFetchBaseQueryError(err)) {
-          const error = err as { data?: { message: string; error: string } };
-          const errMsg = error.data?.message;
-          console.log('API Error', errMsg);
-          toast(errMsg, { type: 'error' });
-        } else if (isErrorWithMessage(err)) {
-          console.log('Unexpected Error:', err.message);
-        } else {
-          console.error('Unknown Error:', err);
-        }
+       handleApiError(err);
       }
     },[]);
     

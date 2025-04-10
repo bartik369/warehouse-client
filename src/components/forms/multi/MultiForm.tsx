@@ -8,30 +8,29 @@ import { getTitleByLocationType } from "../../../utils/title/titleUtils";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { IAdminEntity } from "../../../types/content";
 import { phoneNumberLabel } from "../../../utils/constants/device";
 import { add, update, reset, slugLocation, name, slug, city, description,
   phoneMaskPlaceholder } from "../../../utils/constants/constants";
 import { manufacturersLabel, deviceTypeLabel } from "../../../utils/constants/device";
 import Preview from "../../ui/preview/Preview";
-import { IDeviceMedia } from "../../../types/devices";
+import { IDeviceMedia, IEntity } from "../../../types/devices";
 import { HiMiniXMark } from "react-icons/hi2";
 import { GoPlus } from "react-icons/go";
 import { BsQuestionSquare } from "react-icons/bs";
 import styles from "./MultiForm.module.scss";
 
 interface IMultiFormProps {
-  entity: IAdminEntity;
+  entity: IEntity;
   isUpdate: boolean;
   media?: IDeviceMedia;
   fieldType?: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
   errors: Record<string, string>;
   setMedia?: () => void;
-  handleCity?: (item: any) => void;
-  handleManufacturer?: (item: any) => void;
-  handleType?: (item: any) => void;
-  handleInput: (name: keyof IAdminEntity, e: string) => void;
+  handleCity?: (item: IEntity) => void;
+  handleManufacturer?: (item: IEntity) => void;
+  handleType?: (item: IEntity) => void;
+  handleInput: (name: keyof IEntity, e: string) => void;
   handleCreate: (e: React.MouseEvent<HTMLButtonElement>, type: string) => void;
   handleReset: () => void;
 }
@@ -118,35 +117,35 @@ const MultiForm: FC<IMultiFormProps> = ({
           />
         )}
         {locationPath.pathname.endsWith("add-warehouse") && 
-          <Select<IAdminEntity>
+          <Select<IEntity>
             setValue={handleCity}
             items={cities || []}
             label={city}
             value={entity.locationName || ""}
             errors={errors}
             name="locationName"
-            getId={(item: IAdminEntity) => item.id}
+            getId={(item: IEntity) => item.id}
           />
         }
          { locationPath.pathname.endsWith("add-model") && 
          <>
-          <Select<IAdminEntity>
+          <Select<IEntity>
             setValue={handleManufacturer}
             items={manufacturers || []}
             label={manufacturersLabel}
             value={entity.manufacturer || ""}
             errors={errors}
             name="manufacturer"
-            getId={(item: IAdminEntity) => item.id}
+            getId={(item: IEntity) => item.id}
           />
-          <Select<IAdminEntity>
+          <Select<IEntity>
             setValue={handleType}
             items={types || []}
             label={deviceTypeLabel}
             value={entity.type || ""}
             errors={errors}
             name="type"
-            getId={(item: IAdminEntity) => item.id}
+            getId={(item: IEntity) => item.id}
         />
         </>
         }

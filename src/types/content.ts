@@ -28,6 +28,7 @@ export interface IAdminEntity  {
         manufacturer?: string;
         manufacturerId?: string;
 }
+
 export interface IContractor extends IEntity {
     contractorId?: string;
     phoneNumber: string;

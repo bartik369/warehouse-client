@@ -1,9 +1,12 @@
+import { IContractor } from "./content";
+
 export interface IDevice {
   id?: string;
   name: string;
   inventoryNumber?: string;
   modelCode?: string;
-  modelId: string;
+  modelId?: string;
+  modelSlug?: string;
   modelName?: string;
   serialNumber?: string;
   weight?: number;
@@ -13,11 +16,15 @@ export interface IDevice {
   isFunctional: boolean;
   isAssigned: boolean;
   warehouseId: string;
+  warehouseSlug?: string;
   warehouseName: string;
   description?: string;
-  type: string;
+  typeSlug: string;
+  typeName: string;
   typeId: string;
-  manufacturer: string;
+  manufacturerSlug: string;
+  manufacturerName: string;
+  manufacturerId: string;
   addedById: string;
   updatedById: string;
   createdAt?: Date;
@@ -28,7 +35,8 @@ export interface IDevice {
   warrantyNumber?: string;
   startWarrantyDate?: Date | null;
   endWarrantyDate?: Date | null;
-  provider?: string;
+  providerName: string;
+  providerSlug: string;
   contractorId: string;
 }
 
@@ -69,6 +77,7 @@ export interface IAggregateDeviceInfo extends IDevice {
     isExpired: boolean;
     contractor: {
       name: string;
+      slug: string;
     };
   };
   deviceIssues: {
@@ -86,8 +95,8 @@ export interface IDeviceModel {
 }
 
 export interface IDeviceMedia {
-  file: File | null;
-  prevImg: string | null;
+  file?: File | null;
+  prevImg?: string | null;
 }
 
 export interface IValidationErrors {
@@ -105,7 +114,6 @@ export interface IValidationErrors {
   phoneNumber?: string;
   address?: string;
 }
-
 
 export interface IInventory {
   id?: number;
@@ -165,9 +173,15 @@ export interface ISelectedItem {
 export interface IEntity {
   id: string;
   name: string;
-  slug: string;
+  slug?: string;
+  locationName?: string;
   imagePath?: string;
+  comment?: string;
+  phoneNumber?: string;
+  address?: string;
   typeId?: string;
+  type?: string;
+  manufacturer?: string;
   manufacturerId?: string;
 }
 
@@ -262,6 +276,61 @@ export interface IDeviceInfo {
     name: string;
     slug: string;
   };
-  prevImg: string;
 }
 export type QueryParams = Record<string, string | number | boolean>
+
+export interface IUpdateDeviceFormState {
+  itemType: string;
+  isUpdate: boolean;
+  device: IDevice;
+  modelFields?: Record<string, string>,
+  checked: boolean;
+  errors: Record<string, string>;
+}
+
+
+export interface IUpdateDeviceFormActions {
+  handleTypeChange:(item: IEntity) => void
+  handleModelChange:(item: IEntity) => void
+  handleManufacturerChange:(item: IEntity) => void
+  handleWarehouseChange:(item: IEntity) => void
+  handleContractorChange:(item: IContractor) => void
+  handleInputChange: (name: keyof IDevice, e:any) => void
+  handleNumber: (num: number) => void;
+  handleExtNumber: (num: number, fieldName: string) => void;
+  handleChecked: () => void;
+  handleAddDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleResetDevice: () => void;
+  resetModelData: () => void;
+  handleStartDateChange: (item:Date | null) => void;
+  handleEndDateChange: (item:Date | null) => void;
+  handleSetTitle: (item: string) => void;
+  handleSetType: (item: string) => void;
+}
+export interface IUpdateDeviceFormSetters {
+  setDevice: (item: IDevice) => void;
+  setFieldType: (item: string) => void;
+  setEntity: (item:string) => void;
+}
+
+export interface IWarrantyFormState {
+  selectedValuesMemo: string;
+  device: IDevice;
+  isOpen: boolean;
+}
+
+export interface IWarrantyFormActions {
+  handleInputChange: (name: keyof IDevice, value: string) => void;
+}
+export interface IWarrantyFormSetters {
+  setValue: (value: T) => void;
+  setDevice: (device: IDevice) => void;
+}
+
+export { IContractor };
+// export interface IUpdateDeviceFormSetters {
+//   setDevice: (item: IDevice) => void;
+//   resetModel: () => void;
+// }
+
+

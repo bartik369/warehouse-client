@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback } from 'react';
 import { IDeviceMedia, IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
-import { isErrorWithMessage, isFetchBaseQueryError} from '../../utils/errors/error-handling';
 import { useCreateTypeMutation } from '../../store/api/typesApi';
 import { useCreateModelMutation } from '../../store/api/modelsApi';
 import { useCreateManufacturerMutation } from '../../store/api/manufacturersApi';
 import { selectPic } from '../../utils/constants/constants';
 import { toast } from 'react-toastify';
+import { handleApiError } from '../../utils/errors/handleApiError';
 
 export const useEntity = () => {
   // Device file and preview img for  Device form
@@ -71,24 +71,20 @@ export const useEntity = () => {
           });
         }
       } catch (err: unknown) {
-
-        if (isFetchBaseQueryError(err)) {
-          const error = err as { data?: { message: string; error: string } };
-          const errMsg = error.data?.message;
-          console.log('API Error', errMsg);
-          toast(errMsg, { type: 'error' });
-        } else if (isErrorWithMessage(err)) {
-          console.log('Unexpected Error:', err.message);
-        } else {
-          console.error('Unknown Error:', err);
-        }
+       handleApiError(err);
       }
     },
     [entity, EntityValidation]
   );
 
   const handleResetEntity = useCallback(() => {
-    setEntity({ id: '', name: '', slug: '', imagePath: '', typeId: ''});
+    setEntity({ 
+      id: '', 
+      name: '', 
+      slug: '', 
+      imagePath: '', 
+      typeId: '',
+    });
     setMedia({ file: null, prevImg: null})
   }, []);
 

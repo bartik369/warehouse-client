@@ -1,12 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IAdminEntity } from '../../types/content';
+import { IEntity } from '../../types/devices';
+
 export const contractorApi = createApi({
     reducerPath: 'contractorApi',
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Contractor'],
     endpoints:(build) => ({
-        getContractors: build.query<IAdminEntity[], void>({
+        getContractors: build.query<IEntity[], void>({
             query: () => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}`,
             }),

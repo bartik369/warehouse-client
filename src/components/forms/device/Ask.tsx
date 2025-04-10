@@ -1,20 +1,20 @@
 import { FC } from 'react';
 import { add, isExistingInList } from '../../../utils/constants/constants';
+import { IUpdateDeviceFormActions } from '../../../types/devices';
 import styles from "./DeviceForm.module.scss";
 
 interface IAskProps {
     title: string;
+    type: string;
     isOpen: boolean;
+    actions: IUpdateDeviceFormActions;
     setIsOpen: (isOpen: boolean) => void;
-    setFieldType: (item: string) => void
-    setEntity: (item: string) => void
 }
-
-const Ask:FC<IAskProps> = ({ title, isOpen, setIsOpen, setFieldType, setEntity }) => {
+const Ask:FC<IAskProps> = ({ title, type, isOpen, actions, setIsOpen}) => {
     const handleClick = () => {
         setIsOpen(!isOpen);
-        setFieldType(title)
-        setEntity(title)
+        actions.handleSetTitle(title);
+        actions.handleSetType(type);
     }
     return (
         <div className={styles.ask}>

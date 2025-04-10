@@ -28,6 +28,7 @@ import AddManufacturer from './components/pages/admin/manufacturer/AddManufactur
 import AddLocation from './components/pages/admin/city/AddLocation';
 import AddModel from './components/pages/admin/model/AddModel';
 import AddType from './components/pages/admin/type/AddType';
+import Page404 from './components/pages/404/Page404';
 import './App.scss';
 
 function App() {
@@ -82,9 +83,10 @@ function App() {
       </Route>
       </Route>
       <Route element={<PublicRoutes />}>
-        <Route element={<Signin />} path='/signin' />
+        <Route element={<Signin />} path='/login' />
         <Route element={<ResetPassword />} path='/reset-password' />
       </Route>
+      <Route element={<Page404 />} path='*' />
     </Routes>
     </>
   )

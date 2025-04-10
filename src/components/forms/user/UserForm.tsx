@@ -3,7 +3,7 @@ import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Select from '../../ui/select/Select';
 import Toggle from '../../ui/checkbox/Toggle';
-import { IAdminEntity } from '../../../types/content';
+import { IEntity } from '../../../types/devices';
 import { useAddUser } from '../../../hooks/data/useAddUser';
 import { useGetLocationsQuery } from '../../../store/api/locationApi';
 import { add, no, reset, accountIsActive, yes, addUserTitle } from '../../../utils/constants/constants';
@@ -13,8 +13,9 @@ import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
 import styles from './UserForm.module.scss';
 
+
 interface IUserFormProps {
-  departments: IAdminEntity[];
+  departments: IEntity[];
 }
 
 const UserForm: FC<IUserFormProps> = ({ departments }) => {
@@ -91,23 +92,23 @@ const UserForm: FC<IUserFormProps> = ({ departments }) => {
           errors={errors}
           onChange={(e) => handleInputChange("workId", e.target.value)}
         />
-        <Select<IAdminEntity>
+        <Select<IEntity>
           setValue={handleDepartmentChange}
           items={departments || []}
           label={labelDepartment}
           name="department"
           value={user.department || ""}
           errors={errors}
-          getId={(item: IAdminEntity) => item.id}
+          getId={(item: IEntity) => item.id}
         />
-        <Select<IAdminEntity>
+        <Select<IEntity>
           setValue={handleLocationChange}
           items={locations || []}
           label={labelCity}
           name="location"
           value={user.location || ""}
           errors={errors}
-          getId={(item: IAdminEntity) => item.id}
+          getId={(item: IEntity) => item.id}
         />
         <Toggle
           checked={checked}

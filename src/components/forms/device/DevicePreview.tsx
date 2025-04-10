@@ -4,12 +4,12 @@ import previewPicture from '../../../assets/elements/default.png';
 import styles from "./DeviceForm.module.scss";
 
 const DevicePreview:FC = () => {
-    const devicePic = useAppSelector(state => state.device.device?.prevImg);
+    const devicePic = useAppSelector(state => state.device?.media?.prevImg);
     return (
         <figure className={styles.preview}>
         <img src={devicePic
           ? `${import.meta.env.VITE_API_MODELS}${devicePic}`
-          : previewPicture
+          : previewPicture 
         } alt="" />
       </figure>
     );

@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IAdminEntity } from '../../types/content';
+import { IEntity } from '../../types/devices';
 
 export const typesApi = createApi({
   reducerPath: 'typesApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Type'],
   endpoints: (build) => ({
-    getTypes: build.query<IAdminEntity[], void>({
+    getTypes: build.query<IEntity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_TYPES}`,
       }),
@@ -24,7 +24,7 @@ export const typesApi = createApi({
             url: `${import.meta.env.VITE_TYPES}${id}`,
         }),
     }),
-    createType: build.mutation<IAdminEntity, IAdminEntity>({
+    createType: build.mutation<IEntity, IEntity>({
         query:(body) => ({
             url: `${import.meta.env.VITE_TYPES}`,
             method: 'POST',
@@ -32,7 +32,7 @@ export const typesApi = createApi({
         }),
         invalidatesTags: ['Type']
     }),
-    updateType: build.mutation<IAdminEntity, IAdminEntity>({
+    updateType: build.mutation<IEntity, IEntity>({
         query: ({id, ...body}) => ({
           url: `${import.meta.env.VITE_TYPES}${id}`,
           method: 'PUT',

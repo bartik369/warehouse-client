@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TechnicalInfo from './TechnicalInfo';
 import PriceInfo from './PriceInfo';
@@ -9,10 +9,9 @@ import Tabs from '../../tabs/Tabs';
 import Modal from '../../modal/Modal';
 import UpdateDeviceForm from '../../forms/device/UpdateDeviceForm';
 import { useModal } from '../../../hooks/data/useModal';
-import { IDevice } from '../../../types/devices';
 import { useAddDevice } from '../../../hooks/data/useAddDevice';
 import { useLazyGetDeviceQuery } from '../../../store/api/devicesApi';
-import { setDeviceInfo } from '../../../store/slices/deviceSlice';
+import { setDeviceInfo, setDevicePic } from '../../../store/slices/deviceSlice';
 import { useAppDispatch } from '../../../hooks/redux/useRedux';
 import { deviceTabsMenu } from '../../../utils/data/menus';
 import { editDevice } from '../../../utils/constants/constants';
@@ -22,102 +21,93 @@ import styles from './Device.module.scss';
 const Device: FC = () => {
   const params = useParams();
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
-  const dispatch = useAppDispatch();
+  const dispatchDeviceInfo = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { itemType, device, selectedValues, modelFields, isUpdate, handleTypeChange, 
-    handleGetDevice, handleInputChange, handleModelChange, handleManufacturerChange, 
-    handleWarehouseChange, handleContractorChange, setIsUpdate, resetModelData, 
-    handleNumber, setDevice,
-  } = useAddDevice();
+  const { state, actions, setters } = useAddDevice();
 
   useEffect(() => {
-    if (params.id) {
-      getDevice(params.id);
-    }
+    if (params.id) getDevice(params.id);
   }, [params.id]);
-
+  
   useEffect(() => {
     if (itemDevice?.id) {
-      dispatch(
+      dispatchDeviceInfo(
         setDeviceInfo({
           device: {
             id: itemDevice.id,
-            isAssigned: device.isAssigned,
+            isAssigned: state.device.isAssigned,
             warehouse: {
               name: itemDevice.warehouse?.name || '',
               slug: itemDevice.warehouse?.slug || '',
             },
-            prevImg: itemDevice.model.imagePath || '',
           },
         })
       );
+      dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ''))
     }
   }, [itemDevice]);
 
+  useEffect(() => {
+    return () => { dispatchDeviceInfo(setDevicePic('')); }
+  }, []);
+
   const handleActions = async (id: string) => {
-    await handleGetDevice(id);
-    setIsUpdate(true);
+    await actions.handleGetDevice(id);
+    setters.setIsUpdate(true);
     setIsOpen(true);
   };
 
   return (
     <>
-    {isOpen && (
-      <Modal title={editDevice} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
-      <UpdateDeviceForm
-        itemType={itemType}
-        device={device}
-        isUpdate={isUpdate}
-        selectedValues={selectedValues}
-        modelFields={modelFields}
-        handleType={handleTypeChange}
-        handleModel={handleModelChange}
-        handleManufacturer={handleManufacturerChange}
-        handleWarehouse={handleWarehouseChange}
-        handleContractor={handleContractorChange}
-        resetModel={resetModelData}
-        handleNumber={handleNumber}
-        setDevice={setDevice}
-        handleInputChange={(name: keyof IDevice, e: any) => handleInputChange(name, e)}
-      />
-      </Modal>
-    )}
-    <section className={styles.section}>
-      {itemDevice && (
-        <>
-        <div className={styles.header}>
-          <div className={styles.name}>
-          {itemDevice.name}
-          {itemDevice.inventoryNumber && <span>{itemDevice.inventoryNumber}</span>}
-          </div>
-          <div className={styles.icon} onClick={() => handleActions(itemDevice.id || "")}>
-          <CiEdit title={editDevice}/>
-          </div>
-        </div>
-        <article className={styles.wrapper}>
-          <figure className={styles.picture}>
-            <img
-              src={`${import.meta.env.VITE_API_MODELS}${
-                itemDevice.model.imagePath
-              }`}
-              alt=""
-            />
-          </figure>
-            <div className={styles.info}>
-            <TechnicalInfo device={itemDevice} />
+      {isOpen && (
+        <Modal title={state.fieldType} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
+          <UpdateDeviceForm 
+            state={state} 
+            actions={actions} 
+          />
+        </Modal>
+      )}
+      <section className={styles.section}>
+        {itemDevice && (
+          <>
+            <div className={styles.header}>
+              <div className={styles.name}>
+                {itemDevice.name}
+                {itemDevice.inventoryNumber && (
+                  <span>{itemDevice.inventoryNumber}</span>
+                )}
+              </div>
+              <div
+                className={styles.icon}
+                onClick={() => handleActions(itemDevice.id || "")}
+              >
+                <CiEdit title={editDevice} />
+              </div>
             </div>
-            <div className={styles.info}>
-            <PriceInfo device={itemDevice} />
-             <WarrantyInfo device={itemDevice} />
-          </div>
-          <div className={styles.info}>
-            <LocationInfo device={itemDevice} />
-            <UserInfo device={itemDevice} />
-          </div>
-        </article>
-        </>)}
-    <Tabs tabs={deviceTabsMenu}/>
-    </section>
+            <article className={styles.wrapper}>
+              <figure className={styles.picture}>
+                <img src={`${import.meta.env.VITE_API_MODELS}${
+                  itemDevice.model.imagePath
+                  }`}
+                alt=""
+                />
+              </figure>
+              <div className={styles.info}>
+                <TechnicalInfo device={itemDevice} />
+              </div>
+              <div className={styles.info}>
+                <PriceInfo device={itemDevice} />
+                <WarrantyInfo device={itemDevice} />
+              </div>
+              <div className={styles.info}>
+                <LocationInfo device={itemDevice} />
+                <UserInfo device={itemDevice} />
+              </div>
+            </article>
+          </>
+        )}
+        <Tabs tabs={deviceTabsMenu} />
+      </section>
     </>
   );
 };

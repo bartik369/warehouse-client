@@ -71,7 +71,6 @@ const Select = <T,>({
             {errorMessage}
           </div>
         }
-
         {isOpen && (
           <div className={style.dropdown}>
             {items.length ? (
