@@ -51,7 +51,13 @@ export function deviceReducer(
 ): IDeviceState {
   switch (action.type) {
     case DeviceActionTypes.SET_ERROR:
-      return { ...state, errors: action.payload };
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          ...action.payload
+        }
+     };
     case DeviceActionTypes.RESET_ERROR:
       return { ...state, errors: {} };
     case DeviceActionTypes.SET_IS_UPDATE:

@@ -115,7 +115,6 @@ export interface IValidationErrors {
   address?: string;
 }
 
-
 export interface IInventory {
   id?: number;
   place: string;
@@ -321,6 +320,8 @@ export interface IWarrantyFormSetters {
   setValue: (value: T) => void;
   setDevice: (device: IDevice) => void;
 }
+
+export { IContractor };
 // export interface IUpdateDeviceFormSetters {
 //   setDevice: (item: IDevice) => void;
 //   resetModel: () => void;

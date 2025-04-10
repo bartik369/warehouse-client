@@ -78,7 +78,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
                 label={deviceTypeLabel}
                 value={state.device.typeName || ""}
                 errors={state.errors}
-                name="type"
+                name="typeName"
                 getId={(item:IEntity) => item.id}
               />
             </div>
@@ -89,7 +89,7 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
                 label={manufacturersLabel}
                 value={state.device.manufacturerName || ""}
                 errors={state.errors}
-                name="manufacturer"
+                name="manufacturerName"
                 getId={(item:IEntity) => item.id}
               />
             </div>

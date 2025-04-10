@@ -34,8 +34,8 @@ export const FormValidation = (formData: IDevice, itemType: string): IValidation
   const errors: Record<string, string> = {};
   const requiredField: ValidationField[] = [
     "name",
-    "typeSlug",
-    "manufacturerSlug",
+    "typeName",
+    "manufacturerName",
     "warehouseId",
   ];
   validateRequiredFields(formData, requiredField, errors);

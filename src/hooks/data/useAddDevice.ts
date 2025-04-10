@@ -1,31 +1,25 @@
-import { useCallback, useEffect, useReducer } from "react";
-import { useLocation } from "react-router-dom";
-import { setDevicePic } from "../../store/slices/deviceSlice";
-import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../redux/useRedux";
-import {
-  deviceReducer,
-  initialState,
-} from "../../reducers/device/deviceReducer";
+import { useCallback, useReducer } from 'react';
+import { useLocation } from 'react-router-dom';
+import { setDevicePic } from '../../store/slices/deviceSlice';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../redux/useRedux';
+import { deviceReducer, initialState } from '../../reducers/device/deviceReducer';
 import {
   useCreateDeviceMutation,
   useLazyGetDeviceQuery,
   useUpdateDeviceMutation,
-} from "../../store/api/devicesApi";
-import { DeviceActionTypes } from "../../reducers/device/deviceTypes";
-import { IContractor } from "../../types/content";
-import { IEntity, IDevice } from "./../../types/devices";
-import {
-  FormValidation,
-  ValidateField,
-} from "../../utils/validation/DeviceValidation";
-import { handleApiError } from "../../utils/errors/handleApiError";
+} from '../../store/api/devicesApi';
+import { DeviceActionTypes } from '../../reducers/device/deviceTypes';
+import { IContractor } from '../../types/content';
+import { IEntity, IDevice } from './../../types/devices';
+import { FormValidation, ValidateField } from '../../utils/validation/DeviceValidation';
+import { handleApiError } from '../../utils/errors/handleApiError';
 
 export function useAddDevice() {
   const dispatchDeviceData = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const [state, dispatch] = useReducer(deviceReducer, initialState);
-  const { fieldType, checked, itemType, device, title } = state;
+  const { checked, itemType, device} = state;
 
   const locationPath = useLocation();
   const exceptionPath = /add-device$/.test(locationPath.pathname);
@@ -34,42 +28,13 @@ export function useAddDevice() {
   const [getDevice] = useLazyGetDeviceQuery();
   const [updateDevice] = useUpdateDeviceMutation();
 
-  console.log(title)
-
-  // useEffect(() => {
-  //   console.log(fieldType);
-
-  //   switch (fieldType) {
-  //     case "manufacturer":
-  //       dispatch({
-  //         type: DeviceActionTypes.SET_TITLE,
-  //         payload: addNewManufacturer,
-  //       });
-  //       break;
-  //     case "type":
-  //       dispatch({ type: DeviceActionTypes.SET_TITLE, payload: addNewType });
-  //       break;
-  //     case "contractor":
-  //       dispatch({ type: DeviceActionTypes.SET_TITLE, payload: "New contra" });
-  //       break;
-  //     case "model":
-  //       dispatch({
-  //         type: DeviceActionTypes.SET_TITLE,
-  //         payload: `${addNewModel} (${state.device.typeName})`,
-  //       });
-  //       break;
-  //   }
-  // }, [fieldType]);
-
   const handleNumber = useCallback((num: number) => {
     dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: { weight: num } });
   }, []);
 
   const handleExtNumber = useCallback(
     (num: number, fieldName: string) => {
-
       const data = ValidateField(fieldName, num);
-      console.log(num)
       dispatch({
         type: DeviceActionTypes.SET_DEVICE,
         payload: { [fieldName]: num },
@@ -101,23 +66,21 @@ export function useAddDevice() {
           await createDevice(updatedData)
             .unwrap()
             .then((data) => {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
               handleResetDevice();
-              dispatchDeviceData(setDevicePic(""));
+              dispatchDeviceData(setDevicePic(''));
             });
         } else {
-          console.log(updatedData);
-          
           await updateDevice(updatedData)
             .unwrap()
             .then((data) => {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
               handleResetDevice();
-              dispatchDeviceData(setDevicePic(""));
+              dispatchDeviceData(setDevicePic(''));
             });
         }
       } else {
-        console.error("Validation errors:", validationErrors);
+        console.error('Validation errors:', validationErrors);
       }
     } catch (err) {
       handleApiError(err);
@@ -126,7 +89,7 @@ export function useAddDevice() {
   const handleResetDevice = useCallback(() => {
     dispatch({ type: DeviceActionTypes.RESET_DEVICE });
     dispatch({ type: DeviceActionTypes.RESET_ERROR });
-    dispatchDeviceData(setDevicePic(""));
+    dispatchDeviceData(setDevicePic(''));
   }, [device]);
 
   const handleInputChange = <T extends string | IEntity | IContractor>(
@@ -138,10 +101,9 @@ export function useAddDevice() {
       type: DeviceActionTypes.SET_ERROR,
       payload: { [field]: validationErrors as string },
     });
-    const isEntity = (obj: any): obj is IEntity => "slug" in obj;
+    const isEntity = (obj: any): obj is IEntity => 'slug' in obj;
     const inputValue =
-      typeof value === "string" ? value : isEntity(value) ? value.slug : "";
-    // const selectValue = typeof value === 'string' ? value : value.name;
+      typeof value === 'string' ? value : isEntity(value) ? value.slug : '';
     dispatch({
       type: DeviceActionTypes.SET_DEVICE,
       payload: { [field]: inputValue },
@@ -159,45 +121,45 @@ export function useAddDevice() {
   const handleTypeChange = useCallback(
     (item: IEntity) => {
       console.log(item);
-      handleInputChange("typeSlug", item.slug);
-      handleInputChange("typeName", item.name);
-      handleInputChange("typeId", item.id || "");
+      handleInputChange('typeSlug', item.slug);
+      handleInputChange('typeName', item.name);
+      handleInputChange('typeId', item.id || '');
     },
     [handleInputChange]
   );
 
   const handleModelChange = useCallback(
     (item: IEntity) => {
-      handleInputChange("modelName", item.name || "");
-      handleInputChange("modelSlug", item.slug || "");
-      handleInputChange("modelId", item.id || "");
+      handleInputChange('modelName', item.name || '');
+      handleInputChange('modelSlug', item.slug || '');
+      handleInputChange('modelId', item.id || '');
     },
     [handleInputChange]
   );
 
   const handleManufacturerChange = useCallback(
     (item: IEntity) => {
-      handleInputChange("manufacturerName", item.name);
-      handleInputChange("manufacturerSlug", item.slug);
-      // handleInputChange('manufacturerId', item.id);
+      handleInputChange('manufacturerName', item.name);
+      handleInputChange('manufacturerSlug', item.slug);
+      handleInputChange('manufacturerId', item.id || '');
     },
     [handleInputChange]
   );
 
   const handleWarehouseChange = useCallback(
     (item: IEntity) => {
-      handleInputChange("warehouseId", item.id || "");
-      handleInputChange("warehouseName", item.name || "");
-      handleInputChange("warehouseSlug", item.slug || "");
+      handleInputChange('warehouseId', item.id || '');
+      handleInputChange('warehouseName', item.name || '');
+      handleInputChange('warehouseSlug', item.slug || '');
     },
     [handleInputChange]
   );
 
   const handleContractorChange = useCallback(
     (item: IContractor) => {
-      handleInputChange("contractorId", item.id || "");
-      handleInputChange("providerName", item.name || "");
-      handleInputChange("providerSlug", item.slug || "");
+      handleInputChange('contractorId', item.id || '');
+      handleInputChange('providerName', item.name || '');
+      handleInputChange('providerSlug', item.slug || '');
     },
     [handleInputChange]
   );
@@ -224,48 +186,46 @@ export function useAddDevice() {
         type: DeviceActionTypes.SET_DEVICE,
         payload: {
           ...rest,
-          warehouseName: warehouse.name ?? "",
-          warehouseSlug: warehouse.slug ?? "",
-          providerName: warranty?.contractor?.name ?? "",
-          providerSlug: warranty?.contractor?.slug ?? "",
+          warehouseName: warehouse.name ?? '',
+          warehouseSlug: warehouse.slug ?? '',
+          providerName: warranty?.contractor?.name ?? '',
+          providerSlug: warranty?.contractor?.slug ?? '',
           contractorId: data.contractorId ?? '',
-          manufacturerName: model?.manufacturer?.name ?? "",
-          manufacturerSlug: model?.manufacturer?.slug ?? "",
-          typeName: model?.type.name ?? "",
-          typeSlug: model?.type.slug ?? "",
-          price_with_vat:  Number(data.price_with_vat ?? 0),
-          price_without_vat:  Number(data.price_without_vat ?? 0),
+          manufacturerName: model?.manufacturer?.name ?? '',
+          manufacturerSlug: model?.manufacturer?.slug ?? '',
+          typeName: model?.type.name ?? '',
+          typeSlug: model?.type.slug ?? '',
+          price_with_vat: Number(data.price_with_vat ?? 0),
+          price_without_vat: Number(data.price_without_vat ?? 0),
           residual_price: Number(data.residual_price ?? 0),
-          warrantyNumber: warranty?.warrantyNumber ?? "",
+          warrantyNumber: warranty?.warrantyNumber ?? '',
           startWarrantyDate: warranty?.startWarrantyDate ?? null,
           endWarrantyDate: warranty?.endWarrantyDate ?? null,
-          modelName: model?.name ?? "",
+          modelName: model?.name ?? '',
         },
       });
       dispatch({
         type: DeviceActionTypes.SET_ITEM_TYPE,
-        payload: data.model?.type?.slug ?? "",
+        payload: data.model?.type?.slug ?? '',
       });
       dispatchDeviceData(setDevicePic(data.model.imagePath));
     } catch (error) {
-      console.error("Error fetching device:", error);
+      console.error('Error fetching device:', error);
     }
   }, []);
 
   const resetModelData = useCallback(() => {
-    dispatch({
-      type: DeviceActionTypes.SET_DEVICE,
-      payload: { modelName: "" },
-    });
-    dispatchDeviceData(setDevicePic(""));
+    dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: { modelName: '' }});
+    dispatchDeviceData(setDevicePic(''));
   }, []);
   
-  const handleSetTitle = (item: string) => {
+  const handleSetTitle = useCallback((item: string) => {
     dispatch({ type: DeviceActionTypes.SET_TITLE, payload: item});
-  }
-  const handleSetType = (item: string) => {
+  }, [dispatch]);
+
+  const handleSetType = useCallback((item: string) => {
     dispatch({ type: DeviceActionTypes.SET_FIELD_TYPE, payload: item});
-  }
+  }, [dispatch]);
 
   return {
     state: {

@@ -107,7 +107,7 @@ const DeviceForm: FC = () => {
                 label={deviceTypeLabel}
                 value={state.device.typeName || ""}
                 errors={state.errors}
-                name="type"
+                name="typeName"
                 getId={(item:IEntity) => item.id}
               />
             </div>
@@ -125,7 +125,7 @@ const DeviceForm: FC = () => {
                 label={manufacturersLabel}
                 value={state.device.manufacturerName || ""}
                 errors={state.errors}
-                name="manufacturer"
+                name="manufacturerName"
                 getId={(item:IEntity) => item.id}
               />
             </div>
