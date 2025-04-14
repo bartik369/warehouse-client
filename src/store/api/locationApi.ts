@@ -26,7 +26,7 @@ export const locationApi = createApi({
     }),
     createLocation: build.mutation({
       query: (body) => ({
-        url: ``,
+        url: `${import.meta.env.VITE_LOCATIONS}`,
         method: 'POST',
         body,
       }),
