@@ -9,8 +9,8 @@ import PublicRoutes from './routes/PublicRoutes';
 import Page404 from './components/pages/404/Page404';
 import privateRoutes from './config/routes/privateRoutes';
 import publicRoutes from './config/routes/publicRoutes';
-import './App.scss';
 import { handleApiError } from './utils/errors/handleApiError';
+import './App.scss';
 
 function App() {
   const dispatch = useAppDispatch();
