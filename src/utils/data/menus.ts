@@ -30,8 +30,8 @@ export const profileMenuData = [
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '', icon: LuWarehouse, subMenu: [
       { id: 1, title: 'Московский офис', path: 'msk'},
-      { id: 2, title: 'Санкт-Петербург', path: 'spb'},
-      { id: 3, title: 'Екатеринбург', path: 'ekb'},
+      { id: 2, title: 'Екатеринбург', path: 'ekb'},
+      { id: 3, title: 'Санкт-Петербург', path: 'spb'},
     ]
 },
     {id: 2, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
@@ -68,8 +68,10 @@ export const adminMenu = [
     {id: 5, title: 'Отделы', path: '/admin/add-department', icon: TbArrowsMove},
     {id: 6, title: 'Подрядчики', path: '/admin/add-contractor', icon: MdSupportAgent},
     {id: 7, title: 'Доступ', path: '#', icon: AiOutlineUnlock, subMenu: [
-        { id: 1, title: 'Роли', path: '/admin/add-role'},
-        { id: 2, title: 'Разрешения', path: '/admin/add-permission'},
+        { id: 1, title: 'Новая роль', path: '/admin/add-role'},
+        { id: 2, title: 'Новые права', path: '/admin/add-permission'},
+        { id: 3, title: 'Права ролей', path: '/admin/add-permission'},
+        { id: 4, title: 'Роли пользователей', path: '/admin/add-permission'},
     ]},
     {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
 ]

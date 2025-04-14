@@ -32,7 +32,7 @@ export const departmentApi = createApi({
       }),
       invalidatesTags: ['Department'],
     }),
-    updateDepartment: build.mutation({
+    updateDepartment: build.mutation<any, any>({
       query: ({id, ...body}) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
         method: 'PUT',

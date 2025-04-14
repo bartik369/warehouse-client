@@ -40,6 +40,8 @@ import {
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
  } from '../../store/api/typesApi';
+ import { useLazyGetRoleQuery, useUpdateRoleMutation } from '../../store/api/permissionApi';
+ import { useCreateRoleMutation } from '../../store/api/permissionApi';
 import { IDeviceMedia, IEntity } from '../../types/devices';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { selectPic } from '../../utils/constants/constants';
@@ -75,6 +77,7 @@ export const useAddAdminEntities = () => {
   const [getManufacturer] = useLazyGetManufacturerQuery();
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
+  const [getRole] = useLazyGetRoleQuery();
 
   const [createDepartment] = useCreateDepartmentMutation();
   const [createLocation] = useCreateLocationMutation();
@@ -83,6 +86,7 @@ export const useAddAdminEntities = () => {
   const [createContractor] = useCreateContractorMutation();
   const [createModel] = useCreateModelMutation();
   const [createType] = useCreateTypeMutation();
+  const [createRole] = useCreateRoleMutation();
 
   const [updateContractor] = useUpdateContractorMutation();
   const [updateManufacturer] = useUpdateManufacturerMutation();
@@ -91,6 +95,7 @@ export const useAddAdminEntities = () => {
   const [updateDepartment] = useUpdateDepartmentMutation();
   const [updateModel] = useUpdateModelMutation();
   const [updateType] = useUpdateTypeMutation();
+  const [updateRole] = useUpdateRoleMutation();
 
 
   const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }
@@ -102,6 +107,7 @@ export const useAddAdminEntities = () => {
     contractor: isUpdate ? updateContractor : createContractor,
     model: isUpdate ? updateModel : createModel,
     type: isUpdate ? updateType : createType,
+    role: isUpdate ? updateRole : createRole,
   };
   const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }
   > = {
@@ -112,6 +118,7 @@ export const useAddAdminEntities = () => {
     contractor: getContractor,
     model: getModel,
     type: getType,
+    role: getRole,
   };
 
   const handleInputChange = useCallback(

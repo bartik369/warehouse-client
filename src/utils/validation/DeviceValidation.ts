@@ -1,11 +1,11 @@
 import { IValidationErrors } from './../../types/devices';
 import { requiredFieldText, requiredFieldFive } from '../constants/constants';
-import { IDevice, IDeviceModel, IEntity, IContractor } from './../../types/devices';
+import { IDevice, IDeviceModel, IEntity } from './../../types/devices';
 
 type ValidationField = keyof IDevice;
 type ValidationModelField = keyof IDeviceModel;
 type ValidationEntityField = keyof IEntity;
-type ValidationContractorField = keyof IContractor;
+type ValidationContractorField = keyof IEntity;
 type ValidationError = string | null;
 
 const fieldsMemoryScreen = ['laptop', 'mobile'];
@@ -101,7 +101,7 @@ export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> 
   return errors;
 };
 export const ContractorValidation = (
-  formData: IContractor
+  formData: IEntity
 ): Partial<IValidationErrors> => {
   const errors: Partial<IValidationErrors> = {};
   const requiredFields: ValidationContractorField[] = [

@@ -18,6 +18,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { GoPlus } from "react-icons/go";
 import { BsQuestionSquare } from "react-icons/bs";
 import styles from "./MultiForm.module.scss";
+import { ToastContainer } from "react-toastify";
 
 interface IMultiFormProps {
   entity: IEntity;
@@ -64,6 +65,7 @@ const MultiForm: FC<IMultiFormProps> = ({
 
   return (
     <div className={styles.wrapper}>
+      <ToastContainer position="top-center" theme="light" />
       {fieldType === "model" && (
         <div className={styles.preview}>
           <Preview

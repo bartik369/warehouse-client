@@ -68,7 +68,6 @@
         position: absolute;
         right: 0;
         top: 42px;
-        color: #1a202c;
         font-size: 12px;
         display: inline-block;
         padding: 4px 7px 4px 4px;
@@ -93,7 +92,6 @@
             position: absolute;
             right: 0;
             top: -2px;
-            color: #1a202c;
             font-size: 12px;
             display: inline-block;
             padding: 4px 7px 4px 4px;
@@ -113,7 +111,6 @@
         .item {
             font-size: 20px;
             font-weight: 800;
-            color: #1a202c;
             padding: 5px 0;
         }
     }
@@ -143,12 +140,10 @@
         }
         .value {
             text-align: left;
-            color: #1a202c;
             font-size: 14px;
         }
         .active {
             background-color: #f3fbf6;
-            color: #1a202c;
             font-size: 12px;
             display: inline-block;
             padding: 4px 7px 4px 4px;
@@ -182,7 +177,6 @@
             .value {
                 font-size: 25px;
                 font-weight: 800;
-                color: #1a202c;
                 span {
                     font-size: 12px;
                     font-weight: 300;

@@ -23,8 +23,8 @@ export const FormValidation = (
 ): IValidateLocationErrors => {
     const errors: Record<string, string> = {};
     const fieldMap: Record<string, ValidationFields[]> = {
-        role: ['name'],
-        permission: ['name'],
+        role: ['name', 'comment'],
+        permission: ['name', 'comment'],
         location: ['name', 'slug'],
         manufacturer: ['name', 'slug'],
         department: ['name', 'slug'],
