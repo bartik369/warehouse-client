@@ -12,6 +12,7 @@ html {
     background-color: #f1f2f8;
     scrollbar-width: thin;
     scrollbar-color: #d2d4d7 #aeb1b6;
+    color: #1a202c;
     font-family: "Inter", serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -71,7 +72,6 @@ a {
 .react-datepicker {
     font-family: inherit;
     font-size: 13px;
-    color: #1a202c;
     border-radius: 16px;
     display: inline-block;
     position: relative;

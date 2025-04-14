@@ -1,9 +1,11 @@
 import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
+import { useGetRolesQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import styles from '../Admin.module.scss';
 
 const AddRole = () => {
+  const {data: roles} = useGetRolesQuery();
     const {
         entity,
         errors,
@@ -27,8 +29,8 @@ const AddRole = () => {
           </div>
           <aside className={styles.list}>
             <ItemsList
-              field="permission"
-              items={ []}
+              field="role"
+              items={roles || []}
               handle={(id, field) => handleGetEntity(id, field)}
             />
           </aside>

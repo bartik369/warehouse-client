@@ -295,7 +295,7 @@ export interface IUpdateDeviceFormActions {
   handleManufacturerChange:(item: IEntity) => void
   handleWarehouseChange:(item: IEntity) => void
   handleContractorChange:(item: IContractor) => void
-  handleInputChange: (name: keyof IDevice, e:any) => void
+  handleInputChange: (name: keyof IDevice, e:string) => void
   handleNumber: (num: number) => void;
   handleExtNumber: (num: number, fieldName: string) => void;
   handleChecked: () => void;
@@ -327,10 +327,5 @@ export interface IWarrantyFormSetters {
   setDevice: (device: IDevice) => void;
 }
 
-export { IContractor };
-// export interface IUpdateDeviceFormSetters {
-//   setDevice: (item: IDevice) => void;
-//   resetModel: () => void;
-// }
 
 

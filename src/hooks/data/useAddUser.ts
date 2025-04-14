@@ -45,6 +45,8 @@ export const useAddUser = () => {
       e.preventDefault();
       try {
         const validateErrors = FormValidation(user);
+        console.log(validateErrors);
+        
         setErrors(validateErrors as Record<string, string>);
         if (Object.values(validateErrors).length === 0) {
           if (!user) return;
