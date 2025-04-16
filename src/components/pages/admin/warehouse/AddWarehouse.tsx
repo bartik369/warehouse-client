@@ -25,8 +25,8 @@ const AddWarehouse = () => {
           entity={entity}
           errors={errors}
           handleCity={handleCityChange}
-          handleInput={(name, e) => handleInputChange(name, e)}
-          handleCreate={(e, type) => handleCreateEntity(e, type)}
+          handleInput={handleInputChange}
+          handleCreate={handleCreateEntity}
           handleReset={handleResetEntity}
         />
       </div>
@@ -34,7 +34,7 @@ const AddWarehouse = () => {
         <ItemsList
           field="warehouse"
           items={warehouses || []}
-          handle={(id, field) => handleGetEntity(id, field)}
+          onEdit={handleGetEntity}
         />
       </aside>
     </section>

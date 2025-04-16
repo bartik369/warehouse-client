@@ -34,16 +34,20 @@
                     padding: 3px 0;
                 }
             }
-            .btn {
+            .actions {
                 display: flex;
                 align-items: center;
-                font-size: 15px;
-                margin-left: 15px;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                &:hover {
-                    color: #3d3dbf;
+                .btn {
+                    display: flex;
+                    align-items: center;
+                    font-size: 19px;
+                    margin-left: 15px;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    &:hover {
+                        color: #3d3dbf;
+                    }
                 }
             }
         }

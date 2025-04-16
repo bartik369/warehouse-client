@@ -1,14 +1,16 @@
 import { FC } from "react";
 import { IEntity } from "../../../types/devices";
-import { BsPencilSquare } from "react-icons/bs";
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBin4Line } from "react-icons/ri";
 import styles from "./Admin.module.scss";
 
 interface IItemsListProps {
   field: string;
   items: IEntity[];
-  handle: (id: string, field: string) => void;
+  onEdit: (id: string, field: string) => void;
+  onDelete?: (id: string, field: string) => void;
 }
-const ItemsList: FC<IItemsListProps> = ({ field, items, handle }) => {
+const ItemsList: FC<IItemsListProps> = ({ field, items, onEdit, onDelete }) => {
   if (items.length === 0) return <div>net info</div>;
   return (
     <ul>
@@ -20,13 +22,20 @@ const ItemsList: FC<IItemsListProps> = ({ field, items, handle }) => {
               <div className={styles.description}>{item.comment}</div>
             )}
           </div>
-          <button className={styles.btn} onClick={() => handle(item.id, field)}>
-            <BsPencilSquare />
-          </button>
+          <div className={styles.actions}>
+            <button className={styles.btn} onClick={() => onEdit(item.id, field)}>
+              <MdOutlineEdit />
+            </button>
+            {onDelete &&
+            <button className={styles.btn} onClick={() => onDelete(item.id, field)}>
+              <RiDeleteBin4Line />
+            </button>
+            }
+          </div>
         </li>
       ))}
     </ul>
-  );
+  ); 
 };
 
 export default ItemsList;

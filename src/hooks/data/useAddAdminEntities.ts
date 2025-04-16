@@ -40,8 +40,16 @@ import {
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
  } from '../../store/api/typesApi';
- import { useLazyGetRoleQuery, useUpdateRoleMutation } from '../../store/api/permissionApi';
- import { useCreateRoleMutation } from '../../store/api/permissionApi';
+ import { 
+  useCreatePermissionMutation, 
+  useLazyGetPermissionQuery, 
+  useLazyGetRoleQuery,
+  useCreateRoleMutation, 
+  useUpdatePermissionMutation, 
+  useUpdateRoleMutation,
+  useDeletePermissionMutation,
+  useDeleteRoleMutation,
+} from '../../store/api/permissionApi';
 import { IDeviceMedia, IEntity } from '../../types/devices';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { selectPic } from '../../utils/constants/constants';
@@ -78,6 +86,8 @@ export const useAddAdminEntities = () => {
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
   const [getRole] = useLazyGetRoleQuery();
+  const [getPermission] = useLazyGetPermissionQuery();
+
 
   const [createDepartment] = useCreateDepartmentMutation();
   const [createLocation] = useCreateLocationMutation();
@@ -87,6 +97,7 @@ export const useAddAdminEntities = () => {
   const [createModel] = useCreateModelMutation();
   const [createType] = useCreateTypeMutation();
   const [createRole] = useCreateRoleMutation();
+  const [createPermission] = useCreatePermissionMutation();
 
   const [updateContractor] = useUpdateContractorMutation();
   const [updateManufacturer] = useUpdateManufacturerMutation();
@@ -96,10 +107,17 @@ export const useAddAdminEntities = () => {
   const [updateModel] = useUpdateModelMutation();
   const [updateType] = useUpdateTypeMutation();
   const [updateRole] = useUpdateRoleMutation();
+  const [updatePermission] = useUpdatePermissionMutation();
 
+  const [deleteRole] = useDeleteRoleMutation();
+  const [deletePermission] = useDeletePermissionMutation();
+  
+  const entityDeleteFunctions: Record<string, (item: any) => { unwrap: () => Promise<any>}> = {
+    role: deleteRole,
+    permission: deletePermission,
+  }
 
-  const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }
-  > = {
+  const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     department: isUpdate ? updateDepartment : createDepartment,
     warehouse: isUpdate ? updateWarehouse : createWarehouse,
     location: isUpdate ? updateLocation : createLocation,
@@ -108,6 +126,7 @@ export const useAddAdminEntities = () => {
     model: isUpdate ? updateModel : createModel,
     type: isUpdate ? updateType : createType,
     role: isUpdate ? updateRole : createRole,
+    permission: isUpdate ? updatePermission : createPermission,
   };
   const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }
   > = {
@@ -119,6 +138,7 @@ export const useAddAdminEntities = () => {
     model: getModel,
     type: getType,
     role: getRole,
+    permission: getPermission,
   };
 
   const handleInputChange = useCallback(
@@ -256,7 +276,13 @@ export const useAddAdminEntities = () => {
     },
     [media]
   );
-
+  const handleDeleteEntity = async (id: string, fieldType: string) => {
+    const deleteEntityFunction = entityDeleteFunctions[fieldType]
+    await deleteEntityFunction(id).unwrap().then((data) => {
+      toast(data?.message, { type: 'success' });
+    });
+  }
+  
   return {
     entity,
     errors,
@@ -272,5 +298,6 @@ export const useAddAdminEntities = () => {
     handleGetEntity,
     handleManufacturerChange,
     handleTypeChange,
+    handleDeleteEntity
   };
 };

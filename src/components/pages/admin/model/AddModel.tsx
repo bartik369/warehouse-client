@@ -35,8 +35,8 @@ const AddModel = () => {
               handleCity={handleCityChange}
               handleManufacturer={handleManufacturerChange}
               handleType={handleTypeChange}
-              handleInput={(name, e) => handleInputChange(name, e)}
-              handleCreate={(e, type) => handleCreateEntity(e, type)}
+              handleInput={handleInputChange}
+              handleCreate={handleCreateEntity}
               handleReset={handleResetEntity}
             />
           </div>
@@ -44,7 +44,7 @@ const AddModel = () => {
             <ItemsList
               field="model"
               items={models || []}
-              handle={(id, field) => handleGetEntity(id, field)}
+              onEdit={handleGetEntity}
             />
           </aside>
         </section>

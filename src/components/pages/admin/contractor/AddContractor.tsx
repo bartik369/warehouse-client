@@ -22,15 +22,15 @@ const AddContractor = () => {
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}
-          handleInput={(name, e) => handleInputChange(name, e)}
-          handleCreate={(e, type) => handleCreateEntity(e, type)}
+          handleInput={handleInputChange}
+          handleCreate={handleCreateEntity}
           handleReset={handleResetEntity}
         />
       </div>
       <aside className={styles.list}>
         <ItemsList
           items={contractors || []}
-          handle={(id, field) => handleGetEntity(id, field)}
+          onEdit={handleGetEntity}
           field="contractor"
         />
       </aside>

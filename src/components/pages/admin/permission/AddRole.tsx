@@ -14,6 +14,7 @@ const AddRole = () => {
         handleCreateEntity,
         handleResetEntity,
         handleGetEntity,
+        handleDeleteEntity,
       } = useAddAdminEntities();
       return (
         <section className={styles.inner}>
@@ -22,8 +23,8 @@ const AddRole = () => {
               isUpdate={isUpdate}
               entity={entity}
               errors={errors}
-              handleInput={(name, e) => handleInputChange(name, e)}
-              handleCreate={(e, type) => handleCreateEntity(e, type)}
+              handleInput={handleInputChange}
+              handleCreate={handleCreateEntity}
               handleReset={handleResetEntity}
             />
           </div>
@@ -31,7 +32,8 @@ const AddRole = () => {
             <ItemsList
               field="role"
               items={roles || []}
-              handle={(id, field) => handleGetEntity(id, field)}
+              onEdit={handleGetEntity}
+              onDelete={handleDeleteEntity}
             />
           </aside>
         </section>

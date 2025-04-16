@@ -1,9 +1,11 @@
 import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
+import { useGetPermissionsQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import styles from '../Admin.module.scss';
 
 const AddPermission = () => {
+  const {data: permissions} = useGetPermissionsQuery()
       const {
         entity,
         errors,
@@ -12,6 +14,7 @@ const AddPermission = () => {
         handleCreateEntity,
         handleResetEntity,
         handleGetEntity,
+        handleDeleteEntity,
       } = useAddAdminEntities();
       return (
         <section className={styles.inner}>
@@ -20,16 +23,17 @@ const AddPermission = () => {
               isUpdate={isUpdate}
               entity={entity}
               errors={errors}
-              handleInput={(name, e) => handleInputChange(name, e)}
-              handleCreate={(e, type) => handleCreateEntity(e, type)}
+              handleInput={handleInputChange}
+              handleCreate={handleCreateEntity}
               handleReset={handleResetEntity}
             />
           </div>
           <aside className={styles.list}>
             <ItemsList
               field="permission"
-              items={ []}
-              handle={(id, field) => handleGetEntity(id, field)}
+              items={permissions || []}
+              onEdit={handleGetEntity}
+              onDelete={handleDeleteEntity}
             />
           </aside>
         </section>
