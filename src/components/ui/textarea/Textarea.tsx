@@ -15,13 +15,6 @@ const Textarea:FC<ITextareaProps> = ({value, label, errors, name, setText}) => {
     return (
         <div className={style.wrapper}>
             <div className={style.textarea} tabIndex={0}>
-                <div className={style.error}>
-                    {errorMessage && 
-                    <div className={style.error}>
-                        {errorMessage}
-                    </div>
-                    }
-                </div>
                 <div className={style.label}>{label}</div>
                 <textarea
                     value={value}
@@ -32,6 +25,13 @@ const Textarea:FC<ITextareaProps> = ({value, label, errors, name, setText}) => {
                 >
                 </textarea>
             </div>
+            {errorMessage && 
+            <div className={style.error}>
+                <div className={style.error}>
+                    {errorMessage}
+                </div>
+            </div>
+            }
         </div>
     );
 };

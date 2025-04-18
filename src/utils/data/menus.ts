@@ -70,7 +70,7 @@ export const adminMenu = [
     {id: 7, title: 'Доступ', path: '#', icon: AiOutlineUnlock, subMenu: [
         { id: 1, title: 'Новая роль', path: '/admin/add-role'},
         { id: 2, title: 'Новые права', path: '/admin/add-permission'},
-        { id: 3, title: 'Права ролей', path: '/admin/add-permission'},
+        { id: 3, title: 'Права ролей', path: '/admin/add-permission-role'},
         { id: 4, title: 'Роли пользователей', path: '/admin/add-permission'},
     ]},
     {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},

@@ -1,72 +1,72 @@
-import { useCallback, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import { useInputMask } from './useInputMask';
+import { useCallback, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { useInputMask } from "./useInputMask";
 import {
   FormValidation,
   ValidateField,
-} from '../../utils/validation/AdminEntityValidation';
+} from "../../utils/validation/AdminEntityValidation";
 import {
   useLazyGetManufacturerQuery,
   useCreateManufacturerMutation,
   useUpdateManufacturerMutation,
-} from '../../store/api/manufacturersApi';
+} from "../../store/api/manufacturersApi";
 import {
   useCreateDepartmentMutation,
   useLazyGetDepartmentQuery,
   useUpdateDepartmentMutation,
-} from '../../store/api/departmentApi';
+} from "../../store/api/departmentApi";
 import {
   useCreateLocationMutation,
   useLazyGetLocationQuery,
   useUpdateLocationMutation,
-} from '../../store/api/locationApi';
+} from "../../store/api/locationApi";
 import {
   useCreateWarehouseMutation,
   useLazyGetWarehouseQuery,
   useUpdateWarehouseMutation,
-} from '../../store/api/warehousesApi';
+} from "../../store/api/warehousesApi";
 import {
   useCreateContractorMutation,
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
-} from '../../store/api/contractorApi';
-import { 
-  useCreateModelMutation, 
-  useLazyGetModelQuery, 
+} from "../../store/api/contractorApi";
+import {
+  useCreateModelMutation,
+  useLazyGetModelQuery,
   useUpdateModelMutation,
-} from '../../store/api/modelsApi';
-import { 
-  useCreateTypeMutation, 
+} from "../../store/api/modelsApi";
+import {
+  useCreateTypeMutation,
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
- } from '../../store/api/typesApi';
- import { 
-  useCreatePermissionMutation, 
-  useLazyGetPermissionQuery, 
+} from "../../store/api/typesApi";
+import {
+  useCreatePermissionMutation,
+  useLazyGetPermissionQuery,
   useLazyGetRoleQuery,
-  useCreateRoleMutation, 
-  useUpdatePermissionMutation, 
+  useCreateRoleMutation,
+  useUpdatePermissionMutation,
   useUpdateRoleMutation,
   useDeletePermissionMutation,
   useDeleteRoleMutation,
-} from '../../store/api/permissionApi';
-import { IDeviceMedia, IEntity } from '../../types/devices';
-import { handleApiError } from '../../utils/errors/handleApiError';
-import { selectPic } from '../../utils/constants/constants';
+} from "../../store/api/permissionApi";
+import { IDeviceMedia, IEntity } from "../../types/devices";
+import { handleApiError } from "../../utils/errors/handleApiError";
+import { selectPic } from "../../utils/constants/constants";
 
 export const useAddAdminEntities = () => {
   const [entity, setEntity] = useState<IEntity>({
-    id: '',
-    name: '',
-    slug: '',
-    locationName: '',
-    typeId: '',
-    type: '',
-    manufacturerId: '',
-    manufacturer: '',
-    phoneNumber: '',
-    comment: '',
-    address: '',
+    id: "",
+    name: "",
+    slug: "",
+    locationName: "",
+    typeId: "",
+    type: "",
+    manufacturerId: "",
+    manufacturer: "",
+    phoneNumber: "",
+    comment: "",
+    address: "",
   });
   const [media, setMedia] = useState<IDeviceMedia>({
     file: null,
@@ -87,7 +87,6 @@ export const useAddAdminEntities = () => {
   const [getType] = useLazyGetTypeQuery();
   const [getRole] = useLazyGetRoleQuery();
   const [getPermission] = useLazyGetPermissionQuery();
-
 
   const [createDepartment] = useCreateDepartmentMutation();
   const [createLocation] = useCreateLocationMutation();
@@ -111,13 +110,19 @@ export const useAddAdminEntities = () => {
 
   const [deleteRole] = useDeleteRoleMutation();
   const [deletePermission] = useDeletePermissionMutation();
-  
-  const entityDeleteFunctions: Record<string, (item: any) => { unwrap: () => Promise<any>}> = {
+
+  const entityDeleteFunctions: Record<
+    string,
+    (item: any) => { unwrap: () => Promise<any> }
+  > = {
     role: deleteRole,
     permission: deletePermission,
-  }
+  };
 
-  const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
+  const entityCreateFunctions: Record<
+    string,
+    (item: any) => { unwrap: () => Promise<any> }
+  > = {
     department: isUpdate ? updateDepartment : createDepartment,
     warehouse: isUpdate ? updateWarehouse : createWarehouse,
     location: isUpdate ? updateLocation : createLocation,
@@ -128,7 +133,9 @@ export const useAddAdminEntities = () => {
     role: isUpdate ? updateRole : createRole,
     permission: isUpdate ? updatePermission : createPermission,
   };
-  const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }
+  const entityById: Record<
+    string,
+    (item: any) => { unwrap: () => Promise<any> }
   > = {
     department: getDepartment,
     warehouse: getWarehouse,
@@ -145,14 +152,14 @@ export const useAddAdminEntities = () => {
     <T extends string | IEntity>(field: keyof IEntity, value: T) => {
       setErrors((prev) => ({
         ...prev,
-        [field]: ValidateField(field, value) || '',
+        [field]: ValidateField(field, value) || "",
       }));
       setEntity((prev) => {
         const updateEntity = {
           ...prev,
           [field]:
-            field === 'phoneNumber'
-              ? formatPhone(value as string, prev.phoneNumber || '')
+            field === "phoneNumber"
+              ? formatPhone(value as string, prev.phoneNumber || "")
               : value,
         };
         return updateEntity;
@@ -171,7 +178,7 @@ export const useAddAdminEntities = () => {
 
         if (Object.keys(validationErrors).length === 0) {
           if (!entity) return;
-          if (fieldType === 'model') {
+          if (fieldType === "model") {
             const formData = new FormData();
             (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
               const value = entity[key];
@@ -179,22 +186,22 @@ export const useAddAdminEntities = () => {
                 formData.append(key, value);
             });
 
-            if (media.file) formData.append('file', media.file);
+            if (media.file) formData.append("file", media.file);
             await createEntityFunction(formData)
               .unwrap()
               .then((data) => {
                 handleResetEntity();
-                toast(data?.message, { type: 'success' });
+                toast(data?.message, { type: "success" });
               });
           } else {
             const updateData = {
               ...entity,
-              phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
+              phoneNumber: changeFormatPhone(entity.phoneNumber || ""),
             };
             await createEntityFunction(updateData)
               .unwrap()
               .then((data) => {
-                toast(data?.message, { type: 'success' });
+                toast(data?.message, { type: "success" });
               });
             handleResetEntity();
           }
@@ -208,19 +215,20 @@ export const useAddAdminEntities = () => {
 
   const handleResetEntity = useCallback(() => {
     setEntity({
-      id: '',
-      name: '',
-      slug: '',
-      locationName: '',
-      comment: '',
-      phoneNumber: '',
-      address: '',
-      type: '',
-      typeId: '',
-      manufacturer: '',
-      manufacturerId: ''
+      id: "",
+      name: "",
+      slug: "",
+      locationName: "",
+      comment: "",
+      phoneNumber: "",
+      address: "",
+      type: "",
+      typeId: "",
+      manufacturer: "",
+      manufacturerId: "",
     });
     setIsUpdate(false);
+    setErrors({});
   }, []);
 
   const handleGetEntity = useCallback(async (id: string, field: string) => {
@@ -242,21 +250,21 @@ export const useAddAdminEntities = () => {
 
   const handleCityChange = useCallback(
     (item: IEntity) => {
-      handleInputChange('locationName', item.name || '');
+      handleInputChange("locationName", item.name || "");
     },
     [handleInputChange]
   );
   const handleManufacturerChange = useCallback(
     (item: IEntity) => {
-      handleInputChange('manufacturerId', item.id || '');
-      handleInputChange('manufacturer', item.name || '');
+      handleInputChange("manufacturerId", item.id || "");
+      handleInputChange("manufacturer", item.name || "");
     },
     [handleInputChange]
   );
   const handleTypeChange = useCallback(
-    (item:IEntity) => {
-      handleInputChange('typeId', item.id || '');
-      handleInputChange('type', item.name || '');
+    (item: IEntity) => {
+      handleInputChange("typeId", item.id || "");
+      handleInputChange("type", item.name || "");
     },
     [handleInputChange]
   );
@@ -265,24 +273,33 @@ export const useAddAdminEntities = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
+        if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
         } else {
-          toast(selectPic, { type: 'error' });
+          toast(selectPic, { type: "error" });
         }
       }
     },
     [media]
   );
-  const handleDeleteEntity = async (id: string, fieldType: string) => {
-    const deleteEntityFunction = entityDeleteFunctions[fieldType]
-    await deleteEntityFunction(id).unwrap().then((data) => {
-      toast(data?.message, { type: 'success' });
-    });
-  }
-  
+  const handleDeleteEntity = useCallback(
+    async (id: string, fieldType: string) => {
+      try {
+        const deleteEntityFunction = entityDeleteFunctions[fieldType];
+        await deleteEntityFunction(id)
+          .unwrap()
+          .then((data) => {
+            toast(data?.message, { type: "success" });
+          });
+      } catch (err: unknown) {
+        handleApiError(err);
+      }
+    },
+    []
+  );
+
   return {
     entity,
     errors,
@@ -298,6 +315,6 @@ export const useAddAdminEntities = () => {
     handleGetEntity,
     handleManufacturerChange,
     handleTypeChange,
-    handleDeleteEntity
+    handleDeleteEntity,
   };
 };

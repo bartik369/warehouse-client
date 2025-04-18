@@ -1,13 +1,15 @@
 .wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    margin-bottom: 20px;
     .error {
-        position: absolute;
         white-space: nowrap;
         color: #dc3546;
         font-size: 11px;
-        right: 10px;
-        top: -8px;
+        text-align: end;
+        padding: 2px;
     }
     .textarea {
         border: 1px solid #dce4e8;

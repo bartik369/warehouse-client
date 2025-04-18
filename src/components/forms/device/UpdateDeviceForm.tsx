@@ -173,8 +173,8 @@ const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
               />
             <Actions 
               isUpdate={state.isUpdate} 
-              resetDevice={actions.handleResetDevice} 
-              addDevice={actions.handleAddDevice} 
+              resetEntity={actions.handleResetDevice} 
+              addEntity={actions.handleAddDevice} 
             />
           </form>
         </div>

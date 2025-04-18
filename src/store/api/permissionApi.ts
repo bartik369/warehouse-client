@@ -1,3 +1,4 @@
+import { location } from './../../utils/constants/device';
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 import { IRole, IPermission } from "../../types/access";
@@ -23,6 +24,11 @@ export const permissionApi = createApi({
     getRole: build.query<IRole, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
+      })
+    }),
+    getAssignableRoles: build.query<IRole, void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_ASSIGNABLE_ROLES}`,
       })
     }),
     createRole: build.mutation<IRole, IEntity>({
@@ -95,6 +101,7 @@ export const permissionApi = createApi({
 export const {
   useGetRolesQuery,
   useLazyGetRoleQuery,
+  useGetAssignableRolesQuery,
   useUpdateRoleMutation,
   useCreateRoleMutation, 
   useDeleteRoleMutation,

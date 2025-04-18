@@ -14,6 +14,7 @@ import DevicesConfig from "../pages/Devices";
 import EditDeviceConfig from "../pages/EditDevice";
 import EditUserConfig from "../pages/EditUser";
 import HomeConfig from "../pages/home";
+import PermissionRoleConfig from "../pages/PermissionRole";
 import ProfileConfig from "../pages/Profile";
 import UsersConfig from "../pages/Users";
 
@@ -36,6 +37,7 @@ const privateRoutes = [
     AddManufacturerConfig,
     AddModelConfig,
     AddTypeConfig,
+    PermissionRoleConfig,
 ]
 
 export default privateRoutes;

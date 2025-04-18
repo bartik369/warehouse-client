@@ -40,7 +40,10 @@ const CheckboxFilter: FC<ICheckboxProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <button className={styles.checkbox} onClick={() => setIsOpen(!isOpen)}>
+      <button className={styles.checkbox} onClick={(e) => {
+        setIsOpen(!isOpen)
+        e.preventDefault()
+      }}>
         <div className={styles.header}>
           <div className={styles.placeholder}>{label}</div>
           <CgOptions className={styles.icon} />

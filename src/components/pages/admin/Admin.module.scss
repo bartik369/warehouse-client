@@ -13,6 +13,7 @@
         padding: 20px;
         overflow-x: auto;
         .item {
+            width: 300px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -20,6 +21,7 @@
             margin-bottom: 8px;
             border: 1px solid #e2e8ef;
             border-radius: 6px;
+            box-sizing: border-box;
             .info {
                 display: flex;
                 flex-direction: column;

@@ -7,10 +7,10 @@ import styles from "./DeviceForm.module.scss";
 
 interface IActionsProps {
     isUpdate?: boolean;
-    resetDevice: () => void;
-    addDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    resetEntity: () => void;
+    addEntity: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
-const Actions:FC<IActionsProps> = ({ isUpdate, resetDevice, addDevice}) => {
+const Actions:FC<IActionsProps> = ({ isUpdate, resetEntity, addEntity}) => {
     return (
         <div className={styles.actions}>
         <BtnAction
@@ -19,7 +19,7 @@ const Actions:FC<IActionsProps> = ({ isUpdate, resetDevice, addDevice}) => {
           size="lg"
           color="grey"
           title={reset}
-          click={resetDevice}
+          click={resetEntity}
         />
         <BtnAction
           icon={<GoPlus />}
@@ -27,7 +27,7 @@ const Actions:FC<IActionsProps> = ({ isUpdate, resetDevice, addDevice}) => {
           size="lg"
           color="blue"
           title={isUpdate ? update : add}
-          click={addDevice}
+          click={addEntity}
         />
       </div>
     );

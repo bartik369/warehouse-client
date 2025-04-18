@@ -218,7 +218,10 @@ const DeviceForm: FC = () => {
               errors={state.errors} 
               name="description"
               />
-            <Actions resetDevice={actions.handleResetDevice} addDevice={actions.handleAddDevice}/>
+            <Actions 
+              resetEntity={actions.handleResetDevice} 
+              addEntity={actions.handleAddDevice}
+            />
           </form>
         </div>
       </article>
