@@ -32,7 +32,7 @@ interface IMultiFormProps {
   handleManufacturer?: (item: IEntity) => void;
   handleType?: (item: IEntity) => void;
   handleInput: (name: keyof IEntity, e: string) => void;
-  handleCreate: (e: React.MouseEvent<HTMLButtonElement>, type: string) => void;
+  handleCreate: (type: string) => void;
   handleReset: () => void;
 }
 
@@ -119,7 +119,7 @@ const MultiForm: FC<IMultiFormProps> = ({
           />
         )}
         {locationPath.pathname.endsWith("add-warehouse") && 
-          <Select<IEntity>
+          <Select
             setValue={handleCity}
             items={cities || []}
             label={city}
@@ -131,7 +131,7 @@ const MultiForm: FC<IMultiFormProps> = ({
         }
          { locationPath.pathname.endsWith("add-model") && 
          <>
-          <Select<IEntity>
+          <Select
             setValue={handleManufacturer}
             items={manufacturers || []}
             label={manufacturersLabel}
@@ -140,7 +140,7 @@ const MultiForm: FC<IMultiFormProps> = ({
             name="manufacturer"
             getId={(item: IEntity) => item.id}
           />
-          <Select<IEntity>
+          <Select
             setValue={handleType}
             items={types || []}
             label={deviceTypeLabel}
@@ -165,7 +165,6 @@ const MultiForm: FC<IMultiFormProps> = ({
         <div className={styles.actions}>
           <BtnAction
             icon={<HiMiniXMark />}
-            type="button"
             size="lg"
             color="grey"
             title={reset}
@@ -173,11 +172,10 @@ const MultiForm: FC<IMultiFormProps> = ({
           />
           <BtnAction
             icon={<GoPlus />}
-            type="submit"
             size="lg"
             color="blue"
             title={isUpdate ? update : add}
-            click={(e) => handleCreate(e, locationType)}
+            click={() => handleCreate(locationType)}
           />
         </div>
       </form>

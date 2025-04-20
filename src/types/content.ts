@@ -4,14 +4,21 @@ export type IListRefObj = {
     [index: string]: HTMLDivElement | null;
 };
 export type Checked = {
-    [index: number]: boolean;
+    [index: string]: boolean;
 }
 
 export type CheckedDeviceOptions = {
-    id: number;
+    // id: number;
+    id: string;
     name: string;
     type: string;
     value: string;
+    disabled: boolean;
+  }
+  export type CheckedPermissionOptions  = {
+    id: string;
+    name: string;
+    comment: string;
     disabled: boolean;
   }
 export interface IAdminEntity  {

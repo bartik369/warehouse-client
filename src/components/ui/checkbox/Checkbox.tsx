@@ -1,45 +1,30 @@
-import { ChangeEvent, FC } from "react";
+import { FC } from 'react';
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
-import { Checked, CheckedDeviceOptions } from "../../../types/content";
-import { noOptions } from "../../../utils/constants/constants";
-import styles from "./CheckboxFilter.module.scss";
-import { IPermissionRole } from "../../../types/access";
+import { Checked, CheckedPermissionOptions } from "../../../types/content";
+import { noOptions, selectPermissions } from "../../../utils/constants/constants";
+import { IPermissionState } from "../../../reducers/permission/permissionTypes";
+import { IAccessFormActions, IPermissionRole } from "../../../types/access";
+import styles from "./Checkbox.module.scss";
 
 interface ICheckboxProps {
+  state: IPermissionState;
+  list: Checked;
   entity: IPermissionRole;
-  items: CheckedDeviceOptions[];
+  items: CheckedPermissionOptions[];
+  actions: IAccessFormActions;
   label: string;
   name: string;
-  list: Checked;
-  setList: (list: Checked | ((prev: Checked) => Checked)) => void;
-  onChange: (
-    e: ChangeEvent<HTMLInputElement>,
-    item: CheckedDeviceOptions
-  ) => void;
 }
 
 const Checkbox: FC<ICheckboxProps> = ({
+  list,
   entity,
+  actions,
   items,
   label,
   name,
-  list,
-  setList,
-  onChange,
 }) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
-
-  const handleCheck = (
-    e: ChangeEvent<HTMLInputElement>,
-    item: CheckedDeviceOptions
-  ) => {
-    setList((prev) => ({
-      ...prev,
-      [item.id]: e.target.checked,
-    }));
-    onChange(e, item);
-  };
-
   return (
     <div className={styles.wrapper}>
       <button
@@ -50,14 +35,14 @@ const Checkbox: FC<ICheckboxProps> = ({
         }}
       >
         <span className={styles.label}>{label}</span>
-        <span>Выбрать роли</span>
+        <span>{selectPermissions}</span>
         {entity.permissionName.length > 0 && (
           <span className={styles.count}>{entity.permissionName.length}</span>
         )}
         <span className={styles.arrow} />
       </button>
       {isOpen && (
-        <div ref={modalRef} className={styles.menu2}>
+        <div ref={modalRef} className={styles['checkbox-menu']}>
           {items.length ? (
             items.map((item) => (
               <label key={item.id} className={styles.container}>
@@ -68,7 +53,7 @@ const Checkbox: FC<ICheckboxProps> = ({
                   value={item.name}
                   checked={list[item.id] || false}
                   disabled={item.disabled}
-                  onChange={(e) => handleCheck(e, item)}
+                  onChange={(e) => actions.handleCheck(e, item)}
                 />
                 <span
                   role={"checkbox"}

@@ -299,7 +299,7 @@ export interface IUpdateDeviceFormActions {
   handleNumber: (num: number) => void;
   handleExtNumber: (num: number, fieldName: string) => void;
   handleChecked: () => void;
-  handleAddDevice: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleAddDevice: () => void;
   handleResetDevice: () => void;
   resetModelData: () => void;
   handleStartDateChange: (item:Date | null) => void;

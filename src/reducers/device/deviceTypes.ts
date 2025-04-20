@@ -9,7 +9,7 @@ export interface IDeviceState {
     isUpdate: boolean;
     checked: boolean;
 }
-export enum DeviceActionTypes{
+export enum DeviceActionTypes {
     SET_ERROR = 'SET_ERROR',
     RESET_ERROR = 'RESET_ERROR',
     SET_DEVICE = 'SET_DEVICE',

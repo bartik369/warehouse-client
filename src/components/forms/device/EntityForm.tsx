@@ -72,7 +72,6 @@ const EntityForm:FC<IEntityProps> = ({ fieldType, typeId, manufacturerId }) => {
               <div className={styles.actions}>
                 <BtnAction 
                   icon={<HiMiniXMark />} 
-                  type="button" 
                   size="lg" 
                   color="grey" 
                   title={reset}
@@ -80,11 +79,10 @@ const EntityForm:FC<IEntityProps> = ({ fieldType, typeId, manufacturerId }) => {
                 />   
                 <BtnAction 
                   icon={<GoPlus />} 
-                  type="submit"
                   size="lg" 
                   color="blue" 
                   title={add} 
-                  click={(e) => handleCreateEntity(e, fieldType)}
+                  click={() => handleCreateEntity(fieldType)}
                 />
               </div>
             </form>

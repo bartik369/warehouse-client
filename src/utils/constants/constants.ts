@@ -57,6 +57,8 @@ export const addRoleTitle = 'Добавить роль';
 export const addPermissionTitle = 'Добавить разрешение';
 export const addModelTitle = 'Добавить модель';
 export const addTypeTitle = 'Добавить тип';
+export const addRolePermission = 'Назначить разрешение роли';
+export const selectPermissions = 'Выбрать разрешения';
 
 export const priceWithVat = 'Цена с НДС';
 export const priceWithoutVat = 'Цена без НДС';

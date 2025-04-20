@@ -1,5 +1,5 @@
 import { addContractorTitle, addDepartmentTitle, addLocationTitle, 
-addManufacturerTitle, addModelTitle, addPermissionTitle, addRoleTitle,
+addManufacturerTitle, addModelTitle, addPermissionTitle, addRolePermission, addRoleTitle,
 addTypeTitle, addWarehouseTitle } from "../constants/constants";
 
 export const  getTitleByLocationType = (locationType: string) => {
@@ -13,6 +13,7 @@ export const  getTitleByLocationType = (locationType: string) => {
         permission: addPermissionTitle,
         model: addModelTitle,
         type: addTypeTitle,
+        permission_role: addRolePermission,
       };
     
     return titles[locationType] || ''

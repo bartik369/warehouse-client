@@ -8,14 +8,13 @@ import styles from "./DeviceForm.module.scss";
 interface IActionsProps {
     isUpdate?: boolean;
     resetEntity: () => void;
-    addEntity: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    addEntity: () => void;
 }
 const Actions:FC<IActionsProps> = ({ isUpdate, resetEntity, addEntity}) => {
     return (
         <div className={styles.actions}>
         <BtnAction
           icon={<HiMiniXMark />}
-          type="button"
           size="lg"
           color="grey"
           title={reset}
@@ -23,7 +22,6 @@ const Actions:FC<IActionsProps> = ({ isUpdate, resetEntity, addEntity}) => {
         />
         <BtnAction
           icon={<GoPlus />}
-          type="submit"
           size="lg"
           color="blue"
           title={isUpdate ? update : add}

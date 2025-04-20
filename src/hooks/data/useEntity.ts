@@ -50,9 +50,7 @@ export const useEntity = () => {
     model: createModel,
   };
 
-  const handleCreateEntity = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>, fieldType:string) => {
-      e.preventDefault();
+  const handleCreateEntity = useCallback(async (fieldType:string) => {
       try {
         const createEntityFunction = entityPoolsFunctions[fieldType]
         const validationErrors = EntityValidation(entity);

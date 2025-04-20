@@ -33,7 +33,7 @@ const AuthForm: FC = () => {
           <BtnAction 
             title={signin} 
             size="lg"
-            type="submit"
+            click={authHandler}
             color="blue"
           />
         </form>

@@ -168,9 +168,7 @@ export const useAddAdminEntities = () => {
     []
   );
 
-  const handleCreateEntity = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>, fieldType: string) => {
-      e.preventDefault();
+  const handleCreateEntity = useCallback(async (fieldType: string) => {
       try {
         const createEntityFunction = entityCreateFunctions[fieldType];
         const validationErrors = FormValidation(entity, fieldType);

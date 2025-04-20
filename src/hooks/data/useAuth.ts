@@ -35,8 +35,7 @@ export const useAuth = () => {
         return Object.values(validationErrors).every(item => !item)
       };
 
-      const authHandler = async(e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+      const authHandler = async() => {
         const validationErrors = AuthValidate(authData);
         setErrors(validationErrors)
        

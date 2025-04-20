@@ -6,7 +6,7 @@ import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetAssignableRolesQuery } from "../../../store/api/permissionApi";
 import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import { useGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
-import { IAccessFormActions, IPermissionRole } from "../../../types/access";
+import { IAccessFormActions, IPermission, IPermissionRole, IRole } from "../../../types/access";
 import {
   description,
   locationLabel,
@@ -15,26 +15,23 @@ import {
   rolesLabel,
   warehouseLabel,
 } from "../../../utils/constants/constants";
-import { Checked } from "../../../types/content";
 import Checkbox from "../../ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
+import { IPermissionState } from "../../../reducers/permission/permissionTypes";
+import { useLocation } from "react-router-dom";
+import { getTitleByLocationType } from "../../../utils/title/titleUtils";
+import styles from './AccessForm.module.scss';
+import { IEntity } from "../../../types/devices";
+import { CheckedPermissionOptions } from "../../../types/content";
 
 interface IAccessFormProps {
-  list: Checked;
-  setList: (list: Checked | ((prev: Checked) => Checked)) => void;
+  state: IPermissionState;
   entity: IPermissionRole;
   isUpdate: boolean;
   errors: Record<string, string>;
   actions: IAccessFormActions;
 }
-const AccessForm: FC<IAccessFormProps> = ({
-  list,
-  entity,
-  setList,
-  isUpdate,
-  errors,
-  actions,
-}) => {
+const AccessForm: FC<IAccessFormProps> = ({state, entity, isUpdate,  actions}) => {
   const [skip, setSkip] = useState(true);
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
@@ -43,67 +40,72 @@ const AccessForm: FC<IAccessFormProps> = ({
     { skip: skip }
   );
   const { data: locations } = useGetLocationsQuery();
+  const locationPath = useLocation();
+  const locationType = locationPath.pathname.split('/')[2]?.split('-')[1] || '';
 
   useEffect(() => {
     if (entity.locationId) setSkip(false);
   }, [entity.locationId]);
 
+  console.log(state.entity)
+
   return (
     <form>
+      <div className={styles.title}>{getTitleByLocationType(locationType)}</div>
       <Input
         onChange={(e) => actions.handleInputChange("name", e.target.value)}
         type="text"
-        value={entity.name || ""}
+        value={state.entity.name || ""}
         label={name}
-        errors={errors}
+        errors={state.errors}
         name="name"
       />
-      <Select<IPermissionRole>
+      <Select<IRole>
         setValue={actions.handleRoleChange}
-        items={assignableRoles || []}
+        items={(assignableRoles || []) as IRole }
         label={rolesLabel}
-        value={entity.roleName || ""}
-        errors={errors}
+        value={state.entity.roleName || ""}
+        errors={state.errors}
         name="role"
-        getId={(item: IPermissionRole) => item.id}
+        getId={(item: IRole) => item.id}
       />
       {entity.roleName !== "manager" && (
         <Checkbox
+          state={state}
           entity={entity}
           items={permissions || []}
           label={permissionsLabel}
           name="permission"
-          list={list}
-          setList={setList}
-          onChange={actions.handleSetPermission}
+          list={state.list}
+          actions={actions}
         />
       )}
-      <Select<IPermissionRole>
+      <Select<IEntity>
         setValue={(val) => actions.handleLocationChange?.(val)}
         items={locations || []}
         label={locationLabel}
-        value={entity.locationName || ""}
-        errors={errors}
+        value={state.entity.locationName || ""}
+        errors={state.errors}
         name="location"
-        getId={(item: IPermissionRole) => item.id}
+        getId={(item: IEntity) => item.id}
       />
       {entity.roleName !== "manager" && entity.locationName && (
-        <Select<IPermissionRole>
+        <Select<IEntity>
           setValue={(val) => actions.handleWarehouseChange?.(val)}
           items={warehouses || []}
           label={warehouseLabel}
-          value={entity.warehouseName || ""}
-          errors={errors}
+          value={state.entity.warehouseName || ""}
+          errors={state.errors}
           name="warehouse"
-          getId={(item: IPermissionRole) => item.id}
+          getId={(item: IEntity) => item.id}
         />
       )}
       <Textarea
         setText={(e) => actions.handleInputChange("comment", e.target.value)}
-        value={entity.comment || ""}
+        value={state.entity.comment || ""}
         label={description}
         name="comment"
-        errors={errors}
+        errors={state.errors}
       />
       <Actions
         isUpdate={isUpdate}

@@ -2,7 +2,7 @@ import PermissionRole from "../../components/pages/admin/permission/PermissionRo
 
 const PermissionRoleConfig = {
     title: 'Profile',
-    path: '/admin/add-permission-role',
+    path: '/admin/add-permission_role',
     element: <PermissionRole/>,
     requireAuth: true,
 }

@@ -48,9 +48,7 @@ export const useContactor = () => {
       address: '',
     });
   }, []);
-  const handleCreateContractor = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+  const handleCreateContractor = useCallback(async () => {
       try {
         const validationErrors = ContractorValidation(contractor);
         setErrors(validationErrors);

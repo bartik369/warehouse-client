@@ -1,43 +1,41 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
 import { IPermissionRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
-import { CheckedDeviceOptions } from "../../types/content";
+import { CheckedDeviceOptions, CheckedPermissionOptions } from "../../types/content";
+import { FormValidation } from "../../utils/validation/PermissionValidation";
+import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
+import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
 
 export const usePermission = () => {
-  const [entity, setEntity] = useState<IPermissionRole>({
-    id: "",
-    name: "",
-    roleId: "",
-    roleName: "",
-    permissionId: [],
-    permissionName: [],
-    warehouseId: "",
-    warehouseName: "",
-    locationId: "",
-    locationName: "",
-    comment: "",
-  });
+  const [state, dispatch] = useReducer(permissionReducer, initialState);
+  const { isUpdate, entity } = state;
 
-  const [isUpdate, setIsUpdate] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [list, setList] = useState<Record<number, boolean>>({});
-
+  console.log(state.entity);
   const handleInputChange = useCallback(
     (field: keyof IPermissionRole, value: string) => {
-      setEntity((prev) => {
-        const updateEntity = {
-          ...prev,
-          [field]: value,
-        };
-        return updateEntity;
+      dispatch({
+        type: PermissionActionTypes.SET_ENTITY,
+        payload: { [field]: value },
       });
     },
     []
   );
+  const handleCreateEntity = useCallback(async () => {
+    try {
+      const validationErrors = FormValidation(entity);
+      console.log(validationErrors);
+    } catch (err: unknown) {
+      console.log(err);
+    }
+  }, []);
+
   const handleGetEntity = useCallback((id: string, field: string) => {}, []);
-  const handleCreateEntity = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {}, []);
   const handleDeleteEntity = useCallback(() => {}, []);
-  const handleResetEntity = useCallback(() => {}, []);
+
+  const handleResetEntity = useCallback(() => {
+    dispatch({ type: PermissionActionTypes.RESET_ENTITY });
+    dispatch({ type: PermissionActionTypes.RESET_LIST });
+  }, []);
   const handleRoleChange = useCallback(
     (item: IPermissionRole) => {
       handleInputChange("roleId", item.id || "");
@@ -53,7 +51,7 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handleLocationChange = useCallback(
-    (item: IPermissionRole) => {
+    (item: IEntity) => {
       handleInputChange("locationId", item.id || "");
       handleInputChange("locationName", item.name || "");
     },
@@ -67,50 +65,42 @@ export const usePermission = () => {
     },
     [handleInputChange]
   );
-  const handleSetPermission = useCallback((
-    e: ChangeEvent<HTMLInputElement>,
-    item: CheckedDeviceOptions
-  ) => {
-    const { checked } = e.target;
-    setEntity((prev) => {
-      const currentArr = prev.permissionName || [];
-      if (checked) {
-        if (!currentArr.includes(item.name)) {
-          return {
-            ...prev,
-            permissionName: [...currentArr, item.name],
-          };
-        }
-        return prev;
-      }
-      return {
-        ...prev,
-        permissionName: currentArr.filter((name) => name !== item.name),
-      };
-    });
-  }, []);
+  const handleCheck = useCallback(
+    (e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions) => {
+      const { checked } = e.target;
+      dispatch({
+        type: PermissionActionTypes.SET_LIST,
+        payload: { id: item.id || "", checked },
+      });
+      dispatch({
+        type: PermissionActionTypes.SET_PERMISSION,
+        payload: { id: item.id || "", name: item.name || "", checked },
+      });
+    },
+    []
+  );
 
   useEffect(() => {
-    if (entity.roleName === "manager") {
-      setEntity((prev) => ({
-        ...prev,
-        permissionName: [],
-        permissionId: [],
-        warehouseId: "",
-        warehouseName: "",
-      }));
-      setList({});
+    if (state.entity.roleName === "manager") {
+      dispatch({
+        type: PermissionActionTypes.SET_ENTITY,
+        payload: {
+          permissionName: [],
+          permissionId: [],
+          warehouseId: "",
+          warehouseName: "",
+        },
+      });
+      dispatch({ type: PermissionActionTypes.RESET_LIST });
     }
-  }, [entity.roleName]);
+  }, [state.entity.roleName]);
 
   console.log(entity);
 
   return {
-    list,
     entity,
-    errors,
     isUpdate,
-    setList,
+    state,
     actions: {
       handleInputChange,
       handleGetEntity,
@@ -121,7 +111,7 @@ export const usePermission = () => {
       handlePermissionChange,
       handleLocationChange,
       handleWarehouseChange,
-      handleSetPermission,
+      handleCheck,
     },
   };
 };

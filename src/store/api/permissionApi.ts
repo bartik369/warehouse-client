@@ -3,6 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 import { IRole, IPermission } from "../../types/access";
 import { IEntity } from "../../types/devices";
+import { CheckedPermissionOptions } from '../../types/content';
 
 export const permissionApi = createApi({
   reducerPath: "permissionApi",
@@ -54,7 +55,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    getPermissions: build.query<IPermission[], void>({
+    getPermissions: build.query<CheckedPermissionOptions[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_PERMISSIONS}`,
       }),
@@ -72,7 +73,7 @@ export const permissionApi = createApi({
       }),
     }),
 
-    createPermission: build.mutation<IPermission, IEntity>({
+    createPermission: build.mutation<CheckedPermissionOptions, IEntity>({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}`,
         method: "POST",

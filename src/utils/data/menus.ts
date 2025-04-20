@@ -30,9 +30,7 @@ export const profileMenuData = [
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '', icon: LuWarehouse, subMenu: [
       { id: 1, title: 'Московский офис', path: 'msk'},
-      { id: 2, title: 'Екатеринбург', path: 'ekb'},
-      { id: 3, title: 'Санкт-Петербург', path: 'spb'},
-    ]
+      { id: 2, title: 'Екатеринбург', path: 'ekb'},    ]
 },
     {id: 2, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
     {id: 3, title: 'Пользователи', path: '/users', icon: LuUsers},
@@ -70,7 +68,7 @@ export const adminMenu = [
     {id: 7, title: 'Доступ', path: '#', icon: AiOutlineUnlock, subMenu: [
         { id: 1, title: 'Новая роль', path: '/admin/add-role'},
         { id: 2, title: 'Новые права', path: '/admin/add-permission'},
-        { id: 3, title: 'Права ролей', path: '/admin/add-permission-role'},
+        { id: 3, title: 'Права ролей', path: '/admin/add-permission_role'},
         { id: 4, title: 'Роли пользователей', path: '/admin/add-permission'},
     ]},
     {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},

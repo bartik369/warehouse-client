@@ -40,9 +40,7 @@ export const useAddUser = () => {
   console.log(user);
   
 
-  const handleCreateUser = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+  const handleCreateUser = useCallback(async () => {
       try {
         const validateErrors = FormValidation(user);
         console.log(validateErrors);

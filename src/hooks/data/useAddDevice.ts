@@ -47,8 +47,7 @@ export function useAddDevice() {
     [ValidateField]
   );
 
-  const handleAddDevice = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleAddDevice = async () => {
     try {
       const validationErrors = FormValidation(device, itemType);
       dispatch({
