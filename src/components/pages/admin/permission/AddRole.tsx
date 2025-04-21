@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetRolesQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { addRoleTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddRole = () => {
@@ -20,6 +21,7 @@ const AddRole = () => {
         <section className={styles.inner}>
           <div className={styles.form}>
             <MultiForm
+              title={addRoleTitle}
               isUpdate={isUpdate}
               entity={entity}
               errors={errors}

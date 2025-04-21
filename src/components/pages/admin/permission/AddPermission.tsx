@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetPermissionsQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { addPermissionTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddPermission = () => {
@@ -20,6 +21,7 @@ const AddPermission = () => {
         <section className={styles.inner}>
           <div className={styles.form}>
             <MultiForm
+              title={addPermissionTitle}
               isUpdate={isUpdate}
               entity={entity}
               errors={errors}

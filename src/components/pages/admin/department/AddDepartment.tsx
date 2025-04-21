@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetDepartmentsQuery } from '../../../../store/api/departmentApi';
+import { addDepartmentTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddDepartment = () => {
@@ -19,6 +20,7 @@ const AddDepartment = () => {
     <section className={styles.inner}>
       <div className={styles.form}>
         <MultiForm
+          title={addDepartmentTitle}
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}

@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetManufacturersQuery } from '../../../../store/api/manufacturersApi';
+import { addManufacturerTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddManufacturer = () => {
@@ -19,6 +20,7 @@ const AddManufacturer = () => {
     <section className={styles.inner}>
       <div className={styles.form}>
         <MultiForm
+          title={addManufacturerTitle}
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}

@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetLocationsQuery } from '../../../../store/api/locationApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { addLocationTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddLocation = () => {
@@ -21,6 +22,7 @@ const AddLocation = () => {
       <div className={styles.form}>
         <MultiForm
           isUpdate={isUpdate}
+          title={addLocationTitle}
           entity={entity}
           errors={errors}
           handleCity={handleCityChange}

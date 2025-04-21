@@ -2,11 +2,12 @@ import { FC, useEffect, useState } from "react";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
 import Input from "../../ui/input/Input";
+import Checkbox from "../../ui/checkbox/Checkbox";
+import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
-import { useGetAssignableRolesQuery } from "../../../store/api/permissionApi";
-import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import { useGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
-import { IAccessFormActions, IPermission, IPermissionRole, IRole } from "../../../types/access";
+import { IAccessFormActions, IPermissionRole, IRole } from "../../../types/access";
+import { useGetAssignableRolesQuery, useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import {
   description,
   locationLabel,
@@ -15,23 +16,19 @@ import {
   rolesLabel,
   warehouseLabel,
 } from "../../../utils/constants/constants";
-import Checkbox from "../../ui/checkbox/Checkbox";
-import Actions from "../device/Actions";
 import { IPermissionState } from "../../../reducers/permission/permissionTypes";
-import { useLocation } from "react-router-dom";
-import { getTitleByLocationType } from "../../../utils/title/titleUtils";
-import styles from './AccessForm.module.scss';
 import { IEntity } from "../../../types/devices";
-import { CheckedPermissionOptions } from "../../../types/content";
+import styles from './AccessForm.module.scss';
 
 interface IAccessFormProps {
+  title: string;
   state: IPermissionState;
   entity: IPermissionRole;
   isUpdate: boolean;
   errors: Record<string, string>;
   actions: IAccessFormActions;
 }
-const AccessForm: FC<IAccessFormProps> = ({state, entity, isUpdate,  actions}) => {
+const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  actions}) => {
   const [skip, setSkip] = useState(true);
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
@@ -40,38 +37,33 @@ const AccessForm: FC<IAccessFormProps> = ({state, entity, isUpdate,  actions}) =
     { skip: skip }
   );
   const { data: locations } = useGetLocationsQuery();
-  const locationPath = useLocation();
-  const locationType = locationPath.pathname.split('/')[2]?.split('-')[1] || '';
 
   useEffect(() => {
     if (entity.locationId) setSkip(false);
   }, [entity.locationId]);
 
-  console.log(state.entity)
-
   return (
     <form>
-      <div className={styles.title}>{getTitleByLocationType(locationType)}</div>
+      <div className={styles.title}>{title}</div>
       <Input
-        onChange={(e) => actions.handleInputChange("name", e.target.value)}
+        name="name"
         type="text"
         value={state.entity.name || ""}
         label={name}
         errors={state.errors}
-        name="name"
+        onChange={(e) => actions.handleInputChange("name", e.target.value)}
       />
       <Select<IRole>
-        setValue={actions.handleRoleChange}
-        items={(assignableRoles || []) as IRole }
+        name="role"
+        items={(assignableRoles || []) as IRole[] }
         label={rolesLabel}
         value={state.entity.roleName || ""}
         errors={state.errors}
-        name="role"
+        setValue={actions.handleRoleChange}
         getId={(item: IRole) => item.id}
       />
       {entity.roleName !== "manager" && (
         <Checkbox
-          state={state}
           entity={entity}
           items={permissions || []}
           label={permissionsLabel}

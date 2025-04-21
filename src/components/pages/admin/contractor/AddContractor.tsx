@@ -2,6 +2,7 @@ import ItemsList from '../ItemsList';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetContractorsQuery } from '../../../../store/api/contractorApi';
 import MultiForm from '../../../forms/multi/MultiForm';
+import { addContractorTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddContractor = () => {
@@ -19,6 +20,7 @@ const AddContractor = () => {
     <section className={styles.inner}>
       <div className={styles.form}>
         <MultiForm
+          title={addContractorTitle}
           isUpdate={isUpdate}
           entity={entity}
           errors={errors}

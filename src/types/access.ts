@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { CheckedDeviceOptions, CheckedPermissionOptions } from "./content";
+import { CheckedPermissionOptions } from "./content";
 import { IEntity } from "./devices";
 
 export interface IRole {
@@ -28,7 +28,7 @@ export interface IPermissionRole {
 }
 export interface IAccessFormActions {
     handleInputChange: (name: keyof IPermissionRole, e: string) => void;
-    handleRoleChange: (item: IPermissionRole) => void;
+    handleRoleChange: (item: IRole) => void;
     handlePermissionChange: (item: IPermissionRole) => void;
     handleLocationChange?: (item: IEntity) => void;
     handleWarehouseChange?: (item: IEntity) => void;

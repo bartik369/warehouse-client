@@ -2,12 +2,10 @@ import { FC } from 'react';
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
 import { Checked, CheckedPermissionOptions } from "../../../types/content";
 import { noOptions, selectPermissions } from "../../../utils/constants/constants";
-import { IPermissionState } from "../../../reducers/permission/permissionTypes";
 import { IAccessFormActions, IPermissionRole } from "../../../types/access";
 import styles from "./Checkbox.module.scss";
 
 interface ICheckboxProps {
-  state: IPermissionState;
   list: Checked;
   entity: IPermissionRole;
   items: CheckedPermissionOptions[];
@@ -19,8 +17,8 @@ interface ICheckboxProps {
 const Checkbox: FC<ICheckboxProps> = ({
   list,
   entity,
-  actions,
   items,
+  actions,
   label,
   name,
 }) => {
@@ -29,10 +27,8 @@ const Checkbox: FC<ICheckboxProps> = ({
     <div className={styles.wrapper}>
       <button
         className={styles.checkbox}
-        onClick={(e) => {
-          setIsOpen(!isOpen);
-          e.preventDefault();
-        }}
+        onClick={() => { setIsOpen(!isOpen) }}
+        type="button"
       >
         <span className={styles.label}>{label}</span>
         <span>{selectPermissions}</span>

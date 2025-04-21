@@ -1,6 +1,7 @@
-import React from 'react';
 import AccessForm from '../../../forms/access/AccessForm';
 import { usePermission } from '../../../../hooks/data/usePermission';
+import { addRolePermission } from '../../../../utils/constants/constants';
+
 import styles from '../Admin.module.scss';
 
 const PermissionRole = () => {
@@ -14,6 +15,7 @@ const PermissionRole = () => {
         <section className={styles.inner}>
           <div className={styles.form}>
            <AccessForm
+            title={addRolePermission}
             state={state}
             entity={entity}
             isUpdate={isUpdate}

@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole } from "../../types/access";
+import { IPermissionRole, IRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
-import { CheckedDeviceOptions, CheckedPermissionOptions } from "../../types/content";
+import { CheckedPermissionOptions } from "../../types/content";
 import { FormValidation } from "../../utils/validation/PermissionValidation";
 import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
 import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
@@ -37,7 +37,7 @@ export const usePermission = () => {
     dispatch({ type: PermissionActionTypes.RESET_LIST });
   }, []);
   const handleRoleChange = useCallback(
-    (item: IPermissionRole) => {
+    (item: IRole) => {
       handleInputChange("roleId", item.id || "");
       handleInputChange("roleName", item.name || "");
     },
