@@ -4,38 +4,26 @@ import { useGetRolesQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { addRoleTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
+import { roleFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
 
 const AddRole = () => {
   const {data: roles} = useGetRolesQuery();
-    const {
-        entity,
-        errors,
-        isUpdate,
-        handleInputChange,
-        handleCreateEntity,
-        handleResetEntity,
-        handleGetEntity,
-        handleDeleteEntity,
-      } = useAddAdminEntities();
+    const { actions, state } = useAddAdminEntities();
       return (
         <section className={styles.inner}>
           <div className={styles.form}>
             <MultiForm
+              fields={roleFormFields}
               title={addRoleTitle}
-              isUpdate={isUpdate}
-              entity={entity}
-              errors={errors}
-              handleInput={handleInputChange}
-              handleCreate={handleCreateEntity}
-              handleReset={handleResetEntity}
+              actions={actions}
+              state={state}
             />
           </div>
           <aside className={styles.list}>
             <ItemsList
               field="role"
               items={roles || []}
-              onEdit={handleGetEntity}
-              onDelete={handleDeleteEntity}
+              actions={actions}
             />
           </aside>
         </section>

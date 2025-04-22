@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useReducer, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useInputMask } from "./useInputMask";
 import {
@@ -53,30 +53,37 @@ import {
 import { IDeviceMedia, IEntity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
 import { selectPic } from "../../utils/constants/constants";
+import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";
+import { AdminEntityActionTypes } from "../../reducers/admin-entity/adminEntityTypes";
 
 export const useAddAdminEntities = () => {
-  const [entity, setEntity] = useState<IEntity>({
-    id: "",
-    name: "",
-    slug: "",
-    locationName: "",
-    typeId: "",
-    type: "",
-    manufacturerId: "",
-    manufacturer: "",
-    phoneNumber: "",
-    comment: "",
-    address: "",
-  });
+  const [state, dispatch] = useReducer(adminEntityReducer, initialState);
+  const { isUpdate, entity } = state;
+  // const [entity, setEntity] = useState<IEntity>({
+  //   id: "",
+  //   name: "",
+  //   slug: "",
+  //   locationName: "",
+  //   typeId: "",
+  //   type: "",
+  //   manufacturerId: "",
+  //   manufacturer: "",
+  //   phoneNumber: "",
+  //   comment: "",
+  //   address: "",
+  // });
   const [media, setMedia] = useState<IDeviceMedia>({
     file: null,
     prevImg: null,
   });
 
+  console.log(entity)
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [isUpdate, setIsUpdate] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const { formatPhone, changeFormatPhone } = useInputMask();
+  // const [isUpdate, setIsUpdate] = useState(false);
+  // const [errors, setErrors] = useState<Record<string, string>>({});
+  // const { formatPhone, changeFormatPhone } = useInputMask();
+  console.log(entity)
 
   const [getWarehouse] = useLazyGetWarehouseQuery();
   const [getLocation] = useLazyGetLocationQuery();
@@ -119,10 +126,8 @@ export const useAddAdminEntities = () => {
     permission: deletePermission,
   };
 
-  const entityCreateFunctions: Record<
-    string,
-    (item: any) => { unwrap: () => Promise<any> }
-  > = {
+  const entityCreateFunctions: Record<string,
+    (item: any) => { unwrap: () => Promise<any> }> = {
     department: isUpdate ? updateDepartment : createDepartment,
     warehouse: isUpdate ? updateWarehouse : createWarehouse,
     location: isUpdate ? updateLocation : createLocation,
@@ -133,10 +138,8 @@ export const useAddAdminEntities = () => {
     role: isUpdate ? updateRole : createRole,
     permission: isUpdate ? updatePermission : createPermission,
   };
-  const entityById: Record<
-    string,
-    (item: any) => { unwrap: () => Promise<any> }
-  > = {
+  const entityById: Record<string, 
+  (item: any) => { unwrap: () => Promise<any> } > = {
     department: getDepartment,
     warehouse: getWarehouse,
     location: getLocation,
@@ -150,20 +153,31 @@ export const useAddAdminEntities = () => {
 
   const handleInputChange = useCallback(
     <T extends string | IEntity>(field: keyof IEntity, value: T) => {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: ValidateField(field, value) || "",
-      }));
-      setEntity((prev) => {
-        const updateEntity = {
-          ...prev,
-          [field]:
-            field === "phoneNumber"
-              ? formatPhone(value as string, prev.phoneNumber || "")
-              : value,
-        };
-        return updateEntity;
-      });
+     console.log(field);
+     console.log(value);
+     
+      // setErrors((prev) => ({
+      //   ...prev,
+      //   [field]: ValidateField(field, value) || "",
+      // }));
+      dispatch({
+        type: AdminEntityActionTypes.SET_ERROR,
+        payload: { [field]: ValidateField(field, value) || "" }
+      })
+      dispatch({
+        type: AdminEntityActionTypes.SET_ENTITY,
+        payload: {[field]: value }
+      })
+      // setEntity((prev) => {
+      //   const updateEntity = {
+      //     ...prev,
+      //     [field]:
+      //       field === "phoneNumber"
+      //         ? formatPhone(value as string, prev.phoneNumber || "")
+      //         : value,
+      //   };
+      //   return updateEntity;
+      // });
     },
     []
   );
@@ -212,60 +226,53 @@ export const useAddAdminEntities = () => {
   );
 
   const handleResetEntity = useCallback(() => {
-    setEntity({
-      id: "",
-      name: "",
-      slug: "",
-      locationName: "",
-      comment: "",
-      phoneNumber: "",
-      address: "",
-      type: "",
-      typeId: "",
-      manufacturer: "",
-      manufacturerId: "",
-    });
-    setIsUpdate(false);
-    setErrors({});
-  }, []);
+    dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
+    dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: false});
+    dispatch({ type: AdminEntityActionTypes.RESET_ERROR });
+  }, [dispatch]);
 
   const handleGetEntity = useCallback(async (id: string, field: string) => {
+     console.log('start');
+     
     try {
       const getEntityByIdFunction = entityById[field];
       await getEntityByIdFunction(id)
         .unwrap()
         .then((data) => {
-          setEntity((prev) => ({
-            ...prev,
-            ...data,
-          }));
+          dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
+          // setEntity((prev) => ({
+          //   ...prev,
+          //   ...data,
+          // }));
         });
-      setIsUpdate(true);
+      dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});
+
+      // setIsUpdate(true);
     } catch (err: unknown) {
       handleApiError(err);
     }
   }, []);
 
-  const handleCityChange = useCallback(
-    (item: IEntity) => {
-      handleInputChange("locationName", item.name || "");
-    },
-    [handleInputChange]
-  );
-  const handleManufacturerChange = useCallback(
-    (item: IEntity) => {
-      handleInputChange("manufacturerId", item.id || "");
-      handleInputChange("manufacturer", item.name || "");
-    },
-    [handleInputChange]
-  );
-  const handleTypeChange = useCallback(
-    (item: IEntity) => {
-      handleInputChange("typeId", item.id || "");
-      handleInputChange("type", item.name || "");
-    },
-    [handleInputChange]
-  );
+  // const handleCityChange = useCallback(
+  //   (item: IEntity) => {
+  //     handleInputChange("locationName", item.name || "");
+  //   },
+  //   [handleInputChange]
+  // );
+  // const handleManufacturerChange = useCallback(
+  //   (item: IEntity) => {
+  //     handleInputChange("manufacturerId", item.id || "");
+  //     handleInputChange("manufacturer", item.name || "");
+  //   },
+  //   [handleInputChange]
+  // );
+  // const handleTypeChange = useCallback(
+  //   (item: IEntity) => {
+  //     handleInputChange("typeId", item.id || "");
+  //     handleInputChange("type", item.name || "");
+  //   },
+  //   [handleInputChange]
+  // );
 
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -300,19 +307,17 @@ export const useAddAdminEntities = () => {
 
   return {
     entity,
-    errors,
+    state,
     isUpdate,
     media,
     fileInputRef,
-    handleMedia,
-    handleCityChange,
-    setEntity,
-    handleCreateEntity,
-    handleInputChange,
-    handleResetEntity,
-    handleGetEntity,
-    handleManufacturerChange,
-    handleTypeChange,
-    handleDeleteEntity,
+    actions: {
+      handleMedia,
+      handleCreateEntity,
+      handleInputChange,
+      handleResetEntity,
+      handleGetEntity,
+      handleDeleteEntity,
+    }
   };
 };

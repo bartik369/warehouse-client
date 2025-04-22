@@ -3,14 +3,14 @@ import { IEntity } from "../../../types/devices";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import styles from "./Admin.module.scss";
+import { IEntityFormActions } from "../../../types/entity";
 
 interface IItemsListProps {
+  actions: IEntityFormActions;
   field: string;
   items: IEntity[];
-  onEdit: (id: string, field: string) => void;
-  onDelete?: (id: string, field: string) => void;
 }
-const ItemsList: FC<IItemsListProps> = ({ field, items, onEdit, onDelete }) => {
+const ItemsList: FC<IItemsListProps> = ({ field, items, actions }) => {
   if (items.length === 0) return <div>net info</div>;
   return (
     <ul>
@@ -23,14 +23,19 @@ const ItemsList: FC<IItemsListProps> = ({ field, items, onEdit, onDelete }) => {
             )}
           </div>
           <div className={styles.actions}>
-            <button className={styles.btn} onClick={() => onEdit(item.id, field)}>
+            <button className={styles.btn} onClick={() => actions.handleGetEntity(item.id, field)}>
               <MdOutlineEdit />
             </button>
-            {onDelete &&
-            <button className={styles.btn} onClick={() => onDelete(item.id, field)}>
+            {
+            <button className={styles.btn} onClick={() => actions.handleDeleteEntity(item.id, field)}>
               <RiDeleteBin4Line />
             </button>
             }
+             {/* {(actions.handleGetEntity && item.name!== 'administrator') &&
+            <button className={styles.btn} onClick={() => actions.handleDeleteEntity(item.id, field)}>
+              <RiDeleteBin4Line />
+            </button>
+            } */}
           </div>
         </li>
       ))}

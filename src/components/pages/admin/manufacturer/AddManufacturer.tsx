@@ -3,37 +3,26 @@ import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetManufacturersQuery } from '../../../../store/api/manufacturersApi';
 import { addManufacturerTitle } from '../../../../utils/constants/constants';
+import { manufacturerFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
 import styles from '../Admin.module.scss';
-
 const AddManufacturer = () => {
-  const {
-    entity,
-    errors,
-    isUpdate,
-    handleInputChange,
-    handleCreateEntity,
-    handleResetEntity,
-    handleGetEntity,
-  } = useAddAdminEntities();
+  const {state, actions} = useAddAdminEntities();
   const { data: manufacturers } = useGetManufacturersQuery();
   return (
     <section className={styles.inner}>
       <div className={styles.form}>
         <MultiForm
+          fields={manufacturerFormFields}
           title={addManufacturerTitle}
-          isUpdate={isUpdate}
-          entity={entity}
-          errors={errors}
-          handleInput={handleInputChange}
-          handleCreate={handleCreateEntity}
-          handleReset={handleResetEntity}
+          actions={actions}
+          state={state}
         />
       </div>
       <aside className={styles.list}>
         <ItemsList
           field="manufacturer"
           items={manufacturers || []}
-          onEdit={handleGetEntity}
+          actions={actions}
         />
       </aside>
     </section>

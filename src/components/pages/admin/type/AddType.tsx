@@ -2,36 +2,28 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetTypesQuery } from '../../../../store/api/typesApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import { typeFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
+import { addTypeTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';
 
 const AddType = () => {
-    const {
-        entity,
-        errors,
-        isUpdate,
-        handleInputChange,
-        handleCreateEntity,
-        handleResetEntity,
-        handleGetEntity,
-      } = useAddAdminEntities();
+    const { actions, state } = useAddAdminEntities();
       const { data: types } = useGetTypesQuery();
       return (
         <section className={styles.inner}>
           <div className={styles.form}>
             <MultiForm
-              isUpdate={isUpdate}
-              entity={entity}
-              errors={errors}
-              handleInput={handleInputChange}
-              handleCreate={handleCreateEntity}
-              handleReset={handleResetEntity}
+              title={addTypeTitle}
+              fields={typeFormFields}
+              actions={actions}
+              state={state}
             />
           </div>
           <aside className={styles.list}>
             <ItemsList
               field="type"
               items={types || []}
-              onEdit={handleGetEntity}
+              actions={actions}
             />
           </aside>
         </section>

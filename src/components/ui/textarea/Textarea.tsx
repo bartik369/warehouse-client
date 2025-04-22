@@ -7,10 +7,10 @@ interface ITextareaProps {
     errors: Record<string, string>;
     name: string;
     placeholder?: string;
-    setText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const Textarea:FC<ITextareaProps> = ({value, label, errors, name, setText}) => {
+const Textarea:FC<ITextareaProps> = ({value, label, errors, name, onChange}) => {
     const errorMessage = errors?.[name];
     return (
         <div className={style.wrapper}>
@@ -18,7 +18,7 @@ const Textarea:FC<ITextareaProps> = ({value, label, errors, name, setText}) => {
                 <div className={style.label}>{label}</div>
                 <textarea
                     value={value}
-                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => setText(e)} 
+                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => onChange(e)} 
                     name="" 
                     id="" 
                     rows={6}  

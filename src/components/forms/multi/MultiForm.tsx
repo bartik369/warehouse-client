@@ -8,61 +8,47 @@ import Preview from "../../ui/preview/Preview";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { phoneNumberLabel } from "../../../utils/constants/device";
-import { add, update, reset, slugLocation, name, slug, city, description,
-  phoneMaskPlaceholder } from "../../../utils/constants/constants";
-import { manufacturersLabel, deviceTypeLabel } from "../../../utils/constants/device";
+import { add, update, reset, slugLocation } from "../../../utils/constants/constants";
 import { IDeviceMedia, IEntity } from "../../../types/devices";
+import { IFieldMultiformConfig } from "../../../types/content";
 import { HiMiniXMark } from "react-icons/hi2";
 import { GoPlus } from "react-icons/go";
 import { BsQuestionSquare } from "react-icons/bs";
 import { ToastContainer } from "react-toastify";
+import { IEntityFormActions } from "../../../types/entity";
+import { IAdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
 import styles from "./MultiForm.module.scss";
 
+
 interface IMultiFormProps {
+  actions: IEntityFormActions;
+  state: IAdminEntityState;
   title: string;
-  entity: IEntity;
-  isUpdate: boolean;
+  fields: IFieldMultiformConfig[];
   media?: IDeviceMedia;
   fieldType?: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
-  errors: Record<string, string>;
-  setMedia?: () => void;
-  handleCity?: (item: IEntity) => void;
-  handleManufacturer?: (item: IEntity) => void;
-  handleType?: (item: IEntity) => void;
-  handleInput: (name: keyof IEntity, e: string) => void;
-  handleCreate: (type: string) => void;
-  handleReset: () => void;
 }
 
 const MultiForm: FC<IMultiFormProps> = ({
   title,
-  entity,
+  fields,
+  actions,
+  state,
   fieldType,
-  isUpdate,
-  errors,
   media,
   fileInputRef,
-  setMedia,
-  handleCity,
-  handleManufacturer,
-  handleType,
-  handleInput,
-  handleCreate,
-  handleReset,
 }) => {
   const locationPath = useLocation();
   const { data: cities } = useGetLocationsQuery();
-  const { data : manufacturers } = useGetManufacturersQuery();
+  const { data: manufacturers } = useGetManufacturersQuery();
   const { data: types } = useGetTypesQuery();
-  const locationType = locationPath.pathname.split('/')[2]?.split('-')[1] || '';
-  const exceptionPath = !/add-(model|type)$/.test(locationPath.pathname);
-  const isContractor = locationPath.pathname.endsWith("contractor");
-  const isEntityImg = entity.imagePath 
-    ? `${import.meta.env.VITE_API_MODELS}${entity.imagePath}`
+  const locationType = locationPath.pathname.split("/")[2]?.split("-")[1] || "";
+  const isEntityImg = state.entity.imagePath
+    ? `${import.meta.env.VITE_API_MODELS}${state.entity.imagePath}`
     : media?.prevImg;
-  
+  const dataSources = { cities, manufacturers, types };
+
   return (
     <div className={styles.wrapper}>
       <ToastContainer position="top-center" theme="light" />
@@ -71,20 +57,12 @@ const MultiForm: FC<IMultiFormProps> = ({
           <Preview
             media={isEntityImg || ""}
             ref={fileInputRef}
-            setMedia={() => setMedia?.()}
+            actions={actions}
           />
         </div>
       )}
       <form>
-      <div className={styles.title}>{title}</div>
-        <Input
-          label={name}
-          type="text"
-          name="name"
-          value={entity.name}
-          errors={errors}
-          onChange={(e) => handleInput("name", e.target.value)}
-        />
+        <div className={styles.title}>{title}</div>
         <div className={styles["tooltip-wrapper"]}>
           <span
             className={styles.tooltip}
@@ -94,88 +72,69 @@ const MultiForm: FC<IMultiFormProps> = ({
             <BsQuestionSquare className={styles.icon} />
           </span>
         </div>
-        {!(
-          locationPath.pathname.endsWith("add-role") ||
-          locationPath.pathname.endsWith("add-permission")
-        ) && (
-          <Input
-            label={slug}
-            type="text"
-            name="slug"
-            value={entity.slug || ""}
-            errors={errors}
-            onChange={(e) => handleInput("slug", e.target.value)}
-          />
-        )}
-        {locationPath.pathname.endsWith("contractor") && (
-          <Input
-            type="tel"
-            name="phoneNumber"
-            value={entity.phoneNumber || ""}
-            placeholder={phoneMaskPlaceholder}
-            onChange={(e) => handleInput("phoneNumber", e.target.value)}
-            label={phoneNumberLabel}
-            errors={errors}
-          />
-        )}
-        {locationPath.pathname.endsWith("add-warehouse") && 
-          <Select
-            setValue={(val) => handleCity?.(val)}
-            items={cities || []}
-            label={city}
-            value={entity.locationName || ""}
-            errors={errors}
-            name="locationName"
-            getId={(item: IEntity) => item.id}
-          />
-        }
-         { locationPath.pathname.endsWith("add-model") && 
-         <>
-          <Select
-            setValue={(val) => handleManufacturer?.(val)}
-            items={manufacturers || []}
-            label={manufacturersLabel}
-            value={entity.manufacturer || ""}
-            errors={errors}
-            name="manufacturer"
-            getId={(item: IEntity) => item.id}
-          />
-          <Select
-            setValue={(val) => handleType?.(val)}
-            items={types || []}
-            label={deviceTypeLabel}
-            value={entity.type || ""}
-            errors={errors}
-            name="type"
-            getId={(item: IEntity) => item.id}
-        />
-        </>
-        }
-        {exceptionPath && 
-         <Textarea
-          value={entity[isContractor ? "address" : "comment"] || ""}
-          errors={errors}
-          label={description}
-          name={isContractor ? "address" : "comment"}
-          setText={(e) =>
-            handleInput(isContractor ? "address" : "comment", e.target.value)
+        {fields?.map((field) => {
+          if (field.type === "input"  || field.type === "tel") {
+            return (
+              <Input
+                label={field.label}
+                type={field.type}
+                name={field.name}
+                value={state.entity[field.name] || ''}
+                errors={state.errors}
+                placeholder={field.placeholder}
+                onChange={(e) => actions.handleInputChange(field.name, e.target.value)}
+              />
+            );
           }
-       />
-        }
-        <div className={styles.actions}>
-          <BtnAction
+          if (field.type === "select") {
+            const items = dataSources[field.itemsKey!];
+            return (
+              <Select
+                setValue={(val) => { 
+                  actions.handleInputChange?.(field.name, val.name)
+                  if (field.name === "manufacturer") {
+                    actions.handleInputChange?.("manufacturerId",val.id)
+                  }
+                  if (field.name === "type") {
+                    actions.handleInputChange?.("typeId",val.id)
+                  }
+                }}
+                items={items || []}
+                label={field.label || ""}
+                value={state.entity[field.name] || ""}
+                errors={state.errors}
+                name={field.name}
+                getId={(item: IEntity) => item.id}
+              />
+            );
+          }
+          if (field.type === "textarea") {
+            return (
+              <Textarea
+                value={state.entity[field.name] || ""}
+                errors={state.errors}
+                label={field.label || ''}
+                placeholder={field.placeholder}
+                name={field.name}
+                onChange={(e) => actions.handleInputChange(field.name, e.target.value)}
+              />
+            );
+          }
+        })}
+         <div className={styles.actions}>
+        <BtnAction
             icon={<HiMiniXMark />}
             size="lg"
             color="grey"
             title={reset}
-            click={handleReset}
+            click={actions.handleResetEntity}
           />
           <BtnAction
             icon={<GoPlus />}
             size="lg"
             color="blue"
-            title={isUpdate ? update : add}
-            click={() => handleCreate(locationType)}
+            title={state.isUpdate ? update : add}
+            click={() => actions.handleCreateEntity(locationType)}
           />
         </div>
       </form>

@@ -1,31 +1,36 @@
-import React, { forwardRef } from 'react';
-import loadIcon from '../../../assets/elements/load.svg';
-import previewPicture from '../../../assets/elements/default.png';
-import style from './Preview.module.scss';
+import React, { forwardRef } from "react";
+import { IEntityFormActions } from "../../../types/entity";
+import loadIcon from "../../../assets/elements/load.svg";
+import previewPicture from "../../../assets/elements/default.png";
+import style from "./Preview.module.scss";
 
 interface IPreviewProps {
-    media: string;
-    ref?: React.RefObject<HTMLInputElement>
-    setMedia: () => void;
+  actions: IEntityFormActions;
+  media: string;
+  ref?: React.RefObject<HTMLInputElement>;
 }
-const Preview = forwardRef<HTMLInputElement, IPreviewProps>(({ media, setMedia }, ref) => {  
+const Preview = forwardRef<HTMLInputElement, IPreviewProps>(
+  ({ media, actions }, ref) => {
     return (
-        <label className={style.file} htmlFor={"upload"}>
-           <div className={style.icon}>
-               <img src={loadIcon} alt="" />
-           </div>
+      <label className={style.file} htmlFor={"upload"}>
+        <div className={style.icon}>
+          <img src={loadIcon} alt="" />
+        </div>
         <img src={media || previewPicture} />
-        {<input
+        {
+          <input
             ref={ref}
             name="file"
-            id="upload" 
+            id="upload"
             type="file"
-            accept='image/*'
+            accept="image/*"
             hidden
-            onChange={setMedia}
-        />} 
-     </label>
-    )
-});
+            onChange={(e) => actions.handleMedia?.(e)}
+          />
+        }
+      </label>
+    );
+  }
+);
 
 export default Preview;
