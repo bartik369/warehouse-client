@@ -19,7 +19,6 @@ const PermissionRole = () => {
             state={state}
             entity={entity}
             isUpdate={isUpdate}
-            errors={state.errors}
             actions={actions}
            />
           </div>

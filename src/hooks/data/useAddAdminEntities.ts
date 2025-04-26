@@ -59,32 +59,14 @@ import { AdminEntityActionTypes } from "../../reducers/admin-entity/adminEntityT
 export const useAddAdminEntities = () => {
   const [state, dispatch] = useReducer(adminEntityReducer, initialState);
   const { isUpdate, entity } = state;
-  // const [entity, setEntity] = useState<IEntity>({
-  //   id: "",
-  //   name: "",
-  //   slug: "",
-  //   locationName: "",
-  //   typeId: "",
-  //   type: "",
-  //   manufacturerId: "",
-  //   manufacturer: "",
-  //   phoneNumber: "",
-  //   comment: "",
-  //   address: "",
-  // });
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [media, setMedia] = useState<IDeviceMedia>({
     file: null,
     prevImg: null,
   });
 
-  console.log(entity)
-
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  // const [isUpdate, setIsUpdate] = useState(false);
-  // const [errors, setErrors] = useState<Record<string, string>>({});
-  // const { formatPhone, changeFormatPhone } = useInputMask();
-  console.log(entity)
-
+  const { changeFormatPhone } = useInputMask();
   const [getWarehouse] = useLazyGetWarehouseQuery();
   const [getLocation] = useLazyGetLocationQuery();
   const [getDepartment] = useLazyGetDepartmentQuery();
@@ -123,8 +105,8 @@ export const useAddAdminEntities = () => {
     (item: any) => { unwrap: () => Promise<any> }
   > = {
     role: deleteRole,
-    permission: deletePermission,
-  };
+    permission: deletePermission
+  }
 
   const entityCreateFunctions: Record<string,
     (item: any) => { unwrap: () => Promise<any> }> = {
@@ -153,40 +135,25 @@ export const useAddAdminEntities = () => {
 
   const handleInputChange = useCallback(
     <T extends string | IEntity>(field: keyof IEntity, value: T) => {
-     console.log(field);
-     console.log(value);
-     
-      // setErrors((prev) => ({
-      //   ...prev,
-      //   [field]: ValidateField(field, value) || "",
-      // }));
       dispatch({
         type: AdminEntityActionTypes.SET_ERROR,
-        payload: { [field]: ValidateField(field, value) || "" }
-      })
+        payload: { [field]: ValidateField(field, value) || "" },
+      });
       dispatch({
         type: AdminEntityActionTypes.SET_ENTITY,
-        payload: {[field]: value }
-      })
-      // setEntity((prev) => {
-      //   const updateEntity = {
-      //     ...prev,
-      //     [field]:
-      //       field === "phoneNumber"
-      //         ? formatPhone(value as string, prev.phoneNumber || "")
-      //         : value,
-      //   };
-      //   return updateEntity;
-      // });
+        payload: { [field]: value },
+      });
     },
-    []
-  );
+  []);
 
   const handleCreateEntity = useCallback(async (fieldType: string) => {
       try {
         const createEntityFunction = entityCreateFunctions[fieldType];
         const validationErrors = FormValidation(entity, fieldType);
-        setErrors(validationErrors as Record<string, string>);
+        dispatch({ 
+          type: AdminEntityActionTypes.SET_ERROR, 
+          payload: validationErrors as Record<string, string>
+        });
 
         if (Object.keys(validationErrors).length === 0) {
           if (!entity) return;
@@ -202,7 +169,7 @@ export const useAddAdminEntities = () => {
             await createEntityFunction(formData)
               .unwrap()
               .then((data) => {
-                handleResetEntity();
+                dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
                 toast(data?.message, { type: "success" });
               });
           } else {
@@ -229,50 +196,21 @@ export const useAddAdminEntities = () => {
     dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
     dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: false});
     dispatch({ type: AdminEntityActionTypes.RESET_ERROR });
-  }, [dispatch]);
+  }, []);
 
   const handleGetEntity = useCallback(async (id: string, field: string) => {
-     console.log('start');
-     
     try {
       const getEntityByIdFunction = entityById[field];
       await getEntityByIdFunction(id)
         .unwrap()
         .then((data) => {
           dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
-          // setEntity((prev) => ({
-          //   ...prev,
-          //   ...data,
-          // }));
         });
       dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});
-
-      // setIsUpdate(true);
     } catch (err: unknown) {
       handleApiError(err);
     }
   }, []);
-
-  // const handleCityChange = useCallback(
-  //   (item: IEntity) => {
-  //     handleInputChange("locationName", item.name || "");
-  //   },
-  //   [handleInputChange]
-  // );
-  // const handleManufacturerChange = useCallback(
-  //   (item: IEntity) => {
-  //     handleInputChange("manufacturerId", item.id || "");
-  //     handleInputChange("manufacturer", item.name || "");
-  //   },
-  //   [handleInputChange]
-  // );
-  // const handleTypeChange = useCallback(
-  //   (item: IEntity) => {
-  //     handleInputChange("typeId", item.id || "");
-  //     handleInputChange("type", item.name || "");
-  //   },
-  //   [handleInputChange]
-  // );
 
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

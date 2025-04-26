@@ -34,5 +34,18 @@ export interface IAccessFormActions {
     handleWarehouseChange?: (item: IEntity) => void;
     handleCreateEntity: () => void;
     handleResetEntity: () => void;
-    handleCheck:(e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions) => void;
+    handleCheck:(e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions, name: string) => void;
+}
+export interface IValidateAccessErrors {
+    id: string;
+    name: string;
+    roleId: string;
+    roleName: string;
+    permissionId: string[];
+    permissionName: string[];
+    warehouseId: string;
+    warehouseName?: string;
+    locationId: string;
+    locationName: string;
+    comment: string;
 }

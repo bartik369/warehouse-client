@@ -66,6 +66,16 @@ export function permissionReducer(
       };
     case PermissionActionTypes.RESET_LIST:
       return { ...state, list: initialState.list };
+    case PermissionActionTypes.SET_ERROR:
+      return {
+        ...state,
+        errors: {
+          ...state.errors,
+          ...action.payload,
+        },
+      };
+    case PermissionActionTypes.RESET_ERROR:
+      return { ...state, errors: initialState.errors }
     default:
       return state;
   }

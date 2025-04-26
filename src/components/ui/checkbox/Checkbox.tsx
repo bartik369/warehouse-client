@@ -12,6 +12,7 @@ interface ICheckboxProps {
   actions: IAccessFormActions;
   label: string;
   name: string;
+  errors: Record<string, string>;
 }
 
 const Checkbox: FC<ICheckboxProps> = ({
@@ -21,8 +22,10 @@ const Checkbox: FC<ICheckboxProps> = ({
   actions,
   label,
   name,
+  errors
 }) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
+  const errorMessage = errors[name];
   return (
     <div className={styles.wrapper}>
       <button
@@ -37,6 +40,11 @@ const Checkbox: FC<ICheckboxProps> = ({
         )}
         <span className={styles.arrow} />
       </button>
+      {errorMessage && 
+          <div className={styles.error}>
+            {errorMessage}
+          </div>
+        }
       {isOpen && (
         <div ref={modalRef} className={styles['checkbox-menu']}>
           {items.length ? (
@@ -49,7 +57,7 @@ const Checkbox: FC<ICheckboxProps> = ({
                   value={item.name}
                   checked={list[item.id] || false}
                   disabled={item.disabled}
-                  onChange={(e) => actions.handleCheck(e, item)}
+                  onChange={(e) => actions.handleCheck(e, item, name)}
                 />
                 <span
                   role={"checkbox"}

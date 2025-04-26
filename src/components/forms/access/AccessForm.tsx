@@ -25,7 +25,6 @@ interface IAccessFormProps {
   state: IPermissionState;
   entity: IPermissionRole;
   isUpdate: boolean;
-  errors: Record<string, string>;
   actions: IAccessFormActions;
 }
 const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  actions}) => {
@@ -41,7 +40,6 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
   useEffect(() => {
     if (entity.locationId) setSkip(false);
   }, [entity.locationId]);
-
   return (
     <form>
       <div className={styles.title}>{title}</div>
@@ -54,7 +52,7 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
         onChange={(e) => actions.handleInputChange("name", e.target.value)}
       />
       <Select<IRole>
-        name="role"
+        name="roleName"
         items={(assignableRoles || []) as IRole[] }
         label={rolesLabel}
         value={state.entity.roleName || ""}
@@ -67,9 +65,10 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
           entity={entity}
           items={permissions || []}
           label={permissionsLabel}
-          name="permission"
+          name="permissionName"
           list={state.list}
           actions={actions}
+          errors={state.errors}
         />
       )}
       <Select<IEntity>
@@ -78,7 +77,7 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
         label={locationLabel}
         value={state.entity.locationName || ""}
         errors={state.errors}
-        name="location"
+        name="locationName"
         getId={(item: IEntity) => item.id}
       />
       {entity.roleName !== "manager" && entity.locationName && (
@@ -88,12 +87,12 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
           label={warehouseLabel}
           value={state.entity.warehouseName || ""}
           errors={state.errors}
-          name="warehouse"
+          name="warehouseName"
           getId={(item: IEntity) => item.id}
         />
       )}
       <Textarea
-        setText={(e) => actions.handleInputChange("comment", e.target.value)}
+        onChange={(e) => actions.handleInputChange("comment", e.target.value)}
         value={state.entity.comment || ""}
         label={description}
         name="comment"

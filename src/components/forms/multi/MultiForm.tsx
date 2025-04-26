@@ -76,6 +76,7 @@ const MultiForm: FC<IMultiFormProps> = ({
           if (field.type === "input"  || field.type === "tel") {
             return (
               <Input
+                key={field.name}
                 label={field.label}
                 type={field.type}
                 name={field.name}
@@ -90,6 +91,7 @@ const MultiForm: FC<IMultiFormProps> = ({
             const items = dataSources[field.itemsKey!];
             return (
               <Select
+                key={field.name}
                 setValue={(val) => { 
                   actions.handleInputChange?.(field.name, val.name)
                   if (field.name === "manufacturer") {
@@ -111,6 +113,7 @@ const MultiForm: FC<IMultiFormProps> = ({
           if (field.type === "textarea") {
             return (
               <Textarea
+                key={field.name}
                 value={state.entity[field.name] || ""}
                 errors={state.errors}
                 label={field.label || ''}

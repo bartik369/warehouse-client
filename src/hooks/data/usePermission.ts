@@ -2,17 +2,27 @@ import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
 import { IPermissionRole, IRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
-import { FormValidation } from "../../utils/validation/PermissionValidation";
-import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
+import {
+  FormValidation,
+  validateField,
+} from "../../utils/validation/PermissionValidation";
+import {
+  permissionReducer,
+  initialState,
+} from "../../reducers/permission/permissionReducer";
 import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
 
 export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
-  const { isUpdate, entity } = state;
+  const { isUpdate, entity, list } = state;
 
-  console.log(state.entity);
   const handleInputChange = useCallback(
     (field: keyof IPermissionRole, value: string) => {
+      const validationErrors = validateField(field, value);
+      dispatch({
+        type: PermissionActionTypes.SET_ERROR,
+        payload: validationErrors,
+      });
       dispatch({
         type: PermissionActionTypes.SET_ENTITY,
         payload: { [field]: value },
@@ -20,14 +30,17 @@ export const usePermission = () => {
     },
     []
   );
-  const handleCreateEntity = useCallback(async () => {
+  const handleCreateEntity = () => {
     try {
       const validationErrors = FormValidation(entity);
-      console.log(validationErrors);
+      dispatch({
+        type: PermissionActionTypes.SET_ERROR,
+        payload: validationErrors as Record<string, string>,
+      });
     } catch (err: unknown) {
       console.log(err);
     }
-  }, []);
+  };
 
   const handleGetEntity = useCallback((id: string, field: string) => {}, []);
   const handleDeleteEntity = useCallback(() => {}, []);
@@ -35,6 +48,7 @@ export const usePermission = () => {
   const handleResetEntity = useCallback(() => {
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
     dispatch({ type: PermissionActionTypes.RESET_LIST });
+    dispatch({ type: PermissionActionTypes.RESET_ERROR });
   }, []);
   const handleRoleChange = useCallback(
     (item: IRole) => {
@@ -66,8 +80,9 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handleCheck = useCallback(
-    (e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions) => {
+    (e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions, name: string) => {
       const { checked } = e.target;
+
       dispatch({
         type: PermissionActionTypes.SET_LIST,
         payload: { id: item.id || "", checked },
@@ -76,10 +91,19 @@ export const usePermission = () => {
         type: PermissionActionTypes.SET_PERMISSION,
         payload: { id: item.id || "", name: item.name || "", checked },
       });
+      const updatedCheckList = {
+        ...list,
+        [item.id]: checked,
+      }
+      const validationErrors = validateField(name, updatedCheckList);
+      dispatch({
+        type: PermissionActionTypes.SET_ERROR,
+        payload: validationErrors,
+      });
     },
-    []
+    [list]
   );
-
+  
   useEffect(() => {
     if (state.entity.roleName === "manager") {
       dispatch({
@@ -94,8 +118,6 @@ export const usePermission = () => {
       dispatch({ type: PermissionActionTypes.RESET_LIST });
     }
   }, [state.entity.roleName]);
-
-  console.log(entity);
 
   return {
     entity,

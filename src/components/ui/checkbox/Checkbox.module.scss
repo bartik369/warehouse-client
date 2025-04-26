@@ -1,5 +1,16 @@
 .wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    .error {
+        white-space: nowrap;
+        color: #dc3546;
+        font-size: 11px;
+        text-align: end;
+        padding: 2px;
+    }
     .checkbox-menu {
         position: absolute;
         top: 50px;
@@ -31,7 +42,6 @@
         transition: border-color .4s ease-in;
         font-size: 14px;
         color: #15141f;
-        margin-bottom: 20px;
         text-align: left;
         background-color: transparent;
         cursor: pointer;
