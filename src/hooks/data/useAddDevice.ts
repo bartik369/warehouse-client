@@ -62,21 +62,19 @@ export function useAddDevice() {
           updatedById: user.id,
         };
         if (exceptionPath) {
-          await createDevice(updatedData)
-            .unwrap()
-            .then((data) => {
-              toast(data?.message, { type: 'success' });
-              handleResetDevice();
-              dispatchDeviceData(setDevicePic(''));
-            });
+          const data = await createDevice(updatedData).unwrap();
+          if (data) {
+            toast(data?.message, { type: 'success' });
+            handleResetDevice();
+            dispatchDeviceData(setDevicePic(''));
+          }
         } else {
-          await updateDevice(updatedData)
-            .unwrap()
-            .then((data) => {
-              toast(data?.message, { type: 'success' });
-              handleResetDevice();
-              dispatchDeviceData(setDevicePic(''));
-            });
+          const data = await updateDevice(updatedData).unwrap();
+          if (data) {
+            toast(data?.message, { type: 'success' });
+            handleResetDevice();
+            dispatchDeviceData(setDevicePic(''));
+          }
         }
       } else {
         console.error('Validation errors:', validationErrors);

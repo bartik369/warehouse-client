@@ -66,6 +66,15 @@ export function permissionReducer(
       };
     case PermissionActionTypes.RESET_LIST:
       return { ...state, list: initialState.list };
+    case PermissionActionTypes.RESET_WAREHOUSE:
+      return {
+        ...state,
+        entity: {
+          ...state.entity, 
+          warehouseId: '',
+          warehouseName: '',
+        }
+    };
     case PermissionActionTypes.SET_ERROR:
       return {
         ...state,

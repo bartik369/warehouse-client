@@ -15,6 +15,7 @@ export enum PermissionActionTypes {
     SET_IS_UPDATE = 'SET_IS_UPDATE',
     SET_LIST = 'SET_LIST',
     RESET_LIST = 'RESET_LIST',
+    RESET_WAREHOUSE = 'RESET_WAREHOUSE',
     SET_PERMISSION = 'SET_PERMISSION',
 }
 
@@ -26,4 +27,5 @@ export type PermissionAction =
  | { type: PermissionActionTypes.SET_IS_UPDATE, payload: boolean }
  | { type: PermissionActionTypes.SET_LIST, payload: { id: string; checked: boolean }}
  | { type: PermissionActionTypes.RESET_LIST }
+ | { type: PermissionActionTypes.RESET_WAREHOUSE }
  | { type: PermissionActionTypes.SET_PERMISSION, payload: { id: string, name: string, checked: boolean }}

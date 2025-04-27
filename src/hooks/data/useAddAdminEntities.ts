@@ -166,23 +166,21 @@ export const useAddAdminEntities = () => {
             });
 
             if (media.file) formData.append("file", media.file);
-            await createEntityFunction(formData)
-              .unwrap()
-              .then((data) => {
-                dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
-                toast(data?.message, { type: "success" });
-              });
+            const data = await createEntityFunction(formData).unwrap();
+            if (data) {
+              dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
+              toast(data?.message, { type: "success" });
+            }
           } else {
             const updateData = {
               ...entity,
               phoneNumber: changeFormatPhone(entity.phoneNumber || ""),
             };
-            await createEntityFunction(updateData)
-              .unwrap()
-              .then((data) => {
-                toast(data?.message, { type: "success" });
-              });
-            handleResetEntity();
+            const data = await createEntityFunction(updateData).unwrap();
+            if (data) {
+              toast(data?.message, { type: "success" });
+              handleResetEntity();
+            }
           }
         }
       } catch (err: unknown) {
@@ -201,11 +199,10 @@ export const useAddAdminEntities = () => {
   const handleGetEntity = useCallback(async (id: string, field: string) => {
     try {
       const getEntityByIdFunction = entityById[field];
-      await getEntityByIdFunction(id)
-        .unwrap()
-        .then((data) => {
-          dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
-        });
+      const data = await getEntityByIdFunction(id).unwrap();
+      if (data) {
+        dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
+      }
       dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});
     } catch (err: unknown) {
       handleApiError(err);
@@ -231,11 +228,10 @@ export const useAddAdminEntities = () => {
     async (id: string, fieldType: string) => {
       try {
         const deleteEntityFunction = entityDeleteFunctions[fieldType];
-        await deleteEntityFunction(id)
-          .unwrap()
-          .then((data) => {
-            toast(data?.message, { type: "success" });
-          });
+        const data = await deleteEntityFunction(id).unwrap();
+        if (data) {
+          toast(data?.message, { type: "success" });
+        }
       } catch (err: unknown) {
         handleApiError(err);
       }

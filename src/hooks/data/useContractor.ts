@@ -57,12 +57,11 @@ export const useContactor = () => {
             ...contractor,
             phoneNumber: changeFormatPhone(contractor.phoneNumber),
           }
-          await createContractor(contractorData)
-            .unwrap()
-            .then((data) => {
-              toast(data?.message, { type: 'success' });
-              handleReset();
-            });
+          const data = await createContractor(contractorData).unwrap();
+          if (data) {
+            toast(data?.message, { type: 'success' });
+            handleReset();
+          }
         }
       } catch (err) {
         handleApiError(err);

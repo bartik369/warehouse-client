@@ -86,7 +86,12 @@ const Select = <T,>({
                   onFocus={() => setFocusedIndex(index)}
                   onBlur={() => setFocusedIndex(null)}
                 >
-                  {option.name}
+                <div className={style.info}>
+                <div className={style.name}>{option.name}</div>
+                {option.comment &&
+                 <div className={style.comment}>{option.comment}</div>
+                }
+                </div>
                 </div>
               ))
             ) : (

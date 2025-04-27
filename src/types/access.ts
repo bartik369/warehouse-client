@@ -15,7 +15,6 @@ export interface IPermission {
 }
 export interface IPermissionRole {
     id: string;
-    name: string;
     roleId: string;
     roleName: string;
     permissionId: string[];

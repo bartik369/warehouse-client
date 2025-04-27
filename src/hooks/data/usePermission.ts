@@ -2,19 +2,20 @@ import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
 import { IPermissionRole, IRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
-import {
-  FormValidation,
-  validateField,
-} from "../../utils/validation/PermissionValidation";
-import {
-  permissionReducer,
-  initialState,
-} from "../../reducers/permission/permissionReducer";
+import { 
+  useCreatePermissionRoleMutation, 
+  useLazyGetPermissionsByRoleIdQuery,
+} from "../../store/api/permissionApi";
+import { FormValidation, validateField } from "../../utils/validation/PermissionValidation";
+import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
 import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
+import { handleApiError } from "../../utils/errors/handleApiError";
 
 export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
   const { isUpdate, entity, list } = state;
+  const [createPermissionRole] = useCreatePermissionRoleMutation();
+  const [getPermissionsByRole] = useLazyGetPermissionsByRoleIdQuery();
 
   const handleInputChange = useCallback(
     (field: keyof IPermissionRole, value: string) => {
@@ -30,15 +31,25 @@ export const usePermission = () => {
     },
     []
   );
-  const handleCreateEntity = () => {
+
+  console.log(entity)
+  
+  const handleCreateEntity = async() => {
     try {
       const validationErrors = FormValidation(entity);
-      dispatch({
-        type: PermissionActionTypes.SET_ERROR,
-        payload: validationErrors as Record<string, string>,
-      });
+      if (Object.values(validationErrors).length > 0) {
+        dispatch({
+          type: PermissionActionTypes.SET_ERROR,
+          payload: validationErrors as Record<string, string>,
+        });
+        return;
+      }
+      const data = await createPermissionRole(entity).unwrap();
+      if (data) {
+        console.log(data)
+      }
     } catch (err: unknown) {
-      console.log(err);
+      handleApiError(err);
     }
   };
 
@@ -118,6 +129,24 @@ export const usePermission = () => {
       dispatch({ type: PermissionActionTypes.RESET_LIST });
     }
   }, [state.entity.roleName]);
+
+  useEffect(() => {
+    dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE })
+  }, [entity.locationName]);
+
+  useEffect(() => {
+    if (!entity.roleId) return;
+    (async () => {
+      try {
+        const data = await getPermissionsByRole(entity.roleId).unwrap()
+        if (data) {
+          console.log(data)
+        }
+      } catch (err) {
+        handleApiError(err);
+      }
+    })()
+  }, [entity.roleId]);
 
   return {
     entity,

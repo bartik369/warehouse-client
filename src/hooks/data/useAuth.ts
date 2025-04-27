@@ -41,11 +41,12 @@ export const useAuth = () => {
        
         if (checkErrors(validationErrors)) {
           try {
-            await signinUser(authData).unwrap().then((data) => {
+            const data = await signinUser(authData).unwrap();
+            if (data) {
               dispatch(setCredentials(data.user));
               localStorage.setItem('accessToken', data.accessToken);
               navigate('/');
-            });
+            }
           } catch (err) {
             handleApiError(err);
           }

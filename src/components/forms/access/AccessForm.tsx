@@ -43,14 +43,6 @@ const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  acti
   return (
     <form>
       <div className={styles.title}>{title}</div>
-      <Input
-        name="name"
-        type="text"
-        value={state.entity.name || ""}
-        label={name}
-        errors={state.errors}
-        onChange={(e) => actions.handleInputChange("name", e.target.value)}
-      />
       <Select<IRole>
         name="roleName"
         items={(assignableRoles || []) as IRole[] }

@@ -4,7 +4,6 @@ import { requiredFieldText } from "../constants/constants";
 type ValidationFields = keyof IPermissionRole;
 
 const requiredFieldsOther: ValidationFields[] = [
-  "name",
   "roleName",
   "permissionName",
   "locationName",
@@ -12,7 +11,6 @@ const requiredFieldsOther: ValidationFields[] = [
   "comment",
 ];
 const requiredFieldsManager: ValidationFields[] = [
-  "name",
   "roleName",
   "locationName",
   "comment",

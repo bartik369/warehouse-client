@@ -63,10 +63,11 @@ export const useEntity = () => {
             if (value !== undefined && value !== null) formData.append(key, value);
           });
           if (media.file) formData.append('file', media.file);
-          await createEntityFunction(formData).unwrap().then((data) => {
+          const data = await createEntityFunction(formData).unwrap();
+          if (data) {
             handleResetEntity();
             toast(data?.message, { type: 'success' });
-          });
+          }
         }
       } catch (err: unknown) {
        handleApiError(err);

@@ -83,7 +83,7 @@ export const selectPic = 'Выберите картинку!';
 export const edit = 'Редактировать';
 export const editDevice = 'Редактирование устройства';
 
-export const rolesLabel = 'Роли'
+export const rolesLabel = 'Роль'
 export const permissionsLabel = 'Разрешения'
 export const locationLabel = 'Город'
 export const warehouseLabel = 'Склад'

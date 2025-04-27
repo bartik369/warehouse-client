@@ -1,7 +1,7 @@
 import { location } from './../../utils/constants/device';
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IRole, IPermission } from "../../types/access";
+import { IRole, IPermission, IPermissionRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from '../../types/content';
 
@@ -96,6 +96,18 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
+    getPermissionsByRoleId: build.query({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
+      })
+    }),
+    createPermissionRole: build.mutation<IPermissionRole, IPermissionRole>({
+      query: (body) => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
+        method: 'POST',
+        body,
+      })
+    }),
   }),
 });
 
@@ -111,5 +123,7 @@ export const {
   useCreatePermissionMutation,
   useUpdatePermissionMutation,
   useDeletePermissionMutation,
+  useCreatePermissionRoleMutation,
+  useLazyGetPermissionsByRoleIdQuery,
  } =
   permissionApi;

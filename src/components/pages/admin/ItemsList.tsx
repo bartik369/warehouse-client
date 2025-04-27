@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { IEntity } from '../../../types/devices';
 import { IEntityFormActions } from '../../../types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
-import { RiDeleteBin4Line } from 'react-icons/ri';
 import styles from './Admin.module.scss';
 
 interface IItemsListProps {

@@ -43,19 +43,16 @@ export const useAddUser = () => {
   const handleCreateUser = useCallback(async () => {
       try {
         const validateErrors = FormValidation(user);
-        console.log(validateErrors);
-        
         setErrors(validateErrors as Record<string, string>);
         if (Object.values(validateErrors).length === 0) {
           if (!user) return;
           const updateData = {
             ...user,
           };
-          await createUser(updateData)
-            .unwrap()
-            .then((data) => {
-              toast(data?.message, { type: 'success' });
-            });
+          const data = await createUser(updateData).unwrap();
+          if (data) {
+            toast(data?.message, { type: 'success' });
+          }
         }
       } catch (err) {
        handleApiError(err);
