@@ -7,7 +7,6 @@ import {
 export const initialState: IPermissionState = {
   entity: {
     id: "",
-    name: "",
     roleId: "",
     roleName: "",
     permissionId: [],
@@ -21,6 +20,7 @@ export const initialState: IPermissionState = {
   errors: {},
   isUpdate: false,
   list: {},
+  permissionsRequest: false,
 };
 export function permissionReducer(
   state: IPermissionState,
@@ -64,17 +64,33 @@ export function permissionReducer(
           [action.payload.id]: action.payload.checked,
         },
       };
+    case PermissionActionTypes.SET_LIST_BY_ROLE: {
+      const permissionIds = action.payload.permissionId ?? [];
+
+      const permissionList = permissionIds?.reduce((acc, elem) => {
+        acc[elem] = true;
+        return acc;
+      }, {} as Record<string, boolean>);
+
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          ...permissionList,
+        },
+      };
+    }
     case PermissionActionTypes.RESET_LIST:
       return { ...state, list: initialState.list };
     case PermissionActionTypes.RESET_WAREHOUSE:
       return {
         ...state,
         entity: {
-          ...state.entity, 
-          warehouseId: '',
-          warehouseName: '',
-        }
-    };
+          ...state.entity,
+          warehouseId: "",
+          warehouseName: "",
+        },
+      };
     case PermissionActionTypes.SET_ERROR:
       return {
         ...state,
@@ -84,7 +100,9 @@ export function permissionReducer(
         },
       };
     case PermissionActionTypes.RESET_ERROR:
-      return { ...state, errors: initialState.errors }
+      return { ...state, errors: initialState.errors };
+    case PermissionActionTypes.SET_PERMISSIONS_REQUEST:
+      return { ...state, permissionsRequest: action.payload };
     default:
       return state;
   }

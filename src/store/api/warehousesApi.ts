@@ -54,5 +54,5 @@ export const {
   useCreateWarehouseMutation,
   useLazyGetWarehouseQuery,
   useUpdateWarehouseMutation,
-  useGetAssignableWarehousesQuery,
+  useLazyGetAssignableWarehousesQuery,
 } = warehousesApi;
