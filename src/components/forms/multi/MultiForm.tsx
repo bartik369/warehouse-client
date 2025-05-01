@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { useLocation } from "react-router-dom";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
@@ -30,7 +29,7 @@ interface IMultiFormProps {
   fileInputRef?: React.RefObject<HTMLInputElement>;
 }
 
-const MultiForm: FC<IMultiFormProps> = ({
+const MultiForm = ({
   title,
   fields,
   actions,
@@ -38,7 +37,7 @@ const MultiForm: FC<IMultiFormProps> = ({
   fieldType,
   media,
   fileInputRef,
-}) => {
+}:IMultiFormProps) => {
   const locationPath = useLocation();
   const { data: cities } = useGetLocationsQuery();
   const { data: manufacturers } = useGetManufacturersQuery();

@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, { memo } from 'react';
 import styles from './Buttons.module.scss';
 
 interface IButtonProps {
@@ -9,7 +9,7 @@ interface IButtonProps {
     click?:(e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const BtnAction:FC<IButtonProps> = memo(({icon, size, title, color, click}) => {
+const BtnAction = memo(({ icon, size, title, color, click }:IButtonProps) => {
     return (
         <>
             <button 

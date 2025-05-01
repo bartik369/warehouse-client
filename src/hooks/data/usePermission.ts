@@ -13,7 +13,7 @@ import { handleApiError } from "../../utils/errors/handleApiError";
 
 export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
-  const { isUpdate, entity, list } = state;
+  const { isUpdate, entity, list, permissionsRequest } = state;
   const [createPermissionRole] = useCreatePermissionRoleMutation();
   const [getPermissionsByRole] = useLazyGetPermissionsByRoleIdQuery();
 
@@ -32,7 +32,7 @@ export const usePermission = () => {
     []
   );
 
-  console.log(entity)
+  console.log('entity ====>>', entity)
   
   const handleCreateEntity = async() => {
     try {
@@ -84,7 +84,6 @@ export const usePermission = () => {
   );
   const handleWarehouseChange = useCallback(
     (item: IEntity) => {
-      console.log(item);
       handleInputChange("warehouseId", item.id || "");
       handleInputChange("warehouseName", item.name || "");
     },
@@ -131,16 +130,36 @@ export const usePermission = () => {
   }, [state.entity.roleName]);
 
   useEffect(() => {
-    dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE })
-  }, [entity.locationName]);
+    dispatch({
+      type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
+      payload: false 
+    });
+    if (!permissionsRequest) {
+      dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE })
+    }
+  }, [entity.locationId]);
+
+  console.log("list ====>", list)
 
   useEffect(() => {
     if (!entity.roleId) return;
     (async () => {
       try {
-        const data = await getPermissionsByRole(entity.roleId).unwrap()
+        const data = await getPermissionsByRole(entity.roleId).unwrap();
         if (data) {
-          console.log(data)
+          dispatch({
+            type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
+            payload: true 
+          });
+          dispatch({
+            type: PermissionActionTypes.SET_ENTITY,
+            payload: data
+          });
+          dispatch({ type: PermissionActionTypes.RESET_LIST });
+          dispatch({
+            type: PermissionActionTypes.SET_LIST_BY_ROLE,
+            payload: data,
+          })
         }
       } catch (err) {
         handleApiError(err);

@@ -1,6 +1,5 @@
-import {FC} from 'react';
 
-const Profile:FC = () => {
+const Profile = () => {
     return (
         <>
            User Profile 

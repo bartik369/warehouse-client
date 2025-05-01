@@ -1,17 +1,15 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect} from "react";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
-import Input from "../../ui/input/Input";
 import Checkbox from "../../ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
-import { useGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
+import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
 import { IAccessFormActions, IPermissionRole, IRole } from "../../../types/access";
 import { useGetAssignableRolesQuery, useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import {
   description,
   locationLabel,
-  name,
   permissionsLabel,
   rolesLabel,
   warehouseLabel,
@@ -27,19 +25,18 @@ interface IAccessFormProps {
   isUpdate: boolean;
   actions: IAccessFormActions;
 }
-const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  actions}) => {
-  const [skip, setSkip] = useState(true);
+const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormProps) => {
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
-  const { data: warehouses } = useGetAssignableWarehousesQuery(
-    entity.locationId || "",
-    { skip: skip }
-  );
+  const [ getWarehouses, { data: warehouses } ] = useLazyGetAssignableWarehousesQuery();
   const { data: locations } = useGetLocationsQuery();
 
   useEffect(() => {
-    if (entity.locationId) setSkip(false);
+    if (entity.locationId) {
+      getWarehouses(entity.locationId);
+    };
   }, [entity.locationId]);
+
   return (
     <form>
       <div className={styles.title}>{title}</div>

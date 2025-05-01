@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, memo} from 'react';
+import React, { ChangeEvent, memo } from 'react';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Field, IDevice, IValidationErrors } from '../../../types/devices';
 import style from './Number.module.scss';
@@ -10,7 +10,7 @@ interface ICustomNumberProps {
   errors: IValidationErrors;
 }
 
-const CustomNumber: FC<ICustomNumberProps> = memo(({ device, item, errors, setDevice }) => {
+const CustomNumber = memo(({ device, item, errors, setDevice }:ICustomNumberProps) => {
   const data = {
     min: 0,
     max: 9999999,

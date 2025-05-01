@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import BtnAction from '../../ui/buttons/BtnAction';
@@ -11,7 +10,7 @@ import { isFetchBaseQueryError, isErrorWithMessage } from '../../../utils/errors
 import { LuCircleUser } from 'react-icons/lu';
 import style from './ProfileMenu.module.scss';
 
-const ProfileMenu:FC = () => {
+const ProfileMenu = () => {
     const user = useAppSelector(store => store.auth.user);
     const navigate = useNavigate();
     const [logout] = useLogoutUserMutation();

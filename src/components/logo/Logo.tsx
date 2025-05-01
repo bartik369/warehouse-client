@@ -1,11 +1,10 @@
-import {FC} from 'react';
 import style from './Logo.module.scss';
 
 interface ILogoProps {
     open: boolean;
 }
 
-const Logo:FC<ILogoProps> = ({ open }) => {
+const Logo = ({ open }:ILogoProps) => {
     return (
         <div className={style.logo}>
             <div className={style.title}>

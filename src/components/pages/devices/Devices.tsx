@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
@@ -22,7 +22,7 @@ import {
 import { MdFilterListOff } from "react-icons/md";
 import styles from "./Devices.module.scss";
 
-const Devices: FC = () => {
+const Devices = () => {
   const {
     labels,
     devices,

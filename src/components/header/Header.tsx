@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import HeaderMenu from '../navigates/header/HeaderMenu';
 import Search from '../search/Search';
 import BurgerBtn from '../ui/buttons/burger/BurgerBtn';
@@ -14,7 +13,7 @@ interface IHeaderProps {
   setIsActive: (isActive:boolean) => void;
 };
 
-const Header:FC<IHeaderProps> = ({isActive, setIsActive}) => {
+const Header = ({ isActive, setIsActive }:IHeaderProps) => {
   const device = useAppSelector((state:RootState) => state.device.device);
   const status = useAppSelector((state:RootState) => state.device.status);
   const location = useLocation();

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {prevPage, nextPage } from '../../utils/constants/constants';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from './Pagination.module.scss';
@@ -14,18 +13,18 @@ interface IPaginationProps {
   next: () => void;
   setPage: (page: number) => void;
 }
-const Pagination: FC<IPaginationProps> = ({
+const Pagination = ({
   page,
   disabled,
   totalPages,
   prev,
   next,
   setPage,
-}) => {
-  const paginationsNumber: number[] = [];
+}:IPaginationProps) => {
+  const paginationNumber: number[] = [];
 
   for (let x = 1; x <= totalPages; x++) {
-    paginationsNumber.push(x);
+    paginationNumber.push(x);
   }
 
   return (
@@ -38,7 +37,7 @@ const Pagination: FC<IPaginationProps> = ({
           <IoIosArrowBack aria-hidden={true} />
         </button>
         <ul className={styles.list}>
-          {paginationsNumber.map((number) => (
+          {paginationNumber.map((number) => (
             <li
               role={'button'}
               key={number}

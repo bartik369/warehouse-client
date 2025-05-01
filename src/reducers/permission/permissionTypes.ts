@@ -5,6 +5,7 @@ export interface IPermissionState {
     entity: IPermissionRole;
     errors: Record<string, string>;
     isUpdate: boolean;
+    permissionsRequest: boolean;
     list: Checked;
 }
 export enum PermissionActionTypes {
@@ -14,9 +15,11 @@ export enum PermissionActionTypes {
     RESET_ENTITY = 'RESET_ENTITY',
     SET_IS_UPDATE = 'SET_IS_UPDATE',
     SET_LIST = 'SET_LIST',
+    SET_LIST_BY_ROLE = 'SET_LIST_BY_ROLE',
     RESET_LIST = 'RESET_LIST',
     RESET_WAREHOUSE = 'RESET_WAREHOUSE',
     SET_PERMISSION = 'SET_PERMISSION',
+    SET_PERMISSIONS_REQUEST = 'SET_PERMISSIONS_REQUEST',
 }
 
 export type PermissionAction = 
@@ -29,3 +32,5 @@ export type PermissionAction =
  | { type: PermissionActionTypes.RESET_LIST }
  | { type: PermissionActionTypes.RESET_WAREHOUSE }
  | { type: PermissionActionTypes.SET_PERMISSION, payload: { id: string, name: string, checked: boolean }}
+ | { type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, payload: boolean }
+ | { type: PermissionActionTypes.SET_LIST_BY_ROLE, payload: Partial<IPermissionRole> }

@@ -1,6 +1,5 @@
-import { FC } from 'react';
 
-const Navigate:FC = () => {
+const Navigate = () => {
     return (
         <div>
             

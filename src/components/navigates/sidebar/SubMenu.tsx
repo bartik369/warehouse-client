@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import { ISubmenu } from '../../../types/navigation';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './SidebarMenu.module.scss';
@@ -11,7 +10,7 @@ interface ISubMenuProps {
     title: string;
 }
 
-const SubMenu:FC<ISubMenuProps> = ({item, open, title}) => {
+const SubMenu = ({ item, open, title }:ISubMenuProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 

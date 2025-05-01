@@ -1,7 +1,9 @@
-import { FC } from 'react';
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
 import { Checked, CheckedPermissionOptions } from "../../../types/content";
-import { noOptions, selectPermissions } from "../../../utils/constants/constants";
+import {
+  noOptions,
+  selectPermissions,
+} from "../../../utils/constants/constants";
 import { IAccessFormActions, IPermissionRole } from "../../../types/access";
 import styles from "./Checkbox.module.scss";
 
@@ -15,22 +17,24 @@ interface ICheckboxProps {
   errors: Record<string, string>;
 }
 
-const Checkbox: FC<ICheckboxProps> = ({
+const Checkbox = ({
   list,
   entity,
   items,
   actions,
   label,
   name,
-  errors
-}) => {
+  errors,
+}: ICheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
   return (
     <div className={styles.wrapper}>
       <button
         className={styles.checkbox}
-        onClick={() => { setIsOpen(!isOpen) }}
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
         type="button"
       >
         <span className={styles.label}>{label}</span>
@@ -40,20 +44,16 @@ const Checkbox: FC<ICheckboxProps> = ({
         )}
         <span className={styles.arrow} />
       </button>
-      {errorMessage && 
-          <div className={styles.error}>
-            {errorMessage}
-          </div>
-        }
+      {errorMessage && <div className={styles.error}>{errorMessage}</div>}
       {isOpen && (
-        <div ref={modalRef} className={styles['checkbox-menu']}>
+        <div ref={modalRef} className={styles["checkbox-menu"]}>
           {items.length ? (
             items.map((item) => (
               <label key={item.id} className={styles.container}>
                 <input
                   name={name}
                   type="checkbox"
-                  id={String(item.id)}
+                  id={item.id}
                   value={item.name}
                   checked={list[item.id] || false}
                   disabled={item.disabled}

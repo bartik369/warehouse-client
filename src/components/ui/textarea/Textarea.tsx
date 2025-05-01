@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import style from './Textarea.module.scss'
 
 interface ITextareaProps {
@@ -10,7 +10,7 @@ interface ITextareaProps {
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const Textarea:FC<ITextareaProps> = ({value, label, errors, name, onChange}) => {
+const Textarea = ({ value, label, errors, name, onChange }:ITextareaProps) => {
     const errorMessage = errors?.[name];
     return (
         <div className={style.wrapper}>

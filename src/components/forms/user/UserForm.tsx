@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
 import Select from '../../ui/select/Select';
@@ -18,7 +17,7 @@ interface IUserFormProps {
   departments: IEntity[];
 }
 
-const UserForm: FC<IUserFormProps> = ({ departments }) => {
+const UserForm = ({ departments }:IUserFormProps) => {
   const {
     user,
     errors,

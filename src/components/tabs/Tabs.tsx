@@ -1,4 +1,4 @@
-import { FC, Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import Loader from '../ui/loader/Loader';
 import { ITab } from '../../types/navigation';
 import styles from './Tabs.module.scss';
@@ -6,7 +6,7 @@ import styles from './Tabs.module.scss';
 interface ITabsProps {
   tabs: ITab[];
 }
-const Tabs: FC<ITabsProps> = ({ tabs }) => {
+const Tabs = ({ tabs }:ITabsProps) => {
   const [activeTab, setActiveTab] = useState<number>(tabs[0].id);
   return (
     <>

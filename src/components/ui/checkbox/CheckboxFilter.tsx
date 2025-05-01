@@ -1,4 +1,4 @@
-import { ChangeEvent, FC} from 'react';
+import { ChangeEvent} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { Checked, CheckedDeviceOptions } from '../../../types/content';
 import { noOptions } from '../../../utils/constants/constants';
@@ -17,14 +17,14 @@ interface ICheckboxProps {
   ) => void;
 }
 
-const CheckboxFilter: FC<ICheckboxProps> = ({
+const CheckboxFilter = ({
   items,
   label,
   name,
   list,
   setList,
   onChange,
-}) => {
+}:ICheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
   const handleCheck = (

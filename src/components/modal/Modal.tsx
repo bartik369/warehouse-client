@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import modalStyles from './Modal.module.scss';
@@ -10,7 +10,7 @@ interface IModal {
     maxWidth?: number;
     setIsOpen:(isOpen:boolean) => void;
 }
-const Modal:FC<IModal> = ({ children, isOpen, title, maxWidth, setIsOpen }) => {
+const Modal = ({ children, isOpen, title, maxWidth, setIsOpen }:IModal) => {
     const modal = document.getElementById('portal') as HTMLElement;
     return ReactDOM.createPortal(
         <div className={modalStyles.wrapper}>
