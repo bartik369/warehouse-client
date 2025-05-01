@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect} from "react";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
-import Input from "../../ui/input/Input";
 import Checkbox from "../../ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
@@ -26,7 +25,7 @@ interface IAccessFormProps {
   isUpdate: boolean;
   actions: IAccessFormActions;
 }
-const AccessForm: FC<IAccessFormProps> = ({title, state, entity, isUpdate,  actions}) => {
+const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormProps) => {
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
   const [ getWarehouses, { data: warehouses } ] = useLazyGetAssignableWarehousesQuery();

@@ -1,6 +1,5 @@
-import {FC} from 'react';
 
-const Content:FC = () => {
+const Content = () => {
     return (
         <div>
             

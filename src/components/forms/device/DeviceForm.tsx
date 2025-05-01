@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -33,7 +33,7 @@ import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventor
   import DevicePreview from "./DevicePreview";
 import styles from "./DeviceForm.module.scss";
 
-const DeviceForm: FC = () => {
+const DeviceForm = () => {
   const { state, actions  } = useAddDevice();
   const { isOpen, setIsOpen  } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -29,7 +29,7 @@ interface IUpdateDeviceFormProps {
   state: IUpdateDeviceFormState
   actions: IUpdateDeviceFormActions;
 }
-const UpdateDeviceForm: FC<IUpdateDeviceFormProps> = ({ state, actions }) => {
+const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
   const { isOpen, entity, setIsOpen } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: types } = useGetTypesQuery();

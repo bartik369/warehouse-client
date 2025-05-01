@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TechnicalInfo from './TechnicalInfo';
 import PriceInfo from './PriceInfo';
@@ -18,7 +18,7 @@ import { editDevice } from '../../../utils/constants/constants';
 import { CiEdit } from "react-icons/ci";
 import styles from './Device.module.scss';
 
-const Device: FC = () => {
+const Device = () => {
   const params = useParams();
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
   const dispatchDeviceInfo = useAppDispatch();

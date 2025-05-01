@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { IAggregateDeviceInfo } from "../../../types/devices";
 import {
   financialOptions,
@@ -12,7 +11,7 @@ import styles from "./Device.module.scss";
 interface IPriceInfoProps {
   device: IAggregateDeviceInfo;
 }
-const PriceInfo: FC<IPriceInfoProps> = ({ device }) => {
+const PriceInfo = ({ device }:IPriceInfoProps) => {
   return (
     <div className={styles.price}>
       <div className={styles.title}>

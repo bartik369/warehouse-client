@@ -1,5 +1,5 @@
-import React, {ChangeEvent, FC, memo} from 'react';
-import { deviceWeight} from '../../../utils/constants/device';
+import React, { ChangeEvent, memo} from 'react';
+import { deviceWeight } from '../../../utils/constants/device';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { IDevice } from '../../../types/devices';
 
@@ -9,7 +9,7 @@ interface INumberProps {
     device: IDevice;
     setDevice: (entity:number) => void;
 }
-const Number:FC<INumberProps> = memo(({ device, setDevice}) => {
+const Number = memo(({ device, setDevice }:INumberProps) => {
     const data = {
         min: 0,
         max: 1000000,

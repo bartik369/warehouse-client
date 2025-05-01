@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import styles from './Loader.module.scss';
 
 interface ILoaderProps {
@@ -6,7 +5,7 @@ interface ILoaderProps {
     color: 'blue' | 'green' | 'grey';
 }
 
-const Loader:FC<ILoaderProps> = ({size, color}) => {
+const Loader = ({ size, color }:ILoaderProps) => {
     return (
         <div className={styles.wrapper}>
             <span className={`${styles[size]} ${styles[color]}`}></span>  

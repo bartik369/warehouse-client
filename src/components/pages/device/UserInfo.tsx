@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { IAggregateDeviceInfo } from "../../../types/devices";
 import {
   addedBy,
@@ -8,12 +7,12 @@ import {
   whoAdded,
 } from "../../../utils/constants/constants";
 import { RiFileUserLine } from "react-icons/ri";
-
 import styles from "./Device.module.scss";
+
 interface IUserInfoProps {
   device: IAggregateDeviceInfo;
 }
-const UserInfo: FC<IUserInfoProps> = ({ device }) => {
+const UserInfo = ({ device }:IUserInfoProps) => {
   return (
       <div className={styles.options}>
         <div className={styles.title}>

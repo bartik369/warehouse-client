@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useEntity } from '../../../hooks/data/useEntity';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
@@ -17,7 +17,7 @@ interface IEntityProps {
   fieldType: string;
 };
 
-const EntityForm:FC<IEntityProps> = ({ fieldType, typeId, manufacturerId }) => { 
+const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
     const { entity, errors, media, fileInputRef, handleMedia, handleInputChange, 
     handleCreateEntity, handleResetEntity} = useEntity();
 

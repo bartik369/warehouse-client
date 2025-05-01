@@ -1,7 +1,6 @@
-import React, {FC} from 'react';
 import { Link } from 'react-router-dom';
 
-const Admin:FC = () => {
+const Admin = () => {
     return (
         <div>
             <Link to={`/admin/add-device`}>Добавить устройство</Link>

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { add, reset, update } from '../../../utils/constants/constants';
 import { GoPlus } from 'react-icons/go';
@@ -10,7 +9,7 @@ interface IActionsProps {
     resetEntity: () => void;
     addEntity: () => void;
 }
-const Actions:FC<IActionsProps> = ({ isUpdate, resetEntity, addEntity}) => {
+const Actions = ({ isUpdate, resetEntity, addEntity }: IActionsProps) => {
     return (
         <div className={styles.actions}>
         <BtnAction

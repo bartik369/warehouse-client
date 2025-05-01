@@ -1,4 +1,4 @@
-import {ChangeEvent, FC} from 'react';
+import {ChangeEvent } from 'react';
 import { IFilteredDevicesFromBack } from '../../../types/devices';
 import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
 import { CgUnavailable } from 'react-icons/cg';
@@ -11,7 +11,7 @@ interface IDeviceItemsProps {
     handleCheck:(device:IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DeviceItems:FC<IDeviceItemsProps> = ({devices, checks, handleCheck}) => {
+const DeviceItems = ({ devices, checks, handleCheck }:IDeviceItemsProps) => {
     return (
         <>
           {devices && devices.map((device) => (

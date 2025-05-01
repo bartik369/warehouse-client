@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import {Link} from 'react-router-dom';
 import Input from '../../ui/input/Input';
 import { useAuth } from '../../../hooks/data/useAuth';
@@ -7,7 +6,7 @@ import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword,
   reset, password, email } from '../../../utils/constants/constants';
 import style from './AuthForm.module.scss';
 
-const AuthForm: FC = () => {
+const AuthForm = () => {
     const {authData, errors, userHandler, authHandler} = useAuth();
     return (
       <div className={style.auth}>

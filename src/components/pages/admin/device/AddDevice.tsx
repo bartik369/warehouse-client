@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch } from "../../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../../store/slices/deviceSlice";
 import AddDeviceForm from "../../../forms/device/DeviceForm";
 
-const AddDevice: FC = () => {
+const AddDevice = () => {
   const dispatch = useAppDispatch();
   
   useEffect(() => {

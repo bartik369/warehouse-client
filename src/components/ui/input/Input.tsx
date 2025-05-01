@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, { memo } from 'react';
 import style from './Input.module.scss';
 
 interface IInputProps {
@@ -10,14 +10,14 @@ interface IInputProps {
     label?: string;
     errors: Record<string, string>;
 };
-const Input:FC<IInputProps> = memo(({
+const Input = memo(({
     type,
     name,
     value, 
     placeholder, 
     label,
     errors,
-    onChange}) => {
+    onChange }:IInputProps) => {
     const errorMessage = errors?.[name];
 
     return (

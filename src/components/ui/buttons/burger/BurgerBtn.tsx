@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import { TbMenu2, TbMenu4  } from 'react-icons/tb';
 import { openSidebar } from '../../../../utils/constants/constants';
 import style from './BurgerBtn.module.scss';
@@ -8,7 +7,7 @@ interface IBurgerBtn {
     isActive: boolean;
 }
 
-const BurgerBtn: FC<IBurgerBtn> = ({ isActive, action }) => {
+const BurgerBtn = ({ isActive, action }:IBurgerBtn) => {
     return (
         <button className={style.burger} onClick={action} aria-label={openSidebar}>
             {!isActive

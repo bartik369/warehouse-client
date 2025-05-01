@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import previewPicture from '../../../assets/elements/default.png';
 import styles from "./DeviceForm.module.scss";
 
-const DevicePreview:FC = () => {
+const DevicePreview = () => {
     const devicePic = useAppSelector(state => state.device?.media?.prevImg);
     return (
         <figure className={styles.preview}>

@@ -1,6 +1,5 @@
-import {FC} from 'react';
 
-const Home:FC = () => {
+const Home = () => {
 
     return (
         <div>

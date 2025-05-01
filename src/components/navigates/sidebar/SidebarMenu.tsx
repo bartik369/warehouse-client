@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import SubMenu from './SubMenu';
 import { sidebarMenuData } from '../../../utils/data/menus';
@@ -9,7 +9,7 @@ interface ISidebarMenuProps {
   open: boolean;
 }
 
-const SidebarMenu: FC<ISidebarMenuProps> = ({ open }) => {
+const SidebarMenu = ({ open }:ISidebarMenuProps) => {
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 

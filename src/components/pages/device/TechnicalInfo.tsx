@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { IAggregateDeviceInfo } from "../../../types/devices";
 import {
   name,
@@ -23,7 +22,7 @@ import styles from "./Device.module.scss";
 interface ITechnicalInfoProps {
   device: IAggregateDeviceInfo;
 }
-const TechnicalInfo: FC<ITechnicalInfoProps> = ({ device }) => {
+const TechnicalInfo = ({ device }:ITechnicalInfoProps) => {
   return (
     <div className={styles.options}>
       <div className={styles.title}>
