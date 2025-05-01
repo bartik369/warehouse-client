@@ -71,7 +71,7 @@ export function permissionReducer(
         acc[elem] = true;
         return acc;
       }, {} as Record<string, boolean>);
-
+      
       return {
         ...state,
         list: {

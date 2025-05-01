@@ -3,9 +3,10 @@ import { IEntity } from "./devices";
 export type IListRefObj = {
     [index: string]: HTMLDivElement | null;
 };
-export type Checked = {
-    [index: string]: boolean;
-}
+// export type Checked = {
+//     [index: string]: boolean;
+// }
+export type Checked = Record<string, boolean>
 
 export type CheckedDeviceOptions = {
     // id: number;

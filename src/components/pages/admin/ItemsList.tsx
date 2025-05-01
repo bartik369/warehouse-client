@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { IEntity } from '../../../types/devices';
 import { IEntityFormActions } from '../../../types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
@@ -9,7 +8,7 @@ interface IItemsListProps {
   field: string;
   items: IEntity[];
 }
-const ItemsList: FC<IItemsListProps> = ({ field, items, actions }) => {
+const ItemsList = ({ field, items, actions }: IItemsListProps) => {
   if (items.length === 0) return <div>net info</div>;
   return (
     <ul>

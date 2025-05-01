@@ -84,7 +84,6 @@ export const usePermission = () => {
   );
   const handleWarehouseChange = useCallback(
     (item: IEntity) => {
-      console.log(item);
       handleInputChange("warehouseId", item.id || "");
       handleInputChange("warehouseName", item.name || "");
     },
@@ -147,8 +146,6 @@ export const usePermission = () => {
     (async () => {
       try {
         const data = await getPermissionsByRole(entity.roleId).unwrap();
-        console.log('data ====>>', data);
-        
         if (data) {
           dispatch({
             type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
@@ -158,6 +155,7 @@ export const usePermission = () => {
             type: PermissionActionTypes.SET_ENTITY,
             payload: data
           });
+          dispatch({ type: PermissionActionTypes.RESET_LIST });
           dispatch({
             type: PermissionActionTypes.SET_LIST_BY_ROLE,
             payload: data,

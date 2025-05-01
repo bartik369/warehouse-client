@@ -53,7 +53,7 @@ const Checkbox: FC<ICheckboxProps> = ({
                 <input
                   name={name}
                   type="checkbox"
-                  id={String(item.id)}
+                  id={item.id}
                   value={item.name}
                   checked={list[item.id] || false}
                   disabled={item.disabled}
