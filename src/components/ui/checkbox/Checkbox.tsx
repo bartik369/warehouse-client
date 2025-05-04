@@ -6,6 +6,8 @@ import {
 } from "../../../utils/constants/constants";
 import { IAccessFormActions, IPermissionRole } from "../../../types/access";
 import styles from "./Checkbox.module.scss";
+import { useMemo } from "react";
+import { getRoleType, RoleType } from "../../../utils/roles/roles";
 
 interface ICheckboxProps {
   list: Checked;
@@ -28,12 +30,16 @@ const Checkbox = ({
 }: ICheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
+  const roleType = useMemo(() => getRoleType(entity.roleName), [entity.roleName]);
+  const isManager = roleType === RoleType.Manager;
+  const FIXED_PERMISSIONS = ['user.create', 'user.edit', 'device.create', 'device.edit'];
+
   return (
     <div className={styles.wrapper}>
       <button
         className={styles.checkbox}
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen(!isOpen); 
         }}
         type="button"
       >
@@ -48,7 +54,8 @@ const Checkbox = ({
       {isOpen && (
         <div ref={modalRef} className={styles["checkbox-menu"]}>
           {items.length ? (
-            items.map((item) => (
+            items.filter((item) => !FIXED_PERMISSIONS.includes(item.name))
+            .map((item) => (
               <label key={item.id} className={styles.container}>
                 <input
                   name={name}

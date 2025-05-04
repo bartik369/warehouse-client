@@ -1,0 +1,52 @@
+.items {
+    .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        background-color: rgb(234, 234, 234);
+        .info {
+            .title {
+                font-size: 16px;
+                padding: 5px 0;
+                font-weight: 600;
+                span {
+                    font-size: 12px;
+                    margin-left: 4px;
+                    font-weight: 400;
+                }
+            }
+            .text {
+                font-size: 13px;
+                padding: 2px 0;
+                font-weight: 500;
+            }
+            .permissions {
+                color: #b43131;
+                span {
+                    display: inline-block;
+                    padding: 3px 5px;
+                    margin: 2px 3px;
+                    font-size: 11px;
+                    background-color: rgb(218, 218, 218);
+                }
+            }
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            .btn {
+                display: flex;
+                align-items: center;
+                font-size: 19px;
+                margin-left: 15px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                &:hover {
+                    color: #3d3dbf;
+                }
+            }
+        }
+    }
+}

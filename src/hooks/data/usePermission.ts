@@ -5,6 +5,7 @@ import { CheckedPermissionOptions } from "../../types/content";
 import { 
   useCreatePermissionRoleMutation, 
   useLazyGetPermissionsByRoleIdQuery,
+  useUpdatePermissionRoleMutation,
 } from "../../store/api/permissionApi";
 import { FormValidation, validateField } from "../../utils/validation/PermissionValidation";
 import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
@@ -15,6 +16,7 @@ export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
   const { isUpdate, entity, list, permissionsRequest } = state;
   const [createPermissionRole] = useCreatePermissionRoleMutation();
+  const [updatePermissionRole] = useUpdatePermissionRoleMutation();
   const [getPermissionsByRole] = useLazyGetPermissionsByRoleIdQuery();
 
   const handleInputChange = useCallback(
@@ -36,7 +38,9 @@ export const usePermission = () => {
   
   const handleCreateEntity = async() => {
     try {
+      console.log('start');
       const validationErrors = FormValidation(entity);
+      console.log(validationErrors);
       if (Object.values(validationErrors).length > 0) {
         dispatch({
           type: PermissionActionTypes.SET_ERROR,
@@ -44,9 +48,19 @@ export const usePermission = () => {
         });
         return;
       }
-      const data = await createPermissionRole(entity).unwrap();
-      if (data) {
-        console.log(data)
+      console.log(isUpdate);
+      if (!isUpdate) {
+        console.log('create');
+        
+        const data = await createPermissionRole(entity).unwrap();
+        if (data) {
+          console.log(data)
+        }
+      } else {
+        const data = await updatePermissionRole(entity).unwrap();
+        if (data) {
+          console.log(data)
+        }
       }
     } catch (err: unknown) {
       handleApiError(err);
@@ -69,8 +83,8 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handlePermissionChange = useCallback(
-    (item: IPermissionRole) => {
-      handleInputChange("permissionId", item.id || "");
+    (item: IRole) => {
+      handleInputChange("permissionIds", item.id || "");
       handleInputChange("permissionName", item.name || "");
     },
     [handleInputChange]
@@ -120,7 +134,7 @@ export const usePermission = () => {
         type: PermissionActionTypes.SET_ENTITY,
         payload: {
           permissionName: [],
-          permissionId: [],
+          permissionIds: [],
           warehouseId: "",
           warehouseName: "",
         },
@@ -139,33 +153,31 @@ export const usePermission = () => {
     }
   }, [entity.locationId]);
 
-  console.log("list ====>", list)
-
-  useEffect(() => {
-    if (!entity.roleId) return;
-    (async () => {
-      try {
-        const data = await getPermissionsByRole(entity.roleId).unwrap();
-        if (data) {
-          dispatch({
-            type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
-            payload: true 
-          });
-          dispatch({
-            type: PermissionActionTypes.SET_ENTITY,
-            payload: data
-          });
-          dispatch({ type: PermissionActionTypes.RESET_LIST });
-          dispatch({
-            type: PermissionActionTypes.SET_LIST_BY_ROLE,
-            payload: data,
-          })
-        }
-      } catch (err) {
-        handleApiError(err);
-      }
-    })()
-  }, [entity.roleId]);
+  // useEffect(() => {
+  //   if (!entity.roleId) return;
+  //   (async () => {
+  //     try {
+  //       const data = await getPermissionsByRole(entity.roleId).unwrap();
+  //       if (data) {
+  //         dispatch({
+  //           type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
+  //           payload: true 
+  //         });
+  //         dispatch({
+  //           type: PermissionActionTypes.SET_ENTITY,
+  //           payload: data
+  //         });
+  //         dispatch({ type: PermissionActionTypes.RESET_LIST });
+  //         dispatch({
+  //           type: PermissionActionTypes.SET_LIST_BY_ROLE,
+  //           payload: data,
+  //         })
+  //       }
+  //     } catch (err) {
+  //       handleApiError(err);
+  //     }
+  //   })()
+  // }, [entity.roleId]);
 
   return {
     entity,

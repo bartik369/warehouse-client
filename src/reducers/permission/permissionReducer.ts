@@ -9,7 +9,7 @@ export const initialState: IPermissionState = {
     id: "",
     roleId: "",
     roleName: "",
-    permissionId: [],
+    permissionIds: [],
     permissionName: [],
     warehouseId: "",
     warehouseName: "",
@@ -37,7 +37,7 @@ export function permissionReducer(
     case PermissionActionTypes.SET_PERMISSION: {
       const { id, name, checked } = action.payload;
       const currentNameArr = state.entity.permissionName || [];
-      const currentIdArr = state.entity.permissionId || [];
+      const currentIdArr = state.entity.permissionIds || [];
 
       const checkValue = <T>(arr: T[], value: T) => {
         const result = checked
@@ -52,7 +52,7 @@ export function permissionReducer(
         entity: {
           ...state.entity,
           permissionName: checkValue(currentNameArr, name) || [],
-          permissionId: checkValue(currentIdArr, id) || [],
+          permissionIds: checkValue(currentIdArr, id) || [],
         },
       };
     }
@@ -65,8 +65,7 @@ export function permissionReducer(
         },
       };
     case PermissionActionTypes.SET_LIST_BY_ROLE: {
-      const permissionIds = action.payload.permissionId ?? [];
-
+      const permissionIds = action.payload.permissionIds ?? [];
       const permissionList = permissionIds?.reduce((acc, elem) => {
         acc[elem] = true;
         return acc;

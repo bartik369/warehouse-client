@@ -5,6 +5,7 @@ import { useGetManufacturersQuery } from '../../../../store/api/manufacturersApi
 import { addManufacturerTitle } from '../../../../utils/constants/constants';
 import { manufacturerFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
 import styles from '../Admin.module.scss';
+
 const AddManufacturer = () => {
   const {state, actions} = useAddAdminEntities();
   const { data: manufacturers } = useGetManufacturersQuery();

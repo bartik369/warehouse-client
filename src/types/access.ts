@@ -17,7 +17,7 @@ export interface IPermissionRole {
     id: string;
     roleId: string;
     roleName: string;
-    permissionId: string[];
+    permissionIds: string[];
     permissionName: string[];
     warehouseId?: string;
     warehouseName?: string;
@@ -25,6 +25,14 @@ export interface IPermissionRole {
     locationName?: string;
     comment?: string;
 }
+export type IPermissionRoleRes = Pick<
+  IPermissionRole,
+  | "roleName"
+  | "warehouseName"
+  | "locationName"
+  | "permissionName"
+  | "permissionIds"
+>;
 export interface IAccessFormActions {
     handleInputChange: (name: keyof IPermissionRole, e: string) => void;
     handleRoleChange: (item: IRole) => void;

@@ -1,4 +1,3 @@
-import { location } from './../../utils/constants/device';
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 import { IRole, IPermission, IPermissionRole } from "../../types/access";
@@ -8,7 +7,7 @@ import { CheckedPermissionOptions } from '../../types/content';
 export const permissionApi = createApi({
   reducerPath: "permissionApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Role', 'Permission'],
+  tagTypes: ['Role', 'Permission', 'PermissionRole'],
   endpoints: (build) => ({
     getRoles: build.query<IRole[], void>({
       query: () => ({
@@ -96,6 +95,18 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
+    getPermissionsRoles: build.query<any, void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'PermissionRole' as const, id })),
+              { type: 'PermissionRole', id: 'LIST' },
+            ]
+          : [{ type: 'PermissionRole', id: 'LIST' }],
+    }),
     getPermissionsByRoleId: build.query({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
@@ -106,8 +117,17 @@ export const permissionApi = createApi({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
         method: 'POST',
         body,
-      })
+      }),
+      invalidatesTags: ['PermissionRole']
     }),
+    updatePermissionRole: build.mutation({
+      query: ({ id, body }) => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['PermissionRole']
+    })
   }),
 });
 
@@ -125,5 +145,7 @@ export const {
   useDeletePermissionMutation,
   useCreatePermissionRoleMutation,
   useLazyGetPermissionsByRoleIdQuery,
+  useUpdatePermissionRoleMutation,
+  useGetPermissionsRolesQuery,
  } =
   permissionApi;
