@@ -5,9 +5,8 @@ import {
   selectPermissions,
 } from "../../../utils/constants/constants";
 import { IAccessFormActions, IPermissionRole } from "../../../types/access";
+import { TbSelector } from "react-icons/tb";
 import styles from "./Checkbox.module.scss";
-import { useMemo } from "react";
-import { getRoleType, RoleType } from "../../../utils/roles/roles";
 
 interface ICheckboxProps {
   list: Checked;
@@ -30,8 +29,6 @@ const Checkbox = ({
 }: ICheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
-  const roleType = useMemo(() => getRoleType(entity.roleName), [entity.roleName]);
-  const isManager = roleType === RoleType.Manager;
   const FIXED_PERMISSIONS = ['user.create', 'user.edit', 'device.create', 'device.edit'];
 
   return (
@@ -48,7 +45,7 @@ const Checkbox = ({
         {entity.permissionName.length > 0 && (
           <span className={styles.count}>{entity.permissionName.length}</span>
         )}
-        <span className={styles.arrow} />
+         <TbSelector className={styles.arrow}/>
       </button>
       {errorMessage && <div className={styles.error}>{errorMessage}</div>}
       {isOpen && (

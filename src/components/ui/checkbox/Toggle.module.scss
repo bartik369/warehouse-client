@@ -22,7 +22,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #484c50;
+        background-color: #a0a6b1;
         border-radius: 40px;
         transition: 0.4s;
         cursor: pointer;
@@ -61,7 +61,7 @@
 }
 
 input:checked+.slider {
-    background-color: #169453;
+    background-color: #34c198;
 }
 
 input:checked+.slider:before {

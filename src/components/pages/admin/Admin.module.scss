@@ -22,7 +22,7 @@
             align-items: center;
             padding: 9px 18px;
             margin-bottom: 8px;
-            border: 1px solid #e2e8ef;
+            border: 1px solid #e7ebee;
             border-radius: 6px;
             .info {
                 display: flex;
@@ -36,7 +36,7 @@
                 }
                 .description {
                     font-size: 12px;
-                    color: #646367;
+                    color: #5e6473;
                     padding: 3px 0;
                     overflow: hidden;
                 }
@@ -45,6 +45,7 @@
                 display: flex;
                 align-items: center;
                 .btn {
+                    color: #363941;
                     display: flex;
                     align-items: center;
                     font-size: 19px;

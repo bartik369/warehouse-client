@@ -63,10 +63,10 @@
 
 .grey {
     box-sizing: border-box;
-    background-color: #f2f2ff;
+    border: 1px solid #adb1bc;
+    background-color: transparent;
     &:hover {
-        background-color: #656569;
-        color: #ffff;
+        background-color: #e7e7ee;
     }
     &:focus {
         background-color: #383c48;

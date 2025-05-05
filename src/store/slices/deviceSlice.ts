@@ -42,4 +42,4 @@ const deviceSlice = createSlice({
 });
 
 export default deviceSlice.reducer
-export const {setDeviceInfo, setDevicePic, setDeviceFile} = deviceSlice.actions;
+export const {setDeviceInfo, setDevicePic, setDeviceFile } = deviceSlice.actions;

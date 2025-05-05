@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { IValidationErrors } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
-import style from './Select.module.scss';
+import { TbSelector } from "react-icons/tb";
+import styles from './Select.module.scss';
 
 interface ISelectProps<T> {
   items: T[];
@@ -52,33 +53,33 @@ const Select = <T,>({
     };
 
     return (
-      <div className={style.wrapper} onKeyDown={handleKeyDown} ref={modalRef}>
+      <div className={styles.wrapper} onKeyDown={handleKeyDown} ref={modalRef}>
         {label && 
-          <span className={style.label}>
+          <span className={styles.label}>
             {label}
           </span>
         }
         <button
           type="button"
-          className={style.container}
+          className={styles.container}
           onClick={() => setIsOpen(!isOpen)}
         >
           {value ? value : selectFromList}
-          <span className={style.arrow} />
+          <TbSelector className={styles.arrow}/>
         </button>
         {errorMessage && 
-          <div className={style.error}>
+          <div className={styles.error}>
             {errorMessage}
           </div>
         }
         {isOpen && (
-          <div className={style.dropdown}>
+          <div className={styles.dropdown}>
             {items.length ? (
               items.map((option, index) => (
                 <div
                   key={getId(option)!}
-                  className={`${style.option} ${
-                    focusedIndex === index ? style.focused : ""
+                  className={`${styles.option} ${
+                    focusedIndex === index ? styles.focused : ""
                   }`}
                   onClick={() => handleSelect(option)}
                   role="button"
@@ -86,16 +87,16 @@ const Select = <T,>({
                   onFocus={() => setFocusedIndex(index)}
                   onBlur={() => setFocusedIndex(null)}
                 >
-                <div className={style.info}>
-                <div className={style.name}>{option.name}</div>
+                <div className={styles.info}>
+                <div className={styles.name}>{option.name}</div>
                 {option.comment &&
-                 <div className={style.comment}>{option.comment}</div>
+                 <div className={styles.comment}>{option.comment}</div>
                 }
                 </div>
                 </div>
               ))
             ) : (
-              <div className={style["no-options"]}>{noExistSelect}</div>
+              <div className={styles["no-options"]}>{noExistSelect}</div>
             )}
           </div>
         )}

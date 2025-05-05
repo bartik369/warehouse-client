@@ -7,31 +7,32 @@ interface IPermissionsRoleListProps {
   roles: IPermissionRoleRes[];
 }
 const PermissionsRoleList = ({ roles }: IPermissionsRoleListProps) => {
-  console.log(roles)
   return (
     <div className={styles.items}>
       {roles &&
         roles.map((role) => (
-          <div className={styles.item} key={role.roleName}>
+          <div className={styles.item} 
+          key={`${role.roleName}_${role.locationName}_${role.warehouseName}`}>
             <div className={styles.info}>
-            <div className={styles.title}>
-              {role.roleName}
-              <span>({role.locationName})</span>
-            </div>
-            <div className={styles.text}>{role.warehouseName}</div>
-            <div className={styles.permissions}>
-              {role.permissionName &&
-                role.permissionName.map((p, i) => <span key={i}>{p}</span>)}
-            </div>
+              <div className={styles.title}>{role.roleName}</div>
+              <div className={styles.text}>
+                {role.warehouseName}<span>{role.locationName}</span>
+              </div>
+              {role.warehouseName && role.permissionName.length > 0 && (
+                <div className={styles.permissions}>
+                  {role.permissionName &&
+                    role.permissionName.map((permission, index) => <span key={index}>{permission}</span>)}
+                </div>
+              )}
             </div>
             <div className={styles.actions}>
-            <button className={styles.btn}>
-              <MdOutlineEdit />
-            </button>
-            <button className={styles.btn}>
+              <button className={styles.btn}>
+                <MdOutlineEdit />
+              </button>
+              <button className={styles.btn}>
                 <RiDeleteBin4Line />
               </button>
-          </div>
+            </div>
           </div>
         ))}
     </div>
