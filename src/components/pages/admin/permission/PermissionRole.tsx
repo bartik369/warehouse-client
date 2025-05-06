@@ -27,6 +27,7 @@ const PermissionRole = () => {
           <aside className={styles.list}>
             <PermissionsRoleList
                roles={permissionsRoles}
+               actions={actions}
              />
           </aside>
         </section>

@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, IRole } from "../../types/access";
+import { IPermissionRole, IPermissionRoleRes, IRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
 import { 
@@ -38,9 +38,7 @@ export const usePermission = () => {
   
   const handleCreateEntity = async() => {
     try {
-      console.log('start');
       const validationErrors = FormValidation(entity);
-      console.log(validationErrors);
       if (Object.values(validationErrors).length > 0) {
         dispatch({
           type: PermissionActionTypes.SET_ERROR,
@@ -48,13 +46,12 @@ export const usePermission = () => {
         });
         return;
       }
-      console.log(isUpdate);
       if (!isUpdate) {
-        console.log('create');
-        
         const data = await createPermissionRole(entity).unwrap();
         if (data) {
-          console.log(data)
+          dispatch({ type: PermissionActionTypes.RESET_ENTITY });
+          dispatch({ type: PermissionActionTypes.SET_IS_UPDATE, payload: false });
+          dispatch({ type: PermissionActionTypes.RESET_LIST });
         }
       } else {
         const data = await updatePermissionRole(entity).unwrap();
@@ -127,6 +124,10 @@ export const usePermission = () => {
     },
     [list]
   );
+  const handlePermsByRole = (item: IPermissionRoleRes) => {
+    console.log(item);
+    
+  }
   
   useEffect(() => {
     if (state.entity.roleName === "manager") {
@@ -194,6 +195,7 @@ export const usePermission = () => {
       handleLocationChange,
       handleWarehouseChange,
       handleCheck,
+      handlePermsByRole,
     },
   };
 };

@@ -33,7 +33,7 @@ export function permissionReducer(
         entity: { ...state.entity, ...action.payload },
       };
     case PermissionActionTypes.RESET_ENTITY:
-      return { ...state, entity: initialState.entity };
+      return { ...state, entity: { ...initialState.entity }};
     case PermissionActionTypes.SET_PERMISSION: {
       const { id, name, checked } = action.payload;
       const currentNameArr = state.entity.permissionName || [];
@@ -66,11 +66,7 @@ export function permissionReducer(
       };
     case PermissionActionTypes.SET_LIST_BY_ROLE: {
       const permissionIds = action.payload.permissionIds ?? [];
-      const permissionList = permissionIds?.reduce((acc, elem) => {
-        acc[elem] = true;
-        return acc;
-      }, {} as Record<string, boolean>);
-      
+      const permissionList = Object.fromEntries(permissionIds.map((id) => [id, true]))
       return {
         ...state,
         list: {
@@ -80,7 +76,7 @@ export function permissionReducer(
       };
     }
     case PermissionActionTypes.RESET_LIST:
-      return { ...state, list: initialState.list };
+      return { ...state, list: {} };
     case PermissionActionTypes.RESET_WAREHOUSE:
       return {
         ...state,
@@ -99,7 +95,7 @@ export function permissionReducer(
         },
       };
     case PermissionActionTypes.RESET_ERROR:
-      return { ...state, errors: initialState.errors };
+      return { ...state, errors: {} };
     case PermissionActionTypes.SET_PERMISSIONS_REQUEST:
       return { ...state, permissionsRequest: action.payload };
     default:

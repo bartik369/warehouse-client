@@ -1,12 +1,13 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin4Line } from "react-icons/ri";
-import { IPermissionRoleRes } from "../../../../types/access";
+import { IAccessFormActions, IPermissionRoleRes } from "../../../../types/access";
 import styles from "./PermissionsRoleList.module.scss";
 
 interface IPermissionsRoleListProps {
   roles: IPermissionRoleRes[];
+  actions: IAccessFormActions;
 }
-const PermissionsRoleList = ({ roles }: IPermissionsRoleListProps) => {
+const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
   return (
     <div className={styles.items}>
       {roles &&
@@ -26,7 +27,10 @@ const PermissionsRoleList = ({ roles }: IPermissionsRoleListProps) => {
               )}
             </div>
             <div className={styles.actions}>
-              <button className={styles.btn}>
+              <button 
+              className={styles.btn}
+              onClick={() => actions.handlePermsByRole(role)}
+              >
                 <MdOutlineEdit />
               </button>
               <button className={styles.btn}>

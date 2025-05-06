@@ -41,13 +41,13 @@ export function adminEntityReducer(
         return { ...state, entity: { ...state.entity, ...action.payload } };
       }
       case AdminEntityActionTypes.RESET_ENTITY: {
-        return { ...state, entity: initialState.entity };
+        return { ...state, entity: { ...initialState.entity } };
       }
       case AdminEntityActionTypes.SET_ERROR: {
         return { ...state, errors: action.payload };
       }
       case AdminEntityActionTypes.RESET_ERROR: {
-        return { ...state, errors: initialState.errors };
+        return { ...state, errors: {} };
       }
       case AdminEntityActionTypes.SET_IS_UPDATE: {
         return { ...state, isUpdate: action.payload };

@@ -42,6 +42,7 @@ export interface IAccessFormActions {
     handleCreateEntity: () => void;
     handleResetEntity: () => void;
     handleCheck:(e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions, name: string) => void;
+    handlePermsByRole: (item: IPermissionRoleRes) => void;
 }
 export interface IValidateAccessErrors {
     id: string;

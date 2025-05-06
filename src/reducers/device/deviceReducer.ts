@@ -71,7 +71,7 @@ export function deviceReducer(
     case DeviceActionTypes.SET_DEVICE:
       return { ...state, device: { ...state.device, ...action.payload } };
     case DeviceActionTypes.RESET_DEVICE:
-      return { ...state, device: initialState.device };
+      return { ...state, device: { ...initialState.device } };
     default:
       return state;
   }
