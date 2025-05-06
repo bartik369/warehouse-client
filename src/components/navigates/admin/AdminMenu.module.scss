@@ -2,17 +2,17 @@
     font-size: 13px;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
-    padding: 11px 15px 11px 10px;
+    margin-bottom: 9px;
+    padding: 9px 15px 9px 10px;
     border-radius: 6px;
     border: 1px solid #fff;
     transition: background-color .1s ease;
 }
 
 @mixin active {
-    color: #3d3dbf;
-    background-color: #f8faff;
-    border: 1px solid #eaeefc;
+    color: #3a5ba0;
+    background-color: #f5f9ff;
+    border: 1px solid #aebfdf;
 }
 
 .menu {
@@ -80,10 +80,10 @@
                 position: relative;
                 display: block;
                 padding: 8px 0px 8px 12px;
-                color: #3d3dbf;
+                color: #3a5ba0;
                 font-size: 12px;
                 &:hover {
-                    color: #3d3dbf;
+                    color: #3a5ba0;
                 }
             }
             .submenu-default,

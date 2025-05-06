@@ -33,7 +33,7 @@ const AuthForm = () => {
             title={signin} 
             size="lg"
             click={authHandler}
-            color="blue"
+            color="green"
           />
         </form>
         <div className={style.reset}>{forgetPassword}

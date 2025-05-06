@@ -108,8 +108,8 @@
             display: none;
         }
         input:checked~.checkmark {
-            border: 1px solid #4348c6;
-            background-color: #4a4fd4;
+            border: 1px solid #34bd94;
+            background-color: #35c198;
             transition: background-color .5s ease-in-out;
         }
         input:disabled~.checkmark {
@@ -122,7 +122,7 @@
         }
         .checkmark:after {
             width: 3px;
-            height: 8px;
+            height: 9px;
             top: 2px;
             border: solid #fff;
             border-width: 0 1.5px 1.5px 0;
@@ -132,19 +132,19 @@
         }
     }
     .checkbox:hover input~.checkmark {
-        border: 1px solid #3c52d6;
+        border: 1px solid #34bd94;
     }
     .checkmark {
         position: absolute;
         left: 2px;
-        height: 15px;
-        width: 15px;
+        height: 16px;
+        width: 16px;
         border: 1px solid #d3d6e0;
         background-color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 3px;
+        border-radius: 4px;
         transition: border-color .5s ease-in-out;
         &::after {
             content: "";
@@ -166,16 +166,16 @@
         }
     }
     .serviceable {
-        color: #42a680;
+        color: #379492;
     }
     .not-serviceable {
         color: #cf2a49;
     }
     .instock {
-        color: #42a680;
+        color: #379492;
     }
     .inuse {
-        color: #85868b;
+        color: #adb1bc;
     }
 }
 

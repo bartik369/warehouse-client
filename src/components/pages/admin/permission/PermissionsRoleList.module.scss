@@ -27,13 +27,15 @@
             }
             .text {
                 display: flex;
+                align-items: center;
                 gap: 5px;
                 font-size: 13px;
                 font-weight: 400;
                 padding: 5px 0;
                 span {
-                    font-size: 13px;
-                    color: #36c199;
+                    font-size: 12px;
+                    color: #44bfa4;
+                    border-bottom: 1px dotted #3ea1a0;
                 }
             }
             .permissions {
@@ -55,12 +57,13 @@
                 display: flex;
                 align-items: center;
                 font-size: 19px;
+                color: #40495b;
                 margin-left: 15px;
                 background: transparent;
                 border: none;
                 cursor: pointer;
                 &:hover {
-                    color: #3d3dbf;
+                    color: #46c1a8;
                 }
             }
         }

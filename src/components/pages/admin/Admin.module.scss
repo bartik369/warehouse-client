@@ -7,6 +7,7 @@
         padding: 10px;
     }
     .list {
+        position: relative;
         display: flex;
         flex-direction: column;
         min-width: 300px;
@@ -24,6 +25,10 @@
             margin-bottom: 8px;
             border: 1px solid #e7ebee;
             border-radius: 6px;
+            &:hover {
+                border: 1px solid #d8dee4;
+                box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+            }
             .info {
                 display: flex;
                 flex-direction: column;
@@ -45,16 +50,16 @@
                 display: flex;
                 align-items: center;
                 .btn {
-                    color: #363941;
                     display: flex;
                     align-items: center;
                     font-size: 19px;
+                    color: #40495b;
                     margin-left: 15px;
                     background: transparent;
                     border: none;
                     cursor: pointer;
                     &:hover {
-                        color: #3d3dbf;
+                        color: #46c1a8;
                     }
                 }
             }
