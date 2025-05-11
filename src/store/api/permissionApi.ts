@@ -107,11 +107,6 @@ export const permissionApi = createApi({
             ]
           : [{ type: 'PermissionRole', id: 'LIST' }],
     }),
-    getPermissionsByRoleId: build.query({
-      query: (id: string) => ({
-        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
-      })
-    }),
     createPermissionRole: build.mutation<IPermissionRole, IPermissionRole>({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
@@ -144,7 +139,6 @@ export const {
   useUpdatePermissionMutation,
   useDeletePermissionMutation,
   useCreatePermissionRoleMutation,
-  useLazyGetPermissionsByRoleIdQuery,
   useUpdatePermissionRoleMutation,
   useGetPermissionsRolesQuery,
  } =

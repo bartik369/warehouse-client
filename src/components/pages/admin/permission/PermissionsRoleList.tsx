@@ -8,6 +8,7 @@ interface IPermissionsRoleListProps {
   actions: IAccessFormActions;
 }
 const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
+
   return (
     <div className={styles.items}>
       {roles &&
@@ -29,7 +30,7 @@ const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
             <div className={styles.actions}>
               <button 
               className={styles.btn}
-              onClick={() => actions.handlePermsByRole(role)}
+              onClick={() => actions.handleRoleInfo(role)}
               >
                 <MdOutlineEdit />
               </button>
