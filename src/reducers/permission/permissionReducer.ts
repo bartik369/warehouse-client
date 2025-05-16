@@ -12,8 +12,10 @@ export const initialState: IPermissionState = {
     permissionIds: [],
     permissionName: [],
     warehouseId: "",
+    oldWarehouseId: "",
     warehouseName: "",
     locationId: "",
+    oldLocationId: "",
     locationName: "",
     comment: "",
   },
@@ -98,6 +100,10 @@ export function permissionReducer(
       return { ...state, errors: {} };
     case PermissionActionTypes.SET_PERMISSIONS_REQUEST:
       return { ...state, permissionsRequest: action.payload };
+    case PermissionActionTypes.SET_IS_UPDATE:
+      return { ...state, isUpdate: action.payload }
+    case PermissionActionTypes.RESET_IS_UPDATE: 
+    return { ... state, isUpdate: false }
     default:
       return state;
   }

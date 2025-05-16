@@ -95,7 +95,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
-    getPermissionsRoles: build.query<any, void>({
+    getPermissionsRoles: build.query<IPermissionRole[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
       }),
@@ -116,8 +116,8 @@ export const permissionApi = createApi({
       invalidatesTags: ['PermissionRole']
     }),
     updatePermissionRole: build.mutation({
-      query: ({ id, body }) => ({
-        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
+      query: (body) => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
         method: 'PUT',
         body,
       }),

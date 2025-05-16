@@ -53,17 +53,12 @@ export const usePermission = () => {
       if (!isUpdate) {
         const data = await createPermissionRole(entity).unwrap();
         if (data) {
-          dispatch({ type: PermissionActionTypes.RESET_ENTITY });
-          dispatch({
-            type: PermissionActionTypes.SET_IS_UPDATE,
-            payload: false,
-          });
-          dispatch({ type: PermissionActionTypes.RESET_LIST });
+          handleResetEntity();
         }
       } else {
         const data = await updatePermissionRole(entity).unwrap();
         if (data) {
-          console.log(data);
+          handleResetEntity();
         }
       }
     } catch (err: unknown) {
@@ -75,10 +70,13 @@ export const usePermission = () => {
   const handleDeleteEntity = useCallback(() => {}, []);
 
   const handleResetEntity = useCallback(() => {
+    console.log('reset')
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
     dispatch({ type: PermissionActionTypes.RESET_LIST });
     dispatch({ type: PermissionActionTypes.RESET_ERROR });
+    dispatch({ type: PermissionActionTypes.RESET_IS_UPDATE });
   }, []);
+
   const handleRoleChange = useCallback(
     (item: IRole) => {
       handleInputChange("roleId", item.id || "");
@@ -97,6 +95,7 @@ export const usePermission = () => {
     (item: IEntity) => {
       handleInputChange("locationId", item.id || "");
       handleInputChange("locationName", item.name || "");
+      dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE });
     },
     [handleInputChange]
   );
@@ -136,18 +135,29 @@ export const usePermission = () => {
     [list]
   );
 
-  const handleRoleInfo = useCallback((item: IPermissionRoleRes) => {
+  const handleRoleInfo = useCallback((item: Partial<IPermissionRole> ) => {
     dispatch({ type: PermissionActionTypes.RESET_LIST });
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
+    const data = {
+      ...item,
+      oldLocationId: item.locationId || '',
+      oldWarehouseId: item.warehouseId || '',
+    }
     dispatch({
       type: PermissionActionTypes.SET_ENTITY,
-      payload: item,
+      payload: data,
     });
     dispatch({
       type: PermissionActionTypes.SET_LIST_BY_ROLE,
       payload: item,
     });
-  }, []);
+    dispatch({ type: PermissionActionTypes.SET_IS_UPDATE, payload: true });
+  }, [dispatch]);
+  
+  const handleDeleteRolePerms = (item:IPermissionRoleRes) => {
+    console.log(item);
+    
+  }
 
   useEffect(() => {
     if (state.entity.roleName === "manager") {
@@ -163,16 +173,6 @@ export const usePermission = () => {
       dispatch({ type: PermissionActionTypes.RESET_LIST });
     }
   }, [state.entity.roleName]);
-
-  useEffect(() => {
-    dispatch({
-      type: PermissionActionTypes.SET_PERMISSIONS_REQUEST,
-      payload: false,
-    });
-    if (!permissionsRequest) {
-      dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE });
-    }
-  }, [entity.locationId]);
 
   return {
     entity,
@@ -190,6 +190,7 @@ export const usePermission = () => {
       handleWarehouseChange,
       handleCheck,
       handleRoleInfo,
+      handleDeleteRolePerms,
     },
   };
 };

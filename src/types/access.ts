@@ -20,11 +20,14 @@ export interface IPermissionRole {
     permissionIds: string[];
     permissionName: string[];
     warehouseId?: string;
+    oldWarehouseId?:string;
     warehouseName?: string;
     locationId?: string;
+    oldLocationId?: string;
     locationName?: string;
     comment?: string;
 }
+
 export type IPermissionRoleRes = Pick<
   IPermissionRole,
   | "roleName"
@@ -43,6 +46,7 @@ export interface IAccessFormActions {
     handleResetEntity: () => void;
     handleCheck:(e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions, name: string) => void;
     handleRoleInfo: (item: IPermissionRoleRes) => void;
+    handleDeleteRolePerms:(item: IPermissionRoleRes) => void;
 }
 export interface IValidateAccessErrors {
     id: string;

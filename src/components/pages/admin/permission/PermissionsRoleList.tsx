@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import { IAccessFormActions, IPermissionRoleRes } from "../../../../types/access";
@@ -7,7 +8,7 @@ interface IPermissionsRoleListProps {
   roles: IPermissionRoleRes[];
   actions: IAccessFormActions;
 }
-const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
+const PermissionsRoleList = memo(({ roles, actions }: IPermissionsRoleListProps) => {
 
   return (
     <div className={styles.items}>
@@ -34,7 +35,10 @@ const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
               >
                 <MdOutlineEdit />
               </button>
-              <button className={styles.btn}>
+              <button 
+              className={styles.btn}
+              onClick={() => actions.handleDeleteRolePerms(role)}
+              >
                 <RiDeleteBin4Line />
               </button>
             </div>
@@ -42,6 +46,6 @@ const PermissionsRoleList = ({ roles, actions }: IPermissionsRoleListProps) => {
         ))}
     </div>
   );
-};
+});
 
 export default PermissionsRoleList;

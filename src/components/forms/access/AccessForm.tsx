@@ -40,7 +40,6 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
       getWarehouses(entity.locationId);
     };
   }, [entity.locationId]);
-  
 
   return (
     <form>
