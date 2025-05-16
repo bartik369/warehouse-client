@@ -31,6 +31,7 @@ export function adminEntityReducer(
             ...state,
             entity: {
               ...state.entity,
+              ...action.payload,
               phoneNumber: formatPhone(
                 action?.payload?.phoneNumber,
                 state?.entity?.phoneNumber || ''

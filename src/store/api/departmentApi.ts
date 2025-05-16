@@ -3,9 +3,9 @@ import { baseQueryWithReauth } from '../baseQueryWithReauth';
 import { IEntity } from '../../types/devices';
 
 export const departmentApi = createApi({
-  reducerPath: 'departmentApi',
+  reducerPath: "departmentApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Department'],
+  tagTypes: ["Department"],
   endpoints: (build) => ({
     getDepartments: build.query<IEntity[], void>({
       query: () => ({
@@ -14,33 +14,39 @@ export const departmentApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Department' as const, id })),
-              { type: 'Department', id: 'LIST' },
+              ...result.map(({ id }) => ({ type: "Department" as const, id })),
+              { type: "Department", id: "LIST" },
             ]
-          : [{ type: 'Department', id: 'LIST' }],
+          : [{ type: "Department", id: "LIST" }],
     }),
-    getDepartment: build.query({
+    getDepartment: build.query<IEntity, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
       }),
     }),
-    createDepartment: build.mutation({
+    createDepartment: build.mutation<
+      { message: string; department: IEntity },
+      IEntity
+    >({
       query: (body) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Department'],
+      invalidatesTags: ["Department"],
     }),
-    updateDepartment: build.mutation<any, any>({
-      query: ({id, ...body}) => ({
+    updateDepartment: build.mutation<
+      { message: string; updatedDepartment: IEntity },
+      { id: string } & Partial<IEntity>
+    >({
+      query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ['Department'],
+      invalidatesTags: ["Department"],
     }),
-    deleteDepartment: build.query({
+    deleteDepartment: build.query<{ message: string }, string>({
       query: () => ({
         url: ``,
       }),

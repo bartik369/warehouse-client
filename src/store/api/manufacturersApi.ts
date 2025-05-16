@@ -30,7 +30,10 @@ export const manufacturersApi = createApi({
             ]
           : [{ type: "Manufacturer", id: "LIST" }],
     }),
-    createManufacturer: build.mutation<any, FormData>({
+    createManufacturer: build.mutation<
+      { message: string; manufacturer: IEntity },
+      IEntity
+    >({
       query(body) {
         return {
           url: `${import.meta.env.VITE_MANUFACTURERS}`,
@@ -40,7 +43,10 @@ export const manufacturersApi = createApi({
       },
       invalidatesTags: ["Manufacturer"],
     }),
-    updateManufacturer: build.mutation({
+    updateManufacturer: build.mutation<
+      { message: string; manufacturer: IEntity },
+      { id: string } & Partial<IEntity>
+    >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
         method: "PUT",

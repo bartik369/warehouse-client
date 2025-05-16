@@ -3,9 +3,9 @@ import { baseQueryWithReauth } from '../baseQueryWithReauth';
 import { IEntity } from '../../types/devices';
 
 export const locationApi = createApi({
-  reducerPath: 'locationApi',
+  reducerPath: "locationApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Location'],
+  tagTypes: ["Location"],
   endpoints: (build) => ({
     getLocations: build.query<IEntity[], void>({
       query: () => ({
@@ -14,31 +14,37 @@ export const locationApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Location' as const, id })),
-              { type: 'Location', id: 'LIST' },
+              ...result.map(({ id }) => ({ type: "Location" as const, id })),
+              { type: "Location", id: "LIST" },
             ]
-          : [{ type: 'Location', id: 'LIST' }],
+          : [{ type: "Location", id: "LIST" }],
     }),
     getLocation: build.query<IEntity, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),
     }),
-    createLocation: build.mutation({
+    createLocation: build.mutation<
+      { message: string; location: IEntity },
+      IEntity
+    >({
       query: (body) => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Location'],
+      invalidatesTags: ["Location"],
     }),
-    updateLocation: build.mutation({
-      query: ({id, ...body}) => ({
+    updateLocation: build.mutation<
+      { message: string; updatedLocation: IEntity },
+      { id: string } & Partial<IEntity>
+    >({
+      query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ['Location'],
+      invalidatesTags: ["Location"],
     }),
     deleteLocation: build.query({
       query: () => ({

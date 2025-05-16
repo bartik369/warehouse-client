@@ -201,6 +201,7 @@ export const useAddAdminEntities = () => {
       const getEntityByIdFunction = entityById[field];
       const data = await getEntityByIdFunction(id).unwrap();
       if (data) {
+        console.log(data)
         dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
       }
       dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});

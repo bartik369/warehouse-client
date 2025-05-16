@@ -8,7 +8,6 @@ import {
 } from '../../utils/validation/DeviceValidation';
 import { useInputMask } from './useInputMask';
 import { handleApiError } from '../../utils/errors/handleApiError';
-import { IEntity } from '../../types/devices';
 
 export const useContactor = () => {
   const { formatPhone, changeFormatPhone } = useInputMask();
@@ -19,7 +18,6 @@ export const useContactor = () => {
     address: '',
   });
   const [createContractor] = useCreateContractorMutation();
-  console.log('====>>', contractor)
 
   const handleInputChange = useCallback(
     <T extends IContractor | string>(field: keyof IContractor, value: T) => {
@@ -42,10 +40,6 @@ export const useContactor = () => {
     },
     []
   );
-  const handleGetEntity = (id: string, field: string) => {
-    console.log(id)
-    console.log(field)
-  }
 
   const handleReset = useCallback(() => {
     setContactor({
@@ -84,6 +78,5 @@ export const useContactor = () => {
     handleInputChange,
     handleCreateContractor,
     handleReset,
-    handleGetEntity,
   };
 };

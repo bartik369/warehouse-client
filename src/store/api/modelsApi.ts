@@ -7,7 +7,7 @@ export const modelsApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Model'],
     endpoints: (build) => ({
-        getModels: build.query<IEntity[], any>({
+        getModels: build.query<IEntity[], { manufacturer: string, type: string } & Partial<IEntity>>({
             query({manufacturer, type}) {
                 return {
                     url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturer}/${type}`,
@@ -31,7 +31,7 @@ export const modelsApi = createApi({
                 url: `${import.meta.env.VITE_MODEL}${id}`,
             }),
         }),
-        createModel: build.mutation<any, FormData>({
+        createModel: build.mutation<IEntity, FormData>({
             query:(body) => ({
                 url: `${import.meta.env.VITE_MODELS}`,
                 method: 'POST',
@@ -39,7 +39,7 @@ export const modelsApi = createApi({
             }),
             invalidatesTags: ['Model']
         }),
-        updateModel: build.mutation<any, FormData>({
+        updateModel: build.mutation<IEntity, FormData>({
             query: (body) => {
                 const id = body.get('id') as string;
                 if (!id) throw new Error('Something went wrong')

@@ -39,7 +39,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    updateRole: build.mutation<IRole, {id: string, body: IEntity}>({
+    updateRole: build.mutation<IRole, {id: string } & Partial<IRole>>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "PUT",
@@ -47,7 +47,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    deleteRole: build.mutation<null, string>({
+    deleteRole: build.mutation<{ mesage: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "DELETE",
@@ -88,7 +88,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
-    deletePermission: build.mutation<null, string>({
+    deletePermission: build.mutation<{ message: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}${id}`,
         method: "DELETE",

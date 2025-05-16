@@ -19,7 +19,7 @@ export const typesApi = createApi({
             ]
           : [{ type: 'Type', id: 'LIST' }],
     }),
-    getType: build.query({
+    getType: build.query<IEntity, string>({
         query: (id: string) => ({
             url: `${import.meta.env.VITE_TYPES}${id}`,
         }),
