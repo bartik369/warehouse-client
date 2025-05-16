@@ -1,7 +1,8 @@
 import AccessForm from '../../../forms/access/AccessForm';
+import PermissionsRoleList from './PermissionsRoleList';
 import { usePermission } from '../../../../hooks/data/usePermission';
 import { addRolePermission } from '../../../../utils/constants/constants';
-
+import { useGetPermissionsRolesQuery } from '../../../../store/api/permissionApi';
 import styles from '../Admin.module.scss';
 
 const PermissionRole = () => {
@@ -11,6 +12,7 @@ const PermissionRole = () => {
         isUpdate,
         actions,
       } = usePermission();
+    const { data: permissionsRoles } = useGetPermissionsRolesQuery();
     return (
         <section className={styles.inner}>
           <div className={styles.form}>
@@ -23,12 +25,10 @@ const PermissionRole = () => {
            />
           </div>
           <aside className={styles.list}>
-            {/* <ItemsList
-              field="permission"
-              items={permissions || []}
-              onEdit={handleGetEntity}
-              onDelete={handleDeleteEntity}
-            /> */}
+            <PermissionsRoleList
+               roles={permissionsRoles}
+               actions={actions}
+             />
           </aside>
         </section>
     )

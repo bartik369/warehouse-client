@@ -59,13 +59,8 @@
         }
         .arrow {
             position: absolute;
-            top: 40%;
-            right: 10px;
-            width: 10px;
-            height: 10px;
-            border-left: 2px solid #333;
-            border-bottom: 2px solid #333;
-            transform: rotate(-45deg) translateY(-50%);
+            right: 12px;
+            font-size: 19px;
             cursor: pointer;
         }
         .count {
@@ -82,7 +77,7 @@
             color: #fff;
             font-weight: 500;
             border-radius: 50%;
-            background-color: #3c52d6;
+            background-color: #7c99d5;
         }
         .header {
             outline: none;
@@ -144,7 +139,7 @@
         cursor: pointer;
         &:focus {
             outline: none;
-            border: 1px solid #81c4db;
+            border: 1px solid #2fb58f;
         }
     }
     .container {
@@ -160,8 +155,8 @@
             display: none;
         }
         input:checked~.checkmark {
-            border: 1px solid #6c96bd;
-            background-color: #7aa7d0;
+            border: 1px solid #2fb58f;
+            background-color: #34c198;
             transition: background-color .5s ease-in-out;
         }
         input:disabled~.checkmark {
@@ -189,7 +184,7 @@
         }
     }
     .container:hover input~.checkmark {
-        border: 1px solid #81c4db;
+        border: 1px solid #2fb58f;
     }
     .checkmark {
         position: absolute;

@@ -7,11 +7,12 @@
         padding: 10px;
     }
     .list {
+        position: relative;
         display: flex;
         flex-direction: column;
         min-width: 300px;
         max-width: 350px;
-        max-height: 350px;
+        max-height: 450px;
         padding: 20px;
         box-sizing: border-box;
         overflow-y: auto;
@@ -22,8 +23,12 @@
             align-items: center;
             padding: 9px 18px;
             margin-bottom: 8px;
-            border: 1px solid #e2e8ef;
+            border: 1px solid #e7ebee;
             border-radius: 6px;
+            &:hover {
+                border: 1px solid #d8dee4;
+                box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+            }
             .info {
                 display: flex;
                 flex-direction: column;
@@ -36,7 +41,7 @@
                 }
                 .description {
                     font-size: 12px;
-                    color: #646367;
+                    color: #5e6473;
                     padding: 3px 0;
                     overflow: hidden;
                 }
@@ -48,12 +53,13 @@
                     display: flex;
                     align-items: center;
                     font-size: 19px;
+                    color: #40495b;
                     margin-left: 15px;
                     background: transparent;
                     border: none;
                     cursor: pointer;
                     &:hover {
-                        color: #3d3dbf;
+                        color: #46c1a8;
                     }
                 }
             }

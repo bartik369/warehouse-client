@@ -12,7 +12,7 @@ export const devicesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Device", "Manufacturer", "Model", "Type"],
   endpoints: (build) => ({
-    getDevices: build.query<any, QueryParams>({
+    getDevices: build.query<{ devices: IAggregateDeviceInfo[], totalPages: number}, QueryParams>({
       query: (queryParams) => {
         const { city, ...params } = queryParams;
         const urlParams = new URLSearchParams();
@@ -48,24 +48,29 @@ export const devicesApi = createApi({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
       }),
     }),
-    createDevice: build.mutation<any, IDevice>({
-      query(body) {
-        return {
-          url: `${import.meta.env.VITE_DEVICES}`,
-          method: "POST",
-          body,
-        };
+    createDevice: build.mutation<{ message: string; device: IDevice }, IDevice>(
+      {
+        query(body) {
+          return {
+            url: `${import.meta.env.VITE_DEVICES}`,
+            method: "POST",
+            body,
+          };
+        },
       }
-    }),
-    updateDevice: build.mutation<any, any>({
+    ),
+    updateDevice: build.mutation<
+      { message: string; device: IDevice },
+      { id: string } & Partial<IDevice>
+    >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
         method: "PUT",
         body,
       }),
       invalidatesTags: (result, error, { id }) => [
-        { type: 'Device', id },
-        { type: 'Device', id: 'LIST' }
+        { type: "Device", id },
+        { type: "Device", id: "LIST" },
       ],
     }),
   }),

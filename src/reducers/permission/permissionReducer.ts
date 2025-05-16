@@ -9,11 +9,13 @@ export const initialState: IPermissionState = {
     id: "",
     roleId: "",
     roleName: "",
-    permissionId: [],
+    permissionIds: [],
     permissionName: [],
     warehouseId: "",
+    oldWarehouseId: "",
     warehouseName: "",
     locationId: "",
+    oldLocationId: "",
     locationName: "",
     comment: "",
   },
@@ -33,11 +35,11 @@ export function permissionReducer(
         entity: { ...state.entity, ...action.payload },
       };
     case PermissionActionTypes.RESET_ENTITY:
-      return { ...state, entity: initialState.entity };
+      return { ...state, entity: { ...initialState.entity }};
     case PermissionActionTypes.SET_PERMISSION: {
       const { id, name, checked } = action.payload;
       const currentNameArr = state.entity.permissionName || [];
-      const currentIdArr = state.entity.permissionId || [];
+      const currentIdArr = state.entity.permissionIds || [];
 
       const checkValue = <T>(arr: T[], value: T) => {
         const result = checked
@@ -52,7 +54,7 @@ export function permissionReducer(
         entity: {
           ...state.entity,
           permissionName: checkValue(currentNameArr, name) || [],
-          permissionId: checkValue(currentIdArr, id) || [],
+          permissionIds: checkValue(currentIdArr, id) || [],
         },
       };
     }
@@ -65,13 +67,8 @@ export function permissionReducer(
         },
       };
     case PermissionActionTypes.SET_LIST_BY_ROLE: {
-      const permissionIds = action.payload.permissionId ?? [];
-
-      const permissionList = permissionIds?.reduce((acc, elem) => {
-        acc[elem] = true;
-        return acc;
-      }, {} as Record<string, boolean>);
-      
+      const permissionIds = action.payload.permissionIds ?? [];
+      const permissionList = Object.fromEntries(permissionIds.map((id) => [id, true]))
       return {
         ...state,
         list: {
@@ -81,7 +78,7 @@ export function permissionReducer(
       };
     }
     case PermissionActionTypes.RESET_LIST:
-      return { ...state, list: initialState.list };
+      return { ...state, list: {} };
     case PermissionActionTypes.RESET_WAREHOUSE:
       return {
         ...state,
@@ -100,9 +97,13 @@ export function permissionReducer(
         },
       };
     case PermissionActionTypes.RESET_ERROR:
-      return { ...state, errors: initialState.errors };
+      return { ...state, errors: {} };
     case PermissionActionTypes.SET_PERMISSIONS_REQUEST:
       return { ...state, permissionsRequest: action.payload };
+    case PermissionActionTypes.SET_IS_UPDATE:
+      return { ...state, isUpdate: action.payload }
+    case PermissionActionTypes.RESET_IS_UPDATE: 
+    return { ... state, isUpdate: false }
     default:
       return state;
   }

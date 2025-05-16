@@ -30,7 +30,7 @@ export const warehousesApi = createApi({
         url: `${import.meta.env.VITE_ASSIGNABLE_WAREHOUSES}${locationId}`,
       }),
     }),
-    createWarehouse: build.mutation({
+    createWarehouse: build.mutation<{ message: string, warehouse: IEntity }, IEntity>({
       query: (body) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}`,
         method: "POST",
@@ -38,7 +38,7 @@ export const warehousesApi = createApi({
       }),
       invalidatesTags: ["Warehouse"],
     }),
-    updateWarehouse: build.mutation({
+    updateWarehouse: build.mutation<{ message: string, updatedWarehouse: IEntity }, IEntity>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
         method: "PUT",

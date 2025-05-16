@@ -1,13 +1,19 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, IRole } from "../../types/access";
+import { IPermissionRole, IPermissionRoleRes, IRole } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
-import { 
-  useCreatePermissionRoleMutation, 
-  useLazyGetPermissionsByRoleIdQuery,
+import {
+  useCreatePermissionRoleMutation,
+  useUpdatePermissionRoleMutation,
 } from "../../store/api/permissionApi";
-import { FormValidation, validateField } from "../../utils/validation/PermissionValidation";
-import { permissionReducer, initialState } from "../../reducers/permission/permissionReducer";
+import {
+  FormValidation,
+  validateField,
+} from "../../utils/validation/PermissionValidation";
+import {
+  permissionReducer,
+  initialState,
+} from "../../reducers/permission/permissionReducer";
 import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
 import { handleApiError } from "../../utils/errors/handleApiError";
 
@@ -15,7 +21,7 @@ export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
   const { isUpdate, entity, list, permissionsRequest } = state;
   const [createPermissionRole] = useCreatePermissionRoleMutation();
-  const [getPermissionsByRole] = useLazyGetPermissionsByRoleIdQuery();
+  const [updatePermissionRole] = useUpdatePermissionRoleMutation();
 
   const handleInputChange = useCallback(
     (field: keyof IPermissionRole, value: string) => {
@@ -32,9 +38,9 @@ export const usePermission = () => {
     []
   );
 
-  console.log('entity ====>>', entity)
-  
-  const handleCreateEntity = async() => {
+  console.log("entity ====>>", entity);
+
+  const handleCreateEntity = async () => {
     try {
       const validationErrors = FormValidation(entity);
       if (Object.values(validationErrors).length > 0) {
@@ -44,9 +50,16 @@ export const usePermission = () => {
         });
         return;
       }
-      const data = await createPermissionRole(entity).unwrap();
-      if (data) {
-        console.log(data)
+      if (!isUpdate) {
+        const data = await createPermissionRole(entity).unwrap();
+        if (data) {
+          handleResetEntity();
+        }
+      } else {
+        const data = await updatePermissionRole(entity).unwrap();
+        if (data) {
+          handleResetEntity();
+        }
       }
     } catch (err: unknown) {
       handleApiError(err);
@@ -57,10 +70,13 @@ export const usePermission = () => {
   const handleDeleteEntity = useCallback(() => {}, []);
 
   const handleResetEntity = useCallback(() => {
+    console.log('reset')
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
     dispatch({ type: PermissionActionTypes.RESET_LIST });
     dispatch({ type: PermissionActionTypes.RESET_ERROR });
+    dispatch({ type: PermissionActionTypes.RESET_IS_UPDATE });
   }, []);
+
   const handleRoleChange = useCallback(
     (item: IRole) => {
       handleInputChange("roleId", item.id || "");
@@ -69,8 +85,8 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handlePermissionChange = useCallback(
-    (item: IPermissionRole) => {
-      handleInputChange("permissionId", item.id || "");
+    (item: IRole) => {
+      handleInputChange("permissionIds", item.id || "");
       handleInputChange("permissionName", item.name || "");
     },
     [handleInputChange]
@@ -79,6 +95,7 @@ export const usePermission = () => {
     (item: IEntity) => {
       handleInputChange("locationId", item.id || "");
       handleInputChange("locationName", item.name || "");
+      dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE });
     },
     [handleInputChange]
   );
@@ -90,7 +107,11 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handleCheck = useCallback(
-    (e: ChangeEvent<HTMLInputElement>, item: CheckedPermissionOptions, name: string) => {
+    (
+      e: ChangeEvent<HTMLInputElement>,
+      item: CheckedPermissionOptions,
+      name: string
+    ) => {
       const { checked } = e.target;
 
       dispatch({
@@ -104,7 +125,7 @@ export const usePermission = () => {
       const updatedCheckList = {
         ...list,
         [item.id]: checked,
-      }
+      };
       const validationErrors = validateField(name, updatedCheckList);
       dispatch({
         type: PermissionActionTypes.SET_ERROR,
@@ -113,14 +134,38 @@ export const usePermission = () => {
     },
     [list]
   );
+
+  const handleRoleInfo = useCallback((item: Partial<IPermissionRole> ) => {
+    dispatch({ type: PermissionActionTypes.RESET_LIST });
+    dispatch({ type: PermissionActionTypes.RESET_ENTITY });
+    const data = {
+      ...item,
+      oldLocationId: item.locationId || '',
+      oldWarehouseId: item.warehouseId || '',
+    }
+    dispatch({
+      type: PermissionActionTypes.SET_ENTITY,
+      payload: data,
+    });
+    dispatch({
+      type: PermissionActionTypes.SET_LIST_BY_ROLE,
+      payload: item,
+    });
+    dispatch({ type: PermissionActionTypes.SET_IS_UPDATE, payload: true });
+  }, [dispatch]);
   
+  const handleDeleteRolePerms = (item:IPermissionRoleRes) => {
+    console.log(item);
+    
+  }
+
   useEffect(() => {
     if (state.entity.roleName === "manager") {
       dispatch({
         type: PermissionActionTypes.SET_ENTITY,
         payload: {
           permissionName: [],
-          permissionId: [],
+          permissionIds: [],
           warehouseId: "",
           warehouseName: "",
         },
@@ -128,44 +173,6 @@ export const usePermission = () => {
       dispatch({ type: PermissionActionTypes.RESET_LIST });
     }
   }, [state.entity.roleName]);
-
-  useEffect(() => {
-    dispatch({
-      type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
-      payload: false 
-    });
-    if (!permissionsRequest) {
-      dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE })
-    }
-  }, [entity.locationId]);
-
-  console.log("list ====>", list)
-
-  useEffect(() => {
-    if (!entity.roleId) return;
-    (async () => {
-      try {
-        const data = await getPermissionsByRole(entity.roleId).unwrap();
-        if (data) {
-          dispatch({
-            type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, 
-            payload: true 
-          });
-          dispatch({
-            type: PermissionActionTypes.SET_ENTITY,
-            payload: data
-          });
-          dispatch({ type: PermissionActionTypes.RESET_LIST });
-          dispatch({
-            type: PermissionActionTypes.SET_LIST_BY_ROLE,
-            payload: data,
-          })
-        }
-      } catch (err) {
-        handleApiError(err);
-      }
-    })()
-  }, [entity.roleId]);
 
   return {
     entity,
@@ -182,6 +189,8 @@ export const usePermission = () => {
       handleLocationChange,
       handleWarehouseChange,
       handleCheck,
+      handleRoleInfo,
+      handleDeleteRolePerms,
     },
   };
 };

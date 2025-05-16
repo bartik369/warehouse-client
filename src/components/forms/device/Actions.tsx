@@ -22,7 +22,7 @@ const Actions = ({ isUpdate, resetEntity, addEntity }: IActionsProps) => {
         <BtnAction
           icon={<GoPlus />}
           size="lg"
-          color="blue"
+          color="green"
           title={isUpdate ? update : add}
           click={addEntity}
         />

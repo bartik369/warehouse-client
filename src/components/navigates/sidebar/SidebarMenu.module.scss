@@ -7,24 +7,26 @@
         align-items: center;
         &:hover,
         .active-menu {
-            background-color: #f4f7ff;
+            background-color: #4a5669;
         }
         &:hover .icon {}
         .sub-title,
         a {
             font-size: 13px;
             font-weight: 400;
+            color: #dde0e5;
             cursor: pointer;
             &:hover {
-                color: #3f52dd;
+                color: #35c299;
             }
         }
         .item {
             font-size: 13px;
             font-weight: 400;
+            color: #e6e8eb;
             &:hover,
             &.active {
-                color: #3f52dd;
+                color: #35c299;
             }
         }
         .title {
@@ -38,7 +40,7 @@
             left: 75px;
             top: 14px;
             padding: 8px 11px;
-            background-color: #3d42bc;
+            background-color: #40495a;
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
             border-radius: 5px;
             &:hover {
@@ -51,7 +53,7 @@
                 height: 0;
                 border-left: 10px solid transparent;
                 border-right: 10px solid transparent;
-                border-bottom: 12px solid #3d42bc;
+                border-bottom: 12px solid #40495a;
                 transform: rotate(-90deg);
                 left: -9px;
             }
@@ -66,9 +68,9 @@
         }
         .icon {
             font-size: 21px;
-            color: #383d44;
+            color: #e6e8eb;
             &:hover {
-                color: #3c53d7;
+                color: #35c299;
             }
         }
         .open-icon {
@@ -78,15 +80,15 @@
     .menu-item {
         position: relative;
         .active-menu {
-            background-color: #f6faff;
+            background-color: #4a5669;
         }
         .submenu-closed {
             position: absolute;
             top: 0;
-            left: 66px;
+            left: 69px;
             width: 190px;
             z-index: 99;
-            background-color: #fdfeff;
+            background-color: #4a5669;
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
             .wrapper {
                 position: relative;
@@ -94,7 +96,7 @@
                     font-size: 16px;
                     font-weight: 500;
                     padding: 18.2px;
-                    background-color: #f6faff;
+                    background-color: #4a5669;
                 }
             }
         }
@@ -109,24 +111,28 @@
         padding: 10px 5px;
         font-size: 12px;
         font-weight: 400;
+        color: #f5f7fb;
         cursor: pointer;
         &:hover,
         &.active {
-            color: #3f52dd;
+            color: #44c0a7;
         }
     }
     li:not(:last-child) {
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid #515d72;
+    }
+    li:not(:first-child) {
+        border-top: 1px solid #444f61;
     }
 }
 
 .submenu-toggle {
     margin-left: auto;
-    font-size: 15px;
-    color: #1a2034;
+    font-size: 18px;
+    color: #aeb2bd;
     cursor: pointer;
     &:hover {
-        color: #3f52dd;
+        color: #f7f6fb;
     }
 }
 

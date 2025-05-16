@@ -183,6 +183,7 @@ export interface IEntity {
   type?: string;
   manufacturer?: string;
   manufacturerId?: string;
+  warehouseName?: string;
 }
 
 export interface IFilteredDevicesFromBack {

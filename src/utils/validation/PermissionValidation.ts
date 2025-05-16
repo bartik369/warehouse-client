@@ -37,7 +37,7 @@ export const FormValidation = (
 ): Partial<IValidateAccessErrors> => {
   const errors: Record<string, string> = {};
 
-  if (data.roleName === "manager") {
+  if (data.roleName === 'manager') {
     validateRequiredFields(data, requiredFieldsManager, errors);
   } else {
     validateRequiredFields(data, requiredFieldsOther, errors);

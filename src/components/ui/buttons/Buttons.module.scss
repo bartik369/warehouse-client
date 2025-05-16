@@ -51,7 +51,7 @@
 }
 
 .blue {
-    background-color: #4046c8;
+    background-color: #92d57d;
     color: #fff;
     &:hover {
         background-color: #4a4fd4;
@@ -61,12 +61,24 @@
     }
 }
 
+.green {
+    background-color: #34c199;
+    color: #fff;
+    &:hover {
+        background-color: #45c1a7;
+    }
+    &:focus {
+        background-color: #45c1a7;
+    }
+}
+
 .grey {
     box-sizing: border-box;
-    background-color: #f2f2ff;
+    border: 1px solid #adb1bc;
+    background: transparent;
+    color: #40495a;
     &:hover {
-        background-color: #656569;
-        color: #ffff;
+        background-color: #e7e7ee;
     }
     &:focus {
         background-color: #383c48;

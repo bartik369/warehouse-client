@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
@@ -39,6 +39,22 @@ const Devices = () => {
   } = useDeviceFilters();
   const dispatch = useAppDispatch();
   const [checks, setChecks] = useState({});
+
+  useEffect(() => {
+    return () => {
+      dispatch(setDeviceInfo({
+        device: {
+          id: "",
+          warehouse: {
+            name: '',
+            slug: "",
+          },
+          isAssigned: false,
+        },
+        status: false,
+      }))
+    }
+  }, [])
 
   const handleCheck = useCallback(
     (device: IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {

@@ -19,12 +19,12 @@ export const contractorApi = createApi({
                     ]
                   : [{ type: 'Contractor', id: 'LIST' }],
         }),
-        getContractor: build.query({
+        getContractor: build.query<IEntity, string>({
             query:(id:string) => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
             })
         }),
-        createContractor: build.mutation({
+        createContractor: build.mutation<{message:string, contractor:IEntity}, void>({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_CONTRACTORS}`,
@@ -34,14 +34,14 @@ export const contractorApi = createApi({
             },
             invalidatesTags: ['Contractor'],
         }),
-        updateContractor: build.mutation({
-            query:({id, ...body}) => ({
+        updateContractor: build.mutation<{ message:string, contractor: IEntity}, { id: string } & Partial<IEntity>>({
+            query:({ id, ...body }) => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
                 method: 'PUT',
                 body: body,
             }),
             invalidatesTags: ['Contractor'],
-        })
+        }),
     })
 });
 

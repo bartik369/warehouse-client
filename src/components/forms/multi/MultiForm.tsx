@@ -134,7 +134,7 @@ const MultiForm = ({
           <BtnAction
             icon={<GoPlus />}
             size="lg"
-            color="blue"
+            color="green"
             title={state.isUpdate ? update : add}
             click={() => actions.handleCreateEntity(locationType)}
           />

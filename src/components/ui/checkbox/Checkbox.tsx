@@ -5,6 +5,7 @@ import {
   selectPermissions,
 } from "../../../utils/constants/constants";
 import { IAccessFormActions, IPermissionRole } from "../../../types/access";
+import { TbSelector } from "react-icons/tb";
 import styles from "./Checkbox.module.scss";
 
 interface ICheckboxProps {
@@ -28,12 +29,14 @@ const Checkbox = ({
 }: ICheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
+  const FIXED_PERMISSIONS = ['user.create', 'user.edit', 'device.create', 'device.edit'];
+
   return (
     <div className={styles.wrapper}>
       <button
         className={styles.checkbox}
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen(!isOpen); 
         }}
         type="button"
       >
@@ -42,13 +45,14 @@ const Checkbox = ({
         {entity.permissionName.length > 0 && (
           <span className={styles.count}>{entity.permissionName.length}</span>
         )}
-        <span className={styles.arrow} />
+         <TbSelector className={styles.arrow}/>
       </button>
       {errorMessage && <div className={styles.error}>{errorMessage}</div>}
       {isOpen && (
         <div ref={modalRef} className={styles["checkbox-menu"]}>
           {items.length ? (
-            items.map((item) => (
+            items.filter((item) => !FIXED_PERMISSIONS.includes(item.name))
+            .map((item) => (
               <label key={item.id} className={styles.container}>
                 <input
                   name={name}

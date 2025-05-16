@@ -14,6 +14,7 @@ export enum PermissionActionTypes {
     SET_ENTITY = 'SET_ENTITY',
     RESET_ENTITY = 'RESET_ENTITY',
     SET_IS_UPDATE = 'SET_IS_UPDATE',
+    RESET_IS_UPDATE = 'RESET_IS_UPDATE',
     SET_LIST = 'SET_LIST',
     SET_LIST_BY_ROLE = 'SET_LIST_BY_ROLE',
     RESET_LIST = 'RESET_LIST',
@@ -28,6 +29,7 @@ export type PermissionAction =
  | { type: PermissionActionTypes.SET_ENTITY, payload: Partial<IPermissionRole> }
  | { type: PermissionActionTypes.RESET_ENTITY }
  | { type: PermissionActionTypes.SET_IS_UPDATE, payload: boolean }
+ | { type: PermissionActionTypes.RESET_IS_UPDATE }
  | { type: PermissionActionTypes.SET_LIST, payload: { id: string; checked: boolean }}
  | { type: PermissionActionTypes.RESET_LIST }
  | { type: PermissionActionTypes.RESET_WAREHOUSE }

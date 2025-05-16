@@ -201,6 +201,7 @@ export const useAddAdminEntities = () => {
       const getEntityByIdFunction = entityById[field];
       const data = await getEntityByIdFunction(id).unwrap();
       if (data) {
+        console.log(data)
         dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
       }
       dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});
@@ -213,7 +214,7 @@ export const useAddAdminEntities = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
+        if (file && (file.type.startsWith("image/")) && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
           setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);

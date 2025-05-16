@@ -56,7 +56,7 @@ const ProfileMenu = () => {
                 </ul>
             </nav>
             <div className={style.logout}>
-            <BtnAction color="blue" title={signout} size="md" click={logoutHandler}/>
+            <BtnAction color="green" title={signout} size="md" click={logoutHandler}/>
             </div>
             </div>
         </div>

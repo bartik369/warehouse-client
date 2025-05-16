@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect, useMemo} from "react";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
 import Checkbox from "../../ui/checkbox/Checkbox";
@@ -16,6 +16,7 @@ import {
 } from "../../../utils/constants/constants";
 import { IPermissionState } from "../../../reducers/permission/permissionTypes";
 import { IEntity } from "../../../types/devices";
+import { getRoleType, RoleType  } from "../../../utils/roles/roles";
 import styles from './AccessForm.module.scss';
 
 interface IAccessFormProps {
@@ -31,8 +32,11 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
   const [ getWarehouses, { data: warehouses } ] = useLazyGetAssignableWarehousesQuery();
   const { data: locations } = useGetLocationsQuery();
 
+  const roleType = useMemo(() => getRoleType(entity.roleName), [entity.roleName]);
+  const isManager = roleType === RoleType.Manager;
+
   useEffect(() => {
-    if (entity.locationId) {
+    if (entity.locationId && !isManager) {
       getWarehouses(entity.locationId);
     };
   }, [entity.locationId]);
@@ -49,7 +53,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
         setValue={actions.handleRoleChange}
         getId={(item: IRole) => item.id}
       />
-      {entity.roleName !== "manager" && (
+      {!isManager && (
         <Checkbox
           entity={entity}
           items={permissions || []}
@@ -69,7 +73,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
         name="locationName"
         getId={(item: IEntity) => item.id}
       />
-      {entity.roleName !== "manager" && entity.locationName && (
+      {!isManager && entity.locationName && (
         <Select<IEntity>
           setValue={(val) => actions.handleWarehouseChange?.(val)}
           items={warehouses || []}

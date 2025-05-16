@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import ProfileMenu from '../navigates/profile/ProfileMenu';
 import style from './Profile.module.scss'
 
-const Profile:FC = () => {
+const Profile = () => {
     return (
         <div className={style.profile}>
            <ProfileMenu />

@@ -1,4 +1,3 @@
-import { location } from './../../utils/constants/device';
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 import { IRole, IPermission, IPermissionRole } from "../../types/access";
@@ -8,7 +7,7 @@ import { CheckedPermissionOptions } from '../../types/content';
 export const permissionApi = createApi({
   reducerPath: "permissionApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Role', 'Permission'],
+  tagTypes: ['Role', 'Permission', 'PermissionRole'],
   endpoints: (build) => ({
     getRoles: build.query<IRole[], void>({
       query: () => ({
@@ -40,7 +39,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    updateRole: build.mutation<IRole, {id: string, body: IEntity}>({
+    updateRole: build.mutation<IRole, {id: string } & Partial<IRole>>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "PUT",
@@ -48,7 +47,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    deleteRole: build.mutation<null, string>({
+    deleteRole: build.mutation<{ mesage: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "DELETE",
@@ -89,25 +88,41 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
-    deletePermission: build.mutation<null, string>({
+    deletePermission: build.mutation<{ message: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ['Permission']
     }),
-    getPermissionsByRoleId: build.query({
-      query: (id: string) => ({
-        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}${id}`,
-      })
+    getPermissionsRoles: build.query<IPermissionRole[], void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'PermissionRole' as const, id })),
+              { type: 'PermissionRole', id: 'LIST' },
+            ]
+          : [{ type: 'PermissionRole', id: 'LIST' }],
     }),
     createPermissionRole: build.mutation<IPermissionRole, IPermissionRole>({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
         method: 'POST',
         body,
-      })
+      }),
+      invalidatesTags: ['PermissionRole']
     }),
+    updatePermissionRole: build.mutation({
+      query: (body) => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['PermissionRole']
+    })
   }),
 });
 
@@ -124,6 +139,7 @@ export const {
   useUpdatePermissionMutation,
   useDeletePermissionMutation,
   useCreatePermissionRoleMutation,
-  useLazyGetPermissionsByRoleIdQuery,
+  useUpdatePermissionRoleMutation,
+  useGetPermissionsRolesQuery,
  } =
   permissionApi;

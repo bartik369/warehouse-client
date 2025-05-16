@@ -80,7 +80,7 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
                 <BtnAction 
                   icon={<GoPlus />} 
                   size="lg" 
-                  color="blue" 
+                  color="green" 
                   title={add} 
                   click={() => handleCreateEntity(fieldType)}
                 />

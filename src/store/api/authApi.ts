@@ -15,7 +15,7 @@ export const authApi = createApi({
                 body: {...credentials},
             })
         }),
-        logoutUser: build.mutation<any, any>({
+        logoutUser: build.mutation<{ message: string }, void>({
             query: (id) => ({
                 url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_LOGOUT}`,
                 method: 'POST',
