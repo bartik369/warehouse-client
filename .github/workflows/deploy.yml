@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          ssh deploy@Y79.174.80.187 << 'EOF'
+          ssh deploy@79.174.80.187 << 'EOF'
             cd /srv/apps/frontend
             git pull origin main
             npm install
