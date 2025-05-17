@@ -8,7 +8,7 @@ const Signin = () => {
         <div className={style.wrapper}>
             <div className={style.inner}>
                 <div className={style.left}>
-                    <div className={style.title}>{titleSignin}</div>
+                    {/* <div className={style.title}>{titleSignin}</div> */}
                     <img src={pic} alt="" />
                 </div>
                 <div className={style.right}>
