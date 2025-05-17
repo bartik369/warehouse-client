@@ -1,4 +1,3 @@
-# .github/workflows/deploy.yml
 name: Deploy Frontend
 
 on:
@@ -20,18 +19,13 @@ jobs:
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/github-deploy-key
           chmod 600 ~/.ssh/github-deploy-key
           ssh-keyscan -H 79.174.80.187 >> ~/.ssh/known_hosts
-          echo "Host target-server
-          HostName 79.174.80.187
-          User deploy
-          IdentityFile ~/.ssh/github-deploy-key
-          StrictHostKeyChecking no" >> ~/.ssh/config
 
-      - name: Deploy frontend
+      - name: Deploy frontend with Docker
         run: |
-          ssh target-server << 'EOF'
+          ssh -i ~/.ssh/github-deploy-key deploy@79.174.80.187 << 'EOF'
             cd /srv/apps/frontend
             git pull origin main
-            npm install
-            npm run build
-            pm2 restart frontend-app
+            docker-compose down
+            docker-compose build
+            docker-compose up -d
           EOF
