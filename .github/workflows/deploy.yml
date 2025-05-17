@@ -17,16 +17,21 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/github-deploy-key
+          chmod 600 ~/.ssh/github-deploy-key
           ssh-keyscan -H 79.174.80.187 >> ~/.ssh/known_hosts
+          echo "Host target-server
+          HostName 79.174.80.187
+          User deploy
+          IdentityFile ~/.ssh/github-deploy-key
+          StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Deploy frontend
         run: |
-          ssh deploy@79.174.80.187 << 'EOF'
+          ssh target-server << 'EOF'
             cd /srv/apps/frontend
             git pull origin main
             npm install
             npm run build
-            pm2 restart frontend-app  # если ты используешь pm2
+            pm2 restart frontend-app
           EOF
