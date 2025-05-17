@@ -6,7 +6,7 @@ import { setCredentials, setAuth } from './store/slices/authSlice';
 import PrivateRoutes from './routes/PrivateRoutes';
 import Layout from './routes/Layout';
 import PublicRoutes from './routes/PublicRoutes';
-import Page404 from './components/pages/404/Page404';
+// import Page404 from './components/pages/404/Page404';
 import privateRoutes from './config/routes/privateRoutes';
 import publicRoutes from './config/routes/publicRoutes';
 import { handleApiError } from './utils/errors/handleApiError';
@@ -47,7 +47,7 @@ function App() {
           <Route key={path} path={path} element={element} />
         ))}
       </Route>
-      <Route path='*' element={<Page404 />} />
+      {/* <Route path='*' element={<Page404 />} /> */}
     </Routes>
   );
 }

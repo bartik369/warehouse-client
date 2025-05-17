@@ -31,7 +31,7 @@ const ContractorForm = () => {
           />
           <Textarea
             name="address"
-            setText={(e) => handleInputChange("address", e.target.value)}
+            onChange={(e) => handleInputChange("address", e.target.value)}
             value={contractor.address}
             label={contractorAddressLabel}
             errors={errors}

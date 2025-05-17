@@ -19,7 +19,7 @@ import { handleApiError } from "../../utils/errors/handleApiError";
 
 export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);
-  const { isUpdate, entity, list, permissionsRequest } = state;
+  const { isUpdate, entity, list } = state;
   const [createPermissionRole] = useCreatePermissionRoleMutation();
   const [updatePermissionRole] = useUpdatePermissionRoleMutation();
 

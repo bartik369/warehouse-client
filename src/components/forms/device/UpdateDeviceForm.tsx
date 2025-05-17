@@ -165,7 +165,7 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
           />
           <form className={styles["additional-form"]}>
             <Textarea
-              setText={(e) => actions.handleInputChange("description", e.target.value)}
+              onChange={(e) => actions.handleInputChange("description", e.target.value)}
               value={state.device.description || ""}
               label={description} 
               errors={state.errors} 

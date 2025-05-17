@@ -18,13 +18,12 @@ interface IEntityProps {
 };
 
 const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
-    const { entity, errors, media, fileInputRef, handleMedia, handleInputChange, 
-    handleCreateEntity, handleResetEntity} = useEntity();
+    const { fileInputRef, state, actions} = useEntity();
 
     useEffect(() => {
       if (fieldType === 'model' && (typeId && manufacturerId)) {
-        handleInputChange('typeId', typeId); 
-        handleInputChange('manufacturerId', manufacturerId); 
+        actions.handleInputChange('typeId', typeId); 
+        actions.handleInputChange('manufacturerId', manufacturerId); 
       }
     }, [fieldType, typeId, manufacturerId]);
 
@@ -46,27 +45,27 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
           <div className={styles.content}>
             {fieldType === "model" && 
               <div className={styles.preview}>
-                <Preview media={media.prevImg || ""} ref={fileInputRef} setMedia={handleMedia} />
+                <Preview media={state.media.prevImg || ""} ref={fileInputRef} actions={actions} />
               </div>
             }
             <form>
               <Input
-                onChange={(e) => handleInputChange("name", e.target.value)}
+                onChange={(e) => actions.handleInputChange("name", e.target.value)}
                 type="text"
-                value={entity.name || ""}
+                value={state.entity.name || ""}
                 label={nameLabel}
-                errors={errors}
+                errors={state.errors}
                 name="name"
               /> 
                <span className={styles.tooltip} data-tooltip={slugInfo} tabIndex={0}>
                   <BsQuestionSquare className={styles.icon}/>
                </span>
                <Input
-                onChange={(e) => handleInputChange("slug", e.target.value)}
+                onChange={(e) => actions.handleInputChange("slug", e.target.value)}
                 type="text"
-                value={entity.slug || ""}
+                value={state.entity.slug || ""}
                 label={slugLabel}
-                errors={errors}
+                errors={state.errors}
                 name="slug"
               />
               <div className={styles.actions}>
@@ -75,14 +74,14 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
                   size="lg" 
                   color="grey" 
                   title={reset}
-                  click={handleResetEntity}
+                  click={actions.handleResetEntity}
                 />   
                 <BtnAction 
                   icon={<GoPlus />} 
                   size="lg" 
                   color="green" 
                   title={add} 
-                  click={() => handleCreateEntity(fieldType)}
+                  click={() => actions.handleCreateEntity(fieldType)}
                 />
               </div>
             </form>

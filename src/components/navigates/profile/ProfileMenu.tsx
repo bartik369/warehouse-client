@@ -17,8 +17,9 @@ const ProfileMenu = () => {
     const { isOpen, openModalHandler, modalRef } = useOutsideClick();
     
      const logoutHandler = async () => {
+        if (!user) return;
       try {
-        await logout(user?.id).unwrap();
+        await logout(user.id).unwrap();
         navigate('/');
       } catch (err) {
 

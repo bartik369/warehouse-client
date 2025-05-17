@@ -54,6 +54,7 @@ const MultiForm = ({
       {fieldType === "model" && (
         <div className={styles.preview}>
           <Preview
+            state={state}
             media={isEntityImg || ""}
             ref={fileInputRef}
             actions={actions}

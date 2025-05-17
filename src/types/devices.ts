@@ -1,7 +1,7 @@
 import { IContractor } from "./content";
 
 export interface IDevice {
-  id?: string;
+  id: string;
   name: string;
   inventoryNumber?: string;
   modelCode?: string;
@@ -59,6 +59,7 @@ export interface IAggregateDeviceInfo extends IDevice {
   };
   model: {
     name: string;
+    slug: string;
     imagePath: string;
     manufacturer: {
       name: string;

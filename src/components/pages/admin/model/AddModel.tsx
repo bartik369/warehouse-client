@@ -7,7 +7,7 @@ import styles from '../Admin.module.scss';
 import { modelFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
 
 const AddModel = () => {
-    const { media, fileInputRef, actions, state } = useAddAdminEntities();
+    const { actions, state, fileInputRef} = useAddAdminEntities();
       const { data: models } = useGetAllModelsQuery();
       return (
         <section className={styles.inner}>
@@ -15,7 +15,6 @@ const AddModel = () => {
             <MultiForm
               fields={modelFormFields}
               title={addModelTitle}
-              media={media}
               fieldType='model'
               fileInputRef={fileInputRef}
               actions={actions}

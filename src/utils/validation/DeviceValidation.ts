@@ -101,7 +101,7 @@ export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> 
   return errors;
 };
 export const ContractorValidation = (
-  formData: IEntity
+  formData: Partial<IEntity>
 ): Partial<IValidationErrors> => {
   const errors: Partial<IValidationErrors> = {};
   const requiredFields: ValidationContractorField[] = [

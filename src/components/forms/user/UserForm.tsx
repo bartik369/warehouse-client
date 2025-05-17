@@ -120,7 +120,6 @@ const UserForm = ({ departments }:IUserFormProps) => {
       <div className={styles.actions}>
         <BtnAction
           icon={<HiMiniXMark />}
-          type="button"
           size="lg"
           color="grey"
           title={reset}
@@ -128,7 +127,6 @@ const UserForm = ({ departments }:IUserFormProps) => {
         />
         <BtnAction
           icon={<GoPlus />}
-          type="submit"
           size="lg"
           color="blue-green"
           title={add}
