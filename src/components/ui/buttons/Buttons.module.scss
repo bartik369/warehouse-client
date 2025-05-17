@@ -50,25 +50,25 @@
     }
 }
 
-.blue {
-    background-color: #92d57d;
+.lilac {
+    background-color: #8486d3;
     color: #fff;
     &:hover {
-        background-color: #4a4fd4;
+        background-color: #7679cb;
     }
     &:focus {
-        background-color: #3437a7;
+        background-color: #7679cb;
     }
 }
 
 .green {
-    background-color: #34c199;
+    background-color: #34c099;
     color: #fff;
     &:hover {
-        background-color: #45c1a7;
+        background-color: #31b891;
     }
     &:focus {
-        background-color: #45c1a7;
+        background-color: #31b891;
     }
 }
 
@@ -93,7 +93,7 @@
 }
 
 .dark {
-    background-color: #1a1c1e;
+    background-color: #5c5f6e;
     color: #fff;
     margin: 10px;
     &:hover {
