@@ -2,8 +2,7 @@ name: Deploy Frontend
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
@@ -13,19 +12,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/github-deploy-key
-          chmod 600 ~/.ssh/github-deploy-key
-          ssh-keyscan -H 79.174.80.187 >> ~/.ssh/known_hosts
-
-      - name: Deploy frontend with Docker
-        run: |
-          ssh -i ~/.ssh/github-deploy-key deploy@79.174.80.187 << 'EOF'
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
             cd /srv/apps/frontend
             git pull origin main
-            docker-compose down
-            docker-compose build
-            docker-compose up -d
-          EOF
+            docker compose down
+            docker compose up --build -d
