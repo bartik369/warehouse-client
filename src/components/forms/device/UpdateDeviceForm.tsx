@@ -30,7 +30,7 @@ interface IUpdateDeviceFormProps {
   actions: IUpdateDeviceFormActions;
 }
 const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
-  const { isOpen, entity, setIsOpen } = useModal(false);
+  const { isOpen, setIsOpen } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: types } = useGetTypesQuery();
   const [ getModels, { data: models } ] = useLazyGetModelsQuery();
@@ -80,6 +80,7 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
                 errors={state.errors}
                 name="typeName"
                 getId={(item:IEntity) => item.id}
+                getLabel={(item) => item.name}
               />
             </div>
             <div className={styles.container}>
@@ -91,6 +92,7 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
                 errors={state.errors}
                 name="manufacturerName"
                 getId={(item:IEntity) => item.id}
+                getLabel={(item) => item.name}
               />
             </div>
             {(state.device.manufacturerName && state.device.typeName) && (
@@ -103,6 +105,7 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
                   errors={state.errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
+                  getLabel={(item) => item.name}
                 />
               </div>
             )}
@@ -157,7 +160,6 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
-            entity={entity} 
             isOpen={isOpen}
             state={state}
             actions={actions}

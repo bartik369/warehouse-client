@@ -45,7 +45,12 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
           <div className={styles.content}>
             {fieldType === "model" && 
               <div className={styles.preview}>
-                <Preview media={state.media.prevImg || ""} ref={fileInputRef} actions={actions} />
+                <Preview 
+                  media={state.media.prevImg || ""} 
+                  ref={fileInputRef} 
+                  actions={actions} 
+                  state={state} 
+                />
               </div>
             }
             <form>

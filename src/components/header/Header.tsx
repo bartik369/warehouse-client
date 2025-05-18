@@ -28,7 +28,7 @@ const Header = ({ isActive, setIsActive }:IHeaderProps) => {
         : style.relative}`} >
         <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)}/>
         <Search />
-        {(status || isDevicePage) && <HeaderMenu device={device} />}
+        {device && (status || isDevicePage) && <HeaderMenu device={device} />}
         <Profile />
       </header>
     )

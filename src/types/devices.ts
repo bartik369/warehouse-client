@@ -324,10 +324,10 @@ export interface IWarrantyFormState {
 export interface IWarrantyFormActions {
   handleInputChange: (name: keyof IDevice, value: string) => void;
 }
-export interface IWarrantyFormSetters {
-  setValue: (value: T) => void;
-  setDevice: (device: IDevice) => void;
-}
+// export interface IWarrantyFormSetters {
+//   setValue: (value: T) => void;
+//   setDevice: (device: IDevice) => void;
+// }
 
 
 

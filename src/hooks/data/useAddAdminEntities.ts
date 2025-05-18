@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useRef, useState } from "react";
+import { useCallback, useReducer, useRef } from "react";
 import { toast } from "react-toastify";
 import { useInputMask } from "./useInputMask";
 import {
@@ -50,7 +50,7 @@ import {
   useDeletePermissionMutation,
   useDeleteRoleMutation,
 } from "../../store/api/permissionApi";
-import { IDeviceMedia, IEntity } from "../../types/devices";
+import { IEntity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
 import { selectPic } from "../../utils/constants/constants";
 import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";

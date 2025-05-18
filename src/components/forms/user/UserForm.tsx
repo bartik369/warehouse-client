@@ -99,6 +99,7 @@ const UserForm = ({ departments }:IUserFormProps) => {
           value={user.department || ""}
           errors={errors}
           getId={(item: IEntity) => item.id}
+          getLabel={(item) => item.name}
         />
         <Select<IEntity>
           setValue={handleLocationChange}
@@ -108,6 +109,7 @@ const UserForm = ({ departments }:IUserFormProps) => {
           value={user.location || ""}
           errors={errors}
           getId={(item: IEntity) => item.id}
+          getLabel={(item) => item.name}
         />
         <Toggle
           checked={checked}

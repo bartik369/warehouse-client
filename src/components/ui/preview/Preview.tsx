@@ -18,7 +18,7 @@ const Preview = forwardRef<HTMLInputElement, IPreviewProps>(
         <div className={style.icon}>
           <img src={loadIcon} alt="" />
         </div>
-        <img src={state.media.prevImg || previewPicture} />
+        <img src={state?.media?.prevImg || previewPicture} />
         {
           <input
             ref={ref}

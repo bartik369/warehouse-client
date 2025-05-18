@@ -109,6 +109,7 @@ const DeviceForm = () => {
                 errors={state.errors}
                 name="typeName"
                 getId={(item:IEntity) => item.id}
+                getLabel={(item) => item.name}
               />
             </div>
             <div className={styles.container}>
@@ -127,6 +128,7 @@ const DeviceForm = () => {
                 errors={state.errors}
                 name="manufacturerName"
                 getId={(item:IEntity) => item.id}
+                getLabel={(item) => item.name}
               />
             </div>
             {state.device.typeSlug && state.device.manufacturerSlug && (
@@ -146,6 +148,7 @@ const DeviceForm = () => {
                   errors={state.errors}
                   name="modelName"
                   getId={(item:IEntity) => item.id}
+                  getLabel={(item) => item.name}
                 />
               </div>
             )}
@@ -181,6 +184,7 @@ const DeviceForm = () => {
               errors={state.errors}
               name="warehouseId"
               getId={(item:IEntity) => item.id}
+              getLabel={(item) => item.name}
             />
             <Number device={state.device} setDevice={actions.handleNumber} />
             {state.device.typeSlug && deviceTypes[state.device.typeSlug]?.uniqueFields?.map((item) => (

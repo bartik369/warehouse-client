@@ -84,13 +84,6 @@ export const usePermission = () => {
     },
     [handleInputChange]
   );
-  const handlePermissionChange = useCallback(
-    (item: IRole) => {
-      handleInputChange("permissionIds", item.id || "");
-      handleInputChange("permissionName", item.name || "");
-    },
-    [handleInputChange]
-  );
   const handleLocationChange = useCallback(
     (item: IEntity) => {
       handleInputChange("locationId", item.id || "");
@@ -185,7 +178,6 @@ export const usePermission = () => {
       handleDeleteEntity,
       handleResetEntity,
       handleRoleChange,
-      handlePermissionChange,
       handleLocationChange,
       handleWarehouseChange,
       handleCheck,

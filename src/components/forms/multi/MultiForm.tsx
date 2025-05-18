@@ -107,6 +107,7 @@ const MultiForm = ({
                 errors={state.errors}
                 name={field.name}
                 getId={(item: IEntity) => item.id}
+                getLabel={(item) => item.name}
               />
             );
           }

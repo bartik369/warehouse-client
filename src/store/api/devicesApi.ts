@@ -3,6 +3,7 @@ import {
   IFilterDeviceOptions,
   IAggregateDeviceInfo,
   QueryParams,
+  IFilteredDevicesFromBack,
 } from "./../../types/devices";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
@@ -12,7 +13,7 @@ export const devicesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Device", "Manufacturer", "Model", "Type"],
   endpoints: (build) => ({
-    getDevices: build.query<{ devices: IAggregateDeviceInfo[], totalPages: number}, QueryParams>({
+    getDevices: build.query<{ devices: IFilteredDevicesFromBack[], totalPages: number}, QueryParams>({
       query: (queryParams) => {
         const { city, ...params } = queryParams;
         const urlParams = new URLSearchParams();

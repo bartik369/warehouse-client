@@ -80,12 +80,14 @@ const WarrantyForm = <T,>({
         }
         <Select<IContractor>
           setValue={actions.handleContractorChange}
-          items={contractors || []}
+          items={(contractors || []) as IContractor[]}
           label={contractor}
           value={state.device.providerName}
           errors={state.errors}
           name="provider"
           getId={(item: IContractor) => item.id}
+          getLabel={(item) => item.name}
+          getComment={(item) => item.comment}
         />
       </div>
       <Input

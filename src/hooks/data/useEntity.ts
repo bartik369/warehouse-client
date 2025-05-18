@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback, useReducer } from 'react';
-import { IDeviceMedia, IEntity} from './../../types/devices';
+import { useRef, useCallback, useReducer } from 'react';
+import { IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { useCreateTypeMutation } from '../../store/api/typesApi';
 import { useCreateModelMutation } from '../../store/api/modelsApi';
@@ -101,7 +101,6 @@ export const useEntity = () => {
     state,
     fileInputRef,
     actions: {
-      // setEntity,
       handleMedia,
       handleInputChange,
       handleCreateEntity,

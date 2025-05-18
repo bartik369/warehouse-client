@@ -7,7 +7,7 @@ export interface IAdminEntityState {
         prevImg: string | null;
     };
     errors: Record<string, string>,
-    isUpdate: boolean,
+    isUpdate?: boolean,
 }
 
 export enum AdminEntityActionTypes {
