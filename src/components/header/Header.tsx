@@ -19,9 +19,7 @@ const Header = ({ isActive, setIsActive }:IHeaderProps) => {
   const location = useLocation();
   const isDevicePage = /^\/devices\/[a-f0-9-]+$/.test(location.pathname);
   const {isSticky} = useStickyHeader();
-
-  console.log(status)
-
+  
     return (
       <header  className={`${style.header} ${isSticky 
         ? style.sticky 
