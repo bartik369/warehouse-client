@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
-import { IDeviceMedia, IEntity} from './../../types/devices';
+import { useRef, useCallback, useReducer } from 'react';
+import { IEntity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { useCreateTypeMutation } from '../../store/api/typesApi';
 import { useCreateModelMutation } from '../../store/api/modelsApi';
@@ -7,23 +7,12 @@ import { useCreateManufacturerMutation } from '../../store/api/manufacturersApi'
 import { selectPic } from '../../utils/constants/constants';
 import { toast } from 'react-toastify';
 import { handleApiError } from '../../utils/errors/handleApiError';
+import { entityReducer, initialState } from '../../reducers/entity/entityReducer';
+import { EntityActionTypes } from '../../reducers/entity/entityTypes';
 
 export const useEntity = () => {
-  // Device file and preview img for  Device form
-  const [media, setMedia] = useState<IDeviceMedia>({
-    file: null,
-    prevImg: null,
-  });
+  const [state, dispatch] = useReducer(entityReducer, initialState);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [entity, setEntity] = useState<IEntity>({
-    id: '',
-    name: '',
-    slug: '',
-    imagePath: '',
-    typeId: '',
-    manufacturerId: '',
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [createManufacturer] = useCreateManufacturerMutation();
   const [createType] = useCreateTypeMutation();
   const [createModel] = useCreateModelMutation();
@@ -31,76 +20,93 @@ export const useEntity = () => {
   // Device media logic
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('fdsfd')
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        if (file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
+        if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
-          setMedia({ file: file, prevImg: objectUrl });
+          dispatch({ type: EntityActionTypes.SET_FILE, payload: file });
+          dispatch({ type: EntityActionTypes.SET_PREVIEW, payload: objectUrl });
+          // setMedia({ file: file, prevImg: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
-        } else { toast(selectPic, { type: 'error' }); }
+        } else {
+          toast(selectPic, { type: "error" });
+        }
       }
     },
-    [media]
+    [state.media]
   );
-  
+
   // Mapping between field type and RTK Query API handlers
-  const entityPoolsFunctions: Record<string, (entity: any) => { unwrap: () => Promise<any> }> = {
+  const entityPoolsFunctions: Record<
+    string,
+    (entity: any) => { unwrap: () => Promise<any> }
+  > = {
     manufacturer: createManufacturer,
     type: createType,
     model: createModel,
   };
 
-  const handleCreateEntity = useCallback(async (fieldType:string) => {
+  const handleCreateEntity = useCallback(
+    async (fieldType: string) => {
       try {
-        const createEntityFunction = entityPoolsFunctions[fieldType]
-        const validationErrors = EntityValidation(entity);
-        setErrors(validationErrors);
+        const createEntityFunction = entityPoolsFunctions[fieldType];
+        const validationErrors = EntityValidation(state.entity);
+        dispatch({ type: EntityActionTypes.SET_ERROR, payload: validationErrors});
+        // setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
           const formData = new FormData();
-          (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
-            const value = entity[key];
-            if (value !== undefined && value !== null) formData.append(key, value);
+          (Object.keys(state.entity) as (keyof IEntity)[]).forEach((key) => {
+            const value = state.entity[key];
+            if (value !== undefined && value !== null)
+              formData.append(key, value);
           });
-          if (media.file) formData.append('file', media.file);
+          if (state.media.file) formData.append("file", state.media.file);
           const data = await createEntityFunction(formData).unwrap();
           if (data) {
             handleResetEntity();
-            toast(data?.message, { type: 'success' });
+            toast(data?.message, { type: "success" });
           }
         }
       } catch (err: unknown) {
-       handleApiError(err);
+        handleApiError(err);
       }
     },
-    [entity, EntityValidation]
+    [state.entity, EntityValidation]
   );
 
   const handleResetEntity = useCallback(() => {
-    setEntity({ 
-      id: '', 
-      name: '', 
-      slug: '', 
-      imagePath: '', 
-      typeId: '',
-    });
-    setMedia({ file: null, prevImg: null})
+    dispatch({ type: EntityActionTypes.RESET_ENTITY });
+    dispatch({ type: EntityActionTypes.RESET_FILE });
+    dispatch({ type: EntityActionTypes.RESET_PREVIEW });
+    dispatch({ type: EntityActionTypes.RESET_ERROR });
   }, []);
 
-  const handleInputChange = useCallback(<T extends IEntity | string>(field: keyof IEntity, value: T) => {
+  const handleInputChange = useCallback(
+    <T extends IEntity | string>(field: keyof IEntity, value: T) => {
       const validationErrors = ValidateField(field, value);
-      setErrors((prev) => ({
-        ...prev,
-        [field]: validationErrors as string,
-      }));
-      setEntity((prev) => ({
-        ...prev,
-        [field]: value as string,
-      }));
-    },[]
+      dispatch({ 
+        type: EntityActionTypes.SET_ERROR, 
+        payload: { [field]: validationErrors as string }
+      });
+      dispatch({
+        type: EntityActionTypes.SET_ENTITY,
+        payload: { [field]: value as string }
+      })
+    },
+    []
   );
-  return { errors, entity, media, fileInputRef, setEntity, handleMedia, 
-  handleInputChange,  handleCreateEntity, handleResetEntity };
+  return {
+    state,
+    fileInputRef,
+    actions: {
+      handleMedia,
+      handleInputChange,
+      handleCreateEntity,
+      handleResetEntity,
+    },
+  };
 };
 
 

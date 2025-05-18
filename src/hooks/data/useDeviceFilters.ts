@@ -4,6 +4,7 @@ import { CheckedDeviceOptions } from '../../types/content';
 import { useSearchParams, useParams } from 'react-router-dom';
 import { yes, no, inStock, inUse } from '../../utils/constants/constants';
 import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '../../store/api/devicesApi';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 export const useDeviceFilters = () => {
   const [resetFilters, setResetFilters] = useState<Record<string, boolean>>({});
@@ -13,9 +14,11 @@ export const useDeviceFilters = () => {
   const {city} = useParams();
   const params = Object.fromEntries(searchParams);
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState(20)
-  const { data: options } = useGetDeviceOptionsQuery(city!);
-  const { data: devices } = useGetDevicesQuery({...params, city, page, limit});
+  const [limit] = useState(20)
+  const deviceOptionArgs = city ?? skipToken;
+  const deviceQueryArgs = city ? {...params, city, page, limit } : skipToken;
+  const { data: options } = useGetDeviceOptionsQuery(deviceOptionArgs);
+  const { data: devices } = useGetDevicesQuery(deviceQueryArgs);
   
   const [filters, setFilters] = useState<IDeviceFilters>({
     manufacturer: [],
@@ -56,6 +59,7 @@ export const useDeviceFilters = () => {
       isFunctional: [],
       isAssigned: [],
     };
+
     // Get all device options
     const devicesOptions: Record<string, string[]> = {
       manufacturer: options.manufacturer?.map((item) => item.slug) || [],
@@ -74,7 +78,7 @@ export const useDeviceFilters = () => {
         // Creating temporary filters with the addition current option
         const tempFilters = { ...filters, [key]: [...filters[key as keyof IDeviceFilters], option] }; 
         // Checking some device which matches all current filters
-        const isOptionAvailable = devices && devices?.devices.some((device: IFilteredDevicesFromBack) => {
+        const isOptionAvailable = devices && (devices.devices as IFilteredDevicesFromBack[]).some((device: IFilteredDevicesFromBack) => {
           const matchesFilters = Object.entries(tempFilters).every(([key, values]) => {
             if (values.length === 0) return true;
              //Get the value of device for filter 
@@ -184,41 +188,68 @@ export const useDeviceFilters = () => {
       isAssigned: 7000,
     };
 
+    // Типы опций с разными полями
+    type DeviceOptionMap = {
+      type: { slug: string; name: string };
+      model: { slug: string; name: string };
+      manufacturer: { slug: string; name: string };
+      warehouse: { slug: string; name: string };
+      memorySize: { memorySize: number };
+      screenSize: { screenSize: number };
+      isAssigned: { isAssigned: boolean };
+      isFunctional: { isFunctional: boolean };
+    };
+
+    type DeviceOptionKey = keyof DeviceOptionMap;
     return (
-      options[key]?.map((option: any, index: number) => {
-        const commonProps = {
-          id: index + idOptionsOffsets[key],
-          value: String(
-            option.slug ??
-              option.memorySize ??
-              option.screenSize ??
-              option.isFunctional ??
-              option.isAssigned
-          ),
-          disabled: disabledOptions?.[key]?.includes(
-            String(
-              option.slug ??
-                option.memorySize ??
-                option.screenSize ??
-                option.isFunctional ??
-                option.isAssigned
-            )
-          ),
-        };
+      options[key as DeviceOptionKey]?.map((option, index: number) => {
+        let value = '';
+        let name = '';
+
+        // Безопасный switch для правильного получения value и name
+        switch (key) {
+          case 'manufacturer':
+          case 'type':
+          case 'model':
+          case 'warehouse':
+            if ('slug' in option && 'name' in option) {
+              value = option.slug;
+              name = option.name;
+            }
+            break;
+          case 'memorySize':
+            if ('memorySize' in option) {
+              value = String(option.memorySize);
+              name = value;
+            }
+            break;
+          case 'screenSize':
+            if ('screenSize' in option) {
+              value = String(option.screenSize);
+              name = value;
+            }
+            break;
+          case 'isFunctional':
+            if ('isFunctional' in option) {
+              value = String(option.isFunctional);
+              name = option.isFunctional ? yes : no;
+            }
+            break;
+          case 'isAssigned':
+            if ('isAssigned' in option) {
+              value = String(option.isAssigned);
+              name = option.isAssigned ? inUse : inStock;
+            }
+            break;
+          default:
+            break;
+        }
 
         return {
-          ...commonProps,
-          name:
-            option.name ??
-            (key === 'isFunctional'
-              ? option.isFunctional
-                ? yes
-                : no
-              : key === 'isAssigned'
-              ? option.isAssigned
-                ? inUse
-                : inStock
-              : commonProps.value),
+          id: String(index + idOptionsOffsets[key]),
+          value,
+          disabled: disabledOptions?.[key]?.includes(value),
+          name,
           type: key,
         };
       }) || []
@@ -231,6 +262,7 @@ export const useDeviceFilters = () => {
   const handleNextPage = useCallback(() => {
     setPage((prev) => prev + 1);
   }, []);
+
   
   return { devices, list, labels, options, filters, activeLink, searchParams, disabledOptions, 
     resetFilters, page, setPage, setList, handleResetFilter, handleFilterChange, getUniqueOptions, 

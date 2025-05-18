@@ -24,7 +24,7 @@ export const contractorApi = createApi({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
             })
         }),
-        createContractor: build.mutation<{message:string, contractor:IEntity}, void>({
+        createContractor: build.mutation<{message:string, contractor:IEntity}, Partial<IEntity>>({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_CONTRACTORS}`,

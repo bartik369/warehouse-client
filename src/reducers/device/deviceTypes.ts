@@ -23,7 +23,7 @@ export enum DeviceActionTypes {
 
 
 export type DeviceAction = 
- | { type: DeviceActionTypes.SET_ERROR, payload: { [key: string]: string }}
+ | { type: DeviceActionTypes.SET_ERROR, payload: Record<string, string>}
  | { type: DeviceActionTypes.RESET_ERROR }
  | { type: DeviceActionTypes.SET_DEVICE, payload: Partial<IDevice> }
  | { type: DeviceActionTypes.RESET_DEVICE }

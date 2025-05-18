@@ -99,6 +99,7 @@ const UserForm = ({ departments }:IUserFormProps) => {
           value={user.department || ""}
           errors={errors}
           getId={(item: IEntity) => item.id}
+          getLabel={(item) => item.name}
         />
         <Select<IEntity>
           setValue={handleLocationChange}
@@ -108,6 +109,7 @@ const UserForm = ({ departments }:IUserFormProps) => {
           value={user.location || ""}
           errors={errors}
           getId={(item: IEntity) => item.id}
+          getLabel={(item) => item.name}
         />
         <Toggle
           checked={checked}
@@ -120,7 +122,6 @@ const UserForm = ({ departments }:IUserFormProps) => {
       <div className={styles.actions}>
         <BtnAction
           icon={<HiMiniXMark />}
-          type="button"
           size="lg"
           color="grey"
           title={reset}
@@ -128,7 +129,6 @@ const UserForm = ({ departments }:IUserFormProps) => {
         />
         <BtnAction
           icon={<GoPlus />}
-          type="submit"
           size="lg"
           color="blue-green"
           title={add}

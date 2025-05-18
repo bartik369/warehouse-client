@@ -9,11 +9,11 @@ import AddRoleConfig from "../pages/AddRole";
 import AddTypeConfig from "../pages/AddType";
 import AddUserConfig from "../pages/AddUser";
 import AddWarehouseConfig from "../pages/AddWarehouse";
-import DeviceConfig from "../pages/device";
+import DeviceConfig from "../pages/Device";
 import DevicesConfig from "../pages/Devices";
 import EditDeviceConfig from "../pages/EditDevice";
 import EditUserConfig from "../pages/EditUser";
-import HomeConfig from "../pages/home";
+import HomeConfig from "../pages/Home";
 import PermissionRoleConfig from "../pages/PermissionRole";
 import ProfileConfig from "../pages/Profile";
 import UsersConfig from "../pages/Users";
@@ -21,8 +21,8 @@ import UsersConfig from "../pages/Users";
 const privateRoutes = [
     HomeConfig,
     ProfileConfig,
-    DeviceConfig,
     DevicesConfig,
+    DeviceConfig,
     AddDeviceConfig,
     EditDeviceConfig,
     AddUserConfig,

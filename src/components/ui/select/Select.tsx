@@ -13,6 +13,8 @@ interface ISelectProps<T> {
   errors: IValidationErrors;
   setValue: (value: T) => void;
   getId: (item: T) => void;
+  getLabel: (item: T) => string;
+  getComment?:(item: T) => string | undefined;
 }
 
 const Select = <T,>({
@@ -23,6 +25,8 @@ const Select = <T,>({
   errors,
   setValue,
   getId,
+  getLabel,
+  getComment
 }: ISelectProps<T>) => {
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
     const errorMessage = errors[name as keyof IValidationErrors];
@@ -88,9 +92,9 @@ const Select = <T,>({
                   onBlur={() => setFocusedIndex(null)}
                 >
                 <div className={styles.info}>
-                <div className={styles.name}>{option.name}</div>
-                {option.comment &&
-                 <div className={styles.comment}>{option.comment}</div>
+                <div className={styles.name}>{getLabel(option)}</div>
+                {getComment?.(option) &&
+                 <div className={styles.comment}>{getComment(option)}</div>
                 }
                 </div>
                 </div>

@@ -2,6 +2,7 @@ import { IDeviceState, DeviceAction, DeviceActionTypes } from './deviceTypes';
 
 export const initialState: IDeviceState = {
   device: {
+    id: '',
     name: '',
     inventoryNumber: '',
     modelId: '',

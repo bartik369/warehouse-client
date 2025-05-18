@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useRef, useState } from "react";
+import { useCallback, useReducer, useRef } from "react";
 import { toast } from "react-toastify";
 import { useInputMask } from "./useInputMask";
 import {
@@ -50,7 +50,7 @@ import {
   useDeletePermissionMutation,
   useDeleteRoleMutation,
 } from "../../store/api/permissionApi";
-import { IDeviceMedia, IEntity } from "../../types/devices";
+import { IEntity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
 import { selectPic } from "../../utils/constants/constants";
 import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";
@@ -61,10 +61,6 @@ export const useAddAdminEntities = () => {
   const { isUpdate, entity } = state;
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [media, setMedia] = useState<IDeviceMedia>({
-    file: null,
-    prevImg: null,
-  });
 
   const { changeFormatPhone } = useInputMask();
   const [getWarehouse] = useLazyGetWarehouseQuery();
@@ -165,7 +161,7 @@ export const useAddAdminEntities = () => {
                 formData.append(key, value);
             });
 
-            if (media.file) formData.append("file", media.file);
+            if (state.media.file) formData.append("file", state.media.file);
             const data = await createEntityFunction(formData).unwrap();
             if (data) {
               dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
@@ -216,14 +212,15 @@ export const useAddAdminEntities = () => {
         const file = e.target.files[0];
         if (file && (file.type.startsWith("image/")) && !file.type.endsWith(".gif")) {
           const objectUrl = URL.createObjectURL(file);
-          setMedia({ file: file, prevImg: objectUrl });
+          dispatch({ type: AdminEntityActionTypes.SET_FILE, payload: file });
+          dispatch({ type: AdminEntityActionTypes.SET_PREVIEW, payload: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
         } else {
           toast(selectPic, { type: "error" });
         }
       }
     },
-    [media]
+    [state.media]
   );
   const handleDeleteEntity = useCallback(
     async (id: string, fieldType: string) => {
@@ -244,7 +241,6 @@ export const useAddAdminEntities = () => {
     entity,
     state,
     isUpdate,
-    media,
     fileInputRef,
     actions: {
       handleMedia,

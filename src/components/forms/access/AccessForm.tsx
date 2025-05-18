@@ -52,6 +52,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
         errors={state.errors}
         setValue={actions.handleRoleChange}
         getId={(item: IRole) => item.id}
+        getLabel={(item) => item.name}
       />
       {!isManager && (
         <Checkbox
@@ -72,6 +73,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
         errors={state.errors}
         name="locationName"
         getId={(item: IEntity) => item.id}
+        getLabel={(item) => item.name}
       />
       {!isManager && entity.locationName && (
         <Select<IEntity>
@@ -82,6 +84,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
           errors={state.errors}
           name="warehouseName"
           getId={(item: IEntity) => item.id}
+          getLabel={(item) => item.name}
         />
       )}
       <Textarea

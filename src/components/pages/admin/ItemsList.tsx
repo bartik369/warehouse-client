@@ -23,7 +23,7 @@ const ItemsList = ({ field, items, actions }: IItemsListProps) => {
           <div className={styles.actions}>
             <button
               className={styles.btn}
-              onClick={() => actions.handleGetEntity(item.id, field)}
+              onClick={() => actions.handleGetEntity?.(item.id, field)}
             >
               <MdOutlineEdit />
             </button>

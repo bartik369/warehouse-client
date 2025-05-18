@@ -19,6 +19,10 @@ export const initialState:IAdminEntityState = {
     },
     errors: {},
     isUpdate: false,
+    media: {
+      file: null,
+      prevImg: null,
+    },
 }
 export function adminEntityReducer(
     state: IAdminEntityState,
@@ -53,6 +57,38 @@ export function adminEntityReducer(
       case AdminEntityActionTypes.SET_IS_UPDATE: {
         return { ...state, isUpdate: action.payload };
       }
+      case AdminEntityActionTypes.SET_FILE:
+            return {
+              ...state,
+              media: {
+                ...state.media,
+                file: action.payload,
+              },
+            };
+          case AdminEntityActionTypes.RESET_FILE:
+            return {
+              ...state,
+              media: {
+                ...state.media,
+                file: null,
+              },
+            };
+          case AdminEntityActionTypes.SET_PREVIEW:
+            return {
+              ...state,
+              media: {
+                ...state.media,
+                prevImg: action.payload,
+              },
+            };
+          case AdminEntityActionTypes.RESET_PREVIEW:
+            return {
+              ...state,
+              media: {
+                ...state.media,
+                prevImg: null,
+              },
+            };
       default:
         return state;
     }

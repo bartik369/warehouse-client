@@ -1,7 +1,7 @@
 import { IContractor } from "./content";
 
 export interface IDevice {
-  id?: string;
+  id: string;
   name: string;
   inventoryNumber?: string;
   modelCode?: string;
@@ -59,6 +59,7 @@ export interface IAggregateDeviceInfo extends IDevice {
   };
   model: {
     name: string;
+    slug: string;
     imagePath: string;
     manufacturer: {
       name: string;
@@ -323,10 +324,10 @@ export interface IWarrantyFormState {
 export interface IWarrantyFormActions {
   handleInputChange: (name: keyof IDevice, value: string) => void;
 }
-export interface IWarrantyFormSetters {
-  setValue: (value: T) => void;
-  setDevice: (device: IDevice) => void;
-}
+// export interface IWarrantyFormSetters {
+//   setValue: (value: T) => void;
+//   setDevice: (device: IDevice) => void;
+// }
 
 
 

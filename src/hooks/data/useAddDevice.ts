@@ -177,8 +177,7 @@ export function useAddDevice() {
     try {
       if (!id) return;
       const data = await getDevice(id).unwrap();
-      const { warehouse, model, warranty,  contractor, addedBy, updatedBy,
-        deviceIssues, ...rest } = data;
+      const { warehouse, model, warranty, ...rest } = data;
       dispatch({
         type: DeviceActionTypes.SET_DEVICE,
         payload: {

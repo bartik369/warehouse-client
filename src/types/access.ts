@@ -39,7 +39,6 @@ export type IPermissionRoleRes = Pick<
 export interface IAccessFormActions {
     handleInputChange: (name: keyof IPermissionRole, e: string) => void;
     handleRoleChange: (item: IRole) => void;
-    handlePermissionChange: (item: IPermissionRole) => void;
     handleLocationChange?: (item: IEntity) => void;
     handleWarehouseChange?: (item: IEntity) => void;
     handleCreateEntity: () => void;

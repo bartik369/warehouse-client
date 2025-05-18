@@ -21,8 +21,6 @@ export const useContactor = () => {
 
   const handleInputChange = useCallback(
     <T extends IContractor | string>(field: keyof IContractor, value: T) => {
-      console.log(field);
-
       const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,
