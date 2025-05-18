@@ -85,7 +85,7 @@ const WarrantyForm = <T,>({
           value={state.device.providerName}
           errors={state.errors}
           name="provider"
-          getId={(item: IContractor) => item.id}
+          getId={(item) => item.id}
           getLabel={(item) => item.name}
           getComment={(item) => item.comment}
         />

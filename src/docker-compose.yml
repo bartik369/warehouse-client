@@ -1,8 +1,12 @@
-version: '3.8'
+# docker-compose.yml
+version: "3.8"
 
 services:
   frontend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: warehouse-client
     ports:
       - "80:80"
     restart: always
