@@ -1,11 +1,22 @@
-version: "3.8"
+version: '3.8'
 
 services:
   frontend:
+    container_name: apps-frontend
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: warehouse-client
     ports:
-      - "80:80"
-    restart: always
+      - "3000:80"
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  backend:
+    container_name: apps-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
