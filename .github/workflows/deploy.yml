@@ -1,4 +1,4 @@
-name: 🚀 Deploy Frontend
+name: Deploy Frontend
 
 on:
   push:
@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout репозитория
+      - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: 📝 Запись .env.production локально
+      - name: Запись .env.production локально
         run: echo "${{ secrets.ENV_PROD }}" > .env.production
 
-      - name: 📤 Копирование .env.production на сервер
+      - name: Копирование .env.production на сервер
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -25,7 +25,7 @@ jobs:
           source: ".env.production"
           target: "/srv/apps/frontend/"
 
-      - name: 🚀 Деплой через SSH
+      - name: Деплой через SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
