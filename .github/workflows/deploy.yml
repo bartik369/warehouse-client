@@ -37,8 +37,8 @@ jobs:
             echo "===> Переключаемся в директорию проекта"
             cd /srv/apps/frontend
 
-            echo "===> Переименовываем .env.production в .env"
-            mv .env.production .env
+            # echo "===> Переименовываем .env.production в .env"
+            # mv .env.production .env
 
             echo "===> Проверка наличия docker-compose.yml"
             if [ ! -f docker-compose.yml ]; then
