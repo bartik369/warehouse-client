@@ -37,8 +37,8 @@ jobs:
             echo "===> Переключаемся в директорию проекта"
             cd /srv/apps/frontend
 
-            # echo "===> Переименовываем .env.production в .env"
-            # mv .env.production .env
+            echo "===> Переименовываем .env.production в .env"
+            mv .env.production .env
 
             echo "===> Проверка наличия docker-compose.yml"
             if [ ! -f docker-compose.yml ]; then
@@ -46,20 +46,20 @@ jobs:
               exit 1
             fi
 
-            echo "===> Обновляем код с main"
+            echo "Обновляем код с main"
             git pull origin main
 
-            echo "===> Останавливаем контейнеры"
+            echo "Останавливаем контейнеры"
             docker compose down
 
-            echo "===> Собираем образы"
+            echo "Собираем образы"
             docker compose build
 
-            echo "===> Запускаем контейнеры в фоне"
+            echo "Запускаем контейнеры в фоне"
             docker compose up -d
 
-            echo "===> Проверка статуса контейнеров"
+            echo "Проверка статуса контейнеров"
             docker compose ps
 
-            echo "===> Вывод логов (последние 100 строк)"
+            echo "Вывод логов (последние 100 строк)"
             docker compose logs --tail=100
