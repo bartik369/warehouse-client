@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: 🚀 Deploy Frontend
 
 on:
   push:
@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: 📥 Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Write .env.production file locally
+      - name: 📝 Запись .env.production локально
         run: echo "${{ secrets.ENV_PROD }}" > .env.production
 
-      - name: Copy .env.production to server
+      - name: 📤 Копирование .env.production на сервер
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -25,15 +25,41 @@ jobs:
           source: ".env.production"
           target: "/srv/apps/frontend/"
 
-      - name: Deploy via SSH
+      - name: 🚀 Деплой через SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
+          command_timeout: 50m
           script: |
+            echo "===> Переключаемся в директорию проекта"
             cd /srv/apps/frontend
+
+            echo "===> Переименовываем .env.production в .env"
+            mv .env.production .env
+
+            echo "===> Проверка наличия docker-compose.yml"
+            if [ ! -f docker-compose.yml ]; then
+              echo 'Файл docker-compose.yml не найден!'
+              exit 1
+            fi
+
+            echo "===> Обновляем код с main"
             git pull origin main
+
+            echo "===> Останавливаем контейнеры"
             docker compose down
-            docker compose up --build -d
+
+            echo "===> Собираем образы"
+            docker compose build
+
+            echo "===> Запускаем контейнеры в фоне"
+            docker compose up -d
+
+            echo "===> Проверка статуса контейнеров"
+            docker compose ps
+
+            echo "===> Вывод логов (последние 100 строк)"
+            docker compose logs --tail=100
