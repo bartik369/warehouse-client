@@ -46,7 +46,6 @@ export const authApi = createApi({
         }),
     })
 });
-
 export const {
     useSigninMutation, 
     useLogoutUserMutation,
