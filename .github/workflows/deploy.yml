@@ -12,17 +12,17 @@ jobs:
       - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Запись .env.production локально
-        run: echo "${{ secrets.ENV_PROD }}" > .env.production
+      - name: Запись .env локально
+        run: echo "${{ secrets.ENV_PROD }}" > .env
 
-      - name: Копирование .env.production на сервер
+      - name: Копирование .env на сервер
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          source: ".env.production"
+          source: ".env"
           target: "/srv/apps/frontend/"
 
       - name: Деплой через SSH
@@ -38,7 +38,7 @@ jobs:
             cd /srv/apps/frontend
 
             echo "===> Переименовываем .env.production в .env"
-            mv .env.production .env
+            mv .env .env
 
             echo "===> Проверка наличия docker-compose.yml"
             if [ ! -f docker-compose.yml ]; then
