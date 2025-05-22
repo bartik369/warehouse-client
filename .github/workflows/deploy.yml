@@ -12,23 +12,43 @@ jobs:
       - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Архивируем проект (без node_modules)
+      - name: Установка зависимостей и сборка фронтенда
         run: |
-          tar --exclude='node_modules' -czf frontend.tar.gz .
+          cd frontend
+          npm ci
+          npm run build
+          cd ..
 
-      - name: Копируем архив и .env на сервер
+      - name: Архивирование (исключая node_modules)
+        run: |
+          cd frontend
+          tar --exclude='node_modules' --warning=no-file-changed -czf ../frontend.tar.gz .
+          cd ..
+
+      - name: Запись .env локально
+        run: echo "${{ secrets.ENV_PROD }}" > .env
+
+      - name: Копирование .env на сервер
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          source: |
-            frontend.tar.gz
-            .env
-          target: "/srv/apps/frontend"
+          source: ".env"
+          target: "/srv/apps/frontend/"
 
-      - name: Деплой через SSH
+      - name: Копирование архива проекта на сервер
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: 22
+          source: "frontend.tar.gz"
+          target: "/srv/apps/"
+
+      - name: Деплой на сервер через SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -36,20 +56,25 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
           script: |
-            echo "===> Переходим в директорию проекта"
-            cd /srv/apps/frontend
+            echo "===> Переключаемся в директорию проекта"
+            cd /srv/apps
 
-            echo "===> Распаковываем архив"
-            tar -xzf frontend.tar.gz
+            echo "===> Распаковываем фронтенд в папку frontend"
+            rm -rf frontend
+            mkdir frontend
+            tar -xzf frontend.tar.gz -C frontend
             rm frontend.tar.gz
 
-            echo "===> Обновляем .env"
-            mv .env .env
+            echo "===> Перемещаем .env в нужное место"
+            mv frontend/.env frontend/.env.production
 
-            echo "===> Перезапускаем контейнеры"
+            echo "===> Обновляем и перезапускаем контейнеры"
             docker compose down
             docker compose build
             docker compose up -d
 
-            echo "===> Проверка статуса"
+            echo "===> Проверка статуса контейнеров"
             docker compose ps
+
+            echo "===> Последние логи"
+            docker compose logs --tail=100
