@@ -5,7 +5,7 @@ import { setCredentials, logOut, setAuth } from './slices/authSlice';
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: import.meta.env.VITE_API_URL,
-  baseUrl: '/api',
+  baseUrl: '',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = localStorage.getItem('accessToken');
