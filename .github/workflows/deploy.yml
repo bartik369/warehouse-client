@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy Frontend to Server
 
 on:
   push:
@@ -12,7 +12,20 @@ jobs:
       - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Запись .env локально
+      - name: Упаковка frontend кода
+        run: tar -czf frontend.tar.gz . --exclude=node_modules
+
+      - name: Отправка архива на сервер
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: 22
+          source: "frontend.tar.gz"
+          target: "/srv/apps/"
+
+      - name: Отправка .env на сервер
         run: echo "${{ secrets.ENV_PROD }}" > .env
 
       - name: Копирование .env на сервер
@@ -25,41 +38,26 @@ jobs:
           source: ".env"
           target: "/srv/apps/frontend/"
 
-      - name: Деплой через SSH
+      - name: Распаковка и перезапуск контейнеров
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          command_timeout: 50m
+          command_timeout: 20m
           script: |
-            echo "Переключаемся в директорию проекта"
-            cd /srv/apps/frontend
+            echo "Распаковываем frontend в нужную директорию"
+            mkdir -p /srv/apps/frontend
+            tar -xzf /srv/apps/frontend.tar.gz -C /srv/apps/frontend
 
-            echo "Переименовываем .env.production в .env"
-            mv .env .env
+            echo "Удаляем архив"
+            rm /srv/apps/frontend.tar.gz
 
-            echo "Проверка наличия docker-compose.yml"
-            if [ ! -f docker-compose.yml ]; then
-              echo 'Файл docker-compose.yml не найден!'
-              exit 1
-            fi
+            echo "Переходим в корень проекта"
+            cd /srv/apps
 
-            echo "Обновляем код с main"
-            git pull origin main
-
-            echo "Останавливаем контейнеры"
+            echo "Пересобираем и перезапускаем контейнеры"
             docker compose down
-
-            echo "Собираем образы"
-            docker compose build
-
-            echo "Запускаем контейнеры в фоне"
+            docker compose build --no-cache
             docker compose up -d
-
-            echo "Проверка статуса контейнеров"
-            docker compose ps
-
-            echo "Вывод логов (последние 100 строк)"
-            docker compose logs --tail=100
