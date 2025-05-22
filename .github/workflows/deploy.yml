@@ -34,13 +34,13 @@ jobs:
           port: 22
           command_timeout: 50m
           script: |
-            echo "===> Переключаемся в директорию проекта"
+            echo "Переключаемся в директорию проекта"
             cd /srv/apps/frontend
 
-            echo "===> Переименовываем .env.production в .env"
+            echo "Переименовываем .env.production в .env"
             mv .env .env
 
-            echo "===> Проверка наличия docker-compose.yml"
+            echo "Проверка наличия docker-compose.yml"
             if [ ! -f docker-compose.yml ]; then
               echo 'Файл docker-compose.yml не найден!'
               exit 1
