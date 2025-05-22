@@ -47,7 +47,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Role']
     }),
-    deleteRole: build.mutation<{ mesage: string }, string>({
+    deleteRole: build.mutation<{ message: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "DELETE",
