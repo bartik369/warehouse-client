@@ -24,8 +24,8 @@ const Header = ({ isActive, setIsActive }:IHeaderProps) => {
       <header  className={`${style.header} ${isSticky 
         ? style.sticky 
         : style.relative}`} >
-        <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)}/>
-        <Search />
+          <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)}/>
+          <Search />
         {device && (status || isDevicePage) && <HeaderMenu device={device} />}
         <Profile />
       </header>
