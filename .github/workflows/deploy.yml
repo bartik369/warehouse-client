@@ -1,4 +1,4 @@
-name: Deploy Frontend to Server
+name: Deploy Frontend
 
 on:
   push:
@@ -12,52 +12,44 @@ jobs:
       - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Упаковка frontend кода
-        run: tar -czf frontend.tar.gz . --exclude=node_modules
+      - name: Архивируем проект (без node_modules)
+        run: |
+          tar --exclude='node_modules' -czf frontend.tar.gz .
 
-      - name: Отправка архива на сервер
+      - name: Копируем архив и .env на сервер
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          source: "frontend.tar.gz"
-          target: "/srv/apps/"
+          source: |
+            frontend.tar.gz
+            .env
+          target: "/srv/apps/frontend"
 
-      - name: Отправка .env на сервер
-        run: echo "${{ secrets.ENV_PROD }}" > .env
-
-      - name: Копирование .env на сервер
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
-          source: ".env"
-          target: "/srv/apps/frontend/"
-
-      - name: Распаковка и перезапуск контейнеров
+      - name: Деплой через SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          command_timeout: 20m
           script: |
-            echo "Распаковываем frontend в нужную директорию"
-            mkdir -p /srv/apps/frontend
-            tar -xzf /srv/apps/frontend.tar.gz -C /srv/apps/frontend
+            echo "===> Переходим в директорию проекта"
+            cd /srv/apps/frontend
 
-            echo "Удаляем архив"
-            rm /srv/apps/frontend.tar.gz
+            echo "===> Распаковываем архив"
+            tar -xzf frontend.tar.gz
+            rm frontend.tar.gz
 
-            echo "Переходим в корень проекта"
-            cd /srv/apps
+            echo "===> Обновляем .env"
+            mv .env .env
 
-            echo "Пересобираем и перезапускаем контейнеры"
+            echo "===> Перезапускаем контейнеры"
             docker compose down
-            docker compose build --no-cache
+            docker compose build
             docker compose up -d
+
+            echo "===> Проверка статуса"
+            docker compose ps
