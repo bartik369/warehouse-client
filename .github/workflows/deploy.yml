@@ -12,41 +12,19 @@ jobs:
       - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Установка зависимостей и сборка фронтенда
+      - name: Установка зависимостей и сборка фронтенда 
         run: |
-          cd frontend
           npm ci
           npm run build
-          cd ..
-
-      - name: Архивирование (исключая node_modules)
-        run: |
-          cd frontend
-          tar --exclude='node_modules' --warning=no-file-changed -czf ../frontend.tar.gz .
-          cd ..
 
       - name: Запись .env локально
         run: echo "${{ secrets.ENV_PROD }}" > .env
 
-      - name: Копирование .env на сервер
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
-          source: ".env"
-          target: "/srv/apps/frontend/"
-
-      - name: Копирование архива проекта на сервер
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
-          source: "frontend.tar.gz"
-          target: "/srv/apps/"
+      - name: Копирование проекта через rsync
+        run: |
+         echo "${{ secrets.DEPLOY_SSH_KEY }}" > key.pem
+         chmod 600 key.pem
+         rsync -az --delete -e "ssh -i key.pem -o StrictHostKeyChecking=no" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/srv/apps/frontend/
 
       - name: Деплой на сервер через SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -57,16 +35,10 @@ jobs:
           port: 22
           script: |
             echo "===> Переключаемся в директорию проекта"
-            cd /srv/apps
+            cd /srv/apps/frontend
 
-            echo "===> Распаковываем фронтенд в папку frontend"
-            rm -rf frontend
-            mkdir frontend
-            tar -xzf frontend.tar.gz -C frontend
-            rm frontend.tar.gz
-
-            echo "===> Перемещаем .env в нужное место"
-            mv frontend/.env frontend/.env.production
+            echo "===> Переименовываем .env в .env.production"
+            mv .env .env.production
 
             echo "===> Обновляем и перезапускаем контейнеры"
             docker compose down
