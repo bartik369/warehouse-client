@@ -45,7 +45,7 @@ jobs:
            ${{ secrets.ENV_PROD }}
            EOF
 
-      - name: Deploy on remote server
+      - name: Deploy on remote server.
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
