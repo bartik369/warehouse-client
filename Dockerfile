@@ -9,18 +9,17 @@ RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-# Этап 2: Используем NGINX для сервировки
-FROM nginx:stable-alpine
+# Этап 2: Запуск через "serve"
+FROM node:20-alpine
 
-# Удаляем дефолтный конфиг
-RUN rm /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-# Копируем кастомный конфиг
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Устанавливаем легкий http-сервер
+RUN npm install -g serve
 
-# Копируем собранный Vite-проект
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Копируем собранный проект
+COPY --from=builder /app/dist .
 
-EXPOSE 80
+EXPOSE 3000
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", ".", "-l", "3000"]
