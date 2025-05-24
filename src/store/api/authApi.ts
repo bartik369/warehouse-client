@@ -10,7 +10,7 @@ export const authApi = createApi({
     endpoints: build =>({
         signin:build.mutation<IAuthRes, ISignin>({
             query: (credentials) => ({
-                url: `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_AUTH}`,
+                url: new URL(import.meta.env.VITE_API_URL, import.meta.env.VITE_AUTH).toString(),
                 method: 'POST',
                 body: {...credentials},
             })
