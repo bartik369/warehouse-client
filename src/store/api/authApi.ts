@@ -10,7 +10,7 @@ export const authApi = createApi({
     endpoints: build =>({
         signin:build.mutation<IAuthRes, ISignin>({
             query: (credentials) => ({
-                url: new URL(import.meta.env.VITE_API_URL, import.meta.env.VITE_AUTH).toString(),
+                url: `https://warehouse.webcloudlab.ru/api/auth/login`,
                 method: 'POST',
                 body: {...credentials},
             })
