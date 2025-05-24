@@ -1,25 +1,21 @@
-# Этап 1: Сборка проекта
-FROM node:20-alpine AS builder
+# Сборка
+
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+
+RUN npm install
 
 COPY . .
+
 RUN npm run build
 
-# Этап 2: Запуск через "serve"
-FROM node:20-alpine
+# Продакшен-сервер (на базе nginx)
 
-WORKDIR /app
+FROM nginx:stable-alpine
 
-# Устанавливаем легкий http-сервер
-RUN npm install -g serve
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Копируем собранный проект
-COPY --from=builder /app/dist .
-
-EXPOSE 3000
-
-CMD ["serve", "-s", ".", "-l", "3000"]
+EXPOSE 80
