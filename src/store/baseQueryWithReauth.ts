@@ -4,7 +4,7 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolki
 import { setCredentials, logOut, setAuth } from './slices/authSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL,
+  baseUrl: `${import.meta.env.VITE_AUTH}`,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = localStorage.getItem('accessToken');
