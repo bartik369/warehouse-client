@@ -33,7 +33,7 @@ jobs:
           docker build -t ghcr.io/bartik369/frontend:latest .
           docker push ghcr.io/bartik369/frontend:latest
 
-      - name: Залить .env на сервер.
+      - name: Залить .env на сервер
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
