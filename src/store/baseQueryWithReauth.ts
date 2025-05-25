@@ -3,11 +3,10 @@ import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
 import { setCredentials, logOut, setAuth } from './slices/authSlice';
 
-const API_URL = 'import.meta.env.API_URL' in window 
-  ? import.meta.env.API_URL 
-  : process.env.NODE_ENV === 'development' 
+const API_URL = import.meta.env.VITE_API_URL 
+  || (import.meta.env.MODE === 'development' 
     ? 'http://localhost:5000' 
-    : '/api';
+    : '/api');
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
