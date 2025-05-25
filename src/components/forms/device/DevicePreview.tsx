@@ -7,7 +7,7 @@ const DevicePreview = () => {
     return (
         <figure className={styles.preview}>
         <img src={devicePic
-          ? `${import.meta.env.VITE_API_MODELS}${devicePic}`
+          ? `/api/models/${devicePic}`
           : previewPicture 
         } alt="" />
       </figure>
