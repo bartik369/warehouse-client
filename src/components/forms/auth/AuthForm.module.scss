@@ -1,21 +1,21 @@
 .auth {
     width: 100%;
     .title {
-        font-size: 16px;
-        font-weight: 800;
+        font-size: 20px;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: -.2px;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
     .reset {
         font-size: 12px;
         text-align: center;
         margin-top: 15px;
-        color: #727179;
+        color: #40495a;
         a {
             padding-left: 5px;
-            color: #7795d5;
+            color: #767a85;
             &:hover {
                 color: #6783c0;
             }
