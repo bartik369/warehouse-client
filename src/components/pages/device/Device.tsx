@@ -86,7 +86,7 @@ const Device = () => {
             </div>
             <article className={styles.wrapper}>
               <figure className={styles.picture}>
-                <img src={`${import.meta.env.VITE_API_MODELS}${
+                <img src={`/api/models/${
                   itemDevice.model.imagePath
                   }`}
                 alt=""
