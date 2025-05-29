@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom';
 import Input from '../../ui/input/Input';
 import { useAuth } from '../../../hooks/data/useAuth';
 import BtnAction from '../../ui/buttons/BtnAction';
+import { GoLock } from "react-icons/go";
+import { HiOutlineEnvelope } from "react-icons/hi2";
 import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, 
   reset, password, email } from '../../../utils/constants/constants';
 import styles from './AuthForm.module.scss';
@@ -21,6 +23,7 @@ const AuthForm = () => {
             errors={errors}
             name="email"
             variant='auth'
+            icon={<HiOutlineEnvelope />}
           />
           <Input onChange={userHandler}
             type="password"
@@ -30,6 +33,7 @@ const AuthForm = () => {
             errors={errors}
             name="password"
             variant='auth'
+            icon={<GoLock />}
           />
           <div className={styles.actions}>
           <BtnAction 

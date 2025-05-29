@@ -16,8 +16,12 @@
         flex-wrap: wrap;
         justify-content: center;
         margin: 10px;
-        // background-color: #7badb8;
         background-color: #37b6a3;
+        .logo {
+            background-color: #5d5f6e;
+            display: flex;
+            justify-content: center;
+        }
         .right {
             position: relative;
             width: 55%;
@@ -39,6 +43,7 @@
         }
         .left {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             flex-grow: 1;

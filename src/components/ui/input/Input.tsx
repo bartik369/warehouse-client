@@ -10,6 +10,7 @@ interface IInputProps {
     label?: string;
     errors: Record<string, string>;
     variant?: string;
+    icon?: React.ReactNode;
 };
 const Input = memo(({
     type,
@@ -19,12 +20,14 @@ const Input = memo(({
     label,
     errors,
     variant,
+    icon,
     onChange }:IInputProps) => {
     const errorMessage = errors?.[name];
 
     return (
         <div className={styles.wrapper}>
             <div className={`${styles.input} ${variant ? styles[variant] : ""}`}>
+            {icon && <span className={styles.icon}>{icon}</span>}
             <input 
                 name={name} 
                 value={value}   
