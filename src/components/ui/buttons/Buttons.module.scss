@@ -28,9 +28,10 @@
 }
 
 .lg {
-    padding: 12px 18px;
-    border-radius: 20px;
-    height: 45px;
+    padding: 14px 30px;
+    border-radius: 8px;
+    max-width: 180px;
+    width: 100%;
     font-size: 13px;
     .icon {
         display: flex;
@@ -58,6 +59,17 @@
     }
     &:focus {
         background-color: #41c0ad;
+    }
+}
+
+.dark-grey {
+    background-color: #436378;
+    color: #fff;
+    &:hover {
+        background-color: #496c83;
+    }
+    &:focus {
+        background-color: #496c83;
     }
 }
 

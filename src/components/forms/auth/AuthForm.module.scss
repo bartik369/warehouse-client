@@ -1,12 +1,17 @@
 .auth {
     width: 100%;
     .title {
-        font-size: 20px;
+        color: #fff;
+        font-size: 18px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: -.2px;
         text-align: center;
         margin-bottom: 40px;
+    }
+    .actions {
+        display: flex;
+        justify-content: center;
     }
     .reset {
         font-size: 12px;
@@ -15,9 +20,9 @@
         color: #40495a;
         a {
             padding-left: 5px;
-            color: #767a85;
+            color: #f5f6fa;
             &:hover {
-                color: #6783c0;
+                color: #ffffff;
             }
         }
     }

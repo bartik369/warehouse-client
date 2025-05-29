@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import style from './Input.module.scss';
+import styles from './Input.module.scss';
 
 interface IInputProps {
     onChange:(e:React.ChangeEvent<HTMLInputElement>) => void;
@@ -9,6 +9,7 @@ interface IInputProps {
     placeholder?: string;
     label?: string;
     errors: Record<string, string>;
+    variant?: string;
 };
 const Input = memo(({
     type,
@@ -17,26 +18,27 @@ const Input = memo(({
     placeholder, 
     label,
     errors,
+    variant,
     onChange }:IInputProps) => {
     const errorMessage = errors?.[name];
 
     return (
-        <div className={style.wrapper}>
-            <div className={style.input}>
+        <div className={styles.wrapper}>
+            <div className={`${styles.input} ${variant ? styles[variant] : ""}`}>
             <input 
                 name={name} 
                 value={value}   
                 type={type}
                 onChange={onChange}
                 placeholder={placeholder} 
-                className={style.input} 
+                className={styles.input} 
                 tabIndex={0} 
             />
-             <div className={style.label}>{label}</div>
+             <div className={styles.label}>{label}</div>
             </div>
             {errorMessage && 
-            <div className={style.error}>
-                <div className={style.error}>
+            <div className={styles.error}>
+                <div className={styles.error}>
                     {errorMessage}
                 </div>
             </div>

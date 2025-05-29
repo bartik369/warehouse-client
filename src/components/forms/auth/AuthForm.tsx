@@ -4,13 +4,13 @@ import { useAuth } from '../../../hooks/data/useAuth';
 import BtnAction from '../../ui/buttons/BtnAction';
 import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, 
   reset, password, email } from '../../../utils/constants/constants';
-import style from './AuthForm.module.scss';
+import styles from './AuthForm.module.scss';
 
 const AuthForm = () => {
     const {authData, errors, userHandler, authHandler} = useAuth();
     return (
-      <div className={style.auth}>
-        <div className={style.title}>{enterDashboard}</div>
+      <div className={styles.auth}>
+        <div className={styles.title}>{enterDashboard}</div>
         <form onSubmit={authHandler} >
           <Input
             onChange={userHandler}
@@ -20,6 +20,7 @@ const AuthForm = () => {
             label={email}
             errors={errors}
             name="email"
+            variant='auth'
           />
           <Input onChange={userHandler}
             type="password"
@@ -28,15 +29,18 @@ const AuthForm = () => {
             label={password}
             errors={errors}
             name="password"
+            variant='auth'
           />
+          <div className={styles.actions}>
           <BtnAction 
             title={signin} 
             size="lg"
             click={authHandler}
-            color="green"
+            color="dark-grey"
           />
+          </div>
         </form>
-        <div className={style.reset}>{forgetPassword}
+        <div className={styles.reset}>{forgetPassword}
           <Link to={import.meta.env.VITE_RESET_PASSWORD}>
             {reset}
           </Link>

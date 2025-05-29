@@ -3,15 +3,19 @@
     display: flex;
     align-items: center;
     width: 250px;
-    padding: 0 14px;
-    border-radius: 20px;
-    border: 1px solid #e7e9ef;
-    background-color: #ffffff;
+    padding: 2px 14px;
+    border-radius: 18px;
+    border: 1px solid #d0d6e2;
+    background-color: #fefeff;
+    transition: border-color 0.2s ease;
      ::placeholder {
-        color: #8e91a0;
+        color: #5e606f;
+        font-size: 12px;
+        opacity: 1;
     }
     &:hover {
         border: 1px solid #8e919f;
+        background-color: #ffffff;
     }
     input {
         width: 100%;
@@ -19,6 +23,8 @@
         outline: none;
         color: #1a1c1e;
         padding: 8px 30px 8px 8px;
+        background: transparent;
+        font-family: inherit;
     }
     .glass {
         font-size: 15px;
@@ -39,8 +45,8 @@
         padding: 4px;
         border-radius: 50%;
         cursor: pointer;
-        color: #5c6174;
-        background-color: #dcdfe8;
+        color: #ffffff;
+        background-color: #5c5f6e;
         transition: background-color .2s ease-in;
         &:hover {
             color: #ffffff;

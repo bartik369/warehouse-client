@@ -19,7 +19,9 @@
         padding: 25px 0px;
         border-radius: 10px;
         background-color: #ffffff;
-        box-shadow: rgba(62, 72, 81, 0.1) 0px 48px 100px 0px;
+        border-radius: .9rem;
+        -webkit-box-shadow: 0 8px 17px 0 rgba(20, 22, 30, 0.03), 0 31px 31px 0 rgba(20, 22, 30, .03), 0 69px 41px 0 rgba(20, 22, 30, .02), 0 123px 49px 0 rgba(20, 22, 30, 0), 0 192px 54px 0 rgba(20, 22, 30, 0);
+        box-shadow: 0 8px 17px 0 rgba(20, 22, 30, .03), 0 31px 31px 0 rgba(20, 22, 30, .03), 0 69px 41px 0 rgba(20, 22, 30, .02), 0 123px 49px 0 rgba(20, 22, 30, 0), 0 192px 54px 0 rgba(20, 22, 30, 0);
         right: 0;
         z-index: 99;
         .username {

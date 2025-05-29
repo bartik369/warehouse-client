@@ -1,3 +1,8 @@
+@mixin border {
+    border: 1px solid #5d5f6e;
+    outline: none;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
@@ -11,10 +16,11 @@
         flex-wrap: wrap;
         justify-content: center;
         margin: 10px;
-        background-color: #ffffff;
-        .left {
+        // background-color: #7badb8;
+        background-color: #37b6a3;
+        .right {
             position: relative;
-            width: 50%;
+            width: 55%;
             .title {
                 position: absolute;
                 color: #ffffff;
@@ -31,12 +37,44 @@
                 background-size: cover;
             }
         }
-        .right {
+        .left {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-grow: 1;
             padding: 30px;
+            .input {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                .label {
+                    display: none;
+                }
+                input {
+                    border: 1px solid #0f5ca9 !important;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 45px;
+                    border-radius: 20px;
+                    padding: 0px 24px;
+                    margin: 0;
+                    transition: border-color .4s ease-in;
+                    font-size: 14px;
+                    color: #15141f;
+                    &:focus {
+                        @include border;
+                    }
+                     ::placeholder {
+                        color: #9ba4a9;
+                        font-size: 12px;
+                        font-weight: 100;
+                    }
+                    &:hover {
+                        @include border;
+                    }
+                }
+            }
         }
     }
 }

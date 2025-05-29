@@ -8,7 +8,7 @@ const Logo = ({ open }:ILogoProps) => {
     return (
         <div className={style.logo}>
             <div className={style.title}>
-               {open ? <p>management</p> : ""}
+               {open ? <p>managementds</p> : ""}
             </div>
             <img src="" alt="" />
         </div>
