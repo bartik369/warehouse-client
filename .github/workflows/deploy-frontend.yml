@@ -16,10 +16,10 @@ jobs:
         run: echo "${{ secrets.ENV_PROD }}" > .env.production
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build frontend
-        run: npm run build -- --mode production
+        run: yarn run build -- --mode production
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
