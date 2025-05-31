@@ -15,6 +15,14 @@
     border: 1px solid #aebfdf;
 }
 
+@mixin icon {
+    font-size: 17px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -36,11 +44,7 @@
             @include item;
             color: #363b37;
             .icon {
-                font-size: 17px;
-                width: fit-content;
-                display: flex;
-                align-items: center;
-                margin-right: 5px;
+                @include icon;
             }
             &:hover {
                 @include active;
@@ -50,11 +54,7 @@
             @include item;
             @include active;
             .icon {
-                font-size: 17px;
-                width: fit-content;
-                display: flex;
-                align-items: center;
-                margin-right: 6px;
+                @include icon;
             }
         }
         .submenu {

@@ -14,7 +14,7 @@ export const userApi = createApi({
         }),
         createUser: build.mutation({
             query:(body) => ({
-                url: ``,
+                url: `${import.meta.env.VITE_USERS}`,
                 method: 'POST',
                 body,
             })

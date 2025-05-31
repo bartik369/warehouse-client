@@ -4,9 +4,10 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolki
 import { setCredentials, logOut, setAuth } from './slices/authSlice';
 
 const API_URL = import.meta.env.VITE_API_URL 
-  || (import.meta.env.MODE === 'development' 
+  || (import.meta.env.NODE_ENV === 'development' 
     ? 'http://localhost:5000' 
     : '/api');
+
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,

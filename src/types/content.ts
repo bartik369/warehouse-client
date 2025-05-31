@@ -1,4 +1,5 @@
 import { IEntity } from "./devices";
+import { IUser } from "./user";
 
 export type IListRefObj = {
     [index: string]: HTMLDivElement | null;
@@ -49,5 +50,12 @@ export interface IFieldMultiformConfig {
   label?: string;
   name: keyof IEntity;
   itemsKey?: "cities" | "manufacturers" | "types";
+  placeholder?: string;
+}
+export interface IFieldUserFormConfig {
+  type: "input" | "select"
+  label?: string;
+  name: keyof IUser;
+  itemsKey?: "departments" | "locations";
   placeholder?: string;
 }

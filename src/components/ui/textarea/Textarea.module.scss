@@ -4,15 +4,8 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 20px;
-    .error {
-        white-space: nowrap;
-        color: #dc3546;
-        font-size: 11px;
-        text-align: end;
-        padding: 2px;
-    }
     .textarea {
-        border: 1px solid #d3d9df;
+        border: 1px solid #dddfd3;
         border-radius: 20px;
         padding: 15px;
         position: relative;
@@ -46,6 +39,38 @@
             color: #828890;
             font-size: 11px;
             background-color: #ffffff;
+        }
+        &.input-error {
+            border: 1px solid #fd6677 !important;
+        }
+    }
+    .error-icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 19px;
+        color: #fd6677;
+        cursor: pointer;
+        &::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            right: 0;
+            background: #fd6677;
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+        }
+        &:hover::after {
+            opacity: 1;
         }
     }
 }

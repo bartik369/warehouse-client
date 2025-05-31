@@ -5,7 +5,7 @@ import { useCreateUserMutation } from '../../store/api/userApi';
 import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
 import { handleApiError } from '../../utils/errors/handleApiError';
 
-export const useAddUser = () => {
+export const useUser = () => {
   const [user, setUser] = useState<IUser>({
     id: '',
     userName: '',
@@ -17,11 +17,13 @@ export const useAddUser = () => {
     lastNameEn: '',
     isActive: true,
     department: '',
+    departmentId: '',
     location: '',
+    locationId: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [createUser] = useCreateUserMutation();
   const [checked, setChecked] = useState(true);
+  const [createUser] = useCreateUserMutation();
 
   const handleInputChange = useCallback(
     <T extends string | IUser>(field: keyof IUser, value: T) => {
@@ -43,6 +45,8 @@ export const useAddUser = () => {
   const handleCreateUser = useCallback(async () => {
       try {
         const validateErrors = FormValidation(user);
+        console.log(validateErrors);
+        
         setErrors(validateErrors as Record<string, string>);
         if (Object.values(validateErrors).length === 0) {
           if (!user) return;
@@ -57,18 +61,11 @@ export const useAddUser = () => {
       } catch (err) {
        handleApiError(err);
       }
-    },[]);
+    },[user]);
     
     const resetUser = () => {
 
     }
-    const handleDepartmentChange = useCallback((item: any) => {
-          handleInputChange('department', item.name || '');
-    }, [handleInputChange]);
-
-    const handleLocationChange = useCallback((item: any) => {
-      handleInputChange('location', item.name || '');
-}, [handleInputChange]);
 
     const handleChecked = useCallback(() => {
       setChecked(!checked);
@@ -79,5 +76,5 @@ export const useAddUser = () => {
     }, [checked]);
     
   return { user, errors, checked, handleChecked, handleInputChange, 
-    handleCreateUser, resetUser, handleDepartmentChange, handleLocationChange };
+    handleCreateUser, resetUser };
 };
