@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { MdOutlineErrorOutline } from "react-icons/md";
 import styles from './Input.module.scss';
 
 interface IInputProps {
@@ -26,7 +27,7 @@ const Input = memo(({
 
     return (
         <div className={styles.wrapper}>
-            <div className={`${styles.input} ${variant ? styles[variant] : ""}`}>
+            <div className={`${styles.input} ${variant ? styles[variant] : ""} ${errorMessage ? styles['input-error'] : ''}`}>
             {icon && <span className={styles.icon}>{icon}</span>}
             <input 
                 name={name} 
@@ -40,10 +41,8 @@ const Input = memo(({
              <div className={styles.label}>{label}</div>
             </div>
             {errorMessage && 
-            <div className={styles.error}>
-                <div className={styles.error}>
-                    {errorMessage}
-                </div>
+            <div className={styles['error-icon']} data-tooltip={errorMessage}>
+                <MdOutlineErrorOutline />
             </div>
             }
         </div>

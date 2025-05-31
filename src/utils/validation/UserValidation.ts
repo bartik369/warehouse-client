@@ -28,6 +28,8 @@ const validateRequiredFields = <T>(
 };
 
 export const FormValidation = (formData: IUser): IValidateUserErrors => {
+  console.log(formData);
+  
   const errors: Record<string, string> = {};
   const requiredFields: ValidationFields[] = [
     "userName",
@@ -45,6 +47,9 @@ export const FormValidation = (formData: IUser): IValidateUserErrors => {
 };
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
+  console.log(field);
+  console.log(value);
+  
   const requiredMessage = requiredFieldText;
   if (requiredUserFields.includes(field)) {
     if (typeof value === "string" && value.length === 0) {

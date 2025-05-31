@@ -8,8 +8,10 @@ export interface IUser {
     firstNameEn: string;
     lastNameEn: string;
     department: string;
+    departmentId: string;
     isActive: boolean;
     location: string;
+    locationId: string;
     createdAt?: Date | null;
     updatedAt?: Date | null;
 }
@@ -32,8 +34,10 @@ export interface IValidateUserErrors {
     userName?: string;      
     email?: string;
     workId?: string;      
-    firstName?: string;
-    lastName?: string
+    firstNameRu?: string;
+    lastNameRu?: string
+    firstNameEn?: string;
+    lastNameEn?: string
     department?: string;
-    locationId?: string;
+    location?: string;
 }

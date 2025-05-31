@@ -3,6 +3,7 @@ import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { IValidationErrors } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import { TbSelector } from "react-icons/tb";
+import { MdOutlineErrorOutline } from "react-icons/md";
 import styles from './Select.module.scss';
 
 interface ISelectProps<T> {
@@ -65,17 +66,17 @@ const Select = <T,>({
         }
         <button
           type="button"
-          className={styles.container}
+          className={`${styles.container} ${errorMessage ? styles['input-error'] : ''}`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {value ? value : selectFromList}
           <TbSelector className={styles.arrow}/>
         </button>
         {errorMessage && 
-          <div className={styles.error}>
-            {errorMessage}
-          </div>
-        }
+            <div className={styles['error-icon']} data-tooltip={errorMessage}>
+                <MdOutlineErrorOutline />
+            </div>
+            }
         {isOpen && (
           <div className={styles.dropdown}>
             {items.length ? (
