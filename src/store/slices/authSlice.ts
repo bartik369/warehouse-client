@@ -9,20 +9,23 @@ type AuthState = {
 
 const initialState: AuthState = {
   user: {
-    id: '',
-    workId: '',
-    userName: '',
-    email: '',
-    firstNameRu: '',
-    lastNameRu: '',
-    firstNameEn: '',
-    lastNameEn: '',
-    department: '',
-    isActive: true,
-    location: '',
-    createdAt: null,
-    updatedAt: null,
+      id: '',
+      workId: '',
+      userName: '',
+      email: '',
+      firstNameRu: '',
+      lastNameRu: '',
+      firstNameEn: '',
+      lastNameEn: '',
+      department: '',
+      isActive: true,
+      location: '',
+      createdAt: null,
+      updatedAt: null,
+      departmentId: '',
+      locationId: ''
   },
+  
   isAuth: false,
   error: null,
 };
