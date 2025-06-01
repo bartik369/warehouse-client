@@ -68,22 +68,13 @@
     &:hover {
         background-color: #496c83;
     }
-    &:focus {
-        background-color: #496c83;
-    }
 }
 
 .grey {
-    box-sizing: border-box;
-    border: 1px solid #adb1bc;
-    background: transparent;
-    color: #40495a;
+    border: 1px solid #dee2eb;
+    background-color: #e9ecf3;
     &:hover {
-        background-color: #e7e7ee;
-    }
-    &:focus {
-        background-color: #383c48;
-        color: #ffff;
+        background-color: #f0f3f9;
     }
 }
 

@@ -129,6 +129,8 @@ export const useAddAdminEntities = () => {
     permission: getPermission,
   };
 
+  console.log(state.entity)
+
   const handleInputChange = useCallback(
     <T extends string | IEntity>(field: keyof IEntity, value: T) => {
       dispatch({

@@ -59,11 +59,6 @@ const Select = <T,>({
 
     return (
       <div className={styles.wrapper} onKeyDown={handleKeyDown} ref={modalRef}>
-        {label && 
-          <span className={styles.label}>
-            {label}
-          </span>
-        }
         <button
           type="button"
           className={`${styles.container} ${errorMessage ? styles['input-error'] : ''}`}
@@ -72,11 +67,16 @@ const Select = <T,>({
           {value ? value : selectFromList}
           <TbSelector className={styles.arrow}/>
         </button>
+        {label && 
+          <span className={styles.label}>
+            {label}
+          </span>
+        }
         {errorMessage && 
             <div className={styles['error-icon']} data-tooltip={errorMessage}>
                 <MdOutlineErrorOutline />
             </div>
-            }
+        }
         {isOpen && (
           <div className={styles.dropdown}>
             {items.length ? (

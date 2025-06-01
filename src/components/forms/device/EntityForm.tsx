@@ -6,9 +6,9 @@ import Preview from '../../ui/preview/Preview';
 import { ToastContainer, Bounce } from 'react-toastify';
 import { add, reset, slugInfo } from '../../../utils/constants/constants';
 import {slugLabel, nameLabel} from '../../../utils/constants/device';
+import Tooltip from '../../ui/tooltip/Tooltip';
 import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
-import { BsQuestionSquare } from "react-icons/bs";
 import styles from './EntityForm.module.scss';
 
 interface IEntityProps {
@@ -61,10 +61,8 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
                 label={nameLabel}
                 errors={state.errors}
                 name="name"
-              /> 
-               <span className={styles.tooltip} data-tooltip={slugInfo} tabIndex={0}>
-                  <BsQuestionSquare className={styles.icon}/>
-               </span>
+              />
+              <Tooltip data={slugInfo} />
                <Input
                 onChange={(e) => actions.handleInputChange("slug", e.target.value)}
                 type="text"
@@ -73,6 +71,7 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
                 errors={state.errors}
                 name="slug"
               />
+    
               <div className={styles.actions}>
                 <BtnAction 
                   icon={<HiMiniXMark />} 

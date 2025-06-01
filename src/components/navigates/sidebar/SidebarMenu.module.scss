@@ -44,7 +44,7 @@
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
             border-radius: 5px;
             &:hover {
-                background-color: #4a4fd4;
+                background-color: #4f546d;
             }
             &::after {
                 content: "";
@@ -58,7 +58,7 @@
                 left: -9px;
             }
             &:hover::after {
-                border-bottom: 12px solid #4a4fd4;
+                border-bottom: 12px solid #4f546d;
             }
             a {
                 color: #ffffff;

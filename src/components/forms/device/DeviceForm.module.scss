@@ -35,7 +35,7 @@
 
 .wrapper {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1050px;
     display: flex;
     position: relative;
     .forms {
@@ -110,11 +110,11 @@
         z-index: 1;
         span {
             font-size: 12px;
-            ;
             margin-left: 5px;
             cursor: pointer;
+            transition: color .3s ease;
             &:hover {
-                color: #3c52d6;
+                color: #446cc3;
             }
         }
     }

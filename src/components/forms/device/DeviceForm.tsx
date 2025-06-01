@@ -69,7 +69,7 @@ const DeviceForm = () => {
     <>
     <ToastContainer position="top-center" theme="light" />
       {isOpen && (
-        <Modal title={state.title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={540}>
+        <Modal title={state.title} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={340}>
           {state.fieldType !== "contractor"
             ? <EntityForm 
                 typeId={state.typeId} 

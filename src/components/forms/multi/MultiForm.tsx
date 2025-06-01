@@ -7,17 +7,21 @@ import Preview from "../../ui/preview/Preview";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { add, update, reset, slugLocation } from "../../../utils/constants/constants";
+import {
+  add,
+  update,
+  reset,
+  slugLocation,
+} from "../../../utils/constants/constants";
 import { IDeviceMedia, IEntity } from "../../../types/devices";
 import { IFieldMultiformConfig } from "../../../types/content";
 import { HiMiniXMark } from "react-icons/hi2";
 import { GoPlus } from "react-icons/go";
-import { BsQuestionSquare } from "react-icons/bs";
 import { ToastContainer } from "react-toastify";
 import { IEntityFormActions } from "../../../types/entity";
 import { IAdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
 import styles from "./MultiForm.module.scss";
-
+import Tooltip from "../../ui/tooltip/Tooltip";
 
 interface IMultiFormProps {
   actions: IEntityFormActions;
@@ -37,7 +41,7 @@ const MultiForm = ({
   fieldType,
   media,
   fileInputRef,
-}:IMultiFormProps) => {
+}: IMultiFormProps) => {
   const locationPath = useLocation();
   const { data: cities } = useGetLocationsQuery();
   const { data: manufacturers } = useGetManufacturersQuery();
@@ -63,28 +67,25 @@ const MultiForm = ({
       )}
       <form>
         <div className={styles.title}>{title}</div>
-        <div className={styles["tooltip-wrapper"]}>
-          <span
-            className={styles.tooltip}
-            data-tooltip={slugLocation}
-            tabIndex={0}
-          >
-            <BsQuestionSquare className={styles.icon} />
-          </span>
-        </div>
+
         {fields?.map((field) => {
-          if (field.type === "input"  || field.type === "tel") {
+          if (field.type === "input" || field.type === "tel") {
             return (
+              <>
+              {field.name === "slug" && <Tooltip data={slugLocation} /> }
               <Input
                 key={field.name}
                 label={field.label}
                 type={field.type}
                 name={field.name}
-                value={state.entity[field.name] || ''}
+                value={state.entity[field.name] || ""}
                 errors={state.errors}
                 placeholder={field.placeholder}
-                onChange={(e) => actions.handleInputChange(field.name, e.target.value)}
+                onChange={(e) =>
+                  actions.handleInputChange(field.name, e.target.value)
+                }
               />
+              </>
             );
           }
           if (field.type === "select") {
@@ -92,13 +93,13 @@ const MultiForm = ({
             return (
               <Select
                 key={field.name}
-                setValue={(val) => { 
-                  actions.handleInputChange?.(field.name, val.name)
+                setValue={(val) => {
+                  actions.handleInputChange?.(field.name, val.name);
                   if (field.name === "manufacturer") {
-                    actions.handleInputChange?.("manufacturerId",val.id)
+                    actions.handleInputChange?.("manufacturerId", val.id);
                   }
                   if (field.name === "type") {
-                    actions.handleInputChange?.("typeId",val.id)
+                    actions.handleInputChange?.("typeId", val.id);
                   }
                 }}
                 items={items || []}
@@ -117,16 +118,18 @@ const MultiForm = ({
                 key={field.name}
                 value={state.entity[field.name] || ""}
                 errors={state.errors}
-                label={field.label || ''}
+                label={field.label || ""}
                 placeholder={field.placeholder}
                 name={field.name}
-                onChange={(e) => actions.handleInputChange(field.name, e.target.value)}
+                onChange={(e) =>
+                  actions.handleInputChange(field.name, e.target.value)
+                }
               />
             );
           }
         })}
-         <div className={styles.actions}>
-        <BtnAction
+        <div className={styles.actions}>
+          <BtnAction
             icon={<HiMiniXMark />}
             size="lg"
             color="grey"

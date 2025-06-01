@@ -7,7 +7,7 @@ interface IModal {
     children: React.ReactNode;
     isOpen: boolean;
     title?: string;
-    maxWidth?: number;
+    maxWidth?: number | string;
     setIsOpen:(isOpen:boolean) => void;
 }
 const Modal = ({ children, isOpen, title, maxWidth, setIsOpen }:IModal) => {

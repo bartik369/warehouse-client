@@ -1,6 +1,7 @@
 import { requiredFieldText } from "../constants/constants";
 import { IValidateLocationErrors } from '../../types/locations';
 import { IEntity } from "../../types/devices";
+import { isValidPhone } from "./Phones";
 
 const locationFields = ['name'];
 type ValidationFields = keyof IEntity;
@@ -11,7 +12,13 @@ const validateRequiredFields = <T>(
     errors:Record<string, string>
 ): void => {
     fields.forEach((field) => {
-        if (!formData[field]) {
+        const value = formData[field];
+        if (field === 'phoneNumber') {
+            if (!isValidPhone(value as string)) {
+                errors['phoneNumber'] = requiredFieldText;
+            }
+        }
+        if (!value) {
             errors[field as string] = requiredFieldText;
         }
     });

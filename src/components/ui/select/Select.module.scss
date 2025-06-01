@@ -8,7 +8,7 @@
         display: flex;
         align-items: center;
         outline: none;
-        border: 1px solid #d3d9df;
+        border: 1px solid #dfd8d3;
         padding-left: 20px;
         width: 100%;
         height: 45px;
@@ -16,7 +16,7 @@
         border-radius: 20px;
         position: relative;
         &:focus {
-            border: 1px solid #5a5cac;
+            border: 1px solid #adb1bc;
         }
         &.input-error {
             border: 1px solid #fd6677 !important;
@@ -24,7 +24,6 @@
     }
     .label {
         position: absolute;
-        z-index: 1;
         top: -7px;
         left: 15px;
         padding: 0 5px;
