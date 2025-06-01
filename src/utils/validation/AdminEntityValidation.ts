@@ -12,10 +12,10 @@ const validateRequiredFields = <T>(
     errors:Record<string, string>
 ): void => {
     fields.forEach((field) => {
-        const value = formData[field];
+        const value = formData[field ];
         if (field === 'phoneNumber') {
             if (!isValidPhone(value as string)) {
-                errors['phoneNumber'] = wrongPhoneFormat;
+                errors[field as string] = wrongPhoneFormat;
             }
         }
         if (!value) {
