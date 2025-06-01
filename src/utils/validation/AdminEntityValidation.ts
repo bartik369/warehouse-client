@@ -1,4 +1,4 @@
-import { requiredFieldText } from "../constants/constants";
+import { requiredFieldText, wrongPhoneFormat } from "../constants/constants";
 import { IValidateLocationErrors } from '../../types/locations';
 import { IEntity } from "../../types/devices";
 import { isValidPhone } from "./Phones";
@@ -15,7 +15,7 @@ const validateRequiredFields = <T>(
         const value = formData[field];
         if (field === 'phoneNumber') {
             if (!isValidPhone(value as string)) {
-                errors['phoneNumber'] = requiredFieldText;
+                errors['phoneNumber'] = wrongPhoneFormat;
             }
         }
         if (!value) {

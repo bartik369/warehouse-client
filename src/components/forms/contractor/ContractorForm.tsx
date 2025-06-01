@@ -47,7 +47,7 @@ const ContractorForm = () => {
                 <BtnAction 
                   icon={<GoPlus />} 
                   size="lg" 
-                  color="blue" 
+                  color="green" 
                   title={add} 
                   click={handleCreateContractor}
                 />

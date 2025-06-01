@@ -1,6 +1,7 @@
 import { IValidationErrors } from './../../types/devices';
-import { requiredFieldText, requiredFieldFive } from '../constants/constants';
+import { requiredFieldText, requiredFieldFive, wrongPhoneFormat } from '../constants/constants';
 import { IDevice, IDeviceModel, IEntity } from './../../types/devices';
+import { isValidPhone } from './Phones';
 
 type ValidationField = keyof IDevice;
 type ValidationModelField = keyof IDeviceModel;
@@ -19,9 +20,15 @@ const validateRequiredFields = <T>(
   errors: Record<string, string>
 ): void => {
   fields.forEach((field) => {
-    if (!formData[field]) {
-      errors[field as string] = requiredFieldText;
-    }
+    const value = formData[field];
+           if (field === 'phoneNumber') {
+               if (!isValidPhone(value as string)) {
+                   errors['phoneNumber'] = wrongPhoneFormat;
+               }
+           }
+           if (!value) {
+               errors[field as string] = requiredFieldText;
+           }
   });
 };
 

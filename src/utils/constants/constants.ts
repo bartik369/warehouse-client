@@ -46,6 +46,7 @@ export const noOptions = 'Нет доступных опций';
 export const phoneMaskPlaceholder = '+7 (___) ___-__-__';
 export const requiredFieldText = 'Обязательно к заполнению';
 export const requiredFieldFive = 'Не менее 5 символов';
+export const wrongPhoneFormat = 'Неправильный формат телефона';
 export const adminPanel = 'Панель администратора';
 export const addUserTitle = 'Добавить пользователя';
 export const addWarehouseTitle = 'Добавить склад';
