@@ -18,7 +18,7 @@ export const userApi = createApi({
                 method: 'GET',
             })
         }),
-        createUser: build.mutation<{data: IUser, message: string}, IUser>({
+        createUser: build.mutation<{user: IUser, message: string}, IUser>({
             query:(body) => ({
                 url: `${import.meta.env.VITE_USERS}`,
                 method: 'POST',
