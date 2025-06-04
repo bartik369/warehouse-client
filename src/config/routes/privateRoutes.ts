@@ -12,11 +12,11 @@ import AddWarehouseConfig from "../pages/AddWarehouse";
 import DeviceConfig from "../pages/Device";
 import DevicesConfig from "../pages/Devices";
 import EditDeviceConfig from "../pages/EditDevice";
-import EditUserConfig from "../pages/EditUser";
 import HomeConfig from "../pages/Home";
 import PermissionRoleConfig from "../pages/PermissionRole";
 import ProfileConfig from "../pages/Profile";
-import UsersConfig from "../pages/Users";
+import UsersConfig from "../pages/UsersList";
+import UserDetailsConfig from "../pages/UserDetails";
 
 const privateRoutes = [
     HomeConfig,
@@ -26,8 +26,8 @@ const privateRoutes = [
     AddDeviceConfig,
     EditDeviceConfig,
     AddUserConfig,
-    EditUserConfig,
     UsersConfig,
+    UserDetailsConfig,
     AddLocationConfig,
     AddWarehouseConfig,
     AddDepartmentConfig,

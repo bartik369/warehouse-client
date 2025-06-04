@@ -16,6 +16,24 @@ export interface IUser {
     updatedAt?: Date | null;
 }
 
+type UserLabelsKeys =
+| "firstNameRu"
+| "firstNameRu"
+| "lastNameRu"
+| "firstNameEn"
+| "lastNameEn"
+| "email"
+| "location"
+| "department"
+| "workId"
+| "isActive"
+| "actions"
+
+export type UserLabel = {
+key: UserLabelsKeys;
+label: string;
+};
+
 export interface ISignin {
     email: string;
     password: string;

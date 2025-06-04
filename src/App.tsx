@@ -36,10 +36,12 @@ function App() {
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
-        <Route path='/' element={<Layout />}>
-          {privateRoutes.map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
+        <Route path="/" element={<Layout />}>
+          {privateRoutes.flatMap(({ path, element }) =>
+            (Array.isArray(path) ? path : [path]).map((p) => (
+              <Route key={p} path={p} element={element} />
+            ))
+          )}
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>
@@ -47,7 +49,7 @@ function App() {
           <Route key={path} path={path} element={element} />
         ))}
       </Route>
-      <Route path='*' element={<Page404 />} />
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 }

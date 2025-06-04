@@ -33,7 +33,7 @@ export const sidebarMenuData = [
       { id: 2, title: 'Екатеринбург', path: 'ekb'},    ]
 },
     {id: 2, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
-    {id: 3, title: 'Пользователи', path: '/users', icon: LuUsers},
+    {id: 3, title: 'Пользователи', path: '/admin/users', icon: LuUsers},
     {id: 4, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
     {id: 5, title: 'Календарь', path: '/calendar', icon: IoCalendarNumberOutline},
     {id: 6, title: 'Статистика', path: '/statistic', icon: IoStatsChartOutline},
@@ -53,7 +53,7 @@ export const deviceTabsMenu = [
 export const adminMenu = [
     {id: 1, title: 'Пользователи', path: '#', icon: FiUserPlus, subMenu: [
       {id: 1, title: 'Добавить', path: '/admin/add-user'},
-      {id: 2, title: 'Редактировать', path: '/admin/edit-user'},
+      {id: 2, title: 'Редактировать', path: '/admin/users'},
     ]},
     {id: 2, title: 'Склады', path: '/admin/add-warehouse', icon: TbLocationPlus},
     {id: 3, title: 'Устройства', path: '#', icon: TbDeviceDesktopPlus, subMenu: [

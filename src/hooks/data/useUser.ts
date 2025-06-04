@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useCreateUserMutation } from '../../store/api/userApi';
 import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
 import { handleApiError } from '../../utils/errors/handleApiError';
+import { useNavigate } from 'react-router-dom';
 
 export const useUser = () => {
   const [user, setUser] = useState<IUser>({
@@ -24,6 +25,7 @@ export const useUser = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(true);
   const [createUser] = useCreateUserMutation();
+  const navigate = useNavigate();
 
   const handleInputChange = useCallback(
     <T extends string | IUser>(field: keyof IUser, value: T) => {
@@ -40,6 +42,10 @@ export const useUser = () => {
     []
   );
   console.log(user);
+
+  const handleGetUser = (id: string) => {
+    navigate(`/users/${id}`)
+  }
   
 
   const handleCreateUser = useCallback(async () => {
@@ -76,5 +82,5 @@ export const useUser = () => {
     }, [checked]);
     
   return { user, errors, checked, handleChecked, handleInputChange, 
-    handleCreateUser, resetUser };
+    handleCreateUser, resetUser, handleGetUser };
 };

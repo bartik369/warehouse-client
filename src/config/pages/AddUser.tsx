@@ -1,4 +1,4 @@
-import AddUser from "../../components/pages/admin/user/AddUser";
+import AddUser from "../../components/pages/admin/users/AddUser";
 
 const AddUserConfig = {
     title: 'AddUser',

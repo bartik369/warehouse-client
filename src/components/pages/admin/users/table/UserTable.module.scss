@@ -1,0 +1,23 @@
+.table {
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    scrollbar-width: thin;
+    border: 1px solid #edf2f7;
+    scrollbar-color: #d2d4d7 #aeb1b6;
+    thead {
+        background-color: #fff;
+        box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    }
+    th {
+        position: relative;
+        border: 1px solid #edf2f7;
+        padding: 9px 6px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+    }
+    tr:nth-child(even) {
+        background-color: #fafbff;
+    }
+}
