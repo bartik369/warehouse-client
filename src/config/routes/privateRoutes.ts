@@ -17,6 +17,7 @@ import PermissionRoleConfig from "../pages/PermissionRole";
 import ProfileConfig from "../pages/Profile";
 import UsersConfig from "../pages/UsersList";
 import UserDetailsConfig from "../pages/UserDetails";
+import GrantUserRolesConfig from "../pages/GrantUserRoles";
 
 const privateRoutes = [
     HomeConfig,
@@ -38,6 +39,7 @@ const privateRoutes = [
     AddModelConfig,
     AddTypeConfig,
     PermissionRoleConfig,
+    GrantUserRolesConfig,
 ]
 
 export default privateRoutes;

@@ -43,13 +43,15 @@ import {
 import {
   useCreatePermissionMutation,
   useLazyGetPermissionQuery,
-  useLazyGetRoleQuery,
-  useCreateRoleMutation,
   useUpdatePermissionMutation,
-  useUpdateRoleMutation,
   useDeletePermissionMutation,
-  useDeleteRoleMutation,
 } from "../../store/api/permissionApi";
+import { 
+  useLazyGetRoleQuery, 
+  useCreateRoleMutation, 
+  useUpdateRoleMutation,
+  useDeleteRoleMutation
+} from "../../store/api/rolesApi";
 import { IEntity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
 import { selectPic } from "../../utils/constants/constants";

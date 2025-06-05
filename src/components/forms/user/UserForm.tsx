@@ -3,31 +3,23 @@ import BtnAction from '../../ui/buttons/BtnAction';
 import Select from '../../ui/select/Select';
 import Toggle from '../../ui/checkbox/Toggle';
 import { IEntity } from '../../../types/devices';
-import { useUser } from '../../../hooks/data/useUser';
 import { add, no, reset, accountIsActive, yes, addUserTitle } from '../../../utils/constants/constants';
 import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
-import styles from './UserForm.module.scss';
 import { IFieldUserFormConfig } from '../../../types/content';
-import { IUser } from '../../../types/user';
-
+import { IUser, IUserFormActions } from '../../../types/user';
+import { IUserState } from '../../../reducers/user/userTypes';
+import styles from './UserForm.module.scss';
 
 interface IUserFormProps {
+  state: IUserState;
+  actions: IUserFormActions;
   departments: IEntity[];
   locations: IEntity[];
   fields: IFieldUserFormConfig[];
 }
 
-const UserForm = ({ departments, locations, fields }:IUserFormProps) => {
-  const {
-    user,
-    errors,
-    checked,
-    handleInputChange,
-    handleCreateUser,
-    resetUser,
-    handleChecked,
-  } = useUser();
+const UserForm = ({ departments, locations, fields,  actions, state }:IUserFormProps) => {
 
   const dataSources = { locations, departments }
   return (
@@ -38,14 +30,15 @@ const UserForm = ({ departments, locations, fields }:IUserFormProps) => {
           if (field.type === "input") {
             return (
               <Input
+                key={field.name}
                 label={field.label}
                 type="text"
                 name={field.name}
-                value={user[field.name] as keyof IUser}
+                value={state.user[field.name] as keyof IUser}
                 placeholder={field.placeholder}
-                errors={errors}
+                errors={state.errors}
                 onChange={(e) =>
-                  handleInputChange(field.name, e.target.value)
+                actions.handleInputChange(field.name, e.target.value)
                 }
               />
             );
@@ -56,19 +49,19 @@ const UserForm = ({ departments, locations, fields }:IUserFormProps) => {
               <Select<IEntity>
                 key={field.name}
                 setValue={(val) => {
-                  handleInputChange?.(field.name, val.name)
+                  actions.handleInputChange?.(field.name, val.name)
                   if (field.name === 'department') {
-                    handleInputChange("departmentId", val.id)
+                    actions.handleInputChange("departmentId", val.id)
                   }
                   if (field.name === 'location') {
-                    handleInputChange("locationId", val.id)
+                    actions.handleInputChange("locationId", val.id)
                   }
                 }}
                 items={items || []}
                 label={field.label || ''}
                 name={field.name}
-                value={user[field.name] as keyof IUser}
-                errors={errors}
+                value={state.user[field.name] as keyof IUser}
+                errors={state.errors}
                 getId={(item: IEntity) => item.id}
                 getLabel={(item) => item.name}
               />
@@ -76,8 +69,8 @@ const UserForm = ({ departments, locations, fields }:IUserFormProps) => {
           }
         })}
         <Toggle
-          checked={checked}
-          setChecked={handleChecked}
+          checked={state.checked}
+          setChecked={actions.handleChecked}
           label={accountIsActive}
           leftPosition={no}
           rightPosition={yes}
@@ -89,14 +82,14 @@ const UserForm = ({ departments, locations, fields }:IUserFormProps) => {
           size="lg"
           color="grey"
           title={reset}
-          click={resetUser}
+          click={actions.handleResetUser}
         />
         <BtnAction
           icon={<GoPlus />}
           size="lg"
           color="green"
           title={add}
-          click={handleCreateUser}
+          click={actions.handleCreateUser}
         />
       </div>
     </div>

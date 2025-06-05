@@ -15,6 +15,7 @@ interface ISelectProps<T> {
   setValue: (value: T) => void;
   getId: (item: T) => void;
   getLabel: (item: T) => string;
+  getLocation?: (item: T) => string;
   getComment?:(item: T) => string | undefined;
 }
 
@@ -27,6 +28,7 @@ const Select = <T,>({
   setValue,
   getId,
   getLabel,
+  getLocation,
   getComment
 }: ISelectProps<T>) => {
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
@@ -37,28 +39,8 @@ const Select = <T,>({
       setValue(option);
     };
 
-    const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      e.preventDefault()
-      if (!isOpen) return;
-      if (e.key === 'ArrowDown') {
-        setFocusedIndex((prev) =>
-          prev === null || prev >= items.length - 1 ? 0 : prev + 1
-        );
-      } else if (e.key === 'ArrowUp') {
-        setFocusedIndex((prev) =>
-          prev === null || prev <= 0 ? items.length - 1 : prev - 1
-        );
-      } else if (e.key === 'Enter' && focusedIndex !== null) {
-        handleSelect(items[focusedIndex]);
-      } else if (e.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
     return (
-      <div className={styles.wrapper} onKeyDown={handleKeyDown} ref={modalRef}>
+      <div className={styles.wrapper} ref={modalRef}>
         <button
           type="button"
           className={`${styles.container} ${errorMessage ? styles['input-error'] : ''}`}
@@ -80,22 +62,23 @@ const Select = <T,>({
         {isOpen && (
           <div className={styles.dropdown}>
             {items.length ? (
-              items.map((option, index) => (
+              items.map((option) => (
                 <div
                   key={getId(option)!}
-                  className={`${styles.option} ${
-                    focusedIndex === index ? styles.focused : ""
-                  }`}
+                  className={styles.option}
                   onClick={() => handleSelect(option)}
                   role="button"
                   tabIndex={0}
-                  onFocus={() => setFocusedIndex(index)}
-                  onBlur={() => setFocusedIndex(null)}
                 >
                 <div className={styles.info}>
-                <div className={styles.name}>{getLabel(option)}</div>
+                <div className={styles.name}>
+                  {getLabel(option)}
+                </div>
                 {getComment?.(option) &&
                  <div className={styles.comment}>{getComment(option)}</div>
+                }
+                 {getLocation?.(option) &&
+                 <div className={styles.comment}>{getLocation(option)}</div>
                 }
                 </div>
                 </div>

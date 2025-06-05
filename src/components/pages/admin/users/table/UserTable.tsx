@@ -1,4 +1,4 @@
-import { IUser, UserLabel } from '../../../../../types/user'
+import { IUser, IUserFormActions, UserLabel } from '../../../../../types/user'
 import UserTableRow from "./UserTableRow";
 import styles from './UserTable.module.scss';
 import { labelCity, labelDepartment, labelEmail, labelFirstNameEn, 
@@ -7,10 +7,10 @@ labelUserId } from '../../../../../utils/constants/user';
 
 interface IUserTableProps {
     users: IUser[];
-    onEditUser: (id: string) => void;
+    actions: IUserFormActions;
 }
 
-const UserTable = ({ users, onEditUser }: IUserTableProps) => {
+const UserTable = ({ users, actions }: IUserTableProps) => {
   const isAdmin = true;
 
   const baseUserLabelsConfig: UserLabel[] = [
@@ -44,7 +44,7 @@ const UserTable = ({ users, onEditUser }: IUserTableProps) => {
                   key={user.id} 
                   user={user} 
                   isAdmin={isAdmin}
-                  onEditUser={onEditUser}
+                  actions={actions}
                 />
             ))}
         </tbody>

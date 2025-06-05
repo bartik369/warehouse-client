@@ -25,6 +25,14 @@ export const userApi = createApi({
                 body,
             })
         }),
+        getFilteredUsers: build.query({
+            query: (search: string) => ({
+                url: `${import.meta.env.VITE_SORTED_USERS}`,
+                params: {
+                    search,
+                }
+            })
+        })
     })
 });
 
@@ -32,4 +40,5 @@ export const {
     useProfileQuery, 
     useCreateUserMutation,
     useGetUsersQuery,
+    useLazyGetFilteredUsersQuery,
 } = userApi;

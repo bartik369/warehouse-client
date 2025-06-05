@@ -1,7 +1,7 @@
 import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { roleFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
-import { useGetRolesQuery } from '../../../../store/api/permissionApi';
+import { useGetRolesQuery } from '../../../../store/api/rolesApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { addRoleTitle } from '../../../../utils/constants/constants';
 import styles from '../Admin.module.scss';

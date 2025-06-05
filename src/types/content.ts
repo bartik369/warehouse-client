@@ -49,7 +49,7 @@ export interface IFieldMultiformConfig {
   type: "input" | "select" | "textarea" | "image" | "tel";
   label?: string;
   name: keyof IEntity;
-  itemsKey?: "cities" | "manufacturers" | "types";
+  itemsKey?: "cities" | "manufacturers" | "types" | "roles";
   placeholder?: string;
 }
 export interface IFieldUserFormConfig {

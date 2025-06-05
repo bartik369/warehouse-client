@@ -20,7 +20,7 @@ export const useEntity = () => {
   // Device media logic
   const handleMedia = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log('fdsfd')
+      
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
         if (file.type.startsWith("image/") && !file.type.endsWith(".gif")) {

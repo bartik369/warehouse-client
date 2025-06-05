@@ -82,7 +82,7 @@ const MultiForm = ({
                 errors={state.errors}
                 placeholder={field.placeholder}
                 onChange={(e) =>
-                  actions.handleInputChange(field.name, e.target.value)
+                actions.handleInputChange(field.name, e.target.value)
                 }
               />
               </>

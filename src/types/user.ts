@@ -59,3 +59,11 @@ export interface IValidateUserErrors {
     department?: string;
     location?: string;
 }
+
+export interface IUserFormActions {
+    handleInputChange: (name: keyof IUser, e: string) => void;
+    handleCreateUser: () => void;
+    handleResetUser: () => void;
+    handleGetUser: (id: string) => void;
+    handleChecked: () => void;
+}

@@ -7,6 +7,13 @@ export interface IRole {
     name: string;
     comment: string;
 }
+export interface IUserRole {
+    id: string;
+    userName: string;
+    userId: string;
+    roleName: string;
+    roleId: string;
+}
 export interface IPermission {
     id: string;
     name: string;
@@ -59,4 +66,14 @@ export interface IValidateAccessErrors {
     locationId: string;
     locationName: string;
     comment: string;
+}
+export interface IValidateUserRoleErrors {
+    id?: string;
+    userName?: string;
+    roleName?: string;
+}
+export interface IUserRoleFormActions {
+    handleInputChange: (name: keyof IUserRole, e: string) => void;
+    handleAddUserRole: () => void;
+    handleResetUserRole: () => void;
 }

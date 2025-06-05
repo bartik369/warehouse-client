@@ -119,3 +119,13 @@ export const permissionFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
+export const provideRolesFormFields: IFieldMultiformConfig[] = [
+  { type: 'input', name: 'name', label: name, placeholder: '' },
+  {
+    type: 'select',
+    name: 'type',
+    label: 'Role provide',
+    placeholder: '',
+    itemsKey: 'roles',
+  },
+];

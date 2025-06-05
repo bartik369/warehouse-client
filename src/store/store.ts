@@ -10,6 +10,7 @@ import { userApi } from './api/userApi';
 import { manufacturersApi } from './api/manufacturersApi';
 import { typesApi } from './api/typesApi';
 import { modelsApi } from './api/modelsApi';
+import { rolesApi } from './api/rolesApi';
 import authReducer from './slices/authSlice';
 import deviceReducer from './slices/deviceSlice';
 
@@ -28,6 +29,7 @@ const store = configureStore({
     [locationApi.reducerPath]: locationApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
     [permissionApi.reducerPath]: permissionApi.reducer,
+    [rolesApi.reducerPath]: rolesApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -44,6 +46,7 @@ const store = configureStore({
         modelsApi.middleware,
         departmentApi.middleware,
         permissionApi.middleware,
+        rolesApi.middleware,
       ),
 });
 

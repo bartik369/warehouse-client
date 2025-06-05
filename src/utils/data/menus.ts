@@ -69,7 +69,7 @@ export const adminMenu = [
         { id: 1, title: 'Новая роль', path: '/admin/add-role'},
         { id: 2, title: 'Новые права', path: '/admin/add-permission'},
         { id: 3, title: 'Права ролей', path: '/admin/add-permission_role'},
-        { id: 4, title: 'Роли пользователей', path: '/admin/add-permission'},
+        { id: 4, title: 'Роли пользователей', path: '/admin/grant-access'},
     ]},
     {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
 ]

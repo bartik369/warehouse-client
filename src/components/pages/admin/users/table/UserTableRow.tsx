@@ -1,4 +1,4 @@
-import { IUser } from "../../../../../types/user";
+import { IUser, IUserFormActions } from "../../../../../types/user";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { GoCheckCircleFill } from "react-icons/go";
 import { IoCloseCircle } from "react-icons/io5";
@@ -7,10 +7,10 @@ import styles from "./UserTableRow.module.scss";
 interface IUserTableRowProps {
   user: IUser;
   isAdmin: boolean;
-  onEditUser:(id: string) => void;
+  actions:IUserFormActions;
 }
 
-const UserTableRow = ({ user, isAdmin, onEditUser }: IUserTableRowProps) => {
+const UserTableRow = ({ user, isAdmin, actions }: IUserTableRowProps) => {
   return (
     <tr className={styles.row}>
       <td>{user.firstNameRu}</td>
@@ -30,7 +30,7 @@ const UserTableRow = ({ user, isAdmin, onEditUser }: IUserTableRowProps) => {
       </td>
       {isAdmin && (
         <td>
-          <MdOutlineModeEdit className={styles.icon} onClick={() => onEditUser(user.id)} />
+          <MdOutlineModeEdit className={styles.icon} onClick={() =>actions.handleGetUser(user.id)} />
         </td>
       )}
     </tr>

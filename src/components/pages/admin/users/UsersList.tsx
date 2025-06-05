@@ -4,10 +4,10 @@ import UserTable from "./table/UserTable";
 
 const UsersList = () => {
   const { data: users } = useGetUsersQuery();
-  const { handleGetUser } = useUser()
+  const { actions } = useUser()
   return (
     <>
-      <UserTable users={users || []} onEditUser={handleGetUser} />
+      <UserTable users={users || []} actions={actions} />
     </>
   );
 };

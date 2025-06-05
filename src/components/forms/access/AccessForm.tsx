@@ -6,7 +6,8 @@ import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
 import { IAccessFormActions, IPermissionRole, IRole } from "../../../types/access";
-import { useGetAssignableRolesQuery, useGetPermissionsQuery } from "../../../store/api/permissionApi";
+import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
+import { useGetAssignableRolesQuery } from "../../../store/api/rolesApi";
 import {
   description,
   locationLabel,
