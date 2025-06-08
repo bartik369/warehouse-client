@@ -35,6 +35,8 @@ export function userReducer(
             return { ...state,  user: { ...userInitialState.user }}
         case UserActionTypes.SET_USERS:
             return { ...state, users: action.payload }
+        case UserActionTypes.RESET_USERS:
+            return { ...state, users: [] }
         case UserActionTypes.SET_ERROR:
             return {
                 ...state, 

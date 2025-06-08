@@ -11,21 +11,21 @@ const AddPermission = () => {
       const { actions, state } = useAddAdminEntities();
       return (
         <section className={styles.inner}>
-          <div className={styles.form}>
+          <section className={styles.form}>
             <MultiForm
               fields={permissionFormFields}
               title={addPermissionTitle}
               actions={actions}
               state={state}
             />
-          </div>
-          <aside className={styles.list}>
+          </section>
+          <section className={styles.list}>
             <ItemsList
               field="permission"
               items={permissions || []}
               actions={actions}
             />
-          </aside>
+          </section>
         </section>
       );
 };

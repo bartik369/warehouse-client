@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IRole } from "../../types/access";
+import { IRole, IUserRolesResponse } from "../../types/access";
 import { IEntity } from "../../types/devices";
 
 export const rolesApi = createApi({
@@ -24,6 +24,16 @@ export const rolesApi = createApi({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
       }),
+    }),
+    getRolesList: build.query<any, void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_LIST_ROLES}`
+      })
+    }),
+    getUserRoles: build.query<IUserRolesResponse, string>({
+      query: (id: string) => ({
+         url: `${import.meta.env.VITE_USER_ROLES}${id}`
+      })
     }),
     getAssignableRoles: build.query<IRole, void>({
       query: () => ({
@@ -53,11 +63,13 @@ export const rolesApi = createApi({
       }),
       invalidatesTags: ["Role"],
     }),
-    // grantRole: build.mutation({
-    //   query: () => ({
-
-    //   })
-    // })
+    grantRole: build.mutation({
+      query: (body) => ({
+        url: `${import.meta.env.VITE_GRANT_ROLES}`,
+        method: 'POST',
+        body,
+      })
+    })
   }),
 });
 
@@ -68,4 +80,7 @@ export const {
   useUpdateRoleMutation,
   useCreateRoleMutation,
   useDeleteRoleMutation,
+  useGrantRoleMutation,
+  useGetRolesListQuery,
+  useLazyGetUserRolesQuery,
 } = rolesApi;

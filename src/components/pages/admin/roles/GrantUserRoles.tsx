@@ -1,28 +1,33 @@
+import UserInfo from "./UserInfo";
 import { useUserRoles } from "../../../../hooks/data/useUserRoles";
 import UserRolesForm from "../../../forms/roles/UserRolesForm";
-import UserInfo from "./UserInfo";
-import { useGetPermissionsRolesQuery } from "../../../../store/api/permissionApi";
+import { grantAccess } from "../../../../utils/constants/constants";
+import { useGetRolesListQuery } from "../../../../store/api/rolesApi";
 import styles from './GrantUserRoles.module.scss';
 
 
 const GrantUserRoles = () => {
   const { actions, roleState, userState } = useUserRoles();
-  const { data: roles } = useGetPermissionsRolesQuery();
+  const { data: roles, isFetching, isSuccess } = useGetRolesListQuery();
+
+  console.log(roles)
   return (
-    <div className={styles.test}>
-      <div className={styles.layoutLeft}>
+    <section className={styles.inner}>
+      <section className={styles.layoutLeft}>
         <UserRolesForm
           roles={roles || []}
           actions={actions}
           state={roleState}
           userState={userState.users}
-          title="Grant access"
+          title={grantAccess}
+          isFetching={isFetching}
+          isSuccess={isSuccess}
         />
-      </div>
-      <div className={styles.layoutRight}>
-        <UserInfo />
-      </div>
-    </div>
+      </section>
+      <section className={styles.layoutRight}>
+        <UserInfo userRoles={roleState.assignedUserRoles}/>
+      </section>
+    </section>
   );
 };
 

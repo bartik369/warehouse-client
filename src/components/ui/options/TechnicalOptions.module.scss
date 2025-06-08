@@ -1,0 +1,29 @@
+.property {
+    display: grid;
+    grid-template-columns: auto 1fr min-content;
+    white-space: nowrap;
+    padding: 3px 0;
+    .name {
+        text-align: left;
+        white-space: nowrap;
+        color: #727179;
+        font-size: 13px;
+    }
+    .dots {
+        margin: 0 15px 0 10px;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            border-bottom: 1px dotted rgba(204, 214, 228);
+            height: 1px;
+        }
+    }
+    .value {
+        text-align: left;
+        font-size: 14px;
+    }
+}

@@ -37,8 +37,8 @@ export const usePermission = () => {
     },
     []
   );
-
-  console.log("entity ====>>", entity);
+  console.log(entity.permissionsName?.length);
+  
 
   const handleCreateEntity = async () => {
     try {
@@ -70,7 +70,6 @@ export const usePermission = () => {
   const handleDeleteEntity = useCallback(() => {}, []);
 
   const handleResetEntity = useCallback(() => {
-    console.log('reset')
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
     dispatch({ type: PermissionActionTypes.RESET_LIST });
     dispatch({ type: PermissionActionTypes.RESET_ERROR });
@@ -106,7 +105,6 @@ export const usePermission = () => {
       name: string
     ) => {
       const { checked } = e.target;
-
       dispatch({
         type: PermissionActionTypes.SET_LIST,
         payload: { id: item.id || "", checked },
@@ -148,8 +146,7 @@ export const usePermission = () => {
   }, [dispatch]);
   
   const handleDeleteRolePerms = (item:IPermissionRoleRes) => {
-    console.log(item);
-    
+
   }
 
   useEffect(() => {

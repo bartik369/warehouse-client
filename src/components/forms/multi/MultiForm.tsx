@@ -66,7 +66,7 @@ const MultiForm = ({
         </div>
       )}
       <form>
-        <div className={styles.title}>{title}</div>
+        <h2 className={styles.title}>{title}</h2>
 
         {fields?.map((field) => {
           if (field.type === "input" || field.type === "tel") {

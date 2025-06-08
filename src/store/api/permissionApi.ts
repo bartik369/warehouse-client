@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IPermission, IPermissionRole } from "../../types/access";
+import { IPermission, IPermissionRole, IUserRolesList } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from '../../types/content';
 
@@ -50,7 +50,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission']
     }),
-    getPermissionsRoles: build.query<IPermissionRole[], void>({
+    getPermissionsRoles: build.query<IUserRolesList[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
       }),

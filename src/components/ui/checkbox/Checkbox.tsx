@@ -30,6 +30,7 @@ const Checkbox = ({
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
   const FIXED_PERMISSIONS = ['user.create', 'user.edit', 'device.create', 'device.edit'];
+  console.log(entity.permissionsName?.length)
 
   return (
     <div className={styles.wrapper}>
@@ -42,8 +43,8 @@ const Checkbox = ({
       >
         <span className={styles.label}>{label}</span>
         <span>{selectPermissions}</span>
-        {entity.permissionName.length > 0 && (
-          <span className={styles.count}>{entity.permissionName.length}</span>
+        {entity.permissionsName?.length && (
+          <span className={styles.count}>{entity.permissionsName.length}</span>
         )}
          <TbSelector className={styles.arrow}/>
       </button>

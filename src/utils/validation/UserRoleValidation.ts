@@ -22,8 +22,9 @@ const validateRequiredFields = (
 export const FormValidation = (formData: IUserRole): IValidateUserRoleErrors => {
   const errors: Record<string, string> = {};
   const requiredFields: ValidationFields[] = [
-    "userName",
-    'roleName'
+    "userId",
+    'roleName',
+    'email'
   ];
   validateRequiredFields(formData, requiredFields, errors);
   return errors;

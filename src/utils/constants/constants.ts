@@ -89,3 +89,8 @@ export const permissionsLabel = 'Разрешения'
 export const locationLabel = 'Город'
 export const warehouseLabel = 'Склад'
 export const addressLabel = 'Адрес'
+export const userSearchLabel = 'Поиск сотрудника'
+export const userRoleLabel = 'Роль пользователя'
+
+export const placeholderUserSearch = 'Введите данные, например, "Петров"'
+export const grantAccess = 'Предоставление роли';

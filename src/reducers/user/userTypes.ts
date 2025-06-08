@@ -14,6 +14,7 @@ export enum UserActionTypes {
     SET_USER = 'SET_USER',
     SET_USERS = 'SET_USERS',
     RESET_USER = 'RESET_USER',
+    RESET_USERS = 'RESET_USERS',
     SET_IS_ADMIN = 'SET_IS_ADMIN',
     SET_CHECKED = 'SET_CHECKED',
 }
@@ -24,5 +25,6 @@ export type UserAction =
  | { type: UserActionTypes.SET_USER, payload: Partial<IUser> }
  | { type: UserActionTypes.SET_USERS, payload: IUser[] }
  | { type: UserActionTypes.RESET_USER }
+ | { type: UserActionTypes.RESET_USERS }
  | { type: UserActionTypes.SET_CHECKED, payload: boolean }
  | { type: UserActionTypes.SET_IS_ADMIN, payload: boolean }

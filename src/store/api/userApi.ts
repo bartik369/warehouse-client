@@ -15,7 +15,6 @@ export const userApi = createApi({
         profile: build.query({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_USER_PROFILE}/${id}`,
-                method: 'GET',
             })
         }),
         createUser: build.mutation<{user: IUser, message: string}, IUser>({
@@ -37,7 +36,7 @@ export const userApi = createApi({
 });
 
 export const {
-    useProfileQuery, 
+    useLazyProfileQuery, 
     useCreateUserMutation,
     useGetUsersQuery,
     useLazyGetFilteredUsersQuery,
