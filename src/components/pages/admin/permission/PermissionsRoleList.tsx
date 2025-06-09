@@ -1,9 +1,6 @@
 import { memo } from 'react';
 import PermissionList from '../../../ui/permissions/PermissionList';
-import {
-  IAccessFormActions,
-  IUserRolesList,
-} from '../../../../types/access';
+import { IAccessFormActions, IUserRolesList } from '../../../../types/access';
 import styles from './PermissionsRoleList.module.scss';
 
 interface IPermissionsRoleListProps {
