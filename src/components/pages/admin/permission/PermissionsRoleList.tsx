@@ -20,6 +20,8 @@ const PermissionsRoleList = memo(
               key={`${role.roleName}_${role.locationName}_${role.warehouseName}`}
               role={role}
               actions={actions}
+              showEdit={true}
+              showDelete={true}
             />
           ))}
       </div>

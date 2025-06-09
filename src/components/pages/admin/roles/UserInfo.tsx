@@ -1,7 +1,6 @@
 import { IUserRolesResponse } from "../../../../types/access";
 import TechnicalOptions from "../../../ui/options/TechnicalOptions";
 import PermissionList from "../../../ui/permissions/PermissionList";
-import PermissionsRoleList from "../permission/PermissionsRoleList";
 import styles from "./GrantUserRoles.module.scss";
 
 interface IUserInfoProps {
@@ -28,28 +27,13 @@ const UserInfo = ({ userRoles }: IUserInfoProps) => {
           </div>
           <div className={styles.title}>Список ролей пользователя</div>
           {roles.map((role) => (
-            <PermissionList role={role} />
+            <PermissionList 
+              role={role} 
+              key={`${role.locationName}::${role.warehouseName}::${role.roleName}`}
+              showEdit={false}
+              showDelete={true}
+            />
           ))}
-          {/* <div className={styles.rolesList}>
-            {roles.length > 0 ? (
-              <>
-                {roles.map((item) => (
-                  <div className={styles.role}>
-                    <TechnicalOptions name="Роль" value={item.roleName} />
-                    <TechnicalOptions name="Город" value={item.locationName} />
-                    <TechnicalOptions name="Склад" value={item.warehouseName} />
-                    <div className={styles.access}>
-                      {item.permissionsName.map((item) => (
-                        <span>{item}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <div className={styles.info}>Назначенных ролей нет</div>
-            )}
-          </div> */}
         </>
       )}
     </div>

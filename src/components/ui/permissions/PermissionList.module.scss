@@ -61,8 +61,14 @@
             background: transparent;
             border: none;
             cursor: pointer;
+            transition: color .3s ease-in-out;
             &:hover {
                 color: #46c1a8;
+            }
+            &.delete {
+                &:hover {
+                    color: #f95568;
+                }
             }
         }
     }
