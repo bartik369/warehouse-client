@@ -5,7 +5,7 @@
         font-size: 30px;
         padding-right: 5px;
         border: none;
-        transition: all .2s ease-in;
+        transition: all .2s ease;
         background-color: transparent;
         cursor: pointer;
         &:hover {
@@ -14,39 +14,52 @@
     }
     .menu {
         position: absolute;
+        overflow: hidden;
         top: 36px;
-        width: 230px;
-        padding: 25px 0px;
+        width: 200px;
+        padding: 0 0 25px;
         border-radius: 10px;
-        background-color: #ffffff;
+        background-color: #FFFFFF;
         border-radius: .9rem;
-        -webkit-box-shadow: 0 8px 17px 0 rgba(20, 22, 30, 0.03), 0 31px 31px 0 rgba(20, 22, 30, .03), 0 69px 41px 0 rgba(20, 22, 30, .02), 0 123px 49px 0 rgba(20, 22, 30, 0), 0 192px 54px 0 rgba(20, 22, 30, 0);
-        box-shadow: 0 8px 17px 0 rgba(20, 22, 30, .03), 0 31px 31px 0 rgba(20, 22, 30, .03), 0 69px 41px 0 rgba(20, 22, 30, .02), 0 123px 49px 0 rgba(20, 22, 30, 0), 0 192px 54px 0 rgba(20, 22, 30, 0);
+        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
         right: 0;
         z-index: 99;
         .username {
-            font-size: 16px;
-            color: #1a1c1e;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #596883;
+            color: #fff;
             text-align: center;
             font-weight: 600;
-            padding: 8px 10px 18px;
-            margin-bottom: 10px;
+            padding: 18px 6px;
         }
         li {
-            padding: 13px 45px;
-            &:hover {
-                background-color: #f1f3f7;
-            }
+            padding: 16px 14px;
             a {
+                display: flex;
+                align-items: center;
                 color: #1a2033;
-                font-size: 13px;
+                font-size: 12px;
+                text-decoration: none;
+                .icon {
+                    font-size: 20px;
+                    color: inherit;
+                    transition: color 0.2s ease;
+                }
+                &:hover {
+                    color: #33c199;
+                }
+            }
+            &:hover {
+                background-color: #f5f9ff;
             }
         }
         li:not(:last-child) {
             border-bottom: 1px solid #f1f3f7;
         }
         .logout {
-            padding: 25px 0 3px 5px;
             display: flex;
             justify-content: center;
         }

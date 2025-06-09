@@ -12,7 +12,6 @@ const ItemsList = ({ field, items, actions }: IItemsListProps) => {
   if (items.length === 0) return <div>net info</div>;
   return (
     <>
-    <h2>Информация</h2>
     <ul>
       {items.map((item) => (
         <li key={item.id} className={styles.item}>

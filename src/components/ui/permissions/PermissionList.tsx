@@ -16,7 +16,6 @@ const PermissionList = ({
   showEdit,
   showDelete,
 }: IPermissionListProps) => {
-  console.log(role);
   return (
     <div
       className={styles.item}

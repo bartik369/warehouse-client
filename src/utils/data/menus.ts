@@ -10,6 +10,14 @@ import { MdOutlineLibraryAddCheck, MdSupportAgent  } from "react-icons/md";
 import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
 import { TbFileDescription, TbBrandComedyCentral, TbLocationPlus, 
 TbDeviceDesktopPlus } from "react-icons/tb";
+import { TbSettings } from "react-icons/tb";
+import { MdOutlineLockReset } from "react-icons/md";
+import { TbUserCircle } from "react-icons/tb";
+
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
+
+
 
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
@@ -22,10 +30,10 @@ export const headerMenuData = [
     {id: 4, title: 'Ссылка 4', path: '#'},
 ];
 export const profileMenuData = [
-    {id: 1, title: 'Админ-панель', path: '/admin/add-device'},
-    {id: 2, title: 'Профиль', path: '#'},
-    {id: 3, title: 'Сброс пароля', path: '#'},
-    {id: 4, title: 'Настройки', path: '#'},
+    {id: 1, title: 'Админ-панель', path: '/admin/add-device', icon: MdOutlineAdminPanelSettings},
+    {id: 2, title: 'Профиль', path: '#', icon: TbUserCircle},
+    {id: 3, title: 'Сброс пароля', path: '#', icon: MdOutlineLockReset},
+    {id: 4, title: 'Настройки', path: '#', icon: TbSettings},
 ];
 export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '', icon: LuWarehouse, subMenu: [

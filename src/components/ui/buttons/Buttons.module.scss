@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     transition: background-color .3s ease-in;
-    margin-top: 25px;
+    margin-top: 15px;
     cursor: pointer;
 }
 
@@ -18,12 +18,17 @@
 }
 
 .md {
-    padding: 9px 25px;
+    padding: 12px 25px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 400;
+    color: #3e4a5a;
+    transition: color .4s ease-in-out;
     .icon {
-        font-size: 18px;
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        margin-right: 2px;
     }
 }
 
@@ -40,13 +45,18 @@
     }
 }
 
+.light {
+    background-color: transparent;
+    font-size: 14px;
+    &:hover {
+        color: #3cb3a1;
+    }
+}
+
 .blue-green {
     background-color: #81c4db;
     color: #fff;
     &:hover {
-        background-color: #60abc5;
-    }
-    &:focus {
         background-color: #60abc5;
     }
 }
@@ -55,9 +65,6 @@
     background-color: #3cb3a1;
     color: #fff;
     &:hover {
-        background-color: #41c0ad;
-    }
-    &:focus {
         background-color: #41c0ad;
     }
 }
