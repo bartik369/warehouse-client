@@ -37,8 +37,6 @@ export const usePermission = () => {
     },
     []
   );
-  console.log(entity.permissionsName?.length);
-  
 
   const handleCreateEntity = async () => {
     try {
@@ -154,7 +152,7 @@ export const usePermission = () => {
       dispatch({
         type: PermissionActionTypes.SET_ENTITY,
         payload: {
-          permissionName: [],
+          permissionsName: [],
           permissionIds: [],
           warehouseId: "",
           warehouseName: "",
