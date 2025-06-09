@@ -7,7 +7,7 @@ import { CheckedPermissionOptions } from '../../types/content';
 export const permissionApi = createApi({
   reducerPath: "permissionApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Permission', 'PermissionRole'],
+  tagTypes: ["Permission", "PermissionRole"],
   endpoints: (build) => ({
     getPermissions: build.query<CheckedPermissionOptions[], void>({
       query: () => ({
@@ -16,10 +16,10 @@ export const permissionApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Permission' as const, id })),
-              { type: 'Permission', id: 'LIST' },
+              ...result.map(({ id }) => ({ type: "Permission" as const, id })),
+              { type: "Permission", id: "LIST" },
             ]
-          : [{ type: 'Permission', id: 'LIST' }],
+          : [{ type: "Permission", id: "LIST" }],
     }),
     getPermission: build.query<IPermission, string>({
       query: (id: string) => ({
@@ -33,7 +33,7 @@ export const permissionApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ['Permission']
+      invalidatesTags: ["Permission"],
     }),
     updatePermission: build.mutation<IPermission, IEntity>({
       query: ({ id, ...body }) => ({
@@ -41,14 +41,14 @@ export const permissionApi = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ['Permission']
+      invalidatesTags: ["Permission"],
     }),
     deletePermission: build.mutation<{ message: string }, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['Permission']
+      invalidatesTags: ["Permission"],
     }),
     getPermissionsRoles: build.query<IUserRolesList[], void>({
       query: () => ({
@@ -57,27 +57,30 @@ export const permissionApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'PermissionRole' as const, id })),
-              { type: 'PermissionRole', id: 'LIST' },
+              ...result.map(({ roleName, warehouseName, locationName }) => ({
+                type: "PermissionRole" as const,
+                id: `${roleName}_${locationName}_${warehouseName || 'null'}`,
+              })),
+              { type: "PermissionRole", id: "LIST" },
             ]
-          : [{ type: 'PermissionRole', id: 'LIST' }],
+          : [{ type: "PermissionRole", id: "LIST" }],
     }),
     createPermissionRole: build.mutation<IPermissionRole, IPermissionRole>({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['PermissionRole']
+      invalidatesTags: ["PermissionRole"],
     }),
     updatePermissionRole: build.mutation({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
-        method: 'PUT',
+        method: "PUT",
         body,
       }),
-      invalidatesTags: ['PermissionRole']
-    })
+      invalidatesTags: ["PermissionRole"],
+    }),
   }),
 });
 
