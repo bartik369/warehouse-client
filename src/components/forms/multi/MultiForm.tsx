@@ -20,8 +20,8 @@ import { GoPlus } from "react-icons/go";
 import { ToastContainer } from "react-toastify";
 import { IEntityFormActions } from "../../../types/entity";
 import { IAdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
-import styles from "./MultiForm.module.scss";
 import Tooltip from "../../ui/tooltip/Tooltip";
+import styles from "./MultiForm.module.scss";
 
 interface IMultiFormProps {
   actions: IEntityFormActions;
@@ -89,7 +89,7 @@ const MultiForm = ({
             );
           }
           if (field.type === "select") {
-            const items = dataSources[field.itemsKey!];
+            const items = dataSources[field.itemsKey as keyof typeof dataSources] || [];
             return (
               <Select
                 key={field.name}

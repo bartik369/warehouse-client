@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, IPermissionRoleRes, IRole } from "../../types/access";
+import { IPermissionRole, IPermissionRoleRes, IRole, IUserRolesList } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
 import {
@@ -143,8 +143,9 @@ export const usePermission = () => {
     dispatch({ type: PermissionActionTypes.SET_IS_UPDATE, payload: true });
   }, [dispatch]);
   
-  const handleDeleteRolePerms = (item:IPermissionRoleRes) => {
-
+  const handleDeleteRolePerms = (item:IUserRolesList) => {
+    console.log(item);
+    
   }
 
   useEffect(() => {
