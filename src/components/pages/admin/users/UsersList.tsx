@@ -6,9 +6,9 @@ const UsersList = () => {
   const { data: users } = useGetUsersQuery();
   const { actions } = useUser()
   return (
-    <>
+    <section>
       <UserTable users={users || []} actions={actions} />
-    </>
+    </section>
   );
 };
 

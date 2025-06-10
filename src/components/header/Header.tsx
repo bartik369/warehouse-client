@@ -21,7 +21,7 @@ const Header = ({ isActive, setIsActive }:IHeaderProps) => {
   const {isSticky} = useStickyHeader();
   
     return (
-      <header  className={`${style.header} ${isSticky 
+      <header className={`${style.header} ${isSticky 
         ? style.sticky 
         : style.relative}`} >
           <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)}/>

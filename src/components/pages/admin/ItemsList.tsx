@@ -1,15 +1,17 @@
+import { memo } from 'react';
 import { IEntity } from '../../../types/devices';
 import { IEntityFormActions } from '../../../types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
 import styles from './Admin.module.scss';
+import NoData from '../../nodata/NoData';
 
 interface IItemsListProps {
   actions: IEntityFormActions;
   field: string;
   items: IEntity[];
 }
-const ItemsList = ({ field, items, actions }: IItemsListProps) => {
-  if (items.length === 0) return <div>net info</div>;
+const ItemsList = memo(({ field, items, actions }: IItemsListProps) => {
+  if (items.length === 0) return <NoData />;
   return (
     <>
     <ul>
@@ -34,6 +36,6 @@ const ItemsList = ({ field, items, actions }: IItemsListProps) => {
     </ul>
     </>
   );
-};
+});
 
 export default ItemsList;

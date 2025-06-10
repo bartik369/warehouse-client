@@ -18,6 +18,7 @@ const AddWarehouse = () => {
           title={addWarehouseTitle}
           actions={actions}
           state={state}
+          locationType="warehouse"
         />
       </div>
       <aside className={styles.list}>

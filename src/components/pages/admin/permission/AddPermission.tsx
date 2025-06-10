@@ -17,6 +17,7 @@ const AddPermission = () => {
               title={addPermissionTitle}
               actions={actions}
               state={state}
+              locationType="permission"
             />
           </section>
           <section className={styles.list}>

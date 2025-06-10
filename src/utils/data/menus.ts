@@ -13,11 +13,7 @@ TbDeviceDesktopPlus } from "react-icons/tb";
 import { TbSettings } from "react-icons/tb";
 import { MdOutlineLockReset } from "react-icons/md";
 import { TbUserCircle } from "react-icons/tb";
-
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
-
-
 
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));

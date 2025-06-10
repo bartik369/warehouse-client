@@ -21,7 +21,7 @@ const SubMenu = ({ item, open, title }:ISubMenuProps) => {
 
    return (
      <div className={styles.wrapper}>
-       <div className={styles["sub-title"]}>
+       <div className={styles.subTitle}>
         {!open && title}
        </div>
        <ul className={styles.submenu}>

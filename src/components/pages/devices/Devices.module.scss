@@ -74,8 +74,8 @@
                 color: rgb(0, 0, 0);
             }
         }
-        th:not(.checkbox-column),
-        td:not(.checkbox-column) {
+        th:not(.checkboxColumn),
+        td:not(.checkboxColumn) {
             min-width: 170px;
         }
         tr:nth-child(even) {
@@ -93,7 +93,7 @@
             font-weight: 600;
         }
     }
-    .checkbox-column {
+    .checkboxColumn {
         width: 20px;
         text-align: center;
     }
@@ -153,7 +153,7 @@
         }
     }
     .serviceable,
-    .not-serviceable,
+    .notServiceable,
     .instock,
     .inuse {
         font-size: 22px;
@@ -168,7 +168,7 @@
     .serviceable {
         color: #379492;
     }
-    .not-serviceable {
+    .notServiceable {
         color: #cf2a49;
     }
     .instock {
@@ -179,7 +179,7 @@
     }
 }
 
-.extra-checkbox {
+.extraCheckbox {
     display: flex;
     justify-content: center;
     padding: 6px 0;

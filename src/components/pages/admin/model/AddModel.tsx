@@ -15,10 +15,11 @@ const AddModel = () => {
             <MultiForm
               fields={modelFormFields}
               title={addModelTitle}
-              fieldType='model'
+              fieldType="model"
               fileInputRef={fileInputRef}
               actions={actions}
               state={state}
+              locationType="model"
             />
           </div>
           <aside className={styles.list}>

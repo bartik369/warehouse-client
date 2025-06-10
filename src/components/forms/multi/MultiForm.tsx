@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { memo } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -7,12 +7,7 @@ import Preview from "../../ui/preview/Preview";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import {
-  add,
-  update,
-  reset,
-  slugLocation,
-} from "../../../utils/constants/constants";
+import { add, update, reset, slugLocation } from "../../../utils/constants/constants";
 import { IDeviceMedia, IEntity } from "../../../types/devices";
 import { IFieldMultiformConfig } from "../../../types/content";
 import { HiMiniXMark } from "react-icons/hi2";
@@ -31,22 +26,22 @@ interface IMultiFormProps {
   media?: IDeviceMedia;
   fieldType?: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
+  locationType?: string;
 }
 
-const MultiForm = ({
+const MultiForm = memo(({
   title,
   fields,
   actions,
   state,
   fieldType,
   media,
+  locationType,
   fileInputRef,
 }: IMultiFormProps) => {
-  const locationPath = useLocation();
   const { data: cities } = useGetLocationsQuery();
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: types } = useGetTypesQuery();
-  const locationType = locationPath.pathname.split("/")[2]?.split("-")[1] || "";
   const isEntityImg = state.entity.imagePath
     ? `${import.meta.env.VITE_API_MODELS}${state.entity.imagePath}`
     : media?.prevImg;
@@ -67,7 +62,6 @@ const MultiForm = ({
       )}
       <form>
         <h2 className={styles.title}>{title}</h2>
-
         {fields?.map((field) => {
           if (field.type === "input" || field.type === "tel") {
             return (
@@ -141,12 +135,12 @@ const MultiForm = ({
             size="lg"
             color="green"
             title={state.isUpdate ? update : add}
-            click={() => actions.handleCreateEntity(locationType)}
+            click={() => actions.handleCreateEntity(locationType || '')}
           />
         </div>
       </form>
     </div>
   );
-};
+});
 
 export default MultiForm;

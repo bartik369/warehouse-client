@@ -9,7 +9,7 @@ const AddUser = () => {
   const { data: departments } = useGetDepartmentsQuery();
   const  {state, actions } = useUser();
   return (
-    <div>
+    <section>
       <UserForm
         state={state}
         actions={actions}
@@ -17,7 +17,7 @@ const AddUser = () => {
         locations={locations || []}
         departments={departments || []}
       />
-    </div>
+    </section>
   );
 };
 

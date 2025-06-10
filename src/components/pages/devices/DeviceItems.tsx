@@ -16,7 +16,7 @@ const DeviceItems = ({ devices, checks, handleCheck }:IDeviceItemsProps) => {
         <>
           {devices && devices.map((device) => (
               <tr key={device.id} className={styles.row}>
-                <td className={styles["checkbox-column"]} 
+                <td className={styles.checkboxColumn} 
                   onClick={(e) => e.stopPropagation()}>
                   <label key={device.id} className={styles.checkbox}>
                     <input
@@ -41,7 +41,7 @@ const DeviceItems = ({ devices, checks, handleCheck }:IDeviceItemsProps) => {
                       <span>{yes}</span>
                     </div>
                   ) : (
-                    <div className={styles["not-serviceable"]}>
+                    <div className={styles.notServiceable}>
                       <IoIosCloseCircleOutline />
                       <span>{no}</span>
                     </div>

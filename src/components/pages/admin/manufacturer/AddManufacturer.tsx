@@ -17,6 +17,7 @@ const AddManufacturer = () => {
           title={addManufacturerTitle}
           actions={actions}
           state={state}
+          locationType="manufacturer"
         />
       </div>
       <aside className={styles.list}>

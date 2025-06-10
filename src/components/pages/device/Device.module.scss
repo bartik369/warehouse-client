@@ -31,29 +31,28 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
     .picture {
+        display: flex;
+        align-items: center;
         border: 1px solid #e5ecef;
         padding: 20px;
         border-radius: 12px;
-        display: flex;
-        align-items: center;
         img {
             width: 100%;
         }
     }
     .title {
+        display: flex;
+        align-items: center;
         font-size: 18px;
         margin: 10px 0;
         font-weight: 600;
-        display: flex;
-        align-items: center;
         .icon {
-            font-size: 20px;
             display: flex;
             align-items: center;
-            margin-right: 5px;
+            font-size: 20px;
             color: #6d7fa0;
+            margin-right: 5px;
         }
-        span {}
     }
     .info {
         display: flex;
@@ -64,7 +63,6 @@
         padding: 15px;
     }
     .active {
-        background-color: #f3fbf6;
         position: absolute;
         right: 0;
         top: 42px;
@@ -73,6 +71,7 @@
         padding: 4px 7px 4px 4px;
         border-radius: 8px;
         border: 1px solid #88caaf;
+        background-color: #f3fbf6;
     }
     .status-icon {
         display: flex;
@@ -88,7 +87,6 @@
         width: 100%;
         position: relative;
         .active {
-            background-color: #f3fbf6;
             position: absolute;
             right: 0;
             top: -2px;
@@ -97,6 +95,7 @@
             padding: 4px 7px 4px 4px;
             border-radius: 8px;
             border: 1px solid #34c198;
+            background-color: #f3fbf6;
         }
         .status-icon {
             display: flex;

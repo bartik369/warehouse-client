@@ -1,26 +1,26 @@
-import { add, isExistingInList } from '../../../utils/constants/constants';
-import { IUpdateDeviceFormActions } from '../../../types/devices';
+import { add, isExistingInList } from "../../../utils/constants/constants";
+import { IUpdateDeviceFormActions } from "../../../types/devices";
 import styles from "./DeviceForm.module.scss";
 
 interface IAskProps {
-    title: string;
-    type: string;
-    isOpen: boolean;
-    actions: IUpdateDeviceFormActions;
-    setIsOpen: (isOpen: boolean) => void;
+  title: string;
+  type: string;
+  isOpen: boolean;
+  actions: IUpdateDeviceFormActions;
+  setIsOpen: (isOpen: boolean) => void;
 }
-const Ask = ({ title, type, isOpen, actions, setIsOpen }:IAskProps) => {
-    const handleClick = () => {
-        setIsOpen(!isOpen);
-        actions.handleSetTitle(title);
-        actions.handleSetType(type);
-    }
-    return (
-        <div className={styles.ask}>
-            {isExistingInList}
-        <span onClick={handleClick}>{add}</span>
-      </div>
-    );
+const Ask = ({ title, type, isOpen, actions, setIsOpen }: IAskProps) => {
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+    actions.handleSetTitle(title);
+    actions.handleSetType(type);
+  };
+  return (
+    <div className={styles.ask}>
+      {isExistingInList}
+      <span onClick={handleClick}>{add}</span>
+    </div>
+  );
 };
 
 export default Ask;

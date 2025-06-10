@@ -17,6 +17,7 @@ const AddContractor = () => {
           title={addContractorTitle}
           actions={actions}
           state={state}
+          locationType="contractor"
         />
       </div>
       <aside className={styles.list}>

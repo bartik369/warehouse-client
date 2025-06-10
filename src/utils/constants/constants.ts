@@ -94,3 +94,10 @@ export const userRoleLabel = 'Роль пользователя'
 
 export const placeholderUserSearch = 'Введите данные, например, "Петров"'
 export const grantAccess = 'Предоставление роли';
+
+export const statusLoading = 'Загрузка...';
+export const statusNoData = 'Нет данных';
+
+export const location = 'Локация';
+export const use = 'Использует';
+

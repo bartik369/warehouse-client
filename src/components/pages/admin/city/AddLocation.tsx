@@ -17,6 +17,7 @@ const AddLocation = () => {
           state={state}
           fields={locationFormFields}
           title={addLocationTitle}
+          locationType="location"
         />
       </div>
       <aside className={styles.list}>

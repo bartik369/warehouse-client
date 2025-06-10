@@ -34,7 +34,7 @@ export const useEntity = () => {
         }
       }
     },
-    [state.media]
+    []
   );
 
   // Mapping between field type and RTK Query API handlers
@@ -53,7 +53,6 @@ export const useEntity = () => {
         const createEntityFunction = entityPoolsFunctions[fieldType];
         const validationErrors = EntityValidation(state.entity);
         dispatch({ type: EntityActionTypes.SET_ERROR, payload: validationErrors});
-        // setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
           const formData = new FormData();
@@ -73,7 +72,7 @@ export const useEntity = () => {
         handleApiError(err);
       }
     },
-    [state.entity, EntityValidation]
+    [state.entity]
   );
 
   const handleResetEntity = useCallback(() => {

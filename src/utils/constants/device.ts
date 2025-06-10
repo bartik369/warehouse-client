@@ -1,4 +1,4 @@
-import { DeviceTypes, DevicePrices } from './../../types/devices';
+import { DeviceTypes, DevicePrices, FilterLabel } from './../../types/devices';
 
 export const selectDate = 'Укажите дату';
 export const select = "Укажите";
@@ -81,4 +81,14 @@ export const extraOptions = [
   {id: 2, name: 'serialNumber', label: 'Серийный номер' },
 ]
 
+  export const filterLabelsConfig: FilterLabel[] = [
+    { key: "manufacturer", label: manufacturersLabel },
+    { key: "type", label: deviceTypeLabel },
+    { key: "model", label: modelLabel },
+    { key: "warehouse", label: warehouseLabel },
+    { key: "screenSize", label: screenSizeLabel },
+    { key: "memorySize", label: memorySizeLabel },
+    { key: "isFunctional", label: isFunctionalLabel },
+    { key: "isAssigned", label: isAssignedLabel },
+  ];
 

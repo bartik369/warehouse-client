@@ -5,8 +5,8 @@
         font-size: 30px;
         padding-right: 5px;
         border: none;
-        transition: all .2s ease;
         background-color: transparent;
+        transition: all .2s ease;
         cursor: pointer;
         &:hover {
             color: #686476;
@@ -14,34 +14,33 @@
     }
     .menu {
         position: absolute;
-        overflow: hidden;
-        top: 36px;
         width: 200px;
-        padding: 0 0 25px;
-        border-radius: 10px;
-        background-color: #FFFFFF;
-        border-radius: .9rem;
-        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+        top: 36px;
         right: 0;
+        padding: 0 0 15px;
+        border-radius: 12px;
+        background-color: #FFFFFF;
+        overflow: hidden;
+        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 10px 10px -4px, rgba(42, 51, 70, 0.04) 0px 20px 20px -8px, rgba(14, 63, 126, 0.04) 0px 30px 30px -12px, rgba(14, 63, 126, 0.04) 0px 50px 50px -20px;
         z-index: 99;
         .username {
-            font-size: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #596883;
+            font-size: 15px;
+            font-weight: 600;
             color: #fff;
             text-align: center;
-            font-weight: 600;
             padding: 18px 6px;
+            background-color: #596883;
         }
         li {
             padding: 16px 14px;
             a {
                 display: flex;
                 align-items: center;
-                color: #1a2033;
-                font-size: 12px;
+                color: #363b37;
+                font-size: 12.5px;
                 text-decoration: none;
                 .icon {
                     font-size: 20px;
@@ -53,7 +52,7 @@
                 }
             }
             &:hover {
-                background-color: #f5f9ff;
+                background-color: #f8fbff;
             }
         }
         li:not(:last-child) {

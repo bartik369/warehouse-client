@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -33,7 +33,7 @@ import { manufacturersLabel, deviceTypeLabel, deviceName, serialNumber, inventor
   import DevicePreview from "./DevicePreview";
 import styles from "./DeviceForm.module.scss";
 
-const DeviceForm = () => {
+const DeviceForm = memo(() => {
   const { state, actions  } = useAddDevice();
   const { isOpen, setIsOpen  } = useModal(false);
   const { data: manufacturers } = useGetManufacturersQuery();
@@ -205,7 +205,11 @@ const DeviceForm = () => {
             />
           </form>
           <div className={styles.title}>{financialOptions}</div>
-          <PriceForm device={state.device} errors={state.errors} handleExtNumber={actions.handleExtNumber} />
+          <PriceForm 
+            device={state.device} 
+            errors={state.errors} 
+            handleExtNumber={actions.handleExtNumber} 
+          />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item:IContractor) => item.id}
@@ -231,6 +235,6 @@ const DeviceForm = () => {
       </article>
     </>
   );
-};
+});
 export default DeviceForm;
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useEntity } from '../../../hooks/data/useEntity';
 import Input from '../../ui/input/Input';
 import BtnAction from '../../ui/buttons/BtnAction';
@@ -17,7 +17,7 @@ interface IEntityProps {
   fieldType: string;
 };
 
-const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
+const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
     const { fileInputRef, state, actions} = useEntity();
 
     useEffect(() => {
@@ -92,6 +92,6 @@ const EntityForm = ({ fieldType, typeId, manufacturerId }:IEntityProps) => {
             </div>
         </>
     );
-};
+});
 
 export default EntityForm;

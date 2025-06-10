@@ -17,6 +17,7 @@ const AddDepartment = () => {
           title={addDepartmentTitle}
           state={state}
           actions={actions}
+          locationType="department"
         />
       </div>
       <aside className={styles.list}>

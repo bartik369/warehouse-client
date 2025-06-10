@@ -1,34 +1,34 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import TechnicalInfo from './TechnicalInfo';
-import PriceInfo from './PriceInfo';
-import WarrantyInfo from './WarrantyInfo';
-import UserInfo from './UserInfo';
-import LocationInfo from './LocationInfo';
-import Tabs from '../../tabs/Tabs';
-import Modal from '../../modal/Modal';
-import UpdateDeviceForm from '../../forms/device/UpdateDeviceForm';
-import { useModal } from '../../../hooks/data/useModal';
-import { useAddDevice } from '../../../hooks/data/useAddDevice';
-import { useLazyGetDeviceQuery } from '../../../store/api/devicesApi';
-import { setDeviceInfo, setDevicePic } from '../../../store/slices/deviceSlice';
-import { useAppDispatch } from '../../../hooks/redux/useRedux';
-import { deviceTabsMenu } from '../../../utils/data/menus';
-import { editDevice } from '../../../utils/constants/constants';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import TechnicalInfo from "./TechnicalInfo";
+import PriceInfo from "./PriceInfo";
+import WarrantyInfo from "./WarrantyInfo";
+import UserInfo from "./UserInfo";
+import LocationInfo from "./LocationInfo";
+import Tabs from "../../tabs/Tabs";
+import Modal from "../../modal/Modal";
+import UpdateDeviceForm from "../../forms/device/UpdateDeviceForm";
+import { useModal } from "../../../hooks/data/useModal";
+import { useAddDevice } from "../../../hooks/data/useAddDevice";
+import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
+import { setDeviceInfo, setDevicePic } from "../../../store/slices/deviceSlice";
+import { useAppDispatch } from "../../../hooks/redux/useRedux";
+import { deviceTabsMenu } from "../../../utils/data/menus";
+import { editDevice } from "../../../utils/constants/constants";
 import { CiEdit } from "react-icons/ci";
-import styles from './Device.module.scss';
+import styles from "./Device.module.scss";
 
 const Device = () => {
   const params = useParams();
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
   const dispatchDeviceInfo = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { state, actions, setters } = useAddDevice();
+  const { state, actions } = useAddDevice();
 
   useEffect(() => {
     if (params.id) getDevice(params.id);
   }, [params.id]);
-  
+
   useEffect(() => {
     if (itemDevice?.id) {
       dispatchDeviceInfo(
@@ -37,34 +37,29 @@ const Device = () => {
             id: itemDevice.id,
             isAssigned: state.device.isAssigned,
             warehouse: {
-              name: itemDevice.warehouse?.name || '',
-              slug: itemDevice.warehouse?.slug || '',
+              name: itemDevice.warehouse?.name || "",
+              slug: itemDevice.warehouse?.slug || "",
             },
           },
         })
       );
-      dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ''))
+      dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ""));
     }
+    return () => {
+      dispatchDeviceInfo(setDevicePic(""));
+    };
   }, [itemDevice]);
-
-  useEffect(() => {
-    return () => { dispatchDeviceInfo(setDevicePic('')); }
-  }, []);
-
-  const handleActions = async (id: string) => {
-    await actions.handleGetDevice(id);
-    setters.setIsUpdate(true);
-    setIsOpen(true);
-  };
 
   return (
     <>
       {isOpen && (
-        <Modal title={state.fieldType} isOpen={isOpen} setIsOpen={setIsOpen} maxWidth={1000}>
-          <UpdateDeviceForm 
-            state={state} 
-            actions={actions} 
-          />
+        <Modal
+          title={state.fieldType}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          maxWidth={1000}
+        >
+          <UpdateDeviceForm state={state} actions={actions} />
         </Modal>
       )}
       <section className={styles.section}>
@@ -79,18 +74,17 @@ const Device = () => {
               </div>
               <div
                 className={styles.icon}
-                onClick={() => handleActions(itemDevice.id || "")}
+                onClick={() => {
+                  actions.handleGetDevice(itemDevice.id)
+                  setIsOpen(true)
+                }}
               >
                 <CiEdit title={editDevice} />
               </div>
             </div>
             <article className={styles.wrapper}>
               <figure className={styles.picture}>
-                <img src={`/api/models/${
-                  itemDevice.model.imagePath
-                  }`}
-                alt=""
-                />
+                <img src={`/api/models/${itemDevice.model.imagePath}`} alt="" />
               </figure>
               <div className={styles.info}>
                 <TechnicalInfo device={itemDevice} />

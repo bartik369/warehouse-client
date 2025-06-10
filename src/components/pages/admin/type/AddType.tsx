@@ -17,6 +17,7 @@ const AddType = () => {
               fields={typeFormFields}
               actions={actions}
               state={state}
+              locationType="type"
             />
           </div>
           <aside className={styles.list}>

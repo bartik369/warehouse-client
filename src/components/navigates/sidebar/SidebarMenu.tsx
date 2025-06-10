@@ -27,15 +27,15 @@ const SidebarMenu = ({ open }:ISidebarMenuProps) => {
     <nav>
       <ul className={styles.content}>
         {sidebarMenuData.map((item) => (
-          <li key={item.id} className={styles["menu-item"]}>
+          <li key={item.id} className={styles.menuItem}>
             <NavLink
               to={item.subMenu ? "" : item.path}
               className={({ isActive }) =>
-                `${styles["menu-item-header"]} ${
+                `${styles.menuItemHeader} ${
                   isActive
-                    ? styles["active-menu"]
+                    ? styles.activeMenu
                     : item.subMenu
-                    ? styles["has-submenu"]
+                    ? styles.hasSubmenu
                     : ""
                 }`
               }
@@ -43,7 +43,7 @@ const SidebarMenu = ({ open }:ISidebarMenuProps) => {
               onMouseEnter={() => handleMouseEnter(item.id)}
               onMouseLeave={handleMouseLeave}
             >
-              <span className={!open ? styles.icon : styles["open-icon"]}>
+              <span className={!open ? styles.icon : styles.openIcon}>
                 {!item.subMenu
                   ? item.icon && (
                       <item.icon
@@ -64,17 +64,17 @@ const SidebarMenu = ({ open }:ISidebarMenuProps) => {
               {open && !item.subMenu ? (
                 <div className={styles.item}>{item.title}</div>
               ) : open && item.subMenu ? (
-                <div className={styles["sub-title"]}>{item.title}</div>
+                <div className={styles.subTitle}>{item.title}</div>
               ) : (
                 ""
               )}
               {!open && hoveredItem === item.id && item.subMenu && (
-                <div className={styles["submenu-closed"]}>
+                <div className={styles.closedSubmenu}>
                   <SubMenu title={item.title} item={item} open={open} />
                 </div>
               )}
               {item.subMenu && open && (
-                <span className={styles["submenu-toggle"]}>
+                <span className={styles.toggleSubmenu}>
                   {openSubmenu === item.id ? (
                     <IoIosArrowUp />
                   ) : (

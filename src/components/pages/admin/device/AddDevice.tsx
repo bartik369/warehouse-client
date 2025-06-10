@@ -13,9 +13,9 @@ const AddDevice = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       <AddDeviceForm />
-    </div>
+    </section>
   );
 };
 

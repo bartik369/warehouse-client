@@ -51,7 +51,6 @@ const UpdateDeviceForm = ({ state, actions }:IUpdateDeviceFormProps) => {
   useEffect(() => {
     if (state.device.manufacturerSlug && state.device.typeSlug) {
       getModels({ manufacturer: state.device.manufacturerSlug, type: state.device.typeSlug })
-      // resetModel();
     }
   }, [state.device.manufacturerSlug, state.device.typeSlug]);
 

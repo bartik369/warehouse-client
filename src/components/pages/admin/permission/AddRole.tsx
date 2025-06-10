@@ -17,6 +17,7 @@ const AddRole = () => {
               title={addRoleTitle}
               actions={actions}
               state={state}
+              locationType="role"
             />
           </div>
           <aside className={styles.list}>

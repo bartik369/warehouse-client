@@ -2,20 +2,16 @@ import { memo } from "react";
 import { IUserRoleState } from "../../../reducers/roles/userRoleTypes";
 import { IUser } from "../../../types/user";
 import {
-  add,
   placeholderUserSearch,
-  reset,
   userRoleLabel,
   userSearchLabel,
 } from "../../../utils/constants/constants";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import BtnAction from "../../ui/buttons/BtnAction";
 import UserSuggestionList from "./UserSuggestionList";
-import { IListRoleRes, IPermissionRoleRes, IUserRoleFormActions } from "../../../types/access";
-import { HiMiniXMark } from "react-icons/hi2";
-import { GoPlus } from "react-icons/go";
+import { IListRoleRes, IUserRoleFormActions } from "../../../types/access";
 import styles from "./UserRolesForm.module.scss";
+import Actions from "../device/Actions";
 
 interface IUserRolesFormProps {
   roles: IListRoleRes[];
@@ -68,19 +64,9 @@ const UserRolesForm = memo(
           getComment={(item: IListRoleRes) => item.warehouseName}
         />
         <div className={styles.actions}>
-          <BtnAction
-            icon={<HiMiniXMark />}
-            size="lg"
-            color="grey"
-            title={reset}
-            click={actions.handleResetUserRole}
-          />
-          <BtnAction
-            icon={<GoPlus />}
-            size="lg"
-            color="green"
-            title={add}
-            click={actions.handleAddUserRole}
+          <Actions
+          addEntity={actions.handleAddUserRole}
+          resetEntity={actions.handleResetUserRole}
           />
         </div>
       </>

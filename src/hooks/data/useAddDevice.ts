@@ -19,7 +19,7 @@ export function useAddDevice() {
   const dispatchDeviceData = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const [state, dispatch] = useReducer(deviceReducer, initialState);
-  const { checked, itemType, device} = state;
+  const { checked, itemType, device } = state;
 
   const locationPath = useLocation();
   const exceptionPath = /add-device$/.test(locationPath.pathname);
@@ -44,10 +44,16 @@ export function useAddDevice() {
         payload: { [fieldName]: data as string },
       });
     },
-    [ValidateField]
+    []
   );
 
-  const handleAddDevice = async () => {
+  const handleResetDevice = useCallback(() => {
+    dispatch({ type: DeviceActionTypes.RESET_DEVICE });
+    dispatch({ type: DeviceActionTypes.RESET_ERROR });
+    dispatchDeviceData(setDevicePic(''));
+  }, [dispatchDeviceData]);
+
+  const handleAddDevice = useCallback(async () => {
     try {
       const validationErrors = FormValidation(device, itemType);
       dispatch({
@@ -82,14 +88,10 @@ export function useAddDevice() {
     } catch (err) {
       handleApiError(err);
     }
-  };
-  const handleResetDevice = useCallback(() => {
-    dispatch({ type: DeviceActionTypes.RESET_DEVICE });
-    dispatch({ type: DeviceActionTypes.RESET_ERROR });
-    dispatchDeviceData(setDevicePic(''));
-  }, [device]);
+  }, [device, itemType, user, exceptionPath, createDevice, updateDevice, dispatchDeviceData, handleResetDevice]);
 
-  const handleInputChange = <T extends string | IEntity | IContractor>(
+
+  const handleInputChange = useCallback(<T extends string | IEntity | IContractor>(
     field: keyof IDevice,
     value: T
   ) => {
@@ -105,7 +107,7 @@ export function useAddDevice() {
       type: DeviceActionTypes.SET_DEVICE,
       payload: { [field]: inputValue },
     });
-  };
+  }, []);
 
   const handleChecked = useCallback(() => {
     dispatch({ type: DeviceActionTypes.SET_CHECKED, payload: !checked });
@@ -176,6 +178,7 @@ export function useAddDevice() {
   const handleGetDevice = useCallback(async (id: string) => {
     try {
       if (!id) return;
+      dispatch({ type: DeviceActionTypes.SET_IS_UPDATE, payload: true })
       const data = await getDevice(id).unwrap();
       const { warehouse, model, warranty, ...rest } = data;
       dispatch({
@@ -205,15 +208,15 @@ export function useAddDevice() {
         payload: data.model?.type?.slug ?? '',
       });
       dispatchDeviceData(setDevicePic(data.model.imagePath));
-    } catch (error) {
-      console.error('Error fetching device:', error);
+    } catch (err:unknown) {
+      handleApiError(err);
     }
-  }, []);
+  }, [dispatchDeviceData, getDevice]);
 
   const resetModelData = useCallback(() => {
     dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: { modelName: '' }});
     dispatchDeviceData(setDevicePic(''));
-  }, []);
+  }, [dispatchDeviceData]);
   
   const handleSetTitle = useCallback((item: string) => {
     dispatch({ type: DeviceActionTypes.SET_TITLE, payload: item });

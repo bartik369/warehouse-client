@@ -1,16 +1,36 @@
 .content {
     position: relative;
     width: 100%;
-    .menu-item-header {
+    .menuItemHeader {
         padding: 15px 24.5px;
         display: flex;
         align-items: center;
+        .icon {
+            font-size: 21px;
+            color: inherit;
+        }
         &:hover,
-        .active-menu {
+        .activeMenu {
+            color: #35c299;
             background-color: #4a5669;
         }
-        &:hover .icon {}
-        .sub-title,
+        &:hover .icon {
+            color: inherit;
+        }
+        &:hover .item {
+            font-size: 13px;
+            font-weight: 400;
+            color: inherit
+        }
+        &:active .item {
+            font-size: 13px;
+            font-weight: 400;
+            color: inherit
+        }
+        &:hover a {
+            color: inherit;
+        }
+        .subTitle,
         a {
             font-size: 13px;
             font-weight: 400;
@@ -24,7 +44,6 @@
             font-size: 13px;
             font-weight: 400;
             color: #e6e8eb;
-            &:hover,
             &.active {
                 color: #35c299;
             }
@@ -69,20 +88,17 @@
         .icon {
             font-size: 21px;
             color: #e6e8eb;
-            &:hover {
-                color: #35c299;
-            }
         }
-        .open-icon {
+        .openIcon {
             margin-right: 10px;
         }
     }
-    .menu-item {
+    .menuItem {
         position: relative;
-        .active-menu {
+        .activeMenu {
             background-color: #4a5669;
         }
-        .submenu-closed {
+        .closedSubmenu {
             position: absolute;
             top: 0;
             left: 69px;
@@ -92,7 +108,7 @@
             box-shadow: rgba(68, 71, 76, 0.2) 0px 16px 14px -14px;
             .wrapper {
                 position: relative;
-                .sub-title {
+                .subTitle {
                     font-size: 16px;
                     font-weight: 500;
                     padding: 18.2px;
@@ -126,7 +142,7 @@
     }
 }
 
-.submenu-toggle {
+.toggleSubmenu {
     margin-left: auto;
     font-size: 18px;
     color: #aeb2bd;
@@ -136,6 +152,6 @@
     }
 }
 
-.sidebar.open .submenu-toggle {
+.sidebar.open .toggleSubmenu {
     transform: rotate(180deg);
 }

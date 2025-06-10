@@ -8,8 +8,6 @@ interface IHeaderMenuProps {
 
 const HeaderMenu = ({ device }:IHeaderMenuProps) => {
   const {filteredMenu, handleDeviceAction} = useDevice();
-  console.log(device)
-
     return (
       <nav className={styles.menu}>
         <ul>
