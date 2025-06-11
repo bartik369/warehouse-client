@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IRole, IUserRolesResponse } from "../../types/access";
+import { IRole, IRoleList, IUserRolesResponse } from "../../types/access";
 import { IEntity } from "../../types/devices";
 
 export const rolesApi = createApi({
@@ -25,7 +25,7 @@ export const rolesApi = createApi({
         url: `${import.meta.env.VITE_ROLES}${id}`,
       }),
     }),
-    getRolesList: build.query<any, void>({
+    getRolesList: build.query<IRoleList[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LIST_ROLES}`
       })

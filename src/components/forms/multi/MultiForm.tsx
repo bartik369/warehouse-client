@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
@@ -65,7 +65,7 @@ const MultiForm = memo(({
         {fields?.map((field) => {
           if (field.type === "input" || field.type === "tel") {
             return (
-              <>
+              <React.Fragment key={`${field.name}::${field.type}`}>
               {field.name === "slug" && <Tooltip data={slugLocation} /> }
               <Input
                 key={field.name}
@@ -79,7 +79,7 @@ const MultiForm = memo(({
                 actions.handleInputChange(field.name, e.target.value)
                 }
               />
-              </>
+              </React.Fragment>
             );
           }
           if (field.type === "select") {

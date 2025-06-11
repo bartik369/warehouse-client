@@ -281,7 +281,7 @@ export interface IDeviceInfo {
 }
 export type QueryParams = Record<string, string | number | boolean>
 
-export interface IUpdateDeviceFormState {
+export interface IDeviceFormState {
   itemType: string;
   isUpdate: boolean;
   device: IDevice;
@@ -291,7 +291,7 @@ export interface IUpdateDeviceFormState {
 }
 
 
-export interface IUpdateDeviceFormActions {
+export interface IDeviceFormActions {
   handleTypeChange:(item: IEntity) => void
   handleModelChange:(item: IEntity) => void
   handleManufacturerChange:(item: IEntity) => void

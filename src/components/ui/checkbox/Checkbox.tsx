@@ -47,8 +47,8 @@ const Checkbox = ({
       </button>
       {errorMessage && <div className={styles.error}>{errorMessage}</div>}
       {isOpen && (
-        <div ref={modalRef} className={styles["checkbox-menu"]}>
-          {items.length ? (
+        <div ref={modalRef} className={styles.checkboxMenu}>
+          {items.length > 0 ? (
             items.filter((item) => !FIXED_PERMISSIONS.includes(item.name))
             .map((item) => (
               <label key={item.id} className={styles.container}>

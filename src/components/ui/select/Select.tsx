@@ -55,7 +55,7 @@ const Select = <T,>({
           </span>
         }
         {errorMessage && 
-            <div className={styles['error-icon']} data-tooltip={errorMessage}>
+            <div className={styles.errorIcon} data-tooltip={errorMessage}>
                 <MdOutlineErrorOutline />
             </div>
         }
@@ -84,7 +84,7 @@ const Select = <T,>({
                 </div>
               ))
             ) : (
-              <div className={styles["no-options"]}>{noExistSelect}</div>
+              <div className={styles.noOptions}>{noExistSelect}</div>
             )}
           </div>
         )}

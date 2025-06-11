@@ -1,4 +1,4 @@
-import style from "./Toggle.module.scss";
+import styles from "./Toggle.module.scss";
 
 interface IToggleProps {
   checked: boolean;
@@ -16,23 +16,23 @@ const Toggle = ({
 }: IToggleProps) => {
   return (
     <div
-      className={style.switch}
+      className={styles.switch}
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") setChecked();
       }}
     >
-      <div className={style.label}>{label}</div>
+      <div className={styles.label}>{label}</div>
       <input
-        onClick={setChecked}
+        onChange={setChecked}
         type="checkbox"
         id="checkbox"
         checked={checked}
       />
-      <label className={style.slider} htmlFor="checkbox">
-        <div className={style.labels}>
-          <span className={style.yes}>{rightPosition}</span>
-          <span className={style.no}>{leftPosition}</span>
+      <label className={styles.slider} htmlFor="checkbox">
+        <div className={styles.labels}>
+          <span className={styles.yes}>{rightPosition}</span>
+          <span className={styles.no}>{leftPosition}</span>
         </div>
       </label>
     </div>

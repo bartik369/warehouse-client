@@ -75,7 +75,7 @@
         margin: 0 auto;
         @include table-view;
     }
-    .additional-form {
+    .additionalForm {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;

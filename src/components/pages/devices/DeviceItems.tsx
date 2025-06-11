@@ -1,4 +1,4 @@
-import {ChangeEvent } from 'react';
+import {ChangeEvent, memo } from 'react';
 import { IFilteredDevicesFromBack } from '../../../types/devices';
 import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
 import { CgUnavailable } from 'react-icons/cg';
@@ -11,7 +11,7 @@ interface IDeviceItemsProps {
     handleCheck:(device:IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DeviceItems = ({ devices, checks, handleCheck }:IDeviceItemsProps) => {
+const DeviceItems = memo(({ devices, checks, handleCheck }:IDeviceItemsProps) => {
     return (
         <>
           {devices && devices.map((device) => (
@@ -66,6 +66,6 @@ const DeviceItems = ({ devices, checks, handleCheck }:IDeviceItemsProps) => {
             ))}
         </>
     );
-};
+});
 
 export default DeviceItems;

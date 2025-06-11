@@ -6,21 +6,20 @@
         left: 0;
         width: 90%;
         z-index: 9;
-        padding: 10px;
+        padding: 6px;
         background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: rgba(136, 157, 190, 0.3) 5px 2px 12px 0px, rgba(255, 255, 255, 0.8) -5px -2px 12px 0px;
+        border-radius: 8px;
+        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 5px 5px -2px, rgba(42, 51, 70, 0.04) 0px 10px 10px -6px, rgba(14, 63, 126, 0.04) 0px 25px 25px -10px, rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
         .info {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 6px;
         }
         .list {
             display: flex;
             flex-direction: column;
             padding: 12px;
-            margin-bottom: 5px;
             cursor: pointer;
             &:not(:last-child) {
                 border-bottom: 1px solid #e5e7eb;
@@ -29,13 +28,13 @@
                 background-color: #f9fafd;
             }
             .name {
-                line-height: 24px;
-                font-size: 14px;
+                line-height: 22px;
+                font-size: 13px;
                 font-weight: 600;
             }
             .email {
                 line-height: 18px;
-                font-size: 13px;
+                font-size: 12px;
                 color: #818593;
             }
         }

@@ -18,6 +18,7 @@ const CustomNumber = memo(({ device, item, errors, setDevice }:ICustomNumberProp
   };
 
   const errorMessage = errors[item.name as keyof IValidationErrors];
+  
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
     

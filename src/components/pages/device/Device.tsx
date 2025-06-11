@@ -7,7 +7,7 @@ import UserInfo from "./UserInfo";
 import LocationInfo from "./LocationInfo";
 import Tabs from "../../tabs/Tabs";
 import Modal from "../../modal/Modal";
-import UpdateDeviceForm from "../../forms/device/UpdateDeviceForm";
+import DeviceForm from "../../forms/device/DeviceForm";
 import { useModal } from "../../../hooks/data/useModal";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
@@ -59,7 +59,12 @@ const Device = () => {
           setIsOpen={setIsOpen}
           maxWidth={1000}
         >
-          <UpdateDeviceForm state={state} actions={actions} />
+          <DeviceForm 
+            state={state} 
+            actions={actions} 
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         </Modal>
       )}
       <section className={styles.section}>

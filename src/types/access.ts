@@ -1,4 +1,3 @@
-import { email } from "./../utils/constants/constants";
 import { ChangeEvent } from "react";
 import { CheckedPermissionOptions } from "./content";
 import { IEntity } from "./devices";
@@ -100,4 +99,10 @@ export interface IUserRolesList {
 export interface IUserRolesResponse {
   user: Partial<IUser>;
   roles: IUserRolesList[];
+}
+export interface IRoleList {
+  roleId: string;
+  roleName: string;
+  locationName: string;
+  warehouseName?: string;
 }

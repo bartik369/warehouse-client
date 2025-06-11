@@ -27,7 +27,7 @@ const Input = memo(({
 
     return (
         <div className={styles.wrapper}>
-            <div className={`${styles.input} ${variant ? styles[variant] : ""} ${errorMessage ? styles['input-error'] : ''}`}>
+            <div className={`${styles.input} ${variant ? styles[variant] : ""} ${errorMessage ? styles.inputError : ''}`}>
             {icon && <span className={styles.icon}>{icon}</span>}
             <input 
                 name={name} 
@@ -41,7 +41,7 @@ const Input = memo(({
              <div className={styles.label}>{label}</div>
             </div>
             {errorMessage && 
-            <div className={styles['error-icon']} data-tooltip={errorMessage}>
+            <div className={styles.errorIcon} data-tooltip={errorMessage}>
                 <MdOutlineErrorOutline />
             </div>
             }

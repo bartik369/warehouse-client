@@ -5,7 +5,7 @@ import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
 import Pagination from "../../pagination/Pagination";
 import { IFilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { setDeviceInfo } from "../../../store/slices/deviceSlice";
+import { setDeviceInfo, resetDeviceInfo } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
@@ -32,17 +32,7 @@ const Devices = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setDeviceInfo({
-        device: {
-          id: "",
-          warehouse: {
-            name: '',
-            slug: "",
-          },
-          isAssigned: false,
-        },
-        status: false,
-      }))
+      dispatch(resetDeviceInfo());
     }
   }, [])
 
@@ -63,9 +53,10 @@ const Devices = () => {
           })
         );
       }
-      setChecks({
+      setChecks((prev) => ({
+        ...prev,
         [device.id]: e.target.checked,
-      });
+      }));
     },
     [dispatch]
   );

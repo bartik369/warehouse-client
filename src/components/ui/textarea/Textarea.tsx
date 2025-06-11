@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MdOutlineErrorOutline } from "react-icons/md";
 import styles from './Textarea.module.scss'
 
@@ -11,11 +11,11 @@ interface ITextareaProps {
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const Textarea = ({ value, label, errors, name, onChange }:ITextareaProps) => {
+const Textarea = memo(({ value, label, errors, name, onChange }:ITextareaProps) => {
     const errorMessage = errors?.[name];
     return (
         <div className={styles.wrapper}>
-            <div className={`${styles.textarea} ${errorMessage ? styles['input-error'] : ''}`}
+            <div className={`${styles.textarea} ${errorMessage ? styles.inputError : ''}`}
                 tabIndex={0}>
                 <div className={styles.label}>{label}</div>
                 <textarea
@@ -28,12 +28,12 @@ const Textarea = ({ value, label, errors, name, onChange }:ITextareaProps) => {
                 </textarea>
             </div>
             {errorMessage && 
-            <div className={styles['error-icon']} data-tooltip={errorMessage}>
+            <div className={styles.errorIcon} data-tooltip={errorMessage}>
                 <MdOutlineErrorOutline />
             </div>
             }
         </div>
     );
-};
+});
 
 export default Textarea;
