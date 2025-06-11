@@ -101,3 +101,5 @@ export const statusNoData = 'Нет данных';
 export const location = 'Локация';
 export const use = 'Использует';
 
+export const download = 'Скачать';
+

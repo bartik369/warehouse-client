@@ -1,12 +1,10 @@
 import Input from '../../ui/input/Input';
 import Textarea from '../../ui/textarea/Textarea';
-import BtnAction from '../../ui/buttons/BtnAction';
 import { useContactor } from '../../../hooks/data/useContractor';
-import { add, reset, phoneMaskPlaceholder } from '../../../utils/constants/constants';
+import {phoneMaskPlaceholder } from '../../../utils/constants/constants';
 import { phoneNumberLabel, contractorNameLabel, contractorAddressLabel} from '../../../utils/constants/device';
-import { HiMiniXMark } from 'react-icons/hi2';
-import { GoPlus } from 'react-icons/go';
 import styles from './ContractorForm.module.scss';
+import Actions from '../device/Actions';
 
 const ContractorForm = () => {
     const {contractor, errors,  handleInputChange, handleReset, handleCreateContractor} = useContactor();
@@ -37,21 +35,11 @@ const ContractorForm = () => {
             errors={errors}
           />
           <div className={styles.actions}>
-                <BtnAction 
-                  icon={<HiMiniXMark />} 
-                  size="lg" 
-                  color="grey" 
-                  title={reset}
-                  click={handleReset}
-                />   
-                <BtnAction 
-                  icon={<GoPlus />} 
-                  size="lg" 
-                  color="green" 
-                  title={add} 
-                  click={handleCreateContractor}
-                />
-              </div>
+            <Actions
+              resetEntity={handleReset}
+              addEntity={handleCreateContractor}
+            />
+          </div>
         </form>
     );
 };

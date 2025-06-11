@@ -10,6 +10,7 @@ import Tooltip from '../../ui/tooltip/Tooltip';
 import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
 import styles from './EntityForm.module.scss';
+import Actions from './Actions';
 
 interface IEntityProps {
   typeId: string;
@@ -73,19 +74,9 @@ const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => 
               />
     
               <div className={styles.actions}>
-                <BtnAction 
-                  icon={<HiMiniXMark />} 
-                  size="lg" 
-                  color="grey" 
-                  title={reset}
-                  click={actions.handleResetEntity}
-                />   
-                <BtnAction 
-                  icon={<GoPlus />} 
-                  size="lg" 
-                  color="green" 
-                  title={add} 
-                  click={() => actions.handleCreateEntity(fieldType)}
+                <Actions
+                  resetEntity={actions.handleResetEntity}
+                  addEntity={() => actions.handleCreateEntity(fieldType)}
                 />
               </div>
             </form>

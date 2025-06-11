@@ -35,7 +35,7 @@
             background-color: #596883;
         }
         li {
-            padding: 16px 14px;
+            padding: 14px 14px;
             a {
                 display: flex;
                 align-items: center;
@@ -48,11 +48,11 @@
                     transition: color 0.2s ease;
                 }
                 &:hover {
-                    color: #33c199;
+                    color: #379492;
                 }
             }
             &:hover {
-                background-color: #f8fbff;
+                background-color: #fafbff;
             }
         }
         li:not(:last-child) {

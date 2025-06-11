@@ -123,6 +123,7 @@ const DeviceForm = memo(({state, actions, isOpen, setIsOpen }: IDeviceFormProps)
             <Actions
               resetEntity={actions.handleResetDevice}
               addEntity={actions.handleAddDevice}
+              isUpdate={state.isUpdate}
             />
           </form>
         </div>

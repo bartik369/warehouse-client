@@ -70,7 +70,7 @@
         display: inline-block;
         padding: 4px 7px 4px 4px;
         border-radius: 8px;
-        border: 1px solid #88caaf;
+        border: 1px solid #3cb3a1;
         background-color: #f3fbf6;
     }
     .status-icon {
@@ -94,7 +94,7 @@
             display: inline-block;
             padding: 4px 7px 4px 4px;
             border-radius: 8px;
-            border: 1px solid #34c198;
+            border: 1px solid #3cb3a1;
             background-color: #f3fbf6;
         }
         .status-icon {
@@ -102,7 +102,7 @@
             align-items: center;
             gap: 2px;
             font-size: 17px;
-            color: #34c198;
+            color: #3cb3a1;
             span {
                 font-size: 10px;
             }
@@ -147,7 +147,7 @@
             display: inline-block;
             padding: 4px 7px 4px 4px;
             border-radius: 8px;
-            border: 1px solid #88caaf;
+            border: 1px solid #3cb3a1;
         }
         .status {
             display: flex;
@@ -155,7 +155,7 @@
             gap: 2px;
             font-size: 17px;
             &.available {
-                color: #34c198;
+                color: #3cb3a1;
             }
             &.unavailable {
                 color: #dc4a30;

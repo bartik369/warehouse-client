@@ -1,3 +1,9 @@
+.downloadFile {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+
 .container {
     box-sizing: border-box;
     width: 100%;
@@ -108,8 +114,8 @@
             display: none;
         }
         input:checked~.checkmark {
-            border: 1px solid #34bd94;
-            background-color: #35c198;
+            border: 1px solid #369190;
+            background-color: #379492;
             transition: background-color .5s ease-in-out;
         }
         input:disabled~.checkmark {
@@ -132,7 +138,7 @@
         }
     }
     .checkbox:hover input~.checkmark {
-        border: 1px solid #34bd94;
+        border: 1px solid #369190;
     }
     .checkmark {
         position: absolute;

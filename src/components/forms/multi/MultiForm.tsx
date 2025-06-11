@@ -4,6 +4,7 @@ import Select from "../../ui/select/Select";
 import Textarea from "../../ui/textarea/Textarea";
 import BtnAction from "../../ui/buttons/BtnAction";
 import Preview from "../../ui/preview/Preview";
+import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
@@ -123,19 +124,10 @@ const MultiForm = memo(({
           }
         })}
         <div className={styles.actions}>
-          <BtnAction
-            icon={<HiMiniXMark />}
-            size="lg"
-            color="grey"
-            title={reset}
-            click={actions.handleResetEntity}
-          />
-          <BtnAction
-            icon={<GoPlus />}
-            size="lg"
-            color="green"
-            title={state.isUpdate ? update : add}
-            click={() => actions.handleCreateEntity(locationType || '')}
+          <Actions
+            isUpdate={state.isUpdate}
+            resetEntity={actions.handleResetEntity}
+            addEntity={() => actions.handleCreateEntity(locationType || '')}
           />
         </div>
       </form>

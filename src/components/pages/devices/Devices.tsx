@@ -3,6 +3,7 @@ import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
 import Pagination from "../../pagination/Pagination";
+import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
 import { IFilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
 import { setDeviceInfo, resetDeviceInfo } from "../../../store/slices/deviceSlice";
@@ -53,10 +54,9 @@ const Devices = () => {
           })
         );
       }
-      setChecks((prev) => ({
-        ...prev,
-        [device.id]: e.target.checked,
-      }));
+      setChecks({
+        [device.id]: e.target.checked
+      });
     },
     [dispatch]
   );
@@ -67,6 +67,11 @@ const Devices = () => {
 
   return (
     <>
+    <div className={styles.downloadFile}>
+      <OfficeFileBtn
+       stack={devices?.devices || []} 
+       />
+    </div>
       <div className={styles.container}>
         <table className={styles.table}>
           <thead>
