@@ -4,6 +4,14 @@ import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
 import { CgUnavailable } from 'react-icons/cg';
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
 import styles from './Devices.module.scss';
+import { IoCheckmarkCircle } from "react-icons/io5";
+import { GoCheckCircleFill } from "react-icons/go";
+import { PiCheckCircleFill } from "react-icons/pi";
+import { IoIosCloseCircle } from "react-icons/io";
+
+
+
+
 
 interface IDeviceItemsProps {
     devices: IFilteredDevicesFromBack[];
@@ -37,13 +45,13 @@ const DeviceItems = memo(({ devices, checks, handleCheck }:IDeviceItemsProps) =>
                 <td>
                   {device.isFunctional ? (
                     <div className={styles.serviceable}>
-                      <IoIosCheckmarkCircleOutline />
-                      <span>{yes}</span>
+                      <PiCheckCircleFill />
+                      {/* <span>{yes}</span> */}
                     </div>
                   ) : (
                     <div className={styles.notServiceable}>
-                      <IoIosCloseCircleOutline />
-                      <span>{no}</span>
+                      <IoIosCloseCircle />
+                      {/* <span>{no}</span> */}
                     </div>
                   )}
                 </td>
@@ -51,12 +59,12 @@ const DeviceItems = memo(({ devices, checks, handleCheck }:IDeviceItemsProps) =>
                   {device.isAssigned ? (
                     <div className={styles.inuse}>
                     <CgUnavailable/>
-                    <span>{inUse}</span>
+                    {/* <span>{inUse}</span> */}
                   </div>
                   ) : (
                     <div className={styles.instock}>
-                    <IoIosCheckmarkCircleOutline />
-                    <span>{inStock}</span>
+                    <IoCheckmarkCircle />
+                    {/* <span>{inStock}</span> */}
                   </div>
                   )}
                 </td>

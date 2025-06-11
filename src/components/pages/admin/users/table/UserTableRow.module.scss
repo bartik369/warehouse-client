@@ -10,10 +10,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #f95568;
+        color: #71809d;
         &.active {
             font-size: 18px;
-            color: #34c197;
+            color: #39b49e;
         }
     }
     .icon {
@@ -22,7 +22,7 @@
         transition: color .5s ease;
         cursor: pointer;
         &:hover {
-            color: #46c1a8;
+            color: #39b49e;
         }
     }
 }
