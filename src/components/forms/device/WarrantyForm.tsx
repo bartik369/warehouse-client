@@ -5,7 +5,7 @@ import { useGetContractorsQuery } from "../../../store/api/contractorApi";
 import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
   contractor } from "../../../utils/constants/device";
 import { addNewContractor } from "../../../utils/constants/constants";
-import { IUpdateDeviceFormActions, IUpdateDeviceFormState } from "../../../types/devices";
+import { IDeviceFormActions, IDeviceFormState } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
@@ -17,8 +17,8 @@ registerLocale("ru", ru);
 
 interface IWarrantyFormProps<T> {
   isOpen: boolean;
-  state: IUpdateDeviceFormState;
-  actions: IUpdateDeviceFormActions;
+  state: IDeviceFormState;
+  actions: IDeviceFormActions;
   setIsOpen: (isOpen: boolean) => void;
   getId: (item: T) => void;
 }

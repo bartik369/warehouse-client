@@ -10,7 +10,7 @@ import {
 import Input from "../../ui/input/Input";
 import Ask from "./Ask";
 import Select from "../../ui/select/Select";
-import { IEntity, IUpdateDeviceFormActions } from "../../../types/devices";
+import { IEntity, IDeviceFormActions } from "../../../types/devices";
 import { IDeviceState } from "../../../reducers/device/deviceTypes";
 import {
   deviceName,
@@ -30,7 +30,7 @@ import styles from "./DeviceForm.module.scss";
 
 interface IDeviceTechnicalSectionProps {
   state: IDeviceState;
-  actions: IUpdateDeviceFormActions;
+  actions: IDeviceFormActions;
   manufacturers: IEntity[];
   warehouses: IEntity[];
   types: IEntity[];

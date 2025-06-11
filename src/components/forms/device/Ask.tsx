@@ -1,12 +1,12 @@
 import { add, isExistingInList } from "../../../utils/constants/constants";
-import { IUpdateDeviceFormActions } from "../../../types/devices";
+import { IDeviceFormActions } from "../../../types/devices";
 import styles from "./DeviceForm.module.scss";
 
 interface IAskProps {
   title: string;
   type: string;
   isOpen: boolean;
-  actions: IUpdateDeviceFormActions;
+  actions: IDeviceFormActions;
   setIsOpen: (isOpen: boolean) => void;
 }
 const Ask = ({ title, type, isOpen, actions, setIsOpen }: IAskProps) => {
