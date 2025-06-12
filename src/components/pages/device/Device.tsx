@@ -62,8 +62,6 @@ const Device = () => {
           <DeviceForm 
             state={state} 
             actions={actions} 
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
           />
         </Modal>
       )}

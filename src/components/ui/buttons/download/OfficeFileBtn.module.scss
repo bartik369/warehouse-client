@@ -1,19 +1,18 @@
 .icons {
-    font-size: 20px;
-    height: 22px;
+    font-size: 18px;
     .items {
         display: flex;
         gap: 6px;
         cursor: pointer;
         .green {
-            color: #677591;
+            color: #52627d;
             transition: color .3s ease-in-out;
             &:hover {
                 color: #3faaa8;
             }
         }
         .yellow {
-            color: #677591;
+            color: #52627d;
             transition: color .3s ease-in-out;
             &:hover {
                 color: #ffbc4b;

@@ -5,6 +5,7 @@ import Header from '../components/header/Header';
 import Sidebar from '../components/sidebar/Sidebar';
 import AdminMenu from '../components/navigates/admin/AdminMenu';
 import styles from './Layout.module.scss';
+import { GlobalModal } from '../components/modal/GlobalModal';
 
 const Layout = () => {
   const [isActive, setIsActive] = useState(false);
@@ -23,6 +24,7 @@ const Layout = () => {
         </main>
         <Footer />
       </div>
+      <GlobalModal />
     </div>
   );
 };

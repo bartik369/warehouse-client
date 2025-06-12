@@ -48,8 +48,9 @@ export const useEntity = () => {
   };
 
   const handleCreateEntity = useCallback(
-    async (fieldType: string) => {
+    async (fieldType: string | null) => {
       try {
+        if (!fieldType) return;
         const createEntityFunction = entityPoolsFunctions[fieldType];
         const validationErrors = EntityValidation(state.entity);
         dispatch({ type: EntityActionTypes.SET_ERROR, payload: validationErrors});

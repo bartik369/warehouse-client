@@ -12,12 +12,14 @@ import { typesApi } from './api/typesApi';
 import { modelsApi } from './api/modelsApi';
 import { rolesApi } from './api/rolesApi';
 import authReducer from './slices/authSlice';
+import { modalReducer } from '../reducers/modal/modalReducer';
 import deviceReducer from './slices/deviceSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     device: deviceReducer,
+    modal: modalReducer,
     [authApi.reducerPath]: authApi.reducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
     [contractorApi.reducerPath]: contractorApi.reducer,

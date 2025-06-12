@@ -1,9 +1,11 @@
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Ask from "./Ask";
+import { ModalType } from "../../../reducers/modal/modalTypes";
 import { useGetContractorsQuery } from "../../../store/api/contractorApi";
 import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
   contractor } from "../../../utils/constants/device";
+  import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { addNewContractor } from "../../../utils/constants/constants";
 import { IDeviceFormActions, IDeviceFormState } from "../../../types/devices";
 import { IContractor } from "../../../types/content";
@@ -16,19 +18,26 @@ import styles from "./DeviceForm.module.scss";
 registerLocale("ru", ru);
 
 interface IWarrantyFormProps<T> {
-  isOpen: boolean;
   state: IDeviceFormState;
   actions: IDeviceFormActions;
-  setIsOpen: (isOpen: boolean) => void;
   getId: (item: T) => void;
 }
 const WarrantyForm = <T,>({
-  isOpen,
   state,
   actions,
-  setIsOpen,
 }: IWarrantyFormProps<T>) => {
+  const { openModal } = useGlobalModal();
   const { data: contractors } = useGetContractorsQuery();
+
+  const openEntityModal = (type: ModalType, title: string) => {
+      openModal(type, {
+        title,
+        maxWidth: 340,
+        state: {},
+        actions,
+      });
+    };
+
   return (
     <form className={styles.form4}>
       <div className={styles.input}>
@@ -70,13 +79,7 @@ const WarrantyForm = <T,>({
       </div>
       <div className={styles.container}>
         {!state.isUpdate &&
-          <Ask
-          title={addNewContractor}
-          type="contractor"
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          actions={actions}
-       />
+          <Ask onAsk={() => openEntityModal('contractor', addNewContractor)} />
         }
         <Select<IContractor>
           setValue={actions.handleContractorChange}

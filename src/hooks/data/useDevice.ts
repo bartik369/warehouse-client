@@ -37,5 +37,5 @@ export const useDevice = () => {
         }
       }
 
-    return {filteredMenu, handleDeviceAction}
+    return { filteredMenu, handleDeviceAction }
 }

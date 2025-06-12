@@ -27,6 +27,8 @@ import CustomNumber from "../../ui/number/CustomNumber";
 import Number from "../../ui/number/Number";
 import Toggle from "../../ui/checkbox/Toggle";
 import styles from "./DeviceForm.module.scss";
+import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
+import { ModalType } from "../../../reducers/modal/modalTypes";
 
 interface IDeviceTechnicalSectionProps {
   state: IDeviceState;
@@ -35,8 +37,6 @@ interface IDeviceTechnicalSectionProps {
   warehouses: IEntity[];
   types: IEntity[];
   models: IEntity[];
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
 }
 
 const DeviceTechnicalSection = ({
@@ -46,9 +46,18 @@ const DeviceTechnicalSection = ({
   warehouses,
   types,
   models,
-  isOpen,
-  setIsOpen,
 }: IDeviceTechnicalSectionProps) => {
+  const { openModal } = useGlobalModal();
+
+  const openEntityModal = (type: ModalType, title: string) => {
+    openModal(type, {
+      title,
+      maxWidth: 360,
+      state: {},
+      actions,
+    });
+  };
+
   return (
     <>
       <div className={styles.title}>{technicalOptions}</div>
@@ -63,11 +72,7 @@ const DeviceTechnicalSection = ({
         />
         <div className={styles.container}>
           <Ask
-            title={addNewType}
-            type="type"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            actions={actions}
+            onAsk={() => openEntityModal('type', addNewType)}
           />
           <Select<IEntity>
             setValue={actions.handleTypeChange}
@@ -82,11 +87,7 @@ const DeviceTechnicalSection = ({
         </div>
         <div className={styles.container}>
           <Ask
-            title={addNewManufacturer}
-            type="manufacturer"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            actions={actions}
+           onAsk={() => openEntityModal('manufacturer', addNewManufacturer)}
           />
           <Select<IEntity>
             setValue={actions.handleManufacturerChange}
@@ -102,11 +103,7 @@ const DeviceTechnicalSection = ({
         {state.device.typeSlug && state.device.manufacturerSlug && (
           <div className={styles.container}>
             <Ask
-              title={addNewModel}
-              type="model"
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              actions={actions}
+              onAsk={() => openEntityModal('model', addNewModel)}
             />
             <Select<IEntity>
               setValue={actions.handleModelChange}

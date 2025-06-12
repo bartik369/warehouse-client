@@ -1,16 +1,14 @@
 import { memo, useEffect } from 'react';
 import { useEntity } from '../../../hooks/data/useEntity';
 import Input from '../../ui/input/Input';
-import BtnAction from '../../ui/buttons/BtnAction';
+import Actions from './Actions';
+import Tooltip from '../../ui/tooltip/Tooltip';
 import Preview from '../../ui/preview/Preview';
 import { ToastContainer, Bounce } from 'react-toastify';
-import { add, reset, slugInfo } from '../../../utils/constants/constants';
+import { slugInfo } from '../../../utils/constants/constants';
 import {slugLabel, nameLabel} from '../../../utils/constants/device';
-import Tooltip from '../../ui/tooltip/Tooltip';
-import { GoPlus } from 'react-icons/go';
-import { HiMiniXMark } from 'react-icons/hi2';
+import { useGlobalModal } from '../../../hooks/data/useGlobalModal';
 import styles from './EntityForm.module.scss';
-import Actions from './Actions';
 
 interface IEntityProps {
   typeId: string;
@@ -20,6 +18,7 @@ interface IEntityProps {
 
 const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
     const { fileInputRef, state, actions} = useEntity();
+    const { modalType } = useGlobalModal();
 
     useEffect(() => {
       if (fieldType === 'model' && (typeId && manufacturerId)) {
@@ -44,7 +43,7 @@ const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => 
             transition={Bounce}
       />
           <div className={styles.content}>
-            {fieldType === "model" && 
+            {modalType === "model" && 
               <div className={styles.preview}>
                 <Preview 
                   media={state.media.prevImg || ""} 
@@ -76,7 +75,7 @@ const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => 
               <div className={styles.actions}>
                 <Actions
                   resetEntity={actions.handleResetEntity}
-                  addEntity={() => actions.handleCreateEntity(fieldType)}
+                  addEntity={() => actions.handleCreateEntity(modalType)}
                 />
               </div>
             </form>

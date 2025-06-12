@@ -1,10 +1,7 @@
 import { useEffect, memo } from "react";
 import Textarea from "../../ui/textarea/Textarea";
-import EntityForm from "./EntityForm";
-import ContractorForm from "../contractor/ContractorForm";
 import DeviceTechnicalSection from "./DeviceTechnicalSection";
 import Actions from "./Actions";
-import Modal from "../../modal/Modal";
 import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
 import DevicePreview from "./DevicePreview";
@@ -25,11 +22,9 @@ import styles from "./DeviceForm.module.scss";
 interface IDeviceFormProps {
   state: IDeviceState;
   actions: IDeviceFormActions;
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
 }
 
-const DeviceForm = memo(({state, actions, isOpen, setIsOpen }: IDeviceFormProps) => {
+const DeviceForm = memo(({state, actions }: IDeviceFormProps) => {
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
@@ -65,24 +60,6 @@ const DeviceForm = memo(({state, actions, isOpen, setIsOpen }: IDeviceFormProps)
   return (
     <>
       <ToastContainer position="top-center" theme="light" />
-      {isOpen && (
-        <Modal
-          title={state.title}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          maxWidth={340}
-        >
-          {state.fieldType !== "contractor" ? (
-            <EntityForm
-              typeId={state.device.typeId}
-              manufacturerId={state.device.manufacturerId}
-              fieldType={state.fieldType}
-            />
-          ) : (
-            <ContractorForm />
-          )}
-        </Modal>
-      )}
       <article className={styles.wrapper}>
         <DevicePreview />
         <div className={styles.forms}>
@@ -93,8 +70,6 @@ const DeviceForm = memo(({state, actions, isOpen, setIsOpen }: IDeviceFormProps)
             warehouses={warehouses || []}
             models={models || []}
             types={types || []}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
           />
           <div className={styles.title}>{financialOptions}</div>
           <PriceForm
@@ -105,10 +80,8 @@ const DeviceForm = memo(({state, actions, isOpen, setIsOpen }: IDeviceFormProps)
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
             getId={(item: IContractor) => item.id}
-            isOpen={isOpen}
             state={state}
             actions={actions}
-            setIsOpen={setIsOpen}
           />
           <form className={styles.additionalForm}>
             <Textarea
