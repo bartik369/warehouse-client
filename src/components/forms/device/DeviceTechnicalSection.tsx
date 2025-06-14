@@ -54,7 +54,6 @@ const DeviceTechnicalSection = ({
       title,
       maxWidth: 360,
       state: {},
-      actions,
     });
   };
 

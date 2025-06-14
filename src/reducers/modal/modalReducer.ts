@@ -26,6 +26,15 @@ export function modalReducer(
         modalType: null,
         modalProps: {},
       };
+    case ModalActionsType.SET_MODAL_SIZE:
+      return {
+        ...state,
+        modalProps: {
+          ...state.modalProps,
+          maxWidth: action.payload.modalSize,
+          title: action.payload.title
+        }
+      }
     default:
       return state;
   }

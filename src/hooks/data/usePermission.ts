@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, IPermissionRoleRes, IRole, IUserRolesList } from "../../types/access";
+import { IPermissionRole, IRole, IUserRolesList } from "../../types/access";
 import { IEntity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
 import {

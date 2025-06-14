@@ -1,0 +1,33 @@
+.search {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: coral;
+    padding: 10px;
+    .input {
+        width: 100%;
+        background-color: cadetblue;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 22px;
+            border-radius: 14px;
+        }
+    }
+    .result {
+        position: absolute;
+        top: 105%;
+        left: 0;
+        width: 90%;
+        z-index: 9;
+        padding: 6px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 5px 5px -2px, rgba(42, 51, 70, 0.04) 0px 10px 10px -6px, rgba(14, 63, 126, 0.04) 0px 25px 25px -10px, rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
+    }
+}

@@ -1,0 +1,106 @@
+import { useCallback, useEffect, useReducer } from "react";
+import { useLazyGetIssueQuery } from "../../store/api/deviceIssueApi";
+import { handleApiError } from "../../utils/errors/handleApiError";
+import {
+  deviceIssueReducer,
+  initialState,
+} from "../../components/deviceIssue/context/deviceIssueReducer";
+import { DeviceIssueActionTypes } from "../../components/deviceIssue/context/deviceIssueTypes";
+import { ValidateField } from "../../utils/validation/UserValidation";
+import { IUser } from "../../types/user";
+import { useDebounce } from "./useDebounce.ts";
+// import { useLazyGetUsersBasicSearchQuery } from "../../store/api/userApi";
+import { useLazyGetFilteredUsersQuery } from "../../store/api/userApi";
+
+export const useDeviceIssue = () => {
+  const [getIssue] = useLazyGetIssueQuery();
+  const [state, dispatch] = useReducer(deviceIssueReducer, initialState);
+  const { query } = state;
+  const debouncedQuery = useDebounce(query, 700);
+  const [getFilteredUsers, { isSuccess, isFetching }] =
+    useLazyGetFilteredUsersQuery();
+
+  const handleDeviceIssue = async (id: string) => {
+    if (!id) return;
+    try {
+      const data = await getIssue(id).unwrap();
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USER,
+        payload: data.user,
+      });
+      dispatch({
+        type: DeviceIssueActionTypes.SET_ISSUE_ID,
+        payload: data.id,
+      });
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  };
+
+  const handleInputChange = useCallback((field: keyof IUser, value: string) => {
+    dispatch({
+      type: DeviceIssueActionTypes.SET_QUERY,
+      payload: value,
+    });
+    dispatch({
+      type: DeviceIssueActionTypes.SET_USERS_LIST_VISIBLE,
+      payload: true,
+    });
+    const validateErrors = ValidateField(field, value);
+    dispatch({
+      type: DeviceIssueActionTypes.SET_ERROR,
+      payload: { [field]: validateErrors as string },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (debouncedQuery.length > 0) {
+      handleUsers(debouncedQuery);
+      dispatch({
+        type: DeviceIssueActionTypes.SET_WAS_SEARCHED,
+        payload: true,
+      });
+    } else {
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USERS,
+        payload: [],
+      });
+      dispatch({
+        type: DeviceIssueActionTypes.SET_WAS_SEARCHED,
+        payload: false,
+      });
+    }
+  }, [debouncedQuery]);
+
+  const handleUsers = useCallback(async (query: string) => {
+    try {
+      const data = await getFilteredUsers(query).unwrap();
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USERS,
+        payload: data,
+      });
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  }, []);
+
+  const handleSetUser = () => {
+
+  }
+  const handleReset = () => {
+
+  }
+
+  return {
+    state,
+    isSuccess,
+    isFetching,
+    dispatch,
+    actions: {
+        handleDeviceIssue,
+        handleInputChange,
+        handleReset,
+        handleSetUser,
+    }
+  };
+};

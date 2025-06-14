@@ -67,3 +67,10 @@ export interface IUserFormActions {
     handleGetUser: (id: string) => void;
     handleChecked: () => void;
 }
+
+export interface IBaseUserQuery {
+    handleInputChange: (name: keyof IUser, e: string) => void;
+    handleDeviceIssue: (id: string) => void;
+    handleReset: () => void;
+    handleSetUser: () => void;
+}

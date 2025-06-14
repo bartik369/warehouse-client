@@ -108,8 +108,6 @@ export const useUserRoles = () => {
       }
     },[role]);
 
-    console.log(role)
-
     const handleUserInfo = async (item: IUser) => {
      try {
       if (!item) return;

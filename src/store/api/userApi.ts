@@ -31,7 +31,7 @@ export const userApi = createApi({
                     search,
                 }
             })
-        })
+        }),
     })
 });
 

@@ -10,7 +10,6 @@ const GrantUserRoles = () => {
   const { actions, roleState, userState } = useUserRoles();
   const { data: roles, isFetching, isSuccess } = useGetRolesListQuery();
 
-  console.log(roles)
   return (
     <section className={styles.inner}>
       <section className={styles.layoutLeft}>
