@@ -62,7 +62,7 @@ const SelectUserStep = ({
               size="lg"
               color="dark-green"
               title={select}
-              click={actions.handleSetStepInfo}
+              click={() => actions.handleSetStepInfo('review_document')}
             />
           </div>
         </>

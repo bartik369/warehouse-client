@@ -22,8 +22,8 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #ccc;
-    color: white;
+    background-color: #aeb2bd;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@
 }
 
 .completed {
-    background-color: #28a745;
+    background-color: #424e64;
 }
 
 .label {
@@ -43,8 +43,7 @@
 
 .activeLabel {
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .line {
@@ -53,7 +52,7 @@
     right: -50%;
     width: 100%;
     height: 2px;
-    background-color: #ccc;
+    background-color: #aeb2bd;
     z-index: 0;
 }
 

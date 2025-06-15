@@ -73,5 +73,5 @@ export interface IBaseUserQuery {
     handleDeviceIssue: (id: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => void;
-    handleSetStepInfo: () => void;
+    handleSetStepInfo: (step: string) => void;
 }

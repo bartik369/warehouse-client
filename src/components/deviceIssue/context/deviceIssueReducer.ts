@@ -33,6 +33,11 @@ export const initialState: IDeviceIssueState = {
   query: "",
   isUsersListVisible: false,
   wasSearched: false,
+  deviceIssueData: {
+    userId: "",
+    processId: "",
+    devices: [],
+  }
 };
 
 export function deviceIssueReducer(

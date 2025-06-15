@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useReducer, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
@@ -6,12 +6,14 @@ import Pagination from "../../pagination/Pagination";
 import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
 import { IFilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
+import { deviceIssueReducer, initialState } from "../../deviceIssue/context/deviceIssueReducer";
 import { setDeviceInfo, resetDeviceInfo } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
 import { MdFilterListOff } from "react-icons/md";
 import styles from "./Devices.module.scss";
+import { DeviceIssueActionTypes } from "../../deviceIssue/context/deviceIssueTypes";
 
 const Devices = () => {
   const {
@@ -30,7 +32,6 @@ const Devices = () => {
   } = useDeviceFilters();
   const dispatch = useAppDispatch();
   const [checks, setChecks] = useState({});
-
   useEffect(() => {
     return () => {
       dispatch(resetDeviceInfo());
@@ -40,6 +41,7 @@ const Devices = () => {
   const handleCheck = useCallback(
     (device: IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
       if (device && e.target) {
+        console.log(device)
         dispatch(
           setDeviceInfo({
             device: {

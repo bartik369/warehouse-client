@@ -1,3 +1,4 @@
+import { IDeviceIssueData } from '../../../types/devices';
 import { IUser } from './../../../types/user';
 
 export type DeviceIssueStepType = "select_user" | "review_document" | "sign_document";
@@ -10,11 +11,13 @@ export interface IDeviceIssueState {
     query: string,
     isUsersListVisible: boolean;
     wasSearched: boolean;
+    deviceIssueData: IDeviceIssueData;
 }
 
 export enum DeviceIssueActionTypes {
     SET_USER = 'SET_USER',
     SET_USERS = 'SET_USERS',
+    SET_DEVICE_ID = 'SET_DEVICE_ID',
     SET_ISSUE_ID = 'SET_ISSUE_ID',
     NEXT_STEP = 'NEXT_STEP',
     PREV_STEP = 'PREV_STEP',
@@ -30,6 +33,7 @@ export enum DeviceIssueActionTypes {
 export type DeviceIssueAction = 
 | { type: DeviceIssueActionTypes.SET_USER, payload: Partial<IUser> }
 | { type: DeviceIssueActionTypes.SET_USERS, payload: IUser[] }
+| { type: DeviceIssueActionTypes.SET_DEVICE_ID, payload: string }
 | { type: DeviceIssueActionTypes.NEXT_STEP }
 | { type: DeviceIssueActionTypes.PREV_STEP }
 | { type: DeviceIssueActionTypes.SET_ISSUE_ID, payload: string }

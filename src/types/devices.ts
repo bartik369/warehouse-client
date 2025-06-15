@@ -329,5 +329,10 @@ export interface IWarrantyFormActions {
 //   setDevice: (device: IDevice) => void;
 // }
 
+export interface IDeviceIssueData {
+  userId: string,
+  processId: string,
+  devices: string[],
+}
 
 

@@ -22,7 +22,7 @@ export const useDevice = () => {
         :  item.title !== accept
     });
 
-    const handleDeviceIssue = (item) => {
+    const handleDeviceIssue = () => {
       openModal('device-issue', {
         state: {},
       });
@@ -39,7 +39,7 @@ export const useDevice = () => {
           case move:
             console.log('peremestit');
           break;
-          case issue: handleDeviceIssue(item)
+          case issue: handleDeviceIssue()
           break;
         }
       }

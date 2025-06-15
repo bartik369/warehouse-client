@@ -85,8 +85,8 @@ export const useDeviceIssue = () => {
     }
   }, []);
 
-  const handleSetStepInfo = () => {
-
+  const handleSetStepInfo = (step: string) => {
+    dispatch({ type: DeviceIssueActionTypes.NEXT_STEP })
   }
   const handleReset = useCallback(() => {
     dispatch({ type: DeviceIssueActionTypes.SET_FULL_RESET });
