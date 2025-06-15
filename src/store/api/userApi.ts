@@ -12,6 +12,11 @@ export const userApi = createApi({
                 url: `${import.meta.env.VITE_USERS}`, 
             })
         }),
+        getUser: build.query<IUser, string>({
+            query: (id: string) => ({
+                url: `${import.meta.env.VITE_USERS}${id}`, 
+            }),
+        }),
         profile: build.query({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_USER_PROFILE}/${id}`,
@@ -40,4 +45,5 @@ export const {
     useCreateUserMutation,
     useGetUsersQuery,
     useLazyGetFilteredUsersQuery,
+    useLazyGetUserQuery,
 } = userApi;

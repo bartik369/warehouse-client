@@ -14,6 +14,10 @@ export const reset = 'Сбросить';
 export const add = 'Добавить';
 export const update  = 'Обновить';
 export const email = 'Email';
+export const department = 'Отдел';
+export const login = 'Имя пользователя';
+export const workID = 'Work-ID';
+
 export const password  = 'Password';
 export const titleSignin = 'IT management';
 export const search = 'Поиск...';
@@ -83,6 +87,7 @@ export const notActiveWarranty = 'Неактивна';
 export const selectPic = 'Выберите картинку!';
 export const edit = 'Редактировать';
 export const editDevice = 'Редактирование устройства';
+export const select = 'Выбрать';
 
 export const rolesLabel = 'Роль'
 export const permissionsLabel = 'Разрешения'
@@ -92,8 +97,9 @@ export const addressLabel = 'Адрес'
 export const userSearchLabel = 'Поиск сотрудника'
 export const userRoleLabel = 'Роль пользователя'
 
-export const placeholderUserSearch = 'Введите данные, например, "Петров"'
+export const placeholderUserSearch = 'Введите данные, например, "Петров"...'
 export const grantAccess = 'Предоставление роли';
+export const userListRoles = 'Список ролей пользователя';
 
 export const statusLoading = 'Загрузка...';
 export const statusNoData = 'Нет данных';

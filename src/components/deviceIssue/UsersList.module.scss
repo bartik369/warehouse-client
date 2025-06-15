@@ -1,6 +1,5 @@
 .list {
     display: flex;
-    background-color: aqua;
     flex-direction: column;
     padding: 12px;
     cursor: pointer;
@@ -11,12 +10,11 @@
         background-color: #f9fafd;
     }
     .name {
-        line-height: 22px;
-        font-size: 22px;
+        padding: 2px 0;
+        font-size: 19px;
         font-weight: 600;
     }
     .email {
-        line-height: 18px;
         font-size: 14px;
         color: #818593;
     }
@@ -34,4 +32,12 @@
     font-weight: 600;
     text-align: center;
     padding: 5px 0 40px;
+}
+
+.info {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
 }

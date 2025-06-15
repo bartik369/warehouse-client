@@ -1,0 +1,16 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    .name {
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    .extName {
+        font-size: 20px;
+        color: #696d7e;
+    }
+    .info {
+        padding: 10px;
+    }
+}

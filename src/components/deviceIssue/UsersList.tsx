@@ -1,16 +1,19 @@
 import { memo } from "react";
+import { IDeviceIssueState } from "./context/deviceIssueTypes";
+import { IBaseUserQuery } from "../../types/user";
 import { statusLoading, statusNoData } from "../../utils/constants/constants";
 import styles from "./UsersList.module.scss";
-import { IDeviceIssueState } from "./context/deviceIssueTypes";
 
 interface IUsersListProps {
   state: IDeviceIssueState;
+  actions: IBaseUserQuery;
   isSuccess: boolean;
   isFetching: boolean;
 }
 
 const UsersList = memo(({
   state,
+  actions,
   isSuccess,
   isFetching
 }: IUsersListProps) => {
@@ -26,8 +29,7 @@ const UsersList = memo(({
       <div
         className={styles.list}
         key={item.id}
-        // onClick={() => actions.handleUserInfo(item)}
-        onClick={() => console.log(item)}
+        onClick={() => actions.handleSetUser(item.id)}
       >
         <span className={styles.name}>
           {item.firstNameRu} {item.lastNameRu}
@@ -39,4 +41,4 @@ const UsersList = memo(({
   return <div className={styles.userList}>{content}</div>;
 });
 
-export default  UsersList;
+export default UsersList;

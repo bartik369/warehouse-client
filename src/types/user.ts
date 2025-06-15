@@ -72,5 +72,6 @@ export interface IBaseUserQuery {
     handleInputChange: (name: keyof IUser, e: string) => void;
     handleDeviceIssue: (id: string) => void;
     handleReset: () => void;
-    handleSetUser: () => void;
+    handleSetUser: (id: string) => void;
+    handleSetStepInfo: () => void;
 }

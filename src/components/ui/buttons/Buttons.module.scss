@@ -61,12 +61,20 @@
     }
 }
 
-.green {
-    background-color: #3cb3a1;
+.green,
+.dark-green {
     color: #fff;
     &:hover {
         background-color: #41c0ad;
     }
+}
+
+.green {
+    background-color: #3cb3a1;
+}
+
+.dark-green {
+    background-color: #379492;
 }
 
 .dark-grey {

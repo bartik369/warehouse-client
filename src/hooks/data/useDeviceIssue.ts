@@ -9,16 +9,16 @@ import { DeviceIssueActionTypes } from "../../components/deviceIssue/context/dev
 import { ValidateField } from "../../utils/validation/UserValidation";
 import { IUser } from "../../types/user";
 import { useDebounce } from "./useDebounce.ts";
-// import { useLazyGetUsersBasicSearchQuery } from "../../store/api/userApi";
+import { useLazyGetUserQuery } from "../../store/api/userApi";
 import { useLazyGetFilteredUsersQuery } from "../../store/api/userApi";
 
 export const useDeviceIssue = () => {
-  const [getIssue] = useLazyGetIssueQuery();
   const [state, dispatch] = useReducer(deviceIssueReducer, initialState);
   const { query } = state;
   const debouncedQuery = useDebounce(query, 700);
-  const [getFilteredUsers, { isSuccess, isFetching }] =
-    useLazyGetFilteredUsersQuery();
+  const [getIssue] = useLazyGetIssueQuery();
+  const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
+  const [getBasicUser] = useLazyGetUserQuery();
 
   const handleDeviceIssue = async (id: string) => {
     if (!id) return;
@@ -53,6 +53,45 @@ export const useDeviceIssue = () => {
     });
   }, []);
 
+  const handleUsers = useCallback(async (query: string) => {
+    try {
+      const data = await getFilteredUsers(query).unwrap();
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USERS,
+        payload: data,
+      });
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  }, []);
+
+  const handleSetUser = useCallback(async (id: string) => {
+    try {
+      const data = await getBasicUser(id).unwrap();
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USER,
+        payload: data,
+      });
+      dispatch({
+        type: DeviceIssueActionTypes.SET_USERS,
+        payload: [],
+      });
+      dispatch({
+        type: DeviceIssueActionTypes.SET_WAS_SEARCHED,
+        payload: false,
+      });
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  }, []);
+
+  const handleSetStepInfo = () => {
+
+  }
+  const handleReset = useCallback(() => {
+    dispatch({ type: DeviceIssueActionTypes.SET_FULL_RESET });
+  }, [])
+
   useEffect(() => {
     if (debouncedQuery.length > 0) {
       handleUsers(debouncedQuery);
@@ -72,25 +111,6 @@ export const useDeviceIssue = () => {
     }
   }, [debouncedQuery]);
 
-  const handleUsers = useCallback(async (query: string) => {
-    try {
-      const data = await getFilteredUsers(query).unwrap();
-      dispatch({
-        type: DeviceIssueActionTypes.SET_USERS,
-        payload: data,
-      });
-    } catch (err: unknown) {
-      handleApiError(err);
-    }
-  }, []);
-
-  const handleSetUser = () => {
-
-  }
-  const handleReset = () => {
-
-  }
-
   return {
     state,
     isSuccess,
@@ -101,6 +121,7 @@ export const useDeviceIssue = () => {
         handleInputChange,
         handleReset,
         handleSetUser,
+        handleSetStepInfo,
     }
   };
 };

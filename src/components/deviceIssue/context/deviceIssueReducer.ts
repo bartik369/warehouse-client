@@ -83,6 +83,18 @@ export function deviceIssueReducer(
       return { ...state, isUsersListVisible: action.payload };
     case DeviceIssueActionTypes.SET_WAS_SEARCHED:
           return { ...state, wasSearched: action.payload };
+    case DeviceIssueActionTypes.SET_FULL_RESET:
+      return {
+        ...state,
+        user: null,
+        users: [],
+        step: steps[0],
+        issueId: null,
+        errors: {},
+        query: '',
+        isUsersListVisible: false,
+        wasSearched: false,
+      }
     default:
       return state;
   }

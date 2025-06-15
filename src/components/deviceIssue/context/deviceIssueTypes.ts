@@ -24,6 +24,7 @@ export enum DeviceIssueActionTypes {
     SET_QUERY = 'SET_QUERY',
     SET_USERS_LIST_VISIBLE = 'SET_USERS_LIST_VISIBLE',
     SET_WAS_SEARCHED = 'SET_WAS_SEARCHED',
+    SET_FULL_RESET = 'SET_FULL_RESET',
 }
  
 export type DeviceIssueAction = 
@@ -39,5 +40,6 @@ export type DeviceIssueAction =
 | { type: DeviceIssueActionTypes.SET_WAS_SEARCHED, payload: boolean }
 | { type: DeviceIssueActionTypes.SET_QUERY, payload:string }
 | { type: DeviceIssueActionTypes.SET_USERS_LIST_VISIBLE, payload: boolean }
+| { type: DeviceIssueActionTypes.SET_FULL_RESET }
 
 

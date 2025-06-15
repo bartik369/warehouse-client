@@ -78,4 +78,9 @@ export const adminMenu = [
     {id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral},
 ]
 
+export const deviceIssueSteps = [
+    { id: 'select_user', label: 'Выбор пользователя' },
+    { id: 'review_document', label: 'Просмотр документа' },
+    { id: 'sign_document', label: 'Подпись документа' },
+  ];
   

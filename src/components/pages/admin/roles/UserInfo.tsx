@@ -1,4 +1,6 @@
 import { IUserRolesResponse } from "../../../../types/access";
+import { department, email, login, userListRoles, workID } from "../../../../utils/constants/constants";
+import { location } from "../../../../utils/constants/device";
 import TechnicalOptions from "../../../ui/options/TechnicalOptions";
 import PermissionList from "../../../ui/permissions/PermissionList";
 import styles from "./GrantUserRoles.module.scss";
@@ -12,20 +14,20 @@ const UserInfo = ({ userRoles }: IUserInfoProps) => {
     <div className={styles.userInfo}>
       {user.email && (
         <>
-          <div className={styles.user}>
-            <div className={styles.name}>
+          <section className={styles.user}>
+            <h3 className={styles.name}>
               {user.firstNameRu} {user.lastNameRu}
-            </div>
+            </h3>
             <div className={styles.extraName}>
               {user.firstNameEn} {user.lastNameEn}
             </div>
-            <TechnicalOptions name="Почта" value={user?.email ?? ""} />
-            <TechnicalOptions name="Имя пользователя" value={user?.userName ?? ""}/>
-            <TechnicalOptions name="work-ID" value={user?.workId ?? ""} />
-            <TechnicalOptions name="Отдел" value={user?.department ?? ""} />
-            <TechnicalOptions name="Город" value={user?.location ?? ""} />
-          </div>
-          <div className={styles.title}>Список ролей пользователя</div>
+            <TechnicalOptions name={email} value={user?.email ?? ""} />
+            <TechnicalOptions  name={login} value={user?.userName ?? ""}/>
+            <TechnicalOptions name={workID} value={user?.workId ?? ""} />
+            <TechnicalOptions name={department} value={user?.department ?? ""} />
+            <TechnicalOptions name={location} value={user?.location ?? ""} />
+          </section>
+          <div className={styles.title}>{userListRoles}</div>
           {roles.map((role) => (
             <PermissionList 
               role={role} 
