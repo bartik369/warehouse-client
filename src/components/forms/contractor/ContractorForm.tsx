@@ -1,10 +1,10 @@
 import Input from '../../ui/input/Input';
 import Textarea from '../../ui/textarea/Textarea';
+import Actions from '../device/Actions';
 import { useContactor } from '../../../hooks/data/useContractor';
 import {phoneMaskPlaceholder } from '../../../utils/constants/constants';
 import { phoneNumberLabel, contractorNameLabel, contractorAddressLabel} from '../../../utils/constants/device';
 import styles from './ContractorForm.module.scss';
-import Actions from '../device/Actions';
 
 const ContractorForm = () => {
     const {contractor, errors,  handleInputChange, handleReset, handleCreateContractor} = useContactor();

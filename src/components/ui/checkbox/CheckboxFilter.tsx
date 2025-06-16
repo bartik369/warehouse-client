@@ -5,7 +5,7 @@ import { noOptions } from '../../../utils/constants/constants';
 import { CgOptions } from "react-icons/cg";
 import styles from './CheckboxFilter.module.scss';
 
-interface ICheckboxProps {
+interface CheckboxProps {
   items: CheckedDeviceOptions[];
   label: string;
   name: string;
@@ -24,7 +24,7 @@ const CheckboxFilter = ({
   list,
   setList,
   onChange,
-}:ICheckboxProps) => {
+}:CheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
 
   const handleCheck = (

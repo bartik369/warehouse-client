@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { MdOutlineErrorOutline } from "react-icons/md";
 import styles from './Textarea.module.scss'
 
-interface ITextareaProps {
+interface TextareaProps {
     value: string;
     label: string;
     errors: Record<string, string>;
@@ -11,7 +11,7 @@ interface ITextareaProps {
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const Textarea = memo(({ value, label, errors, name, onChange }:ITextareaProps) => {
+const Textarea = memo(({ value, label, errors, name, onChange }:TextareaProps) => {
     const errorMessage = errors?.[name];
     return (
         <div className={styles.wrapper}>

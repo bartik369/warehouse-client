@@ -4,12 +4,12 @@ import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
 import styles from "./DeviceForm.module.scss";
 
-interface IActionsProps {
+interface ActionsProps {
     isUpdate?: boolean;
     resetEntity: () => void;
     addEntity: () => void;
 }
-const Actions = ({ isUpdate, resetEntity, addEntity }: IActionsProps) => {
+const Actions = ({ isUpdate, resetEntity, addEntity }: ActionsProps) => {
     return (
         <div className={styles.actions}>
         <BtnAction

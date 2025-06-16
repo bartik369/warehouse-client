@@ -2,7 +2,7 @@ import {prevPage, nextPage } from '../../utils/constants/constants';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from './Pagination.module.scss';
 
-interface IPaginationProps {
+interface PaginationProps {
   page: number;
   disabled: {
     left: boolean;
@@ -20,7 +20,7 @@ const Pagination = ({
   prev,
   next,
   setPage,
-}:IPaginationProps) => {
+}:PaginationProps) => {
   const paginationNumber: number[] = [];
 
   for (let x = 1; x <= totalPages; x++) {

@@ -1,20 +1,20 @@
-import { ISubmenu } from '../../../types/navigation';
+import { Submenu } from '../../../types/navigation';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './SidebarMenu.module.scss';
 
-interface ISubMenuProps {
+interface SubMenuProps {
     item: {
-      subMenu: ISubmenu[]
+      subMenu: Submenu[]
     };
     open: boolean;
     title: string;
 }
 
-const SubMenu = ({ item, open, title }:ISubMenuProps) => {
+const SubMenu = ({ item, open, title }:SubMenuProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLink = (e: React.MouseEvent<HTMLLIElement>, item: ISubmenu) => {
+  const handleLink = (e: React.MouseEvent<HTMLLIElement>, item: Submenu) => {
     e.preventDefault()
     navigate(`/devices/locations/${item.path}`)
   }
@@ -25,7 +25,7 @@ const SubMenu = ({ item, open, title }:ISubMenuProps) => {
         {!open && title}
        </div>
        <ul className={styles.submenu}>
-         {item.subMenu.map((subItem: ISubmenu) => (
+         {item.subMenu.map((subItem: Submenu) => (
            <li key={subItem.id} className={location.pathname.includes(subItem.path)
             ? styles.active 
             : ""} 

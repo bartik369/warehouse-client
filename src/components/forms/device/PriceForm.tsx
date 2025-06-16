@@ -3,13 +3,13 @@ import CustomNumber from "../../ui/number/CustomNumber";
 import { Device } from "../../../types/devices";
 import styles from "./DeviceForm.module.scss";
 
-interface IPriceFormProps {
+interface PriceFormProps {
   device: Device;
   errors: Record<string, string>;
   handleExtNumber: (entity: number, name: string) => void;
 }
 
-const PriceForm = ({ device, errors, handleExtNumber }: IPriceFormProps) => {
+const PriceForm = ({ device, errors, handleExtNumber }: PriceFormProps) => {
   return (
     <form className={styles.form}>
       {devicePrices?.uniqueFields?.map((item) => (

@@ -1,10 +1,10 @@
 import { add, isExistingInList } from "../../../utils/constants/constants";
 import styles from "./DeviceForm.module.scss";
 
-interface IAskProps {
+interface AskProps {
   onAsk: () => void;
 }
-const Ask = ({ onAsk }: IAskProps) => {
+const Ask = ({ onAsk }: AskProps) => {
 
   return (
     <div className={styles.ask}>

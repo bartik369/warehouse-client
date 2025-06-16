@@ -4,10 +4,10 @@ import { TbLocationCheck } from "react-icons/tb";
 import { use, location } from "../../../utils/constants/constants";
 import styles from "./Device.module.scss";
 
-interface ILocationInfoProps {
+interface LocationInfoProps {
   device: AggregateDeviceInfo;
 }
-const LocationInfo = ({ device }:ILocationInfoProps) => {
+const LocationInfo = ({ device }:LocationInfoProps) => {
   return (
     <div className={styles.options}>
       <div className={styles.title}>

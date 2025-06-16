@@ -4,7 +4,6 @@ import {
   Dispatch,
   ReactNode,
 } from "react";
-// import { issueReducer, initialIssueState } from "../model/issueReducer";
 import { IssueAction, IssueState } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
 import { User } from "../../../types/user";

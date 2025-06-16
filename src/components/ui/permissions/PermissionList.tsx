@@ -3,7 +3,7 @@ import { RiDeleteBin4Line } from "react-icons/ri";
 import { AccessFormActions, UserRolesList } from "../../../types/access";
 import styles from "./PermissionList.module.scss";
 
-interface IPermissionListProps {
+interface PermissionListProps {
   role: UserRolesList;
   actions?: AccessFormActions;
   showEdit?: boolean;
@@ -15,7 +15,7 @@ const PermissionList = ({
   actions,
   showEdit,
   showDelete,
-}: IPermissionListProps) => {
+}: PermissionListProps) => {
   return (
     <div
       className={styles.item}

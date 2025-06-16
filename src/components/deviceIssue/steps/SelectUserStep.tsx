@@ -9,7 +9,7 @@ import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
 
-interface ISelectUserStepProps {
+interface SelectUserStepProps {
   isSuccess: boolean;
   isFetching: boolean;
   actions: BaseUserQuery;
@@ -20,7 +20,7 @@ const SelectUserStep = ({
   isSuccess,
   isFetching,
   actions,
-}: ISelectUserStepProps) => {
+}: SelectUserStepProps) => {
   const { state } = useIssueContext();
   console.log(state.query)
   return (

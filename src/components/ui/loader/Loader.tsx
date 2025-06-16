@@ -1,11 +1,11 @@
 import styles from './Loader.module.scss';
 
-interface ILoaderProps {
+interface LoaderProps {
     size: 'sm' | 'md' | 'lg';
     color: 'blue' | 'green' | 'grey';
 }
 
-const Loader = ({ size, color }:ILoaderProps) => {
+const Loader = ({ size, color }:LoaderProps) => {
     return (
         <div className={styles.wrapper}>
             <span className={`${styles[size]} ${styles[color]}`}></span>  

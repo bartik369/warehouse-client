@@ -3,14 +3,14 @@ import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Field, Device, ValidationErrors } from '../../../types/devices';
 import style from './Number.module.scss';
 
-interface ICustomNumberProps {
+interface CustomNumberProps {
   device: Device;
   setDevice: (entity: number, name: string) => void;
   item: Field;
   errors: ValidationErrors;
 }
 
-const CustomNumber = memo(({ device, item, errors, setDevice }:ICustomNumberProps) => {
+const CustomNumber = memo(({ device, item, errors, setDevice }:CustomNumberProps) => {
   const data = {
     min: 0,
     max: 9999999,

@@ -1,11 +1,11 @@
 import { BsQuestionSquare } from "react-icons/bs";
 import styles from './Tooltip.module.scss'
 
-interface ITooltipProps {
+interface TooltipProps {
     data: string;
 }
 
-const Tooltip = ({ data }:ITooltipProps) => {
+const Tooltip = ({ data }:TooltipProps) => {
     return (
         <div className={styles.block}>
               <button

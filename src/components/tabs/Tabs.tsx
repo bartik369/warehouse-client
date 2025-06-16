@@ -1,12 +1,12 @@
 import { Suspense, useState } from 'react';
 import Loader from '../ui/loader/Loader';
-import { ITab } from '../../types/navigation';
+import { Tab } from '../../types/navigation';
 import styles from './Tabs.module.scss';
 
-interface ITabsProps {
-  tabs: ITab[];
+interface TabsProps {
+  tabs: Tab[];
 }
-const Tabs = ({ tabs }:ITabsProps) => {
+const Tabs = ({ tabs }:TabsProps) => {
   const [activeTab, setActiveTab] = useState<number>(tabs[0].id);
   return (
     <>

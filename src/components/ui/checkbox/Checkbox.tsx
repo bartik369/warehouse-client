@@ -4,13 +4,13 @@ import {
   noOptions,
   selectPermissions,
 } from "../../../utils/constants/constants";
-import { AccessFormActions, IPermissionRole } from "../../../types/access";
+import { AccessFormActions, PermissionRole } from "../../../types/access";
 import { TbSelector } from "react-icons/tb";
 import styles from "./Checkbox.module.scss";
 
-interface ICheckboxProps {
+interface CheckboxProps {
   list: Checked;
-  entity: IPermissionRole;
+  entity: PermissionRole;
   items: CheckedPermissionOptions[];
   actions: AccessFormActions;
   label: string;
@@ -26,7 +26,7 @@ const Checkbox = ({
   label,
   name,
   errors,
-}: ICheckboxProps) => {
+}: CheckboxProps) => {
   const { isOpen, setIsOpen, modalRef } = useOutsideClick();
   const errorMessage = errors[name];
   const FIXED_PERMISSIONS = ['user.create', 'user.edit', 'device.create', 'device.edit'];

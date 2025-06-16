@@ -1,6 +1,6 @@
 import styles from "./Toggle.module.scss";
 
-interface IToggleProps {
+interface ToggleProps {
   checked: boolean;
   label: string;
   leftPosition: string;
@@ -13,7 +13,7 @@ const Toggle = ({
   rightPosition,
   label,
   setChecked,
-}: IToggleProps) => {
+}: ToggleProps) => {
   return (
     <div
       className={styles.switch}

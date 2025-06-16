@@ -1,17 +1,10 @@
 import {ChangeEvent, memo } from 'react';
 import { FilteredDevicesFromBack } from '../../../types/devices';
-import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
 import { CgUnavailable } from 'react-icons/cg';
-import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
 import styles from './Devices.module.scss';
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { GoCheckCircleFill } from "react-icons/go";
 import { PiCheckCircleFill } from "react-icons/pi";
 import { IoIosCloseCircle } from "react-icons/io";
-
-
-
-
 
 interface DeviceItemsProps {
     devices: FilteredDevicesFromBack[];

@@ -2,11 +2,11 @@ import { MdBarcodeReader } from "react-icons/md";
 import { IoBarcodeOutline } from "react-icons/io5";
 import styles from './Logo.module.scss';
 
-interface ILogoProps {
+interface LogoProps {
     open: boolean;
 }
 
-const Logo = ({ open }: ILogoProps) => {
+const Logo = ({ open }: LogoProps) => {
   const Icon = open ? IoBarcodeOutline : MdBarcodeReader;
   const style = open ? styles.icon : styles.active;
   return (

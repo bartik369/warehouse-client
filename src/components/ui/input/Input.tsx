@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { MdOutlineErrorOutline } from "react-icons/md";
 import styles from './Input.module.scss';
 
-interface IInputProps {
+interface InputProps {
     onChange:(e:React.ChangeEvent<HTMLInputElement>) => void;
     type: string;
     name: string;
@@ -22,7 +22,7 @@ const Input = memo(({
     errors,
     variant,
     icon,
-    onChange }:IInputProps) => {
+    onChange }:InputProps) => {
     const errorMessage = errors?.[name];
 
     return (

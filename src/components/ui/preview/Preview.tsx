@@ -5,13 +5,13 @@ import loadIcon from "../../../assets/elements/load.svg";
 import previewPicture from "../../../assets/elements/default.png";
 import style from "./Preview.module.scss";
 
-interface IPreviewProps {
+interface PreviewProps {
   actions: EntityFormActions;
   state: AdminEntityState;
   media: string;
   ref?: React.RefObject<HTMLInputElement>;
 }
-const Preview = forwardRef<HTMLInputElement, IPreviewProps>(
+const Preview = forwardRef<HTMLInputElement, PreviewProps>(
   ({ actions, state }, ref) => {
     return (
       <label className={style.file} htmlFor={"upload"}>

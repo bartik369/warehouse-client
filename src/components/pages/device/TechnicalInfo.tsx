@@ -19,10 +19,10 @@ import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import styles from "./Device.module.scss";
 
 
-interface ITechnicalInfoProps {
+interface TechnicalInfoProps {
   device: AggregateDeviceInfo;
 }
-const TechnicalInfo = ({ device }:ITechnicalInfoProps) => {
+const TechnicalInfo = ({ device }: TechnicalInfoProps) => {
   return (
     <div className={styles.options}>
       <div className={styles.title}>

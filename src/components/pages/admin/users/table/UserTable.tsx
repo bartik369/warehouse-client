@@ -1,9 +1,9 @@
 import { User, UserFormActions, UserLabel } from '../../../../../types/user'
 import UserTableRow from "./UserTableRow";
-import styles from './UserTable.module.scss';
 import { labelCity, labelDepartment, labelEmail, labelFirstNameEn, 
   labelFirstNameRu, labelIsActive, labelLastNameEn, labelLastNameRu, 
 labelUserId } from '../../../../../utils/constants/user';
+import styles from './UserTable.module.scss';
 
 interface UserTableProps {
     users: User[];

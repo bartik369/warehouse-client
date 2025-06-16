@@ -5,11 +5,11 @@ import { sidebarMenuData } from '../../../utils/data/menus';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import styles from './SidebarMenu.module.scss';
 
-interface ISidebarMenuProps {
+interface SidebarMenuProps {
   open: boolean;
 }
 
-const SidebarMenu = ({ open }:ISidebarMenuProps) => {
+const SidebarMenu = ({ open }: SidebarMenuProps) => {
   const [openSubmenu, setOpenSubmenu] = useState<number | null>(null);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 

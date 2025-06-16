@@ -3,7 +3,6 @@ import DeviceIssueSteps from "./DeviceIssueSteps";
 import Steps from "../ui/steps/Steps";
 import Loader from "../ui/loader/Loader";
 import { useGlobalModal } from "../../hooks/data/useGlobalModal";
-import { EquipmentProvider } from "../../shared/context/EquipmentContext";
 import { useIssueContext } from "../../features/issue/context/IssueContext";
 
 const DeviceIssueForm = ({ issueId = null }) => {

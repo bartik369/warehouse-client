@@ -13,7 +13,6 @@ import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
 import { MdFilterListOff } from "react-icons/md";
 import styles from "./Devices.module.scss";
-import { DeviceIssueActionTypes } from "../../deviceIssue/context44/deviceIssueTypes";
 
 const Devices = () => {
   const {

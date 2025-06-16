@@ -2,14 +2,13 @@ import React, { ChangeEvent, memo} from 'react';
 import { deviceWeight } from '../../../utils/constants/device';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Device } from '../../../types/devices';
-
 import style from './Number.module.scss';
 
-interface INumberProps {
+interface NumberProps {
     device: Device;
     setDevice: (entity:number) => void;
 }
-const Number = memo(({ device, setDevice }:INumberProps) => {
+const Number = memo(({ device, setDevice }:NumberProps) => {
     const data = {
         min: 0,
         max: 1000000,

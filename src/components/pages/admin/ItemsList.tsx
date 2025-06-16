@@ -5,12 +5,12 @@ import { MdOutlineEdit } from 'react-icons/md';
 import styles from './Admin.module.scss';
 import NoData from '../../nodata/NoData';
 
-interface IItemsListProps {
+interface ItemsListProps {
   actions: EntityFormActions;
   field: string;
   items: Entity[];
 }
-const ItemsList = memo(({ field, items, actions }: IItemsListProps) => {
+const ItemsList = memo(({ field, items, actions }: ItemsListProps) => {
   if (items.length === 0) return <NoData />;
   return (
     <>

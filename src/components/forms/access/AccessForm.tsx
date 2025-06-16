@@ -5,7 +5,7 @@ import Checkbox from "../../ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
-import { AccessFormActions, IPermissionRole, Role } from "../../../types/access";
+import { AccessFormActions, PermissionRole, Role } from "../../../types/access";
 import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import { useGetAssignableRolesQuery } from "../../../store/api/rolesApi";
 import {
@@ -15,15 +15,15 @@ import {
   rolesLabel,
   warehouseLabel,
 } from "../../../utils/constants/constants";
-import { IPermissionState } from "../../../reducers/permission/permissionTypes";
+import { PermissionState } from "../../../reducers/permission/permissionTypes";
 import { Entity } from "../../../types/devices";
 import { getRoleType, RoleType  } from "../../../utils/roles/roles";
 import styles from './AccessForm.module.scss';
 
 interface AccessFormProps {
   title: string;
-  state: IPermissionState;
-  entity: IPermissionRole;
+  state: PermissionState;
+  entity: PermissionRole;
   isUpdate: boolean;
   actions: AccessFormActions;
 }

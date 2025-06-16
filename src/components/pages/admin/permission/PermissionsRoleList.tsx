@@ -3,12 +3,12 @@ import PermissionList from '../../../ui/permissions/PermissionList';
 import { AccessFormActions, UserRolesList } from '../../../../types/access';
 import styles from './PermissionsRoleList.module.scss';
 
-interface IPermissionsRoleListProps {
+interface PermissionsRoleListProps {
   roles: UserRolesList[];
   actions: AccessFormActions;
 }
 const PermissionsRoleList = memo(
-  ({ roles, actions }: IPermissionsRoleListProps) => {
+  ({ roles, actions }: PermissionsRoleListProps) => {
     return (
       <div className={styles.items}>
         {roles &&

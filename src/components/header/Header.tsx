@@ -9,12 +9,12 @@ import { useStickyHeader } from '../../hooks/data/useStickyHeader';
 import style from './Header.module.scss';
 import { EquipmentProvider } from '../../shared/context/EquipmentContext';
 
-interface IHeaderProps {
+interface HeaderProps {
   isActive: boolean;
   setIsActive: (isActive:boolean) => void;
 };
 
-const Header = ({ isActive, setIsActive }:IHeaderProps) => {
+const Header = ({ isActive, setIsActive }:HeaderProps) => {
   const device = useAppSelector((state:RootState) => state.device.device);
   const status = useAppSelector((state:RootState) => state.device.status);
   const location = useLocation();

@@ -1,19 +1,19 @@
 import { FC } from "react";
 
-export interface ISubmenu {
+export interface Submenu {
     id: number;
     title: string;
     path: string;
 }
-export interface ISidebar {
+export interface Sidebar {
     [x: string]: any;
     id: number;
     title: string;
     path: string;
     icon: string;
-    subMenu?: ISubmenu[];
+    subMenu?: Submenu[];
 }
-export interface ITab {
+export interface Tab {
   id: number;
   label: string;
   component: FC;

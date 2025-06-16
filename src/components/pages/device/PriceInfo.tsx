@@ -8,10 +8,10 @@ import {
 import { TbCoins } from "react-icons/tb";
 import styles from "./Device.module.scss";
 
-interface IPriceInfoProps {
+interface PriceInfoProps {
   device: AggregateDeviceInfo;
 }
-const PriceInfo = ({ device }:IPriceInfoProps) => {
+const PriceInfo = ({ device }:PriceInfoProps) => {
   return (
     <div className={styles.price}>
       <div className={styles.title}>

@@ -4,11 +4,11 @@ import { FaFileCsv } from "react-icons/fa6";
 import styles from "./OfficeFileBtn.module.scss";
 import { download } from "../../../../utils/constants/constants";
 
-interface IOfficeFileBtnProps<T> {
+interface OfficeFileBtnProps<T> {
   stack: T[];
 }
 
-const OfficeFileBtn = <T,>({ stack }: IOfficeFileBtnProps<T>) => {
+const OfficeFileBtn = <T,>({ stack }: OfficeFileBtnProps<T>) => {
   return (
     <div className={styles.icons}>
       <div className={styles.items}>

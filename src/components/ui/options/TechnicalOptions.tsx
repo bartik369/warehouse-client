@@ -1,11 +1,11 @@
 import styles from "./TechnicalOptions.module.scss";
 
-interface ITechnicalOptionsProps {
+interface TechnicalOptionsProps {
   name: string;
   value: string | number;
 }
 
-const TechnicalOptions = ({ name, value }: ITechnicalOptionsProps) => {
+const TechnicalOptions = ({ name, value }: TechnicalOptionsProps) => {
   return (
     <div className={styles.property}>
       <div className={styles.name}>{name}</div>

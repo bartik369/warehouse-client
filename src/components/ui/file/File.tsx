@@ -3,10 +3,10 @@ import { selectPhoto } from '../../../utils/constants/constants';
 import fileIcon from '../../../assets/elements/file-icon.svg';
 import styles from './File.module.scss';
 
-interface IFileProps {
+interface FileProps {
     media: (e:ChangeEvent<HTMLInputElement>) => void;
 }
-const File = ({ media }:IFileProps) => {
+const File = ({ media }:FileProps) => {
     return (
         <div>
              <label className={styles.file} htmlFor={"upload"}>
