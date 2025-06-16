@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { IAggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "../../../types/devices";
 import {
   activeWarranty,
   contractor,
@@ -15,10 +15,10 @@ import { MdMiscellaneousServices } from "react-icons/md";
 import styles from "./Device.module.scss";
 
 
-interface IWarrantyInfoProps {
-  device: IAggregateDeviceInfo;
+interface WarrantyInfoProps {
+  device: AggregateDeviceInfo;
 }
-const WarrantyInfo: FC<IWarrantyInfoProps> = ({ device }) => {
+const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
   return (
     <div className={styles.warranty}>
         <div className={styles.options}>

@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { logOut, setCredentials } from '../slices/authSlice';
-import { ISignin, IAuthRes, IUser } from '../../types/user';
+import { Signin, AuthRes, User } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const authApi = createApi({
@@ -8,7 +8,7 @@ export const authApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes:[],
     endpoints: build =>({
-        signin:build.mutation<IAuthRes, ISignin>({
+        signin:build.mutation<AuthRes, Signin>({
             query: (credentials) => ({
                 url: `${import.meta.env.VITE_AUTH}`,
                 method: 'POST',
@@ -38,7 +38,7 @@ export const authApi = createApi({
                 method: 'POST',
             }),
         }),
-        validate: build.mutation<IUser, null>({
+        validate: build.mutation<User, null>({
             query:() => ({
                 url: import.meta.env.VITE_VALIDATE,
                 method: 'POST',

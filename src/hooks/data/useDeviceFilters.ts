@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent, useCallback } from 'react';
-import { IDeviceFilters, IFilteredDevicesFromBack } from './../../types/devices';
+import { DeviceFilters, FilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from '../../types/content';
 import { useSearchParams, useParams } from 'react-router-dom';
 import { yes, no, inStock, inUse } from '../../utils/constants/constants';
@@ -20,7 +20,7 @@ export const useDeviceFilters = () => {
   const { data: options } = useGetDeviceOptionsQuery(deviceOptionArgs);
   const { data: devices } = useGetDevicesQuery(deviceQueryArgs);
   
-  const [filters, setFilters] = useState<IDeviceFilters>({
+  const [filters, setFilters] = useState<DeviceFilters>({
     manufacturer: [],
     isFunctional: [],
     isAssigned: [],
@@ -30,7 +30,7 @@ export const useDeviceFilters = () => {
     model: [],
     warehouse: [],
   });
-  const [labels, setLabels] = useState<IDeviceFilters>({
+  const [labels, setLabels] = useState<DeviceFilters>({
     manufacturer: [],
     isFunctional: [],
     isAssigned: [],
@@ -76,9 +76,9 @@ export const useDeviceFilters = () => {
       //Filtering options that cant be selected  based on the selected files
       disabledOptions[key] = optionList.filter((option) => {
         // Creating temporary filters with the addition current option
-        const tempFilters = { ...filters, [key]: [...filters[key as keyof IDeviceFilters], option] }; 
+        const tempFilters = { ...filters, [key]: [...filters[key as keyof DeviceFilters], option] }; 
         // Checking some device which matches all current filters
-        const isOptionAvailable = devices && (devices.devices as IFilteredDevicesFromBack[]).some((device: IFilteredDevicesFromBack) => {
+        const isOptionAvailable = devices && (devices.devices as FilteredDevicesFromBack[]).some((device: FilteredDevicesFromBack) => {
           const matchesFilters = Object.entries(tempFilters).every(([key, values]) => {
             if (values.length === 0) return true;
              //Get the value of device for filter 
@@ -92,7 +92,7 @@ export const useDeviceFilters = () => {
               key === 'isFunctional' ? String(device.isFunctional) :
               key === 'isAssigned' ? String(device.isAssigned) :
               undefined;
-            return values.includes(deviceValue as keyof IDeviceFilters);
+            return values.includes(deviceValue as keyof DeviceFilters);
           });
           return matchesFilters;
         });
@@ -107,8 +107,8 @@ export const useDeviceFilters = () => {
   useEffect(() => {
     const params: Record<string, string> = {};
     Object.keys(filters).forEach((key: string) => {
-      if (filters[key as keyof IDeviceFilters].length) {
-        params[key] = filters[key as keyof IDeviceFilters].join(',');
+      if (filters[key as keyof DeviceFilters].length) {
+        params[key] = filters[key as keyof DeviceFilters].join(',');
       }
     });
 
@@ -123,8 +123,8 @@ export const useDeviceFilters = () => {
 
     if (!(name in filters)) return;
 
-    if (Array.isArray(filters[name as keyof IDeviceFilters])) {
-      const key = name as keyof IDeviceFilters;
+    if (Array.isArray(filters[name as keyof DeviceFilters])) {
+      const key = name as keyof DeviceFilters;
       const updatedValues = filters[key].includes(String(item.value))
         ? filters[key].filter((value) => value !== String(item.value))
         : [...filters[key], String(item.value)];
@@ -133,8 +133,8 @@ export const useDeviceFilters = () => {
         [key]: updatedValues,
       }));
     }
-    if (Array.isArray(labels[name as keyof IDeviceFilters])) {
-      const key = name as keyof IDeviceFilters;
+    if (Array.isArray(labels[name as keyof DeviceFilters])) {
+      const key = name as keyof DeviceFilters;
       const updatedLabels = labels[key].includes(String(item.name))
         ? labels[key].filter((value) => value !== String(item.name))
         : [...labels[key], String(item.name)];
@@ -174,10 +174,10 @@ export const useDeviceFilters = () => {
   }, [filters, labels]);
   
   // Disabled options of the checkboxes
-  const getUniqueOptions = (key: keyof IDeviceFilters): CheckedDeviceOptions[] => {
+  const getUniqueOptions = (key: keyof DeviceFilters): CheckedDeviceOptions[] => {
     if (!options) return [];
 
-    const idOptionsOffsets: Record<keyof IDeviceFilters, number> = {
+    const idOptionsOffsets: Record<keyof DeviceFilters, number> = {
       manufacturer: 1,
       isFunctional: 1000,
       type: 2000,

@@ -1,10 +1,10 @@
 import {
-  IUserRoleState,
+  UserRoleState,
   UserRoleAction,
   UserRoleActionsTypes,
 } from "./userRoleTypes";
 
-export const userRoleInitialState: IUserRoleState = {
+export const userRoleInitialState: UserRoleState = {
   role: {
     id: "",
     email: "",
@@ -40,9 +40,9 @@ export const userRoleInitialState: IUserRoleState = {
 };
 
 export function userRoleReducer(
-  state: IUserRoleState,
+  state: UserRoleState,
   action: UserRoleAction
-): IUserRoleState {
+): UserRoleState {
   switch (action.type) {
     case UserRoleActionsTypes.SET_ROLE:
       return {

@@ -7,8 +7,8 @@ import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
   contractor } from "../../../utils/constants/device";
   import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { addNewContractor } from "../../../utils/constants/constants";
-import { IDeviceFormActions, IDeviceFormState } from "../../../types/devices";
-import { IContractor } from "../../../types/content";
+import { DeviceFormActions, DeviceFormState } from "../../../types/devices";
+import { Contractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
@@ -17,15 +17,15 @@ import styles from "./DeviceForm.module.scss";
 
 registerLocale("ru", ru);
 
-interface IWarrantyFormProps<T> {
-  state: IDeviceFormState;
-  actions: IDeviceFormActions;
+interface WarrantyFormProps<T> {
+  state: DeviceFormState;
+  actions: DeviceFormActions;
   getId: (item: T) => void;
 }
 const WarrantyForm = <T,>({
   state,
   actions,
-}: IWarrantyFormProps<T>) => {
+}: WarrantyFormProps<T>) => {
   const { openModal } = useGlobalModal();
   const { data: contractors } = useGetContractorsQuery();
 
@@ -81,9 +81,9 @@ const WarrantyForm = <T,>({
         {!state.isUpdate &&
           <Ask onAsk={() => openEntityModal('contractor', addNewContractor)} />
         }
-        <Select<IContractor>
+        <Select<Contractor>
           setValue={actions.handleContractorChange}
-          items={(contractors || []) as IContractor[]}
+          items={(contractors || []) as Contractor[]}
           label={contractor}
           value={state.device.providerName}
           errors={state.errors}

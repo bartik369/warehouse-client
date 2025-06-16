@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { IContractor } from '../../types/content';
+import { Contractor } from '../../types/content';
 import { useCreateContractorMutation } from '../../store/api/contractorApi';
 import {
   ContractorValidation,
@@ -20,7 +20,7 @@ export const useContactor = () => {
   const [createContractor] = useCreateContractorMutation();
 
   const handleInputChange = useCallback(
-    <T extends IContractor | string>(field: keyof IContractor, value: T) => {
+    <T extends Contractor | string>(field: keyof Contractor, value: T) => {
       const validationErrors = ValidateField(field, value);
       setErrors((prev) => ({
         ...prev,

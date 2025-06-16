@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IEntity } from "../../types/devices";
+import { Entity } from "../../types/devices";
 
 export const manufacturersApi = createApi({
   reducerPath: "manufacturersApi",
@@ -12,7 +12,7 @@ export const manufacturersApi = createApi({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
       }),
     }),
-    getManufacturers: build.query<IEntity[], void>({
+    getManufacturers: build.query<Entity[], void>({
       query() {
         return {
           url: `${import.meta.env.VITE_MANUFACTURERS}`,
@@ -31,8 +31,8 @@ export const manufacturersApi = createApi({
           : [{ type: "Manufacturer", id: "LIST" }],
     }),
     createManufacturer: build.mutation<
-      { message: string; manufacturer: IEntity },
-      IEntity
+      { message: string; manufacturer: Entity },
+      Entity
     >({
       query(body) {
         return {
@@ -44,8 +44,8 @@ export const manufacturersApi = createApi({
       invalidatesTags: ["Manufacturer"],
     }),
     updateManufacturer: build.mutation<
-      { message: string; manufacturer: IEntity },
-      { id: string } & Partial<IEntity>
+      { message: string; manufacturer: Entity },
+      { id: string } & Partial<Entity>
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,

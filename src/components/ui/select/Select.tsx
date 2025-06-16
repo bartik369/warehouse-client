@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { IValidationErrors } from '../../../types/devices';
+import { ValidationErrors } from '../../../types/devices';
 import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import { TbSelector } from "react-icons/tb";
 import { MdOutlineErrorOutline } from "react-icons/md";
@@ -11,7 +11,7 @@ interface ISelectProps<T> {
   label: string;
   name?: string;
   value: string;
-  errors: IValidationErrors;
+  errors: ValidationErrors;
   setValue: (value: T) => void;
   getId: (item: T) => void;
   getLabel: (item: T) => string;
@@ -32,7 +32,7 @@ const Select = <T,>({
   getComment
 }: ISelectProps<T>) => {
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
-    const errorMessage = errors[name as keyof IValidationErrors];
+    const errorMessage = errors[name as keyof ValidationErrors];
     
     const handleSelect = (option: T) => {
       setIsOpen(false);

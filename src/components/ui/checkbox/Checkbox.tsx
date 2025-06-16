@@ -4,7 +4,7 @@ import {
   noOptions,
   selectPermissions,
 } from "../../../utils/constants/constants";
-import { IAccessFormActions, IPermissionRole } from "../../../types/access";
+import { AccessFormActions, IPermissionRole } from "../../../types/access";
 import { TbSelector } from "react-icons/tb";
 import styles from "./Checkbox.module.scss";
 
@@ -12,7 +12,7 @@ interface ICheckboxProps {
   list: Checked;
   entity: IPermissionRole;
   items: CheckedPermissionOptions[];
-  actions: IAccessFormActions;
+  actions: AccessFormActions;
   label: string;
   name: string;
   errors: Record<string, string>;

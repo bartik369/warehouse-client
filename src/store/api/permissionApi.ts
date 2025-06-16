@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IPermission, IPermissionRole, IUserRolesList } from "../../types/access";
-import { IEntity } from "../../types/devices";
+import { IPermission, IPermissionRole, UserRolesList } from "../../types/access";
+import { Entity } from "../../types/devices";
 import { CheckedPermissionOptions } from '../../types/content';
 
 export const permissionApi = createApi({
@@ -27,7 +27,7 @@ export const permissionApi = createApi({
       }),
     }),
 
-    createPermission: build.mutation<CheckedPermissionOptions, IEntity>({
+    createPermission: build.mutation<CheckedPermissionOptions, Entity>({
       query: (body) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}`,
         method: "POST",
@@ -35,7 +35,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ["Permission"],
     }),
-    updatePermission: build.mutation<IPermission, IEntity>({
+    updatePermission: build.mutation<IPermission, Entity>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_PERMISSIONS}${id}`,
         method: "PUT",
@@ -50,7 +50,7 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ["Permission"],
     }),
-    getPermissionsRoles: build.query<IUserRolesList[], void>({
+    getPermissionsRoles: build.query<UserRolesList[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
       }),

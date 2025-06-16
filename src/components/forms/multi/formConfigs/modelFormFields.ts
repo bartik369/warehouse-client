@@ -1,4 +1,4 @@
-import { IFieldMultiformConfig } from '../../../../types/content';
+import { FieldMultiformConfig } from '../../../../types/content';
 import {
   addressLabel,
   description,
@@ -13,7 +13,7 @@ import {
   phoneNumberLabel,
 } from '../../../../utils/constants/device';
 
-export const modelFormFields: IFieldMultiformConfig[] = [
+export const modelFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -32,12 +32,12 @@ export const modelFormFields: IFieldMultiformConfig[] = [
   },
 ];
 
-export const typeFormFields: IFieldMultiformConfig[] = [
+export const typeFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
 ];
 
-export const manufacturerFormFields: IFieldMultiformConfig[] = [
+export const manufacturerFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -47,7 +47,7 @@ export const manufacturerFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const locationFormFields: IFieldMultiformConfig[] = [
+export const locationFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -57,7 +57,7 @@ export const locationFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const departmentFormFields: IFieldMultiformConfig[] = [
+export const departmentFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -67,7 +67,7 @@ export const departmentFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const warehouseFormFields: IFieldMultiformConfig[] = [
+export const warehouseFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -84,7 +84,7 @@ export const warehouseFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const contractorFormFields: IFieldMultiformConfig[] = [
+export const contractorFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   { type: 'input', name: 'slug', label: slug, placeholder: '' },
   {
@@ -100,7 +100,7 @@ export const contractorFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const roleFormFields: IFieldMultiformConfig[] = [
+export const roleFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   {
     type: 'textarea',
@@ -110,7 +110,7 @@ export const roleFormFields: IFieldMultiformConfig[] = [
   },
 ];
 
-export const permissionFormFields: IFieldMultiformConfig[] = [
+export const permissionFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   {
     type: 'textarea',
@@ -119,7 +119,7 @@ export const permissionFormFields: IFieldMultiformConfig[] = [
     placeholder: '',
   },
 ];
-export const provideRolesFormFields: IFieldMultiformConfig[] = [
+export const provideRolesFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: name, placeholder: '' },
   {
     type: 'select',

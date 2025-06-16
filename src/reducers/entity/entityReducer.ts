@@ -1,6 +1,6 @@
-import { EntityAction, EntityActionTypes, IEntityState } from "./entityTypes";
+import { EntityAction, EntityActionTypes, EntityState } from "./entityTypes";
 
-export const initialState: IEntityState = {
+export const initialState: EntityState = {
   entity: {
     id: "",
     name: "",
@@ -17,9 +17,9 @@ export const initialState: IEntityState = {
 };
 
 export function entityReducer(
-  state: IEntityState,
+  state: EntityState,
   action: EntityAction
-): IEntityState {
+): EntityState {
   switch (action.type) {
     case EntityActionTypes.SET_ENTITY:
       return {

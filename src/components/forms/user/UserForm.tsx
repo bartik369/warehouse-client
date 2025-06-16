@@ -2,7 +2,7 @@ import { memo } from "react";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import Toggle from "../../ui/checkbox/Toggle";
-import { IEntity } from "../../../types/devices";
+import { Entity } from "../../../types/devices";
 import Actions from "../device/Actions";
 import {
   no,
@@ -10,17 +10,17 @@ import {
   yes,
   addUserTitle,
 } from "../../../utils/constants/constants";
-import { IFieldUserFormConfig } from "../../../types/content";
-import { IUser, IUserFormActions } from "../../../types/user";
-import { IUserState } from "../../../reducers/user/userTypes";
+import { FieldUserFormConfig } from "../../../types/content";
+import { User, UserFormActions } from "../../../types/user";
+import { UserState } from "../../../reducers/user/userTypes";
 import styles from "./UserForm.module.scss";
 
-interface IUserFormProps {
-  state: IUserState;
-  actions: IUserFormActions;
-  departments: IEntity[];
-  locations: IEntity[];
-  fields: IFieldUserFormConfig[];
+interface UserFormProps {
+  state: UserState;
+  actions: UserFormActions;
+  departments: Entity[];
+  locations: Entity[];
+  fields: FieldUserFormConfig[];
 }
 
 const UserForm = memo(({
@@ -29,7 +29,7 @@ const UserForm = memo(({
   fields,
   actions,
   state,
-}: IUserFormProps) => {
+}: UserFormProps) => {
   const dataSources = { locations, departments };
   return (
     <div className={styles.container}>
@@ -43,7 +43,7 @@ const UserForm = memo(({
                 label={field.label}
                 type="text"
                 name={field.name}
-                value={state.user[field.name] as keyof IUser}
+                value={state.user[field.name] as keyof User}
                 placeholder={field.placeholder}
                 errors={state.errors}
                 onChange={(e) =>
@@ -55,7 +55,7 @@ const UserForm = memo(({
           if (field.type === "select") {
             const items = dataSources[field.itemsKey!];
             return (
-              <Select<IEntity>
+              <Select<Entity>
                 key={field.name}
                 setValue={(val) => {
                   actions.handleInputChange?.(field.name, val.name);
@@ -69,9 +69,9 @@ const UserForm = memo(({
                 items={items || []}
                 label={field.label || ""}
                 name={field.name}
-                value={state.user[field.name] as keyof IUser}
+                value={state.user[field.name] as keyof User}
                 errors={state.errors}
-                getId={(item: IEntity) => item.id}
+                getId={(item: Entity) => item.id}
                 getLabel={(item) => item.name}
               />
             );

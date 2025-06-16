@@ -1,6 +1,6 @@
-import { IUser } from "../../types/user";
+import { User } from "../../types/user";
 import { requiredFieldText } from "../constants/constants";
-import { IValidateUserErrors } from "../../types/user";
+import { ValidateUserErrors } from "../../types/user";
 
 const requiredUserFields = [
   "userName",
@@ -13,12 +13,12 @@ const requiredUserFields = [
   "department",
   "location",
 ];
-type ValidationFields = keyof IUser;
+type ValidationFields = keyof User;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const validateRequiredFields = (
-  formData: IUser,
-  fields: (keyof IUser)[],
+  formData: User,
+  fields: (keyof User)[],
   errors: Record<string, string>
 ): void => {
   fields.forEach((field) => {
@@ -33,7 +33,7 @@ const validateRequiredFields = (
   });
 };
 
-export const FormValidation = (formData: IUser): IValidateUserErrors => {
+export const FormValidation = (formData: User): ValidateUserErrors => {
   const errors: Record<string, string> = {};
   const requiredFields: ValidationFields[] = [
     "userName",

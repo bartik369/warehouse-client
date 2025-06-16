@@ -1,5 +1,5 @@
 import { useRef, useCallback, useReducer } from 'react';
-import { IEntity} from './../../types/devices';
+import { Entity} from './../../types/devices';
 import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { useCreateTypeMutation } from '../../store/api/typesApi';
 import { useCreateModelMutation } from '../../store/api/modelsApi';
@@ -57,7 +57,7 @@ export const useEntity = () => {
 
         if (Object.keys(validationErrors).length === 0) {
           const formData = new FormData();
-          (Object.keys(state.entity) as (keyof IEntity)[]).forEach((key) => {
+          (Object.keys(state.entity) as (keyof Entity)[]).forEach((key) => {
             const value = state.entity[key];
             if (value !== undefined && value !== null)
               formData.append(key, value);
@@ -84,7 +84,7 @@ export const useEntity = () => {
   }, []);
 
   const handleInputChange = useCallback(
-    <T extends IEntity | string>(field: keyof IEntity, value: T) => {
+    <T extends Entity | string>(field: keyof Entity, value: T) => {
       const validationErrors = ValidateField(field, value);
       dispatch({ 
         type: EntityActionTypes.SET_ERROR, 

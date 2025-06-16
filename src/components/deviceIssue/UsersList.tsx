@@ -1,12 +1,12 @@
 import { memo } from "react";
-import { IDeviceIssueState } from "./context/deviceIssueTypes";
-import { IBaseUserQuery } from "../../types/user";
+import { DeviceIssueState } from "./context44/deviceIssueTypes";
+import { BaseUserQuery } from "../../types/user";
 import { statusLoading, statusNoData } from "../../utils/constants/constants";
 import styles from "./UsersList.module.scss";
 
-interface IUsersListProps {
-  state: IDeviceIssueState;
-  actions: IBaseUserQuery;
+interface UsersListProps {
+  state: DeviceIssueState;
+  actions: BaseUserQuery;
   isSuccess: boolean;
   isFetching: boolean;
 }
@@ -16,7 +16,7 @@ const UsersList = memo(({
   actions,
   isSuccess,
   isFetching
-}: IUsersListProps) => {
+}: UsersListProps) => {
   let content: React.ReactNode = null;
   if (isFetching) {
     content = <div className={styles.info}>{statusLoading}</div>;

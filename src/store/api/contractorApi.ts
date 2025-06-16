@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IEntity } from '../../types/devices';
+import { Entity } from '../../types/devices';
 
 export const contractorApi = createApi({
     reducerPath: 'contractorApi',
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Contractor'],
     endpoints:(build) => ({
-        getContractors: build.query<IEntity[], void>({
+        getContractors: build.query<Entity[], void>({
             query: () => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}`,
             }),
@@ -19,12 +19,12 @@ export const contractorApi = createApi({
                     ]
                   : [{ type: 'Contractor', id: 'LIST' }],
         }),
-        getContractor: build.query<IEntity, string>({
+        getContractor: build.query<Entity, string>({
             query:(id:string) => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
             })
         }),
-        createContractor: build.mutation<{message:string, contractor:IEntity}, Partial<IEntity>>({
+        createContractor: build.mutation<{message:string, contractor:Entity}, Partial<Entity>>({
             query(body) {
                 return {
                     url: `${import.meta.env.VITE_CONTRACTORS}`,
@@ -34,7 +34,7 @@ export const contractorApi = createApi({
             },
             invalidatesTags: ['Contractor'],
         }),
-        updateContractor: build.mutation<{ message:string, contractor: IEntity}, { id: string } & Partial<IEntity>>({
+        updateContractor: build.mutation<{ message:string, contractor: Entity}, { id: string } & Partial<Entity>>({
             query:({ id, ...body }) => ({
                 url: `${import.meta.env.VITE_CONTRACTORS}${id}`,
                 method: 'PUT',

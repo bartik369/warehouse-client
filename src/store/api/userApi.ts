@@ -1,18 +1,18 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IUser } from '../../types/user';
+import { User } from '../../types/user';
 
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: baseQueryWithReauth,
     tagTypes:[],
     endpoints: build => ({
-        getUsers: build.query<IUser[], void>({
+        getUsers: build.query<User[], void>({
             query: () => ({
                 url: `${import.meta.env.VITE_USERS}`, 
             })
         }),
-        getUser: build.query<IUser, string>({
+        getUser: build.query<User, string>({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_USERS}${id}`, 
             }),
@@ -22,7 +22,7 @@ export const userApi = createApi({
                 url: `${import.meta.env.VITE_USER_PROFILE}/${id}`,
             })
         }),
-        createUser: build.mutation<{user: IUser, message: string}, IUser>({
+        createUser: build.mutation<{user: User, message: string}, User>({
             query:(body) => ({
                 url: `${import.meta.env.VITE_USERS}`,
                 method: 'POST',

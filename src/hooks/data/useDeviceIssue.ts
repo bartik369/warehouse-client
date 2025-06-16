@@ -4,10 +4,10 @@ import { handleApiError } from "../../utils/errors/handleApiError";
 import {
   deviceIssueReducer,
   initialState,
-} from "../../components/deviceIssue/context/deviceIssueReducer";
-import { DeviceIssueActionTypes } from "../../components/deviceIssue/context/deviceIssueTypes";
+} from "../../components/deviceIssue/context44/deviceIssueReducer";
+import { DeviceIssueActionTypes } from "../../components/deviceIssue/context44/deviceIssueTypes";
 import { ValidateField } from "../../utils/validation/UserValidation";
-import { IUser } from "../../types/user";
+import { User } from "../../types/user";
 import { useDebounce } from "./useDebounce.ts";
 import { useLazyGetUserQuery } from "../../store/api/userApi";
 import { useLazyGetFilteredUsersQuery } from "../../store/api/userApi";
@@ -37,7 +37,7 @@ export const useDeviceIssue = () => {
     }
   };
 
-  const handleInputChange = useCallback((field: keyof IUser, value: string) => {
+  const handleInputChange = useCallback((field: keyof User, value: string) => {
     dispatch({
       type: DeviceIssueActionTypes.SET_QUERY,
       payload: value,

@@ -1,8 +1,8 @@
-import { IFieldUserFormConfig } from "../../../../types/content";
+import { FieldUserFormConfig } from "../../../../types/content";
 import { labelFirstNameEn, labelFirstNameRu, labelLastNameEn, labelLastNameRu,
     labelUserLogin, labelEmail, labelUserId, labelDepartment, labelCity } from '../../../../utils/constants/user';
 
-export const createFormFields: IFieldUserFormConfig[] = [
+export const createFormFields: FieldUserFormConfig[] = [
   { type: 'input', name: 'firstNameRu', label: labelFirstNameRu },
   { type: 'input', name: 'lastNameRu', label: labelLastNameRu },
   { type: 'input', name: 'firstNameEn',  label: labelFirstNameEn },

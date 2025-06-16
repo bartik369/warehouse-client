@@ -5,7 +5,7 @@ import { handleApiError } from '../../utils/errors/handleApiError';
 import { toast } from 'react-toastify';
 import { userReducer, userInitialState } from '../../reducers/user/userReducer';
 import { userRoleReducer, userRoleInitialState } from '../../reducers/roles/userRoleReducer';
-import { IUserRole } from '../../types/access';
+import { UserRole } from '../../types/access';
 import { UserRoleActionsTypes } from '../../reducers/roles/userRoleTypes';
 import { useLazyGetFilteredUsersQuery } from '../../store/api/userApi';
 import { useLazyGetUserRolesQuery } from '../../store/api/rolesApi';
@@ -13,7 +13,7 @@ import { FormValidation, ValidateField } from '../../utils/validation/UserRoleVa
 import { useDebounce } from './useDebounce.ts';
 import { UserActionTypes } from '../../reducers/user/userTypes';
 import { useGrantRoleMutation } from '../../store/api/rolesApi';
-import { IUser } from '../../types/user';
+import { User } from '../../types/user';
 
 export const useUserRoles = () => {
   const  [userState, dispatchUser]  = useReducer(userReducer, userInitialState);
@@ -62,7 +62,7 @@ export const useUserRoles = () => {
 
 
   const handleInputChange = useCallback(
-    <T extends string | IUserRole>(field: keyof IUserRole, value: T) => {
+    <T extends string | UserRole>(field: keyof UserRole, value: T) => {
       if (field === 'email') {
         dispatchUserRole({
           type: UserRoleActionsTypes.SET_USERS_LIST_VISIBLE,
@@ -108,7 +108,7 @@ export const useUserRoles = () => {
       }
     },[role]);
 
-    const handleUserInfo = async (item: IUser) => {
+    const handleUserInfo = async (item: User) => {
      try {
       if (!item) return;
       dispatchUserRole({

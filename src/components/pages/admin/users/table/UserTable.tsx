@@ -1,16 +1,16 @@
-import { IUser, IUserFormActions, UserLabel } from '../../../../../types/user'
+import { User, UserFormActions, UserLabel } from '../../../../../types/user'
 import UserTableRow from "./UserTableRow";
 import styles from './UserTable.module.scss';
 import { labelCity, labelDepartment, labelEmail, labelFirstNameEn, 
   labelFirstNameRu, labelIsActive, labelLastNameEn, labelLastNameRu, 
 labelUserId } from '../../../../../utils/constants/user';
 
-interface IUserTableProps {
-    users: IUser[];
-    actions: IUserFormActions;
+interface UserTableProps {
+    users: User[];
+    actions: UserFormActions;
 }
 
-const UserTable = ({ users, actions }: IUserTableProps) => {
+const UserTable = ({ users, actions }: UserTableProps) => {
   const isAdmin = true;
 
   const baseUserLabelsConfig: UserLabel[] = [

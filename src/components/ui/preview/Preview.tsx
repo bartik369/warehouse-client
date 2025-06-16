@@ -1,13 +1,13 @@
 import React, { forwardRef } from "react";
-import { IEntityFormActions } from "../../../types/entity";
-import { IAdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
+import { EntityFormActions } from "../../../types/entity";
+import { AdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
 import loadIcon from "../../../assets/elements/load.svg";
 import previewPicture from "../../../assets/elements/default.png";
 import style from "./Preview.module.scss";
 
 interface IPreviewProps {
-  actions: IEntityFormActions;
-  state: IAdminEntityState;
+  actions: EntityFormActions;
+  state: AdminEntityState;
   media: string;
   ref?: React.RefObject<HTMLInputElement>;
 }

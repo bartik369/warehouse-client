@@ -1,12 +1,12 @@
-import { IDeviceInfo, IDeviceMedia } from './../../types/devices';
+import { DeviceInfo, DeviceMedia } from './../../types/devices';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type IDeviceAction =  {
-    device: IDeviceInfo | null;
-    media: IDeviceMedia;
+type DeviceAction =  {
+    device: DeviceInfo | null;
+    media: DeviceMedia;
     status?: boolean;
 }
-const initialState:IDeviceAction = {
+const initialState:DeviceAction = {
     device: {
         id: '',
         isAssigned: false,
@@ -28,7 +28,7 @@ const deviceSlice = createSlice({
   reducers: {
     setDeviceInfo: (
       state,
-      action: PayloadAction<{ device: IDeviceInfo; status?: boolean }>
+      action: PayloadAction<{ device: DeviceInfo; status?: boolean }>
     ) => {
       state.device = action.payload.device;
       state.status = action.payload.status;

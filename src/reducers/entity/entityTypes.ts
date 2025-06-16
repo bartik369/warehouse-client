@@ -1,6 +1,6 @@
-import { IEntity } from './../../types/devices';
-export interface IEntityState {
-    entity: IEntity;
+import { Entity } from './../../types/devices';
+export interface EntityState {
+    entity: Entity;
     media: {
         file: File | null;
         prevImg: string | null;
@@ -20,7 +20,7 @@ export enum EntityActionTypes {
 }
 
 export type EntityAction = 
-| { type:EntityActionTypes.SET_ENTITY, payload: Partial<IEntity> }
+| { type:EntityActionTypes.SET_ENTITY, payload: Partial<Entity> }
 | { type:EntityActionTypes.RESET_ENTITY }
 | { type:EntityActionTypes.SET_ERROR, payload: Record<string, string> }
 | { type:EntityActionTypes.RESET_ERROR }

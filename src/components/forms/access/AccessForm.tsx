@@ -5,7 +5,7 @@ import Checkbox from "../../ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
-import { IAccessFormActions, IPermissionRole, IRole } from "../../../types/access";
+import { AccessFormActions, IPermissionRole, Role } from "../../../types/access";
 import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import { useGetAssignableRolesQuery } from "../../../store/api/rolesApi";
 import {
@@ -16,18 +16,18 @@ import {
   warehouseLabel,
 } from "../../../utils/constants/constants";
 import { IPermissionState } from "../../../reducers/permission/permissionTypes";
-import { IEntity } from "../../../types/devices";
+import { Entity } from "../../../types/devices";
 import { getRoleType, RoleType  } from "../../../utils/roles/roles";
 import styles from './AccessForm.module.scss';
 
-interface IAccessFormProps {
+interface AccessFormProps {
   title: string;
   state: IPermissionState;
   entity: IPermissionRole;
   isUpdate: boolean;
-  actions: IAccessFormActions;
+  actions: AccessFormActions;
 }
-const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormProps) => {
+const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProps) => {
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
   const [ getWarehouses, { data: warehouses } ] = useLazyGetAssignableWarehousesQuery();
@@ -45,14 +45,14 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
   return (
     <form>
       <div className={styles.title}>{title}</div>
-      <Select<IRole>
+      <Select<Role>
         name="roleName"
-        items={(assignableRoles || []) as IRole[] }
+        items={(assignableRoles || []) as Role[] }
         label={rolesLabel}
         value={state.entity.roleName || ""}
         errors={state.errors}
         setValue={actions.handleRoleChange}
-        getId={(item: IRole) => item.id}
+        getId={(item: Role) => item.id}
         getLabel={(item) => item.name}
       />
       {!isManager && (
@@ -66,25 +66,25 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: IAccessFormPro
           errors={state.errors}
         />
       )}
-      <Select<IEntity>
+      <Select<Entity>
         setValue={(val) => actions.handleLocationChange?.(val)}
         items={locations || []}
         label={locationLabel}
         value={state.entity.locationName || ""}
         errors={state.errors}
         name="locationName"
-        getId={(item: IEntity) => item.id}
+        getId={(item: Entity) => item.id}
         getLabel={(item) => item.name}
       />
       {!isManager && entity.locationName && (
-        <Select<IEntity>
+        <Select<Entity>
           setValue={(val) => actions.handleWarehouseChange?.(val)}
           items={warehouses || []}
           label={warehouseLabel}
           value={state.entity.warehouseName || ""}
           errors={state.errors}
           name="warehouseName"
-          getId={(item: IEntity) => item.id}
+          getId={(item: Entity) => item.id}
           getLabel={(item) => item.name}
         />
       )}

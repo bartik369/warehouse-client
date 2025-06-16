@@ -10,8 +10,8 @@ import {
 import Input from "../../ui/input/Input";
 import Ask from "./Ask";
 import Select from "../../ui/select/Select";
-import { IEntity, IDeviceFormActions } from "../../../types/devices";
-import { IDeviceState } from "../../../reducers/device/deviceTypes";
+import { Entity, DeviceFormActions } from "../../../types/devices";
+import { DeviceState } from "../../../reducers/device/deviceTypes";
 import {
   deviceName,
   deviceTypeLabel,
@@ -30,13 +30,13 @@ import styles from "./DeviceForm.module.scss";
 import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { ModalType } from "../../../reducers/modal/modalTypes";
 
-interface IDeviceTechnicalSectionProps {
-  state: IDeviceState;
-  actions: IDeviceFormActions;
-  manufacturers: IEntity[];
-  warehouses: IEntity[];
-  types: IEntity[];
-  models: IEntity[];
+interface DeviceTechnicalSectionProps {
+  state: DeviceState;
+  actions: DeviceFormActions;
+  manufacturers: Entity[];
+  warehouses: Entity[];
+  types: Entity[];
+  models: Entity[];
 }
 
 const DeviceTechnicalSection = ({
@@ -46,7 +46,7 @@ const DeviceTechnicalSection = ({
   warehouses,
   types,
   models,
-}: IDeviceTechnicalSectionProps) => {
+}: DeviceTechnicalSectionProps) => {
   const { openModal } = useGlobalModal();
 
   const openEntityModal = (type: ModalType, title: string) => {
@@ -73,14 +73,14 @@ const DeviceTechnicalSection = ({
           <Ask
             onAsk={() => openEntityModal('type', addNewType)}
           />
-          <Select<IEntity>
+          <Select<Entity>
             setValue={actions.handleTypeChange}
             items={types || []}
             label={deviceTypeLabel}
             value={state.device.typeName || ""}
             errors={state.errors}
             name="typeName"
-            getId={(item: IEntity) => item.id}
+            getId={(item: Entity) => item.id}
             getLabel={(item) => item.name}
           />
         </div>
@@ -88,14 +88,14 @@ const DeviceTechnicalSection = ({
           <Ask
            onAsk={() => openEntityModal('manufacturer', addNewManufacturer)}
           />
-          <Select<IEntity>
+          <Select<Entity>
             setValue={actions.handleManufacturerChange}
             items={manufacturers || []}
             label={manufacturersLabel}
             value={state.device.manufacturerName || ""}
             errors={state.errors}
             name="manufacturerName"
-            getId={(item: IEntity) => item.id}
+            getId={(item: Entity) => item.id}
             getLabel={(item) => item.name}
           />
         </div>
@@ -104,14 +104,14 @@ const DeviceTechnicalSection = ({
             <Ask
               onAsk={() => openEntityModal('model', addNewModel)}
             />
-            <Select<IEntity>
+            <Select<Entity>
               setValue={actions.handleModelChange}
               items={models || []}
               label={modelLabel}
               value={state.device.modelName || ""}
               errors={state.errors}
               name="modelName"
-              getId={(item: IEntity) => item.id}
+              getId={(item: Entity) => item.id}
               getLabel={(item) => item.name}
             />
           </div>
@@ -146,14 +146,14 @@ const DeviceTechnicalSection = ({
           errors={state.errors}
           name="modelCode"
         />
-        <Select<IEntity>
+        <Select<Entity>
           setValue={actions.handleWarehouseChange}
           items={warehouses || []}
           label={location}
           value={state.device.warehouseName || ""}
           errors={state.errors}
           name="warehouseId"
-          getId={(item: IEntity) => item.id}
+          getId={(item: Entity) => item.id}
           getLabel={(item) => item.name}
         />
         <Number device={state.device} setDevice={actions.handleNumber} />

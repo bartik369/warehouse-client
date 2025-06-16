@@ -1,7 +1,7 @@
-import { IEntity } from "../../types/devices";
+import { Entity } from "../../types/devices";
 
-export interface IAdminEntityState {
-    entity: IEntity;
+export interface AdminEntityState {
+    entity: Entity;
     media: {
         file: File | null;
         prevImg: string | null;
@@ -23,7 +23,7 @@ export enum AdminEntityActionTypes {
 }
 
 export type AdminEntityAction = 
-| { type: AdminEntityActionTypes.SET_ENTITY, payload: Partial<IEntity> }
+| { type: AdminEntityActionTypes.SET_ENTITY, payload: Partial<Entity> }
 | { type: AdminEntityActionTypes.SET_ERROR, payload: { [key: string]: string }}
 | { type: AdminEntityActionTypes.RESET_ERROR }
 | { type: AdminEntityActionTypes.RESET_ENTITY }

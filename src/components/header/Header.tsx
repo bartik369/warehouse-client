@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { useStickyHeader } from '../../hooks/data/useStickyHeader';
 import style from './Header.module.scss';
+import { EquipmentProvider } from '../../shared/context/EquipmentContext';
 
 interface IHeaderProps {
   isActive: boolean;
@@ -26,7 +27,11 @@ const Header = ({ isActive, setIsActive }:IHeaderProps) => {
         : style.relative}`} >
           <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)}/>
           <Search />
-        {device && (status || isDevicePage) && <HeaderMenu device={device} />}
+        {device && (status || isDevicePage) && 
+        <EquipmentProvider>
+          <HeaderMenu device={device} />
+        </EquipmentProvider>
+        }
         <Profile />
       </header>
     )

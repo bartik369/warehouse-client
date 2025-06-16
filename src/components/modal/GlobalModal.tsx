@@ -3,6 +3,7 @@ import ContractorForm from '../forms/contractor/ContractorForm';
 import EntityForm from '../forms/device/EntityForm';
 import DeviceIssueForm from '../deviceIssue/DeviceIssueForm';
 import Modal from './Modal';
+import { IssueProvider } from '../../features/issue/context/IssueContext';
 
 export const GlobalModal = () => {
   const { isOpen, modalType, modalProps, closeModal } = useGlobalModal();
@@ -22,7 +23,7 @@ export const GlobalModal = () => {
       case 'contractor':
         return <ContractorForm {...modalProps} />;
       case 'device-issue':
-        return <DeviceIssueForm />;
+        return <IssueProvider><DeviceIssueForm /></IssueProvider>;
       default:
         return null;
     }

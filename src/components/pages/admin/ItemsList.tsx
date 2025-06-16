@@ -1,14 +1,14 @@
 import { memo } from 'react';
-import { IEntity } from '../../../types/devices';
-import { IEntityFormActions } from '../../../types/entity';
+import { Entity } from '../../../types/devices';
+import { EntityFormActions } from '../../../types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
 import styles from './Admin.module.scss';
 import NoData from '../../nodata/NoData';
 
 interface IItemsListProps {
-  actions: IEntityFormActions;
+  actions: EntityFormActions;
   field: string;
-  items: IEntity[];
+  items: Entity[];
 }
 const ItemsList = memo(({ field, items, actions }: IItemsListProps) => {
   if (items.length === 0) return <NoData />;

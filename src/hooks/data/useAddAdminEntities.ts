@@ -52,7 +52,7 @@ import {
   useUpdateRoleMutation,
   useDeleteRoleMutation
 } from "../../store/api/rolesApi";
-import { IEntity } from "../../types/devices";
+import { Entity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
 import { selectPic } from "../../utils/constants/constants";
 import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";
@@ -134,7 +134,7 @@ export const useAddAdminEntities = () => {
   console.log(state.entity)
 
   const handleInputChange = useCallback(
-    <T extends string | IEntity>(field: keyof IEntity, value: T) => {
+    <T extends string | Entity>(field: keyof Entity, value: T) => {
       dispatch({
         type: AdminEntityActionTypes.SET_ERROR,
         payload: { [field]: ValidateField(field, value) || "" },
@@ -159,7 +159,7 @@ export const useAddAdminEntities = () => {
           if (!entity) return;
           if (fieldType === "model") {
             const formData = new FormData();
-            (Object.keys(entity) as (keyof IEntity)[]).forEach((key) => {
+            (Object.keys(entity) as (keyof Entity)[]).forEach((key) => {
               const value = entity[key];
               if (value !== undefined && value !== null)
                 formData.append(key, value);

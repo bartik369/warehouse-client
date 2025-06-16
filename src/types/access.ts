@@ -1,27 +1,27 @@
 import { ChangeEvent } from "react";
 import { CheckedPermissionOptions } from "./content";
-import { IEntity } from "./devices";
-import { IUser } from "./user";
+import { Entity } from "./devices";
+import { User } from "./user";
 
-export interface IRole {
+export interface Role {
   id: string;
   name: string;
   comment: string;
 }
-export interface IUserRole {
+export interface UserRole {
   id: string;
   email: string;
   userId: string;
   roleName: string;
   roleId: string;
 }
-export interface IPermission {
+export interface Permission {
   id: string;
   name: string;
   comment: string;
   disabled?: boolean;
 }
-export interface IPermissionRole {
+export interface PermissionRole {
   id: string;
   roleId: string;
   roleName: string;
@@ -36,8 +36,8 @@ export interface IPermissionRole {
   comment?: string;
 }
 
-export type IPermissionRoleRes = Pick<
-  IPermissionRole,
+export type PermissionRoleRes = Pick<
+  PermissionRole,
   | "roleName"
   | "roleId"
   | "warehouseName"
@@ -45,16 +45,16 @@ export type IPermissionRoleRes = Pick<
   | "permissionsName"
   | "permissionIds"
 >;
-export type IListRoleRes = Pick<
-  IPermissionRole,
+export type ListRoleRes = Pick<
+  PermissionRole,
   "roleName" | "roleId" | "warehouseName" | "locationName"
 >;
 
-export interface IAccessFormActions {
-  handleInputChange: (name: keyof IPermissionRole, e: string) => void;
-  handleRoleChange: (item: IRole) => void;
-  handleLocationChange?: (item: IEntity) => void;
-  handleWarehouseChange?: (item: IEntity) => void;
+export interface AccessFormActions {
+  handleInputChange: (name: keyof PermissionRole, e: string) => void;
+  handleRoleChange: (item: Role) => void;
+  handleLocationChange?: (item: Entity) => void;
+  handleWarehouseChange?: (item: Entity) => void;
   handleCreateEntity: () => void;
   handleResetEntity: () => void;
   handleCheck: (
@@ -62,10 +62,10 @@ export interface IAccessFormActions {
     item: CheckedPermissionOptions,
     name: string
   ) => void;
-  handleRoleInfo: (item: IUserRolesList) => void;
-  handleDeleteRolePerms: (item: IUserRolesList) => void;
+  handleRoleInfo: (item: UserRolesList) => void;
+  handleDeleteRolePerms: (item: UserRolesList) => void;
 }
-export interface IValidateAccessErrors {
+export interface ValidateAccessErrors {
   id: string;
   name: string;
   roleId: string;
@@ -78,29 +78,29 @@ export interface IValidateAccessErrors {
   locationName: string;
   comment: string;
 }
-export interface IValidateUserRoleErrors {
+export interface ValidateUserRoleErrors {
   id?: string;
   email?: string;
   roleName?: string;
 }
-export interface IUserRoleFormActions {
-  handleInputChange: (name: keyof IUserRole, e: string) => void;
+export interface UserRoleFormActions {
+  handleInputChange: (name: keyof UserRole, e: string) => void;
   handleAddUserRole: () => void;
   handleResetUserRole: () => void;
-  handleUserInfo: (item: IUser) => void;
+  handleUserInfo: (item: User) => void;
 }
-export interface IUserRolesList {
+export interface UserRolesList {
     locationName: string;
     warehouseName: string;
     roleName: string;
     permissionsName: string[];
 }
 
-export interface IUserRolesResponse {
-  user: Partial<IUser>;
-  roles: IUserRolesList[];
+export interface UserRolesResponse {
+  user: Partial<User>;
+  roles: UserRolesList[];
 }
-export interface IRoleList {
+export interface RoleList {
   roleId: string;
   roleName: string;
   locationName: string;

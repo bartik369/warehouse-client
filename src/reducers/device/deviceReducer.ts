@@ -1,6 +1,6 @@
-import { IDeviceState, DeviceAction, DeviceActionTypes } from './deviceTypes';
+import { DeviceState, DeviceAction, DeviceActionTypes } from './deviceTypes';
 
-export const initialState: IDeviceState = {
+export const initialState: DeviceState = {
   device: {
     id: '',
     name: '',
@@ -47,9 +47,9 @@ export const initialState: IDeviceState = {
 };
 
 export function deviceReducer(
-  state: IDeviceState,
+  state: DeviceState,
   action: DeviceAction
-): IDeviceState {
+): DeviceState {
   switch (action.type) {
     case DeviceActionTypes.SET_ERROR:
       return {

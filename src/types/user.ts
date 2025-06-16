@@ -1,4 +1,4 @@
-export interface IUser {
+export interface User {
     id: string;
     userName: string;
     email: string;
@@ -34,20 +34,20 @@ key: UserLabelsKeys;
 label: string;
 };
 
-export interface ISignin {
+export interface Signin {
     email: string;
     password: string;
 }
 
-export interface IAuthRes {
-    user: IUser;
+export interface AuthRes {
+    user: User;
     accessToken: string;
 }
 export interface RefreshTokenResponse {
     accessToken: string;
-    user: IUser;
+    user: User;
 }
-export interface IValidateUserErrors {
+export interface ValidateUserErrors {
     id?: string;
     userName?: string;      
     email?: string;
@@ -60,16 +60,16 @@ export interface IValidateUserErrors {
     location?: string;
 }
 
-export interface IUserFormActions {
-    handleInputChange: (name: keyof IUser, e: string) => void;
+export interface UserFormActions {
+    handleInputChange: (name: keyof User, e: string) => void;
     handleCreateUser: () => void;
     handleResetUser: () => void;
     handleGetUser: (id: string) => void;
     handleChecked: () => void;
 }
 
-export interface IBaseUserQuery {
-    handleInputChange: (name: keyof IUser, e: string) => void;
+export interface BaseUserQuery {
+    handleInputChange: (name: keyof User, e: string) => void;
     handleDeviceIssue: (id: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => void;

@@ -1,10 +1,10 @@
 import { requiredFieldText, wrongPhoneFormat } from "../constants/constants";
-import { IValidateLocationErrors } from '../../types/locations';
-import { IEntity } from "../../types/devices";
+import { ValidateLocationErrors } from '../../types/locations';
+import { Entity } from "../../types/devices";
 import { isValidPhone } from "./Phones";
 
 const locationFields = ['name'];
-type ValidationFields = keyof IEntity;
+type ValidationFields = keyof Entity;
 
 const validateRequiredFields = <T>(
     formData: T,
@@ -25,9 +25,9 @@ const validateRequiredFields = <T>(
 }
 
 export const FormValidation = (
-    formData: IEntity, 
+    formData: Entity, 
     fieldType: string
-): IValidateLocationErrors => {
+): ValidateLocationErrors => {
     const errors: Record<string, string> = {};
     const fieldMap: Record<string, ValidationFields[]> = {
         role: ['name', 'comment'],

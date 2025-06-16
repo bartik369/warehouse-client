@@ -1,9 +1,9 @@
 import {
-  IDevice,
-  IFilterDeviceOptions,
-  IAggregateDeviceInfo,
+  Device,
+  FilterDeviceOptions,
+  AggregateDeviceInfo,
   QueryParams,
-  IFilteredDevicesFromBack,
+  FilteredDevicesFromBack,
 } from "./../../types/devices";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
@@ -13,7 +13,7 @@ export const devicesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Device", "Manufacturer", "Model", "Type"],
   endpoints: (build) => ({
-    getDevices: build.query<{ devices: IFilteredDevicesFromBack[], totalPages: number}, QueryParams>({
+    getDevices: build.query<{ devices: FilteredDevicesFromBack[], totalPages: number}, QueryParams>({
       query: (queryParams) => {
         const { city, ...params } = queryParams;
         const urlParams = new URLSearchParams();
@@ -39,17 +39,17 @@ export const devicesApi = createApi({
             ]
           : [{ type: "Device", id: "LIST" }],
     }),
-    getDeviceOptions: build.query<IFilterDeviceOptions, string>({
+    getDeviceOptions: build.query<FilterDeviceOptions, string>({
       query: (city) => ({
         url: `${import.meta.env.VITE_OPTIONS}${city}`,
       }),
     }),
-    getDevice: build.query<IAggregateDeviceInfo, string>({
+    getDevice: build.query<AggregateDeviceInfo, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
       }),
     }),
-    createDevice: build.mutation<{ message: string; device: IDevice }, IDevice>(
+    createDevice: build.mutation<{ message: string; device: Device }, Device>(
       {
         query(body) {
           return {
@@ -61,8 +61,8 @@ export const devicesApi = createApi({
       }
     ),
     updateDevice: build.mutation<
-      { message: string; device: IDevice },
-      { id: string } & Partial<IDevice>
+      { message: string; device: Device },
+      { id: string } & Partial<Device>
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEVICES}${id}`,

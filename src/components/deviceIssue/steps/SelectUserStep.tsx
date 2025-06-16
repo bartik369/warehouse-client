@@ -1,8 +1,8 @@
 import UsersList from '../UsersList';
 import UserInfo from '../UserInfo';
 import BtnAction from '../../ui/buttons/BtnAction';
-import { useDeviceIssueContext } from '../context/DeviceIssueContext';
-import { IBaseUserQuery } from '../../../types/user';
+import { useIssueContext } from '../../../features/issue/context/IssueContext';
+import { BaseUserQuery } from '../../../types/user';
 import { placeholderUserSearch, reset, select } from '../../../utils/constants/constants';
 import { CgCloseO } from 'react-icons/cg';
 import { BsCheck } from 'react-icons/bs';
@@ -12,7 +12,8 @@ import styles from './Steps.module.scss';
 interface ISelectUserStepProps {
   isSuccess: boolean;
   isFetching: boolean;
-  actions: IBaseUserQuery;
+  actions: BaseUserQuery;
+  
 }
 
 const SelectUserStep = ({
@@ -20,7 +21,8 @@ const SelectUserStep = ({
   isFetching,
   actions,
 }: ISelectUserStepProps) => {
-  const { state } = useDeviceIssueContext();
+  const { state } = useIssueContext();
+  console.log(state.query)
   return (
     <div className={styles.inner}>
       <form className={styles.form}>

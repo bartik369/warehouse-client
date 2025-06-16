@@ -1,6 +1,6 @@
-import { IContractor } from "./content";
+import { Contractor } from "./content";
 
-export interface IDevice {
+export interface Device {
   id: string;
   name: string;
   inventoryNumber?: string;
@@ -40,7 +40,7 @@ export interface IDevice {
   contractorId: string;
 }
 
-export interface IAggregateDeviceInfo extends IDevice {
+export interface AggregateDeviceInfo extends Device {
   addedBy: {
     firstNameRu: string;
     lastNameRu: string;
@@ -87,7 +87,7 @@ export interface IAggregateDeviceInfo extends IDevice {
   }[];
 }
 
-export interface IDeviceModel {
+export interface DeviceModel {
   id?: string;
   name: string;
   type: string;
@@ -95,12 +95,12 @@ export interface IDeviceModel {
   imagePath?: string;
 }
 
-export interface IDeviceMedia {
+export interface DeviceMedia {
   file?: File | null;
   prevImg?: string | null;
 }
 
-export interface IValidationErrors {
+export interface ValidationErrors {
   id?: string;
   name?: string;
   slug?: string;
@@ -116,29 +116,29 @@ export interface IValidationErrors {
   address?: string;
 }
 
-export interface IInventory {
+export interface Inventory {
   id?: number;
   place: string;
   responsibleUser: string;
   startDate: Date;
   endDate: Date;
   completed: boolean;
-  result: IInventoryResult;
+  result: InventoryResult;
 }
 
-export interface IInventoryResult {
+export interface InventoryResult {
   id?: number;
   inventoryId: number;
   found: string[];
   lost: string[];
 }
-export interface IDeviceRepair {
+export interface DeviceRepair {
   id?: number;
   serialNumber?: string;
   contractorId: string;
   dateTransfer: Date;
 }
-export interface IManufacturer {
+export interface Manufacturer {
   id: number;
   name: string;
   icon?: React.ReactElement;
@@ -165,13 +165,13 @@ export interface DevicePrices {
   uniqueFields: Field[];
 }
 
-export interface ISelectedItem {
+export interface SelectedItem {
   id: string;
   name: string;
   value: string;
 }
 
-export interface IEntity {
+export interface Entity {
   id: string;
   name: string;
   slug?: string;
@@ -187,7 +187,7 @@ export interface IEntity {
   warehouseName?: string;
 }
 
-export interface IFilteredDevicesFromBack {
+export interface FilteredDevicesFromBack {
   id: string;
   name: string;
   inventoryNumber: string;
@@ -214,7 +214,7 @@ export interface IFilteredDevicesFromBack {
   };
 }
 
-export interface IFilterDeviceOptions {
+export interface FilterDeviceOptions {
   isAssigned: {
     isAssigned: boolean;
   }[];
@@ -245,7 +245,7 @@ export interface IFilterDeviceOptions {
   }[];
 }
 
-export interface IDeviceFilters {
+export interface DeviceFilters {
   manufacturer: string[];
   isFunctional: string[];
   isAssigned: string[];
@@ -271,7 +271,7 @@ export type FilterLabel = {
   label: string;
 };
 
-export interface IDeviceInfo {
+export interface DeviceInfo {
   id: string;
   isAssigned: boolean;
   warehouse: {
@@ -281,23 +281,23 @@ export interface IDeviceInfo {
 }
 export type QueryParams = Record<string, string | number | boolean>
 
-export interface IDeviceFormState {
+export interface DeviceFormState {
   itemType: string;
   isUpdate: boolean;
-  device: IDevice;
+  device: Device;
   modelFields?: Record<string, string>,
   checked: boolean;
   errors: Record<string, string>;
 }
 
 
-export interface IDeviceFormActions {
-  handleTypeChange:(item: IEntity) => void
-  handleModelChange:(item: IEntity) => void
-  handleManufacturerChange:(item: IEntity) => void
-  handleWarehouseChange:(item: IEntity) => void
-  handleContractorChange:(item: IContractor) => void
-  handleInputChange: (name: keyof IDevice, e:string) => void
+export interface DeviceFormActions {
+  handleTypeChange:(item: Entity) => void
+  handleModelChange:(item: Entity) => void
+  handleManufacturerChange:(item: Entity) => void
+  handleWarehouseChange:(item: Entity) => void
+  handleContractorChange:(item: Contractor) => void
+  handleInputChange: (name: keyof Device, e:string) => void
   handleNumber: (num: number) => void;
   handleExtNumber: (num: number, fieldName: string) => void;
   handleChecked: () => void;
@@ -309,27 +309,27 @@ export interface IDeviceFormActions {
   handleSetTitle: (item: string) => void;
   handleSetType: (item: string) => void;
 }
-export interface IUpdateDeviceFormSetters {
-  setDevice: (item: IDevice) => void;
+export interface UpdateDeviceFormSetters {
+  setDevice: (item: Device) => void;
   setFieldType: (item: string) => void;
   setEntity: (item:string) => void;
 }
 
-export interface IWarrantyFormState {
+export interface WarrantyFormState {
   selectedValuesMemo: string;
-  device: IDevice;
+  device: Device;
   isOpen: boolean;
 }
 
-export interface IWarrantyFormActions {
-  handleInputChange: (name: keyof IDevice, value: string) => void;
+export interface WarrantyFormActions {
+  handleInputChange: (name: keyof Device, value: string) => void;
 }
-// export interface IWarrantyFormSetters {
+// export interface WarrantyFormSetters {
 //   setValue: (value: T) => void;
-//   setDevice: (device: IDevice) => void;
+//   setDevice: (device: Device) => void;
 // }
 
-export interface IDeviceIssueData {
+export interface DeviceIssueData {
   userId: string,
   processId: string,
   devices: string[],

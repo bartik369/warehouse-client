@@ -1,4 +1,4 @@
-import { IAggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "../../../types/devices";
 import {
   addedBy,
   updatedBy,
@@ -9,10 +9,10 @@ import {
 import { RiFileUserLine } from "react-icons/ri";
 import styles from "./Device.module.scss";
 
-interface IUserInfoProps {
-  device: IAggregateDeviceInfo;
+interface UserInfoProps {
+  device: AggregateDeviceInfo;
 }
-const UserInfo = ({ device }:IUserInfoProps) => {
+const UserInfo = ({ device }:UserInfoProps) => {
   return (
       <div className={styles.options}>
         <div className={styles.title}>

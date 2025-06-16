@@ -1,8 +1,8 @@
-import { IDevice } from "../../types/devices";
+import { Device } from "../../types/devices";
 
-export interface IDeviceState {
-    device: IDevice;
-    errors: Partial<Record<keyof IDevice, string>>;
+export interface DeviceState {
+    device: Device;
+    errors: Partial<Record<keyof Device, string>>;
     title: string;
     fieldType: string;
     itemType: string;
@@ -25,7 +25,7 @@ export enum DeviceActionTypes {
 export type DeviceAction = 
  | { type: DeviceActionTypes.SET_ERROR, payload: Record<string, string>}
  | { type: DeviceActionTypes.RESET_ERROR }
- | { type: DeviceActionTypes.SET_DEVICE, payload: Partial<IDevice> }
+ | { type: DeviceActionTypes.SET_DEVICE, payload: Partial<Device> }
  | { type: DeviceActionTypes.RESET_DEVICE }
  | { type: DeviceActionTypes.SET_IS_UPDATE, payload: boolean }
  | { type: DeviceActionTypes.SET_TITLE, payload: string }

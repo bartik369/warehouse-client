@@ -1,7 +1,7 @@
-import { IEntity } from "./devices";
+import { Entity } from "./devices";
 
-export interface IEntityFormActions {
-      handleInputChange: (name: keyof IEntity, e: string) => void;
+export interface EntityFormActions {
+      handleInputChange: (name: keyof Entity, e: string) => void;
       handleCreateEntity: (type: string) => void;
       handleResetEntity: () => void;
       handleMedia?: (e: React.ChangeEvent<HTMLInputElement>) => void;

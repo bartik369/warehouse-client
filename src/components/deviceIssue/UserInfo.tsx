@@ -1,11 +1,11 @@
 import { department, email, login, workID } from '../../utils/constants/constants';
 import TechnicalOptions from '../ui/options/TechnicalOptions';
-import { useDeviceIssueContext } from './context/DeviceIssueContext';
+import { useIssueContext } from '../../features/issue/context/IssueContext';
 import { location } from '../../utils/constants/device';
 import styles from './UserInfo.module.scss';
 
 const UserInfo = () => {
-  const { state } = useDeviceIssueContext();
+  const { state } = useIssueContext();
   return (
     <section className={styles.user}>
       <h2 className={styles.name}>

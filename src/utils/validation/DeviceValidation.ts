@@ -1,12 +1,12 @@
-import { IValidationErrors } from './../../types/devices';
+import { ValidationErrors } from './../../types/devices';
 import { requiredFieldText, requiredFieldFive, wrongPhoneFormat } from '../constants/constants';
-import { IDevice, IDeviceModel, IEntity } from './../../types/devices';
+import { Device, DeviceModel, Entity } from './../../types/devices';
 import { isValidPhone } from './Phones';
 
-type ValidationField = keyof IDevice;
-type ValidationModelField = keyof IDeviceModel;
-type ValidationEntityField = keyof IEntity;
-type ValidationContractorField = keyof IEntity;
+type ValidationField = keyof Device;
+type ValidationModelField = keyof DeviceModel;
+type ValidationEntityField = keyof Entity;
+type ValidationContractorField = keyof Entity;
 type ValidationError = string | null;
 
 const fieldsMemoryScreen = ['laptop', 'mobile'];
@@ -32,7 +32,7 @@ const validateRequiredFields = <T>(
   });
 };
 
-export const FormValidation = (formData: IDevice, itemType: string): IValidationErrors => {
+export const FormValidation = (formData: Device, itemType: string): ValidationErrors => {
   const errors: Record<string, string> = {};
   const requiredField: ValidationField[] = [
     'name',
@@ -56,9 +56,9 @@ export const FormValidation = (formData: IDevice, itemType: string): IValidation
 };
 
 export const ModelValidation = (
-  formData: IDeviceModel
-): Partial<IValidationErrors> => {
-  const errors: Partial<IValidationErrors> = {};
+  formData: DeviceModel
+): Partial<ValidationErrors> => {
+  const errors: Partial<ValidationErrors> = {};
   const requiredFields: ValidationModelField[] = [
     'name',
     'manufacturer',
@@ -68,7 +68,7 @@ export const ModelValidation = (
   return errors;
 };
 
-export const ModelValidationField = <T extends string | IEntity>(
+export const ModelValidationField = <T extends string | Entity>(
   field: string,
   value: T
 ): ValidationError => {
@@ -100,17 +100,17 @@ export const ValidateField = <T>(field: string, value: T): string | null => {
   return null;
 };
 
-export const EntityValidation = (formData: IEntity): Partial<IValidationErrors> => {
-  const errors: Partial<IValidationErrors> = {};
+export const EntityValidation = (formData: Entity): Partial<ValidationErrors> => {
+  const errors: Partial<ValidationErrors> = {};
   const requiredFields: ValidationEntityField[] = ['name', 'slug'];
 
   validateRequiredFields(formData, requiredFields, errors);
   return errors;
 };
 export const ContractorValidation = (
-  formData: Partial<IEntity>
-): Partial<IValidationErrors> => {
-  const errors: Partial<IValidationErrors> = {};
+  formData: Partial<Entity>
+): Partial<ValidationErrors> => {
+  const errors: Partial<ValidationErrors> = {};
   const requiredFields: ValidationContractorField[] = [
     'address',
     'name',

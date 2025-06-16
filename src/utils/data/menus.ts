@@ -4,7 +4,7 @@ import { LiaCitySolid } from "react-icons/lia";
 import { AiOutlineUnlock } from "react-icons/ai";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { TbArrowsMove } from "react-icons/tb";
-import { FiUserPlus, FiUserMinus } from "react-icons/fi";
+import { FiUserPlus, FiUserMinus  } from "react-icons/fi";
 import { LuUsers, LuHandshake, LuWarehouse } from "react-icons/lu";
 import { MdOutlineLibraryAddCheck, MdSupportAgent  } from "react-icons/md";
 import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";

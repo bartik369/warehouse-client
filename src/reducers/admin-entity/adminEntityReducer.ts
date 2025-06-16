@@ -1,9 +1,9 @@
 import { useInputMask } from '../../hooks/data/useInputMask';
-import { AdminEntityAction, AdminEntityActionTypes, IAdminEntityState } from './adminEntityTypes';
+import { AdminEntityAction, AdminEntityActionTypes, AdminEntityState } from './adminEntityTypes';
 
 const { formatPhone } = useInputMask();
 
-export const initialState:IAdminEntityState = {
+export const initialState:AdminEntityState = {
     entity: {
         id: '',
         name: '',
@@ -25,9 +25,9 @@ export const initialState:IAdminEntityState = {
     },
 }
 export function adminEntityReducer(
-    state: IAdminEntityState,
+    state: AdminEntityState,
     action: AdminEntityAction,
-): IAdminEntityState {
+): AdminEntityState {
     switch (action.type) {
       case AdminEntityActionTypes.SET_ENTITY: {
         if (action.payload.phoneNumber) {

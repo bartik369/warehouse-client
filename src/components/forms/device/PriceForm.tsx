@@ -1,10 +1,10 @@
 import { devicePrices } from "../../../utils/constants/device";
 import CustomNumber from "../../ui/number/CustomNumber";
-import { IDevice } from "../../../types/devices";
+import { Device } from "../../../types/devices";
 import styles from "./DeviceForm.module.scss";
 
 interface IPriceFormProps {
-  device: IDevice;
+  device: Device;
   errors: Record<string, string>;
   handleExtNumber: (entity: number, name: string) => void;
 }

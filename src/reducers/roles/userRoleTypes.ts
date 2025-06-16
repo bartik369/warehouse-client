@@ -1,12 +1,12 @@
-import { IUserRole, IUserRolesResponse } from "../../types/access";
+import { UserRole, UserRolesResponse } from "../../types/access";
 
-export interface IUserRoleState {
-    role: IUserRole;
+export interface UserRoleState {
+    role: UserRole;
     errors: Record<string, string>,
     query: string,
     isUsersListVisible: boolean;
     wasSearched: boolean;
-    assignedUserRoles: IUserRolesResponse;
+    assignedUserRoles: UserRolesResponse;
 }
 
 export enum UserRoleActionsTypes {
@@ -24,10 +24,10 @@ export enum UserRoleActionsTypes {
 export type UserRoleAction = 
  | { type: UserRoleActionsTypes.SET_ERROR, payload: Record<string, string>}
  | { type: UserRoleActionsTypes.RESET_ERROR }
- | { type: UserRoleActionsTypes.SET_ROLE, payload: Partial<IUserRole> }
+ | { type: UserRoleActionsTypes.SET_ROLE, payload: Partial<UserRole> }
  | { type: UserRoleActionsTypes.RESET_ROLE }
  | { type: UserRoleActionsTypes.SET_QUERY, payload:string }
  | { type: UserRoleActionsTypes.SET_USERS_LIST_VISIBLE, payload: boolean }
  | { type: UserRoleActionsTypes.SET_WAS_SEARCHED, payload: boolean }
- | { type: UserRoleActionsTypes.SET_USER_ASSIGNED_ROLES, payload: IUserRolesResponse }
+ | { type: UserRoleActionsTypes.SET_USER_ASSIGNED_ROLES, payload: UserRolesResponse }
  | { type: UserRoleActionsTypes.RESET_USER_ASSIGNED_ROLES }

@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IEntity } from '../../types/devices';
+import { Entity } from '../../types/devices';
 
 export const modelsApi = createApi({
     reducerPath: 'modelsApi',
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Model'],
     endpoints: (build) => ({
-        getModels: build.query<IEntity[], { manufacturer: string, type: string } & Partial<IEntity>>({
+        getModels: build.query<Entity[], { manufacturer: string, type: string } & Partial<Entity>>({
             query({manufacturer, type}) {
                 return {
                     url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturer}/${type}`,
@@ -21,17 +21,17 @@ export const modelsApi = createApi({
                 ]
               : [{ type: 'Model', id: 'LIST' }],
         }),
-        getAllModels: build.query<IEntity[], void>({
+        getAllModels: build.query<Entity[], void>({
             query:() => ({
                 url: `${import.meta.env.VITE_MODELS_ALL}`,
             })
         }),
-        getModel: build.query<IEntity, string>({
+        getModel: build.query<Entity, string>({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_MODEL}${id}`,
             }),
         }),
-        createModel: build.mutation<IEntity, FormData>({
+        createModel: build.mutation<Entity, FormData>({
             query:(body) => ({
                 url: `${import.meta.env.VITE_MODELS}`,
                 method: 'POST',
@@ -39,7 +39,7 @@ export const modelsApi = createApi({
             }),
             invalidatesTags: ['Model']
         }),
-        updateModel: build.mutation<IEntity, FormData>({
+        updateModel: build.mutation<Entity, FormData>({
             query: (body) => {
                 const id = body.get('id') as string;
                 if (!id) throw new Error('Something went wrong')

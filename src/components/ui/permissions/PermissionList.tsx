@@ -1,11 +1,11 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin4Line } from "react-icons/ri";
-import { IAccessFormActions, IUserRolesList } from "../../../types/access";
+import { AccessFormActions, UserRolesList } from "../../../types/access";
 import styles from "./PermissionList.module.scss";
 
 interface IPermissionListProps {
-  role: IUserRolesList;
-  actions?: IAccessFormActions;
+  role: UserRolesList;
+  actions?: AccessFormActions;
   showEdit?: boolean;
   showDelete?: boolean;
 }

@@ -1,15 +1,15 @@
 import { requiredFieldText } from "../constants/constants";
-import { IUserRole, IValidateUserRoleErrors } from "../../types/access";
+import { UserRole, ValidateUserRoleErrors } from "../../types/access";
 
 const requiredUserFields = [
   "userName",
   "roleName",
 ];
-type ValidationFields = keyof IUserRole;
+type ValidationFields = keyof UserRole;
 
 const validateRequiredFields = (
-  formData: IUserRole,
-  fields: (keyof IUserRole)[],
+  formData: UserRole,
+  fields: (keyof UserRole)[],
   errors: Record<string, string>
 ): void => {
   fields.forEach((field) => {
@@ -19,7 +19,7 @@ const validateRequiredFields = (
   });
 };
 
-export const FormValidation = (formData: IUserRole): IValidateUserRoleErrors => {
+export const FormValidation = (formData: UserRole): ValidateUserRoleErrors => {
   const errors: Record<string, string> = {};
   const requiredFields: ValidationFields[] = [
     "userId",

@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IEntity } from '../../types/devices';
+import { Entity } from '../../types/devices';
 
 export const locationApi = createApi({
   reducerPath: "locationApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Location"],
   endpoints: (build) => ({
-    getLocations: build.query<IEntity[], void>({
+    getLocations: build.query<Entity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
       }),
@@ -19,14 +19,14 @@ export const locationApi = createApi({
             ]
           : [{ type: "Location", id: "LIST" }],
     }),
-    getLocation: build.query<IEntity, string>({
+    getLocation: build.query<Entity, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),
     }),
     createLocation: build.mutation<
-      { message: string; location: IEntity },
-      IEntity
+      { message: string; location: Entity },
+      Entity
     >({
       query: (body) => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
@@ -36,8 +36,8 @@ export const locationApi = createApi({
       invalidatesTags: ["Location"],
     }),
     updateLocation: build.mutation<
-      { message: string; updatedLocation: IEntity },
-      { id: string } & Partial<IEntity>
+      { message: string; updatedLocation: Entity },
+      { id: string } & Partial<Entity>
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,

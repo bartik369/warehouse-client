@@ -10,13 +10,13 @@ import {slugLabel, nameLabel} from '../../../utils/constants/device';
 import { useGlobalModal } from '../../../hooks/data/useGlobalModal';
 import styles from './EntityForm.module.scss';
 
-interface IEntityProps {
+interface EntityProps {
   typeId: string;
   manufacturerId: string;
   fieldType: string;
 };
 
-const EntityForm = memo(({ fieldType, typeId, manufacturerId }:IEntityProps) => { 
+const EntityForm = memo(({ fieldType, typeId, manufacturerId }:EntityProps) => { 
     const { fileInputRef, state, actions} = useEntity();
     const { modalType } = useGlobalModal();
 

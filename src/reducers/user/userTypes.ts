@@ -1,8 +1,8 @@
-import { IUser } from "../../types/user";
+import { User } from "../../types/user";
 
-export interface IUserState {
-    user: IUser,
-    users: IUser[],
+export interface UserState {
+    user: User,
+    users: User[],
     errors: Record<string, string>,
     checked: boolean;
     isAdmin: boolean;
@@ -22,8 +22,8 @@ export enum UserActionTypes {
 export type UserAction = 
  | { type: UserActionTypes.SET_ERROR, payload: Record<string, string>}
  | { type: UserActionTypes.RESET_ERROR }
- | { type: UserActionTypes.SET_USER, payload: Partial<IUser> }
- | { type: UserActionTypes.SET_USERS, payload: IUser[] }
+ | { type: UserActionTypes.SET_USER, payload: Partial<User> }
+ | { type: UserActionTypes.SET_USERS, payload: User[] }
  | { type: UserActionTypes.RESET_USER }
  | { type: UserActionTypes.RESET_USERS }
  | { type: UserActionTypes.SET_CHECKED, payload: boolean }

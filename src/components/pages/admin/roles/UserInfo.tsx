@@ -1,14 +1,14 @@
-import { IUserRolesResponse } from "../../../../types/access";
+import { UserRolesResponse } from "../../../../types/access";
 import { department, email, login, userListRoles, workID } from "../../../../utils/constants/constants";
 import { location } from "../../../../utils/constants/device";
 import TechnicalOptions from "../../../ui/options/TechnicalOptions";
 import PermissionList from "../../../ui/permissions/PermissionList";
 import styles from "./GrantUserRoles.module.scss";
 
-interface IUserInfoProps {
-  userRoles: IUserRolesResponse;
+interface UserInfoProps {
+  userRoles: UserRolesResponse;
 }
-const UserInfo = ({ userRoles }: IUserInfoProps) => {
+const UserInfo = ({ userRoles }: UserInfoProps) => {
   const { user, roles } = userRoles;
   return (
     <div className={styles.userInfo}>

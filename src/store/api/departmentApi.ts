@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IEntity } from '../../types/devices';
+import { Entity } from '../../types/devices';
 
 export const departmentApi = createApi({
   reducerPath: "departmentApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Department"],
   endpoints: (build) => ({
-    getDepartments: build.query<IEntity[], void>({
+    getDepartments: build.query<Entity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
       }),
@@ -19,14 +19,14 @@ export const departmentApi = createApi({
             ]
           : [{ type: "Department", id: "LIST" }],
     }),
-    getDepartment: build.query<IEntity, string>({
+    getDepartment: build.query<Entity, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
       }),
     }),
     createDepartment: build.mutation<
-      { message: string; department: IEntity },
-      IEntity
+      { message: string; department: Entity },
+      Entity
     >({
       query: (body) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
@@ -36,8 +36,8 @@ export const departmentApi = createApi({
       invalidatesTags: ["Department"],
     }),
     updateDepartment: build.mutation<
-      { message: string; updatedDepartment: IEntity },
-      { id: string } & Partial<IEntity>
+      { message: string; updatedDepartment: Entity },
+      { id: string } & Partial<Entity>
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,

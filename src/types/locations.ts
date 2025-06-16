@@ -1,5 +1,5 @@
 
-export interface IValidateLocationErrors {
+export interface ValidateLocationErrors {
     id?: string;
     name?: string;
 }

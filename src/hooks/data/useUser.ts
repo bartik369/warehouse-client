@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IUser } from '../../types/user';
+import { User } from '../../types/user';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { useCreateUserMutation } from '../../store/api/userApi';
 import { UserActionTypes } from '../../reducers/user/userTypes';
@@ -15,7 +15,7 @@ export const useUser = () => {
   const navigate = useNavigate();
 
   const handleInputChange = useCallback(
-    <T extends string | IUser>(field: keyof IUser, value: T) => {
+    <T extends string | User>(field: keyof User, value: T) => {
       const validateErrors = ValidateField(field, value);
       dispatch({ 
         type: UserActionTypes.SET_ERROR, 

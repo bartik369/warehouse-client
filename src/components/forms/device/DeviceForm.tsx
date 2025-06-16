@@ -7,24 +7,24 @@ import WarrantyForm from "./WarrantyForm";
 import DevicePreview from "./DevicePreview";
 import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { IDeviceState } from "../../../reducers/device/deviceTypes";
+import { DeviceState } from "../../../reducers/device/deviceTypes";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
 import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { IEntity, IDeviceFormActions } from "../../../types/devices";
-import { IContractor } from "../../../types/content";
+import { Entity, DeviceFormActions } from "../../../types/devices";
+import { Contractor } from "../../../types/content";
 import { financialOptions, warrantyOptions } from "../../../utils/constants/constants";
 import { description } from "../../../utils/constants/device";
 import styles from "./DeviceForm.module.scss";
 
-interface IDeviceFormProps {
-  state: IDeviceState;
-  actions: IDeviceFormActions;
+interface DeviceFormProps {
+  state: DeviceState;
+  actions: DeviceFormActions;
 }
 
-const DeviceForm = memo(({state, actions }: IDeviceFormProps) => {
+const DeviceForm = memo(({state, actions }: DeviceFormProps) => {
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
@@ -34,7 +34,7 @@ const DeviceForm = memo(({state, actions }: IDeviceFormProps) => {
   // Allow model query by manufacturer and type
   useEffect(() => {
     if (state.device.modelName && models) {
-      models.forEach((model: IEntity) => {
+      models.forEach((model: Entity) => {
         if (model.name === state.device.modelName) {
           dispatch(setDevicePic(model.imagePath || ""));
         }
@@ -79,7 +79,7 @@ const DeviceForm = memo(({state, actions }: IDeviceFormProps) => {
           />
           <div className={styles.title}>{warrantyOptions}</div>
           <WarrantyForm
-            getId={(item: IContractor) => item.id}
+            getId={(item: Contractor) => item.id}
             state={state}
             actions={actions}
           />

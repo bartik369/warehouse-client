@@ -1,5 +1,5 @@
 import {ChangeEvent, memo } from 'react';
-import { IFilteredDevicesFromBack } from '../../../types/devices';
+import { FilteredDevicesFromBack } from '../../../types/devices';
 import { yes, no, inStock, inUse } from '../../../utils/constants/constants';
 import { CgUnavailable } from 'react-icons/cg';
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
@@ -13,13 +13,13 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 
 
-interface IDeviceItemsProps {
-    devices: IFilteredDevicesFromBack[];
+interface DeviceItemsProps {
+    devices: FilteredDevicesFromBack[];
     checks: Record<string, boolean>
-    handleCheck:(device:IFilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
+    handleCheck:(device:FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DeviceItems = memo(({ devices, checks, handleCheck }:IDeviceItemsProps) => {
+const DeviceItems = memo(({ devices, checks, handleCheck }:DeviceItemsProps) => {
     return (
         <>
           {devices && devices.map((device) => (

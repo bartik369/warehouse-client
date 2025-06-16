@@ -1,4 +1,4 @@
-import { IPermissionRole, IValidateAccessErrors } from "../../types/access";
+import { IPermissionRole, ValidateAccessErrors } from "../../types/access";
 import { requiredFieldText } from "../constants/constants";
 
 type ValidationFields = keyof IPermissionRole;
@@ -34,7 +34,7 @@ const validateRequiredFields = (
 
 export const FormValidation = (
   data: IPermissionRole
-): Partial<IValidateAccessErrors> => {
+): Partial<ValidateAccessErrors> => {
   const errors: Record<string, string> = {};
 
   if (data.roleName === 'manager') {

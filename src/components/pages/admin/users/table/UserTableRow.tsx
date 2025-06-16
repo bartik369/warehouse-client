@@ -1,16 +1,16 @@
-import { IUser, IUserFormActions } from "../../../../../types/user";
+import { User, UserFormActions } from "../../../../../types/user";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { GoCheckCircleFill } from "react-icons/go";
 import { IoCloseCircle } from "react-icons/io5";
 import styles from "./UserTableRow.module.scss";
 
-interface IUserTableRowProps {
-  user: IUser;
+interface UserTableRowProps {
+  user: User;
   isAdmin: boolean;
-  actions:IUserFormActions;
+  actions:UserFormActions;
 }
 
-const UserTableRow = ({ user, isAdmin, actions }: IUserTableRowProps) => {
+const UserTableRow = ({ user, isAdmin, actions }: UserTableRowProps) => {
   return (
     <tr className={styles.row}>
       <td>{user.firstNameRu}</td>

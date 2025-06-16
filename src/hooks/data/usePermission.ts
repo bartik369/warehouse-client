@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, IRole, IUserRolesList } from "../../types/access";
-import { IEntity } from "../../types/devices";
+import { IPermissionRole, Role, UserRolesList } from "../../types/access";
+import { Entity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
 import {
   useCreatePermissionRoleMutation,
@@ -75,14 +75,14 @@ export const usePermission = () => {
   }, []);
 
   const handleRoleChange = useCallback(
-    (item: IRole) => {
+    (item: Role) => {
       handleInputChange("roleId", item.id || "");
       handleInputChange("roleName", item.name || "");
     },
     [handleInputChange]
   );
   const handleLocationChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       handleInputChange("locationId", item.id || "");
       handleInputChange("locationName", item.name || "");
       dispatch({ type: PermissionActionTypes.RESET_WAREHOUSE });
@@ -90,7 +90,7 @@ export const usePermission = () => {
     [handleInputChange]
   );
   const handleWarehouseChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       handleInputChange("warehouseId", item.id || "");
       handleInputChange("warehouseName", item.name || "");
     },
@@ -143,7 +143,7 @@ export const usePermission = () => {
     dispatch({ type: PermissionActionTypes.SET_IS_UPDATE, payload: true });
   }, [dispatch]);
   
-  const handleDeleteRolePerms = (item:IUserRolesList) => {
+  const handleDeleteRolePerms = (item:UserRolesList) => {
     console.log(item);
     
   }

@@ -1,11 +1,11 @@
-import { ISignin } from './../../types/user';
+import { Signin } from './../../types/user';
 
-type ValidationField = keyof ISignin;
-const errors: Partial<ISignin> = {};
+type ValidationField = keyof Signin;
+const errors: Partial<Signin> = {};
 const requiredFields: ValidationField[] = ['email', 'password'];
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-export const AuthValidate = (formData: ISignin) => {
+export const AuthValidate = (formData: Signin) => {
   if (requiredFields) {
     requiredFields.map((field) => {
       if (formData[field].trim().length === 0) {

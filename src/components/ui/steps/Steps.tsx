@@ -1,9 +1,9 @@
 import { deviceIssueSteps } from "../../../utils/data/menus";
-import { useDeviceIssueContext } from "../../deviceIssue/context/DeviceIssueContext";
+import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import styles from "./Steps.module.scss";
 
 const Steps = () => {
-  const { state } = useDeviceIssueContext();
+  const { state } = useIssueContext ();
   
   return (
     <div className={styles.stepsContainer}>

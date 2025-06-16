@@ -1,4 +1,4 @@
-import { IAggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "../../../types/devices";
 import {
   name,
   technicalOptions,
@@ -20,7 +20,7 @@ import styles from "./Device.module.scss";
 
 
 interface ITechnicalInfoProps {
-  device: IAggregateDeviceInfo;
+  device: AggregateDeviceInfo;
 }
 const TechnicalInfo = ({ device }:ITechnicalInfoProps) => {
   return (

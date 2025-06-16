@@ -1,17 +1,17 @@
 import { memo } from "react";
-import { IUserRoleState } from "../../../reducers/roles/userRoleTypes";
-import { IUserRoleFormActions } from "../../../types/access";
-import { IUser } from "../../../types/user";
+import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
+import { UserRoleFormActions } from "../../../types/access";
+import { User } from "../../../types/user";
 import {
   statusLoading,
   statusNoData,
 } from "../../../utils/constants/constants";
 import styles from "./UserRolesForm.module.scss";
 
-interface IUserSuggestionListProps {
-  state: IUserRoleState;
-  userState: IUser[];
-  actions: IUserRoleFormActions;
+interface UserSuggestionListProps {
+  state: UserRoleState;
+  userState: User[];
+  actions: UserRoleFormActions;
   isSuccess: boolean;
   isFetching: boolean;
 }
@@ -22,7 +22,7 @@ const UserSuggestionList = memo(({
   actions,
   isSuccess,
   isFetching,
-}: IUserSuggestionListProps) => {
+}: UserSuggestionListProps) => {
   let content: React.ReactNode = null;
 
   if (isFetching) {

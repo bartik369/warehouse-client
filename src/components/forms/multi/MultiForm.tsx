@@ -9,22 +9,22 @@ import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { add, update, reset, slugLocation } from "../../../utils/constants/constants";
-import { IDeviceMedia, IEntity } from "../../../types/devices";
-import { IFieldMultiformConfig } from "../../../types/content";
+import { DeviceMedia, Entity } from "../../../types/devices";
+import { FieldMultiformConfig } from "../../../types/content";
 import { HiMiniXMark } from "react-icons/hi2";
 import { GoPlus } from "react-icons/go";
 import { ToastContainer } from "react-toastify";
-import { IEntityFormActions } from "../../../types/entity";
-import { IAdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
+import { EntityFormActions } from "../../../types/entity";
+import { AdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
 import Tooltip from "../../ui/tooltip/Tooltip";
 import styles from "./MultiForm.module.scss";
 
 interface IMultiFormProps {
-  actions: IEntityFormActions;
-  state: IAdminEntityState;
+  actions: EntityFormActions;
+  state: AdminEntityState;
   title: string;
-  fields: IFieldMultiformConfig[];
-  media?: IDeviceMedia;
+  fields: FieldMultiformConfig[];
+  media?: DeviceMedia;
   fieldType?: string;
   fileInputRef?: React.RefObject<HTMLInputElement>;
   locationType?: string;
@@ -102,7 +102,7 @@ const MultiForm = memo(({
                 value={state.entity[field.name] || ""}
                 errors={state.errors}
                 name={field.name}
-                getId={(item: IEntity) => item.id}
+                getId={(item: Entity) => item.id}
                 getLabel={(item) => item.name}
               />
             );

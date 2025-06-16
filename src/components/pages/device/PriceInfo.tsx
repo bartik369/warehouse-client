@@ -1,4 +1,4 @@
-import { IAggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "../../../types/devices";
 import {
   financialOptions,
   priceWithVat,
@@ -9,7 +9,7 @@ import { TbCoins } from "react-icons/tb";
 import styles from "./Device.module.scss";
 
 interface IPriceInfoProps {
-  device: IAggregateDeviceInfo;
+  device: AggregateDeviceInfo;
 }
 const PriceInfo = ({ device }:IPriceInfoProps) => {
   return (

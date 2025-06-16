@@ -1,14 +1,14 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { IRole, IRoleList, IUserRolesResponse } from "../../types/access";
-import { IEntity } from "../../types/devices";
+import { Role, RoleList, UserRolesResponse } from "../../types/access";
+import { Entity } from "../../types/devices";
 
 export const rolesApi = createApi({
   reducerPath: "rolesApi",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Role"],
   endpoints: (build) => ({
-    getRoles: build.query<IRole[], void>({
+    getRoles: build.query<Role[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_ROLES}`,
       }),
@@ -20,27 +20,27 @@ export const rolesApi = createApi({
             ]
           : [{ type: "Role", id: "LIST" }],
     }),
-    getRole: build.query<IRole, string>({
+    getRole: build.query<Role, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
       }),
     }),
-    getRolesList: build.query<IRoleList[], void>({
+    getRolesList: build.query<RoleList[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LIST_ROLES}`
       })
     }),
-    getUserRoles: build.query<IUserRolesResponse, string>({
+    getUserRoles: build.query<UserRolesResponse, string>({
       query: (id: string) => ({
          url: `${import.meta.env.VITE_USER_ROLES}${id}`
       })
     }),
-    getAssignableRoles: build.query<IRole, void>({
+    getAssignableRoles: build.query<Role, void>({
       query: () => ({
         url: `${import.meta.env.VITE_ASSIGNABLE_ROLES}`,
       }),
     }),
-    createRole: build.mutation<IRole, IEntity>({
+    createRole: build.mutation<Role, Entity>({
       query: (body) => ({
         url: `${import.meta.env.VITE_ROLES}`,
         method: "POST",
@@ -48,7 +48,7 @@ export const rolesApi = createApi({
       }),
       invalidatesTags: ["Role"],
     }),
-    updateRole: build.mutation<IRole, { id: string } & Partial<IRole>>({
+    updateRole: build.mutation<Role, { id: string } & Partial<Role>>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: "PUT",

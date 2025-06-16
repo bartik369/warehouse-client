@@ -1,16 +1,11 @@
-import {
-  DeviceIssueAction,
-  DeviceIssueActionTypes,
-  DeviceIssueStepType,
-  IDeviceIssueState,
-} from "./deviceIssueTypes";
+import { IssueState, IssueAction, IssueStepType, IssueActionTypes } from "./issueTypes";
 
-const steps: DeviceIssueStepType[] = [
+const steps: IssueStepType[] = [
   "select_user",
   "review_document",
   "sign_document",
 ];
-export const initialState: IDeviceIssueState = {
+export const initialIssueState: IssueState = {
   user: {
     id: "",
     userName: "",
@@ -40,31 +35,31 @@ export const initialState: IDeviceIssueState = {
   }
 };
 
-export function deviceIssueReducer(
-  state: IDeviceIssueState,
-  action: DeviceIssueAction
-): IDeviceIssueState {
+export function issueReducer(
+  state: IssueState,
+  action: IssueAction
+): IssueState {
   switch (action.type) {
-    case DeviceIssueActionTypes.SET_USER:
+    case IssueActionTypes.SET_USER:
       return { ...state, user: action.payload };
-    case DeviceIssueActionTypes.SET_USERS:
+    case IssueActionTypes.SET_USERS:
       return { ...state, users: action.payload };  
-    case DeviceIssueActionTypes.NEXT_STEP: {
+    case IssueActionTypes.NEXT_STEP: {
       const currentStep = steps.indexOf(state.step);
       const nextStep = steps[currentStep + 1] ?? currentStep;
       return { ...state, step: nextStep };
     }
-    case DeviceIssueActionTypes.PREV_STEP: {
+    case IssueActionTypes.PREV_STEP: {
       const currentStep = steps.indexOf(state.step);
       const prevStep = steps[currentStep - 1] ?? currentStep;
       return { ...state, step: prevStep };
     }
-    case DeviceIssueActionTypes.SET_ISSUE_ID:
+    case IssueActionTypes.SET_ISSUE_ID:
       return {
         ...state,
         issueId: action.payload,
       };
-    case DeviceIssueActionTypes.RESET: {
+    case IssueActionTypes.RESET: {
       return {
         ...state,
         user: null,
@@ -72,7 +67,7 @@ export function deviceIssueReducer(
         issueId: null,
       };
     }
-    case DeviceIssueActionTypes.SET_ERROR:
+    case IssueActionTypes.SET_ERROR:
       return {
         ...state,
         errors: {
@@ -80,15 +75,15 @@ export function deviceIssueReducer(
           ...action.payload,
         },
       };
-    case DeviceIssueActionTypes.RESET_ERROR:
+    case IssueActionTypes.RESET_ERROR:
       return { ...state, errors: {} };
-    case DeviceIssueActionTypes.SET_QUERY:
+    case IssueActionTypes.SET_QUERY:
       return { ...state, query: action.payload };
-    case DeviceIssueActionTypes.SET_USERS_LIST_VISIBLE:
+    case IssueActionTypes.SET_USERS_LIST_VISIBLE:
       return { ...state, isUsersListVisible: action.payload };
-    case DeviceIssueActionTypes.SET_WAS_SEARCHED:
+    case IssueActionTypes.SET_WAS_SEARCHED:
           return { ...state, wasSearched: action.payload };
-    case DeviceIssueActionTypes.SET_FULL_RESET:
+    case IssueActionTypes.SET_FULL_RESET:
       return {
         ...state,
         user: null,

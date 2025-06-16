@@ -1,9 +1,9 @@
-import { IDeviceInfo } from '../../../types/devices';
+import { DeviceInfo } from '../../../types/devices';
 import { useDevice } from '../../../hooks/data/useDevice';
 import styles from './HeaderMenu.module.scss';
 
 interface IHeaderMenuProps {
-  device: IDeviceInfo;
+  device: DeviceInfo;
 }
 
 

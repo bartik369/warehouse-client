@@ -1,6 +1,6 @@
-import { IUserState, UserAction, UserActionTypes } from "./userTypes";
+import { UserState, UserAction, UserActionTypes } from "./userTypes";
 
-export const userInitialState: IUserState = {
+export const userInitialState: UserState = {
     user: {
         id: '',
         userName: '',
@@ -23,9 +23,9 @@ export const userInitialState: IUserState = {
 }
 
 export function userReducer(
-  state: IUserState,
+  state: UserState,
   action: UserAction
-): IUserState {
+): UserState {
     switch (action.type) {
         case UserActionTypes.SET_USER:
         return {

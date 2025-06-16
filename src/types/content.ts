@@ -1,7 +1,7 @@
-import { IEntity } from "./devices";
-import { IUser } from "./user";
+import { Entity } from "./devices";
+import { User } from "./user";
 
-export type IListRefObj = {
+export type ListRefObj = {
     [index: string]: HTMLDivElement | null;
 };
 // export type Checked = {
@@ -23,7 +23,7 @@ export type CheckedDeviceOptions = {
     comment: string;
     disabled: boolean;
   }
-export interface IAdminEntity  {
+export interface AdminEntity  {
         id: string;
         name: string;
         slug?: string;
@@ -38,24 +38,24 @@ export interface IAdminEntity  {
         manufacturerId?: string;
 }
 
-export interface IContractor extends IEntity {
+export interface Contractor extends Entity {
     contractorId?: string;
     phoneNumber: string;
     address: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
-export interface IFieldMultiformConfig {
+export interface FieldMultiformConfig {
   type: "input" | "select" | "textarea" | "image" | "tel";
   label?: string;
-  name: keyof IEntity;
+  name: keyof Entity;
   itemsKey?: "cities" | "manufacturers" | "types" | "roles";
   placeholder?: string;
 }
-export interface IFieldUserFormConfig {
+export interface FieldUserFormConfig {
   type: "input" | "select"
   label?: string;
-  name: keyof IUser;
+  name: keyof User;
   itemsKey?: "departments" | "locations";
   placeholder?: string;
 }

@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { IEntity } from '../../types/devices';
+import { Entity } from '../../types/devices';
 
 export const typesApi = createApi({
   reducerPath: 'typesApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Type'],
   endpoints: (build) => ({
-    getTypes: build.query<IEntity[], void>({
+    getTypes: build.query<Entity[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_TYPES}`,
       }),
@@ -19,12 +19,12 @@ export const typesApi = createApi({
             ]
           : [{ type: 'Type', id: 'LIST' }],
     }),
-    getType: build.query<IEntity, string>({
+    getType: build.query<Entity, string>({
         query: (id: string) => ({
             url: `${import.meta.env.VITE_TYPES}${id}`,
         }),
     }),
-    createType: build.mutation<IEntity, IEntity>({
+    createType: build.mutation<Entity, Entity>({
         query:(body) => ({
             url: `${import.meta.env.VITE_TYPES}`,
             method: 'POST',
@@ -32,7 +32,7 @@ export const typesApi = createApi({
         }),
         invalidatesTags: ['Type']
     }),
-    updateType: build.mutation<IEntity, IEntity>({
+    updateType: build.mutation<Entity, Entity>({
         query: ({id, ...body}) => ({
           url: `${import.meta.env.VITE_TYPES}${id}`,
           method: 'PUT',

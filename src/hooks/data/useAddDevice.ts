@@ -10,8 +10,8 @@ import {
   useUpdateDeviceMutation,
 } from '../../store/api/devicesApi';
 import { DeviceActionTypes } from '../../reducers/device/deviceTypes';
-import { IContractor } from '../../types/content';
-import { IEntity, IDevice } from './../../types/devices';
+import { Contractor } from '../../types/content';
+import { Entity, Device } from './../../types/devices';
 import { FormValidation, ValidateField } from '../../utils/validation/DeviceValidation';
 import { handleApiError } from '../../utils/errors/handleApiError';
 
@@ -91,16 +91,16 @@ export function useAddDevice() {
   }, [device, itemType, user, exceptionPath, createDevice, updateDevice, dispatchDeviceData, handleResetDevice]);
 
 
-  const handleInputChange = useCallback(<T extends string | IEntity | IContractor>(
-    field: keyof IDevice,
+  const handleInputChange = useCallback(<T extends string | Entity | Contractor>(
+    field: keyof Device,
     value: T
   ) => {
-    const validationErrors = ValidateField(field as keyof IDevice, value);
+    const validationErrors = ValidateField(field as keyof Device, value);
     dispatch({
       type: DeviceActionTypes.SET_ERROR,
       payload: { [field]: validationErrors as string },
     });
-    const isEntity = (obj: any): obj is IEntity => 'slug' in obj;
+    const isEntity = (obj: any): obj is Entity => 'slug' in obj;
     const inputValue =
       typeof value === 'string' ? value : isEntity(value) ? value.slug : '';
     dispatch({
@@ -118,7 +118,7 @@ export function useAddDevice() {
   }, [checked]);
 
   const handleTypeChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       console.log(item);
       handleInputChange('typeSlug', item.slug || '');
       handleInputChange('typeName', item.name || '');
@@ -128,7 +128,7 @@ export function useAddDevice() {
   );
 
   const handleModelChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       handleInputChange('modelName', item.name || '');
       handleInputChange('modelSlug', item.slug || '');
       handleInputChange('modelId', item.id || '');
@@ -137,7 +137,7 @@ export function useAddDevice() {
   );
 
   const handleManufacturerChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       handleInputChange('manufacturerName', item.name);
       handleInputChange('manufacturerSlug', item.slug || '');
       handleInputChange('manufacturerId', item.id || '');
@@ -146,7 +146,7 @@ export function useAddDevice() {
   );
 
   const handleWarehouseChange = useCallback(
-    (item: IEntity) => {
+    (item: Entity) => {
       handleInputChange('warehouseId', item.id || '');
       handleInputChange('warehouseName', item.name || '');
       handleInputChange('warehouseSlug', item.slug || '');
@@ -155,7 +155,7 @@ export function useAddDevice() {
   );
 
   const handleContractorChange = useCallback(
-    (item: IContractor) => {
+    (item: Contractor) => {
       handleInputChange('contractorId', item.id || '');
       handleInputChange('providerName', item.name || '');
       handleInputChange('providerSlug', item.slug || '');
@@ -264,7 +264,7 @@ export function useAddDevice() {
     setters: {
       setIsUpdate: (value: boolean) =>
         dispatch({ type: DeviceActionTypes.SET_IS_UPDATE, payload: value }),
-      setDevice: (value: Partial<IDevice>) =>
+      setDevice: (value: Partial<Device>) =>
         dispatch({ type: DeviceActionTypes.SET_DEVICE, payload: value }),
     },
   };
