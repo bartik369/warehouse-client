@@ -24,7 +24,9 @@ export const useDevice = () => {
 
     const handleDeviceIssue = () => {
       openModal('device-issue', {
-        state: {},
+        state: {
+          deviceId: device?.id
+        },
       });
     }
     

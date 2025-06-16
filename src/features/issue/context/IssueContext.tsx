@@ -3,6 +3,7 @@ import {
   useContext,
   Dispatch,
   ReactNode,
+  useEffect,
 } from "react";
 import { IssueAction, IssueState } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
@@ -17,6 +18,7 @@ type IssueContextType = {
     handleReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
     handleSetStepInfo: (step: string) => void;
+    handleStartDeviceIssueWith: (id: string) => void;
   };
   isSuccess: boolean;
   isFetching: boolean;
@@ -24,9 +26,15 @@ type IssueContextType = {
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);
 
-export const IssueProvider = ({ children }: { children: ReactNode }) => {
+export const IssueProvider = ({ children, initialDeviceId }: { children: ReactNode, initialDeviceId?: string }) => {
 
-  const value = useIssue()
+  const value = useIssue();
+  useEffect(() => {
+    if (initialDeviceId) {
+      value.actions.handleStartDeviceIssueWith(initialDeviceId);
+    }
+  }, [initialDeviceId]);
+  
   return (
     <IssueContext.Provider value={value}>
       {children}

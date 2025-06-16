@@ -33,6 +33,12 @@ export const useIssue = () => {
       handleApiError(err);
     }
   };
+  const handleStartDeviceIssueWith = (id: string) => {
+    dispatch({
+      type: IssueActionTypes.SET_DEVICE_ID,
+      payload: id,
+    });
+  }
 
   const handleInputChange = useCallback((field: keyof User, value: string) => {
     dispatch({
@@ -119,6 +125,7 @@ export const useIssue = () => {
         handleReset,
         handleSetUser,
         handleSetStepInfo,
+        handleStartDeviceIssueWith,
     }
   };
 };

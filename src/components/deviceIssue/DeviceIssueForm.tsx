@@ -19,6 +19,7 @@ const DeviceIssueForm = ({ issueId = null }) => {
 
   if (!state.step && !state.user) return <Loader size="sm" color="green" />
 
+
   return (
     <>
       <DeviceIssueSteps

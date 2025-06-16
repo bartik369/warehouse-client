@@ -95,6 +95,18 @@ export function issueReducer(
         isUsersListVisible: false,
         wasSearched: false,
       }
+    case IssueActionTypes.SET_DEVICE_ID: {
+      const exists = state.deviceIssueData.devices.includes(action.payload);
+      return {
+        ...state,
+        deviceIssueData: {
+          ...state.deviceIssueData,
+         devices: exists
+         ? state.deviceIssueData.devices
+         : [...state.deviceIssueData.devices, action.payload]
+        }
+      }
+    }
     default:
       return state;
   }
