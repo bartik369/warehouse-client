@@ -29,6 +29,8 @@ const Device = () => {
     if (params.id) getDevice(params.id);
   }, [params.id]);
 
+  console.log(itemDevice?.isAssigned)
+
   useEffect(() => {
     if (itemDevice?.id) {
       dispatchDeviceInfo(

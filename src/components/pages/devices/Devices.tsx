@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useReducer, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
@@ -6,7 +6,6 @@ import Pagination from "../../pagination/Pagination";
 import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
 import { FilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { deviceIssueReducer, initialState } from "../../deviceIssue/context44/deviceIssueReducer";
 import { setDeviceInfo, resetDeviceInfo } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import { resetFilter } from "../../../utils/constants/constants";
@@ -37,7 +36,7 @@ const Devices = () => {
     }
   }, [])
 
-  const handleCheck = useCallback(
+  const handleCheck = 
     (device: FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
       if (device && e.target) {
         console.log(device)
@@ -58,9 +57,7 @@ const Devices = () => {
       setChecks({
         [device.id]: e.target.checked
       });
-    },
-    [dispatch]
-  );
+    };
 
   if (!devices) {
     return <Loader size="lg" color="grey" />;
