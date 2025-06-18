@@ -309,11 +309,6 @@ export interface DeviceFormActions {
   handleSetTitle: (item: string) => void;
   handleSetType: (item: string) => void;
 }
-export interface UpdateDeviceFormSetters {
-  setDevice: (item: Device) => void;
-  setFieldType: (item: string) => void;
-  setEntity: (item:string) => void;
-}
 
 export interface WarrantyFormState {
   selectedValuesMemo: string;
@@ -324,10 +319,6 @@ export interface WarrantyFormState {
 export interface WarrantyFormActions {
   handleInputChange: (name: keyof Device, value: string) => void;
 }
-// export interface WarrantyFormSetters {
-//   setValue: (value: T) => void;
-//   setDevice: (device: Device) => void;
-// }
 
 export interface DeviceIssueData {
   userId: string,

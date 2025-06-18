@@ -31,7 +31,7 @@ const Select = <T,>({
   getComment
 }: SelectProps<T>) => {
     const { isOpen, setIsOpen, modalRef } = useOutsideClick();
-    const errorMessage = errors[name as keyof ValidationErrors];
+    const errorMessage = errors?.[name as keyof ValidationErrors];
     
     const handleSelect = (option: T) => {
       setIsOpen(false);

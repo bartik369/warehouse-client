@@ -7,7 +7,7 @@ import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
   contractor } from "../../../utils/constants/device";
   import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { addNewContractor } from "../../../utils/constants/constants";
-import { DeviceFormActions, DeviceFormState } from "../../../types/devices";
+import { Device, DeviceFormActions } from "../../../types/devices";
 import { Contractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
@@ -18,13 +18,17 @@ import styles from "./DeviceForm.module.scss";
 registerLocale("ru", ru);
 
 interface WarrantyFormProps<T> {
-  state: DeviceFormState;
+  state: Device;
+  errors: Record<string, string>;
+  isUpdate: boolean;
   actions: DeviceFormActions;
   getId: (item: T) => void;
 }
 const WarrantyForm = <T,>({
   state,
   actions,
+  errors,
+  isUpdate,
 }: WarrantyFormProps<T>) => {
   const { openModal } = useGlobalModal();
   const { data: contractors } = useGetContractorsQuery();
@@ -49,12 +53,12 @@ const WarrantyForm = <T,>({
           showIcon
           dateFormat="dd.MM.yyyy"
           selected={
-            state.device.startWarrantyDate
-              ? new Date(state.device.startWarrantyDate)
+            state.startWarrantyDate
+              ? new Date(state.startWarrantyDate)
               : null
           }
           onChange={(date) => actions.handleStartDateChange(date)}
-          maxDate={state.device.endWarrantyDate ?? undefined}
+          maxDate={state.endWarrantyDate ?? undefined}
           placeholderText={selectDate}
         />
         <div className={styles.label}>{startWarrantyLabel}</div>
@@ -67,26 +71,26 @@ const WarrantyForm = <T,>({
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={state.device.endWarrantyDate
-            ? new Date(state.device.endWarrantyDate)
+          selected={state.endWarrantyDate
+            ? new Date(state.endWarrantyDate)
             : null
           }
           onChange={(date) => actions.handleEndDateChange(date)}
-          minDate={state.device.startWarrantyDate ?? undefined}
+          minDate={state.startWarrantyDate ?? undefined}
           placeholderText={selectDate}
         />
         <div className={styles.label}>{endWarrantyLabel}</div>
       </div>
       <div className={styles.container}>
-        {!state.isUpdate &&
+        {!isUpdate &&
           <Ask onAsk={() => openEntityModal('contractor', addNewContractor)} />
         }
         <Select<Contractor>
           setValue={actions.handleContractorChange}
           items={(contractors || []) as Contractor[]}
           label={contractor}
-          value={state.device.providerName}
-          errors={state.errors}
+          value={state.providerName}
+          errors={errors}
           name="provider"
           getId={(item) => item.id}
           getLabel={(item) => item.name}
@@ -96,9 +100,9 @@ const WarrantyForm = <T,>({
       <Input
         type="text"
         name="warrantyNumber"
-        value={state.device.warrantyNumber || ""}
+        value={state.warrantyNumber || ""}
         label={warrantyNumber}
-        errors={state.errors}
+        errors={errors}
         onChange={(e) =>
           actions.handleInputChange("warrantyNumber", e.target.value)
         }

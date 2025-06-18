@@ -10,8 +10,7 @@ import {
 import Input from "../../ui/input/Input";
 import Ask from "./Ask";
 import Select from "../../ui/select/Select";
-import { Entity, DeviceFormActions } from "../../../types/devices";
-import { DeviceState } from "../../../reducers/device/deviceTypes";
+import { Entity, DeviceFormActions, Device } from "../../../types/devices";
 import {
   deviceName,
   deviceTypeLabel,
@@ -31,8 +30,10 @@ import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { ModalType } from "../../../reducers/modal/modalTypes";
 
 interface DeviceTechnicalSectionProps {
-  state: DeviceState;
+  state: Device;
   actions: DeviceFormActions;
+  errors: Record<string, string>
+  checked: boolean;
   manufacturers: Entity[];
   warehouses: Entity[];
   types: Entity[];
@@ -42,13 +43,14 @@ interface DeviceTechnicalSectionProps {
 const DeviceTechnicalSection = ({
   state,
   actions,
+  errors,
+  checked,
   manufacturers,
   warehouses,
   types,
   models,
 }: DeviceTechnicalSectionProps) => {
   const { openModal } = useGlobalModal();
-
   const openEntityModal = (type: ModalType, title: string) => {
     openModal(type, {
       title,
@@ -64,9 +66,9 @@ const DeviceTechnicalSection = ({
         <Input
           onChange={(e) => actions.handleInputChange("name", e.target.value)}
           type="text"
-          value={state.device.name}
+          value={state.name}
           label={deviceName}
-          errors={state.errors}
+          errors={errors}
           name="name"
         />
         <div className={styles.container}>
@@ -77,8 +79,8 @@ const DeviceTechnicalSection = ({
             setValue={actions.handleTypeChange}
             items={types || []}
             label={deviceTypeLabel}
-            value={state.device.typeName || ""}
-            errors={state.errors}
+            value={state.typeName || ""}
+            errors={errors}
             name="typeName"
             getId={(item: Entity) => item.id}
             getLabel={(item) => item.name}
@@ -92,14 +94,14 @@ const DeviceTechnicalSection = ({
             setValue={actions.handleManufacturerChange}
             items={manufacturers || []}
             label={manufacturersLabel}
-            value={state.device.manufacturerName || ""}
-            errors={state.errors}
+            value={state.manufacturerName || ""}
+            errors={errors}
             name="manufacturerName"
             getId={(item: Entity) => item.id}
             getLabel={(item) => item.name}
           />
         </div>
-        {state.device.typeSlug && state.device.manufacturerSlug && (
+        {state.typeSlug && state.manufacturerSlug && (
           <div className={styles.container}>
             <Ask
               onAsk={() => openEntityModal('model', addNewModel)}
@@ -108,8 +110,8 @@ const DeviceTechnicalSection = ({
               setValue={actions.handleModelChange}
               items={models || []}
               label={modelLabel}
-              value={state.device.modelName || ""}
-              errors={state.errors}
+              value={state.modelName || ""}
+              errors={errors}
               name="modelName"
               getId={(item: Entity) => item.id}
               getLabel={(item) => item.name}
@@ -121,9 +123,9 @@ const DeviceTechnicalSection = ({
             actions.handleInputChange("serialNumber", e.target.value)
           }
           type={"text"}
-          value={state.device.serialNumber || ""}
+          value={state.serialNumber || ""}
           label={serialNumber}
-          errors={state.errors}
+          errors={errors}
           name="serialNumber"
         />
         <Input
@@ -131,9 +133,9 @@ const DeviceTechnicalSection = ({
             actions.handleInputChange("inventoryNumber", e.target.value)
           }
           type={"text"}
-          value={state.device.inventoryNumber || ""}
+          value={state.inventoryNumber || ""}
           label={inventoryNumber}
-          errors={state.errors}
+          errors={errors}
           name="inventoryNumber"
         />
         <Input
@@ -141,34 +143,34 @@ const DeviceTechnicalSection = ({
             actions.handleInputChange("modelCode", e.target.value)
           }
           type={"text"}
-          value={state.device.modelCode || ""}
+          value={state.modelCode || ""}
           label={modelCode}
-          errors={state.errors}
+          errors={errors}
           name="modelCode"
         />
         <Select<Entity>
           setValue={actions.handleWarehouseChange}
           items={warehouses || []}
           label={location}
-          value={state.device.warehouseName || ""}
-          errors={state.errors}
+          value={state.warehouseName || ""}
+          errors={errors}
           name="warehouseId"
           getId={(item: Entity) => item.id}
           getLabel={(item) => item.name}
         />
-        <Number device={state.device} setDevice={actions.handleNumber} />
-        {state.device.typeSlug &&
-          deviceTypes[state.device.typeSlug]?.uniqueFields?.map((item) => (
+        <Number device={state} setDevice={actions.handleNumber} />
+        {state.typeSlug &&
+          deviceTypes[state.typeSlug]?.uniqueFields?.map((item) => (
             <CustomNumber
               key={item.name}
-              device={state.device}
+              device={state}
               setDevice={actions.handleExtNumber}
               item={item}
-              errors={state.errors}
+              errors={errors}
             />
           ))}
         <Toggle
-          checked={state.checked}
+          checked={checked}
           setChecked={actions.handleChecked}
           label={serviceable}
           leftPosition={no}

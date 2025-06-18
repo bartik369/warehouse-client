@@ -11,9 +11,9 @@ import DeviceForm from "../../forms/device/DeviceForm";
 import { handleApiError } from "../../../utils/errors/handleApiError";
 import { useModal } from "../../../hooks/data/useModal";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux/useRedux";
 import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
-import { setDeviceInfo, setDevicePic } from "../../../store/slices/deviceSlice";
-import { useAppDispatch } from "../../../hooks/redux/useRedux";
+import { patchDevice, setDevicePic } from "../../../store/slices/deviceSlice";
 import { deviceTabsMenu } from "../../../utils/data/menus";
 import { editDevice } from "../../../utils/constants/constants";
 import { CiEdit } from "react-icons/ci";
@@ -22,26 +22,22 @@ import styles from "./Device.module.scss";
 const Device = () => {
   const params = useParams();
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
-  const dispatchDeviceInfo = useAppDispatch();
   const { isOpen, setIsOpen } = useModal(false);
-  const { state, actions } = useAddDevice();
+  const { actions } = useAddDevice();
+  const currentFieldType = useAppSelector(state => state.device.fieldType);
+  const dispatch = useAppDispatch();
 
   async function fetchDevice(id: string) {
     try {
       const itemDevice = await getDevice(id).unwrap();
-      dispatchDeviceInfo(
-        setDeviceInfo({
-          device: {
-            id: itemDevice.id,
-            isAssigned: itemDevice.isAssigned,
-            warehouse: {
-              name: itemDevice.warehouse?.name || "",
-              slug: itemDevice.warehouse?.slug || "",
-            },
-          },
-        })
-      );
-      dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ""));
+      dispatch(patchDevice({
+        id: itemDevice.id,
+        isAssigned: itemDevice.isAssigned,
+        warehouseName: itemDevice.warehouse?.name || "",
+        warehouseSlug: itemDevice.warehouse?.slug || "",
+      }))
+      dispatch(setDevicePic(itemDevice.model.imagePath || ""))
+     
     } catch (err: unknown) {
        handleApiError(err);
     }
@@ -55,12 +51,12 @@ const Device = () => {
     <>
       {isOpen && (
         <Modal
-          title={state.fieldType}
+          title={currentFieldType}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           maxWidth={1000}
         >
-          <DeviceForm state={state} actions={actions} />
+          <DeviceForm actions={actions} />
         </Modal>
       )}
       <section className={styles.section}>

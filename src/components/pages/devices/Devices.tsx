@@ -6,7 +6,7 @@ import Pagination from "../../pagination/Pagination";
 import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
 import { FilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { setDeviceInfo, resetDeviceInfo } from "../../../store/slices/deviceSlice";
+import { resetDevice, patchDevice, setStatus } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
@@ -33,31 +33,30 @@ const Devices = () => {
   
   useEffect(() => {
     return () => {
-      dispatch(resetDeviceInfo());
+      dispatch(resetDevice());
     }
   }, []);
+  
 
   const handleCheck = 
     (device: FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
       if (device && e.target) {
         dispatch(
-          setDeviceInfo({
-            device: {
-              id: device.id,
-              warehouse: {
-                name: device.warehouse.name,
-                slug: device.warehouse.slug,
-              },
-              isAssigned: device.isAssigned,
-            },
-            status: e.target.checked,
+          patchDevice({
+            id: device.id,
+            warehouseName: device.warehouse.name,
+            warehouseSlug: device.warehouse.slug,
+            isAssigned: device.isAssigned,
           })
         );
       }
+      dispatch(setStatus(e.target.checked));
       setChecks({
         [device.id]: e.target.checked
       });
     };
+
+    // status: e.target.checked,
 
   if (!devices) return <Loader size="lg" color="grey" />;
 
