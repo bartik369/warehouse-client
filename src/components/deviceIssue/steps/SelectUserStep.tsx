@@ -22,18 +22,20 @@ const SelectUserStep = ({
   actions,
 }: SelectUserStepProps) => {
   const { state } = useIssueContext();
-  console.log(state.query)
+
+  console.log(state.deviceIssueData.devices)
+
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
         <div className={styles.input}>
           <input
-            value={state.query}
+            value={state.userQuery}
             type="text"
             placeholder={placeholderUserSearch}
-            onChange={(e) => actions.handleInputChange("email", e.target.value)}
+            onChange={(e) => actions.handleUserChange("email", e.target.value)}
           />
-          {state.query.length > 0 && (
+          {state.userQuery.length > 0 && (
             <CgCloseO className={styles.icon} onClick={actions.handleReset} />
           )}
         </div>

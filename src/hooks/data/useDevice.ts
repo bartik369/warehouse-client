@@ -3,7 +3,6 @@ import { useAppSelector } from '../redux/useRedux';
 import { deviceActionsMenu } from '../../utils/data/menus';
 import { useGlobalModal } from './useGlobalModal';
 import { accept, deviceInfo, move, issue } from '../../utils/constants/device';
-import { useEffect } from 'react';
 
 export const useDevice = () => {
     const { openModal } = useGlobalModal();
@@ -11,23 +10,18 @@ export const useDevice = () => {
     const device = useAppSelector(state => state.device.device);
     const { isAssigned } = device || {}
     const isDevicePage = /^\/devices\/[a-f0-9-]+$/.test(location.pathname);
-
+    
     const filteredMenu = deviceActionsMenu.filter((item) => {
-        if (isAssigned) {
+          if (isAssigned) {
             return !isDevicePage
             ? [accept, deviceInfo].includes(item.title)
             : [accept].includes(item.title)
+        } else {
+          return isDevicePage 
+          ?  [move, issue].includes(item.title)
+          :  item.title !== accept
         }
-        return isDevicePage 
-        ?  [move, issue].includes(item.title)
-        :  item.title !== accept
     });
-
-    useEffect(() => {
-
-    }, [isAssigned])
-
-    console.log(device?.isAssigned)
 
     const handleDeviceIssue = () => {
       openModal('device-issue', {

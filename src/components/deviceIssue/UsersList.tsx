@@ -1,11 +1,11 @@
-import { memo } from "react";
-import { DeviceIssueState } from "./context44/deviceIssueTypes";
-import { BaseUserQuery } from "../../types/user";
+import { memo } from "react"
+import { BaseUserQuery, User } from "../../types/user";
 import { statusLoading, statusNoData } from "../../utils/constants/constants";
 import styles from "./UsersList.module.scss";
+import { IssueState } from "../../features/issue/model/issueTypes";
 
 interface UsersListProps {
-  state: DeviceIssueState;
+  state: IssueState;
   actions: BaseUserQuery;
   isSuccess: boolean;
   isFetching: boolean;
@@ -25,7 +25,7 @@ const UsersList = memo(({
   } else if (!state.users.length) {
     return null;
   } else {
-    content = state.users.map((item) => (
+    content = state.users.map((item: User) => (
       <div
         className={styles.list}
         key={item.id}

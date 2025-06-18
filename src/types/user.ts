@@ -69,7 +69,7 @@ export interface UserFormActions {
 }
 
 export interface BaseUserQuery {
-    handleInputChange: (name: keyof User, e: string) => void;
+    handleUserChange: (name: keyof User, e: string) => void;
     handleDeviceIssue: (id: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => void;

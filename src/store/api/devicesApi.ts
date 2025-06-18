@@ -49,6 +49,7 @@ export const devicesApi = createApi({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
       }),
     }),
+    
     createDevice: build.mutation<{ message: string; device: Device }, Device>(
       {
         query(body) {
@@ -60,6 +61,12 @@ export const devicesApi = createApi({
         },
       }
     ),
+     searchDevices: build.query<Device[], string>({
+      query: (q: string) => ({
+        url: `${import.meta.env.VITE_SEARCH_DEVICES}`,
+        params: { q }
+      }),
+    }),
     updateDevice: build.mutation<
       { message: string; device: Device },
       { id: string } & Partial<Device>
@@ -83,4 +90,5 @@ export const {
   useGetDevicesQuery,
   useLazyGetDeviceQuery,
   useGetDeviceOptionsQuery,
+  useLazySearchDevicesQuery,
 } = devicesApi;

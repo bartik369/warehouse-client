@@ -8,6 +8,7 @@ import LocationInfo from "./LocationInfo";
 import Tabs from "../../tabs/Tabs";
 import Modal from "../../modal/Modal";
 import DeviceForm from "../../forms/device/DeviceForm";
+import { handleApiError } from "../../../utils/errors/handleApiError";
 import { useModal } from "../../../hooks/data/useModal";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
@@ -25,19 +26,14 @@ const Device = () => {
   const { isOpen, setIsOpen } = useModal(false);
   const { state, actions } = useAddDevice();
 
-  useEffect(() => {
-    if (params.id) getDevice(params.id);
-  }, [params.id]);
-
-  console.log(itemDevice?.isAssigned)
-
-  useEffect(() => {
-    if (itemDevice?.id) {
+  async function fetchDevice(id: string) {
+    try {
+      const itemDevice = await getDevice(id).unwrap();
       dispatchDeviceInfo(
         setDeviceInfo({
           device: {
             id: itemDevice.id,
-            isAssigned: state.device.isAssigned,
+            isAssigned: itemDevice.isAssigned,
             warehouse: {
               name: itemDevice.warehouse?.name || "",
               slug: itemDevice.warehouse?.slug || "",
@@ -46,11 +42,14 @@ const Device = () => {
         })
       );
       dispatchDeviceInfo(setDevicePic(itemDevice.model.imagePath || ""));
+    } catch (err: unknown) {
+       handleApiError(err);
     }
-    return () => {
-      dispatchDeviceInfo(setDevicePic(""));
-    };
-  }, [itemDevice]);
+  }
+
+  useEffect(() => {
+    if (params.id) fetchDevice(params.id);
+  }, [params.id]);
 
   return (
     <>
@@ -61,10 +60,7 @@ const Device = () => {
           setIsOpen={setIsOpen}
           maxWidth={1000}
         >
-          <DeviceForm 
-            state={state} 
-            actions={actions} 
-          />
+          <DeviceForm state={state} actions={actions} />
         </Modal>
       )}
       <section className={styles.section}>

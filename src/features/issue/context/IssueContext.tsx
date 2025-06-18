@@ -14,11 +14,13 @@ type IssueContextType = {
   dispatch: Dispatch<IssueAction>;
   actions: {
     handleDeviceIssue: (id: string) => Promise<void>;
-    handleInputChange: (field: keyof User, value: string) => void;
+    handleUserChange: (field: keyof User, value: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
     handleSetStepInfo: (step: string) => void;
     handleStartDeviceIssueWith: (id: string) => void;
+    handleGetDevice: (query: string) => void;
+    handleDeviceChange: (value: string) => void;
   };
   isSuccess: boolean;
   isFetching: boolean;
@@ -27,8 +29,8 @@ type IssueContextType = {
 const IssueContext = createContext<IssueContextType | undefined>(undefined);
 
 export const IssueProvider = ({ children, initialDeviceId }: { children: ReactNode, initialDeviceId?: string }) => {
-
   const value = useIssue();
+  
   useEffect(() => {
     if (initialDeviceId) {
       value.actions.handleStartDeviceIssueWith(initialDeviceId);

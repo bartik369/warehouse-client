@@ -1,12 +1,8 @@
-import { DeviceInfo } from '../../../types/devices';
 import { useDevice } from '../../../hooks/data/useDevice';
 import styles from './HeaderMenu.module.scss';
 
-interface HeaderMenuProps {
-  device: DeviceInfo;
-}
 
-const HeaderMenu = ({ device }:HeaderMenuProps) => {
+const HeaderMenu = () => {
   const { filteredMenu, handleDeviceAction} = useDevice();
     return (
       <nav className={styles.menu}>

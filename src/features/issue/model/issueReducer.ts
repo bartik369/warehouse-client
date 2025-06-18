@@ -25,14 +25,16 @@ export const initialIssueState: IssueState = {
   step: "select_user",
   issueId: null,
   errors: {},
-  query: "",
+  userQuery: "",
+  deviceQuery: "",
   isUsersListVisible: false,
   wasSearched: false,
   deviceIssueData: {
     userId: "",
     processId: "",
     devices: [],
-  }
+  },
+  assignedDevices: [],
 };
 
 export function issueReducer(
@@ -43,7 +45,7 @@ export function issueReducer(
     case IssueActionTypes.SET_USER:
       return { ...state, user: action.payload };
     case IssueActionTypes.SET_USERS:
-      return { ...state, users: action.payload };  
+      return { ...state, users: action.payload };
     case IssueActionTypes.NEXT_STEP: {
       const currentStep = steps.indexOf(state.step);
       const nextStep = steps[currentStep + 1] ?? currentStep;
@@ -58,6 +60,15 @@ export function issueReducer(
       return {
         ...state,
         issueId: action.payload,
+      };
+    case IssueActionTypes.SET_ASSIGNED_DEVICES:
+      // const existDeviceMap = new Map(state.assignedDevices.map(item => [item.id, item]));
+
+      return {
+        ...state,
+        assignedDevices: {
+          ...state.assignedDevices,
+        },
       };
     case IssueActionTypes.RESET: {
       return {
@@ -77,12 +88,18 @@ export function issueReducer(
       };
     case IssueActionTypes.RESET_ERROR:
       return { ...state, errors: {} };
-    case IssueActionTypes.SET_QUERY:
-      return { ...state, query: action.payload };
+    case IssueActionTypes.SET_USER_QUERY:
+      return { ...state, userQuery: action.payload };
+    case IssueActionTypes.RESET_USER_QUERY:
+      return { ...state, userQuery: "" };
+    case IssueActionTypes.SET_DEVICE_QUERY:
+      return { ...state, deviceQuery: action.payload };
+    case IssueActionTypes.RESET_DEVICE_QUERY:
+      return { ...state, deviceQuery: "" };
     case IssueActionTypes.SET_USERS_LIST_VISIBLE:
       return { ...state, isUsersListVisible: action.payload };
     case IssueActionTypes.SET_WAS_SEARCHED:
-          return { ...state, wasSearched: action.payload };
+      return { ...state, wasSearched: action.payload };
     case IssueActionTypes.SET_FULL_RESET:
       return {
         ...state,
@@ -91,21 +108,22 @@ export function issueReducer(
         step: steps[0],
         issueId: null,
         errors: {},
-        query: '',
+        userQuery: "",
+        deviceQuery: "",
         isUsersListVisible: false,
         wasSearched: false,
-      }
+      };
     case IssueActionTypes.SET_DEVICE_ID: {
       const exists = state.deviceIssueData.devices.includes(action.payload);
       return {
         ...state,
         deviceIssueData: {
           ...state.deviceIssueData,
-         devices: exists
-         ? state.deviceIssueData.devices
-         : [...state.deviceIssueData.devices, action.payload]
-        }
-      }
+          devices: exists
+            ? state.deviceIssueData.devices
+            : [...state.deviceIssueData.devices, action.payload],
+        },
+      };
     }
     default:
       return state;

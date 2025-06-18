@@ -80,7 +80,7 @@ export const adminMenu = [
 
 export const deviceIssueSteps = [
     { id: 'select_user', label: 'Выбор пользователя' },
-    { id: 'review_document', label: 'Просмотр документа' },
+    { id: 'review_document', label: 'Список оборудования' },
     { id: 'sign_document', label: 'Подпись документа' },
   ];
   

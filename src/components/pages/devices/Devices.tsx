@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import DeviceItems from "./DeviceItems";
 import Loader from "../../ui/loader/Loader";
 import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
@@ -30,16 +30,16 @@ const Devices = () => {
   } = useDeviceFilters();
   const dispatch = useAppDispatch();
   const [checks, setChecks] = useState({});
+  
   useEffect(() => {
     return () => {
       dispatch(resetDeviceInfo());
     }
-  }, [])
+  }, []);
 
   const handleCheck = 
     (device: FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
       if (device && e.target) {
-        console.log(device)
         dispatch(
           setDeviceInfo({
             device: {
@@ -59,16 +59,12 @@ const Devices = () => {
       });
     };
 
-  if (!devices) {
-    return <Loader size="lg" color="grey" />;
-  }
+  if (!devices) return <Loader size="lg" color="grey" />;
 
   return (
     <>
     <div className={styles.downloadFile}>
-      <OfficeFileBtn
-       stack={devices?.devices || []} 
-       />
+      <OfficeFileBtn stack={devices?.devices || []} />
     </div>
       <div className={styles.container}>
         <table className={styles.table}>
