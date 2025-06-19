@@ -1,6 +1,8 @@
 import { memo } from "react";
+import Actions from "../device/Actions";
+import UserSuggestionList from "./UserSuggestionList";
+import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
-import { User } from "../../../types/user";
 import {
   placeholderUserSearch,
   userRoleLabel,
@@ -8,23 +10,21 @@ import {
 } from "../../../utils/constants/constants";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
-import UserSuggestionList from "./UserSuggestionList";
 import { ListRoleRes, UserRoleFormActions } from "../../../types/access";
 import styles from "./UserRolesForm.module.scss";
-import Actions from "../device/Actions";
 
 interface UserRolesFormProps {
   roles: ListRoleRes[];
   actions: UserRoleFormActions;
   state: UserRoleState;
-  userState: User[];
   title: string;
   isFetching: boolean;
   isSuccess: boolean;
 }
 
 const UserRolesForm = memo(
-  ({ roles, actions, state, userState, title, isFetching, isSuccess }: UserRolesFormProps) => {
+  ({ roles, actions, state, title, isFetching, isSuccess }: UserRolesFormProps) => {
+    const users = useAppSelector(state => state.user.users);
     return (
       <>
         <h2 className={styles.title}>{title}</h2>
@@ -41,7 +41,7 @@ const UserRolesForm = memo(
           {state.isUsersListVisible && (
             <UserSuggestionList 
             state={state}
-            userState={userState} 
+            userState={users} 
             actions={actions}
             isSuccess={isSuccess}
             isFetching={isFetching}

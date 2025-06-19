@@ -1,5 +1,5 @@
-import { Device, DeviceMedia } from "./../../types/devices";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Device, DeviceMedia } from './../../types/devices';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type DeviceAction = {
   device: Device;
@@ -15,58 +15,58 @@ type DeviceAction = {
 };
 const initialState: DeviceAction = {
   device: {
-    id: "",
-    name: "",
-    inventoryNumber: "",
-    modelId: "",
-    modelName: "",
-    modelSlug: "",
-    modelCode: "",
-    serialNumber: "",
+    id: '',
+    name: '',
+    inventoryNumber: '',
+    modelId: '',
+    modelName: '',
+    modelSlug: '',
+    modelCode: '',
+    serialNumber: '',
     weight: 0,
     screenSize: 0,
     memorySize: 0,
     inStock: true,
     isFunctional: true,
     isAssigned: false,
-    warehouseId: "",
-    warehouseName: "",
-    warehouseSlug: "",
-    description: "",
-    typeName: "",
-    typeSlug: "",
-    typeId: "",
-    manufacturerName: "",
-    manufacturerSlug: "",
-    manufacturerId: "",
-    addedById: "",
-    updatedById: "",
+    warehouseId: '',
+    warehouseName: '',
+    warehouseSlug: '',
+    description: '',
+    typeName: '',
+    typeSlug: '',
+    typeId: '',
+    manufacturerName: '',
+    manufacturerSlug: '',
+    manufacturerId: '',
+    addedById: '',
+    updatedById: '',
     price_with_vat: 0,
     price_without_vat: 0,
     residual_price: 0,
-    warrantyNumber: "",
+    warrantyNumber: '',
     startWarrantyDate: null,
     endWarrantyDate: null,
-    providerName: "",
-    providerSlug: "",
-    contractorId: "",
+    providerName: '',
+    providerSlug: '',
+    contractorId: '',
   },
   devices: [],
   errors: {},
-  title: "",
-  fieldType: "",
-  itemType: "",
+  title: '',
+  fieldType: '',
+  itemType: '',
   isUpdate: false,
   checked: true,
   media: {
-    prevImg: "",
+    prevImg: '',
     file: null,
   },
   status: false,
 };
 
 const deviceSlice = createSlice({
-  name: "device",
+  name: 'device',
   initialState,
   reducers: {
     setError: (state, action: PayloadAction<Record<string, string>>) => {
@@ -100,7 +100,6 @@ const deviceSlice = createSlice({
       state: DeviceAction,
       action: PayloadAction<{ field: K; value: Device[K] }>
     ) => {
-      console.log(action.payload)
       state.device[action.payload.field] = action.payload.value;
     },
     patchDevice: (state, action: PayloadAction<Partial<Device>>) => {
@@ -113,7 +112,7 @@ const deviceSlice = createSlice({
       if (state?.media) state.media.prevImg = action.payload;
     },
     resetDevicePic: (state) => {
-      state.media.prevImg = ""; 
+      state.media.prevImg = ''; 
     },
     setDeviceFile: (state, action: PayloadAction<File | null>) => {
       if (state?.media)

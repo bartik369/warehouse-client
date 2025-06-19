@@ -5,9 +5,8 @@ import { grantAccess } from "../../../../utils/constants/constants";
 import { useGetRolesListQuery } from "../../../../store/api/rolesApi";
 import styles from './GrantUserRoles.module.scss';
 
-
 const GrantUserRoles = () => {
-  const { actions, roleState, userState } = useUserRoles();
+  const { actions, roleState } = useUserRoles();
   const { data: roles, isFetching, isSuccess } = useGetRolesListQuery();
 
   return (
@@ -17,7 +16,6 @@ const GrantUserRoles = () => {
           roles={roles || []}
           actions={actions}
           state={roleState}
-          userState={userState.users}
           title={grantAccess}
           isFetching={isFetching}
           isSuccess={isSuccess}

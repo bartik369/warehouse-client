@@ -1,27 +1,26 @@
-import { email } from './../../utils/constants/constants';
 import { useCallback, useEffect, useReducer } from 'react';
 import { useLocation, useNavigate} from 'react-router-dom';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { toast } from 'react-toastify';
-import { userReducer, userInitialState } from '../../reducers/user/userReducer';
 import { userRoleReducer, userRoleInitialState } from '../../reducers/roles/userRoleReducer';
+import { useAppDispatch } from '../redux/useRedux';
 import { UserRole } from '../../types/access';
 import { UserRoleActionsTypes } from '../../reducers/roles/userRoleTypes';
 import { useLazyGetFilteredUsersQuery } from '../../store/api/userApi';
 import { useLazyGetUserRolesQuery } from '../../store/api/rolesApi';
 import { FormValidation, ValidateField } from '../../utils/validation/UserRoleValidation';
 import { useDebounce } from './useDebounce.ts';
-import { UserActionTypes } from '../../reducers/user/userTypes';
 import { useGrantRoleMutation } from '../../store/api/rolesApi';
 import { User } from '../../types/user';
+import { resetUsers, setUsers } from '../../store/slices/userSlice';
 
 export const useUserRoles = () => {
-  const  [userState, dispatchUser]  = useReducer(userReducer, userInitialState);
   const  [roleState, dispatchUserRole]  = useReducer(userRoleReducer, userRoleInitialState);
   const { role, query } = roleState;
   const debouncedQuery = useDebounce(query, 700);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
   const [fetchUsers] = useLazyGetFilteredUsersQuery();
   const [fetchUserRolesData] = useLazyGetUserRolesQuery();
   const [grantRole] = useGrantRoleMutation();
@@ -33,7 +32,8 @@ export const useUserRoles = () => {
         payload: true,
       });
       const data = await fetchUsers(debouncedQuery).unwrap();
-        dispatchUser({ type: UserActionTypes.SET_USERS, payload: data });
+        dispatch(setUsers(data));
+        // dispatchUser({ type: UserActionTypes.SET_USERS, payload: data });
     } catch (err: unknown) {
       handleApiError(err);
     }
@@ -52,7 +52,7 @@ export const useUserRoles = () => {
     } else {
       params.delete('search');
       navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
-      dispatchUser({ type: UserActionTypes.SET_USERS, payload: []});
+      dispatch(resetUsers());
       dispatchUserRole({
         type: UserRoleActionsTypes.SET_WAS_SEARCHED,
         payload: false,
@@ -140,7 +140,6 @@ export const useUserRoles = () => {
     
   return { 
     roleState,
-    userState,
     actions: {
       handleInputChange,
       handleAddUserRole,

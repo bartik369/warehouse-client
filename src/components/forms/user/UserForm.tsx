@@ -12,11 +12,10 @@ import {
 } from "../../../utils/constants/constants";
 import { FieldUserFormConfig } from "../../../types/content";
 import { User, UserFormActions } from "../../../types/user";
-import { UserState } from "../../../reducers/user/userTypes";
+import { useAppSelector } from "../../../hooks/redux/useRedux";
 import styles from "./UserForm.module.scss";
 
 interface UserFormProps {
-  state: UserState;
   actions: UserFormActions;
   departments: Entity[];
   locations: Entity[];
@@ -28,9 +27,12 @@ const UserForm = memo(({
   locations,
   fields,
   actions,
-  state,
 }: UserFormProps) => {
   const dataSources = { locations, departments };
+  const user = useAppSelector(state => state.user.user);
+  const errors = useAppSelector(state => state.user.errors);
+  const checked = useAppSelector(state => state.user.checked);
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>{addUserTitle}</div>
@@ -43,9 +45,9 @@ const UserForm = memo(({
                 label={field.label}
                 type="text"
                 name={field.name}
-                value={state.user[field.name] as keyof User}
+                value={user[field.name] as keyof User}
                 placeholder={field.placeholder}
-                errors={state.errors}
+                errors={errors}
                 onChange={(e) =>
                   actions.handleInputChange(field.name, e.target.value)
                 }
@@ -69,8 +71,8 @@ const UserForm = memo(({
                 items={items || []}
                 label={field.label || ""}
                 name={field.name}
-                value={state.user[field.name] as keyof User}
-                errors={state.errors}
+                value={user[field.name] as keyof User}
+                errors={errors}
                 getId={(item: Entity) => item.id}
                 getLabel={(item) => item.name}
               />
@@ -78,7 +80,7 @@ const UserForm = memo(({
           }
         })}
         <Toggle
-          checked={state.checked}
+          checked={checked}
           setChecked={actions.handleChecked}
           label={accountIsActive}
           leftPosition={no}

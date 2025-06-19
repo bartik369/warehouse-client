@@ -15,11 +15,13 @@ import { deviceIssueApi } from './api/deviceIssueApi';
 import authReducer from './slices/authSlice';
 import { modalReducer } from '../reducers/modal/modalReducer';
 import deviceReducer from './slices/deviceSlice';
+import userReducer from './slices/userSlice';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     device: deviceReducer,
+    user: userReducer,
     modal: modalReducer,
     [authApi.reducerPath]: authApi.reducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
