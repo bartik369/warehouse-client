@@ -12,8 +12,9 @@ import { handleApiError } from "../../../utils/errors/handleApiError";
 import { useModal } from "../../../hooks/data/useModal";
 import { useAddDevice } from "../../../hooks/data/useAddDevice";
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux/useRedux";
+import { RootState } from "../../../store/store";
 import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
-import { patchDevice, setDevicePic } from "../../../store/slices/deviceSlice";
+import { patchDevice, resetDevice, resetStatus, setDevicePic } from "../../../store/slices/deviceSlice";
 import { deviceTabsMenu } from "../../../utils/data/menus";
 import { editDevice } from "../../../utils/constants/constants";
 import { CiEdit } from "react-icons/ci";
@@ -24,7 +25,7 @@ const Device = () => {
   const [getDevice, { data: itemDevice }] = useLazyGetDeviceQuery();
   const { isOpen, setIsOpen } = useModal(false);
   const { actions } = useAddDevice();
-  const currentFieldType = useAppSelector(state => state.device.fieldType);
+  const currentFieldType = useAppSelector((state:RootState) => state.device.fieldType);
   const dispatch = useAppDispatch();
 
   async function fetchDevice(id: string) {
@@ -46,6 +47,13 @@ const Device = () => {
   useEffect(() => {
     if (params.id) fetchDevice(params.id);
   }, [params.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetDevice());
+      dispatch(resetStatus());
+    }
+  }, []);
 
   return (
     <>

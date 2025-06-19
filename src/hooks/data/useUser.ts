@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../types/user';
 import { useAppDispatch, useAppSelector } from '../redux/useRedux';
+import { RootState } from '../../store/store';
 import { handleApiError } from '../../utils/errors/handleApiError';
 import { useCreateUserMutation } from '../../store/api/userApi';
 import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
@@ -12,8 +13,8 @@ export const useUser = () => {
   const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const currentUser = useAppSelector(state => state.user.user);
-  const currentChecked = useAppSelector(state => state.user.checked);
+  const currentUser = useAppSelector((state:RootState) => state.user.user);
+  const currentChecked = useAppSelector((state:RootState) => state.user.checked);
 
   const handleInputChange = useCallback(
     <T extends string | User>(field: keyof User, value: T) => {

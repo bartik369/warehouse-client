@@ -10,6 +10,7 @@ import {
 } from "../../../utils/constants/constants";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
+import { RootState } from "../../../store/store";
 import { ListRoleRes, UserRoleFormActions } from "../../../types/access";
 import styles from "./UserRolesForm.module.scss";
 
@@ -24,7 +25,7 @@ interface UserRolesFormProps {
 
 const UserRolesForm = memo(
   ({ roles, actions, state, title, isFetching, isSuccess }: UserRolesFormProps) => {
-    const users = useAppSelector(state => state.user.users);
+    const users = useAppSelector((state:RootState) => state.user.users);
     return (
       <>
         <h2 className={styles.title}>{title}</h2>

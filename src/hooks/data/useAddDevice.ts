@@ -13,6 +13,7 @@ import {
 } from "../../store/slices/deviceSlice";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../redux/useRedux";
+import { RootState } from "../../store/store";
 import {
   useCreateDeviceMutation,
   useLazyGetDeviceQuery,
@@ -34,9 +35,9 @@ import { Entity, Device } from "./../../types/devices";
 export function useAddDevice() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
-  const currentDevice = useAppSelector((state) => state.device.device);
-  const currentItemType = useAppSelector((state) => state.device.itemType);
-  const currentChecked = useAppSelector((state) => state.device.checked);
+  const currentDevice = useAppSelector((state:RootState) => state.device.device);
+  const currentItemType = useAppSelector((state:RootState) => state.device.itemType);
+  const currentChecked = useAppSelector((state:RootState) => state.device.checked);
 
   const locationPath = useLocation();
   const exceptionPath = /add-device$/.test(locationPath.pathname);

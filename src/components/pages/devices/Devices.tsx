@@ -6,7 +6,7 @@ import Pagination from "../../pagination/Pagination";
 import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
 import { FilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { resetDevice, patchDevice, setStatus } from "../../../store/slices/deviceSlice";
+import { resetDevice, patchDevice, setStatus, resetStatus } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
 import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
@@ -34,10 +34,10 @@ const Devices = () => {
   useEffect(() => {
     return () => {
       dispatch(resetDevice());
+      dispatch(resetStatus());
     }
   }, []);
   
-
   const handleCheck = 
     (device: FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => {
       if (device && e.target) {

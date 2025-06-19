@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../redux/useRedux';
+import { RootState } from '../../store/store';
 import { deviceActionsMenu } from '../../utils/data/menus';
 import { useGlobalModal } from './useGlobalModal';
 import { accept, deviceInfo, move, issue } from '../../utils/constants/device';
@@ -7,7 +8,7 @@ import { accept, deviceInfo, move, issue } from '../../utils/constants/device';
 export const useDevice = () => {
     const { openModal } = useGlobalModal();
     const navigate = useNavigate();
-    const device = useAppSelector(state => state.device.device);
+    const device = useAppSelector((state:RootState) => state.device.device);
     const { isAssigned } = device || {}
     const isDevicePage = /^\/devices\/[a-f0-9-]+$/.test(location.pathname);
     

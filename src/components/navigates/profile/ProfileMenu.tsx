@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
+import { RootState } from '../../../store/store';
 import {useLogoutUserMutation} from '../../../store/api/authApi';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { profileMenuData } from '../../../utils/data/menus';
@@ -12,7 +13,7 @@ import { TbLogout2 } from "react-icons/tb";
 import styles from './ProfileMenu.module.scss';
 
 const ProfileMenu = () => {
-    const user = useAppSelector(store => store.auth.user);
+    const user = useAppSelector((state:RootState) => state.auth.user);
     const navigate = useNavigate();
     const [logout] = useLogoutUserMutation();
     const { isOpen, openModalHandler, modalRef } = useOutsideClick();

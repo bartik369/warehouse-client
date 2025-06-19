@@ -131,7 +131,7 @@ const deviceSlice = createSlice({
     },
     resetStatus: (state) => {
       state.status = false;
-    }
+    },
   },
 });
 
@@ -153,5 +153,5 @@ export const {
   resetDeviceFile,
   setChecked,
   setStatus, 
-  resetStatus
+  resetStatus,
  } = deviceSlice.actions;

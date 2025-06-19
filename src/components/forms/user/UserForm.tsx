@@ -4,6 +4,8 @@ import Select from "../../ui/select/Select";
 import Toggle from "../../ui/checkbox/Toggle";
 import { Entity } from "../../../types/devices";
 import Actions from "../device/Actions";
+import { useAppSelector } from "../../../hooks/redux/useRedux";
+import { RootState } from "../../../store/store";
 import {
   no,
   accountIsActive,
@@ -12,7 +14,6 @@ import {
 } from "../../../utils/constants/constants";
 import { FieldUserFormConfig } from "../../../types/content";
 import { User, UserFormActions } from "../../../types/user";
-import { useAppSelector } from "../../../hooks/redux/useRedux";
 import styles from "./UserForm.module.scss";
 
 interface UserFormProps {
@@ -29,9 +30,9 @@ const UserForm = memo(({
   actions,
 }: UserFormProps) => {
   const dataSources = { locations, departments };
-  const user = useAppSelector(state => state.user.user);
-  const errors = useAppSelector(state => state.user.errors);
-  const checked = useAppSelector(state => state.user.checked);
+  const user = useAppSelector((state:RootState) => state.user.user);
+  const errors = useAppSelector((state:RootState) => state.user.errors);
+  const checked = useAppSelector((state:RootState) => state.user.checked);
 
   return (
     <div className={styles.container}>
