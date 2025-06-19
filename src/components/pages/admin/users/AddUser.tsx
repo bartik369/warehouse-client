@@ -7,11 +7,10 @@ import { useUser } from "../../../../hooks/data/useUser";
 const AddUser = () => {
   const { data: locations } = useGetLocationsQuery();
   const { data: departments } = useGetDepartmentsQuery();
-  const  {state, actions } = useUser();
+  const  { actions } = useUser();
   return (
     <section>
       <UserForm
-        state={state}
         actions={actions}
         fields={createFormFields}
         locations={locations || []}

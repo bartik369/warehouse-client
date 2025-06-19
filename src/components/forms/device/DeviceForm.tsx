@@ -6,6 +6,7 @@ import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
 import DevicePreview from "./DevicePreview";
 import { ToastContainer } from "react-toastify";
+import { RootState } from "../../../store/store";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../store/slices/deviceSlice";
 import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
@@ -28,10 +29,10 @@ const DeviceForm = memo(({actions }: DeviceFormProps) => {
   const { data: types } = useGetTypesQuery();
   const [getModels, { data: models }] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
-  const state = useAppSelector(state => state.device.device);
-  const errors = useAppSelector(state => state.device.errors);
-  const isUpdate = useAppSelector(state => state.device.isUpdate);
-  const checked = useAppSelector(state => state.device.checked);
+  const state = useAppSelector((state:RootState) => state.device.device);
+  const errors = useAppSelector((state:RootState) => state.device.errors);
+  const isUpdate = useAppSelector((state:RootState) => state.device.isUpdate);
+  const checked = useAppSelector((state:RootState) => state.device.checked);
   
 
   // Allow model query by manufacturer and type
