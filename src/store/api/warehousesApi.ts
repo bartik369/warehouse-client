@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 import { Entity } from "../../types/devices";
+import { Warehouse } from "../../types/locations";
 
 export const warehousesApi = createApi({
   reducerPath: "warehousesApi",
@@ -46,6 +47,11 @@ export const warehousesApi = createApi({
       }),
       invalidatesTags: ["Warehouse"],
     }),
+    getWarehousesByUser: build.query<Warehouse[], string>({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_WAREHOUSES_BY_USER}${id}`,
+      })
+    })
   }),
 });
 
@@ -55,4 +61,5 @@ export const {
   useLazyGetWarehouseQuery,
   useUpdateWarehouseMutation,
   useLazyGetAssignableWarehousesQuery,
+  useLazyGetWarehousesByUserQuery,
 } = warehousesApi;

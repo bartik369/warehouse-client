@@ -1,34 +1,38 @@
-import { IssueState, IssueAction, IssueStepType, IssueActionTypes } from "./issueTypes";
+import {
+  IssueState,
+  IssueAction,
+  IssueStepType,
+  IssueActionTypes,
+  IssueStepTitle,
+} from "./issueTypes";
 
 const steps: IssueStepType[] = [
+  "select_warehouse",
   "select_user",
   "review_document",
   "sign_document",
 ];
+const titles: IssueStepTitle[] = [
+  "Выбор склада",
+  "Выбор пользователя",
+  "Выбор оборудования",
+  "Подпись документа",
+]
 export const initialIssueState: IssueState = {
-  user: {
-    id: "",
-    userName: "",
-    email: "",
-    workId: "",
-    firstNameRu: "",
-    lastNameRu: "",
-    firstNameEn: "",
-    lastNameEn: "",
-    isActive: true,
-    department: "",
-    departmentId: "",
-    location: "",
-    locationId: "",
-  },
-  users: [],
-  step: "select_user",
+  step: "select_warehouse",
+  title: 'Выбор склада',
   issueId: null,
   errors: {},
   userQuery: "",
   deviceQuery: "",
   isUsersListVisible: false,
   wasSearched: false,
+  warehouse: {
+    id: "",
+    name: "",
+    slug: "",
+  },
+  warehouses: [],
   deviceIssueData: {
     userId: "",
     processId: "",
@@ -42,38 +46,57 @@ export function issueReducer(
   action: IssueAction
 ): IssueState {
   switch (action.type) {
-    case IssueActionTypes.SET_USER:
-      return { ...state, user: action.payload };
-    case IssueActionTypes.SET_USERS:
-      return { ...state, users: action.payload };
     case IssueActionTypes.NEXT_STEP: {
       const currentStep = steps.indexOf(state.step);
       const nextStep = steps[currentStep + 1] ?? currentStep;
-      return { ...state, step: nextStep };
+      const currentTitle = titles.indexOf(state.title);
+      const nextTitle = titles[currentTitle + 1] ?? currentTitle;
+      return {
+         ...state, 
+        step: nextStep,
+        title: nextTitle,
+       };
     }
     case IssueActionTypes.PREV_STEP: {
       const currentStep = steps.indexOf(state.step);
       const prevStep = steps[currentStep - 1] ?? currentStep;
-      return { ...state, step: prevStep };
+      const currentTitle = titles.indexOf(state.title);
+      const prevTitle = titles[currentTitle - 1] ?? currentTitle;
+      return { 
+        ...state, 
+        step: prevStep,
+        title: prevTitle,
+       };
     }
+    case IssueActionTypes.SET_STEP:
+      return {
+        ...state,
+        step: action.payload
+      }
+      case IssueActionTypes.RESET_STEP:
+        return {
+          ...state,
+          step: "select_warehouse"
+        }
     case IssueActionTypes.SET_ISSUE_ID:
       return {
         ...state,
         issueId: action.payload,
       };
-    case IssueActionTypes.SET_ASSIGNED_DEVICES:
-      // const existDeviceMap = new Map(state.assignedDevices.map(item => [item.id, item]));
-
+    case IssueActionTypes.SET_ASSIGNED_DEVICES: {
+      const existingIds = new Set(state.assignedDevices.map((item) => item.id));
+      const newDevices = action.payload.filter(
+        (item) => !existingIds.has(item.id)
+      );
       return {
         ...state,
-        assignedDevices: {
-          ...state.assignedDevices,
-        },
+        assignedDevices: [...state.assignedDevices, ...newDevices],
       };
+    }
+
     case IssueActionTypes.RESET: {
       return {
         ...state,
-        user: null,
         step: steps[0],
         issueId: null,
       };
@@ -103,8 +126,6 @@ export function issueReducer(
     case IssueActionTypes.SET_FULL_RESET:
       return {
         ...state,
-        user: null,
-        users: [],
         step: steps[0],
         issueId: null,
         errors: {},
@@ -125,6 +146,21 @@ export function issueReducer(
         },
       };
     }
+    case IssueActionTypes.SET_WAREHOUSE:
+      return { ...state, warehouse: action.payload };
+    case IssueActionTypes.RESET_WAREHOUSE:
+      return {
+        ...state,
+        warehouse: { ...initialIssueState.warehouse },
+      };
+    case IssueActionTypes.SET_WAREHOUSES:
+      return { ...state, warehouses: action.payload };
+    case IssueActionTypes.RESET_WAREHOUSES:
+      return { ...state, warehouses: [] };
+    case IssueActionTypes.RESET_DEVICE_ISSUE_DATA:
+      return {
+        ...state, deviceIssueData: {...initialIssueState.deviceIssueData }
+      }
     default:
       return state;
   }

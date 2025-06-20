@@ -1,3 +1,5 @@
+import { IssueStepType } from "../features/issue/model/issueTypes";
+
 export interface User {
     id: string;
     userName: string;
@@ -73,5 +75,7 @@ export interface BaseUserQuery {
     handleDeviceIssue: (id: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => void;
-    handleSetStepInfo: (step: string) => void;
+    handleResetUser: () => void;
+    handleSetStepInfo: (step: IssueStepType) => void;
+    handleNextStep:() => void;
 }

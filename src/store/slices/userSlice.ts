@@ -34,6 +34,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<{ user: User }>) => {
+      console.log(action.payload.user)
       state.user = action.payload.user;
     },
     updateUser: <K extends keyof User>(
@@ -49,6 +50,7 @@ const userSlice = createSlice({
       state.user = { ...initialState.user };
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
+      console.log(action.payload)
         state.users = action.payload;
     },
     resetUsers: (state) => {

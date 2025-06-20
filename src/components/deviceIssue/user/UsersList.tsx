@@ -1,8 +1,10 @@
 import { memo } from "react"
-import { BaseUserQuery, User } from "../../types/user";
-import { statusLoading, statusNoData } from "../../utils/constants/constants";
+import { BaseUserQuery, User } from "../../../types/user";
+import { useAppSelector } from "../../../hooks/redux/useRedux";
+import { RootState } from "../../../store/store";
+import { statusLoading, statusNoData } from "../../../utils/constants/constants";
+import { IssueState } from "../../../features/issue/model/issueTypes";
 import styles from "./UsersList.module.scss";
-import { IssueState } from "../../features/issue/model/issueTypes";
 
 interface UsersListProps {
   state: IssueState;
@@ -17,15 +19,16 @@ const UsersList = memo(({
   isSuccess,
   isFetching
 }: UsersListProps) => {
+  const users = useAppSelector((state: RootState) => state.user.users);
   let content: React.ReactNode = null;
   if (isFetching) {
     content = <div className={styles.info}>{statusLoading}</div>;
-  } else if (!state.users.length && isSuccess && state.wasSearched) {
+  } else if (!users.length && isSuccess && state.wasSearched) {
     content = <div className={styles.info}>{statusNoData}</div>;
-  } else if (!state.users.length) {
+  } else if (!users.length) {
     return null;
   } else {
-    content = state.users.map((item: User) => (
+    content = users.map((item: User) => (
       <div
         className={styles.list}
         key={item.id}

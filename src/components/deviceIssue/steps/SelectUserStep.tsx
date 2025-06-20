@@ -1,30 +1,28 @@
-import UsersList from '../UsersList';
-import UserInfo from '../UserInfo';
+import UsersList from '../user/UsersList';
+import UserInfo from '../user/UserInfo';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { useIssueContext } from '../../../features/issue/context/IssueContext';
 import { BaseUserQuery } from '../../../types/user';
+import { useAppSelector } from '../../../hooks/redux/useRedux';
 import { placeholderUserSearch, reset, select } from '../../../utils/constants/constants';
 import { CgCloseO } from 'react-icons/cg';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
+import { RootState } from '../../../store/store';
 
 interface SelectUserStepProps {
   isSuccess: boolean;
   isFetching: boolean;
-  actions: BaseUserQuery;
-  
+  actions: BaseUserQuery; 
 }
-
 const SelectUserStep = ({
   isSuccess,
   isFetching,
   actions,
 }: SelectUserStepProps) => {
   const { state } = useIssueContext();
-
-  console.log(state.deviceIssueData.devices)
-
+  const user = useAppSelector((state: RootState) => state.user.user);
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
@@ -48,9 +46,9 @@ const SelectUserStep = ({
               actions={actions}
             />
           </div>
-        )}
+      )}
       </form>
-      {state.user?.email && (
+      {user?.email && (
         <>
           <UserInfo />
           <div className={styles.actions}>
@@ -59,14 +57,14 @@ const SelectUserStep = ({
               size="lg"
               color="grey"
               title={reset}
-              click={actions.handleReset}
+              click={actions.handleResetUser}
             />
             <BtnAction
               icon={<BsCheck />}
               size="lg"
               color="dark-green"
               title={select}
-              click={() => actions.handleSetStepInfo('review_document')}
+              click={actions.handleNextStep}
             />
           </div>
         </>

@@ -2,21 +2,29 @@ import { useIssueContext } from "../../features/issue/context/IssueContext";
 import SelectUserStep from "./steps/SelectUserStep";
 import ReviewDocumentStep from "./steps/ReviewDocumentStep";
 import SignDocumentStep from "./steps/SignDocumentStep";
-import { BaseUserQuery } from "../../types/user";
+import SelectWarehouseStep from "./steps/SelectWarehouseStep";
 
-interface DeviceIssueStepsProps {
-  isSuccess: boolean;
-  isFetching: boolean;
-  actions: BaseUserQuery;
-}
+const DeviceIssueSteps = () => {
+  const { 
+    state,
+    actions,
+    isSuccess, 
+    isFetching, 
+    isWarehousesFetching, 
+    isWarehousesSuccess, 
+    isDeviceFetching, 
+    isDeviceSuccess 
+  } = useIssueContext();
 
-const DeviceIssueSteps = ({
-  isSuccess,
-  isFetching,
-  actions,
-}: DeviceIssueStepsProps) => {
-  const { state } = useIssueContext();
   switch (state.step) {
+    case "select_warehouse":
+     return (
+      <SelectWarehouseStep
+       actions={actions}
+       isSuccess={isWarehousesSuccess}
+       isFetching={isWarehousesFetching}
+      />
+     )
     case "select_user":
       return (
         <SelectUserStep
@@ -26,7 +34,13 @@ const DeviceIssueSteps = ({
         />
       );
     case "review_document":
-      return <ReviewDocumentStep />;
+      return (
+        <ReviewDocumentStep
+          isSuccess={isDeviceSuccess}
+          isFetching={isDeviceFetching}
+          actions={actions}
+        />
+      );
     case "sign_document":
       return <SignDocumentStep />;
     default:

@@ -1,28 +1,34 @@
 import { Device, DeviceIssueData } from '../../../types/devices';
-import { User } from './../../../types/user';
+import { Warehouse } from '../../../types/locations';
 
-export type IssueStepType = "select_user" | "review_document" | "sign_document";
+export type IssueStepType = "select_warehouse" | "select_user" | "review_document" | "sign_document";
+export type IssueStepTitle = "Выбор склада" | "Выбор пользователя" | "Выбор оборудования" | "Подпись документа";
+
 export interface IssueState {
-    user: Partial<User> | null;
-    users: User[];
     step: IssueStepType;
+    title: IssueStepTitle;
     issueId?: string | null;
     errors: Record<string, string>,
     userQuery: string,
     deviceQuery: string,
     isUsersListVisible: boolean;
     wasSearched: boolean;
+    warehouse: Warehouse,
+    warehouses: Warehouse[];
     deviceIssueData: DeviceIssueData;
     assignedDevices: Device[];
 }
 
 export enum IssueActionTypes {
-    SET_USER = 'SET_USER',
-    SET_USERS = 'SET_USERS',
-    SET_DEVICES = 'SET_DEVICES',
-    RESET_DEVICES = 'RESET_DEVICES',
     SET_DEVICE_ID = 'SET_DEVICE_ID',
     SET_ISSUE_ID = 'SET_ISSUE_ID',
+    SET_WAREHOUSE = 'SET_WAREHOUSE',
+    RESET_DEVICE_ISSUE_DATA = 'RESET_DEVICE_ISSUE_DATA',
+    RESET_WAREHOUSE = 'RESET_WAREHOUSE',
+    SET_WAREHOUSES = 'SET_WAREHOUSES',
+    RESET_WAREHOUSES = 'RESET_WAREHOUSES',
+    SET_STEP = 'SET_STEP',
+    RESET_STEP = 'RESET_STEP',
     NEXT_STEP = 'NEXT_STEP',
     PREV_STEP = 'PREV_STEP',
     RESET = 'RESET',
@@ -39,15 +45,16 @@ export enum IssueActionTypes {
 }
  
 export type IssueAction = 
-| { type: IssueActionTypes.SET_USER, payload: Partial<User> }
-| { type: IssueActionTypes.SET_USERS, payload: User[] }
-| { type: IssueActionTypes.SET_DEVICES, payload: User[] }
-| { type: IssueActionTypes.RESET_DEVICES, payload: User[] }
 | { type: IssueActionTypes.SET_DEVICE_ID, payload: string }
 | { type: IssueActionTypes.SET_ASSIGNED_DEVICES, payload: Device[] }
+| { type: IssueActionTypes.SET_WAREHOUSE, payload: Warehouse }
+| { type: IssueActionTypes.RESET_WAREHOUSE }
+| { type: IssueActionTypes.SET_WAREHOUSES, payload: Warehouse[] }
+| { type: IssueActionTypes.RESET_WAREHOUSES }
 | { type: IssueActionTypes.NEXT_STEP }
 | { type: IssueActionTypes.PREV_STEP }
-| { type: IssueActionTypes.SET_ISSUE_ID, payload: string }
+| { type: IssueActionTypes.SET_STEP, payload: IssueStepType}
+| { type: IssueActionTypes.RESET_STEP }
 | { type: IssueActionTypes.SET_ISSUE_ID, payload: string }
 | { type: IssueActionTypes.SET_ERROR, payload: Record<string, string> }
 | { type: IssueActionTypes.RESET_ERROR }
@@ -59,5 +66,6 @@ export type IssueAction =
 | { type: IssueActionTypes.RESET_DEVICE_QUERY}
 | { type: IssueActionTypes.SET_USERS_LIST_VISIBLE, payload: boolean }
 | { type: IssueActionTypes.SET_FULL_RESET }
+| { type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA }
 
 

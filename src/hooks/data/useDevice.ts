@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../redux/useRedux';
-import { RootState } from '../../store/store';
 import { deviceActionsMenu } from '../../utils/data/menus';
-import { useGlobalModal } from './useGlobalModal';
 import { accept, deviceInfo, move, issue } from '../../utils/constants/device';
+import { RootState } from '../../store/store';
 
 export const useDevice = () => {
-    const { openModal } = useGlobalModal();
     const navigate = useNavigate();
     const device = useAppSelector((state:RootState) => state.device.device);
     const { isAssigned } = device || {}
@@ -24,14 +22,6 @@ export const useDevice = () => {
         }
     });
 
-    const handleDeviceIssue = () => {
-      openModal('device-issue', {
-        state: {
-          deviceId: device?.id
-        },
-      });
-    }
-    
     const handleDeviceAction = (item:any) => {
         switch(item.title) {
           case deviceInfo: 
@@ -43,7 +33,8 @@ export const useDevice = () => {
           case move:
             console.log('peremestit');
           break;
-          case issue: handleDeviceIssue()
+          case issue:
+            navigate(`/issue`)
           break;
         }
       }

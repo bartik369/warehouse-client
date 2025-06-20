@@ -1,42 +1,75 @@
+import { useAppDispatch } from './../../../hooks/redux/useRedux';
 import { useCallback, useEffect, useReducer } from "react";
 import { useLazyGetIssueQuery } from "../../../store/api/deviceIssueApi";
 import { handleApiError } from "../../../utils/errors/handleApiError";
 import { issueReducer, initialIssueState } from "./issueReducer";
-import { IssueActionTypes } from "./issueTypes";
+import { IssueActionTypes, IssueStepType } from "./issueTypes";
 import { ValidateField } from "../../../utils/validation/UserValidation";
 import { User } from "../../../types/user";
 import { useDebounce } from "../../../hooks/data/useDebounce.ts";
 import { useLazyGetUserQuery } from "../../../store/api/userApi";
 import { useLazyGetFilteredUsersQuery } from "../../../store/api/userApi";
 import { useLazySearchDevicesQuery } from "../../../store/api/devicesApi";
+import { resetUser, resetUsers, setUser, setUsers } from "../../../store/slices/userSlice";
+import { resetDevices, setDevices } from '../../../store/slices/deviceSlice';
+import { useLazyGetDeviceQuery } from '../../../store/api/devicesApi';
+import { useLazyGetWarehousesByUserQuery } from '../../../store/api/warehousesApi';
+import { Device } from '../../../types/devices';
+import { Warehouse } from '../../../types/locations';
 
 export const useIssue = () => {
   const [state, dispatch] = useReducer(issueReducer, initialIssueState);
+  const userDispatch = useAppDispatch();
+  const deviceDispatch = useAppDispatch();
   const { userQuery } = state;
   const userDebouncedQuery = useDebounce(userQuery, 700);
   const [getIssue] = useLazyGetIssueQuery();
   const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
   const [getBasicUser] = useLazyGetUserQuery();
+  const [getDevice, { isSuccess: isDeviceSuccess, isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
+  const [ getWarehousesByUser,
+    { isSuccess: isWarehousesSuccess, isFetching: isWarehousesFetching },
+  ] = useLazyGetWarehousesByUserQuery();
   const [searchDevices] = useLazySearchDevicesQuery();
 
   const handleGetDevice = useCallback(async(query: string) => {
     try {
       const data = await searchDevices(query).unwrap();
+      deviceDispatch(setDevices(data));
     } catch (err: unknown) {
       handleApiError(err);
     }
   },[]);
-  
 
+  const handleStartDeviceIssueWith = useCallback(async (id: string) => {
+    if (!id) return;
+    dispatch({
+      type: IssueActionTypes.SET_DEVICE_ID,
+      payload: id,
+    });
+    const data = await getDevice(id).unwrap();
+    const { warehouse, warehouseId } = data;
+    const warehouseData = {
+      id: warehouseId,
+      name: warehouse.name,
+      slug: warehouse.slug,
+    }
+    dispatch({ 
+      type: IssueActionTypes.SET_ASSIGNED_DEVICES,
+      payload: [data]
+    });
+    dispatch({
+      type: IssueActionTypes.SET_WAREHOUSE,
+      payload: warehouseData,
+    });
+  }, []);
+
+ /// ????
   const handleDeviceIssue = async (id: string) => {
-
     if (!id) return;
     try {
       const data = await getIssue(id).unwrap();
-      dispatch({
-        type: IssueActionTypes.SET_USER,
-        payload: data.user,
-      });
+      userDispatch(setUser(data.user));
       dispatch({
         type: IssueActionTypes.SET_ISSUE_ID,
         payload: data.id,
@@ -45,13 +78,6 @@ export const useIssue = () => {
       handleApiError(err);
     }
   };
-
-  const handleStartDeviceIssueWith = (id: string) => {
-    dispatch({
-      type: IssueActionTypes.SET_DEVICE_ID,
-      payload: id,
-    });
-  }
 
   const handleUserChange = useCallback((field: keyof User, value: string) => {
     dispatch({
@@ -72,14 +98,14 @@ export const useIssue = () => {
   const handleUsers = useCallback(async (query: string) => {
     try {
       const data = await getFilteredUsers(query).unwrap();
-      dispatch({
-        type: IssueActionTypes.SET_USERS,
-        payload: data,
-      });
+      userDispatch(setUsers(data));
     } catch (err: unknown) {
       handleApiError(err);
     }
-  }, []);
+  }, [dispatch]);
+  const handleResetUser = useCallback(() => {
+    userDispatch(resetUser());
+  }, [dispatch])
 
   const handleDeviceChange = useCallback((value: string) => {
     dispatch({ 
@@ -91,14 +117,8 @@ export const useIssue = () => {
   const handleSetUser = useCallback(async (id: string) => {
     try {
       const data = await getBasicUser(id).unwrap();
-      dispatch({
-        type: IssueActionTypes.SET_USER,
-        payload: data,
-      });
-      dispatch({
-        type: IssueActionTypes.SET_USERS,
-        payload: [],
-      });
+      userDispatch(setUser({ user: data}));
+      userDispatch(resetUsers());
       dispatch({
         type: IssueActionTypes.SET_WAS_SEARCHED,
         payload: false,
@@ -107,23 +127,52 @@ export const useIssue = () => {
       handleApiError(err);
     }
   }, []);
+  const handleGetWarehousesByUser = useCallback(async(userId: string) => {
+    try {
+      const data = await getWarehousesByUser(userId).unwrap();
+      dispatch({
+        type: IssueActionTypes.SET_WAREHOUSES,
+        payload: data,
+      });
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  }, [dispatch]);
 
-  const handleSetDevice = useCallback(() => {
+  const handleSetWarehouse = useCallback((item: Warehouse) => {
+    dispatch({
+      type: IssueActionTypes.SET_WAREHOUSE,
+      payload: item,
+    });
+  }, [dispatch]);
 
+  const handleSetDevice = useCallback((device: Device) => {
+    dispatch({ 
+      type: IssueActionTypes.SET_ASSIGNED_DEVICES,
+      payload: [device],
+     });
+    deviceDispatch(resetDevices());
   },[])
 
-  const handleSetStepInfo = (step: string) => {
-    dispatch({ type: IssueActionTypes.RESET_USER_QUERY })
-    dispatch({ type: IssueActionTypes.RESET_DEVICE_QUERY })
-    dispatch({ type: IssueActionTypes.NEXT_STEP })
+  const handleSetStepInfo = (step: IssueStepType) => {
+    dispatch({ 
+      type: IssueActionTypes.SET_STEP,
+      payload: step,
+    });
+    dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
+    dispatch({ type: IssueActionTypes.RESET_DEVICE_QUERY });
   }
   const handleReset = useCallback(() => {
-    dispatch({ type: IssueActionTypes.SET_FULL_RESET });
-  }, [])
+    dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA });
+  }, []);
+
+  const handleNextStep = useCallback(() => {
+    dispatch({ type: IssueActionTypes.NEXT_STEP });
+  }, [dispatch])
 
   const handleEquipmentList = useCallback((items: string[]) => {
     
-  },[])
+  },[]);
 
   useEffect(() => {
     if (userDebouncedQuery.length > 3) {
@@ -133,10 +182,7 @@ export const useIssue = () => {
         payload: true,
       });
     } else {
-      dispatch({
-        type: IssueActionTypes.SET_USERS,
-        payload: [],
-      });
+      userDispatch(resetUsers());
       dispatch({
         type: IssueActionTypes.SET_WAS_SEARCHED,
         payload: false,
@@ -148,17 +194,26 @@ export const useIssue = () => {
     state,
     isSuccess,
     isFetching,
+    isDeviceSuccess,
+    isDeviceFetching,
+    isWarehousesFetching,
+    isWarehousesSuccess,
     dispatch,
     actions: {
         handleDeviceIssue,
         handleUserChange,
         handleReset,
         handleSetUser,
+        handleResetUser,
         handleSetStepInfo,
+        handleNextStep,
         handleEquipmentList,
         handleGetDevice,
         handleStartDeviceIssueWith,
         handleDeviceChange,
+        handleSetDevice,
+        handleSetWarehouse,
+        handleGetWarehousesByUser,
     }
   };
 };

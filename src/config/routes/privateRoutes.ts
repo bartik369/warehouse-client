@@ -18,6 +18,7 @@ import ProfileConfig from "../pages/Profile";
 import UsersConfig from "../pages/UsersList";
 import UserDetailsConfig from "../pages/UserDetails";
 import GrantUserRolesConfig from "../pages/GrantUserRoles";
+import IssueConfig from "../pages/Issue";
 
 const privateRoutes = [
     HomeConfig,
@@ -25,6 +26,7 @@ const privateRoutes = [
     DevicesConfig,
     DeviceConfig,
     AddDeviceConfig,
+    IssueConfig,
     EditDeviceConfig,
     AddUserConfig,
     UsersConfig,

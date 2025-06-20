@@ -5,9 +5,11 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { IssueAction, IssueState } from "../model/issueTypes";
+import { IssueAction, IssueState, IssueStepType } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
 import { User } from "../../../types/user";
+import { Device } from "../../../types/devices";
+import { Warehouse } from "../../../types/locations";
 
 type IssueContextType = {
   state: IssueState;
@@ -17,13 +19,22 @@ type IssueContextType = {
     handleUserChange: (field: keyof User, value: string) => void;
     handleReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
-    handleSetStepInfo: (step: string) => void;
+    handleResetUser: () => void;
+    handleSetStepInfo: (step: IssueStepType) => void;
+    handleNextStep: () => void;
     handleStartDeviceIssueWith: (id: string) => void;
     handleGetDevice: (query: string) => void;
     handleDeviceChange: (value: string) => void;
+    handleSetDevice: (item: Device) => void;
+    handleSetWarehouse: (item: Warehouse) => void;
+    handleGetWarehousesByUser: (id: string) => void;
   };
   isSuccess: boolean;
   isFetching: boolean;
+  isDeviceSuccess: boolean;
+  isDeviceFetching: boolean;
+  isWarehousesSuccess: boolean;
+  isWarehousesFetching: boolean;
 };
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);

@@ -1,4 +1,7 @@
+import { IssueStepType } from "../features/issue/model/issueTypes";
 import { Contractor } from "./content";
+import { Warehouse } from "./locations";
+import { User } from "./user";
 
 export interface Device {
   id: string;
@@ -325,5 +328,21 @@ export interface DeviceIssueData {
   processId: string,
   devices: string[],
 }
+
+export interface BaseDeviceQuery {
+    handleDeviceIssue: (id: string) => Promise<void>;
+    handleUserChange: (field: keyof User, value: string) => void;
+    handleReset: () => void;
+    handleSetUser: (id: string) => Promise<void>;
+    handleSetStepInfo: (step: IssueStepType) => void;
+    handleStartDeviceIssueWith: (id: string) => void;
+    handleGetDevice: (query: string) => void;
+    handleDeviceChange: (value: string) => void;
+    handleSetDevice: (item: Device) => void;
+    handleSetWarehouse: (item: Warehouse) => void;
+    handleGetWarehousesByUser: (id: string) => void;
+    handleNextStep: () => void;
+}
+
 
 

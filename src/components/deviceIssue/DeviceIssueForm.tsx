@@ -2,32 +2,32 @@ import { useEffect } from "react";
 import DeviceIssueSteps from "./DeviceIssueSteps";
 import Steps from "../ui/steps/Steps";
 import Loader from "../ui/loader/Loader";
-import { useGlobalModal } from "../../hooks/data/useGlobalModal";
+import { useAppSelector } from "../../hooks/redux/useRedux";
+// import { useGlobalModal } from "../../hooks/data/useGlobalModal";
 import { useIssueContext } from "../../features/issue/context/IssueContext";
+import { RootState } from "../../store/store";
+import styles from './DeviceIssueForm.module.scss'
 
 const DeviceIssueForm = ({ issueId = null }) => {
-  const {state, actions, isFetching, isSuccess } = useIssueContext()
-  const { updateModalProps } = useGlobalModal();
+  const {state, actions } = useIssueContext();
+  const user = useAppSelector((state: RootState) => state.user.user);
+  
+  // const { updateModalProps } = useGlobalModal();
 
   useEffect(() => {
     if (issueId) actions.handleDeviceIssue(issueId);
   }, [issueId]);
 
-  useEffect(() => {
-    updateModalProps(state.step);
-  }, [state.step]);
-
-  if (!state.step && !state.user) return <Loader size="sm" color="green" />
+  if (!state.step && !user) return <Loader size="sm" color="green" />
 
   return (
-    <>
-      <DeviceIssueSteps
-        isFetching={isFetching}
-        isSuccess={isSuccess}
-        actions={actions}
-      />
+    <section className={styles.inner}>
+      <h1 className={styles.title}>{state.title}</h1>
+      <div className={styles.info}>
+      <DeviceIssueSteps />
+      </div>
       <Steps />
-      </>
+     </section>
   );
 };
 

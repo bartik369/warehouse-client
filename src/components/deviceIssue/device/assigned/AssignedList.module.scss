@@ -1,0 +1,14 @@
+.items {
+    .item {
+        display: flex;
+        background-color: beige;
+        .info {
+            .name {
+                font-size: 35px;
+            }
+            .number {
+                font-size: 25px;
+            }
+        }
+    }
+}

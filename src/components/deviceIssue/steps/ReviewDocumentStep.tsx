@@ -1,12 +1,16 @@
 import { useIssueContext } from "../../../features/issue/context/IssueContext";
-import EquipmentList from "../../EquipmentItem/EquipmentList";
+import DeviceList from "../device/list/DeviceList";
+import AssignedList from "../device/assigned/AssignedList";
 import styles from "./Steps.module.scss";
+import { BaseDeviceQuery } from "../../../types/devices";
 
-const ReviewDocumentStep = () => {
-  const { state, actions } = useIssueContext();
-//   if (state.deviceIssueData.devices.length > 0) {
-//     console.log("start");
-//   }
+interface ReviewDocumentStepProps {
+  isSuccess: boolean;
+  isFetching: boolean;
+  actions: BaseDeviceQuery;
+}
+const ReviewDocumentStep = ({ isSuccess, isFetching, actions}: ReviewDocumentStepProps) => {
+  const { state} = useIssueContext();
   return (
     <>
       <form>
@@ -16,11 +20,21 @@ const ReviewDocumentStep = () => {
           type="text"
           value={state.deviceQuery}
         />
-        <button type="button" onClick={() => actions.handleGetDevice(state.deviceQuery)}>ok</button>
+        <button 
+          type="button" 
+          onClick={() => actions.handleGetDevice(state.deviceQuery)}>
+          ok
+        </button>
       </div>
       </form>
-      
-      <EquipmentList />
+      {state.assignedDevices.length > 0}
+      <DeviceList
+       state={state}
+       actions={actions}
+       isFetching={isFetching}
+       isSuccess={isSuccess}
+      />
+      <AssignedList />
     </>
   );
 };

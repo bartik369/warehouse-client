@@ -16,11 +16,12 @@
             position: relative;
             width: 100%;
             border-radius: 14px;
-            border: 3px solid #d3d9df;
+            border: 1px solid #c5c8ce;
+            border-radius: 20px;
             transition: border-color .3s ease-in-out;
             &:hover,
             &:active {
-                border: 3px solid #40495a;
+                border: 1px solid #40495a;
             }
             input {
                 font-size: 22px;
@@ -45,19 +46,20 @@
                 }
             }
         }
-    }
-    .result {
-        position: absolute;
-        max-height: 180px;
-        overflow-y: auto;
-        top: 105%;
-        left: 0;
-        width: 90%;
-        z-index: 9;
-        padding: 6px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 5px 5px -2px, rgba(42, 51, 70, 0.04) 0px 10px 10px -6px, rgba(14, 63, 126, 0.04) 0px 25px 25px -10px, rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
+        .result {
+            position: absolute;
+            max-height: 180px;
+            overflow-y: auto;
+            top: 105%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            z-index: 9;
+            padding: 6px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 5px 5px -2px, rgba(42, 51, 70, 0.04) 0px 10px 10px -6px, rgba(14, 63, 126, 0.04) 0px 25px 25px -10px, rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
+        }
     }
     .actions {
         display: flex;
