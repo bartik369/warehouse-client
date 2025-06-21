@@ -34,10 +34,6 @@ type IssueContextType = {
   };
   isSuccess: boolean;
   isFetching: boolean;
-  isDeviceSuccess: boolean;
-  isDeviceFetching: boolean;
-  isWarehousesSuccess: boolean;
-  isWarehousesFetching: boolean;
 };
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);

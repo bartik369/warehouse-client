@@ -1,7 +1,7 @@
 export type ModalType = 
   "entity" 
   | "contractor" 
-  | "device-issue" 
+  | "signature" 
   | "receive" 
   | "type" 
   | "manufacturer" 

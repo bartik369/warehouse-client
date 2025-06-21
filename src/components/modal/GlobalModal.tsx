@@ -2,8 +2,6 @@ import { useGlobalModal } from "../../hooks/data/useGlobalModal";
 import ContractorForm from "../forms/contractor/ContractorForm";
 import EntityForm from "../forms/device/EntityForm";
 import Modal from "./Modal";
-// import DeviceIssueForm from "../deviceIssue/DeviceIssueForm";
-// import { IssueProvider } from "../../features/issue/context/IssueContext";
 
 export const GlobalModal = () => {
   const { isOpen, modalType, modalProps, closeModal } = useGlobalModal();
@@ -24,12 +22,10 @@ export const GlobalModal = () => {
         );
       case "contractor":
         return <ContractorForm {...modalProps} />;
-      // case "device-issue":
-      //   return (
-      //     <IssueProvider initialDeviceId={modalProps.state?.deviceId}>
-      //       <DeviceIssueForm />
-      //     </IssueProvider>
-      //   );
+      case "signature":
+        return (
+          <div>fdsfdsfsdf</div>
+        );
       default:
         return null;
     }
