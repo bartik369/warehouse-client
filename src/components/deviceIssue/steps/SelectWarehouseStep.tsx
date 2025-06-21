@@ -3,12 +3,11 @@ import Select from "../select/Select";
 import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { BaseDeviceQuery } from "../../../types/devices";
-import styles from "./Steps.module.scss";
 import { RootState } from "../../../store/store";
-import { reset, select } from "../../../utils/constants/constants";
+import { select } from "../../../utils/constants/constants";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { BsCheck } from "react-icons/bs";
-import { GrFormClose } from "react-icons/gr";
+import styles from "./Steps.module.scss";
 
 interface SelectWarehouseStepProps {
   actions: BaseDeviceQuery;
@@ -39,13 +38,6 @@ const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
       {state.warehouse.name &&
      <div className={styles.actions}>
      <BtnAction
-       icon={<GrFormClose />}
-       size="lg"
-       color="grey"
-       title={reset}
-       click={actions.handleReset}
-     />
-     <BtnAction
        icon={<BsCheck />}
        size="lg"
        color="dark-green"
@@ -53,7 +45,6 @@ const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
        click={actions.handleNextStep}
      />
    </div>
-    //    <button onClick={actions.handleNextStep}>Далее</button>
       }
     </div>
   );

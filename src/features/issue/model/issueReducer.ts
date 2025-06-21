@@ -146,6 +146,15 @@ export function issueReducer(
         },
       };
     }
+    case IssueActionTypes.DELETE_DEVICE:
+      return {
+        ...state,
+        deviceIssueData: {
+          ...state.deviceIssueData,
+          devices: state.deviceIssueData.devices.filter((item) => item !== action.payload)
+        },
+        assignedDevices: state.assignedDevices.filter((item) => item.id !== action.payload)
+      }
     case IssueActionTypes.SET_WAREHOUSE:
       return { ...state, warehouse: action.payload };
     case IssueActionTypes.RESET_WAREHOUSE:

@@ -5,11 +5,11 @@ import { useIssueContext } from '../../../features/issue/context/IssueContext';
 import { BaseUserQuery } from '../../../types/user';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import { placeholderUserSearch, reset, select } from '../../../utils/constants/constants';
-import { CgCloseO } from 'react-icons/cg';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
 import { RootState } from '../../../store/store';
+import Search from '../search/Search';
 
 interface SelectUserStepProps {
   isSuccess: boolean;
@@ -22,21 +22,20 @@ const SelectUserStep = ({
   actions,
 }: SelectUserStepProps) => {
   const { state } = useIssueContext();
+  console.log(state.userQuery)
   const user = useAppSelector((state: RootState) => state.user.user);
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
-        <div className={styles.input}>
-          <input
-            value={state.userQuery}
-            type="text"
-            placeholder={placeholderUserSearch}
-            onChange={(e) => actions.handleUserChange("email", e.target.value)}
-          />
-          {state.userQuery.length > 0 && (
-            <CgCloseO className={styles.icon} onClick={actions.handleReset} />
-          )}
-        </div>
+        <Search
+          placeholder={placeholderUserSearch} 
+          actions={{
+            handleChange: actions.handleUserChange,
+            handleReset: actions.handleResetUserQuery
+          }}
+          value={state.userQuery}
+          name='email'
+        />
         {(state.isUsersListVisible && isSuccess && state.wasSearched) && (
           <div className={styles.result}>
             <UsersList

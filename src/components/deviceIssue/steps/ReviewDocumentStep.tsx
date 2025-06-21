@@ -1,8 +1,13 @@
 import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import DeviceList from "../device/list/DeviceList";
-import AssignedList from "../device/assigned/AssignedList";
-import styles from "./Steps.module.scss";
 import { BaseDeviceQuery } from "../../../types/devices";
+import Search from "../search/Search";
+import styles from "./Steps.module.scss";
+import BtnAction from "../../ui/buttons/BtnAction";
+import { BsCheck } from "react-icons/bs";
+import { GrFormClose } from "react-icons/gr";
+import { reset  } from "../../../utils/constants/constants";
+import DeviceTable from "../../tables/device/DeviceTable";
 
 interface ReviewDocumentStepProps {
   isSuccess: boolean;
@@ -11,30 +16,49 @@ interface ReviewDocumentStepProps {
 }
 const ReviewDocumentStep = ({ isSuccess, isFetching, actions}: ReviewDocumentStepProps) => {
   const { state} = useIssueContext();
+
+console.log(state.assignedDevices)
+console.log(state.deviceIssueData)
   return (
     <>
       <form>
-      <div className={styles.input}>
-        <input
-          onChange={(e) => actions.handleDeviceChange(e.target.value)}
-          type="text"
+        <Search
+          placeholder="search devices"
+          actions={{
+            handleChange: actions.handleDeviceChange,
+            handleReset: actions.handleResetDeviceQuery,
+            handleSearch: actions.handleGetDevice
+          }}
           value={state.deviceQuery}
         />
-        <button 
-          type="button" 
-          onClick={() => actions.handleGetDevice(state.deviceQuery)}>
-          ok
-        </button>
-      </div>
       </form>
-      {state.assignedDevices.length > 0}
       <DeviceList
        state={state}
        actions={actions}
        isFetching={isFetching}
        isSuccess={isSuccess}
       />
-      <AssignedList />
+      {state.assignedDevices.length > 0 &&
+      <DeviceTable />
+      }
+      {state?.assignedDevices.length > 0 && (
+          <div className={styles.actions}>
+            <BtnAction
+              icon={<GrFormClose />}
+              size="lg"
+              color="grey"
+              title={reset}
+              click={actions.handleResetDeviceQuery}
+            />
+            <BtnAction
+              icon={<BsCheck />}
+              size="lg"
+              color="dark-green"
+              title={"next"}
+              click={actions.handleNextStep}
+            />
+          </div>
+      )}
     </>
   );
 };

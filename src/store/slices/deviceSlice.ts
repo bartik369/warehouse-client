@@ -109,9 +109,10 @@ const deviceSlice = createSlice({
       state.device = {...initialState.device};
     },
     setDevices:(state, action: PayloadAction<Device[]>) => {
-      const existingIds = new Set(state.devices.map(item => item.id));
-      const newDevices = action.payload.filter(item => !existingIds.has(item.id));
-      state.devices = [...state.devices, ...newDevices];
+      state.devices = action.payload;
+      // const existingIds = new Set(state.devices.map(item => item.id));
+      // const newDevices = action.payload.filter(item => !existingIds.has(item.id));
+      // state.devices = [...state.devices, ...newDevices];
     },
     resetDevices:(state) => {
       state.devices = [];
@@ -152,6 +153,7 @@ export const {
   updateDevice,
   resetDevice,
   setDevices,
+  deleteDevice,
   resetDevices,
   setIsUpdate,
   setTitle,

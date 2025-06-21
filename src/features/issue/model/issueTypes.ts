@@ -24,6 +24,7 @@ export enum IssueActionTypes {
     SET_ISSUE_ID = 'SET_ISSUE_ID',
     SET_WAREHOUSE = 'SET_WAREHOUSE',
     RESET_DEVICE_ISSUE_DATA = 'RESET_DEVICE_ISSUE_DATA',
+    DELETE_DEVICE = 'DELETE_DEVICE',
     RESET_WAREHOUSE = 'RESET_WAREHOUSE',
     SET_WAREHOUSES = 'SET_WAREHOUSES',
     RESET_WAREHOUSES = 'RESET_WAREHOUSES',
@@ -67,5 +68,6 @@ export type IssueAction =
 | { type: IssueActionTypes.SET_USERS_LIST_VISIBLE, payload: boolean }
 | { type: IssueActionTypes.SET_FULL_RESET }
 | { type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA }
+| { type: IssueActionTypes.DELETE_DEVICE, payload: string }
 
 

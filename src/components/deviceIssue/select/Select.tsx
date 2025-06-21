@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './Select.module.scss';
+import { useEffect, useRef } from 'react';
 import { useModal } from '../../../hooks/data/useModal';
 import { TbSelector } from 'react-icons/tb';
 import { BaseDeviceQuery } from '../../../types/devices';
-import { noExistSelect, select, selectFromList } from '../../../utils/constants/device';
+import { noExistSelect, selectFromList } from '../../../utils/constants/device';
 import { Warehouse } from '../../../types/locations';
 import { useIssueContext } from '../../../features/issue/context/IssueContext';
+import styles from './Select.module.scss';
 
 interface SelectProps {
     actions: BaseDeviceQuery;
@@ -48,7 +48,7 @@ const Select = ({ warehouses, actions }: SelectProps) => {
                     className={styles.option}
                     onClick={() => {
                         actions.handleSetWarehouse(option)
-                        actions.handleReset();
+                        actions.handleFullReset();
                         setIsOpen(false)
                     }}
                     role="button"

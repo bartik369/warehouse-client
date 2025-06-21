@@ -7,7 +7,6 @@ import {
 } from "react";
 import { IssueAction, IssueState, IssueStepType } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
-import { User } from "../../../types/user";
 import { Device } from "../../../types/devices";
 import { Warehouse } from "../../../types/locations";
 
@@ -16,18 +15,21 @@ type IssueContextType = {
   dispatch: Dispatch<IssueAction>;
   actions: {
     handleDeviceIssue: (id: string) => Promise<void>;
-    handleUserChange: (field: keyof User, value: string) => void;
-    handleReset: () => void;
+    handleUserChange: (value: string) => void;
+    handleFullReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
     handleResetUser: () => void;
+    handleResetUserQuery: () => void;
     handleSetStepInfo: (step: IssueStepType) => void;
     handleNextStep: () => void;
     handleStartDeviceIssueWith: (id: string) => void;
-    handleGetDevice: (query: string) => void;
+    handleGetDevice: () => void;
     handleDeviceChange: (value: string) => void;
     handleSetDevice: (item: Device) => void;
     handleSetWarehouse: (item: Warehouse) => void;
     handleGetWarehousesByUser: (id: string) => void;
+    handleResetDeviceQuery: () => void;
+    handleDeleteDevice: (id: string) => void;
   };
   isSuccess: boolean;
   isFetching: boolean;

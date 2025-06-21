@@ -1,7 +1,6 @@
 import { IssueStepType } from "../features/issue/model/issueTypes";
 import { Contractor } from "./content";
 import { Warehouse } from "./locations";
-import { User } from "./user";
 
 export interface Device {
   id: string;
@@ -269,6 +268,21 @@ type FilterLabelsKeys =
   | "isFunctional"
   | "isAssigned";
 
+
+
+type DeviceLabelKeys = 
+| "name"
+| "typeName"
+| "modelName"
+| "manufacturerName"
+| "inventoryNumber"
+| "serialNumber"
+
+export type DeviceLabel = {
+  key: DeviceLabelKeys,
+  label: string;
+}
+
 export type FilterLabel = {
   key: FilterLabelsKeys;
   label: string;
@@ -331,17 +345,19 @@ export interface DeviceIssueData {
 
 export interface BaseDeviceQuery {
     handleDeviceIssue: (id: string) => Promise<void>;
-    handleUserChange: (field: keyof User, value: string) => void;
-    handleReset: () => void;
+    handleUserChange: (value: string) => void;
+    handleFullReset: () => void;
+    handleResetDeviceQuery: () => void;
     handleSetUser: (id: string) => Promise<void>;
     handleSetStepInfo: (step: IssueStepType) => void;
     handleStartDeviceIssueWith: (id: string) => void;
-    handleGetDevice: (query: string) => void;
+    handleGetDevice: () => void;
     handleDeviceChange: (value: string) => void;
     handleSetDevice: (item: Device) => void;
     handleSetWarehouse: (item: Warehouse) => void;
     handleGetWarehousesByUser: (id: string) => void;
     handleNextStep: () => void;
+    handleDeleteDevice: (id: string) => void;
 }
 
 

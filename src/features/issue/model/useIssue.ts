@@ -4,8 +4,6 @@ import { useLazyGetIssueQuery } from "../../../store/api/deviceIssueApi";
 import { handleApiError } from "../../../utils/errors/handleApiError";
 import { issueReducer, initialIssueState } from "./issueReducer";
 import { IssueActionTypes, IssueStepType } from "./issueTypes";
-import { ValidateField } from "../../../utils/validation/UserValidation";
-import { User } from "../../../types/user";
 import { useDebounce } from "../../../hooks/data/useDebounce.ts";
 import { useLazyGetUserQuery } from "../../../store/api/userApi";
 import { useLazyGetFilteredUsersQuery } from "../../../store/api/userApi";
@@ -32,14 +30,16 @@ export const useIssue = () => {
   ] = useLazyGetWarehousesByUserQuery();
   const [searchDevices] = useLazySearchDevicesQuery();
 
-  const handleGetDevice = useCallback(async(query: string) => {
+  const handleGetDevice = useCallback(async() => {
     try {
-      const data = await searchDevices(query).unwrap();
-      deviceDispatch(setDevices(data));
+      if (state.deviceQuery) {
+        const data = await searchDevices(state.deviceQuery).unwrap();
+        deviceDispatch(setDevices(data));
+      }
     } catch (err: unknown) {
       handleApiError(err);
     }
-  },[]);
+  },[deviceDispatch, state.deviceQuery]);
 
   const handleStartDeviceIssueWith = useCallback(async (id: string) => {
     if (!id) return;
@@ -79,7 +79,7 @@ export const useIssue = () => {
     }
   };
 
-  const handleUserChange = useCallback((field: keyof User, value: string) => {
+  const handleUserChange = useCallback((value: string) => {
     dispatch({
       type: IssueActionTypes.SET_USER_QUERY,
       payload: value,
@@ -88,12 +88,7 @@ export const useIssue = () => {
       type: IssueActionTypes.SET_USERS_LIST_VISIBLE,
       payload: true,
     });
-    const validateErrors = ValidateField(field, value);
-    dispatch({
-      type: IssueActionTypes.SET_ERROR,
-      payload: { [field]: validateErrors as string },
-    });
-  }, [ValidateField]);
+  }, []);
 
   const handleUsers = useCallback(async (query: string) => {
     try {
@@ -103,6 +98,7 @@ export const useIssue = () => {
       handleApiError(err);
     }
   }, [dispatch]);
+
   const handleResetUser = useCallback(() => {
     userDispatch(resetUser());
   }, [dispatch])
@@ -151,8 +147,18 @@ export const useIssue = () => {
       type: IssueActionTypes.SET_ASSIGNED_DEVICES,
       payload: [device],
      });
+    dispatch({
+      type: IssueActionTypes.SET_DEVICE_ID,
+      payload: device.id,
+    });
     deviceDispatch(resetDevices());
   },[])
+  const handleDeleteDevice = (id: string) => {
+    dispatch({
+      type: IssueActionTypes.DELETE_DEVICE,
+      payload: id,
+    })
+  }
 
   const handleSetStepInfo = (step: IssueStepType) => {
     dispatch({ 
@@ -162,7 +168,9 @@ export const useIssue = () => {
     dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
     dispatch({ type: IssueActionTypes.RESET_DEVICE_QUERY });
   }
-  const handleReset = useCallback(() => {
+  const handleFullReset = useCallback(() => {
+    userDispatch(resetUser());
+    deviceDispatch(resetDevices());
     dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA });
   }, []);
 
@@ -173,6 +181,13 @@ export const useIssue = () => {
   const handleEquipmentList = useCallback((items: string[]) => {
     
   },[]);
+
+  const handleResetUserQuery = () => {
+    dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
+  }
+  const handleResetDeviceQuery = () => {
+
+  }
 
   useEffect(() => {
     if (userDebouncedQuery.length > 3) {
@@ -202,9 +217,10 @@ export const useIssue = () => {
     actions: {
         handleDeviceIssue,
         handleUserChange,
-        handleReset,
+        handleFullReset,
         handleSetUser,
         handleResetUser,
+        handleResetUserQuery,
         handleSetStepInfo,
         handleNextStep,
         handleEquipmentList,
@@ -214,6 +230,8 @@ export const useIssue = () => {
         handleSetDevice,
         handleSetWarehouse,
         handleGetWarehousesByUser,
+        handleResetDeviceQuery,
+        handleDeleteDevice,
     }
   };
 };
