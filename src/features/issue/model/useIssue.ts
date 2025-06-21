@@ -24,10 +24,8 @@ export const useIssue = () => {
   const [getIssue] = useLazyGetIssueQuery();
   const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
   const [getBasicUser] = useLazyGetUserQuery();
-  const [getDevice, { isSuccess: isDeviceSuccess, isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
-  const [ getWarehousesByUser,
-    { isSuccess: isWarehousesSuccess, isFetching: isWarehousesFetching },
-  ] = useLazyGetWarehousesByUserQuery();
+  const [getDevice] = useLazyGetDeviceQuery();
+  const [ getWarehousesByUser] = useLazyGetWarehousesByUserQuery();
   const [searchDevices] = useLazySearchDevicesQuery();
 
   const handleGetDevice = useCallback(async() => {
@@ -35,6 +33,18 @@ export const useIssue = () => {
       if (state.deviceQuery) {
         const data = await searchDevices(state.deviceQuery).unwrap();
         deviceDispatch(setDevices(data));
+        dispatch({
+          type: IssueActionTypes.SET_DEVICES_LIST_VISIBLE,
+          payload: true,
+        });
+        dispatch({
+          type: IssueActionTypes.SET_WAS_SEARCHED,
+          payload: true,
+        });
+        dispatch({
+          type: IssueActionTypes.SET_DEVICES_LOADED,
+          payload: true,
+        });
       }
     } catch (err: unknown) {
       handleApiError(err);
@@ -130,6 +140,10 @@ export const useIssue = () => {
         type: IssueActionTypes.SET_WAREHOUSES,
         payload: data,
       });
+      dispatch({
+        type: IssueActionTypes.SET_WAS_SEARCHED,
+        payload: false,
+      });
     } catch (err: unknown) {
       handleApiError(err);
     }
@@ -151,8 +165,13 @@ export const useIssue = () => {
       type: IssueActionTypes.SET_DEVICE_ID,
       payload: device.id,
     });
+    dispatch({
+      type: IssueActionTypes.SET_WAS_SEARCHED,
+      payload: false,
+    });
     deviceDispatch(resetDevices());
   },[])
+
   const handleDeleteDevice = (id: string) => {
     dispatch({
       type: IssueActionTypes.DELETE_DEVICE,
@@ -185,12 +204,17 @@ export const useIssue = () => {
   const handleResetUserQuery = () => {
     dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
   }
+
   const handleResetDeviceQuery = () => {
 
   }
 
+  const handleResetIssueDevices = () => {
+    dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA })
+  }
+
   useEffect(() => {
-    if (userDebouncedQuery.length > 3) {
+    if (userDebouncedQuery.length > 1) {
       handleUsers(userDebouncedQuery);
       dispatch({
         type: IssueActionTypes.SET_WAS_SEARCHED,
@@ -209,10 +233,6 @@ export const useIssue = () => {
     state,
     isSuccess,
     isFetching,
-    isDeviceSuccess,
-    isDeviceFetching,
-    isWarehousesFetching,
-    isWarehousesSuccess,
     dispatch,
     actions: {
         handleDeviceIssue,
@@ -232,6 +252,7 @@ export const useIssue = () => {
         handleGetWarehousesByUser,
         handleResetDeviceQuery,
         handleDeleteDevice,
+        handleResetIssueDevices,
     }
   };
 };

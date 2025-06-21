@@ -47,7 +47,7 @@
         }
         .result {
             position: absolute;
-            max-height: 180px;
+            max-height: 280px;
             overflow-y: auto;
             top: 105%;
             left: 50%;
@@ -66,6 +66,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     gap: 30px;
 }

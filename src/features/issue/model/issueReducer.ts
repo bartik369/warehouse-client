@@ -26,6 +26,8 @@ export const initialIssueState: IssueState = {
   userQuery: "",
   deviceQuery: "",
   isUsersListVisible: false,
+  isDevicesListVisible: false,
+  devicesLoaded: false,
   wasSearched: false,
   warehouse: {
     id: "",
@@ -117,10 +119,14 @@ export function issueReducer(
       return { ...state, userQuery: "" };
     case IssueActionTypes.SET_DEVICE_QUERY:
       return { ...state, deviceQuery: action.payload };
+    case IssueActionTypes.SET_DEVICES_LOADED:
+      return { ...state, devicesLoaded: action.payload };
     case IssueActionTypes.RESET_DEVICE_QUERY:
       return { ...state, deviceQuery: "" };
     case IssueActionTypes.SET_USERS_LIST_VISIBLE:
       return { ...state, isUsersListVisible: action.payload };
+    case IssueActionTypes.SET_DEVICES_LIST_VISIBLE:
+      return { ...state, isDevicesListVisible: action.payload };
     case IssueActionTypes.SET_WAS_SEARCHED:
       return { ...state, wasSearched: action.payload };
     case IssueActionTypes.SET_FULL_RESET:
@@ -168,7 +174,9 @@ export function issueReducer(
       return { ...state, warehouses: [] };
     case IssueActionTypes.RESET_DEVICE_ISSUE_DATA:
       return {
-        ...state, deviceIssueData: {...initialIssueState.deviceIssueData }
+        ...state, 
+        deviceIssueData: {...initialIssueState.deviceIssueData },
+        assignedDevices: [],
       }
     default:
       return state;

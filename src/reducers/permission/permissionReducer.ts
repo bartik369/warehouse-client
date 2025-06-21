@@ -1,10 +1,10 @@
 import {
-  IPermissionState,
+  PermissionState,
   PermissionAction,
   PermissionActionTypes,
 } from "./permissionTypes";
 
-export const initialState: IPermissionState = {
+export const initialState: PermissionState = {
   entity: {
     id: "",
     roleId: "",
@@ -25,9 +25,9 @@ export const initialState: IPermissionState = {
   permissionsRequest: false,
 };
 export function permissionReducer(
-  state: IPermissionState,
+  state: PermissionState,
   action: PermissionAction
-): IPermissionState {
+): PermissionState {
   switch (action.type) {
     case PermissionActionTypes.SET_ENTITY:
       return {

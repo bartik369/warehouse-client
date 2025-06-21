@@ -10,6 +10,7 @@ import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
 import { RootState } from '../../../store/store';
 import Search from '../search/Search';
+import NoData from '../../ui/no-data/NoData';
 
 interface SelectUserStepProps {
   isSuccess: boolean;
@@ -22,7 +23,6 @@ const SelectUserStep = ({
   actions,
 }: SelectUserStepProps) => {
   const { state } = useIssueContext();
-  console.log(state.userQuery)
   const user = useAppSelector((state: RootState) => state.user.user);
   return (
     <div className={styles.inner}>
@@ -47,7 +47,8 @@ const SelectUserStep = ({
           </div>
       )}
       </form>
-      {user?.email && (
+      {user?.email 
+       ? (
         <>
           <UserInfo />
           <div className={styles.actions}>
@@ -67,7 +68,9 @@ const SelectUserStep = ({
             />
           </div>
         </>
-      )}
+      )
+      : <NoData />
+    }
     </div>
   );
 };

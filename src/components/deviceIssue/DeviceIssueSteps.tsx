@@ -9,21 +9,13 @@ const DeviceIssueSteps = () => {
     state,
     actions,
     isSuccess, 
-    isFetching, 
-    isWarehousesFetching, 
-    isWarehousesSuccess, 
-    isDeviceFetching, 
-    isDeviceSuccess 
+    isFetching
   } = useIssueContext();
 
   switch (state.step) {
     case "select_warehouse":
      return (
-      <SelectWarehouseStep
-       actions={actions}
-       isSuccess={isWarehousesSuccess}
-       isFetching={isWarehousesFetching}
-      />
+      <SelectWarehouseStep actions={actions} />
      )
     case "select_user":
       return (
@@ -35,11 +27,7 @@ const DeviceIssueSteps = () => {
       );
     case "review_document":
       return (
-        <ReviewDocumentStep
-          isSuccess={isDeviceSuccess}
-          isFetching={isDeviceFetching}
-          actions={actions}
-        />
+        <ReviewDocumentStep actions={actions} />
       );
     case "sign_document":
       return <SignDocumentStep />;

@@ -1,0 +1,44 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    max-height: 400px;
+    cursor: pointer;
+    &:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb;
+    }
+    &:hover {
+        background-color: #f9fafd;
+    }
+    .name {
+        padding: 2px 0;
+        font-size: 19px;
+        font-weight: 600;
+    }
+    .email {
+        font-size: 14px;
+        color: #818593;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 0 40px;
+}
+
+.info {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+}

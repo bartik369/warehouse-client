@@ -11,8 +11,6 @@ import styles from "./Steps.module.scss";
 
 interface SelectWarehouseStepProps {
   actions: BaseDeviceQuery;
-  isSuccess: boolean;
-  isFetching: boolean;
 }
 
 const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {

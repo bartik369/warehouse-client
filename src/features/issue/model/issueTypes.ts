@@ -12,6 +12,8 @@ export interface IssueState {
     userQuery: string,
     deviceQuery: string,
     isUsersListVisible: boolean;
+    isDevicesListVisible: boolean;
+    devicesLoaded: boolean;
     wasSearched: boolean;
     warehouse: Warehouse,
     warehouses: Warehouse[];
@@ -25,6 +27,7 @@ export enum IssueActionTypes {
     SET_WAREHOUSE = 'SET_WAREHOUSE',
     RESET_DEVICE_ISSUE_DATA = 'RESET_DEVICE_ISSUE_DATA',
     DELETE_DEVICE = 'DELETE_DEVICE',
+    SET_DEVICES_LOADED = 'SET_DEVICES_LOADED',
     RESET_WAREHOUSE = 'RESET_WAREHOUSE',
     SET_WAREHOUSES = 'SET_WAREHOUSES',
     RESET_WAREHOUSES = 'RESET_WAREHOUSES',
@@ -40,6 +43,7 @@ export enum IssueActionTypes {
     SET_DEVICE_QUERY = 'SET_DEVICE_QUERY',
     RESET_DEVICE_QUERY = 'RESET_DEVICE_QUERY',
     SET_USERS_LIST_VISIBLE = 'SET_USERS_LIST_VISIBLE',
+    SET_DEVICES_LIST_VISIBLE = 'SET_DEVICES_LIST_VISIBLE',
     SET_WAS_SEARCHED = 'SET_WAS_SEARCHED',
     SET_FULL_RESET = 'SET_FULL_RESET',
     SET_ASSIGNED_DEVICES = 'SET_ASSIGNED_DEVICES',
@@ -66,8 +70,10 @@ export type IssueAction =
 | { type: IssueActionTypes.SET_DEVICE_QUERY, payload: string }
 | { type: IssueActionTypes.RESET_DEVICE_QUERY}
 | { type: IssueActionTypes.SET_USERS_LIST_VISIBLE, payload: boolean }
+| { type: IssueActionTypes.SET_DEVICES_LIST_VISIBLE, payload: boolean }
 | { type: IssueActionTypes.SET_FULL_RESET }
 | { type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA }
 | { type: IssueActionTypes.DELETE_DEVICE, payload: string }
+| { type: IssueActionTypes.SET_DEVICES_LOADED, payload: boolean }
 
 

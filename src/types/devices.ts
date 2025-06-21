@@ -358,6 +358,7 @@ export interface BaseDeviceQuery {
     handleGetWarehousesByUser: (id: string) => void;
     handleNextStep: () => void;
     handleDeleteDevice: (id: string) => void;
+    handleResetIssueDevices: () => void;
 }
 
 

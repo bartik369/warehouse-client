@@ -153,7 +153,6 @@ export const {
   updateDevice,
   resetDevice,
   setDevices,
-  deleteDevice,
   resetDevices,
   setIsUpdate,
   setTitle,

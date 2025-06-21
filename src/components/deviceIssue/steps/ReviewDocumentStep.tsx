@@ -6,60 +6,62 @@ import styles from "./Steps.module.scss";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { BsCheck } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
-import { reset  } from "../../../utils/constants/constants";
+import { reset } from "../../../utils/constants/constants";
 import DeviceTable from "../../tables/device/DeviceTable";
+import NoData from "../../ui/no-data/NoData";
 
 interface ReviewDocumentStepProps {
-  isSuccess: boolean;
-  isFetching: boolean;
   actions: BaseDeviceQuery;
 }
-const ReviewDocumentStep = ({ isSuccess, isFetching, actions}: ReviewDocumentStepProps) => {
-  const { state} = useIssueContext();
-
-console.log(state.assignedDevices)
-console.log(state.deviceIssueData)
+const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
+  const { state } = useIssueContext();
   return (
-    <>
-      <form>
+    <div className={styles.inner}>
+      <form className={styles.form}>
         <Search
           placeholder="search devices"
           actions={{
             handleChange: actions.handleDeviceChange,
             handleReset: actions.handleResetDeviceQuery,
-            handleSearch: actions.handleGetDevice
+            handleSearch: actions.handleGetDevice,
           }}
           value={state.deviceQuery}
         />
-      </form>
-      <DeviceList
-       state={state}
-       actions={actions}
-       isFetching={isFetching}
-       isSuccess={isSuccess}
-      />
-      {state.assignedDevices.length > 0 &&
-      <DeviceTable />
-      }
-      {state?.assignedDevices.length > 0 && (
-          <div className={styles.actions}>
-            <BtnAction
-              icon={<GrFormClose />}
-              size="lg"
-              color="grey"
-              title={reset}
-              click={actions.handleResetDeviceQuery}
-            />
-            <BtnAction
-              icon={<BsCheck />}
-              size="lg"
-              color="dark-green"
-              title={"next"}
-              click={actions.handleNextStep}
+        {(state.devicesLoaded && state.wasSearched) &&
+          <div className={styles.result}>
+            <DeviceList
+              state={state}
+              actions={actions}
             />
           </div>
-      )}
-    </>
+        }
+        </form>
+        <>
+          {state?.assignedDevices.length > 0 ? (
+            <>
+              <DeviceTable />
+              <div className={styles.actions}>
+                <BtnAction
+                  icon={<GrFormClose />}
+                  size="lg"
+                  color="grey"
+                  title={reset}
+                  click={actions.handleResetIssueDevices}
+                />
+                <BtnAction
+                  icon={<BsCheck />}
+                  size="lg"
+                  color="dark-green"
+                  title={"next"}
+                  click={actions.handleNextStep}
+                />
+              </div>
+            </>
+          ) : (
+            <NoData />
+          )}
+        </>
+    </div>
   );
 };
 

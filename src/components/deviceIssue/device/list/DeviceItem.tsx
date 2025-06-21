@@ -13,7 +13,7 @@ const DeviceItem = ({ actions, devices }:DeviceItemProps) => {
           className={styles.list}
           key={item.id}
           onClick={() => actions.handleSetDevice(item)}
-        >77
+        >
           <span className={styles.name}>
             {item.name} {item.inventoryNumber}
           </span>

@@ -30,6 +30,7 @@ type IssueContextType = {
     handleGetWarehousesByUser: (id: string) => void;
     handleResetDeviceQuery: () => void;
     handleDeleteDevice: (id: string) => void;
+    handleResetIssueDevices: () => void;
   };
   isSuccess: boolean;
   isFetching: boolean;

@@ -1,8 +1,8 @@
-import { IPermissionRole } from "../../types/access";
+import { PermissionRole } from "../../types/access";
 import { Checked } from "../../types/content";
 
-export interface IPermissionState {
-    entity: IPermissionRole;
+export interface PermissionState {
+    entity: PermissionRole;
     errors: Record<string, string>;
     isUpdate: boolean;
     permissionsRequest: boolean;
@@ -26,7 +26,7 @@ export enum PermissionActionTypes {
 export type PermissionAction = 
 | { type: PermissionActionTypes.SET_ERROR, payload: Record<string, string>}
 | { type: PermissionActionTypes.RESET_ERROR }
- | { type: PermissionActionTypes.SET_ENTITY, payload: Partial<IPermissionRole> }
+ | { type: PermissionActionTypes.SET_ENTITY, payload: Partial<PermissionRole> }
  | { type: PermissionActionTypes.RESET_ENTITY }
  | { type: PermissionActionTypes.SET_IS_UPDATE, payload: boolean }
  | { type: PermissionActionTypes.RESET_IS_UPDATE }
@@ -35,4 +35,4 @@ export type PermissionAction =
  | { type: PermissionActionTypes.RESET_WAREHOUSE }
  | { type: PermissionActionTypes.SET_PERMISSION, payload: { id: string, name: string, checked: boolean }}
  | { type: PermissionActionTypes.SET_PERMISSIONS_REQUEST, payload: boolean }
- | { type: PermissionActionTypes.SET_LIST_BY_ROLE, payload: Partial<IPermissionRole> }
+ | { type: PermissionActionTypes.SET_LIST_BY_ROLE, payload: Partial<PermissionRole> }
