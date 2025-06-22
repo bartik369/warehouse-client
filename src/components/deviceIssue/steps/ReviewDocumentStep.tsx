@@ -4,14 +4,10 @@ import { BaseDeviceQuery } from "../../../types/devices";
 import Search from "../search/Search";
 import styles from "./Steps.module.scss";
 import BtnAction from "../../ui/buttons/BtnAction";
-import { reset } from "../../../utils/constants/constants";
-import DeviceTable from "../../tables/device/DeviceTable";
 import NoData from "../../ui/no-data/NoData";
 import { AiOutlineSignature } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
-
-
-
+import DeviceTable from "../../tables/DeviceTable";
 
 interface ReviewDocumentStepProps {
   actions: BaseDeviceQuery;

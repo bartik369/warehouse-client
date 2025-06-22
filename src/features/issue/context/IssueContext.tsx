@@ -46,7 +46,7 @@ export const IssueProvider = ({ children, initialDeviceId }: { children: ReactNo
       value.actions.handleStartDeviceIssueWith(initialDeviceId);
     }
   }, [initialDeviceId]);
-  
+
   return (
     <IssueContext.Provider value={value}>
       {children}

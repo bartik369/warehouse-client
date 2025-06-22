@@ -1,11 +1,13 @@
 export type ModalType = 
   "entity" 
   | "contractor" 
+  | "signature-document" 
   | "signature" 
   | "receive" 
   | "type" 
   | "manufacturer" 
   | "model" 
+  
   | null;
 
 export interface IModalState {

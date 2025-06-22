@@ -2,10 +2,13 @@ import { useGlobalModal } from "../../hooks/data/useGlobalModal";
 import ContractorForm from "../forms/contractor/ContractorForm";
 import EntityForm from "../forms/device/EntityForm";
 import Modal from "./Modal";
+import Signature from "../signature/Signature";
+import { useSignature } from "../signature/useSignature";
+
 
 export const GlobalModal = () => {
   const { isOpen, modalType, modalProps, closeModal } = useGlobalModal();
-
+  const { actions } = useSignature();
   if (!isOpen) return null;
 
   const renderContent = () => {
@@ -23,9 +26,7 @@ export const GlobalModal = () => {
       case "contractor":
         return <ContractorForm {...modalProps} />;
       case "signature":
-        return (
-          <div>fdsfdsfsdf</div>
-        );
+        return <Signature actions={actions} {...modalProps}/>
       default:
         return null;
     }

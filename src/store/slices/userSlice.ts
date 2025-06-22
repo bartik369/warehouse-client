@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../types/user";
+import { RootState } from "../store";
 
 type UserAction = {
   user: User;
@@ -94,3 +95,5 @@ export const {
     setChecked,
     setIsAdmin,
 } = userSlice.actions;
+
+export const partnerUser = (state: RootState) => state.user.user;

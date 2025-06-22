@@ -1,10 +1,12 @@
 import React from 'react';
+import DocumentWithSignatures from '../../../features/documents/DocumentWithSignatures';
+
 
 const SignDocumentStep = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <DocumentWithSignatures />
+        </>
     );
 };
 

@@ -1,5 +1,5 @@
 import { useAppDispatch } from './../../../hooks/redux/useRedux';
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
 import { useLazyGetIssueQuery } from "../../../store/api/deviceIssueApi";
 import { handleApiError } from "../../../utils/errors/handleApiError";
 import { issueReducer, initialIssueState } from "./issueReducer";
@@ -49,7 +49,7 @@ export const useIssue = () => {
     } catch (err: unknown) {
       handleApiError(err);
     }
-  },[deviceDispatch, state.deviceQuery]);
+  },[deviceDispatch, searchDevices, state.deviceQuery]);
 
   const handleStartDeviceIssueWith = useCallback(async (id: string) => {
     if (!id) return;
@@ -72,10 +72,10 @@ export const useIssue = () => {
       type: IssueActionTypes.SET_WAREHOUSE,
       payload: warehouseData,
     });
-  }, []);
+  }, [getDevice]);
 
  /// ????
-  const handleDeviceIssue = async (id: string) => {
+  const handleDeviceIssue = useCallback(async (id: string) => {
     if (!id) return;
     try {
       const data = await getIssue(id).unwrap();
@@ -87,7 +87,7 @@ export const useIssue = () => {
     } catch (err: unknown) {
       handleApiError(err);
     }
-  };
+  },[getIssue, userDispatch]);
 
   const handleUserChange = useCallback((value: string) => {
     dispatch({
@@ -107,18 +107,18 @@ export const useIssue = () => {
     } catch (err: unknown) {
       handleApiError(err);
     }
-  }, [dispatch]);
+  }, [getFilteredUsers, userDispatch]);
 
   const handleResetUser = useCallback(() => {
     userDispatch(resetUser());
-  }, [dispatch])
+  }, [dispatch, userDispatch])
 
   const handleDeviceChange = useCallback((value: string) => {
     dispatch({ 
       type: IssueActionTypes.SET_DEVICE_QUERY,
       payload: value,
     });
-  }, [])
+  }, [dispatch])
 
   const handleSetUser = useCallback(async (id: string) => {
     try {
@@ -132,7 +132,8 @@ export const useIssue = () => {
     } catch (err: unknown) {
       handleApiError(err);
     }
-  }, []);
+  }, [userDispatch, dispatch]);
+
   const handleGetWarehousesByUser = useCallback(async(userId: string) => {
     try {
       const data = await getWarehousesByUser(userId).unwrap();
@@ -147,7 +148,7 @@ export const useIssue = () => {
     } catch (err: unknown) {
       handleApiError(err);
     }
-  }, [dispatch]);
+  }, [dispatch, getWarehousesByUser]);
 
   const handleSetWarehouse = useCallback((item: Warehouse) => {
     dispatch({
@@ -170,28 +171,29 @@ export const useIssue = () => {
       payload: false,
     });
     deviceDispatch(resetDevices());
-  },[])
+  },[dispatch, deviceDispatch])
 
-  const handleDeleteDevice = (id: string) => {
+  const handleDeleteDevice =  useCallback((id: string) => {
     dispatch({
       type: IssueActionTypes.DELETE_DEVICE,
       payload: id,
     })
-  }
+  },[dispatch])
 
-  const handleSetStepInfo = (step: IssueStepType) => {
+  const handleSetStepInfo =  useCallback((step: IssueStepType) => {
     dispatch({ 
       type: IssueActionTypes.SET_STEP,
       payload: step,
     });
     dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
     dispatch({ type: IssueActionTypes.RESET_DEVICE_QUERY });
-  }
+  },[dispatch])
+
   const handleFullReset = useCallback(() => {
     userDispatch(resetUser());
     deviceDispatch(resetDevices());
     dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA });
-  }, []);
+  }, [userDispatch, deviceDispatch, dispatch]);
 
   const handleNextStep = useCallback(() => {
     dispatch({ type: IssueActionTypes.NEXT_STEP });
@@ -201,17 +203,17 @@ export const useIssue = () => {
     
   },[]);
 
-  const handleResetUserQuery = () => {
+  const handleResetUserQuery =  useCallback(() => {
     dispatch({ type: IssueActionTypes.RESET_USER_QUERY });
-  }
+  }, [ dispatch])
 
-  const handleResetDeviceQuery = () => {
+  const handleResetDeviceQuery = useCallback(() => {
 
-  }
+  }, [])
 
-  const handleResetIssueDevices = () => {
+  const handleResetIssueDevices =  useCallback(() => {
     dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA })
-  }
+  }, [ dispatch])
 
   useEffect(() => {
     if (userDebouncedQuery.length > 1) {
@@ -229,30 +231,53 @@ export const useIssue = () => {
     }
   }, [userDebouncedQuery]);
 
-  return {
+  const actions = useMemo(() => ({
+    handleDeviceIssue,
+    handleUserChange,
+    handleFullReset,
+    handleSetUser,
+    handleResetUser,
+    handleResetUserQuery,
+    handleSetStepInfo,
+    handleNextStep,
+    handleEquipmentList,
+    handleGetDevice,
+    handleStartDeviceIssueWith,
+    handleDeviceChange,
+    handleSetDevice,
+    handleSetWarehouse,
+    handleGetWarehousesByUser,
+    handleResetDeviceQuery,
+    handleDeleteDevice,
+    handleResetIssueDevices,
+  }), [
+    handleDeviceIssue,
+    handleUserChange,
+    handleFullReset,
+    handleSetUser,
+    handleResetUser,
+    handleResetUserQuery,
+    handleSetStepInfo,
+    handleNextStep,
+    handleEquipmentList,
+    handleGetDevice,
+    handleStartDeviceIssueWith,
+    handleDeviceChange,
+    handleSetDevice,
+    handleSetWarehouse,
+    handleGetWarehousesByUser,
+    handleResetDeviceQuery,
+    handleDeleteDevice,
+    handleResetIssueDevices,
+  ]);
+  
+  const value = useMemo(() => ({
     state,
     isSuccess,
     isFetching,
     dispatch,
-    actions: {
-        handleDeviceIssue,
-        handleUserChange,
-        handleFullReset,
-        handleSetUser,
-        handleResetUser,
-        handleResetUserQuery,
-        handleSetStepInfo,
-        handleNextStep,
-        handleEquipmentList,
-        handleGetDevice,
-        handleStartDeviceIssueWith,
-        handleDeviceChange,
-        handleSetDevice,
-        handleSetWarehouse,
-        handleGetWarehousesByUser,
-        handleResetDeviceQuery,
-        handleDeleteDevice,
-        handleResetIssueDevices,
-    }
-  };
+    actions
+  }), [state, isSuccess, isFetching, dispatch, actions]);
+  
+  return value;
 };

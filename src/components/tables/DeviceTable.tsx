@@ -1,10 +1,10 @@
-import { DeviceLabel } from "../../../types/devices";
 import styles from "./DeviceTable.module.scss";
-import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import DeviceTableRow from "./DeviceTableRow";
+import { useIssueContext } from "../../features/issue/context/IssueContext";
+import { DeviceLabel } from "../../types/devices";
 
 const DeviceTable = () => {
-  const { state, actions } = useIssueContext();
+  const { state } = useIssueContext();
   const baseDeviceLabelConfig: DeviceLabel[] = [
     { key: "name", label: "Название" },
     { key: "modelName", label: "Модель" },
@@ -24,7 +24,7 @@ const DeviceTable = () => {
       </thead>
       <tbody>
         {state.assignedDevices?.map((device) => (
-          <DeviceTableRow key={device.id} device={device} actions={actions} />
+          <DeviceTableRow key={device.id} device={device} />
         ))}
       </tbody>
     </table>
