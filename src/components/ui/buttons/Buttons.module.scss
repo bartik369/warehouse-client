@@ -67,6 +67,7 @@
 .green,
 .dark-green {
     color: #fff;
+    transition: background-color .3s ease-in;
     &:hover {
         background-color: #41c0ad;
     }
@@ -80,11 +81,20 @@
     background-color: #379492;
 }
 
-.dark-grey {
-    background-color: #5c5f6e;
+.grey-light {
+    background-color: #aeb2bd;
     color: #fff;
     &:hover {
-        background-color: #6f7384;
+        background-color: #b4b9c5;
+    }
+}
+
+.dark-grey {
+    background-color: #434f63;
+    transition: background-color .3s ease-in;
+    color: #fff;
+    &:hover {
+        background-color: #62708a;
     }
 }
 

@@ -11,6 +11,7 @@ export const fillPassword = 'Введите пароль';
 export const enterDashboard = 'Войдите в аккаунт';
 export const forgetPassword = 'Забыли пароль?';
 export const reset = 'Сбросить';
+export const clean = 'Очистить';
 export const cancel = 'Отменить';
 export const add = 'Добавить';
 export const save = 'Сохранить';
@@ -19,6 +20,7 @@ export const email = 'Email';
 export const department = 'Отдел';
 export const login = 'Имя пользователя';
 export const workID = 'Work-ID';
+export const actNumberTitle = 'Акт приема-передачи';
 
 export const password  = 'Password';
 export const titleSignin = 'IT management';
@@ -112,3 +114,6 @@ export const use = 'Использует';
 export const download = 'Скачать';
 export const issue = 'Выдать';
 
+export const colorDarkGrey = 'dark-grey';
+export const colorGreyLight = 'grey-light';
+export const colorDarkGreen = 'dark-green';

@@ -1,16 +1,14 @@
 import React, { useRef } from "react";
-import SignatureCanvas from "react-signature-canvas";
-import { SignatureActions } from "../../types/signature";
-import { useGlobalModal } from "../../hooks/data/useGlobalModal";
 import BtnAction from "../ui/buttons/BtnAction";
-import { MdOutlineCancel } from "react-icons/md";
-import { IoAddCircleOutline } from "react-icons/io5";
+import SignatureCanvas from "react-signature-canvas";
+import { useGlobalModal } from "../../hooks/data/useGlobalModal";
+import { SignatureActions } from "../../types/signature";
+import { cancel, clean, colorDarkGreen, colorDarkGrey,
+   colorGreyLight, save } from "../../utils/constants/constants";
 import { RiResetLeftFill } from "react-icons/ri";
-
-
-
-import styles from './Signature.module.scss';
-import { cancel, reset, save } from "../../utils/constants/constants";
+import { IoSaveOutline } from "react-icons/io5";
+import { RiDeleteBack2Line } from "react-icons/ri";
+import styles from "./Signature.module.scss";
 
 interface SignatureProps {
   actions: SignatureActions;
@@ -33,19 +31,21 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
 
   return (
     <div className={styles.inner}>
-      <div className={styles.signatures}
-  style={{
-    display: 'flex',
-    justifyContent: 'space-around',
-    backgroundColor: '#f6f7fb',
-    flexDirection: 'row',
-    marginTop: 'auto',
-  }}>
+      <div
+        className={styles.signatures}
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          backgroundColor: "#f6f7fb",
+          flexDirection: "row",
+          marginTop: "auto",
+        }}
+      >
         <SignatureCanvas
           ref={canvasRef}
           penColor="black"
-          minWidth={1}
-          maxWidth={1}
+          minWidth={2}
+          maxWidth={2}
           canvasProps={{
             width: 400,
             height: 300,
@@ -54,26 +54,26 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
         />
       </div>
       <div className={styles.actions}>
-        <BtnAction 
-        size="sm" 
-        color="dark-grey" 
-        title={reset}
-        icon={<RiResetLeftFill />}
-        click={handleClear} 
+        <BtnAction
+          size="sm"
+          color={colorDarkGrey}
+          title={cancel}
+          icon={<RiDeleteBack2Line />}
+          click={closeModal}
         />
-        <BtnAction 
-        size="sm" 
-        color="red" 
-        title={cancel}
-        icon={<MdOutlineCancel />}
-        click={closeModal} 
+        <BtnAction
+          size="sm"
+          color={colorGreyLight}
+          title={clean}
+          icon={<RiResetLeftFill />}
+          click={handleClear}
         />
-        <BtnAction 
-        size="sm" 
-        color="dark-green" 
-        title={save}
-        icon={<IoAddCircleOutline />}
-        click={handleSave} 
+        <BtnAction
+          size="sm"
+          color={colorDarkGreen}
+          title={save}
+          icon={<IoSaveOutline />}
+          click={handleSave}
         />
       </div>
     </div>

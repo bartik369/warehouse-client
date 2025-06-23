@@ -9,6 +9,7 @@ import { useLazyGetUserQuery } from "../../../store/api/userApi";
 import { useLazyGetFilteredUsersQuery } from "../../../store/api/userApi";
 import { useLazySearchDevicesQuery } from "../../../store/api/devicesApi";
 import { resetUser, resetUsers, setUser, setUsers } from "../../../store/slices/userSlice";
+import { resetAllSignatures } from '../../../store/slices/signatureSlice';
 import { resetDevices, setDevices } from '../../../store/slices/deviceSlice';
 import { useLazyGetDeviceQuery } from '../../../store/api/devicesApi';
 import { useLazyGetWarehousesByUserQuery } from '../../../store/api/warehousesApi';
@@ -19,6 +20,7 @@ export const useIssue = () => {
   const [state, dispatch] = useReducer(issueReducer, initialIssueState);
   const userDispatch = useAppDispatch();
   const deviceDispatch = useAppDispatch();
+  const signatureDispatch = useAppDispatch();
   const { userQuery } = state;
   const userDebouncedQuery = useDebounce(userQuery, 700);
   const [getIssue] = useLazyGetIssueQuery();
@@ -191,6 +193,7 @@ export const useIssue = () => {
 
   const handleFullReset = useCallback(() => {
     userDispatch(resetUser());
+    signatureDispatch(resetAllSignatures());
     deviceDispatch(resetDevices());
     dispatch({ type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA });
   }, [userDispatch, deviceDispatch, dispatch]);
