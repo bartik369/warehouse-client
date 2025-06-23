@@ -38,7 +38,7 @@ const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
         <>
           {state?.assignedDevices.length > 0 ? (
             <>
-              <DeviceTable />
+              <DeviceTable showDeleteIcon={true}/>
               <div className={styles.actions}>
                 <BtnAction
                   icon={<TbArrowBackUp />}

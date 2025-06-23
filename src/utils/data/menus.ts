@@ -14,6 +14,7 @@ import { TbSettings } from "react-icons/tb";
 import { MdOutlineLockReset } from "react-icons/md";
 import { TbUserCircle } from "react-icons/tb";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { DeviceLabel } from "../../types/devices";
 
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
@@ -83,5 +84,15 @@ export const deviceIssueSteps = [
     { id: 'select_user', label: 'Выбор пользователя' },
     { id: 'review_document', label: 'Список оборудования' },
     { id: 'sign_document', label: 'Подпись документа' },
+    { id: 'send_document', label: 'Отправка документа' },
+  ];
+
+ export const baseDeviceLabelConfig: DeviceLabel[] = [
+    { key: "name", label: "Название" },
+    { key: "modelName", label: "Модель" },
+    { key: "typeName", label: "Тип" },
+    { key: "manufacturerName", label: "Производитель" },
+    { key: "inventoryNumber", label: "Инвентарный номер" },
+    { key: "serialNumber", label: "Серийный номер" },
   ];
   

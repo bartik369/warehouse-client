@@ -6,17 +6,19 @@ import {
   IssueStepTitle,
 } from "./issueTypes";
 
-const steps: IssueStepType[] = [
+export const steps: IssueStepType[] = [
   "select_warehouse",
   "select_user",
   "review_document",
   "sign_document",
+  "send_document",
 ];
 const titles: IssueStepTitle[] = [
   "Выбор склада",
   "Выбор пользователя",
   "Выбор оборудования",
   "Подпись документа",
+  "Отправка документа",
 ]
 export const initialIssueState: IssueState = {
   step: "select_warehouse",

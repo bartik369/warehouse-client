@@ -1,3 +1,9 @@
-.wrapper {
-    background-color: rgb(233, 255, 248);
+.inner {
+    .signature {
+        background-color: #f6f7fc;
+    }
+    .actions {
+        display: flex;
+        gap: 20px;
+    }
 }

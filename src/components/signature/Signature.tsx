@@ -1,8 +1,16 @@
 import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import styles from './Signature.module.scss';
 import { SignatureActions } from "../../types/signature";
 import { useGlobalModal } from "../../hooks/data/useGlobalModal";
+import BtnAction from "../ui/buttons/BtnAction";
+import { MdOutlineCancel } from "react-icons/md";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { RiResetLeftFill } from "react-icons/ri";
+
+
+
+import styles from './Signature.module.scss';
+import { cancel, reset, save } from "../../utils/constants/constants";
 
 interface SignatureProps {
   actions: SignatureActions;
@@ -12,8 +20,6 @@ interface SignatureProps {
 const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
   const canvasRef = useRef<SignatureCanvas>(null);
   const { closeModal } = useGlobalModal();
-  console.log(role)
-
   const handleSave = () => {
     const img = canvasRef.current?.getCanvas().toDataURL("image/png");
     if (img && role) {
@@ -26,9 +32,15 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
   };
 
   return (
-    <div>
-      <div>
-        <h2>Подпишите здесь</h2>
+    <div className={styles.inner}>
+      <div className={styles.signatures}
+  style={{
+    display: 'flex',
+    justifyContent: 'space-around',
+    backgroundColor: '#f6f7fb',
+    flexDirection: 'row',
+    marginTop: 'auto',
+  }}>
         <SignatureCanvas
           ref={canvasRef}
           penColor="black"
@@ -40,24 +52,29 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
             className: styles.wrapper,
           }}
         />
-        <div>
-          <button onClick={handleClear}>
-            Очистить
-          </button>
-          <div className="space-x-2">
-            <button
-              onClick={closeModal}
-              className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
-            >
-              Отмена
-            </button>
-            <button
-              onClick={handleSave}
-            >
-              Сохранить
-            </button>
-          </div>
-        </div>
+      </div>
+      <div className={styles.actions}>
+        <BtnAction 
+        size="sm" 
+        color="dark-grey" 
+        title={reset}
+        icon={<RiResetLeftFill />}
+        click={handleClear} 
+        />
+        <BtnAction 
+        size="sm" 
+        color="red" 
+        title={cancel}
+        icon={<MdOutlineCancel />}
+        click={closeModal} 
+        />
+        <BtnAction 
+        size="sm" 
+        color="dark-green" 
+        title={save}
+        icon={<IoAddCircleOutline />}
+        click={handleSave} 
+        />
       </div>
     </div>
   );

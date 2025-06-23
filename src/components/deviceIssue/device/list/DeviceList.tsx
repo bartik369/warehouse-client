@@ -12,7 +12,7 @@ interface DeviceListProps {
   state: IssueState;
   actions: BaseDeviceQuery;
 }
-const DeviceList = ({state, actions}: DeviceListProps) => {
+const DeviceList = ({state, actions }: DeviceListProps) => {
     
     const devices = useAppSelector((state: RootState) => state.device.devices);
 

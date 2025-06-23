@@ -10,19 +10,22 @@
 }
 
 .sm {
-    padding: 6px 12px;
-    border-radius: 10px;
-    height: 25px;
+    padding: 7px 9px;
+    border-radius: 4px;
     font-size: 12px;
-    font-weight: 400;
+    .icon {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        margin-right: 2px;
+    }
 }
 
 .md {
-    padding: 12px 25px;
+    padding: 10px 25px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 400;
-    color: #5a4c3e;
     transition: color .4s ease-in-out;
     .icon {
         display: flex;
@@ -78,10 +81,10 @@
 }
 
 .dark-grey {
-    background-color: #436378;
+    background-color: #5c5f6e;
     color: #fff;
     &:hover {
-        background-color: #496c83;
+        background-color: #6f7384;
     }
 }
 
@@ -96,7 +99,9 @@
 .red {
     background-color: #ff6a73;
     color: #ffffff;
-    &:hover {}
+    &:hover {
+        background-color: #ff8991;
+    }
 }
 
 .dark {

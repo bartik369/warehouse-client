@@ -11,7 +11,9 @@ export const fillPassword = 'Введите пароль';
 export const enterDashboard = 'Войдите в аккаунт';
 export const forgetPassword = 'Забыли пароль?';
 export const reset = 'Сбросить';
+export const cancel = 'Отменить';
 export const add = 'Добавить';
+export const save = 'Сохранить';
 export const update  = 'Обновить';
 export const email = 'Email';
 export const department = 'Отдел';
@@ -108,4 +110,5 @@ export const location = 'Локация';
 export const use = 'Использует';
 
 export const download = 'Скачать';
+export const issue = 'Выдать';
 
