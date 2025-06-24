@@ -77,18 +77,20 @@ export const useIssue = () => {
   }, [getDevice]);
 
  /// ????
-  const handleDeviceIssue = useCallback(async (id: string) => {
-    if (!id) return;
-    try {
-      const data = await getIssue(id).unwrap();
-      userDispatch(setUser(data.user));
-      dispatch({
-        type: IssueActionTypes.SET_ISSUE_ID,
-        payload: data.id,
-      });
-    } catch (err: unknown) {
-      handleApiError(err);
-    }
+  const handleDeviceIssue = useCallback(async (id: string, file: Blob) => {
+    console.log(id)
+    console.log(file)
+    // if (!id) return;
+    // try {
+    //   const data = await getIssue(id).unwrap();
+    //   userDispatch(setUser(data.user));
+    //   dispatch({
+    //     type: IssueActionTypes.SET_ISSUE_ID,
+    //     payload: data.id,
+    //   });
+    // } catch (err: unknown) {
+    //   handleApiError(err);
+    // }
   },[getIssue, userDispatch]);
 
   const handleUserChange = useCallback((value: string) => {

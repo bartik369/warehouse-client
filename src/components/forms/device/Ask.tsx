@@ -1,4 +1,5 @@
-import { add, isExistingInList } from "../../../utils/constants/constants";
+import { isExistingInList } from "../../../utils/constants/constants";
+import { BUTTON_LABELS } from "../../../utils/constants/ui/buttons";
 import styles from "./DeviceForm.module.scss";
 
 interface AskProps {
@@ -9,7 +10,7 @@ const Ask = ({ onAsk }: AskProps) => {
   return (
     <div className={styles.ask}>
       {isExistingInList}
-      <span onClick={onAsk}>{add}</span>
+      <span onClick={onAsk}>{BUTTON_LABELS.add}</span>
     </div>
   );
 };

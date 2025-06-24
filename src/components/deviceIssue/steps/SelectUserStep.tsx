@@ -4,7 +4,8 @@ import BtnAction from '../../ui/buttons/BtnAction';
 import { useIssueContext } from '../../../features/issue/context/IssueContext';
 import { BaseUserQuery } from '../../../types/user';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
-import { placeholderUserSearch, reset, select } from '../../../utils/constants/constants';
+import { placeholderUserSearch } from '../../../utils/constants/constants';
+import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
@@ -56,14 +57,14 @@ const SelectUserStep = ({
               icon={<GrFormClose />}
               size="lg"
               color="grey"
-              title={reset}
+              title={BUTTON_LABELS.reset}
               click={actions.handleResetUser}
             />
             <BtnAction
               icon={<BsCheck />}
               size="lg"
               color="dark-green"
-              title={select}
+              title={BUTTON_LABELS.select}
               click={actions.handleNextStep}
             />
           </div>

@@ -6,7 +6,7 @@ import { RootState } from '../../../store/store';
 import {useLogoutUserMutation} from '../../../store/api/authApi';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { profileMenuData } from '../../../utils/data/menus';
-import { signout } from '../../../utils/constants/constants';
+import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
 import { handleApiError } from '../../../utils/errors/handleApiError';
 import { LuCircleUser } from 'react-icons/lu';
 import { TbLogout2 } from "react-icons/tb";
@@ -55,7 +55,7 @@ const ProfileMenu = () => {
           <div className={styles.logout}>
             <BtnAction
               color="light"
-              title={signout}
+              title={BUTTON_LABELS.signout}
               size="md"
               icon={<TbLogout2 />}
               click={logoutHandler}

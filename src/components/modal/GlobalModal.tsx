@@ -9,6 +9,7 @@ import { useSignature } from "../signature/useSignature";
 export const GlobalModal = () => {
   const { isOpen, modalType, modalProps, closeModal } = useGlobalModal();
   const { actions } = useSignature();
+  
   if (!isOpen) return null;
 
   const renderContent = () => {

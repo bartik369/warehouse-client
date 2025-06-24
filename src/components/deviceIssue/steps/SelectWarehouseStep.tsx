@@ -4,7 +4,7 @@ import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { BaseDeviceQuery } from "../../../types/devices";
 import { RootState } from "../../../store/store";
-import { select } from "../../../utils/constants/constants";
+import { BUTTON_LABELS } from "../../../utils/constants/ui/buttons";
 import BtnAction from "../../ui/buttons/BtnAction";
 import { BsCheck } from "react-icons/bs";
 import styles from "./Steps.module.scss";
@@ -39,7 +39,7 @@ const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
        icon={<BsCheck />}
        size="lg"
        color="dark-green"
-       title={select}
+       title={BUTTON_LABELS.select}
        click={actions.handleNextStep}
      />
    </div>

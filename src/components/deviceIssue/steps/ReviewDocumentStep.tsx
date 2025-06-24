@@ -8,6 +8,7 @@ import NoData from "../../ui/no-data/NoData";
 import { AiOutlineSignature } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
 import DeviceTable from "../../tables/DeviceTable";
+import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
 
 interface ReviewDocumentStepProps {
   actions: BaseDeviceQuery;
@@ -18,7 +19,7 @@ const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
     <div className={styles.inner}>
       <form className={styles.form}>
         <Search
-          placeholder="search devices"
+          placeholder={PLACEHOLDER_LABELS.searchDevice}
           actions={{
             handleChange: actions.handleDeviceChange,
             handleReset: actions.handleResetDeviceQuery,

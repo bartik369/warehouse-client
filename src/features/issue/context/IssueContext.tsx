@@ -14,7 +14,7 @@ type IssueContextType = {
   state: IssueState;
   dispatch: Dispatch<IssueAction>;
   actions: {
-    handleDeviceIssue: (id: string) => Promise<void>;
+    handleDeviceIssue: (id: string, file: Blob | null) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
     handleSetUser: (id: string) => Promise<void>;

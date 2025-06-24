@@ -1,13 +1,12 @@
-import React from 'react';
-import DocumentWithSignatures from '../../../features/documents/DocumentWithSignatures';
-
+import React from "react";
+import DocumentWithSignatures from "../../../features/documents/DocumentWithSignatures";
 
 const SignDocumentStep = () => {
-    return (
-        <>
-            <DocumentWithSignatures />
-        </>
-    );
+  return (
+    <>
+      <DocumentWithSignatures />
+    </>
+  );
 };
 
 export default SignDocumentStep;

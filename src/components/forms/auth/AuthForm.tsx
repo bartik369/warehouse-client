@@ -4,8 +4,9 @@ import { useAuth } from '../../../hooks/data/useAuth';
 import BtnAction from '../../ui/buttons/BtnAction';
 import { GoLock } from "react-icons/go";
 import { HiOutlineEnvelope } from "react-icons/hi2";
-import {enterDashboard, fillEmail, fillPassword, signin, forgetPassword, 
-  reset, password, email } from '../../../utils/constants/constants';
+import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
+import {enterDashboard, fillEmail, fillPassword, forgetPassword, 
+  password, email } from '../../../utils/constants/constants';
 import styles from './AuthForm.module.scss';
 
 const AuthForm = () => {
@@ -37,7 +38,7 @@ const AuthForm = () => {
           />
           <div className={styles.actions}>
           <BtnAction 
-            title={signin} 
+            title={BUTTON_LABELS.signin} 
             size="lg"
             click={authHandler}
             color="dark-grey"
@@ -46,7 +47,7 @@ const AuthForm = () => {
         </form>
         <div className={styles.reset}>{forgetPassword}
           <Link to={import.meta.env.VITE_RESET_PASSWORD}>
-            {reset}
+            {BUTTON_LABELS.reset}
           </Link>
         </div>
       </div>
