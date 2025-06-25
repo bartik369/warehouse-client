@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import Select from "../select/Select";
+import BtnAction from "../../ui/buttons/BtnAction";
 import { useIssueContext } from "../../../features/issue/context/IssueContext";
 import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { BaseDeviceQuery } from "../../../types/devices";
 import { RootState } from "../../../store/store";
+import { COLORS } from "../../../utils/constants/ui/colors";
 import { BUTTON_LABELS } from "../../../utils/constants/ui/buttons";
-import BtnAction from "../../ui/buttons/BtnAction";
 import { BsCheck } from "react-icons/bs";
 import styles from "./Steps.module.scss";
 
@@ -28,22 +29,19 @@ const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
-        <Select
-          actions={actions}
-          warehouses={state.warehouses}
-        />
+        <Select actions={actions} warehouses={state.warehouses} />
       </form>
-      {state.warehouse.name &&
-     <div className={styles.actions}>
-     <BtnAction
-       icon={<BsCheck />}
-       size="lg"
-       color="dark-green"
-       title={BUTTON_LABELS.select}
-       click={actions.handleNextStep}
-     />
-   </div>
-      }
+      {state.warehouse.name && (
+        <div className={styles.actions}>
+          <BtnAction
+            icon={<BsCheck />}
+            size="lg"
+            color={COLORS.darkGreen}
+            title={BUTTON_LABELS.select}
+            click={actions.handleNextStep}
+          />
+        </div>
+      )}
     </div>
   );
 };

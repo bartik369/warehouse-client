@@ -8,4 +8,7 @@ export const BUTTON_LABELS = {
   select: "Выбрать",
   signin: 'Войти',
   signout: 'Выйти',
+  download: 'Скачать',
+  issue: 'Выдать',
+  signature: 'Подписать'
 };

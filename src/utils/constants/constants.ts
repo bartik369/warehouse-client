@@ -12,7 +12,7 @@ export const email = 'Email';
 export const department = 'Отдел';
 export const login = 'Имя пользователя';
 export const workID = 'Work-ID';
-export const actNumberTitle = 'Акт приема-передачи';
+// export const actNumberTitle = 'Акт приема-передачи';
 
 export const password  = 'Password';
 export const titleSignin = 'IT management';

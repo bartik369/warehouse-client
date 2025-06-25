@@ -1,17 +1,18 @@
 import UsersList from '../user/UsersList';
 import UserInfo from '../user/UserInfo';
 import BtnAction from '../../ui/buttons/BtnAction';
+import Search from '../search/Search';
+import NoData from '../../ui/no-data/NoData';
 import { useIssueContext } from '../../../features/issue/context/IssueContext';
 import { BaseUserQuery } from '../../../types/user';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
-import { placeholderUserSearch } from '../../../utils/constants/constants';
+import { RootState } from '../../../store/store';
 import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
+import { COLORS } from '../../../utils/constants/ui/colors';
+import { placeholderUserSearch } from '../../../utils/constants/constants';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
-import { RootState } from '../../../store/store';
-import Search from '../search/Search';
-import NoData from '../../ui/no-data/NoData';
 
 interface SelectUserStepProps {
   isSuccess: boolean;
@@ -25,6 +26,7 @@ const SelectUserStep = ({
 }: SelectUserStepProps) => {
   const { state } = useIssueContext();
   const user = useAppSelector((state: RootState) => state.user.user);
+
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
@@ -48,7 +50,7 @@ const SelectUserStep = ({
           </div>
       )}
       </form>
-      {user?.email 
+      {user?.id
        ? (
         <>
           <UserInfo />
@@ -56,14 +58,14 @@ const SelectUserStep = ({
             <BtnAction
               icon={<GrFormClose />}
               size="lg"
-              color="grey"
+              color={COLORS.grey}
               title={BUTTON_LABELS.reset}
               click={actions.handleResetUser}
             />
             <BtnAction
               icon={<BsCheck />}
               size="lg"
-              color="dark-green"
+              color={COLORS.darkGreen}
               title={BUTTON_LABELS.select}
               click={actions.handleNextStep}
             />

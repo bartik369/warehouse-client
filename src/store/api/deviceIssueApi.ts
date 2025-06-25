@@ -10,10 +10,18 @@ export const deviceIssueApi = createApi({
             query: (id: string) => ({
                 url: `${import.meta.env.VITE_DEVICE_ISSUE}${id}`,
             })
-        })
+        }),
+        createIssue: build.mutation({
+            query:(body) => ({
+                url: `${import.meta.env.VITE_DEVICE_ISSUE}`,
+                method: 'POST',
+                body,
+            })
+        }),
     })
 });
 
 export const {
     useLazyGetIssueQuery,
+    useCreateIssueMutation,
 } = deviceIssueApi;

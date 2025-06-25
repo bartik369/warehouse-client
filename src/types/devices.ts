@@ -338,13 +338,12 @@ export interface WarrantyFormActions {
 }
 
 export interface DeviceIssueData {
-  userId: string,
   processId: string,
   devices: string[],
 }
 
 export interface BaseDeviceQuery {
-    handleDeviceIssue: (id: string, file: Blob | null) => void;
+    handleCreateIssue: (file: Blob | null) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
     handleResetDeviceQuery: () => void;

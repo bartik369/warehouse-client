@@ -23,6 +23,7 @@ export interface IssueState {
 
 export enum IssueActionTypes {
     SET_DEVICE_ID = 'SET_DEVICE_ID',
+    SET_PROCESS_ID = 'SET_PROCESS_ID',
     SET_ISSUE_ID = 'SET_ISSUE_ID',
     SET_WAREHOUSE = 'SET_WAREHOUSE',
     RESET_DEVICE_ISSUE_DATA = 'RESET_DEVICE_ISSUE_DATA',
@@ -51,6 +52,7 @@ export enum IssueActionTypes {
  
 export type IssueAction = 
 | { type: IssueActionTypes.SET_DEVICE_ID, payload: string }
+| { type: IssueActionTypes.SET_PROCESS_ID, payload: string }
 | { type: IssueActionTypes.SET_ASSIGNED_DEVICES, payload: Device[] }
 | { type: IssueActionTypes.SET_WAREHOUSE, payload: Warehouse }
 | { type: IssueActionTypes.RESET_WAREHOUSE }

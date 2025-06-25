@@ -9,6 +9,7 @@ interface SignaturesProps {
   issueUser: User | null;
   receiverUser: User | null;
 }
+
 const Signatures = ({
   issuerSignature,
   receiverSignature,
@@ -23,22 +24,18 @@ const Signatures = ({
           {issueUser?.firstNameRu} {issueUser?.lastNameRu}
         </div>
         <div
-          className={`${styles.pic} ${
-            issuerSignature ? styles.filed : styles.empty
+          className={`${styles.pic} ${issuerSignature 
+            ? styles.filed 
+            : styles.empty
           }`}
-          onClick={() =>
-            openModal("signature", {
+          onClick={() => openModal("signature", {
               maxWidth: 400,
               role: "issuer",
             })
           }
         >
-          {issuerSignature && <img src={issuerSignature} />}
-          {!issuerSignature && (
-            <span>
-             <BsPen />
-            </span>
-          )}
+          { issuerSignature && <img src={issuerSignature} /> }
+          { !issuerSignature && <span><BsPen /></span> }
         </div>
       </div>
 
@@ -46,22 +43,17 @@ const Signatures = ({
         <div className={styles.user}>
           {receiverUser?.firstNameRu} {receiverUser?.lastNameRu}
         </div>
-        <div
-          className={`${styles.pic} ${
-            receiverSignature ? styles.filed : styles.empty
+        <div className={`${styles.pic} ${receiverSignature 
+          ? styles.filed 
+          : styles.empty
           }`}
-          onClick={() =>
-            openModal("signature", {
+          onClick={() => openModal("signature", {
               maxWidth: 400,
               role: "receiver",
             })
           }
         >
-             {!receiverSignature && (
-            <span>
-              <BsPen />
-            </span>
-          )}
+            { !receiverSignature && <span><BsPen /></span> }
           {receiverSignature && (
             <img src={receiverSignature} alt="Подпись получателя" />
           )}

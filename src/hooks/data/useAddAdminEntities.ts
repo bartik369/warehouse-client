@@ -161,8 +161,9 @@ export const useAddAdminEntities = () => {
             const formData = new FormData();
             (Object.keys(entity) as (keyof Entity)[]).forEach((key) => {
               const value = entity[key];
-              if (value !== undefined && value !== null)
+              if (value !== undefined && value !== null) {
                 formData.append(key, value);
+              }
             });
 
             if (state.media.file) formData.append("file", state.media.file);

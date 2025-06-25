@@ -1,14 +1,16 @@
-import { useIssueContext } from "../../../features/issue/context/IssueContext";
-import DeviceList from "../device/list/DeviceList";
-import { BaseDeviceQuery } from "../../../types/devices";
 import Search from "../search/Search";
-import styles from "./Steps.module.scss";
 import BtnAction from "../../ui/buttons/BtnAction";
+import DeviceList from "../device/list/DeviceList";
 import NoData from "../../ui/no-data/NoData";
+import DeviceTable from "../../tables/DeviceTable";
+import { useIssueContext } from "../../../features/issue/context/IssueContext";
+import { BaseDeviceQuery } from "../../../types/devices";
 import { AiOutlineSignature } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
-import DeviceTable from "../../tables/DeviceTable";
 import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
+import { COLORS } from "../../../utils/constants/ui/colors";
+import { BUTTON_LABELS } from "../../../utils/constants/ui/buttons";
+import styles from "./Steps.module.scss";
 
 interface ReviewDocumentStepProps {
   actions: BaseDeviceQuery;
@@ -44,15 +46,15 @@ const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
                 <BtnAction
                   icon={<TbArrowBackUp />}
                   size="lg"
-                  color="grey"
-                  title={'Очистить'}
+                  color={COLORS.grey}
+                  title={BUTTON_LABELS.clean}
                   click={actions.handleResetIssueDevices}
                 />
                 <BtnAction
                   icon={<AiOutlineSignature />}
                   size="lg"
-                  color="dark-green"
-                  title={"Подписать"}
+                  color={COLORS.darkGreen}
+                  title={BUTTON_LABELS.signature}
                   click={actions.handleNextStep}
                 />
               </div>

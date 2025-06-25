@@ -38,7 +38,6 @@ export const initialIssueState: IssueState = {
   },
   warehouses: [],
   deviceIssueData: {
-    userId: "",
     processId: "",
     devices: [],
   },
@@ -154,6 +153,14 @@ export function issueReducer(
         },
       };
     }
+    case IssueActionTypes.SET_PROCESS_ID:
+      return {
+        ...state,
+        deviceIssueData: {
+          ...state.deviceIssueData,
+          processId: action.payload,
+        }
+      }
     case IssueActionTypes.DELETE_DEVICE:
       return {
         ...state,
@@ -175,6 +182,7 @@ export function issueReducer(
     case IssueActionTypes.RESET_WAREHOUSES:
       return { ...state, warehouses: [] };
     case IssueActionTypes.RESET_DEVICE_ISSUE_DATA:
+      console.log('ressset')
       return {
         ...state, 
         deviceIssueData: {...initialIssueState.deviceIssueData },

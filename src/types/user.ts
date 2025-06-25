@@ -72,7 +72,7 @@ export interface UserFormActions {
 
 export interface BaseUserQuery {
     handleUserChange: (value: string) => void;
-    handleDeviceIssue: (id: string, file: Blob | null) => void;
+    handleCreateIssue: (file: Blob | null) => void;
     handleFullReset: () => void;
     handleSetUser: (id: string) => void;
     handleResetUser: () => void;

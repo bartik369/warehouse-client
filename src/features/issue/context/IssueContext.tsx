@@ -14,7 +14,7 @@ type IssueContextType = {
   state: IssueState;
   dispatch: Dispatch<IssueAction>;
   actions: {
-    handleDeviceIssue: (id: string, file: Blob | null) => void;
+    handleCreateIssue: (file: Blob) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
@@ -34,6 +34,8 @@ type IssueContextType = {
   };
   isSuccess: boolean;
   isFetching: boolean;
+  isIssueSuccess: boolean;
+  isIssueLoading: boolean;
 };
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);
