@@ -1,0 +1,40 @@
+.inner {
+    padding: 8px 0px 4px 40px;
+    .list {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        min-height: 22px;
+        padding: 4px 0 0;
+        .link {
+            display: flex;
+            align-items: center;
+            .icon {
+                display: flex;
+                align-items: center;
+                font-size: 1.4em;
+                margin-right: 3px;
+            }
+        }
+        li {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            .active {
+                color: #3d4555;
+                font-weight: 500;
+            }
+            a {
+                color: #636676;
+                &:hover {
+                    color: #3d4555;
+                }
+            }
+            .icon svg {
+                display: block;
+                font-size: 1.2em;
+                margin-right: 3px;
+            }
+        }
+    }
+}

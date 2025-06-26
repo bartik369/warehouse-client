@@ -10,5 +10,6 @@ export const BUTTON_LABELS = {
   signout: 'Выйти',
   download: 'Скачать',
   issue: 'Выдать',
-  signature: 'Подписать'
+  signature: 'Подписать',
+  home: 'Главная',
 };

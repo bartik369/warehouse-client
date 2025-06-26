@@ -6,6 +6,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import AdminMenu from '../components/navigates/admin/AdminMenu';
 import styles from './Layout.module.scss';
 import { GlobalModal } from '../components/modal/GlobalModal';
+import Breadcrumbs from '../components/breadcrumbs/Breadcrumbs';
 
 const Layout = () => {
   const [isActive, setIsActive] = useState(false);
@@ -16,6 +17,7 @@ const Layout = () => {
       <Sidebar open={isActive} />
       <div className={isActive ? styles.active : styles["not-active"]}>
         <Header isActive={isActive} setIsActive={setIsActive} />
+        <Breadcrumbs />
         <main className={styles.outlet}>
           {location.pathname.startsWith("/admin") && <AdminMenu />}
           <div className={styles.content}>
