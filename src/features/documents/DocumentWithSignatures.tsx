@@ -2,6 +2,7 @@ import IssueActContent from "./IssueActContent";
 import IssueDocument from "../../components/pdf/issue/IssueDocument";
 import BtnAction from "../../components/ui/buttons/BtnAction";
 import Signatures from "./Signatures";
+import EnvelopeLoader from "../../components/ui/loader/envelope/EnvelopeLoader";
 import { useIssueContext } from "../issue/context/IssueContext";
 import { useAppSelector } from "../../hooks/redux/useRedux";
 import { currentUser } from "../../store/slices/authSlice";
@@ -10,19 +11,12 @@ import { selectIssuerSignature, selectReceiverSignature } from "../../store/slic
 import { ELEMENTS_LABELS } from "../../utils/constants/ui/elements";
 import { pdf } from "@react-pdf/renderer";
 import { IoBarcodeOutline } from "react-icons/io5";
-import { TbBookDownload } from "react-icons/tb";
 import { MdOutlineDone } from "react-icons/md";
 import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
 import { SECTION_TITLES } from "../../utils/constants/ui/titles";
 import { COLORS } from "../../utils/constants/ui/colors";
 import { SIZES } from "../../utils/constants/ui/sizes";
-import Loader from "../../components/ui/loader/Loader";
 import styles from "./Document.module.scss";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import EnvelopeLoader from "../../components/ui/loader/envelope/EnvelopeLoader";
-
-
 
 const DocumentWithSignatures = () => {
   const { actions, state, isIssueLoading } = useIssueContext();
@@ -31,8 +25,6 @@ const DocumentWithSignatures = () => {
   const issueUser = useAppSelector(currentUser);
   const receiverUser = useAppSelector(partnerUser);
   const date = new Date();
-
-  const [isSent, setIsSent] = useState(false);
 
   const generatePDFBlob = async (): Promise<Blob> => {
     const doc = (
@@ -53,23 +45,6 @@ const DocumentWithSignatures = () => {
     await instance.updateContainer(doc);
     const blob = await instance.toBlob();
     return blob;
-  };
-
-  const handleDownload = async () => {
-    try {
-      const blob = await generatePDFBlob();
-      const url = URL.createObjectURL(blob);
-      window.open(url);
-
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'act-of-issue.pdf';
-      a.click();
-
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Ошибка при генерации PDF:", err);
-    }
   };
 
   const handleSend = async () => {
@@ -114,13 +89,13 @@ const DocumentWithSignatures = () => {
       </div>
 
       <div className={styles.actions}>
-        <BtnAction
+        {/* <BtnAction
           size={SIZES.md}
           color={COLORS.darkGrey}
           click={handleDownload}
           title={BUTTON_LABELS.download}
           icon={<TbBookDownload />}
-        />
+        /> */}
         <BtnAction
           size={SIZES.md}
           color={COLORS.darkGreen}

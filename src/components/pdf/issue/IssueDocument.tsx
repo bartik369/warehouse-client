@@ -172,7 +172,7 @@ const IssueDocument = ({
       </View>
       <View style={styles.centeredBlock}>
       <Text style={styles.numberBlock}>
-            <Text style={styles.docNumberText}>Номер акта выдачи:</Text>
+            <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
             <Text style={styles.docNumber}>{docNumber}</Text>
       </Text>
         <Text style={styles.date}>{date}</Text>

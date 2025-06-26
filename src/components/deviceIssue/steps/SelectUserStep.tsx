@@ -29,7 +29,7 @@ const SelectUserStep = ({
 
   return (
     <div className={styles.inner}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <Search
           placeholder={placeholderUserSearch} 
           actions={{

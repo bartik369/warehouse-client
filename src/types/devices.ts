@@ -343,7 +343,7 @@ export interface DeviceIssueData {
 }
 
 export interface BaseDeviceQuery {
-    handleCreateIssue: (file: Blob | null) => void;
+    handleCreateIssue: (file: Blob) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
     handleResetDeviceQuery: () => void;

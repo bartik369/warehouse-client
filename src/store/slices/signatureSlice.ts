@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type SignatureState = {
   issuerSignature: null | string;
   receiverSignature: null | string;
+  pdfBlob: Blob | null;
 };
 
 const initialState: SignatureState = {
   issuerSignature: null,
   receiverSignature: null,
+  pdfBlob: null,
 };
 
 const signatureSlice = createSlice({
@@ -30,6 +32,14 @@ const signatureSlice = createSlice({
       state.issuerSignature = null;
       state.receiverSignature = null;
     },
+    setPdfBlob: (state, action: PayloadAction<Blob>) => {
+      state.pdfBlob = action.payload;
+    },
+    resetState: (state) => {
+      state.issuerSignature = null;
+      state.receiverSignature = null;
+      state.pdfBlob = null;
+    }
   },
 });
 export default signatureSlice.reducer;
@@ -39,6 +49,8 @@ export const {
   resetIssuerSignature,
   resetReceiverSignature,
   resetAllSignatures,
+  setPdfBlob,
+  resetState,
 } = signatureSlice.actions;
 
 import { RootState } from "../store";
@@ -47,3 +59,4 @@ export const selectIssuerSignature = (state: RootState) =>
   state.signature.issuerSignature;
 export const selectReceiverSignature = (state: RootState) =>
   state.signature.receiverSignature;
+export const pdfBlob = (state: RootState) => state.signature.pdfBlob;

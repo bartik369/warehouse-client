@@ -11,7 +11,7 @@ import { partnerUser } from "../../../store/slices/userSlice";
 import { useLazyGetFilteredUsersQuery } from "../../../store/api/userApi";
 import { useLazySearchDevicesQuery } from "../../../store/api/devicesApi";
 import { resetUser, resetUsers, setUser, setUsers } from "../../../store/slices/userSlice";
-import { resetAllSignatures } from '../../../store/slices/signatureSlice';
+import { resetAllSignatures, setPdfBlob } from '../../../store/slices/signatureSlice';
 import { resetDevices, setDevices } from '../../../store/slices/deviceSlice';
 import { useLazyGetDeviceQuery } from '../../../store/api/devicesApi';
 import { useLazyGetWarehousesByUserQuery } from '../../../store/api/warehousesApi';
@@ -66,15 +66,22 @@ export const useIssue = () => {
       payload: id,
     });
     const data = await getDevice(id).unwrap();
-    const { warehouse, warehouseId } = data;
+    const { warehouse, warehouseId, model, ...rest } = data;
     const warehouseData = {
       id: warehouseId,
       name: warehouse.name,
       slug: warehouse.slug,
     }
+    const deviceData = {
+      ...rest,
+      modelName: model.name,
+      typeName: model.type.name,
+      manufacturerName: model.manufacturer.name,
+      warehouseId: warehouseId,
+    }
     dispatch({ 
       type: IssueActionTypes.SET_ASSIGNED_DEVICES,
-      payload: [data]
+      payload: [deviceData]
     });
     dispatch({
       type: IssueActionTypes.SET_WAREHOUSE,
@@ -85,6 +92,7 @@ export const useIssue = () => {
   const handleCreateIssue = useCallback(async (file: Blob) => {
     if (!file) return;
     try {
+      signatureDispatch(setPdfBlob(file));
       const issueData = new FormData();
       issueData.append('userId', recipient?.id);
       issueData.append('processId', state.deviceIssueData?.processId);

@@ -3,6 +3,7 @@ import SelectUserStep from "./steps/SelectUserStep";
 import ReviewDocumentStep from "./steps/ReviewDocumentStep";
 import SignDocumentStep from "./steps/SignDocumentStep";
 import SelectWarehouseStep from "./steps/SelectWarehouseStep";
+import FinalizeIssueStep from "./steps/FinalizeIssueStep";
 
 const DeviceIssueSteps = () => {
   const { 
@@ -31,6 +32,8 @@ const DeviceIssueSteps = () => {
       );
     case "sign_document":
       return <SignDocumentStep />;
+    case "send_document":
+      return <FinalizeIssueStep />
     default:
       return <div></div>;
   }

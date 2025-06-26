@@ -19,7 +19,11 @@ const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
   const { state } = useIssueContext();
   return (
     <div className={styles.inner}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => {
+          e.preventDefault()
+          actions.handleGetDevice()
+        }}
+      >
         <Search
           placeholder={PLACEHOLDER_LABELS.searchDevice}
           actions={{

@@ -69,3 +69,30 @@
     padding: 15px;
     gap: 30px;
 }
+
+.doneProcess {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0 40px;
+    .icon {
+        font-size: 50px;
+        color: #379492;
+        margin-bottom: 5px;
+    }
+    .header {
+        font-size: 20px;
+        line-height: 30px;
+        span {
+            font-weight: 800;
+            font-size: 23px;
+            padding: 0 5px;
+        }
+    }
+    .text {
+        span {
+            color: #318988;
+        }
+    }
+}

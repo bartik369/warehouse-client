@@ -87,6 +87,13 @@ export function issueReducer(
         issueId: action.payload,
       };
     case IssueActionTypes.SET_ASSIGNED_DEVICES: {
+      // const { model, ...rest } = action.payload;
+      // const device = {
+      //   ...rest,
+      //   modelName: model.name,
+      //   typeName: model.type.name,
+      //   manufacturerName: model.manufacturer.name,
+      // }
       const existingIds = new Set(state.assignedDevices.map((item) => item.id));
       const newDevices = action.payload.filter(
         (item) => !existingIds.has(item.id)
