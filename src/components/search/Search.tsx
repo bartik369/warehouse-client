@@ -1,30 +1,38 @@
-import { useState } from 'react';
-import { search } from '../../utils/constants/constants';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faXmark} from '@fortawesome/free-solid-svg-icons';
-import style from './Search.module.scss';
+import { useState } from "react";
+import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
+import { PLACEHOLDER_LABELS } from "../../utils/constants/ui/placeholders";
+import { IoSearch } from "react-icons/io5";
+import { CgCloseO } from "react-icons/cg";
+import styles from "./Search.module.scss";
 
 const Search = () => {
-    const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
-    return (
-        <div className={style.search}>
-            <div className={style.glass}>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </div>
-            <input 
-                onChange={(e) => setSearchQuery(e.target.value)} 
-                placeholder={search} 
-                value={searchQuery}
-                type="text" 
-            />
-            {searchQuery &&
-            <div className={style.close} onClick={() => setSearchQuery('')}>
-                <FontAwesomeIcon icon={faXmark}/>
-            </div>
-            }
+  return (
+    <div className={styles.search}>
+      <div className={styles.input}>
+        <div className={styles.glass}>
+          <IoSearch />
         </div>
-    );
+        <input
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={PLACEHOLDER_LABELS.search}
+          value={searchQuery}
+          type="text"
+        />
+        {searchQuery && (
+          <div className={styles.close} onClick={() => setSearchQuery("")}>
+            <CgCloseO />
+          </div>
+        )}
+      </div>
+      <button
+        className={styles.button}
+        style={{ visibility: searchQuery ? "visible" : "hidden" }}>
+        {BUTTON_LABELS.search}
+      </button>
+    </div>
+  );
 };
 
 export default Search;

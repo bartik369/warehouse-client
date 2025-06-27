@@ -12,4 +12,5 @@ export const BUTTON_LABELS = {
   issue: 'Выдать',
   signature: 'Подписать',
   home: 'Главная',
+  search: 'Найти',
 };

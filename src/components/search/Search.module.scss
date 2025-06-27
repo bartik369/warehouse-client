@@ -1,56 +1,65 @@
 .search {
-    position: relative;
     display: flex;
     align-items: center;
-    width: 250px;
-    padding: 2px 14px;
-    border-radius: 18px;
-    border: 1px solid #d0d6e2;
-    background-color: #fefeff;
-    transition: border-color 0.2s ease;
-     ::placeholder {
-        color: #5e606f;
-        font-size: 12px;
-        opacity: 1;
-    }
-    &:hover {
-        border: 1px solid #8e919f;
-        background-color: #ffffff;
-    }
-    input {
-        width: 100%;
-        border: none;
-        outline: none;
-        color: #1a1c1e;
-        padding: 8px 30px 8px 8px;
-        background: transparent;
-        font-family: inherit;
-    }
-    .glass {
-        font-size: 15px;
-        color: #8e91a0;
-    }
-    &:hover .glass {
-        color: #5c6174;
-    }
-    .close {
-        position: absolute;
+    padding: 0 8px;
+    border-radius: 20px;
+    height: 40px;
+    gap: 4px;
+    .input {
+        flex: 1;
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        right: 11px;
-        height: 12px;
-        width: 12px;
-        padding: 4px;
-        border-radius: 50%;
-        cursor: pointer;
+        position: relative;
+        border-radius: 18px;
+        border: 1px solid #d0d6e2;
+        background-color: #fefeff;
+        padding: 3px 14px;
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 8px 30px 8px 8px;
+        }
+        .glass {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 19px;
+            color: #8e91a0;
+        }
+        .close {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 5px;
+            height: 23px;
+            width: 23px;
+            padding: 4px;
+            font-size: 21px;
+            transform: rotate(-3deg);
+            color: #8e91a0;
+            transition: color .4s ease-in;
+            cursor: pointer;
+            &:hover {
+                color: #424b5c;
+            }
+        }
+    }
+    .button {
+        background: #379492;
+        height: 36px;
+        font-size: 11px;
         color: #ffffff;
-        background-color: #5c5f6e;
-        transition: background-color .2s ease-in;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color .4s ease-in;
         &:hover {
-            color: #ffffff;
-            background-color: #1a1c1e;
+            background: #3ea5a4;
         }
     }
 }

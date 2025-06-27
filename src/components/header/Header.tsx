@@ -6,7 +6,7 @@ import Profile from "../profile/Profile";
 import { useAppSelector} from "../../hooks/redux/useRedux";
 import { RootState } from "../../store/store";
 import { useStickyHeader } from "../../hooks/data/useStickyHeader";
-import style from "./Header.module.scss";
+import styles from "./Header.module.scss";
 
 interface HeaderProps {
   isActive: boolean;
@@ -22,13 +22,17 @@ const Header = ({ isActive, setIsActive }: HeaderProps) => {
 
 
   return (
-    <header className={`${style.header} ${isSticky 
-      ? style.sticky 
-      : style.relative}`}
+    <header className={`${styles.header} ${isSticky 
+      ? styles.sticky 
+      : styles.relative}`}
     >
       <BurgerBtn isActive={isActive} action={() => setIsActive(!isActive)} />
+      <div className={styles.searchBlock}>
       <Search />
-      {(device?.id && (isDevicePage || status)) && <HeaderMenu />}
+      </div>
+      <div className={styles.menuBlock}>
+        {(device?.id && (isDevicePage || status)) && <HeaderMenu />}
+      </div>
       <Profile />
     </header>
   );

@@ -16,7 +16,7 @@ export const workID = 'Work-ID';
 
 export const password  = 'Password';
 export const titleSignin = 'IT management';
-export const search = 'Поиск...';
+// export const search = 'Поиск...';
 export const yes = 'Да';
 export const no = 'Нет';
 export const prevPage = 'Предыдущая страница';
