@@ -19,6 +19,7 @@ import UsersConfig from "../pages/UsersList";
 import UserDetailsConfig from "../pages/UserDetails";
 import GrantUserRolesConfig from "../pages/GrantUserRoles";
 import IssueConfig from "../pages/Issue";
+import LocationsConfig from "../pages/Locations";
 
 const privateRoutes = [
     HomeConfig,
@@ -42,6 +43,7 @@ const privateRoutes = [
     AddTypeConfig,
     PermissionRoleConfig,
     GrantUserRolesConfig,
+    LocationsConfig,
 ]
 
 export default privateRoutes;

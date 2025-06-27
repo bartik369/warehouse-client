@@ -10,12 +10,14 @@ import { MdOutlineLibraryAddCheck, MdSupportAgent  } from "react-icons/md";
 import { IoCalendarNumberOutline, IoStatsChartOutline } from "react-icons/io5";
 import { TbFileDescription, TbBrandComedyCentral, TbLocationPlus, 
 TbDeviceDesktopPlus } from "react-icons/tb";
+import { LuSquareChevronUp } from "react-icons/lu";
 import { TbSettings } from "react-icons/tb";
 import { MdOutlineLockReset } from "react-icons/md";
 import { TbUserCircle } from "react-icons/tb";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { DeviceLabel } from "../../types/devices";
-
+import msk from '../../assets/elements/msk.png';
+import ekb from '../../assets/elements/ekb.png';
 
 const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
 const  Another = React.lazy(() => import('../../components/pages/device/Another'));
@@ -36,7 +38,7 @@ export const sidebarMenuData = [
       { id: 1,  title: 'Локации', path: '', icon: LuWarehouse, subMenu: [
       { id: 1, title: 'Московский офис', path: 'msk'},
       { id: 2, title: 'Екатеринбург', path: 'ekb'},    ]
-},  {id: 2, title: 'Выдать', path: '/issue', icon: BiMessageSquareDetail},
+},  {id: 2, title: 'Выдать', path: '/issue', icon: LuSquareChevronUp},
     {id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
     {id: 4, title: 'Пользователи', path: '/admin/users', icon: LuUsers},
     {id: 5, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
@@ -94,5 +96,20 @@ export const deviceIssueSteps = [
     { key: "manufacturerName", label: "Производитель" },
     { key: "inventoryNumber", label: "Инвентарный номер" },
     { key: "serialNumber", label: "Серийный номер" },
+  ];
+
+  export const locations = [
+    {
+      id: 1,
+      label: 'Москва',
+      image: ekb,
+      path: '/devices/locations/msk'
+    },
+    {
+      id: 2,
+      label: 'Екатеринбург',
+      image: ekb,
+       path: '/devices/locations/ekb'
+    },
   ];
   

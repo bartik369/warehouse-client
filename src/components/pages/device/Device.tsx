@@ -33,6 +33,7 @@ const Device = () => {
       const itemDevice = await getDevice(id).unwrap();
       dispatch(patchDevice({
         id: itemDevice.id,
+        name: itemDevice.name,
         isAssigned: itemDevice.isAssigned,
         warehouseName: itemDevice.warehouse?.name || "",
         warehouseSlug: itemDevice.warehouse?.slug || "",
