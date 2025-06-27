@@ -1,12 +1,11 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useEntityNameResolver } from "../../hooks/data/useEntityNameResolver";
 import { routeNameMap } from "../../utils/constants/breadcrumbs";
 import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { RiHome3Line } from "react-icons/ri";
-import { useEffect, useState } from "react";
-import { useEntityNameResolver } from "../../hooks/data/useEntityNameResolver";
 import styles from "./Breadcrumbs.module.scss";
-
 
 const Breadcrumbs = () => {
   const location = useLocation();
@@ -15,20 +14,22 @@ const Breadcrumbs = () => {
   const [pathName, setPathName] = useState<string | null>(null)
   const { resolveEntityName } = useEntityNameResolver();
 
-  const isLast = pathnames[pathnames.length - 1];
+  const isLast = pathnames.at(-1);
   const regEx = /^[0-9a-fA-F-]{36}$/;
   const isUuidFormat = regEx.test(isLast || '');
 
   useEffect(() => {
     async function fetchName(path: string) {
-      const data = await resolveEntityName(path)
-      setPathName(data)
+      const data = await resolveEntityName(path);
+      setPathName(data);
     }
-
     if (isUuidFormat) {
       setIsUuid(true);
       fetchName(location.pathname)
-    } 
+    } else {
+      setIsUuid(false);
+      setPathName(null);
+    }
   }, [location.pathname]);
 
   return (

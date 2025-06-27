@@ -35,10 +35,13 @@ export const profileMenuData = [
     {id: 4, title: 'Настройки', path: '#', icon: TbSettings},
 ];
 export const sidebarMenuData = [
-      { id: 1,  title: 'Локации', path: '', icon: LuWarehouse, subMenu: [
-      { id: 1, title: 'Московский офис', path: 'msk'},
-      { id: 2, title: 'Екатеринбург', path: 'ekb'},    ]
-},  {id: 2, title: 'Выдать', path: '/issue', icon: LuSquareChevronUp},
+    { id: 1,  title: 'Локации', path: 'devices/locations', icon: LuWarehouse, 
+      subMenu: [
+        { id: 1, title: 'Московский офис', path: 'msk'},
+        { id: 2, title: 'Екатеринбург', path: 'ekb'},    
+      ]
+    },  
+    {id: 2, title: 'Выдать', path: '/issue', icon: LuSquareChevronUp},
     {id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
     {id: 4, title: 'Пользователи', path: '/admin/users', icon: LuUsers},
     {id: 5, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
@@ -102,7 +105,7 @@ export const deviceIssueSteps = [
     {
       id: 1,
       label: 'Москва',
-      image: ekb,
+      image: msk,
       path: '/devices/locations/msk'
     },
     {

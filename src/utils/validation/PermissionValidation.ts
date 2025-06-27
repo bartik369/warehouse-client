@@ -1,7 +1,7 @@
-import { IPermissionRole, ValidateAccessErrors } from "../../types/access";
+import { PermissionRole, ValidateAccessErrors } from "../../types/access";
 import { requiredFieldText } from "../constants/constants";
 
-type ValidationFields = keyof IPermissionRole;
+type ValidationFields = keyof PermissionRole;
 
 const requiredFieldsOther: ValidationFields[] = [
   "roleName",
@@ -17,7 +17,7 @@ const requiredFieldsManager: ValidationFields[] = [
 ];
 
 const validateRequiredFields = (
-  data: IPermissionRole,
+  data: PermissionRole,
   fields: ValidationFields[],
   errors: Record<string, string>
 ): void => {
@@ -33,7 +33,7 @@ const validateRequiredFields = (
 };
 
 export const FormValidation = (
-  data: IPermissionRole
+  data: PermissionRole
 ): Partial<ValidateAccessErrors> => {
   const errors: Record<string, string> = {};
 

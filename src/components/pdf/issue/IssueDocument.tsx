@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   table: {
     fontSize: 9,
-    display: "table",
+    display: "flex",
     width: "auto",
     borderStyle: "solid",
     borderWidth: 1,

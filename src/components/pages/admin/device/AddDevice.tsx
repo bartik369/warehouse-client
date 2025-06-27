@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../../../../hooks/redux/useRedux";
 import { setDevicePic } from "../../../../store/slices/deviceSlice";
-import AddDeviceForm from "../../../forms/device/DeviceForm";
+import DeviceForm from "../../../forms/device/DeviceForm";
 import { useAddDevice } from "../../../../hooks/data/useAddDevice";
 
 const AddDevice = () => {
   const dispatch = useAppDispatch();
-  const { state, actions } = useAddDevice();
+  const { actions } = useAddDevice();
 
   useEffect(() => {
     return () => {
@@ -16,7 +16,7 @@ const AddDevice = () => {
 
   return (
     <section>
-      <AddDeviceForm state={state} actions={actions} />
+      <DeviceForm actions={actions} />
     </section>
   );
 };

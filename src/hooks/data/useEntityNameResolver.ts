@@ -18,8 +18,8 @@ export function useEntityNameResolver() {
 
   const resolveEntityName = async (path: string) => {
     const segments = path.split('/');
-    const id = segments[segments.length - 1];
-    const prefix = segments[segments.length - 2];
+    const id = segments.at(-1);
+    const prefix = segments.at(-2);
 
     if (!id || !prefix) return null;
     const resolvedName = resolverMap[prefix];

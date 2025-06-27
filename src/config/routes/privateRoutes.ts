@@ -24,7 +24,7 @@ import LocationsConfig from "../pages/Locations";
 const privateRoutes = [
     HomeConfig,
     ProfileConfig,
-    DevicesConfig,
+    ...DevicesConfig,
     DeviceConfig,
     AddDeviceConfig,
     IssueConfig,

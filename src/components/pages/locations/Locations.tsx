@@ -4,8 +4,7 @@ import styles from "./Locations.module.scss";
 
 const Locations = () => {
   return (
-    <section className={styles.inner}>
-      <h2>Города</h2>
+    <div className={styles.inner}>
       <div className={styles.items}>
         {locations.map((city) => (
           <Link to={city.path} key={city.id} className={styles.item}>
@@ -14,7 +13,7 @@ const Locations = () => {
           </Link>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

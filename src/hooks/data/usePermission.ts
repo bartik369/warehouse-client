@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { IPermissionRole, Role, UserRolesList } from "../../types/access";
+import { PermissionRole, Role, UserRolesList } from "../../types/access";
 import { Entity } from "../../types/devices";
 import { CheckedPermissionOptions } from "../../types/content";
 import {
@@ -24,7 +24,7 @@ export const usePermission = () => {
   const [updatePermissionRole] = useUpdatePermissionRoleMutation();
 
   const handleInputChange = useCallback(
-    (field: keyof IPermissionRole, value: string) => {
+    (field: keyof PermissionRole, value: string) => {
       const validationErrors = validateField(field, value);
       dispatch({
         type: PermissionActionTypes.SET_ERROR,
@@ -64,7 +64,10 @@ export const usePermission = () => {
     }
   };
 
-  const handleGetEntity = useCallback((id: string, field: string) => {}, []);
+  const handleGetEntity = useCallback((id: string, field: string) => {
+    console.log(id)
+    console.log(field)
+  }, []);
   const handleDeleteEntity = useCallback(() => {}, []);
 
   const handleResetEntity = useCallback(() => {
@@ -124,7 +127,7 @@ export const usePermission = () => {
     [list]
   );
 
-  const handleRoleInfo = useCallback((item: Partial<IPermissionRole> ) => {
+  const handleRoleInfo = useCallback((item: Partial<PermissionRole> ) => {
     dispatch({ type: PermissionActionTypes.RESET_LIST });
     dispatch({ type: PermissionActionTypes.RESET_ENTITY });
     const data = {
