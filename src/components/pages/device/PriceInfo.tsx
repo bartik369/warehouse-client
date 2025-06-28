@@ -1,6 +1,7 @@
 import { AggregateDeviceInfo } from "../../../types/devices";
 import { TbCoins } from "react-icons/tb";
 import { LABELS } from "../../../utils/constants/ui/labels";
+import { UNIT_LABELS } from "../../../utils/constants/ui/unit";
 import styles from "./Device.module.scss";
 
 interface PriceInfoProps {
@@ -18,14 +19,14 @@ const PriceInfo = ({ device }:PriceInfoProps) => {
       <div className={styles.block}>
         <div className={styles.value}>
           {device.price_with_vat}
-          <span>{LABELS.ruble}</span>
+          <span>{UNIT_LABELS.ruble}</span>
         </div>
         <div className={styles.name}>{LABELS.priceWithVat}</div>
       </div>
       <div className={styles.block}>
         <div className={styles.value}>
           {device.price_without_vat}
-          <span>{LABELS.ruble}</span>
+          <span>{UNIT_LABELS.ruble}</span>
         </div>
         <div className={styles.name}>{LABELS.priceWithoutVat}</div>
       </div>

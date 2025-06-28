@@ -51,7 +51,7 @@ export const FormValidation = (formData: User): ValidateUserErrors => {
 };
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
-  const requiredMessage = requiredFieldText;
+  const requiredMessage = MESSAGES.requiredFieldText;
   if (requiredUserFields.includes(field)) {
     if (typeof value === "string" && value.length === 0) {
       return requiredMessage;
