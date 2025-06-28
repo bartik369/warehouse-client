@@ -10,6 +10,8 @@ import { RiResetLeftFill } from "react-icons/ri";
 import { IoSaveOutline } from "react-icons/io5";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import styles from "./Signature.module.scss";
+import { FaPencil } from "react-icons/fa6";
+
 
 interface SignatureProps {
   actions: SignatureActions;
@@ -40,6 +42,7 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
           backgroundColor: "#f6f7fb",
           flexDirection: "row",
           marginTop: "auto",
+          cursor: 'url(/src/assets/elements/write.png) 0 32, auto',
         }}
       >
         <SignatureCanvas

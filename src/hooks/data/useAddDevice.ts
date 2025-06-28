@@ -57,7 +57,7 @@ export function useAddDevice() {
     const data = ValidateField(fieldName, num);
     dispatch(setDevice({ device: { ...currentDevice, [fieldName]: num } }));
     dispatch(setError({ [fieldName]: data as string }));
-  }, []);
+  }, [dispatch, currentDevice]);
 
   const handleResetDevice = useCallback(() => {
     dispatch(resetDevice());
@@ -170,10 +170,16 @@ export function useAddDevice() {
     [handleInputChange]
   );
   const handleStartDateChange = (item: Date | null) => {
-    dispatch(updateDevice({ field: "startWarrantyDate", value: item }));
+    dispatch(updateDevice({ 
+      field: "startWarrantyDate", 
+      value: item ? item.toString() : null 
+    }));
   };
   const handleEndDateChange = (item: Date | null) => {
-    dispatch(updateDevice({ field: "endWarrantyDate", value: item }));
+    dispatch(updateDevice({ 
+      field: "endWarrantyDate", 
+      value: item ? item.toISOString() : null 
+    }));
   };
 
   const handleGetDevice = useCallback(

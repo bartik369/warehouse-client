@@ -22,8 +22,7 @@ import styles from "./DeviceForm.module.scss";
 interface DeviceFormProps {
   actions: DeviceFormActions;
 }
-
-const DeviceForm = memo(({actions }: DeviceFormProps) => {
+const DeviceForm = memo(({ actions }: DeviceFormProps) => {
   const { data: manufacturers } = useGetManufacturersQuery();
   const { data: warehouses } = useGetWarehousesQuery();
   const { data: types } = useGetTypesQuery();
@@ -33,7 +32,6 @@ const DeviceForm = memo(({actions }: DeviceFormProps) => {
   const errors = useAppSelector((state:RootState) => state.device.errors);
   const isUpdate = useAppSelector((state:RootState) => state.device.isUpdate);
   const checked = useAppSelector((state:RootState) => state.device.checked);
-  
 
   // Allow model query by manufacturer and type
   useEffect(() => {
