@@ -1,17 +1,9 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { AggregateDeviceInfo } from "../../../types/devices";
-import {
-  activeWarranty,
-  contractor,
-  endWarranty,
-  notActiveWarranty,
-  startWarranty,
-  warranty,
-  warrantyNumber,
-} from "../../../utils/constants/constants";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdMiscellaneousServices } from "react-icons/md";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 
@@ -26,7 +18,7 @@ const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
           <div className={styles.icon}>
             <MdMiscellaneousServices />
           </div>
-          <span>{warranty}</span>
+          <span>{LABELS.warranty}</span>
         </div>
        {device.warranty?.startWarrantyDate
        ? <>
@@ -39,16 +31,16 @@ const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
           {device.warranty?.warrantyStatus === "active" ? (
             <div className={styles["status-icon"]}>
               <IoIosCheckmarkCircle />
-              <span>{activeWarranty}</span>
+              <span>{LABELS.active}</span>
             </div>
           ) : (
-            notActiveWarranty
+            LABELS.notActive
           )}
         </div>
         </div>
 
         <div className={styles.property}>
-          <div className={styles.name}>{warrantyNumber}</div>
+          <div className={styles.name}>{LABELS.warrantyNumber}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
           {device.warranty?.warrantyNumber}
@@ -56,7 +48,7 @@ const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
         </div>
 
         <div className={styles.property}>
-          <div className={styles.name}>{contractor}</div>
+          <div className={styles.name}>{LABELS.contractor}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
           <Link to="#">
@@ -66,7 +58,7 @@ const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
         </div>
 
         <div className={styles.property}>
-          <div className={styles.name}>{startWarranty}</div>
+          <div className={styles.name}>{LABELS.startWarranty}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
           {device.warranty?.startWarrantyDate &&
@@ -76,7 +68,7 @@ const WarrantyInfo: FC<WarrantyInfoProps> = ({ device }) => {
           </div>
         </div>
         <div className={styles.property}>
-          <div className={styles.name}>{endWarranty}</div>
+          <div className={styles.name}>{LABELS.endWarranty}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
           {device.warranty?.endWarrantyDate &&

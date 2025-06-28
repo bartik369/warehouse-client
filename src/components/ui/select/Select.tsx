@@ -1,8 +1,8 @@
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { ValidationErrors } from '../../../types/devices';
-import { selectFromList, noExistSelect } from '../../../utils/constants/device';
 import { TbSelector } from "react-icons/tb";
 import { MdOutlineErrorOutline } from "react-icons/md";
+import { SELECTS } from '../../../utils/constants/ui/selects';
 import styles from './Select.module.scss';
 
 interface SelectProps<T> {
@@ -45,7 +45,7 @@ const Select = <T,>({
           className={`${styles.container} ${errorMessage ? styles['input-error'] : ''}`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {value ? value : selectFromList}
+          {value ? value : SELECTS.fromList}
           <TbSelector className={styles.arrow}/>
         </button>
         {label && 
@@ -83,7 +83,7 @@ const Select = <T,>({
                 </div>
               ))
             ) : (
-              <div className={styles.noOptions}>{noExistSelect}</div>
+              <div className={styles.noOptions}>{SELECTS.noExist}</div>
             )}
           </div>
         )}

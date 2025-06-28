@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo} from 'react';
-import { deviceWeight } from '../../../utils/constants/device';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Device } from '../../../types/devices';
+import { LABELS } from '../../../utils/constants/ui/labels';
 import style from './Number.module.scss';
 
 interface NumberProps {
@@ -43,7 +43,7 @@ const Number = memo(({ device, setDevice }:NumberProps) => {
             </div>
             <div className={style.number}>
                 <div className={style.label}>
-                {deviceWeight}
+                {LABELS.deviceWeight}
                 </div>
                 <CiSquareMinus className={style["btn-left"]} onClick={handleIncrease} />
                 <input 

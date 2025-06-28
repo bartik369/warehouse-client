@@ -1,8 +1,6 @@
-import { User, UserFormActions, UserLabel } from '../../../../../types/user'
 import UserTableRow from "./UserTableRow";
-import { labelCity, labelDepartment, labelEmail, labelFirstNameEn, 
-  labelFirstNameRu, labelIsActive, labelLastNameEn, labelLastNameRu, 
-labelUserId } from '../../../../../utils/constants/user';
+import { LABELS } from '../../../../../utils/constants/ui/labels';
+import { User, UserFormActions, UserLabel } from '../../../../../types/user'
 import styles from './UserTable.module.scss';
 
 interface UserTableProps {
@@ -14,15 +12,15 @@ const UserTable = ({ users, actions }: UserTableProps) => {
   const isAdmin = true;
 
   const baseUserLabelsConfig: UserLabel[] = [
-    { key: "firstNameRu", label: labelFirstNameRu },
-    { key: "lastNameRu", label: labelLastNameRu },
-    { key: "firstNameEn", label: labelFirstNameEn },
-    { key: "lastNameEn", label: labelLastNameEn },
-    { key: "email", label: labelEmail },
-    { key: "location", label: labelCity },
-    { key: "department", label: labelDepartment },
-    { key: "workId", label: labelUserId },
-    { key: "isActive", label: labelIsActive },
+    { key: "firstNameRu", label: LABELS.firstNameRu },
+    { key: "lastNameRu", label: LABELS.lastNameRu },
+    { key: "firstNameEn", label: LABELS.firstNameEn },
+    { key: "lastNameEn", label: LABELS.lastNameEn },
+    { key: "email", label: LABELS.email },
+    { key: "location", label: LABELS.location },
+    { key: "department", label: LABELS.department },
+    { key: "workId", label: LABELS.workID },
+    { key: "isActive", label: LABELS.isActive },
   ];
   
   const userLabelsConfig: UserLabel[] = isAdmin

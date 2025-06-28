@@ -1,5 +1,5 @@
+import { MESSAGES } from '../constants/ui/messages';
 import { ValidationErrors } from './../../types/devices';
-import { requiredFieldText, requiredFieldFive, wrongPhoneFormat } from '../constants/constants';
 import { Device, DeviceModel, Entity } from './../../types/devices';
 import { isValidPhone } from './Phones';
 
@@ -23,11 +23,11 @@ const validateRequiredFields = <T>(
     const value = formData[field];
            if (field === 'phoneNumber') {
                if (!isValidPhone(value as string)) {
-                   errors[field as string] = wrongPhoneFormat;
+                   errors[field as string] = MESSAGES.wrongPhoneFormat;
                }
            }
            if (!value) {
-               errors[field as string] = requiredFieldText;
+               errors[field as string] = MESSAGES.requiredFieldText;
            }
   });
 };
@@ -50,7 +50,7 @@ export const FormValidation = (formData: Device, itemType: string): ValidationEr
   }
 
   if (formData.name && formData.name.length < 5) {
-    errors.name = requiredFieldFive;
+    errors.name = MESSAGES.requiredFieldFive;
   }
   return errors;
 };
@@ -75,16 +75,16 @@ export const ModelValidationField = <T extends string | Entity>(
   const isEmpty = (val: string) => val.length === 0;
 
   if (typeof value === 'object' && isEmpty(value.slug!)) {
-    return requiredFieldText;
+    return MESSAGES.requiredFieldText;
   }
   if (typeof value === 'string' && modelFields.includes(field) && isEmpty(value)) {
-    return requiredFieldText;
+    return MESSAGES.requiredFieldText;
   }
   return null;
 };
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
-  const requiredMessage = requiredFieldText;
+  const requiredMessage = MESSAGES.requiredFieldText;
 
   if (field === 'name') {
     if (typeof value === 'string' && value.length === 0) return requiredMessage;

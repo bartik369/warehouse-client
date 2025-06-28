@@ -1,11 +1,6 @@
 import { AggregateDeviceInfo } from "../../../types/devices";
-import {
-  financialOptions,
-  priceWithVat,
-  priceWithoutVat,
-  ruble,
-} from "../../../utils/constants/constants";
 import { TbCoins } from "react-icons/tb";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 interface PriceInfoProps {
@@ -18,21 +13,21 @@ const PriceInfo = ({ device }:PriceInfoProps) => {
       <div className={styles.icon}>
         <TbCoins />
       </div>
-        <span>{financialOptions}</span>
+        <span>{LABELS.financialOptions}</span>
       </div>
       <div className={styles.block}>
         <div className={styles.value}>
           {device.price_with_vat}
-          <span>{ruble}</span>
+          <span>{LABELS.ruble}</span>
         </div>
-        <div className={styles.name}>{priceWithVat}</div>
+        <div className={styles.name}>{LABELS.priceWithVat}</div>
       </div>
       <div className={styles.block}>
         <div className={styles.value}>
           {device.price_without_vat}
-          <span>{ruble}</span>
+          <span>{LABELS.ruble}</span>
         </div>
-        <div className={styles.name}>{priceWithoutVat}</div>
+        <div className={styles.name}>{LABELS.priceWithoutVat}</div>
       </div>
       <div className={styles.separate}></div>
     </div>

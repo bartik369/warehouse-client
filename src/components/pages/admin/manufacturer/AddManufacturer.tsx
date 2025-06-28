@@ -2,8 +2,8 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetManufacturersQuery } from '../../../../store/api/manufacturersApi';
-import { addManufacturerTitle } from '../../../../utils/constants/constants';
 import { manufacturerFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const AddManufacturer = () => {
@@ -14,7 +14,7 @@ const AddManufacturer = () => {
       <div className={styles.form}>
         <MultiForm
           fields={manufacturerFormFields}
-          title={addManufacturerTitle}
+          title={SECTION_TITLES.addManufacturer}
           actions={actions}
           state={state}
           locationType="manufacturer"

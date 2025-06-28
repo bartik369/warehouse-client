@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useEffect } from 'react';
+import React, { ChangeEvent, memo } from 'react';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Field, Device, ValidationErrors } from '../../../types/devices';
 import style from './Number.module.scss';
@@ -16,12 +16,6 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
     max: 9999999,
     step: item.step,
   };
-
-    useEffect(() => {
-      console.log('mount')
-    }, [])
-
-
   const errorMessage = errors[item.name as keyof ValidationErrors];
   
   const handleValueChange = (value: number, name: string) => {

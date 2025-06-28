@@ -1,12 +1,6 @@
 import { AggregateDeviceInfo } from "../../../types/devices";
-import {
-  addedBy,
-  updatedBy,
-  wasAdded,
-  wasUpdated,
-  whoAdded,
-} from "../../../utils/constants/constants";
 import { RiFileUserLine } from "react-icons/ri";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 interface UserInfoProps {
@@ -19,24 +13,24 @@ const UserInfo = ({ device }:UserInfoProps) => {
           <div className={styles.icon}>
             <RiFileUserLine />
           </div>
-          <span>{whoAdded}</span>
+          <span>{LABELS.whoAdded}</span>
         </div>
         <div className={styles.property}>
-          <div className={styles.name}>{addedBy}</div>
+          <div className={styles.name}>{LABELS.addedBy}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
             {device.addedBy.firstNameRu} {device.addedBy.lastNameRu}
           </div>
         </div>
         <div className={styles.property}>
-          <div className={styles.name}>{updatedBy}</div>
+          <div className={styles.name}>{LABELS.updatedBy}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
             {device.updatedBy.firstNameRu} {device.updatedBy.lastNameRu}
           </div>
         </div>
         <div className={styles.property}>
-          <div className={styles.name}>{wasAdded}</div>
+          <div className={styles.name}>{LABELS.wasAdded}</div>
           <div className={styles.dots}></div>
           <div className={styles.value}>
             {device.createdAt &&
@@ -44,7 +38,7 @@ const UserInfo = ({ device }:UserInfoProps) => {
           </div>
         </div>
       <div className={styles.property}>
-        <div className={styles.name}>{wasUpdated}</div>
+        <div className={styles.name}>{LABELS.wasUpdated}</div>
         <div className={styles.dots}></div>
         <div className={styles.value}>
           {device.updatedAt &&

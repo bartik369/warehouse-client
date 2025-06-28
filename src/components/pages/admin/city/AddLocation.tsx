@@ -2,8 +2,8 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetLocationsQuery } from '../../../../store/api/locationApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
-import { addLocationTitle } from '../../../../utils/constants/constants';
 import { locationFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const AddLocation = () => {
@@ -16,7 +16,7 @@ const AddLocation = () => {
           actions={actions}
           state={state}
           fields={locationFormFields}
-          title={addLocationTitle}
+          title={SECTION_TITLES.addLocation}
           locationType="location"
         />
       </div>

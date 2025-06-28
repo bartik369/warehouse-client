@@ -5,22 +5,23 @@ import BtnAction from '../../ui/buttons/BtnAction';
 import { GoLock } from "react-icons/go";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
-import {enterDashboard, fillEmail, fillPassword, forgetPassword, 
-  password, email } from '../../../utils/constants/constants';
+import { LABELS } from '../../../utils/constants/ui/labels';
+import { PLACEHOLDER_LABELS } from '../../../utils/constants/ui/placeholders';
+import { MESSAGES } from '../../../utils/constants/ui/messages';
 import styles from './AuthForm.module.scss';
 
 const AuthForm = () => {
     const {authData, errors, userHandler, authHandler} = useAuth();
     return (
       <div className={styles.auth}>
-        <div className={styles.title}>{enterDashboard}</div>
+        <div className={styles.title}>{MESSAGES.enterDashboard}</div>
         <form onSubmit={authHandler} >
           <Input
             onChange={userHandler}
             type="text"
             value={authData.email}
-            placeholder={fillEmail}
-            label={email}
+            placeholder={PLACEHOLDER_LABELS.fillEmail}
+            label={LABELS.email}
             errors={errors}
             name="email"
             variant='auth'
@@ -29,8 +30,8 @@ const AuthForm = () => {
           <Input onChange={userHandler}
             type="password"
             value={authData.password}
-            placeholder={fillPassword}
-            label={password}
+            placeholder={PLACEHOLDER_LABELS.fillPassword}
+            label={LABELS.password}
             errors={errors}
             name="password"
             variant='auth'
@@ -45,7 +46,7 @@ const AuthForm = () => {
           />
           </div>
         </form>
-        <div className={styles.reset}>{forgetPassword}
+        <div className={styles.reset}>{MESSAGES.forgetPassword}
           <Link to={import.meta.env.VITE_RESET_PASSWORD}>
             {BUTTON_LABELS.reset}
           </Link>

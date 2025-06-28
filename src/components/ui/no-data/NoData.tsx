@@ -1,10 +1,10 @@
-import { statusNoData } from '../../../utils/constants/constants';
+import { MESSAGES } from '../../../utils/constants/ui/messages';
 import styles from './NoData.module.scss';
 
 const NoData = () => {
     return (
         <div className={styles.info}>
-            {statusNoData}
+            {MESSAGES.noData}
         </div>
     );
 };

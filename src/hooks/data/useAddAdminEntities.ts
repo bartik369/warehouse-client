@@ -54,9 +54,9 @@ import {
 } from "../../store/api/rolesApi";
 import { Entity } from "../../types/devices";
 import { handleApiError } from "../../utils/errors/handleApiError";
-import { selectPic } from "../../utils/constants/constants";
 import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";
 import { AdminEntityActionTypes } from "../../reducers/admin-entity/adminEntityTypes";
+import { ELEMENTS_LABELS } from "../../utils/constants/ui/elements";
 
 export const useAddAdminEntities = () => {
   const [state, dispatch] = useReducer(adminEntityReducer, initialState);
@@ -130,9 +130,6 @@ export const useAddAdminEntities = () => {
     role: getRole,
     permission: getPermission,
   };
-
-  console.log(state.entity)
-
   const handleInputChange = useCallback(
     <T extends string | Entity>(field: keyof Entity, value: T) => {
       dispatch({
@@ -221,7 +218,7 @@ export const useAddAdminEntities = () => {
           dispatch({ type: AdminEntityActionTypes.SET_PREVIEW, payload: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
         } else {
-          toast(selectPic, { type: "error" });
+          toast(ELEMENTS_LABELS.selectPhoto, { type: "error" });
         }
       }
     },

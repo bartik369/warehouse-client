@@ -1,11 +1,9 @@
 import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
 import { Checked, CheckedPermissionOptions } from "../../../types/content";
-import {
-  noOptions,
-  selectPermissions,
-} from "../../../utils/constants/constants";
 import { AccessFormActions, PermissionRole } from "../../../types/access";
 import { TbSelector } from "react-icons/tb";
+import { MESSAGES } from "../../../utils/constants/ui/messages";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import styles from "./Checkbox.module.scss";
 
 interface CheckboxProps {
@@ -39,7 +37,7 @@ const Checkbox = ({
         type="button"
       >
         <span className={styles.label}>{label}</span>
-        <span>{selectPermissions}</span>
+        <span>{LABELS.selectPermissions}</span>
         {entity.permissionsName?.length > 0 && (
           <span className={styles.count}>{entity.permissionsName.length}</span>
         )}
@@ -77,7 +75,7 @@ const Checkbox = ({
               </label>
             ))
           ) : (
-            <div className={styles.info}>{noOptions}</div>
+            <div className={styles.info}>{MESSAGES.noOptions}</div>
           )}
         </div>
       )}

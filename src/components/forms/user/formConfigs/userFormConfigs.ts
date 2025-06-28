@@ -1,25 +1,24 @@
 import { FieldUserFormConfig } from "../../../../types/content";
-import { labelFirstNameEn, labelFirstNameRu, labelLastNameEn, labelLastNameRu,
-    labelUserLogin, labelEmail, labelUserId, labelDepartment, labelCity } from '../../../../utils/constants/user';
+import { LABELS } from "../../../../utils/constants/ui/labels";
 
 export const createFormFields: FieldUserFormConfig[] = [
-  { type: 'input', name: 'firstNameRu', label: labelFirstNameRu },
-  { type: 'input', name: 'lastNameRu', label: labelLastNameRu },
-  { type: 'input', name: 'firstNameEn',  label: labelFirstNameEn },
-  { type: 'input', name: 'lastNameEn', label: labelLastNameEn },
-  { type: 'input', name: 'userName', label: labelUserLogin },
-  { type: 'input', name: 'email',  label: labelEmail },
-  { type: 'input', name: 'workId', label: labelUserId },
+  { type: 'input', name: 'firstNameRu', label: LABELS.firstNameRu },
+  { type: 'input', name: 'lastNameRu', label: LABELS.lastNameRu },
+  { type: 'input', name: 'firstNameEn',  label: LABELS.firstNameEn },
+  { type: 'input', name: 'lastNameEn', label: LABELS.lastNameEn },
+  { type: 'input', name: 'userName', label: LABELS.userLogin },
+  { type: 'input', name: 'email',  label: LABELS.email },
+  { type: 'input', name: 'workId', label: LABELS.workID },
   {
     type: 'select',
     name: 'department',
-    label: labelDepartment,
+    label: LABELS.department,
     itemsKey: 'departments',
   },
   {
     type: 'select',
     name: 'location',
-    label: labelCity,
+    label: LABELS.location,
     itemsKey: 'locations',
   },
 ];

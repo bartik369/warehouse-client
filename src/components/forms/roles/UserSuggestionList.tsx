@@ -2,10 +2,7 @@ import { memo } from "react";
 import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
 import { UserRoleFormActions } from "../../../types/access";
 import { User } from "../../../types/user";
-import {
-  statusLoading,
-  statusNoData,
-} from "../../../utils/constants/constants";
+import { MESSAGES } from "../../../utils/constants/ui/messages";
 import styles from "./UserRolesForm.module.scss";
 
 interface UserSuggestionListProps {
@@ -26,9 +23,9 @@ const UserSuggestionList = memo(({
   let content: React.ReactNode = null;
 
   if (isFetching) {
-    content = <div className={styles.info}>{statusLoading}</div>;
+    content = <div className={styles.info}>{MESSAGES.loading}</div>;
   } else if (!userState.length && isSuccess && state.wasSearched) {
-    content = <div className={styles.info}>{statusNoData}</div>;
+    content = <div className={styles.info}>{MESSAGES.noData}</div>;
   } else if (!userState.length) {
     return null;
   } else {

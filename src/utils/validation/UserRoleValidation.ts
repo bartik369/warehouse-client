@@ -1,5 +1,5 @@
-import { requiredFieldText } from "../constants/constants";
 import { UserRole, ValidateUserRoleErrors } from "../../types/access";
+import { MESSAGES } from "../constants/ui/messages";
 
 const requiredUserFields = [
   "userName",
@@ -14,7 +14,7 @@ const validateRequiredFields = (
 ): void => {
   fields.forEach((field) => {
     if (!formData[field]) {
-      errors[field as string] = requiredFieldText;
+      errors[field as string] = MESSAGES.requiredFieldText;
     }
   });
 };
@@ -31,7 +31,7 @@ export const FormValidation = (formData: UserRole): ValidateUserRoleErrors => {
 };
 
 export const ValidateField = <T>(field: string, value: T): string | null => {
-  const requiredMessage = requiredFieldText;
+  const requiredMessage = MESSAGES.requiredFieldText;
   if (requiredUserFields.includes(field)) {
     if (typeof value === "string" && value.length === 0) {
       return requiredMessage;

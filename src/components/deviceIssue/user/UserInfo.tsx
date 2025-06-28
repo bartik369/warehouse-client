@@ -1,8 +1,7 @@
-import { department, email, login, workID } from '../../../utils/constants/constants';
 import TechnicalOptions from '../../ui/options/TechnicalOptions';
 import { useAppSelector } from '../../../hooks/redux/useRedux';
 import { RootState } from '../../../store/store';
-import { location } from '../../../utils/constants/device';
+import { LABELS } from '../../../utils/constants/ui/labels';
 import styles from './UserInfo.module.scss';
 
 const UserInfo = () => {
@@ -16,14 +15,14 @@ const UserInfo = () => {
         {user.firstNameEn} {user.lastNameEn}
       </div>
       <div className={styles.info}>
-        <TechnicalOptions name={email} value={user.email ?? ""} />
+        <TechnicalOptions name={LABELS.email} value={user.email ?? ""} />
         <TechnicalOptions
-          name={login}
+          name={LABELS.login}
           value={user.userName ?? ""}
         />
-        <TechnicalOptions name={workID} value={user.workId ?? ""} />
-        <TechnicalOptions name={department} value={user.department ?? ""} />
-        <TechnicalOptions name={location} value={user.location ?? ""} />
+        <TechnicalOptions name={LABELS.workID} value={user.workId ?? ""} />
+        <TechnicalOptions name={LABELS.department} value={user.department ?? ""} />
+        <TechnicalOptions name={LABELS.location} value={user.location ?? ""} />
       </div>
     </section>
   );

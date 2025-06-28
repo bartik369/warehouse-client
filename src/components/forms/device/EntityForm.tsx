@@ -5,9 +5,9 @@ import Actions from './Actions';
 import Tooltip from '../../ui/tooltip/Tooltip';
 import Preview from '../../ui/preview/Preview';
 import { ToastContainer, Bounce } from 'react-toastify';
-import { slugInfo } from '../../../utils/constants/constants';
-import {slugLabel, nameLabel} from '../../../utils/constants/device';
 import { useGlobalModal } from '../../../hooks/data/useGlobalModal';
+import { MESSAGES } from '../../../utils/constants/ui/messages';
+import { LABELS } from '../../../utils/constants/ui/labels';
 import styles from './EntityForm.module.scss';
 
 interface EntityProps {
@@ -58,16 +58,16 @@ const EntityForm = memo(({ fieldType, typeId, manufacturerId }:EntityProps) => {
                 onChange={(e) => actions.handleInputChange("name", e.target.value)}
                 type="text"
                 value={state.entity.name || ""}
-                label={nameLabel}
+                label={LABELS.deviceName}
                 errors={state.errors}
                 name="name"
               />
-              <Tooltip data={slugInfo} />
+              <Tooltip data={MESSAGES.slugInfo} />
                <Input
                 onChange={(e) => actions.handleInputChange("slug", e.target.value)}
                 type="text"
                 value={state.entity.slug || ""}
-                label={slugLabel}
+                label={LABELS.slug}
                 errors={state.errors}
                 name="slug"
               />

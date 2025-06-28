@@ -1,5 +1,5 @@
 import { PermissionRole, ValidateAccessErrors } from "../../types/access";
-import { requiredFieldText } from "../constants/constants";
+import { MESSAGES } from "../constants/ui/messages";
 
 type ValidationFields = keyof PermissionRole;
 
@@ -24,10 +24,10 @@ const validateRequiredFields = (
   fields.forEach((field) => {
     const value = data[field];
     if (Array.isArray(value) && value.length === 0) {
-      errors[field as string] = requiredFieldText;
+      errors[field as string] = MESSAGES.requiredFieldText;
     }
     if (!value) {
-      errors[field as string] = requiredFieldText;
+      errors[field as string] = MESSAGES.requiredFieldText;
     }
   });
 };
@@ -50,7 +50,7 @@ export const validateField = <T>(
   value: T
 ): Record<string, string> => {
   const errors: Record<string, string> = {};
-  const requiredMessage = requiredFieldText;
+  const requiredMessage = MESSAGES.requiredFieldText;
 
   if (requiredFieldsOther.includes(field as ValidationFields)) {
     let isEmptyField = false;

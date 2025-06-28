@@ -3,16 +3,15 @@ import Select from "../../ui/select/Select";
 import Ask from "./Ask";
 import { ModalType } from "../../../reducers/modal/modalTypes";
 import { useGetContractorsQuery } from "../../../store/api/contractorApi";
-import {startWarrantyLabel, endWarrantyLabel, selectDate, warrantyNumber,
-  contractor } from "../../../utils/constants/device";
-  import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
-import { addNewContractor } from "../../../utils/constants/constants";
+import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { Device, DeviceFormActions } from "../../../types/devices";
 import { Contractor } from "../../../types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
+import { LABELS } from "../../../utils/constants/ui/labels";
+import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
 import styles from "./DeviceForm.module.scss";
 
 registerLocale("ru", ru);
@@ -59,9 +58,9 @@ const WarrantyForm = <T,>({
           }
           onChange={(date) => actions.handleStartDateChange(date)}
           maxDate={state.endWarrantyDate ?? undefined}
-          placeholderText={selectDate}
+          placeholderText={PLACEHOLDER_LABELS.selectDate}
         />
-        <div className={styles.label}>{startWarrantyLabel}</div>
+        <div className={styles.label}>{LABELS.startWarranty}</div>
       </div>
       <div className={styles.input}>
         <div className={styles.icon}>
@@ -77,18 +76,18 @@ const WarrantyForm = <T,>({
           }
           onChange={(date) => actions.handleEndDateChange(date)}
           minDate={state.startWarrantyDate ?? undefined}
-          placeholderText={selectDate}
+          placeholderText={PLACEHOLDER_LABELS.selectDate}
         />
-        <div className={styles.label}>{endWarrantyLabel}</div>
+        <div className={styles.label}>{LABELS.endWarranty}</div>
       </div>
       <div className={styles.container}>
         {!isUpdate &&
-          <Ask onAsk={() => openEntityModal('contractor', addNewContractor)} />
+          <Ask onAsk={() => openEntityModal('contractor', LABELS.addContractor)} />
         }
         <Select<Contractor>
           setValue={actions.handleContractorChange}
           items={(contractors || []) as Contractor[]}
-          label={contractor}
+          label={LABELS.contractor}
           value={state.providerName}
           errors={errors}
           name="provider"
@@ -101,7 +100,7 @@ const WarrantyForm = <T,>({
         type="text"
         name="warrantyNumber"
         value={state.warrantyNumber || ""}
-        label={warrantyNumber}
+        label={LABELS.warrantyNumber}
         errors={errors}
         onChange={(e) =>
           actions.handleInputChange("warrantyNumber", e.target.value)

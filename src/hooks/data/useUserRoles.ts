@@ -94,7 +94,6 @@ export const useUserRoles = () => {
 
         if (Object.values(validateErrors).length === 0) {
           if (!role) return;
-          console.log(role)
           const updateData = {
             ...role,
           };

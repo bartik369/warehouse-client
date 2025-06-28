@@ -1,6 +1,6 @@
 import { UserRolesResponse } from "../../../../types/access";
-import { department, email, login, userListRoles, workID } from "../../../../utils/constants/constants";
-import { location } from "../../../../utils/constants/device";
+import { LABELS } from "../../../../utils/constants/ui/labels";
+import { SECTION_TITLES } from "../../../../utils/constants/ui/titles";
 import TechnicalOptions from "../../../ui/options/TechnicalOptions";
 import PermissionList from "../../../ui/permissions/PermissionList";
 import styles from "./GrantUserRoles.module.scss";
@@ -21,13 +21,13 @@ const UserInfo = ({ userRoles }: UserInfoProps) => {
             <div className={styles.extraName}>
               {user.firstNameEn} {user.lastNameEn}
             </div>
-            <TechnicalOptions name={email} value={user?.email ?? ""} />
-            <TechnicalOptions  name={login} value={user?.userName ?? ""}/>
-            <TechnicalOptions name={workID} value={user?.workId ?? ""} />
-            <TechnicalOptions name={department} value={user?.department ?? ""} />
-            <TechnicalOptions name={location} value={user?.location ?? ""} />
+            <TechnicalOptions name={LABELS.email} value={user?.email ?? ""} />
+            <TechnicalOptions name={LABELS.login} value={user?.userName ?? ""}/>
+            <TechnicalOptions name={LABELS.workID} value={user?.workId ?? ""} />
+            <TechnicalOptions name={LABELS.department} value={user?.department ?? ""} />
+            <TechnicalOptions name={LABELS.location} value={user?.location ?? ""} />
           </section>
-          <div className={styles.title}>{userListRoles}</div>
+          <div className={styles.title}>{SECTION_TITLES.userListRoles}</div>
           {roles.map((role) => (
             <PermissionList 
               role={role} 

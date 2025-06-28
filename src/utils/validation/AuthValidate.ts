@@ -1,3 +1,4 @@
+import { MESSAGES } from '../constants/ui/messages';
 import { Signin } from './../../types/user';
 
 type ValidationField = keyof Signin;
@@ -9,7 +10,7 @@ export const AuthValidate = (formData: Signin) => {
   if (requiredFields) {
     requiredFields.map((field) => {
       if (formData[field].trim().length === 0) {
-        errors[field] = 'Обязательно к заполнению';
+        errors[field] = MESSAGES.requiredFieldText;
       } else {
         errors[field] = '';
       }
@@ -17,7 +18,7 @@ export const AuthValidate = (formData: Signin) => {
   }
 
   if (!emailRegex.test(formData.email) && formData.email.length !== 0) {
-    errors.email = 'Неправильный формат';
+    errors.email = MESSAGES.wrongFormat;
   }
   return errors;
 };

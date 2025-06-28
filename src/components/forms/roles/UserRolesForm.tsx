@@ -3,15 +3,12 @@ import Actions from "../device/Actions";
 import UserSuggestionList from "./UserSuggestionList";
 import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
-import {
-  placeholderUserSearch,
-  userRoleLabel,
-  userSearchLabel,
-} from "../../../utils/constants/constants";
 import Input from "../../ui/input/Input";
 import Select from "../../ui/select/Select";
 import { RootState } from "../../../store/store";
 import { ListRoleRes, UserRoleFormActions } from "../../../types/access";
+import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import styles from "./UserRolesForm.module.scss";
 
 interface UserRolesFormProps {
@@ -32,8 +29,8 @@ const UserRolesForm = memo(
         <div className={styles.group}>
           <Input
             errors={state.errors}
-            placeholder={placeholderUserSearch}
-            label={userSearchLabel}
+            placeholder={PLACEHOLDER_LABELS.userSearch}
+            label={LABELS.userSearch}
             value={state.role.email}
             type="text"
             name="email"
@@ -53,7 +50,7 @@ const UserRolesForm = memo(
           items={roles}
           errors={state.errors}
           name="roleName"
-          label={userRoleLabel}
+          label={LABELS.userRole}
           value={state.role.roleName}
           setValue={(val) => {
             actions.handleInputChange("roleName", val.roleName);
@@ -66,8 +63,8 @@ const UserRolesForm = memo(
         />
         <div className={styles.actions}>
           <Actions
-          addEntity={actions.handleAddUserRole}
-          resetEntity={actions.handleResetUserRole}
+            addEntity={actions.handleAddUserRole}
+            resetEntity={actions.handleResetUserRole}
           />
         </div>
       </>

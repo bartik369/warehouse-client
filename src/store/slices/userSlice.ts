@@ -51,7 +51,6 @@ const userSlice = createSlice({
       state.user = { ...initialState.user };
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
-      console.log(action.payload)
         state.users = action.payload;
     },
     resetUsers: (state) => {

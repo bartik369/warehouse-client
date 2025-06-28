@@ -1,33 +1,16 @@
-import {
-  yes,
-  no,
-  serviceable,
-  technicalOptions,
-  addNewType,
-  addNewModel,
-  addNewManufacturer,
-} from "../../../utils/constants/constants";
 import Input from "../../ui/input/Input";
 import Ask from "./Ask";
 import Select from "../../ui/select/Select";
 import { Entity, DeviceFormActions, Device } from "../../../types/devices";
-import {
-  deviceName,
-  deviceTypeLabel,
-  deviceTypes,
-  inventoryNumber,
-  manufacturersLabel,
-  modelCode,
-  modelLabel,
-  serialNumber,
-  location,
-} from "../../../utils/constants/device";
 import CustomNumber from "../../ui/number/CustomNumber";
 import Number from "../../ui/number/Number";
 import Toggle from "../../ui/checkbox/Toggle";
-import styles from "./DeviceForm.module.scss";
 import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
 import { ModalType } from "../../../reducers/modal/modalTypes";
+import { LABELS } from "../../../utils/constants/ui/labels";
+import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
+import { deviceTypes } from "../../../utils/constants/device";
+import styles from "./DeviceForm.module.scss";
 
 interface DeviceTechnicalSectionProps {
   state: Device;
@@ -61,24 +44,24 @@ const DeviceTechnicalSection = ({
 
   return (
     <>
-      <div className={styles.title}>{technicalOptions}</div>
+      <div className={styles.title}>{SECTION_TITLES.technicalOptions}</div>
       <form className={styles.form}>
         <Input
           onChange={(e) => actions.handleInputChange("name", e.target.value)}
           type="text"
           value={state.name}
-          label={deviceName}
+          label={LABELS.deviceName}
           errors={errors}
           name="name"
         />
         <div className={styles.container}>
           <Ask
-            onAsk={() => openEntityModal('type', addNewType)}
+            onAsk={() => openEntityModal('type', SECTION_TITLES.addType)}
           />
           <Select<Entity>
             setValue={actions.handleTypeChange}
             items={types || []}
-            label={deviceTypeLabel}
+            label={LABELS.deviceType}
             value={state.typeName || ""}
             errors={errors}
             name="typeName"
@@ -88,12 +71,12 @@ const DeviceTechnicalSection = ({
         </div>
         <div className={styles.container}>
           <Ask
-           onAsk={() => openEntityModal('manufacturer', addNewManufacturer)}
+           onAsk={() => openEntityModal('manufacturer', SECTION_TITLES.addManufacturer)}
           />
           <Select<Entity>
             setValue={actions.handleManufacturerChange}
             items={manufacturers || []}
-            label={manufacturersLabel}
+            label={LABELS.manufacturer}
             value={state.manufacturerName || ""}
             errors={errors}
             name="manufacturerName"
@@ -104,12 +87,12 @@ const DeviceTechnicalSection = ({
         {state.typeSlug && state.manufacturerSlug && (
           <div className={styles.container}>
             <Ask
-              onAsk={() => openEntityModal('model', addNewModel)}
+              onAsk={() => openEntityModal('model', SECTION_TITLES.addModel)}
             />
             <Select<Entity>
               setValue={actions.handleModelChange}
               items={models || []}
-              label={modelLabel}
+              label={LABELS.model}
               value={state.modelName || ""}
               errors={errors}
               name="modelName"
@@ -124,7 +107,7 @@ const DeviceTechnicalSection = ({
           }
           type={"text"}
           value={state.serialNumber || ""}
-          label={serialNumber}
+          label={LABELS.serialNumber}
           errors={errors}
           name="serialNumber"
         />
@@ -134,7 +117,7 @@ const DeviceTechnicalSection = ({
           }
           type={"text"}
           value={state.inventoryNumber || ""}
-          label={inventoryNumber}
+          label={LABELS.inventoryNumber}
           errors={errors}
           name="inventoryNumber"
         />
@@ -144,14 +127,14 @@ const DeviceTechnicalSection = ({
           }
           type={"text"}
           value={state.modelCode || ""}
-          label={modelCode}
+          label={LABELS.modelCode}
           errors={errors}
           name="modelCode"
         />
         <Select<Entity>
           setValue={actions.handleWarehouseChange}
           items={warehouses || []}
-          label={location}
+          label={LABELS.location}
           value={state.warehouseName || ""}
           errors={errors}
           name="warehouseId"
@@ -172,9 +155,9 @@ const DeviceTechnicalSection = ({
         <Toggle
           checked={checked}
           setChecked={actions.handleChecked}
-          label={serviceable}
-          leftPosition={no}
-          rightPosition={yes}
+          label={LABELS.serviceable}
+          leftPosition={LABELS.no}
+          rightPosition={LABELS.yes}
         />
       </form>
     </>

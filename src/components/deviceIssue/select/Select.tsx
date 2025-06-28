@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useModal } from '../../../hooks/data/useModal';
 import { TbSelector } from 'react-icons/tb';
 import { BaseDeviceQuery } from '../../../types/devices';
-import { noExistSelect, selectFromList } from '../../../utils/constants/device';
 import { Warehouse } from '../../../types/locations';
+import { SELECTS } from '../../../utils/constants/ui/selects';
 import { useIssueContext } from '../../../features/issue/context/IssueContext';
 import styles from './Select.module.scss';
 
@@ -35,7 +35,7 @@ const Select = ({ warehouses, actions }: SelectProps) => {
             className={`${styles.container}`}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {state.warehouse.name || selectFromList}
+            {state.warehouse.name || SELECTS.fromList}
             <TbSelector className={styles.arrow}/>
           </button>
 
@@ -62,7 +62,7 @@ const Select = ({ warehouses, actions }: SelectProps) => {
                   </div>
                 ))
               ) : (
-                <div className={styles.noOptions}>{noExistSelect}</div>
+                <div className={styles.noOptions}>{SELECTS.noExist}</div>
               )}
             </div>
           )}

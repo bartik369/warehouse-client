@@ -13,4 +13,6 @@ export const BUTTON_LABELS = {
   signature: 'Подписать',
   home: 'Главная',
   search: 'Найти',
+  prevPage: 'Предыдущая страница',
+  nextPage: 'Следующая страница',
 };

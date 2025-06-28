@@ -126,7 +126,6 @@ export function useAddDevice() {
 
   const handleTypeChange = useCallback(
     (item: Entity) => {
-      console.log(item);
       handleInputChange("typeSlug", item.slug || "");
       handleInputChange("typeName", item.name || "");
       handleInputChange("typeId", item.id || "");

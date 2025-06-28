@@ -15,8 +15,8 @@ import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
 import { Entity, DeviceFormActions } from "../../../types/devices";
 import { Contractor } from "../../../types/content";
-import { financialOptions, warrantyOptions } from "../../../utils/constants/constants";
-import { description } from "../../../utils/constants/device";
+import { LABELS } from "../../../utils/constants/ui/labels";
+import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
 import styles from "./DeviceForm.module.scss";
 
 interface DeviceFormProps {
@@ -75,13 +75,13 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
             models={models || []}
             types={types || []}
           />
-          <div className={styles.title}>{financialOptions}</div>
+          <div className={styles.title}>{SECTION_TITLES.financialOptions}</div>
           <PriceForm
             device={state}
             errors={errors}
             handleExtNumber={actions.handleExtNumber}
           />
-          <div className={styles.title}>{warrantyOptions}</div>
+          <div className={styles.title}>{SECTION_TITLES.warrantyOptions}</div>
           <WarrantyForm
             getId={(item: Contractor) => item.id}
             state={state}
@@ -95,7 +95,7 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
                 state && actions.handleInputChange("description", e.target.value)
               }
               value={state.description || ""}
-              label={description}
+              label={LABELS.description}
               errors={errors}
               name="description"
             />

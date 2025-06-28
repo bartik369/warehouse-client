@@ -3,14 +3,12 @@ import BtnAction from "../ui/buttons/BtnAction";
 import SignatureCanvas from "react-signature-canvas";
 import { useGlobalModal } from "../../hooks/data/useGlobalModal";
 import { SignatureActions } from "../../types/signature";
-import { colorDarkGreen, colorDarkGrey,
-   colorGreyLight} from "../../utils/constants/constants";
 import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
+import { COLORS } from "../../utils/constants/ui/colors";
 import { RiResetLeftFill } from "react-icons/ri";
 import { IoSaveOutline } from "react-icons/io5";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import styles from "./Signature.module.scss";
-import { FaPencil } from "react-icons/fa6";
 
 
 interface SignatureProps {
@@ -60,21 +58,21 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
       <div className={styles.actions}>
         <BtnAction
           size="sm"
-          color={colorDarkGrey}
+          color={COLORS.darkGrey}
           title={BUTTON_LABELS.cancel}
           icon={<RiDeleteBack2Line />}
           click={closeModal}
         />
         <BtnAction
           size="sm"
-          color={colorGreyLight}
+          color={COLORS.greyLight}
           title={BUTTON_LABELS.clean}
           icon={<RiResetLeftFill />}
           click={handleClear}
         />
         <BtnAction
           size="sm"
-          color={colorDarkGreen}
+          color={COLORS.darkGreen}
           title={BUTTON_LABELS.save}
           icon={<IoSaveOutline />}
           click={handleSave}

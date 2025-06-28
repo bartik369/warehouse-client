@@ -8,8 +8,8 @@ import { FilteredDevicesFromBack } from "../../../types/devices";
 import { useAppDispatch } from "../../../hooks/redux/useRedux";
 import { resetDevice, patchDevice, setStatus, resetStatus } from "../../../store/slices/deviceSlice";
 import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
-import { resetFilter } from "../../../utils/constants/constants";
 import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
+import { ELEMENTS_LABELS } from "../../../utils/constants/ui/elements";
 import { MdFilterListOff } from "react-icons/md";
 import styles from "./Devices.module.scss";
 
@@ -76,7 +76,7 @@ const Devices = () => {
                     role="button"
                     className={styles.reset}
                     onClick={handleResetFilter}
-                    aria-label={resetFilter}
+                    aria-label={ELEMENTS_LABELS.resetFilter}
                   />
                 )}
               </th>

@@ -6,14 +6,10 @@ import { Entity } from "../../../types/devices";
 import Actions from "../device/Actions";
 import { useAppSelector } from "../../../hooks/redux/useRedux";
 import { RootState } from "../../../store/store";
-import {
-  no,
-  accountIsActive,
-  yes,
-  addUserTitle,
-} from "../../../utils/constants/constants";
 import { FieldUserFormConfig } from "../../../types/content";
 import { User, UserFormActions } from "../../../types/user";
+import { LABELS } from "../../../utils/constants/ui/labels";
+import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
 import styles from "./UserForm.module.scss";
 
 interface UserFormProps {
@@ -36,7 +32,7 @@ const UserForm = memo(({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{addUserTitle}</div>
+      <div className={styles.title}>{SECTION_TITLES.addUser}</div>
       <form className={styles.form}>
         {fields?.map((field) => {
           if (field.type === "input") {
@@ -83,9 +79,9 @@ const UserForm = memo(({
         <Toggle
           checked={checked}
           setChecked={actions.handleChecked}
-          label={accountIsActive}
-          leftPosition={no}
-          rightPosition={yes}
+          label={LABELS.accountIsActive}
+          leftPosition={LABELS.no}
+          rightPosition={LABELS.yes}
         />
       </form>
       <div className={styles.actions}>

@@ -1,8 +1,8 @@
 import UserInfo from "./UserInfo";
 import { useUserRoles } from "../../../../hooks/data/useUserRoles";
 import UserRolesForm from "../../../forms/roles/UserRolesForm";
-import { grantAccess } from "../../../../utils/constants/constants";
 import { useGetRolesListQuery } from "../../../../store/api/rolesApi";
+import { SECTION_TITLES } from "../../../../utils/constants/ui/titles";
 import styles from './GrantUserRoles.module.scss';
 
 const GrantUserRoles = () => {
@@ -16,7 +16,7 @@ const GrantUserRoles = () => {
           roles={roles || []}
           actions={actions}
           state={roleState}
-          title={grantAccess}
+          title={SECTION_TITLES.grantAccess}
           isFetching={isFetching}
           isSuccess={isSuccess}
         />

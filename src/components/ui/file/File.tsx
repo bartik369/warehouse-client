@@ -1,6 +1,6 @@
-import {ChangeEvent } from 'react';
-import { selectPhoto } from '../../../utils/constants/constants';
+import { ChangeEvent } from 'react';
 import fileIcon from '../../../assets/elements/file-icon.svg';
+import { ELEMENTS_LABELS } from '../../../utils/constants/ui/elements';
 import styles from './File.module.scss';
 
 interface FileProps {
@@ -13,7 +13,7 @@ const File = ({ media }:FileProps) => {
                  <div className={styles.icon}>
                      <img className={styles.test} src={fileIcon} alt="" />
                  </div>
-                 <span>{selectPhoto}</span>
+                 <span>{ELEMENTS_LABELS.selectPhoto}</span>
             </label>
             <input
                 name="file"

@@ -2,9 +2,9 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useGetPermissionsQuery } from '../../../../store/api/permissionApi';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
-import { addPermissionTitle } from '../../../../utils/constants/constants';
-import styles from '../Admin.module.scss';
 import { permissionFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import styles from '../Admin.module.scss';
 
 const AddPermission = () => {
   const {data: permissions} = useGetPermissionsQuery()
@@ -14,7 +14,7 @@ const AddPermission = () => {
           <section className={styles.form}>
             <MultiForm
               fields={permissionFormFields}
-              title={addPermissionTitle}
+              title={SECTION_TITLES.addPermission}
               actions={actions}
               state={state}
               locationType="permission"

@@ -9,7 +9,7 @@ import { useAppSelector } from '../../../hooks/redux/useRedux';
 import { RootState } from '../../../store/store';
 import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
 import { COLORS } from '../../../utils/constants/ui/colors';
-import { placeholderUserSearch } from '../../../utils/constants/constants';
+import { PLACEHOLDER_LABELS } from '../../../utils/constants/ui/placeholders';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 import styles from './Steps.module.scss';
@@ -31,7 +31,7 @@ const SelectUserStep = ({
     <div className={styles.inner}>
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <Search
-          placeholder={placeholderUserSearch} 
+          placeholder={PLACEHOLDER_LABELS.userSearch} 
           actions={{
             handleChange: actions.handleUserChange,
             handleReset: actions.handleResetUserQuery

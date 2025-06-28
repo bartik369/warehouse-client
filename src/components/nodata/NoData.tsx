@@ -1,11 +1,7 @@
-import { statusNoData } from '../../utils/constants/constants';
+import { MESSAGES } from "../../utils/constants/ui/messages";
 
 const NoData = () => {
-    return (
-        <>
-            {statusNoData}
-        </>
-    );
+  return <>{MESSAGES.noData}</>;
 };
 
 export default NoData;

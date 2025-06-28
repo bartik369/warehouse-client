@@ -1,5 +1,5 @@
-import {prevPage, nextPage } from '../../utils/constants/constants';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { BUTTON_LABELS } from '../../utils/constants/ui/buttons';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {
@@ -33,7 +33,7 @@ const Pagination = ({
         <button
           onClick={prev}
           disabled={disabled.left}
-          aria-label={prevPage}>
+          aria-label={BUTTON_LABELS.prevPage}>
           <IoIosArrowBack aria-hidden={true} />
         </button>
         <ul className={styles.list}>
@@ -52,7 +52,7 @@ const Pagination = ({
         <button
           onClick={next}
           disabled={disabled.right}
-          aria-label={nextPage}>
+          aria-label={BUTTON_LABELS.nextPage}>
           <IoIosArrowForward aria-hidden={true} />
         </button>
       </nav>

@@ -2,9 +2,9 @@ import { useState, useEffect, ChangeEvent, useCallback } from 'react';
 import { DeviceFilters, FilteredDevicesFromBack } from './../../types/devices';
 import { CheckedDeviceOptions } from '../../types/content';
 import { useSearchParams, useParams } from 'react-router-dom';
-import { yes, no, inStock, inUse } from '../../utils/constants/constants';
 import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '../../store/api/devicesApi';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { LABELS } from '../../utils/constants/ui/labels';
 
 export const useDeviceFilters = () => {
   const [resetFilters, setResetFilters] = useState<Record<string, boolean>>({});
@@ -232,13 +232,13 @@ export const useDeviceFilters = () => {
           case 'isFunctional':
             if ('isFunctional' in option) {
               value = String(option.isFunctional);
-              name = option.isFunctional ? yes : no;
+              name = option.isFunctional ? LABELS.yes : LABELS.no;
             }
             break;
           case 'isAssigned':
             if ('isAssigned' in option) {
               value = String(option.isAssigned);
-              name = option.isAssigned ? inUse : inStock;
+              name = option.isAssigned ? LABELS.inUse : LABELS.inStock;
             }
             break;
           default:

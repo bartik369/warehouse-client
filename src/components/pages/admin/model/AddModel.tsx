@@ -2,9 +2,9 @@ import ItemsList from '../ItemsList';
 import MultiForm from '../../../forms/multi/MultiForm';
 import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
 import { useGetAllModelsQuery } from '../../../../store/api/modelsApi';
-import { addModelTitle } from '../../../../utils/constants/constants';
-import styles from '../Admin.module.scss';
 import { modelFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import styles from '../Admin.module.scss';
 
 const AddModel = () => {
     const { actions, state, fileInputRef} = useAddAdminEntities();
@@ -14,7 +14,7 @@ const AddModel = () => {
           <div className={styles.form}>
             <MultiForm
               fields={modelFormFields}
-              title={addModelTitle}
+              title={SECTION_TITLES.addModel}
               fieldType="model"
               fileInputRef={fileInputRef}
               actions={actions}

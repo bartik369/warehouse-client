@@ -1,7 +1,7 @@
-import { requiredFieldText, wrongPhoneFormat } from "../constants/constants";
 import { ValidateLocationErrors } from '../../types/locations';
 import { Entity } from "../../types/devices";
 import { isValidPhone } from "./Phones";
+import { MESSAGES } from "../constants/ui/messages";
 
 const locationFields = ['name'];
 type ValidationFields = keyof Entity;
@@ -15,11 +15,11 @@ const validateRequiredFields = <T>(
         const value = formData[field ];
         if (field === 'phoneNumber') {
             if (!isValidPhone(value as string)) {
-                errors[field as string] = wrongPhoneFormat;
+                errors[field as string] = MESSAGES.wrongPhoneFormat;
             }
         }
         if (!value) {
-            errors[field as string] = requiredFieldText;
+            errors[field as string] = MESSAGES.requiredFieldText;
         }
     });
 }
@@ -46,7 +46,7 @@ export const FormValidation = (
 }
 
 export const ValidateField = <T>(field: string, value: T):string | null => {
-    const requiredMessage = requiredFieldText;
+    const requiredMessage = MESSAGES.requiredFieldText;
     if (locationFields.includes(field)) {
         if (typeof value === "string" && value.length === 0) {
             return requiredMessage

@@ -7,13 +7,13 @@ import Actions from "../device/Actions";
 import { useGetLocationsQuery } from "../../../store/api/locationApi";
 import { useGetTypesQuery } from "../../../store/api/typesApi";
 import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { slugLocation } from "../../../utils/constants/constants";
 import { DeviceMedia, Entity } from "../../../types/devices";
 import { FieldMultiformConfig } from "../../../types/content";
 import { ToastContainer } from "react-toastify";
 import { EntityFormActions } from "../../../types/entity";
 import { AdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
 import Tooltip from "../../ui/tooltip/Tooltip";
+import { MESSAGES } from "../../../utils/constants/ui/messages";
 import styles from "./MultiForm.module.scss";
 
 interface IMultiFormProps {
@@ -64,7 +64,7 @@ const MultiForm = memo(({
           if (field.type === "input" || field.type === "tel") {
             return (
               <React.Fragment key={`${field.name}::${field.type}`}>
-              {field.name === "slug" && <Tooltip data={slugLocation} /> }
+              {field.name === "slug" && <Tooltip data={MESSAGES.slugLocation} /> }
               <Input
                 key={field.name}
                 label={field.label}

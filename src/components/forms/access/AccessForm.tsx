@@ -8,15 +8,9 @@ import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehous
 import { AccessFormActions, PermissionRole, Role } from "../../../types/access";
 import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
 import { useGetAssignableRolesQuery } from "../../../store/api/rolesApi";
-import {
-  description,
-  locationLabel,
-  permissionsLabel,
-  rolesLabel,
-  warehouseLabel,
-} from "../../../utils/constants/constants";
 import { PermissionState } from "../../../reducers/permission/permissionTypes";
 import { Entity } from "../../../types/devices";
+import { LABELS } from "../../../utils/constants/ui/labels";
 import { getRoleType, RoleType  } from "../../../utils/roles/roles";
 import styles from './AccessForm.module.scss';
 
@@ -48,7 +42,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
       <Select<Role>
         name="roleName"
         items={(assignableRoles || []) as Role[] }
-        label={rolesLabel}
+        label={LABELS.role}
         value={state.entity.roleName || ""}
         errors={state.errors}
         setValue={actions.handleRoleChange}
@@ -59,7 +53,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
         <Checkbox
           entity={entity}
           items={permissions || []}
-          label={permissionsLabel}
+          label={LABELS.permissions}
           name="permissionName"
           list={state.list}
           actions={actions}
@@ -69,7 +63,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
       <Select<Entity>
         setValue={(val) => actions.handleLocationChange?.(val)}
         items={locations || []}
-        label={locationLabel}
+        label={LABELS.location}
         value={state.entity.locationName || ""}
         errors={state.errors}
         name="locationName"
@@ -80,7 +74,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
         <Select<Entity>
           setValue={(val) => actions.handleWarehouseChange?.(val)}
           items={warehouses || []}
-          label={warehouseLabel}
+          label={LABELS.warehouse}
           value={state.entity.warehouseName || ""}
           errors={state.errors}
           name="warehouseName"
@@ -91,7 +85,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
       <Textarea
         onChange={(e) => actions.handleInputChange("comment", e.target.value)}
         value={state.entity.comment || ""}
-        label={description}
+        label={LABELS.description}
         name="comment"
         errors={state.errors}
       />

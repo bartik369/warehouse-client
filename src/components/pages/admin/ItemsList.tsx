@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { Entity } from '../../../types/devices';
 import { EntityFormActions } from '../../../types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
-import styles from './Admin.module.scss';
 import NoData from '../../nodata/NoData';
+import styles from './Admin.module.scss';
 
 interface ItemsListProps {
   actions: EntityFormActions;

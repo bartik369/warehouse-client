@@ -1,8 +1,8 @@
 import { ChangeEvent} from 'react';
 import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
 import { Checked, CheckedDeviceOptions } from '../../../types/content';
-import { noOptions } from '../../../utils/constants/constants';
 import { CgOptions } from "react-icons/cg";
+import { MESSAGES } from '../../../utils/constants/ui/messages';
 import styles from './CheckboxFilter.module.scss';
 
 interface CheckboxProps {
@@ -78,7 +78,7 @@ const CheckboxFilter = ({
               <span className={styles.title}>{item.name}</span>
             </label>
           ))
-          : <div className={styles.info}>{noOptions}</div>
+          : <div className={styles.info}>{MESSAGES.noOptions}</div>
         }
         </div>
       )}

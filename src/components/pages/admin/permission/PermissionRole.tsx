@@ -1,8 +1,8 @@
 import AccessForm from '../../../forms/access/AccessForm';
 import PermissionsRoleList from './PermissionsRoleList';
 import { usePermission } from '../../../../hooks/data/usePermission';
-import { addRolePermission } from '../../../../utils/constants/constants';
 import { useGetPermissionsRolesQuery } from '../../../../store/api/permissionApi';
+import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const PermissionRole = () => {
@@ -17,7 +17,7 @@ const PermissionRole = () => {
         <section className={styles.inner}>
           <div className={styles.form}>
            <AccessForm
-            title={addRolePermission}
+            title={SECTION_TITLES.addRolePermission}
             state={state}
             entity={entity}
             isUpdate={isUpdate}

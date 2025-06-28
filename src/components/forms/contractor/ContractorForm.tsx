@@ -2,8 +2,8 @@ import Input from '../../ui/input/Input';
 import Textarea from '../../ui/textarea/Textarea';
 import Actions from '../device/Actions';
 import { useContactor } from '../../../hooks/data/useContractor';
-import {phoneMaskPlaceholder } from '../../../utils/constants/constants';
-import { phoneNumberLabel, contractorNameLabel, contractorAddressLabel} from '../../../utils/constants/device';
+import { LABELS } from '../../../utils/constants/ui/labels';
+import { PLACEHOLDER_LABELS } from '../../../utils/constants/ui/placeholders';
 import styles from './ContractorForm.module.scss';
 
 const ContractorForm = () => {
@@ -15,23 +15,23 @@ const ContractorForm = () => {
             name="name" 
             value={contractor.name} 
             onChange={(e) => handleInputChange("name", e.target.value)}
-            label={contractorNameLabel}
+            label={LABELS.contractorName}
             errors={errors}
           />
           <Input 
             type="tel" 
             name="phoneNumber" 
             value={contractor.phoneNumber}
-            placeholder={phoneMaskPlaceholder}
+            placeholder={PLACEHOLDER_LABELS.phoneMask}
             onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
-            label={phoneNumberLabel}
+            label={LABELS.phoneNumber}
             errors={errors}
           />
           <Textarea
             name="address"
             onChange={(e) => handleInputChange("address", e.target.value)}
             value={contractor.address}
-            label={contractorAddressLabel}
+            label={LABELS.contractorAddress}
             errors={errors}
           />
           <div className={styles.actions}>

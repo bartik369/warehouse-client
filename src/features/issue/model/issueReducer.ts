@@ -189,7 +189,6 @@ export function issueReducer(
     case IssueActionTypes.RESET_WAREHOUSES:
       return { ...state, warehouses: [] };
     case IssueActionTypes.RESET_DEVICE_ISSUE_DATA:
-      console.log('ressset')
       return {
         ...state, 
         deviceIssueData: {...initialIssueState.deviceIssueData },

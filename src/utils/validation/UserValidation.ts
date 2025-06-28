@@ -1,6 +1,6 @@
 import { User } from "../../types/user";
-import { requiredFieldText } from "../constants/constants";
 import { ValidateUserErrors } from "../../types/user";
+import { MESSAGES } from "../constants/ui/messages";
 
 const requiredUserFields = [
   "userName",
@@ -23,11 +23,11 @@ const validateRequiredFields = (
 ): void => {
   fields.forEach((field) => {
     if (!formData[field]) {
-      errors[field as string] = requiredFieldText;
+      errors[field as string] = MESSAGES.requiredFieldText;
     }
     if (formData[field] === 'email') {
       if (!emailRegex.test(formData[field]) && formData[field].length !== 0) {
-        errors.email = 'Неправильный формат';
+        errors.email = MESSAGES.wrongFormat;
       }
     }
   });

@@ -16,7 +16,7 @@ import { RootState } from "../../../store/store";
 import { useLazyGetDeviceQuery } from "../../../store/api/devicesApi";
 import { patchDevice, resetDevice, resetStatus, setDevicePic } from "../../../store/slices/deviceSlice";
 import { deviceTabsMenu } from "../../../utils/data/menus";
-import { editDevice } from "../../../utils/constants/constants";
+import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
 import { CiEdit } from "react-icons/ci";
 import styles from "./Device.module.scss";
 
@@ -85,7 +85,7 @@ const Device = () => {
                   setIsOpen(true)
                 }}
               >
-                <CiEdit title={editDevice} />
+                <CiEdit title={SECTION_TITLES.editDevice} />
               </div>
             </div>
             <article className={styles.wrapper}>
