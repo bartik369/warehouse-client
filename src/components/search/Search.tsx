@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
-import { PLACEHOLDER_LABELS } from "../../utils/constants/ui/placeholders";
+import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
+import { PLACEHOLDER_LABELS } from "@/utils/constants/ui/placeholders";
 import { IoSearch } from "react-icons/io5";
 import { CgCloseO } from "react-icons/cg";
 import styles from "./Search.module.scss";
+
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { ModalActionsType, ModalType } from "../../reducers/modal/modalTypes";
-import { modalSize } from "../../utils/modal/modalSize";
+import { RootState } from "@/store/store";
+import { ModalActionsType, ModalType } from "@/reducers/modal/modalTypes";
+import { modalSize } from "@/utils/modal/modalSize";
 
 export function useGlobalModal() {
   const dispatch = useDispatch();

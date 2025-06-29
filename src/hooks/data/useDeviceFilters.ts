@@ -1,10 +1,10 @@
 import { useState, useEffect, ChangeEvent, useCallback } from 'react';
-import { DeviceFilters, FilteredDevicesFromBack } from './../../types/devices';
-import { CheckedDeviceOptions } from '../../types/content';
+import { DeviceFilters, FilteredDevicesFromBack } from '@/types/devices';
+import { CheckedDeviceOptions } from '@/types/content';
 import { useSearchParams, useParams } from 'react-router-dom';
-import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '../../store/api/devicesApi';
+import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '@/store/api/devicesApi';
 import { skipToken } from '@reduxjs/toolkit/query';
-import { LABELS } from '../../utils/constants/ui/labels';
+import { LABELS } from '@/utils/constants/ui/labels';
 
 export const useDeviceFilters = () => {
   const [resetFilters, setResetFilters] = useState<Record<string, boolean>>({});

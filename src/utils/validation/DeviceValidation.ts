@@ -1,6 +1,6 @@
 import { MESSAGES } from '../constants/ui/messages';
-import { ValidationErrors } from './../../types/devices';
-import { Device, DeviceModel, Entity } from './../../types/devices';
+import { ValidationErrors } from '@/types/devices';
+import { Device, DeviceModel, Entity } from '@/types/devices';
 import { isValidPhone } from './Phones';
 
 type ValidationField = keyof Device;

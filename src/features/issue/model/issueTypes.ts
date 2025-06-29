@@ -1,5 +1,5 @@
-import { Device, DeviceIssueData } from '../../../types/devices';
-import { Warehouse } from '../../../types/locations';
+import { Device, DeviceIssueData } from '@/types/devices';
+import { Warehouse } from '@/types/locations';
 
 export type IssueStepType = "select_warehouse" | "select_user" | "review_document" | "sign_document" | "send_document";
 export type IssueStepTitle = "Выбор склада" | "Выбор пользователя" | "Выбор оборудования" | "Подпись документа" | "Отправка документа";

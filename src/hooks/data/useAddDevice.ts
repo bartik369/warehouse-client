@@ -13,24 +13,24 @@ import {
 } from "../../store/slices/deviceSlice";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../redux/useRedux";
-import { RootState } from "../../store/store";
+import { RootState } from "@/store/store";
 import {
   useCreateDeviceMutation,
   useLazyGetDeviceQuery,
   useUpdateDeviceMutation,
-} from "../../store/api/devicesApi";
+} from "@/store/api/devicesApi";
 import {
   setDevice,
   updateDevice,
   setError,
-} from "../../store/slices/deviceSlice";
+} from "@/store/slices/deviceSlice";
 import {
   FormValidation,
   ValidateField,
-} from "../../utils/validation/DeviceValidation";
-import { handleApiError } from "../../utils/errors/handleApiError";
-import { Contractor } from "../../types/content";
-import { Entity, Device } from "./../../types/devices";
+} from "@/utils/validation/DeviceValidation";
+import { handleApiError } from "@/utils/errors/handleApiError";
+import { Contractor } from "@/types/content";
+import { Entity, Device } from "@/types/devices";
 
 export function useAddDevice() {
   const dispatch = useAppDispatch();

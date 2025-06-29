@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import SubMenu from './SubMenu';
-import { sidebarMenuData } from '../../../utils/data/menus';
+import { sidebarMenuData } from '@/utils/data/menus';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import styles from './SidebarMenu.module.scss';
 

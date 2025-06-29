@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { AggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "@/types/devices";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdMiscellaneousServices } from "react-icons/md";
-import { LABELS } from "../../../utils/constants/ui/labels";
+import { LABELS } from "@/utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 

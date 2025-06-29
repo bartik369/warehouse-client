@@ -1,4 +1,4 @@
-import { MESSAGES } from '../../../utils/constants/ui/messages';
+import { MESSAGES } from '@/utils/constants/ui/messages';
 import styles from './NoData.module.scss';
 
 const NoData = () => {

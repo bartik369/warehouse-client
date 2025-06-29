@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../../hooks/redux/useRedux";
-import { setDevicePic } from "../../../../store/slices/deviceSlice";
-import DeviceForm from "../../../forms/device/DeviceForm";
-import { useAddDevice } from "../../../../hooks/data/useAddDevice";
+import { useAppDispatch } from "@/hooks/redux/useRedux";
+import { setDevicePic } from "@/store/slices/deviceSlice";
+import DeviceForm from "@/components/forms/device/DeviceForm";
+import { useAddDevice } from "@/hooks/data/useAddDevice";
 
 const AddDevice = () => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
-import TechnicalOptions from '../../ui/options/TechnicalOptions';
-import { useAppSelector } from '../../../hooks/redux/useRedux';
-import { RootState } from '../../../store/store';
-import { LABELS } from '../../../utils/constants/ui/labels';
+import TechnicalOptions from '@/components/ui/options/TechnicalOptions';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { RootState } from '@/store/store';
+import { LABELS } from '@/utils/constants/ui/labels';
 import styles from './UserInfo.module.scss';
 
 const UserInfo = () => {

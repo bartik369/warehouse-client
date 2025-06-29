@@ -1,5 +1,5 @@
-import { FieldUserFormConfig } from "../../../../types/content";
-import { LABELS } from "../../../../utils/constants/ui/labels";
+import { FieldUserFormConfig } from "@/types/content";
+import { LABELS } from "@/utils/constants/ui/labels";
 
 export const createFormFields: FieldUserFormConfig[] = [
   { type: 'input', name: 'firstNameRu', label: LABELS.firstNameRu },

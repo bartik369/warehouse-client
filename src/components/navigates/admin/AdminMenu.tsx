@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { adminMenu } from '../../../utils/data/menus';
+import { adminMenu } from '@/utils/data/menus';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import styles from './AdminMenu.module.scss';
 

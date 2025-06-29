@@ -1,13 +1,13 @@
 import { memo, useEffect } from 'react';
-import { useEntity } from '../../../hooks/data/useEntity';
-import Input from '../../ui/input/Input';
+import { useEntity } from '@/hooks/data/useEntity';
+import Input from '@/components/ui/input/Input';
 import Actions from './Actions';
-import Tooltip from '../../ui/tooltip/Tooltip';
-import Preview from '../../ui/preview/Preview';
+import Tooltip from '@/components/ui/tooltip/Tooltip';
+import Preview from '@/components/ui/preview/Preview';
 import { ToastContainer, Bounce } from 'react-toastify';
-import { useGlobalModal } from '../../../hooks/data/useGlobalModal';
-import { MESSAGES } from '../../../utils/constants/ui/messages';
-import { LABELS } from '../../../utils/constants/ui/labels';
+import { useGlobalModal } from '@/hooks/data/useGlobalModal';
+import { MESSAGES } from '@/utils/constants/ui/messages';
+import { LABELS } from '@/utils/constants/ui/labels';
 import styles from './EntityForm.module.scss';
 
 interface EntityProps {

@@ -1,4 +1,4 @@
-import { SECTION_TITLES } from './../constants/ui/titles';
+import { SECTION_TITLES } from '../constants/ui/titles';
 
 export const getTitleFromPath = (locationPath: string):string => {
   const locationType = locationPath.split('/')[2]?.split('-')[1] || '';

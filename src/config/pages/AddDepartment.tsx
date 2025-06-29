@@ -1,4 +1,4 @@
-import AddDepartment from "../../components/pages/admin/department/AddDepartment";
+import AddDepartment from "@/components/pages/admin/department/AddDepartment";
 
 const AddDepartmentConfig = {
     title: 'AddDepartment',

@@ -1,5 +1,5 @@
-import { ValidateLocationErrors } from '../../types/locations';
-import { Entity } from "../../types/devices";
+import { ValidateLocationErrors } from '@/types/locations';
+import { Entity } from "@/types/devices";
 import { isValidPhone } from "./Phones";
 import { MESSAGES } from "../constants/ui/messages";
 

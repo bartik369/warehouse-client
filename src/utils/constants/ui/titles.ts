@@ -18,6 +18,6 @@ export const SECTION_TITLES = {
     userListRoles: 'Список ролей пользователя',
     editDevice: 'Редактирование устройства',
     download: 'Скачать',
-
+    section: 'Раздел',
   };
   

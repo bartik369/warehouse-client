@@ -1,4 +1,4 @@
-import AddPermission from "../../components/pages/admin/permission/AddPermission";
+import AddPermission from "@/components/pages/admin/permission/AddPermission";
 
 const AddPermissionConfig = {
     title: 'AddPermission',

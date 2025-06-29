@@ -1,4 +1,4 @@
-import AddWarehouse from "../../components/pages/admin/warehouse/AddWarehouse";
+import AddWarehouse from "@/components/pages/admin/warehouse/AddWarehouse";
 
 const AddWarehouseConfig = {
     title: 'AddWarehouse',

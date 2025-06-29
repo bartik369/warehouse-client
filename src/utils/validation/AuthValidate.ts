@@ -1,5 +1,5 @@
 import { MESSAGES } from '../constants/ui/messages';
-import { Signin } from './../../types/user';
+import { Signin } from '@/types/user';
 
 type ValidationField = keyof Signin;
 const errors: Partial<Signin> = {};

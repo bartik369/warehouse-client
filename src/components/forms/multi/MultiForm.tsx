@@ -1,19 +1,19 @@
 import React, { memo } from "react";
-import Input from "../../ui/input/Input";
-import Select from "../../ui/select/Select";
-import Textarea from "../../ui/textarea/Textarea";
-import Preview from "../../ui/preview/Preview";
+import Input from "@/components/ui/input/Input";
+import Select from "@/components/ui/select/Select";
+import Textarea from "@/components/ui/textarea/Textarea";
+import Preview from "@/components/ui/preview/Preview";
 import Actions from "../device/Actions";
-import { useGetLocationsQuery } from "../../../store/api/locationApi";
-import { useGetTypesQuery } from "../../../store/api/typesApi";
-import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { DeviceMedia, Entity } from "../../../types/devices";
-import { FieldMultiformConfig } from "../../../types/content";
+import { useGetLocationsQuery } from "@/store/api/locationApi";
+import { useGetTypesQuery } from "@/store/api/typesApi";
+import { useGetManufacturersQuery } from "@/store/api/manufacturersApi";
+import { DeviceMedia, Entity } from "@/types/devices";
+import { FieldMultiformConfig } from "@/types/content";
 import { ToastContainer } from "react-toastify";
-import { EntityFormActions } from "../../../types/entity";
-import { AdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
-import Tooltip from "../../ui/tooltip/Tooltip";
-import { MESSAGES } from "../../../utils/constants/ui/messages";
+import { EntityFormActions } from "@/types/entity";
+import { AdminEntityState } from "@/reducers/admin-entity/adminEntityTypes";
+import Tooltip from "@/components/ui/tooltip/Tooltip";
+import { MESSAGES } from "@/utils/constants/ui/messages";
 import styles from "./MultiForm.module.scss";
 
 interface IMultiFormProps {

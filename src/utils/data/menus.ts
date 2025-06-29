@@ -15,12 +15,12 @@ import { TbSettings } from "react-icons/tb";
 import { MdOutlineLockReset } from "react-icons/md";
 import { TbUserCircle } from "react-icons/tb";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import { DeviceLabel } from "../../types/devices";
-import msk from '../../assets/elements/msk.png';
-import ekb from '../../assets/elements/ekb.png';
+import { DeviceLabel } from "@/types/devices";
+import msk from '@/assets/elements/msk.png';
+import ekb from '@/assets/elements/ekb.png';
 
-const  DeviceHistory = React.lazy(() => import('../../components/pages/device/DeviceHistory'));
-const  Another = React.lazy(() => import('../../components/pages/device/Another'));
+const  DeviceHistory = React.lazy(() => import('@/components/pages/device/DeviceHistory'));
+const  Another = React.lazy(() => import('@/components/pages/device/Another'));
 
 export const headerMenuData = [
     {id: 1, title: 'Ссылка 1', path: '#'},

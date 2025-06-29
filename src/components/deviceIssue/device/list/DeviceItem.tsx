@@ -1,4 +1,4 @@
-import { BaseDeviceQuery, Device } from '../../../../types/devices';
+import { BaseDeviceQuery, Device } from '@/types/devices';
 import styles from './DeviceItem.module.scss';
 
 interface DeviceItemProps {

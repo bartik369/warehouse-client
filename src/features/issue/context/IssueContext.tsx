@@ -7,8 +7,8 @@ import {
 } from "react";
 import { IssueAction, IssueState, IssueStepType } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
-import { Device } from "../../../types/devices";
-import { Warehouse } from "../../../types/locations";
+import { Device } from "@/types/devices";
+import { Warehouse } from "@/types/locations";
 
 type IssueContextType = {
   state: IssueState;

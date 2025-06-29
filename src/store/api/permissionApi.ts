@@ -1,8 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { Permission, PermissionRole, UserRolesList } from "../../types/access";
-import { Entity } from "../../types/devices";
-import { CheckedPermissionOptions } from '../../types/content';
+import { Permission, PermissionRole, UserRolesList } from "@/types/access";
+import { Entity } from "@/types/devices";
+import { CheckedPermissionOptions } from '@/types/content';
 
 export const permissionApi = createApi({
   reducerPath: "permissionApi",

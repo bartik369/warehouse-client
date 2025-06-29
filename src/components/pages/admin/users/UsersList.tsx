@@ -1,5 +1,5 @@
-import { useUser } from "../../../../hooks/data/useUser";
-import { useGetUsersQuery } from "../../../../store/api/userApi";
+import { useUser } from "@/hooks/data/useUser";
+import { useGetUsersQuery } from "@/store/api/userApi";
 import UserTable from "./table/UserTable";
 
 const UsersList = () => {

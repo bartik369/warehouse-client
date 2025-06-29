@@ -1,4 +1,4 @@
-import AddType from "../../components/pages/admin/type/AddType";
+import AddType from "@/components/pages/admin/type/AddType";
 
 const AddTypeConfig = {
     title: 'AddType',

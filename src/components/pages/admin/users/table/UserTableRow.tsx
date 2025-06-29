@@ -1,4 +1,4 @@
-import { User, UserFormActions } from "../../../../../types/user";
+import { User, UserFormActions } from "@/types/user";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { GoCheckCircleFill } from "react-icons/go";
 import { IoCloseCircle } from "react-icons/io5";

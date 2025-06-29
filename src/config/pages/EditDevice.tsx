@@ -1,4 +1,4 @@
-import EditDevice from "../../components/pages/admin/device/EditDevice";
+import EditDevice from "@/components/pages/admin/device/EditDevice";
 
 const EditDeviceConfig = {
     title: 'EditDevice',

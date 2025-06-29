@@ -1,5 +1,5 @@
-import BtnAction from '../../ui/buttons/BtnAction';
-import { BUTTON_LABELS } from '../../../utils/constants/ui/buttons';
+import BtnAction from '@/components/ui/buttons/BtnAction';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { GoPlus } from 'react-icons/go';
 import { HiMiniXMark } from 'react-icons/hi2';
 import styles from "./DeviceForm.module.scss";

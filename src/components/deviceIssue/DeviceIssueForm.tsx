@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import DeviceIssueSteps from "./DeviceIssueSteps";
 import Steps from "../ui/steps/Steps";
 import Loader from "../ui/loader/Loader";
-import { useAppSelector } from "../../hooks/redux/useRedux";
-import { useIssueContext } from "../../features/issue/context/IssueContext";
-import { RootState } from "../../store/store";
-import { steps } from "../../features/issue/model/issueReducer";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { useIssueContext } from "@/features/issue/context/IssueContext";
+import { RootState } from "@/store/store";
+import { steps } from "@/features/issue/model/issueReducer";
 import styles from './DeviceIssueForm.module.scss'
 
 const DeviceIssueForm = ({ issueId = null }) => {

@@ -1,4 +1,4 @@
-import Locations from "../../components/pages/locations/Locations";
+import Locations from "@/components/pages/locations/Locations";
 
 const LocationsConfig = {
     title: 'Locations',

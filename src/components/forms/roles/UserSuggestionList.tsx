@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
-import { UserRoleFormActions } from "../../../types/access";
-import { User } from "../../../types/user";
-import { MESSAGES } from "../../../utils/constants/ui/messages";
+import { UserRoleState } from "@/reducers/roles/userRoleTypes";
+import { UserRoleFormActions } from "@/types/access";
+import { User } from "@/types/user";
+import { MESSAGES } from "@/utils/constants/ui/messages";
 import styles from "./UserRolesForm.module.scss";
 
 interface UserSuggestionListProps {

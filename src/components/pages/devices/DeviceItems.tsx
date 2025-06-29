@@ -1,5 +1,5 @@
 import {ChangeEvent, memo } from 'react';
-import { FilteredDevicesFromBack } from '../../../types/devices';
+import { FilteredDevicesFromBack } from '@/types/devices';
 import { CgUnavailable } from 'react-icons/cg';
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { PiCheckCircleFill } from "react-icons/pi";

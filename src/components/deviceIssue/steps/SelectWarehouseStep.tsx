@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import Select from "../select/Select";
-import BtnAction from "../../ui/buttons/BtnAction";
-import { useIssueContext } from "../../../features/issue/context/IssueContext";
-import { useAppSelector } from "../../../hooks/redux/useRedux";
-import { BaseDeviceQuery } from "../../../types/devices";
-import { RootState } from "../../../store/store";
-import { COLORS } from "../../../utils/constants/ui/colors";
-import { BUTTON_LABELS } from "../../../utils/constants/ui/buttons";
+import BtnAction from "@/components/ui/buttons/BtnAction";
+import { useIssueContext } from "@/features/issue/context/IssueContext";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { BaseDeviceQuery } from "@/types/devices";
+import { RootState } from "@/store/store";
+import { COLORS } from "@/utils/constants/ui/colors";
+import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
 import { BsCheck } from "react-icons/bs";
 import styles from "./Steps.module.scss";
 

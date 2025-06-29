@@ -1,4 +1,4 @@
-import Profile from "../../components/pages/profile/Profile";
+import Profile from "@/components/pages/profile/Profile";
 
 const ProfileConfig = {
     title: 'Profile',

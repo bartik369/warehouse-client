@@ -1,7 +1,7 @@
-import { AggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "@/types/devices";
 import { TbCoins } from "react-icons/tb";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { UNIT_LABELS } from "../../../utils/constants/ui/unit";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { UNIT_LABELS } from "@/utils/constants/ui/unit";
 import styles from "./Device.module.scss";
 
 interface PriceInfoProps {

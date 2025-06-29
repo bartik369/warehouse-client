@@ -1,14 +1,14 @@
 import { useRef, useCallback, useReducer } from 'react';
-import { Entity} from './../../types/devices';
-import { EntityValidation, ValidateField } from '../../utils/validation/DeviceValidation';
-import { useCreateTypeMutation } from '../../store/api/typesApi';
-import { useCreateModelMutation } from '../../store/api/modelsApi';
-import { useCreateManufacturerMutation } from '../../store/api/manufacturersApi';
+import { Entity} from '@/types/devices';
+import { EntityValidation, ValidateField } from '@/utils/validation/DeviceValidation';
+import { useCreateTypeMutation } from '@/store/api/typesApi';
+import { useCreateModelMutation } from '@/store/api/modelsApi';
+import { useCreateManufacturerMutation } from '@/store/api/manufacturersApi';
 import { toast } from 'react-toastify';
-import { handleApiError } from '../../utils/errors/handleApiError';
-import { entityReducer, initialState } from '../../reducers/entity/entityReducer';
-import { EntityActionTypes } from '../../reducers/entity/entityTypes';
-import { MESSAGES } from '../../utils/constants/ui/messages';
+import { handleApiError } from '@/utils/errors/handleApiError';
+import { entityReducer, initialState } from '@/reducers/entity/entityReducer';
+import { EntityActionTypes } from '@/reducers/entity/entityTypes';
+import { MESSAGES } from '@/utils/constants/ui/messages';
 
 export const useEntity = () => {
   const [state, dispatch] = useReducer(entityReducer, initialState);

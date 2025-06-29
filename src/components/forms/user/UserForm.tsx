@@ -1,15 +1,15 @@
 import { memo } from "react";
-import Input from "../../ui/input/Input";
-import Select from "../../ui/select/Select";
-import Toggle from "../../ui/checkbox/Toggle";
-import { Entity } from "../../../types/devices";
+import Input from "@/components/ui/input/Input";
+import Select from "@/components/ui/select/Select";
+import Toggle from "@/components/ui/checkbox/Toggle";
+import { Entity } from "@/types/devices";
 import Actions from "../device/Actions";
-import { useAppSelector } from "../../../hooks/redux/useRedux";
-import { RootState } from "../../../store/store";
-import { FieldUserFormConfig } from "../../../types/content";
-import { User, UserFormActions } from "../../../types/user";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { RootState } from "@/store/store";
+import { FieldUserFormConfig } from "@/types/content";
+import { User, UserFormActions } from "@/types/user";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
 import styles from "./UserForm.module.scss";
 
 interface UserFormProps {

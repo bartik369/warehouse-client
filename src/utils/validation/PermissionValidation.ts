@@ -1,4 +1,4 @@
-import { PermissionRole, ValidateAccessErrors } from "../../types/access";
+import { PermissionRole, ValidateAccessErrors } from "@/types/access";
 import { MESSAGES } from "../constants/ui/messages";
 
 type ValidationFields = keyof PermissionRole;

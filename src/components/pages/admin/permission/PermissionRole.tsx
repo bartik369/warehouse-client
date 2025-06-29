@@ -1,8 +1,8 @@
-import AccessForm from '../../../forms/access/AccessForm';
+import AccessForm from '@/components/forms/access/AccessForm';
 import PermissionsRoleList from './PermissionsRoleList';
-import { usePermission } from '../../../../hooks/data/usePermission';
-import { useGetPermissionsRolesQuery } from '../../../../store/api/permissionApi';
-import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import { usePermission } from '@/hooks/data/usePermission';
+import { useGetPermissionsRolesQuery } from '@/store/api/permissionApi';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const PermissionRole = () => {

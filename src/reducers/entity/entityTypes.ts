@@ -1,4 +1,4 @@
-import { Entity } from './../../types/devices';
+import { Entity } from '@/types/devices';
 export interface EntityState {
     entity: Entity;
     media: {

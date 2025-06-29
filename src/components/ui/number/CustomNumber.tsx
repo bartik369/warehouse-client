@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo } from 'react';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
-import { Field, Device, ValidationErrors } from '../../../types/devices';
+import { Field, Device, ValidationErrors } from '@/types/devices';
 import style from './Number.module.scss';
 
 interface CustomNumberProps {

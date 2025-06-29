@@ -1,15 +1,14 @@
 import React, { useRef } from "react";
 import BtnAction from "../ui/buttons/BtnAction";
 import SignatureCanvas from "react-signature-canvas";
-import { useGlobalModal } from "../../hooks/data/useGlobalModal";
-import { SignatureActions } from "../../types/signature";
-import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
-import { COLORS } from "../../utils/constants/ui/colors";
+import { useGlobalModal } from "@/hooks/data/useGlobalModal";
+import { SignatureActions } from "@/types/signature";
+import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
+import { COLORS } from "@/utils/constants/ui/colors";
 import { RiResetLeftFill } from "react-icons/ri";
 import { IoSaveOutline } from "react-icons/io5";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import styles from "./Signature.module.scss";
-
 
 interface SignatureProps {
   actions: SignatureActions;

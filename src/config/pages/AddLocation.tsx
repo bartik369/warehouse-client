@@ -1,4 +1,4 @@
-import AddLocation from "../../components/pages/admin/city/AddLocation";
+import AddLocation from "@/components/pages/admin/city/AddLocation";
 
 const AddLocationConfig = {
     title: 'AddLocation',

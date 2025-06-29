@@ -1,17 +1,17 @@
-import Input from "../../ui/input/Input";
-import Select from "../../ui/select/Select";
+import Input from "@/components/ui/input/Input";
+import Select from "@/components/ui/select/Select";
 import Ask from "./Ask";
-import { ModalType } from "../../../reducers/modal/modalTypes";
-import { useGetContractorsQuery } from "../../../store/api/contractorApi";
-import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
-import { Device, DeviceFormActions } from "../../../types/devices";
-import { Contractor } from "../../../types/content";
+import { ModalType } from "@/reducers/modal/modalTypes";
+import { useGetContractorsQuery } from "@/store/api/contractorApi";
+import { useGlobalModal } from "@/hooks/data/useGlobalModal";
+import { Device, DeviceFormActions } from "@/types/devices";
+import { Contractor } from "@/types/content";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
 import { CiCalendar } from "react-icons/ci";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { PLACEHOLDER_LABELS } from "@/utils/constants/ui/placeholders";
 import styles from "./DeviceForm.module.scss";
 
 registerLocale("ru", ru);

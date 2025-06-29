@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { AggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "@/types/devices";
 import { TbLocationCheck } from "react-icons/tb";
-import { LABELS } from "../../../utils/constants/ui/labels";
+import { LABELS } from "@/utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 interface LocationInfoProps {

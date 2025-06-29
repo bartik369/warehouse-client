@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { useModal } from '../../../hooks/data/useModal';
+import { useModal } from '@/hooks/data/useModal';
 import { TbSelector } from 'react-icons/tb';
-import { BaseDeviceQuery } from '../../../types/devices';
-import { Warehouse } from '../../../types/locations';
-import { SELECTS } from '../../../utils/constants/ui/selects';
-import { useIssueContext } from '../../../features/issue/context/IssueContext';
+import { BaseDeviceQuery } from '@/types/devices';
+import { Warehouse } from '@/types/locations';
+import { SELECTS } from '@/utils/constants/ui/selects';
+import { useIssueContext } from '@/features/issue/context/IssueContext';
 import styles from './Select.module.scss';
 
 interface SelectProps {

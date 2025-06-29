@@ -1,5 +1,5 @@
-import AuthForm from "../../forms/auth/AuthForm";
-import pic from "../../../assets/elements/pic.jpg";
+import AuthForm from "@/components/forms/auth/AuthForm";
+import pic from "@/assets/elements/pic.jpg";
 import styles from "./Signin.module.scss";
 
 const Signin = () => {

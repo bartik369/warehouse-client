@@ -1,8 +1,8 @@
-import { UserRolesResponse } from "../../../../types/access";
-import { LABELS } from "../../../../utils/constants/ui/labels";
-import { SECTION_TITLES } from "../../../../utils/constants/ui/titles";
-import TechnicalOptions from "../../../ui/options/TechnicalOptions";
-import PermissionList from "../../../ui/permissions/PermissionList";
+import { UserRolesResponse } from "@/types/access";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
+import TechnicalOptions from "@/components/ui/options/TechnicalOptions";
+import PermissionList from "@/components/ui/permissions/PermissionList";
 import styles from "./GrantUserRoles.module.scss";
 
 interface UserInfoProps {

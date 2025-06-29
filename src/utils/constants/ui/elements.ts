@@ -3,5 +3,6 @@ export const ELEMENTS_LABELS = {
   resetFilter: 'Сбросить фильтр',
   openSidebar: 'Открыть боковое меню',
   selectPhoto: 'Выбрать фото',
+  
 };
   

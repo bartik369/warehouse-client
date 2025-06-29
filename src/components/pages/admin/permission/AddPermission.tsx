@@ -1,9 +1,9 @@
 import ItemsList from '../ItemsList';
-import MultiForm from '../../../forms/multi/MultiForm';
-import { useGetPermissionsQuery } from '../../../../store/api/permissionApi';
-import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
-import { permissionFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
-import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import MultiForm from '@/components/forms/multi/MultiForm';
+import { useGetPermissionsQuery } from '@/store/api/permissionApi';
+import { useAddAdminEntities } from '@/hooks/data/useAddAdminEntities';
+import { permissionFormFields } from '@/components/forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const AddPermission = () => {

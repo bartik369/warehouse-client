@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Document,
   Page,
@@ -8,9 +7,9 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-import { Device } from "../../../types/devices";
-import { baseDeviceLabelConfig } from "../../../utils/data/menus";
-import printLogo from "../../../assets/elements/print_logo.png";
+import { Device } from "@/types/devices";
+import { baseDeviceLabelConfig } from "@/utils/data/menus";
+import printLogo from "@/assets/elements/print_logo.png";
 
 Font.register({
   family: "Roboto",

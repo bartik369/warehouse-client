@@ -1,5 +1,5 @@
-import { deviceIssueSteps } from "../../../utils/data/menus";
-import { useIssueContext } from "../../../features/issue/context/IssueContext";
+import { deviceIssueSteps } from "@/utils/data/menus";
+import { useIssueContext } from "@/features/issue/context/IssueContext";
 import styles from "./Steps.module.scss";
 
 const Steps = () => {

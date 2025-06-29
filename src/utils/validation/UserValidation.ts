@@ -1,5 +1,5 @@
-import { User } from "../../types/user";
-import { ValidateUserErrors } from "../../types/user";
+import { User } from "@/types/user";
+import { ValidateUserErrors } from "@/types/user";
 import { MESSAGES } from "../constants/ui/messages";
 
 const requiredUserFields = [

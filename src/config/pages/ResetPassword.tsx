@@ -1,4 +1,4 @@
-import ResetPassword from "../../components/pages/reset/ResetPassword";
+import ResetPassword from "@/components/pages/reset/ResetPassword";
 
 const ResetPasswordConfig = {
     title: 'ResetPassword',

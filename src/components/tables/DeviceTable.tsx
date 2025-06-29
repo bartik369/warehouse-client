@@ -1,6 +1,6 @@
 import DeviceTableRow from "./DeviceTableRow";
-import { useIssueContext } from "../../features/issue/context/IssueContext";
-import { baseDeviceLabelConfig } from "../../utils/data/menus";
+import { useIssueContext } from "@/features/issue/context/IssueContext";
+import { baseDeviceLabelConfig } from "@/utils/data/menus";
 import styles from "./DeviceTable.module.scss";
 
 interface DeviceTableProps {

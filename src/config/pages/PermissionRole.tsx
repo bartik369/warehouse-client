@@ -1,4 +1,4 @@
-import PermissionRole from "../../components/pages/admin/permission/PermissionRole";
+import PermissionRole from "@/components/pages/admin/permission/PermissionRole";
 
 const PermissionRoleConfig = {
     title: 'Profile',

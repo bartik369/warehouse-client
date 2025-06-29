@@ -1,17 +1,17 @@
 import { useEffect, useMemo} from "react";
-import Select from "../../ui/select/Select";
-import Textarea from "../../ui/textarea/Textarea";
-import Checkbox from "../../ui/checkbox/Checkbox";
+import Select from "@/components/ui/select/Select";
+import Textarea from "@/components/ui/textarea/Textarea";
+import Checkbox from "@/components/ui/checkbox/Checkbox";
 import Actions from "../device/Actions";
-import { useGetLocationsQuery } from "../../../store/api/locationApi";
-import { useLazyGetAssignableWarehousesQuery } from "../../../store/api/warehousesApi";
-import { AccessFormActions, PermissionRole, Role } from "../../../types/access";
-import { useGetPermissionsQuery } from "../../../store/api/permissionApi";
-import { useGetAssignableRolesQuery } from "../../../store/api/rolesApi";
-import { PermissionState } from "../../../reducers/permission/permissionTypes";
-import { Entity } from "../../../types/devices";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { getRoleType, RoleType  } from "../../../utils/roles/roles";
+import { useGetLocationsQuery } from "@/store/api/locationApi";
+import { useLazyGetAssignableWarehousesQuery } from "@/store/api/warehousesApi";
+import { AccessFormActions, PermissionRole, Role } from "@/types/access";
+import { useGetPermissionsQuery } from "@/store/api/permissionApi";
+import { useGetAssignableRolesQuery } from "@/store/api/rolesApi";
+import { PermissionState } from "@/reducers/permission/permissionTypes";
+import { Entity } from "@/types/devices";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { getRoleType, RoleType  } from "@/utils/roles/roles";
 import styles from './AccessForm.module.scss';
 
 interface AccessFormProps {

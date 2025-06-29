@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../../hooks/redux/useRedux';
-import { RootState } from '../../../store/store';
-import previewPicture from '../../../assets/elements/default.png';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { RootState } from '@/store/store';
+import previewPicture from '@/assets/elements/default.png';
 import styles from "./DeviceForm.module.scss";
 
 const DevicePreview = () => {

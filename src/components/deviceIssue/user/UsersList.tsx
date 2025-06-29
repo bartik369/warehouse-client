@@ -1,9 +1,9 @@
 import { memo } from "react"
-import { BaseUserQuery, User } from "../../../types/user";
-import { useAppSelector } from "../../../hooks/redux/useRedux";
-import { RootState } from "../../../store/store";
-import { IssueState } from "../../../features/issue/model/issueTypes";
-import { MESSAGES } from "../../../utils/constants/ui/messages";
+import { BaseUserQuery, User } from "@/types/user";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { RootState } from "@/store/store";
+import { IssueState } from "@/features/issue/model/issueTypes";
+import { MESSAGES } from "@/utils/constants/ui/messages";
 import styles from "./UsersList.module.scss";
 
 interface UsersListProps {

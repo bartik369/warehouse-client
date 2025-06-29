@@ -1,6 +1,6 @@
 import { MdBarcodeReader } from "react-icons/md";
 import { IoBarcodeOutline } from "react-icons/io5";
-import { ELEMENTS_LABELS } from "../../utils/constants/ui/elements";
+import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
 import styles from './Logo.module.scss';
 
 interface LogoProps {

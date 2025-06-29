@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { Entity } from "../../types/devices";
-import { Warehouse } from "../../types/locations";
+import { Entity } from "@/types/devices";
+import { Warehouse } from "@/types/locations";
 
 export const warehousesApi = createApi({
   reducerPath: "warehousesApi",

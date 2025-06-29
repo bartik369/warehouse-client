@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { locations } from "../../../utils/data/menus";
+import { locations } from "@/utils/data/menus";
 import styles from "./Locations.module.scss";
 
 const Locations = () => {

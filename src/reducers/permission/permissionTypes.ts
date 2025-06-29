@@ -1,5 +1,5 @@
-import { PermissionRole } from "../../types/access";
-import { Checked } from "../../types/content";
+import { PermissionRole } from "@/types/access";
+import { Checked } from "@/types/content";
 
 export interface PermissionState {
     entity: PermissionRole;

@@ -1,8 +1,8 @@
 import { ChangeEvent} from 'react';
-import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { Checked, CheckedDeviceOptions } from '../../../types/content';
+import { useOutsideClick } from '@/hooks/data/useOutsideClick';
+import { Checked, CheckedDeviceOptions } from '@/types/content';
 import { CgOptions } from "react-icons/cg";
-import { MESSAGES } from '../../../utils/constants/ui/messages';
+import { MESSAGES } from '@/utils/constants/ui/messages';
 import styles from './CheckboxFilter.module.scss';
 
 interface CheckboxProps {

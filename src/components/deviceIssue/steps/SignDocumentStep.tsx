@@ -1,5 +1,5 @@
 import React from "react";
-import DocumentWithSignatures from "../../../features/documents/DocumentWithSignatures";
+import DocumentWithSignatures from "@/features/documents/DocumentWithSignatures";
 
 const SignDocumentStep = () => {
   return (

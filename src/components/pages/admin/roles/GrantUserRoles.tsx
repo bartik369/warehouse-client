@@ -1,8 +1,8 @@
 import UserInfo from "./UserInfo";
-import { useUserRoles } from "../../../../hooks/data/useUserRoles";
-import UserRolesForm from "../../../forms/roles/UserRolesForm";
-import { useGetRolesListQuery } from "../../../../store/api/rolesApi";
-import { SECTION_TITLES } from "../../../../utils/constants/ui/titles";
+import { useUserRoles } from "@/hooks/data/useUserRoles";
+import UserRolesForm from "@/components/forms/roles/UserRolesForm";
+import { useGetRolesListQuery } from "@/store/api/rolesApi";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
 import styles from './GrantUserRoles.module.scss';
 
 const GrantUserRoles = () => {

@@ -1,4 +1,4 @@
-import { Device, DeviceMedia } from './../../types/devices';
+import { Device, DeviceMedia } from '@/types/devices';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type DeviceAction = {

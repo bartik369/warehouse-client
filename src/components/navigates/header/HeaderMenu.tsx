@@ -1,4 +1,4 @@
-import { useDevice } from '../../../hooks/data/useDevice';
+import { useDevice } from '@/hooks/data/useDevice';
 import styles from './HeaderMenu.module.scss';
 
 

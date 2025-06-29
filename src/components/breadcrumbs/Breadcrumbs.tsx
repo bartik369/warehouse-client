@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useEntityNameResolver } from "../../hooks/data/useEntityNameResolver";
-import { routeNameMap } from "../../utils/constants/breadcrumbs";
-import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
+import { useEntityNameResolver } from "@/hooks/data/useEntityNameResolver";
+import { routeNameMap } from "@/utils/constants/breadcrumbs";
+import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { RiHome3Line } from "react-icons/ri";
 import styles from "./Breadcrumbs.module.scss";

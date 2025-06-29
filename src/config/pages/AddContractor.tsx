@@ -1,4 +1,4 @@
-import AddContractor from "../../components/pages/admin/contractor/AddContractor";
+import AddContractor from "@/components/pages/admin/contractor/AddContractor";
 
 const AddContractorConfig = {
     title: 'AddContractor',

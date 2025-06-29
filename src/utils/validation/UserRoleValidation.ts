@@ -1,4 +1,4 @@
-import { UserRole, ValidateUserRoleErrors } from "../../types/access";
+import { UserRole, ValidateUserRoleErrors } from "@/types/access";
 import { MESSAGES } from "../constants/ui/messages";
 
 const requiredUserFields = [

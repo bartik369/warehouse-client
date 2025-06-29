@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useReducer } from 'react';
 import { useLocation, useNavigate} from 'react-router-dom';
-import { handleApiError } from '../../utils/errors/handleApiError';
+import { handleApiError } from '@/utils/errors/handleApiError';
 import { toast } from 'react-toastify';
-import { userRoleReducer, userRoleInitialState } from '../../reducers/roles/userRoleReducer';
+import { userRoleReducer, userRoleInitialState } from '@/reducers/roles/userRoleReducer';
 import { useAppDispatch } from '../redux/useRedux';
-import { UserRole } from '../../types/access';
-import { UserRoleActionsTypes } from '../../reducers/roles/userRoleTypes';
-import { useLazyGetFilteredUsersQuery } from '../../store/api/userApi';
-import { useLazyGetUserRolesQuery } from '../../store/api/rolesApi';
-import { FormValidation, ValidateField } from '../../utils/validation/UserRoleValidation';
+import { UserRole } from '@/types/access';
+import { UserRoleActionsTypes } from '@/reducers/roles/userRoleTypes';
+import { useLazyGetFilteredUsersQuery } from '@/store/api/userApi';
+import { useLazyGetUserRolesQuery } from '@/store/api/rolesApi';
+import { FormValidation, ValidateField } from '@/utils/validation/UserRoleValidation';
 import { useDebounce } from './useDebounce.ts';
-import { useGrantRoleMutation } from '../../store/api/rolesApi';
-import { User } from '../../types/user';
-import { resetUsers, setUsers } from '../../store/slices/userSlice';
+import { useGrantRoleMutation } from '@/store/api/rolesApi';
+import { User } from '@/types/user';
+import { resetUsers, setUsers } from '@/store/slices/userSlice';
 
 export const useUserRoles = () => {
   const  [roleState, dispatchUserRole]  = useReducer(userRoleReducer, userRoleInitialState);

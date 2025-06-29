@@ -1,21 +1,21 @@
 import { ChangeEvent, useCallback, useEffect, useReducer } from "react";
-import { PermissionRole, Role, UserRolesList } from "../../types/access";
-import { Entity } from "../../types/devices";
-import { CheckedPermissionOptions } from "../../types/content";
+import { PermissionRole, Role, UserRolesList } from "@/types/access";
+import { Entity } from "@/types/devices";
+import { CheckedPermissionOptions } from "@/types/content";
 import {
   useCreatePermissionRoleMutation,
   useUpdatePermissionRoleMutation,
-} from "../../store/api/permissionApi";
+} from "@/store/api/permissionApi";
 import {
   FormValidation,
   validateField,
-} from "../../utils/validation/PermissionValidation";
+} from "@/utils/validation/PermissionValidation";
 import {
   permissionReducer,
   initialState,
-} from "../../reducers/permission/permissionReducer";
-import { PermissionActionTypes } from "../../reducers/permission/permissionTypes";
-import { handleApiError } from "../../utils/errors/handleApiError";
+} from "@/reducers/permission/permissionReducer";
+import { PermissionActionTypes } from "@/reducers/permission/permissionTypes";
+import { handleApiError } from "@/utils/errors/handleApiError";
 
 export const usePermission = () => {
   const [state, dispatch] = useReducer(permissionReducer, initialState);

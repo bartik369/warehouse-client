@@ -1,4 +1,4 @@
-import Signin from "../../components/pages/signin/Signin";
+import Signin from "@/components/pages/signin/Signin";
 
 const SigninConfig = {
     title: 'Signin',

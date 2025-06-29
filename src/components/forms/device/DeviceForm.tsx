@@ -1,22 +1,22 @@
 import { useEffect, memo } from "react";
-import Textarea from "../../ui/textarea/Textarea";
+import Textarea from "@/components/ui/textarea/Textarea";
 import DeviceTechnicalSection from "./DeviceTechnicalSection";
 import Actions from "./Actions";
 import PriceForm from "./PriceForm";
 import WarrantyForm from "./WarrantyForm";
 import DevicePreview from "./DevicePreview";
 import { ToastContainer } from "react-toastify";
-import { RootState } from "../../../store/store";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux/useRedux";
-import { setDevicePic } from "../../../store/slices/deviceSlice";
-import { useGetWarehousesQuery } from "../../../store/api/warehousesApi";
-import { useLazyGetModelsQuery } from "../../../store/api/modelsApi";
-import { useGetTypesQuery } from "../../../store/api/typesApi";
-import { useGetManufacturersQuery } from "../../../store/api/manufacturersApi";
-import { Entity, DeviceFormActions } from "../../../types/devices";
-import { Contractor } from "../../../types/content";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
+import { RootState } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux/useRedux";
+import { setDevicePic } from "@/store/slices/deviceSlice";
+import { useGetWarehousesQuery } from "@/store/api/warehousesApi";
+import { useLazyGetModelsQuery } from "@/store/api/modelsApi";
+import { useGetTypesQuery } from "@/store/api/typesApi";
+import { useGetManufacturersQuery } from "@/store/api/manufacturersApi";
+import { Entity, DeviceFormActions } from "@/types/devices";
+import { Contractor } from "@/types/content";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
 import styles from "./DeviceForm.module.scss";
 
 interface DeviceFormProps {

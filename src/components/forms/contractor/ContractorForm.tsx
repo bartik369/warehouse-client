@@ -1,9 +1,9 @@
-import Input from '../../ui/input/Input';
-import Textarea from '../../ui/textarea/Textarea';
+import Input from '@/components/ui/input/Input';
+import Textarea from '@/components/ui/textarea/Textarea';
 import Actions from '../device/Actions';
-import { useContactor } from '../../../hooks/data/useContractor';
-import { LABELS } from '../../../utils/constants/ui/labels';
-import { PLACEHOLDER_LABELS } from '../../../utils/constants/ui/placeholders';
+import { useContactor } from '@/hooks/data/useContractor';
+import { LABELS } from '@/utils/constants/ui/labels';
+import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 import styles from './ContractorForm.module.scss';
 
 const ContractorForm = () => {

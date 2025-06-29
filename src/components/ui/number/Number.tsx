@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo} from 'react';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
-import { Device } from '../../../types/devices';
-import { LABELS } from '../../../utils/constants/ui/labels';
+import { Device } from '@/types/devices';
+import { LABELS } from '@/utils/constants/ui/labels';
 import style from './Number.module.scss';
 
 interface NumberProps {

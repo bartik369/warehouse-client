@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import fileIcon from '../../../assets/elements/file-icon.svg';
-import { ELEMENTS_LABELS } from '../../../utils/constants/ui/elements';
+import fileIcon from '@/assets/elements/file-icon.svg';
+import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
 import styles from './File.module.scss';
 
 interface FileProps {

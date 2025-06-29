@@ -1,8 +1,8 @@
-import UserForm from "../../../forms/user/UserForm";
-import { createFormFields } from "../../../forms/user/formConfigs/userFormConfigs";
-import { useGetDepartmentsQuery } from "../../../../store/api/departmentApi";
-import { useGetLocationsQuery } from "../../../../store/api/locationApi";
-import { useUser } from "../../../../hooks/data/useUser";
+import UserForm from "@/components/forms/user/UserForm";
+import { createFormFields } from "@/components/forms/user/formConfigs/userFormConfigs";
+import { useGetDepartmentsQuery } from "@/store/api/departmentApi";
+import { useGetLocationsQuery } from "@/store/api/locationApi";
+import { useUser } from "@/hooks/data/useUser";
 
 const AddUser = () => {
   const { data: locations } = useGetLocationsQuery();

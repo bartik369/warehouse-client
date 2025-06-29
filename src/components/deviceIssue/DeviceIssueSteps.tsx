@@ -1,4 +1,4 @@
-import { useIssueContext } from "../../features/issue/context/IssueContext";
+import { useIssueContext } from "@/features/issue/context/IssueContext";
 import SelectUserStep from "./steps/SelectUserStep";
 import ReviewDocumentStep from "./steps/ReviewDocumentStep";
 import SignDocumentStep from "./steps/SignDocumentStep";

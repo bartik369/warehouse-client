@@ -1,5 +1,5 @@
-import { useGlobalModal } from "../../hooks/data/useGlobalModal";
-import { User } from "../../types/user";
+import { useGlobalModal } from "@/hooks/data/useGlobalModal";
+import { User } from "@/types/user";
 import { BsPen } from "react-icons/bs";
 import styles from "./Document.module.scss";
 

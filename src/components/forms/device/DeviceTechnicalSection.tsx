@@ -1,15 +1,15 @@
-import Input from "../../ui/input/Input";
+import Input from "@/components/ui/input/Input";
 import Ask from "./Ask";
-import Select from "../../ui/select/Select";
-import { Entity, DeviceFormActions, Device } from "../../../types/devices";
-import CustomNumber from "../../ui/number/CustomNumber";
-import Number from "../../ui/number/Number";
-import Toggle from "../../ui/checkbox/Toggle";
-import { useGlobalModal } from "../../../hooks/data/useGlobalModal";
-import { ModalType } from "../../../reducers/modal/modalTypes";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
-import { deviceTypes } from "../../../utils/constants/device";
+import Select from "@/components/ui/select/Select";
+import { Entity, DeviceFormActions, Device } from "@/types/devices";
+import CustomNumber from "@/components/ui/number/CustomNumber";
+import Number from "@/components/ui/number/Number";
+import Toggle from "@/components/ui/checkbox/Toggle";
+import { useGlobalModal } from "@/hooks/data/useGlobalModal";
+import { ModalType } from "@/reducers/modal/modalTypes";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
+import { deviceTypes } from "@/utils/constants/device";
 import styles from "./DeviceForm.module.scss";
 
 interface DeviceTechnicalSectionProps {

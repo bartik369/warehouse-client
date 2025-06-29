@@ -1,4 +1,4 @@
-import { UserRole, UserRolesResponse } from "../../types/access";
+import { UserRole, UserRolesResponse } from "@/types/access";
 
 export interface UserRoleState {
     role: UserRole;

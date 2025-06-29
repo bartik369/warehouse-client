@@ -3,9 +3,9 @@ import HeaderMenu from "../navigates/header/HeaderMenu";
 import Search from "../search/Search";
 import BurgerBtn from "../ui/buttons/burger/BurgerBtn";
 import Profile from "../profile/Profile";
-import { useAppSelector} from "../../hooks/redux/useRedux";
-import { RootState } from "../../store/store";
-import { useStickyHeader } from "../../hooks/data/useStickyHeader";
+import { useAppSelector} from "@/hooks/redux/useRedux";
+import { RootState } from "@/store/store";
+import { useStickyHeader } from "@/hooks/data/useStickyHeader";
 import styles from "./Header.module.scss";
 
 interface HeaderProps {

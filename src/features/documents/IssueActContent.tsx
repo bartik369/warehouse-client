@@ -1,7 +1,7 @@
-import DeviceTable from '../../components/tables/DeviceTable';
-import { useAppSelector } from '../../hooks/redux/useRedux';
-import { currentUser } from '../../store/slices/authSlice';
-import { partnerUser } from '../../store/slices/userSlice';
+import DeviceTable from '@/components/tables/DeviceTable';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { currentUser } from '@/store/slices/authSlice';
+import { partnerUser } from '@/store/slices/userSlice';
 
 const IssueActContent = () => {
   const issueUser = useAppSelector(currentUser);

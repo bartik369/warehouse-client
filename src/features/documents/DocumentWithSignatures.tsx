@@ -1,21 +1,21 @@
 import IssueActContent from "./IssueActContent";
-import IssueDocument from "../../components/pdf/issue/IssueDocument";
-import BtnAction from "../../components/ui/buttons/BtnAction";
+import IssueDocument from "@/components/pdf/issue/IssueDocument";
+import BtnAction from "@/components/ui/buttons/BtnAction";
 import Signatures from "./Signatures";
-import EnvelopeLoader from "../../components/ui/loader/envelope/EnvelopeLoader";
+import EnvelopeLoader from "@/components/ui/loader/envelope/EnvelopeLoader";
 import { useIssueContext } from "../issue/context/IssueContext";
-import { useAppSelector } from "../../hooks/redux/useRedux";
-import { currentUser } from "../../store/slices/authSlice";
-import { partnerUser } from "../../store/slices/userSlice";
-import { selectIssuerSignature, selectReceiverSignature } from "../../store/slices/signatureSlice";
-import { ELEMENTS_LABELS } from "../../utils/constants/ui/elements";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { currentUser } from "@/store/slices/authSlice";
+import { partnerUser } from "@/store/slices/userSlice";
+import { selectIssuerSignature, selectReceiverSignature } from "@/store/slices/signatureSlice";
+import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
 import { pdf } from "@react-pdf/renderer";
 import { IoBarcodeOutline } from "react-icons/io5";
 import { MdOutlineDone } from "react-icons/md";
-import { BUTTON_LABELS } from "../../utils/constants/ui/buttons";
-import { SECTION_TITLES } from "../../utils/constants/ui/titles";
-import { COLORS } from "../../utils/constants/ui/colors";
-import { SIZES } from "../../utils/constants/ui/sizes";
+import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
+import { COLORS } from "@/utils/constants/ui/colors";
+import { SIZES } from "@/utils/constants/ui/sizes";
 import styles from "./Document.module.scss";
 
 const DocumentWithSignatures = () => {

@@ -1,4 +1,4 @@
-import { useInputMask } from '../../hooks/data/useInputMask';
+import { useInputMask } from '@/hooks/data/useInputMask';
 import { AdminEntityAction, AdminEntityActionTypes, AdminEntityState } from './adminEntityTypes';
 
 const { formatPhone } = useInputMask();

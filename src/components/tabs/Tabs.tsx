@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 import Loader from '../ui/loader/Loader';
-import { Tab } from '../../types/navigation';
+import { Tab } from '@/types/navigation';
 import styles from './Tabs.module.scss';
 
 interface TabsProps {

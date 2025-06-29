@@ -1,4 +1,4 @@
-import AddManufacturer from "../../components/pages/admin/manufacturer/AddManufacturer";
+import AddManufacturer from "@/components/pages/admin/manufacturer/AddManufacturer";
 
 const AddManufacturerConfig = {
     title: 'AddManufacturer',

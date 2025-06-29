@@ -1,5 +1,5 @@
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { BUTTON_LABELS } from '../../utils/constants/ui/buttons';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import styles from './Pagination.module.scss';
 
 interface PaginationProps {

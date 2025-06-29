@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSigninMutation } from '../../store/api/authApi';
-import { setCredentials } from '../../store/slices/authSlice';
-import { Signin } from '../../types/user';
-import { AuthValidate, AuthValidateField } from '../../utils/validation/AuthValidate';
+import { useSigninMutation } from '@/store/api/authApi';
+import { setCredentials } from '@/store/slices/authSlice';
+import { Signin } from '@/types/user';
+import { AuthValidate, AuthValidateField } from '@/utils/validation/AuthValidate';
 import { useAppDispatch } from '../redux/useRedux';
-import { handleApiError } from '../../utils/errors/handleApiError';
+import { handleApiError } from '@/utils/errors/handleApiError';
 
 export const useAuth = () => {
     const [authData, setAuthData] = useState<Signin>({

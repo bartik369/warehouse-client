@@ -1,4 +1,4 @@
-import { useGlobalModal } from "../../hooks/data/useGlobalModal";
+import { useGlobalModal } from "@/hooks/data/useGlobalModal";
 import ContractorForm from "../forms/contractor/ContractorForm";
 import EntityForm from "../forms/device/EntityForm";
 import Modal from "./Modal";

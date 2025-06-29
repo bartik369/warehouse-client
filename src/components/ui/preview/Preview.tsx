@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { EntityFormActions } from "../../../types/entity";
-import { AdminEntityState } from "../../../reducers/admin-entity/adminEntityTypes";
-import loadIcon from "../../../assets/elements/load.svg";
-import previewPicture from "../../../assets/elements/default.png";
+import { EntityFormActions } from "@/types/entity";
+import { AdminEntityState } from "@/reducers/admin-entity/adminEntityTypes";
+import loadIcon from "@/assets/elements/load.svg";
+import previewPicture from "@/assets/elements/default.png";
 import style from "./Preview.module.scss";
 
 interface PreviewProps {

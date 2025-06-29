@@ -1,6 +1,6 @@
-import { FieldMultiformConfig } from '../../../../types/content';
-import { LABELS } from '../../../../utils/constants/ui/labels';
-import { PLACEHOLDER_LABELS } from '../../../../utils/constants/ui/placeholders';
+import { FieldMultiformConfig } from '@/types/content';
+import { LABELS } from '@/utils/constants/ui/labels';
+import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 
 export const modelFormFields: FieldMultiformConfig[] = [
   { type: 'input', name: 'name', label: LABELS.name, placeholder: '' },

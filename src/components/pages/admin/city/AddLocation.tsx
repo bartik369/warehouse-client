@@ -1,9 +1,9 @@
 import ItemsList from '../ItemsList';
-import MultiForm from '../../../forms/multi/MultiForm';
-import { useGetLocationsQuery } from '../../../../store/api/locationApi';
-import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
+import MultiForm from '@/components/forms/multi/MultiForm';
+import { useGetLocationsQuery } from '@/store/api/locationApi';
+import { useAddAdminEntities } from '@/hooks/data/useAddAdminEntities';
 import { locationFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
-import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const AddLocation = () => {

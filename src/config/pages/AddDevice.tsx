@@ -1,4 +1,4 @@
-import AddDevice from "../../components/pages/admin/device/AddDevice";
+import AddDevice from "@/components/pages/admin/device/AddDevice";
 
 const AddDeviceConfig = {
     title: 'AddDevices',

@@ -1,4 +1,4 @@
-import { Submenu } from '../../../types/navigation';
+import { Submenu } from '@/types/navigation';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './SidebarMenu.module.scss';
 

@@ -4,7 +4,7 @@ import {
   AggregateDeviceInfo,
   QueryParams,
   FilteredDevicesFromBack,
-} from "./../../types/devices";
+} from "@/types/devices";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
 

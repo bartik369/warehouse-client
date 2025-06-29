@@ -4,59 +4,59 @@ import { useInputMask } from "./useInputMask";
 import {
   FormValidation,
   ValidateField,
-} from "../../utils/validation/AdminEntityValidation";
+} from "@/utils/validation/AdminEntityValidation";
 import {
   useLazyGetManufacturerQuery,
   useCreateManufacturerMutation,
   useUpdateManufacturerMutation,
-} from "../../store/api/manufacturersApi";
+} from "@/store/api/manufacturersApi";
 import {
   useCreateDepartmentMutation,
   useLazyGetDepartmentQuery,
   useUpdateDepartmentMutation,
-} from "../../store/api/departmentApi";
+} from "@/store/api/departmentApi";
 import {
   useCreateLocationMutation,
   useLazyGetLocationQuery,
   useUpdateLocationMutation,
-} from "../../store/api/locationApi";
+} from "@/store/api/locationApi";
 import {
   useCreateWarehouseMutation,
   useLazyGetWarehouseQuery,
   useUpdateWarehouseMutation,
-} from "../../store/api/warehousesApi";
+} from "@/store/api/warehousesApi";
 import {
   useCreateContractorMutation,
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
-} from "../../store/api/contractorApi";
+} from "@/store/api/contractorApi";
 import {
   useCreateModelMutation,
   useLazyGetModelQuery,
   useUpdateModelMutation,
-} from "../../store/api/modelsApi";
+} from "@/store/api/modelsApi";
 import {
   useCreateTypeMutation,
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
-} from "../../store/api/typesApi";
+} from "@/store/api/typesApi";
 import {
   useCreatePermissionMutation,
   useLazyGetPermissionQuery,
   useUpdatePermissionMutation,
   useDeletePermissionMutation,
-} from "../../store/api/permissionApi";
+} from "@/store/api/permissionApi";
 import { 
   useLazyGetRoleQuery, 
   useCreateRoleMutation, 
   useUpdateRoleMutation,
   useDeleteRoleMutation
-} from "../../store/api/rolesApi";
-import { Entity } from "../../types/devices";
-import { handleApiError } from "../../utils/errors/handleApiError";
-import { adminEntityReducer, initialState } from "../../reducers/admin-entity/adminEntityReducer";
-import { AdminEntityActionTypes } from "../../reducers/admin-entity/adminEntityTypes";
-import { ELEMENTS_LABELS } from "../../utils/constants/ui/elements";
+} from "@/store/api/rolesApi";
+import { Entity } from "@/types/devices";
+import { handleApiError } from "@/utils/errors/handleApiError";
+import { adminEntityReducer, initialState } from "@/reducers/admin-entity/adminEntityReducer";
+import { AdminEntityActionTypes } from "@/reducers/admin-entity/adminEntityTypes";
+import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
 
 export const useAddAdminEntities = () => {
   const [state, dispatch] = useReducer(adminEntityReducer, initialState);

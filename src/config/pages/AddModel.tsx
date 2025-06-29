@@ -1,4 +1,4 @@
-import AddModel from "../../components/pages/admin/model/AddModel";
+import AddModel from "@/components/pages/admin/model/AddModel";
 
 const AddModelConfig = {
     title: 'AddModel',

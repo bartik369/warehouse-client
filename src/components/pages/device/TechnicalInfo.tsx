@@ -1,9 +1,9 @@
-import { AggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "@/types/devices";
 import { BiArea } from "react-icons/bi";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
-import { LABELS } from "../../../utils/constants/ui/labels";
-import { SECTION_TITLES } from "../../../utils/constants/ui/titles";
-import { UNIT_LABELS } from "../../../utils/constants/ui/unit";
+import { LABELS } from "@/utils/constants/ui/labels";
+import { SECTION_TITLES } from "@/utils/constants/ui/titles";
+import { UNIT_LABELS } from "@/utils/constants/ui/unit";
 import styles from "./Device.module.scss";
 
 interface TechnicalInfoProps {

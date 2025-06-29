@@ -1,4 +1,4 @@
-import Device from "../../components/pages/device/Device";
+import Device from "@/components/pages/device/Device";
 
 const DeviceConfig = {
     title: 'Device',

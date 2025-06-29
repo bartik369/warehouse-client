@@ -1,6 +1,6 @@
-import { AggregateDeviceInfo } from "../../../types/devices";
+import { AggregateDeviceInfo } from "@/types/devices";
 import { RiFileUserLine } from "react-icons/ri";
-import { LABELS } from "../../../utils/constants/ui/labels";
+import { LABELS } from "@/utils/constants/ui/labels";
 import styles from "./Device.module.scss";
 
 interface UserInfoProps {

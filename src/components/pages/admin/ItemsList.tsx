@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { Entity } from '../../../types/devices';
-import { EntityFormActions } from '../../../types/entity';
+import { Entity } from '@/types/devices';
+import { EntityFormActions } from '@/types/entity';
 import { MdOutlineEdit } from 'react-icons/md';
-import NoData from '../../nodata/NoData';
+import NoData from '@/components/nodata/NoData';
 import styles from './Admin.module.scss';
 
 interface ItemsListProps {

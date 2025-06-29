@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Contractor } from '../../types/content';
-import { useCreateContractorMutation } from '../../store/api/contractorApi';
+import { Contractor } from '@/types/content';
+import { useCreateContractorMutation } from '@/store/api/contractorApi';
 import {
   ContractorValidation,
   ValidateField,
-} from '../../utils/validation/DeviceValidation';
+} from '@/utils/validation/DeviceValidation';
 import { useInputMask } from './useInputMask';
-import { handleApiError } from '../../utils/errors/handleApiError';
+import { handleApiError } from '@/utils/errors/handleApiError';
 
 export const useContactor = () => {
   const { formatPhone, changeFormatPhone } = useInputMask();

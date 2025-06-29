@@ -1,8 +1,8 @@
-import { useOutsideClick } from '../../../hooks/data/useOutsideClick';
-import { ValidationErrors } from '../../../types/devices';
+import { useOutsideClick } from '@/hooks/data/useOutsideClick';
+import { ValidationErrors } from '@/types/devices';
 import { TbSelector } from "react-icons/tb";
 import { MdOutlineErrorOutline } from "react-icons/md";
-import { SELECTS } from '../../../utils/constants/ui/selects';
+import { SELECTS } from '@/utils/constants/ui/selects';
 import styles from './Select.module.scss';
 
 interface SelectProps<T> {

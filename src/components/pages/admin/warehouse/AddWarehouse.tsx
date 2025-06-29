@@ -1,9 +1,9 @@
 import ItemsList from '../ItemsList';
-import { useGetWarehousesQuery } from '../../../../store/api/warehousesApi';
-import MultiForm from '../../../forms/multi/MultiForm';
-import { useAddAdminEntities } from '../../../../hooks/data/useAddAdminEntities';
-import { warehouseFormFields } from '../../../forms/multi/formConfigs/modelFormFields';
-import { SECTION_TITLES } from '../../../../utils/constants/ui/titles';
+import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
+import MultiForm from '@/components/forms/multi/MultiForm';
+import { useAddAdminEntities } from '@/hooks/data/useAddAdminEntities';
+import { warehouseFormFields } from '@/components/forms/multi/formConfigs/modelFormFields';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 
 const AddWarehouse = () => {

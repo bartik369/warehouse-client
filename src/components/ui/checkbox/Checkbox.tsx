@@ -1,9 +1,9 @@
-import { useOutsideClick } from "../../../hooks/data/useOutsideClick";
-import { Checked, CheckedPermissionOptions } from "../../../types/content";
-import { AccessFormActions, PermissionRole } from "../../../types/access";
+import { useOutsideClick } from "@/hooks/data/useOutsideClick";
+import { Checked, CheckedPermissionOptions } from "@/types/content";
+import { AccessFormActions, PermissionRole } from "@/types/access";
 import { TbSelector } from "react-icons/tb";
-import { MESSAGES } from "../../../utils/constants/ui/messages";
-import { LABELS } from "../../../utils/constants/ui/labels";
+import { MESSAGES } from "@/utils/constants/ui/messages";
+import { LABELS } from "@/utils/constants/ui/labels";
 import styles from "./Checkbox.module.scss";
 
 interface CheckboxProps {

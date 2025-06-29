@@ -1,6 +1,6 @@
 import UserTableRow from "./UserTableRow";
-import { LABELS } from '../../../../../utils/constants/ui/labels';
-import { User, UserFormActions, UserLabel } from '../../../../../types/user'
+import { LABELS } from '@/utils/constants/ui/labels';
+import { User, UserFormActions, UserLabel } from '@/types/user'
 import styles from './UserTable.module.scss';
 
 interface UserTableProps {

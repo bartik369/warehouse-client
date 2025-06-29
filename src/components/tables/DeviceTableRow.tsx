@@ -1,4 +1,4 @@
-import { BaseDeviceQuery, Device } from "../../types/devices";
+import { BaseDeviceQuery, Device } from "@/types/devices";
 import { RiDeleteBin4Line } from "react-icons/ri";
 import styles from "./DeviceTable.module.scss";
 

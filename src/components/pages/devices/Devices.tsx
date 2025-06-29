@@ -1,15 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import DeviceItems from "./DeviceItems";
-import Loader from "../../ui/loader/Loader";
-import CheckboxFilter from "../../ui/checkbox/CheckboxFilter";
-import Pagination from "../../pagination/Pagination";
-import OfficeFileBtn from "../../ui/buttons/download/OfficeFileBtn";
-import { FilteredDevicesFromBack } from "../../../types/devices";
-import { useAppDispatch } from "../../../hooks/redux/useRedux";
-import { resetDevice, patchDevice, setStatus, resetStatus } from "../../../store/slices/deviceSlice";
-import { useDeviceFilters } from "../../../hooks/data/useDeviceFilters";
-import { extraOptions, filterLabelsConfig } from "../../../utils/constants/device";
-import { ELEMENTS_LABELS } from "../../../utils/constants/ui/elements";
+import Loader from "@/components/ui/loader/Loader";
+import CheckboxFilter from "@/components/ui/checkbox/CheckboxFilter";
+import Pagination from "@/components/pagination/Pagination";
+import OfficeFileBtn from "@/components/ui/buttons/download/OfficeFileBtn";
+import { FilteredDevicesFromBack } from "@/types/devices";
+import { useAppDispatch } from "@/hooks/redux/useRedux";
+import { resetDevice, patchDevice, setStatus, resetStatus } from "@/store/slices/deviceSlice";
+import { useDeviceFilters } from "@/hooks/data/useDeviceFilters";
+import { extraOptions, filterLabelsConfig } from "@/utils/constants/device";
+import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
 import { MdFilterListOff } from "react-icons/md";
 import styles from "./Devices.module.scss";
 

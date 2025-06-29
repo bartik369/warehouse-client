@@ -1,14 +1,14 @@
 import { memo } from "react";
 import Actions from "../device/Actions";
 import UserSuggestionList from "./UserSuggestionList";
-import { useAppSelector } from "../../../hooks/redux/useRedux";
-import { UserRoleState } from "../../../reducers/roles/userRoleTypes";
-import Input from "../../ui/input/Input";
-import Select from "../../ui/select/Select";
-import { RootState } from "../../../store/store";
-import { ListRoleRes, UserRoleFormActions } from "../../../types/access";
-import { PLACEHOLDER_LABELS } from "../../../utils/constants/ui/placeholders";
-import { LABELS } from "../../../utils/constants/ui/labels";
+import { useAppSelector } from "@/hooks/redux/useRedux";
+import { UserRoleState } from "@/reducers/roles/userRoleTypes";
+import Input from "@/components/ui/input/Input";
+import Select from "@/components/ui/select/Select";
+import { RootState } from "@/store/store";
+import { ListRoleRes, UserRoleFormActions } from "@/types/access";
+import { PLACEHOLDER_LABELS } from "@/utils/constants/ui/placeholders";
+import { LABELS } from "@/utils/constants/ui/labels";
 import styles from "./UserRolesForm.module.scss";
 
 interface UserRolesFormProps {

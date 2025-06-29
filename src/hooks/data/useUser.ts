@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../../types/user';
+import { User } from '@/types/user';
 import { useAppDispatch, useAppSelector } from '../redux/useRedux';
-import { RootState } from '../../store/store';
-import { handleApiError } from '../../utils/errors/handleApiError';
-import { useCreateUserMutation } from '../../store/api/userApi';
-import { FormValidation, ValidateField } from '../../utils/validation/UserValidation';
-import { setError, resetError, updateUser, setChecked, resetUser } from '../../store/slices/userSlice';
+import { RootState } from '@/store/store';
+import { handleApiError } from '@/utils/errors/handleApiError';
+import { useCreateUserMutation } from '@/store/api/userApi';
+import { FormValidation, ValidateField } from '@/utils/validation/UserValidation';
+import { setError, resetError, updateUser, setChecked, resetUser } from '@/store/slices/userSlice';
 import { toast } from 'react-toastify';
 
 export const useUser = () => {

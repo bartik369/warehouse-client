@@ -1,4 +1,4 @@
-import { useIssueContext } from '../../../../features/issue/context/IssueContext';
+import { useIssueContext } from '@/features/issue/context/IssueContext';
 import styles from './AssignedList.module.scss'
 
 const AssignedList = () => {

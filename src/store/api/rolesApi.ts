@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { Role, RoleList, UserRolesResponse } from "../../types/access";
-import { Entity } from "../../types/devices";
+import { Role, RoleList, UserRolesResponse } from "@/types/access";
+import { Entity } from "@/types/devices";
 
 export const rolesApi = createApi({
   reducerPath: "rolesApi",
