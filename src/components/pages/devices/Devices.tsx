@@ -56,9 +56,7 @@ const Devices = () => {
       });
     };
 
-    // status: e.target.checked,
-
-  if (!devices) return <Loader size="lg" color="grey" />;
+  if (!devices) return <Loader size="lg" color="green" />;
 
   return (
     <>

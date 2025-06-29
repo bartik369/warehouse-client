@@ -18,20 +18,12 @@
         @include base;
     }
     .lg {
-        width: 48px;
-        height: 48px;
+        width: 50px;
+        height: 50px;
         @include base;
     }
-    .blue {
-        border: 5px dotted #3c53d7;
-        border-radius: 50%;
-    }
-    .grey {
-        border: 5px dotted #464450;
-        border-radius: 50%;
-    }
     .green {
-        background-color: #379492;
+        border: 6px dotted #3cb3a1;
         border-radius: 50%;
     }
     @keyframes rotation {

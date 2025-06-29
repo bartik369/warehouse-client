@@ -34,7 +34,7 @@ export const useDevice = () => {
             console.log('peremestit');
           break;
           case issue:
-            navigate(`/issue`)
+            navigate(`/issue/create-issue`)
           break;
         }
       }

@@ -20,6 +20,9 @@ import UserDetailsConfig from "../pages/UserDetails";
 import GrantUserRolesConfig from "../pages/GrantUserRoles";
 import IssueConfig from "../pages/Issue";
 import LocationsConfig from "../pages/Locations";
+import IssueListConfig from "../pages/IssueList";
+import InventoryListConfig from "../pages/InventoryList";
+import InventoryConfig from "../pages/Inventory";
 
 const privateRoutes = [
     HomeConfig,
@@ -28,6 +31,9 @@ const privateRoutes = [
     DeviceConfig,
     AddDeviceConfig,
     IssueConfig,
+    IssueListConfig,
+    InventoryListConfig,
+    InventoryConfig,
     EditDeviceConfig,
     AddUserConfig,
     UsersConfig,

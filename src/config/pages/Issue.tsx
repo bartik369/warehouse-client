@@ -14,7 +14,7 @@ const IssueWrapper = () => {
 
 const IssueConfig = {
   title: 'Issue',
-  path: '/issue',
+  path: '/issue/create-issue',
   element: <IssueWrapper />,
   requireAuth: true,
 }

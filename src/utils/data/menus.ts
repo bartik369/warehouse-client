@@ -13,6 +13,7 @@ TbDeviceDesktopPlus } from "react-icons/tb";
 import { LuSquareChevronUp } from "react-icons/lu";
 import { TbSettings } from "react-icons/tb";
 import { MdOutlineLockReset } from "react-icons/md";
+import { MdOutlineInventory } from "react-icons/md";
 import { TbUserCircle } from "react-icons/tb";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { DeviceLabel } from "@/types/devices";
@@ -41,13 +42,14 @@ export const sidebarMenuData = [
         { id: 2, title: 'Екатеринбург', path: 'ekb'},    
       ]
     },  
-    {id: 2, title: 'Выдать', path: '/issue', icon: LuSquareChevronUp},
+    {id: 2, title: 'Выдать', path: '/issue/create-issue', icon: LuSquareChevronUp},
     {id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail},
     {id: 4, title: 'Пользователи', path: '/admin/users', icon: LuUsers},
-    {id: 5, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
-    {id: 6, title: 'Календарь', path: '/calendar', icon: IoCalendarNumberOutline},
-    {id: 7, title: 'Статистика', path: '/statistic', icon: IoStatsChartOutline},
-    {id: 8, title: 'База знаний', path: '/library', icon: MdOutlineLibraryAddCheck},
+    {id: 5, title: 'Инвентаризации', path: '/inventory/inventory-create', icon: MdOutlineInventory},
+    {id: 6, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
+    {id: 7, title: 'Календарь', path: '/calendar', icon: IoCalendarNumberOutline},
+    {id: 8, title: 'Статистика', path: '/statistic', icon: IoStatsChartOutline},
+    {id: 9, title: 'База знаний', path: '/library', icon: MdOutlineLibraryAddCheck},
 ];
 export const deviceActionsMenu = [
     {id: 1, title: 'Выдать', icon: FiUserPlus},

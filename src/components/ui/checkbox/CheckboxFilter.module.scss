@@ -70,7 +70,7 @@
     cursor: pointer;
     &:focus {
         outline: none;
-        border: 1px solid #38b09a;
+        border: 1px solid #3a9e9c;
     }
 }
 
@@ -87,8 +87,8 @@
         display: none;
     }
     input:checked~.checkmark {
-        border: 1px solid #38b09a;
-        background-color: #39b49e;
+        border: 1px solid #3a9e9c;
+        background-color: #3ca19f;
         transition: background-color .5s ease-in-out;
     }
     input:disabled~.checkmark {
@@ -117,7 +117,7 @@
 }
 
 .container:hover input~.checkmark {
-    border: 1px solid #38b09a;
+    border: 1px solid #3a9e9c;
 }
 
 .checkmark {
