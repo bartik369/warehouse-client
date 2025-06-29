@@ -48,8 +48,8 @@ export const sidebarMenuData = [
     {id: 5, title: 'Инвентаризации', path: '/inventory/inventory-create', icon: MdOutlineInventory},
     {id: 6, title: 'Подрядчики', path: '/contractors', icon: LuHandshake},
     {id: 7, title: 'Календарь', path: '/calendar', icon: IoCalendarNumberOutline},
-    {id: 8, title: 'Статистика', path: '/statistic', icon: IoStatsChartOutline},
-    {id: 9, title: 'База знаний', path: '/library', icon: MdOutlineLibraryAddCheck},
+    {id: 8, title: 'Статистика', path: '/statistics', icon: IoStatsChartOutline},
+    {id: 9, title: 'База знаний', path: '/knowledge', icon: MdOutlineLibraryAddCheck},
 ];
 export const deviceActionsMenu = [
     {id: 1, title: 'Выдать', icon: FiUserPlus},

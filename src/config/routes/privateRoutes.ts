@@ -23,6 +23,11 @@ import LocationsConfig from "../pages/Locations";
 import IssueListConfig from "../pages/IssueList";
 import InventoryListConfig from "../pages/InventoryList";
 import InventoryConfig from "../pages/Inventory";
+import StatisticsConfig from "../pages/Statistics";
+import MessagesConfig from "../pages/Messages";
+import KnowledgeConfig from "../pages/Knowledge";
+import ContractorsConfig from "../pages/Contractors";
+import CalendarConfig from "../pages/Calendar";
 
 const privateRoutes = [
     HomeConfig,
@@ -43,6 +48,11 @@ const privateRoutes = [
     AddDepartmentConfig,
     AddContractorConfig,
     AddRoleConfig,
+    StatisticsConfig,
+    MessagesConfig,
+    KnowledgeConfig,
+    ContractorsConfig,
+    CalendarConfig,
     AddPermissionConfig,
     AddManufacturerConfig,
     AddModelConfig,
