@@ -52,18 +52,22 @@
         }
     }
     .button {
-        background: #379492;
         height: 40px;
-        font-size: 11px;
+        width: 40px;
+        background: #379492;
         color: #ffffff;
         border: none;
-        border-radius: 12px;
-        padding: 6px 13px;
+        border-radius: 50%;
         cursor: pointer;
-        white-space: nowrap;
         transition: background-color .4s ease-in;
         &:hover {
             background: #3ea5a4;
+        }
+        span {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

@@ -51,7 +51,7 @@ export const deviceTypes:DeviceTypes = {
   desktop: {
     label: "Стационарный компьютер",
     uniqueFields: [
-      { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
+      { name: "memorySize", label: "ОЗУ(гб)", type: "number", step: 2 },
     ],
   },
   tv: {
@@ -64,7 +64,7 @@ export const deviceTypes:DeviceTypes = {
     label: "Мобильный телефон",
     uniqueFields: [
         { name: "screenSize", label: "Размер экрана(дюйм)", type: "number", step: 0.1 },
-        { name: "memorySize", label: "Оперативная память(гб)", type: "number", step: 2 },
+        { name: "memorySize", label: "ОЗУ(гб)", type: "number", step: 2 },
         
     ],
   },
