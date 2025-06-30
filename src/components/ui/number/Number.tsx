@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo} from 'react';
+import React, { ChangeEvent, memo, useEffect, useState} from 'react';
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { Device } from '@/types/devices';
 import { LABELS } from '@/utils/constants/ui/labels';
@@ -9,6 +9,7 @@ interface NumberProps {
     setDevice: (entity:number) => void;
 }
 const Number = memo(({ device, setDevice }:NumberProps) => {
+    const [inputValue, setInputValue] = useState<string>('');
     const data = {
         min: 0,
         max: 1000000,
@@ -25,7 +26,8 @@ const Number = memo(({ device, setDevice }:NumberProps) => {
 
     const handleIncrease = (e: React.MouseEvent) => {
         e.preventDefault();
-         handleValueChange(device.weight! - data.step);
+        const currentValue = parseFloat(inputValue) || 0
+         handleValueChange(currentValue - data.step);
       };
     
     const handleDecrease = (e:React.MouseEvent) => {
@@ -36,6 +38,11 @@ const Number = memo(({ device, setDevice }:NumberProps) => {
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         handleValueChange(parseFloat(e.target.value) || data.min);
     };
+
+    useEffect(() => {
+        const currentValue = device.weight;
+        setInputValue(currentValue?.toString() ?? '');
+    }, [device.weight]);
     
     return (
         <div className={style.wrapper}>
@@ -49,7 +56,8 @@ const Number = memo(({ device, setDevice }:NumberProps) => {
                 <input 
                     className={style.value} 
                     type="number"
-                    value={device.weight}
+                    inputMode="decimal"
+                    value={inputValue}
                     step={data.step}
                     min={data.min}
                     max={data.max}

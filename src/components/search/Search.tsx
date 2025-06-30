@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
 import { PLACEHOLDER_LABELS } from "@/utils/constants/ui/placeholders";
 import { IoSearch } from "react-icons/io5";
 import { CgCloseO } from "react-icons/cg";
@@ -12,7 +11,7 @@ const Search = () => {
     <div className={styles.search}>
       <div className={styles.input}>
         <div className={styles.glass}>
-          <IoSearch />
+          {!searchQuery && <IoSearch />}
         </div>
         <input
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -29,7 +28,7 @@ const Search = () => {
       <button
         className={styles.button}
         style={{ visibility: searchQuery ? "visible" : "hidden" }}>
-        {BUTTON_LABELS.search}
+          <span><IoSearch /></span>
       </button>
     </div>
   );
