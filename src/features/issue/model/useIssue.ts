@@ -108,7 +108,6 @@ export const useIssue = () => {
       issueData.append('file', file);
       const data = await finalizeIssue(issueData).unwrap();
       if (data) {
-        console.log('retuuuurn')
         dispatch({ type: IssueActionTypes.NEXT_STEP });
       }
     } catch (err: unknown) {
