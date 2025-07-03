@@ -17,6 +17,7 @@ import { useLazyGetDeviceQuery } from "@/store/api/devicesApi";
 import { patchDevice, resetDevice, resetStatus, setDevicePic } from "@/store/slices/deviceSlice";
 import { deviceTabsMenu } from "@/utils/data/menus";
 import { SECTION_TITLES } from "@/utils/constants/ui/titles";
+import { PATHS } from "@/utils/constants/system/paths";
 import { CiEdit } from "react-icons/ci";
 import styles from "./Device.module.scss";
 
@@ -90,7 +91,7 @@ const Device = () => {
             </div>
             <article className={styles.wrapper}>
               <figure className={styles.picture}>
-                <img src={`/api/uploads/models/${itemDevice.model.imagePath}`} alt="" />
+                <img src={`${PATHS.models}${itemDevice.model.imagePath}`} alt="" />
               </figure>
               <div className={styles.info}>
                 <TechnicalInfo device={itemDevice} />
