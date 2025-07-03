@@ -39,7 +39,6 @@ type IssueContextType = {
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);
 
-
 export const IssueProvider = ({
   children,
   initialDeviceId,
@@ -47,7 +46,6 @@ export const IssueProvider = ({
   children: ReactNode;
   initialDeviceId?: string;
 }) => {
-
   const value = useIssue();
 
   useEffect(() => {
