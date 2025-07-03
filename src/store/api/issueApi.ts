@@ -32,7 +32,7 @@ export const issueApi = createApi({
     }),
     finalizeIssueProcess: build.mutation({
       query: (body) => ({
-        url: `${import.meta.env.VITE_ISSUE}finalize`,
+        url: `${import.meta.env.VITE_ISSUE_FINALIZE}`,
         method: "POST",
         body,
       }),
