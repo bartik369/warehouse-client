@@ -72,11 +72,10 @@ export interface UserFormActions {
 
 export interface BaseUserQuery {
     handleUserChange: (value: string) => void;
-    handleCreateIssue: (file: Blob) => void;
+    handleCompleteProcess: (file: Blob) => void;
     handleFullReset: () => void;
     handleSetUser: (id: string) => void;
     handleResetUser: () => void;
     handleResetUserQuery: () => void;
-    handleSetStepInfo: (step: IssueStepType) => void;
     handleNextStep:() => void;
 }

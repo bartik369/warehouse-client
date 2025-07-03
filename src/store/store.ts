@@ -11,7 +11,7 @@ import { manufacturersApi } from './api/manufacturersApi';
 import { typesApi } from './api/typesApi';
 import { modelsApi } from './api/modelsApi';
 import { rolesApi } from './api/rolesApi';
-import { deviceIssueApi } from './api/deviceIssueApi';
+import { issueApi } from './api/issueApi';
 import authReducer from './slices/authSlice';
 import { modalReducer } from '../reducers/modal/modalReducer';
 import deviceReducer from './slices/deviceSlice';
@@ -37,7 +37,7 @@ const store = configureStore({
     [departmentApi.reducerPath]: departmentApi.reducer,
     [permissionApi.reducerPath]: permissionApi.reducer,
     [rolesApi.reducerPath]: rolesApi.reducer,
-    [deviceIssueApi.reducerPath]: deviceIssueApi.reducer,
+    [issueApi.reducerPath]: issueApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -55,7 +55,7 @@ const store = configureStore({
         departmentApi.middleware,
         permissionApi.middleware,
         rolesApi.middleware,
-        deviceIssueApi.middleware,
+        issueApi.middleware,
       ),
 });
 

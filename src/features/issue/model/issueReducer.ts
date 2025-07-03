@@ -9,7 +9,7 @@ import {
 export const steps: IssueStepType[] = [
   "select_warehouse",
   "select_user",
-  "review_document",
+  "select_devices",
   "sign_document",
   "send_document",
 ];
@@ -22,6 +22,7 @@ const titles: IssueStepTitle[] = [
 ]
 export const initialIssueState: IssueState = {
   step: "select_warehouse",
+  pdfBlob: null,
   title: 'Выбор склада',
   issueId: null,
   errors: {},
@@ -194,6 +195,8 @@ export function issueReducer(
         deviceIssueData: {...initialIssueState.deviceIssueData },
         assignedDevices: [],
       }
+    case IssueActionTypes.SET_PDF_FILE:
+      return { ...state, pdfBlob: action.payload }
     default:
       return state;
   }

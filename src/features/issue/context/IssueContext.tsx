@@ -5,7 +5,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { IssueAction, IssueState, IssueStepType } from "../model/issueTypes";
+import { IssueAction, IssueState } from "../model/issueTypes";
 import { useIssue } from "../model/useIssue";
 import { Device } from "@/types/devices";
 import { Warehouse } from "@/types/locations";
@@ -14,13 +14,12 @@ type IssueContextType = {
   state: IssueState;
   dispatch: Dispatch<IssueAction>;
   actions: {
-    handleCreateIssue: (file: Blob) => void;
+    handleCompleteProcess: (file: Blob) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
     handleSetUser: (id: string) => Promise<void>;
     handleResetUser: () => void;
     handleResetUserQuery: () => void;
-    handleSetStepInfo: (step: IssueStepType) => void;
     handleNextStep: () => void;
     handleStartDeviceIssueWith: (id: string) => void;
     handleGetDevice: () => void;
@@ -40,9 +39,17 @@ type IssueContextType = {
 
 const IssueContext = createContext<IssueContextType | undefined>(undefined);
 
-export const IssueProvider = ({ children, initialDeviceId }: { children: ReactNode, initialDeviceId?: string }) => {
+
+export const IssueProvider = ({
+  children,
+  initialDeviceId,
+}: {
+  children: ReactNode;
+  initialDeviceId?: string;
+}) => {
+
   const value = useIssue();
-  
+
   useEffect(() => {
     if (initialDeviceId) {
       value.actions.handleStartDeviceIssueWith(initialDeviceId);
@@ -50,9 +57,7 @@ export const IssueProvider = ({ children, initialDeviceId }: { children: ReactNo
   }, [initialDeviceId]);
 
   return (
-    <IssueContext.Provider value={value}>
-      {children}
-    </IssueContext.Provider>
+    <IssueContext.Provider value={value}>{children}</IssueContext.Provider>
   );
 };
 export const useIssueContext = () => {

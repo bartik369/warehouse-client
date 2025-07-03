@@ -12,10 +12,6 @@ const DeviceIssueForm = ({ issueId = null }) => {
   const { state, actions } = useIssueContext();
   const user = useAppSelector((state: RootState) => state.user.user);
 
-  // useEffect(() => {
-  //   if (issueId) actions.handleDeviceIssue(issueId);
-  // }, [issueId]);
-
   useEffect(() => {
     return () => { actions.handleFullReset(); };
   }, []);

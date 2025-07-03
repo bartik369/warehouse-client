@@ -4,7 +4,7 @@ export function modalSize(type: string) {
       return {
         modalSize: 500,
       };
-    case "review_document":
+    case "select_devices":
       return {
         modalSize: 700,
     };

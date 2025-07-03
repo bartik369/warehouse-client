@@ -10,7 +10,7 @@
 }
 
 .sm {
-    padding: 7px 9px;
+    padding: 9px 9px;
     border-radius: 4px;
     font-size: 12px;
     .icon {
@@ -36,9 +36,9 @@
 }
 
 .lg {
-    padding: 12px 30px;
+    padding: 12px 20px;
     border-radius: 8px;
-    max-width: 130px;
+    max-width: 120px;
     width: 100%;
     font-size: 13px;
     .icon {
@@ -99,10 +99,10 @@
 }
 
 .grey {
-    background-color: #5d5f6e;
+    background-color: #6b7993;
     color: #fff;
     &:hover {
-        background-color: #707282;
+        background-color: #7786a3;
     }
 }
 
