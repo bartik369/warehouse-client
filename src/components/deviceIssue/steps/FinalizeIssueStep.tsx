@@ -2,7 +2,6 @@ import BtnAction from "@/components/ui/buttons/BtnAction";
 import { useAppSelector } from "@/hooks/redux/useRedux";
 import { useIssueContext } from "@/features/issue/context/IssueContext";
 import { partnerUser } from "@/store/slices/userSlice";
-import { pdfBlob } from "@/store/slices/signatureSlice";
 import { SIZES } from "@/utils/constants/ui/sizes";
 import { COLORS } from "@/utils/constants/ui/colors";
 import { MESSAGES } from "@/utils/constants/ui/messages";
@@ -14,13 +13,12 @@ import styles from "./Steps.module.scss";
 const FinalizeIssueStep = () => {
   const { state } = useIssueContext();
   const recipient = useAppSelector(partnerUser);
-  const pdfFile = useAppSelector(pdfBlob);
 
   const handleDownload = async () => {
     try {
-      if (!pdfFile) return;
+      if (!state.pdfBlob) return;
 
-      const url = URL.createObjectURL(pdfFile);
+      const url = URL.createObjectURL(state.pdfBlob);
       window.open(url);
 
       const a = document.createElement("a");

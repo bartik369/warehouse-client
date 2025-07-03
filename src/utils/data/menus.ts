@@ -89,7 +89,7 @@ export const adminMenu = [
 export const deviceIssueSteps = [
     { id: 'select_warehouse', label: 'Выбор склада' },
     { id: 'select_user', label: 'Выбор пользователя' },
-    { id: 'review_document', label: 'Список оборудования' },
+    { id: 'select_devices', label: 'Список оборудования' },
     { id: 'sign_document', label: 'Подпись документа' },
     { id: 'send_document', label: 'Отправка документа' },
   ];

@@ -26,7 +26,7 @@ const DeviceIssueSteps = () => {
           actions={actions}
         />
       );
-    case "review_document":
+    case "select_devices":
       return (
         <ReviewDocumentStep actions={actions} />
       );

@@ -1,11 +1,12 @@
 import { Device, DeviceIssueData } from '@/types/devices';
 import { Warehouse } from '@/types/locations';
 
-export type IssueStepType = "select_warehouse" | "select_user" | "review_document" | "sign_document" | "send_document";
+export type IssueStepType = "select_warehouse" | "select_user" | "select_devices" | "sign_document" | "send_document";
 export type IssueStepTitle = "Выбор склада" | "Выбор пользователя" | "Выбор оборудования" | "Подпись документа" | "Отправка документа";
 
 export interface IssueState {
     step: IssueStepType;
+    pdfBlob: Blob | null;
     title: IssueStepTitle;
     issueId?: string | null;
     errors: Record<string, string>,
@@ -48,6 +49,7 @@ export enum IssueActionTypes {
     SET_WAS_SEARCHED = 'SET_WAS_SEARCHED',
     SET_FULL_RESET = 'SET_FULL_RESET',
     SET_ASSIGNED_DEVICES = 'SET_ASSIGNED_DEVICES',
+    SET_PDF_FILE = 'SET_PDF_FILE',
 }
  
 export type IssueAction = 
@@ -77,5 +79,6 @@ export type IssueAction =
 | { type: IssueActionTypes.RESET_DEVICE_ISSUE_DATA }
 | { type: IssueActionTypes.DELETE_DEVICE, payload: string }
 | { type: IssueActionTypes.SET_DEVICES_LOADED, payload: boolean }
+| { type: IssueActionTypes.SET_PDF_FILE, payload: Blob }
 
 

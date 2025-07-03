@@ -44,13 +44,14 @@ const DocumentWithSignatures = () => {
     const instance = pdf();
     await instance.updateContainer(doc);
     const blob = await instance.toBlob();
-    return blob;
+    const fileName = `${state.deviceIssueData?.processId}.pdf`;
+    return new File([blob], fileName, { type: 'application/pdf' });
   };
 
   const handleSend = async () => {
     try {
       const blob = await generatePDFBlob();
-      actions.handleCreateIssue(blob);
+      actions.handleCompleteProcess(blob);
     } catch (err) {
       console.error("Ошибка при отправке PDF:", err);
     }
@@ -87,15 +88,7 @@ const DocumentWithSignatures = () => {
           />
         </div>
       </div>
-
       <div className={styles.actions}>
-        {/* <BtnAction
-          size={SIZES.md}
-          color={COLORS.darkGrey}
-          click={handleDownload}
-          title={BUTTON_LABELS.download}
-          icon={<TbBookDownload />}
-        /> */}
         <BtnAction
           size={SIZES.md}
           color={COLORS.darkGreen}
