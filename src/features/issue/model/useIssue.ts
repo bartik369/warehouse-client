@@ -248,7 +248,6 @@ export const useIssue = () => {
         status: state.step,
       };
       const data = await createIssueProcess(processData).unwrap();
-      console.log(data)
     } catch (err: unknown) {
       handleApiError(err);
     }
@@ -259,7 +258,6 @@ export const useIssue = () => {
       const { processId, devices } = state.deviceIssueData;
       if (!processId || !devices.length) return;
       const data = await createIssue(state.deviceIssueData).unwrap();
-      console.log(data)
     } catch (err: unknown) {
       handleApiError(err);
     }
@@ -295,7 +293,7 @@ export const useIssue = () => {
                 handleCreateIssue();
                 break;
               default:
-                console.log('fsdfds')
+              
         
             }
   }, [state.step])
