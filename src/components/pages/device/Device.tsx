@@ -90,7 +90,7 @@ const Device = () => {
             </div>
             <article className={styles.wrapper}>
               <figure className={styles.picture}>
-                <img src={`/api/models/${itemDevice.model.imagePath}`} alt="" />
+                <img src={`/api/uploads/models/${itemDevice.model.imagePath}`} alt="" />
               </figure>
               <div className={styles.info}>
                 <TechnicalInfo device={itemDevice} />
