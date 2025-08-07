@@ -1,5 +1,6 @@
 import { RefreshTokenResponse } from './../types/user';
 import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import getCookie from '@/utils/secure/getCookie';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
 import { setCredentials, logOut, setAuth } from './slices/authSlice';
 
@@ -8,17 +9,16 @@ const API_URL = import.meta.env.VITE_API_URL
     ? 'http://localhost:5000' 
     : '/api');
 
-
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
+  prepareHeaders: (headers) => {
+    const csrfToken = getCookie('csrfToken');
+    if (csrfToken) {
+      headers.set('x-csrf-token', csrfToken);
     }
     return headers;
-  },
+  }
 });
 
 export const baseQueryWithReauth: BaseQueryFn<
@@ -36,13 +36,11 @@ export const baseQueryWithReauth: BaseQueryFn<
     ) as  {data?: RefreshTokenResponse};
   
     if (refreshResult.data) {
-      localStorage.setItem('accessToken', refreshResult.data.accessToken);
       api.dispatch(setCredentials(refreshResult.data.user));
       api.dispatch(setAuth(true));
       result = await baseQuery(args, api, extraOptions);
     } else {
-      localStorage.removeItem('accessToken');
-      api.dispatch(logOut(null));
+      api.dispatch(logOut());
     }
   }
   return result;

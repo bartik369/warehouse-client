@@ -1,4 +1,4 @@
-import AddDepartmentConfig from "../pages/ AddDepartment";
+import AddDepartmentConfig from "../pages/AddDepartment";
 import AddContractorConfig from "../pages/AddContractor";
 import AddDeviceConfig from "../pages/AddDevice";
 import AddLocationConfig from "../pages/AddLocation";

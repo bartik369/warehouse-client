@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { logOut, setCredentials } from '../slices/authSlice';
+import { logOut } from '../slices/authSlice';
 import { Signin, AuthRes, User } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -24,9 +24,7 @@ export const authApi = createApi({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
-                    localStorage.removeItem('accessToken');
-                    setCredentials(null);
-                    dispatch(logOut(null));
+                    dispatch(logOut());
                 } catch (err) {
                     console.log(err)
                 }
