@@ -44,7 +44,7 @@ export const useAuth = () => {
             const data = await signinUser(authData).unwrap();
             if (data) {
               dispatch(setCredentials(data.user));
-              localStorage.setItem('accessToken', data.accessToken);
+              localStorage.setItem('hasAccessToken', 'true');
               navigate('/');
             }
           } catch (err) {

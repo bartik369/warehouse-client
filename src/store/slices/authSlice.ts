@@ -5,6 +5,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 type AuthState = {
     user: User | null;
     isAuth: boolean;
+    isAuthChecked: boolean;
     error: string | null;
 }
 
@@ -28,6 +29,7 @@ const initialState: AuthState = {
   },
   
   isAuth: false,
+  isAuthChecked: false,
   error: null,
 };
 
@@ -37,17 +39,22 @@ const authSlice = createSlice({
     reducers: {
         setCredentials:(state, action:PayloadAction<User | null>) => {
             state.user = action.payload;
+            state.isAuth = true;
+            state.isAuthChecked = true;
         },
-        logOut:(state, action) => {
-            state.user = action.payload
+        logOut:(state) => {
+            state.user = null;
             state.isAuth = false;
+            state.isAuthChecked = true;
+            localStorage.removeItem('hasAccessToken');
         },
         setAuth: (state, action) => {
             state.isAuth = action.payload;
+            state.isAuthChecked = true;
         },
     },
 });
 
 export default authSlice.reducer;
-export const {setCredentials, setAuth,  logOut} = authSlice.actions;
+export const { setCredentials, setAuth, logOut } = authSlice.actions;
 export const currentUser = (state: RootState) => state.auth.user;

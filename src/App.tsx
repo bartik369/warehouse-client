@@ -15,23 +15,26 @@ import './App.scss';
 function App() {
   const dispatch = useAppDispatch();
   const [validToken] = useValidateMutation();
-  const token = localStorage.getItem('accessToken');
 
   useEffect(() => {
-    if (token) {
+    const hasAccessToken = localStorage.getItem('hasAccessToken');
+    if (!hasAccessToken) {
+      dispatch(setAuth(false));
+      return;
+    }
+    (async function () {
       try {
-       (async function() {
-            const data = await validToken(null).unwrap();
-            if (data) {
-              dispatch(setCredentials(data));          
-              dispatch(setAuth(true));
-            }
-          })();
+        const data = await validToken(null).unwrap();
+        if (data) {
+          localStorage.setItem('hasAccessToken', 'true')
+          dispatch(setCredentials(data));
+        }
       } catch (err) {
+        dispatch(setAuth(false));
         handleApiError(err);
       }
-    }
-  }, [token]);
+    })();
+  }, []);
   
   return (
     <Routes>

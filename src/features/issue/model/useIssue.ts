@@ -24,6 +24,7 @@ import { generateActNumber } from "@/utils/nums/generateActNumber";
 export const useIssue = () => {
   const [state, dispatch] = useReducer(issueReducer, initialIssueState);
   const { userQuery } = state;
+  const { processId, devices} = state.deviceIssueData;
   const userDebouncedQuery = useDebounce(userQuery, 700);
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
@@ -41,7 +42,6 @@ export const useIssue = () => {
   const [getDevice] = useLazyGetDeviceQuery();
   const [getWarehousesByUser] = useLazyGetWarehousesByUserQuery();
   const [searchDevices] = useLazySearchDevicesQuery();
-  const { processId, devices} = state.deviceIssueData;
 
   const handleGetDevice = useCallback(async() => {
     try {
