@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 500px;
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}

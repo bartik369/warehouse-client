@@ -15,5 +15,7 @@ export const MESSAGES = {
     wrongPhoneFormat:'Неправильный формат телефона',
     wrongFormat:'Неправильный формат',
     selectPic: 'Выберите картинку!',
+    errorFixing: 'Что-то пошло не так и мы уже это исправляем!',
+
 
 }
