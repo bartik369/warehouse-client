@@ -3,10 +3,12 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Sidebar from '../components/sidebar/Sidebar';
+import { ErrorBoundary } from 'react-error-boundary';
 import AdminMenu from '../components/navigates/admin/AdminMenu';
-import styles from './Layout.module.scss';
 import { GlobalModal } from '../components/modal/GlobalModal';
+import LocalFallback from '@/components/ui/error/LocalFallback';
 import Breadcrumbs from '../components/breadcrumbs/Breadcrumbs';
+import styles from './Layout.module.scss';
 
 const Layout = () => {
   const [isActive, setIsActive] = useState(false);
@@ -21,7 +23,9 @@ const Layout = () => {
         <main className={styles.outlet}>
           {location.pathname.startsWith("/admin") && <AdminMenu />}
           <div className={styles.content}>
-            <Outlet />
+            <ErrorBoundary FallbackComponent={LocalFallback}>
+              <Outlet />
+            </ErrorBoundary>
           </div>
         </main>
         <Footer />
