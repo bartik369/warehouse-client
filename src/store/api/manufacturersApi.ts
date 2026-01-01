@@ -1,11 +1,11 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { Entity } from "@/types/devices";
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { Entity } from '@/types/devices';
 
 export const manufacturersApi = createApi({
-  reducerPath: "manufacturersApi",
+  reducerPath: 'manufacturersApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Manufacturer"],
+  tagTypes: ['Manufacturer'],
   endpoints: (build) => ({
     getManufacturer: build.query({
       query: (id: string) => ({
@@ -23,25 +23,22 @@ export const manufacturersApi = createApi({
         result
           ? [
               ...result.map(({ id }) => ({
-                type: "Manufacturer" as const,
+                type: 'Manufacturer' as const,
                 id,
               })),
-              { type: "Manufacturer", id: "LIST" },
+              { type: 'Manufacturer', id: 'LIST' },
             ]
-          : [{ type: "Manufacturer", id: "LIST" }],
+          : [{ type: 'Manufacturer', id: 'LIST' }],
     }),
-    createManufacturer: build.mutation<
-      { message: string; manufacturer: Entity },
-      Entity
-    >({
+    createManufacturer: build.mutation<{ message: string; manufacturer: Entity }, Entity>({
       query(body) {
         return {
           url: `${import.meta.env.VITE_MANUFACTURERS}`,
-          method: "POST",
+          method: 'POST',
           body,
         };
       },
-      invalidatesTags: ["Manufacturer"],
+      invalidatesTags: ['Manufacturer'],
     }),
     updateManufacturer: build.mutation<
       { message: string; manufacturer: Entity },
@@ -49,19 +46,17 @@ export const manufacturersApi = createApi({
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Manufacturer"],
+      invalidatesTags: ['Manufacturer'],
     }),
   }),
 });
 
-
 export const {
-    useGetManufacturersQuery,
-    useCreateManufacturerMutation,
-    useUpdateManufacturerMutation,
-     useLazyGetManufacturerQuery,
+  useGetManufacturersQuery,
+  useCreateManufacturerMutation,
+  useUpdateManufacturerMutation,
+  useLazyGetManufacturerQuery,
 } = manufacturersApi;
-

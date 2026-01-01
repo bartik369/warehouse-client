@@ -1,9 +1,10 @@
-import { Device, DeviceMedia } from '@/types/devices';
+import { Device, DeviceMedia, FilteredDevicesFromBack } from '@/types/devices';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type DeviceAction = {
   device: Device;
   devices: Device[];
+  selectedDevices: FilteredDevicesFromBack[];
   errors: Partial<Record<keyof Device, string>>;
   title: string;
   fieldType: string;
@@ -52,6 +53,7 @@ const initialState: DeviceAction = {
     contractorId: '',
   },
   devices: [],
+  selectedDevices: [],
   errors: {},
   title: '',
   fieldType: '',
@@ -104,6 +106,9 @@ const deviceSlice = createSlice({
     },
     patchDevice: (state, action: PayloadAction<Partial<Device>>) => {
       state.device = {...state.device, ...action.payload }
+    },
+    setSelectedDevices: (state, action: PayloadAction<FilteredDevicesFromBack[]>) => {
+      state.selectedDevices = action.payload;
     },
     resetDevice: (state) => {
       state.device = {...initialState.device};
@@ -165,4 +170,5 @@ export const {
   setChecked,
   setStatus, 
   resetStatus,
+  setSelectedDevices,
  } = deviceSlice.actions;

@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.next
+out
+*.log
+*.svg
+*.png
+*.jpg
+.DS_Store
+package-lock.json
+yarn.lock

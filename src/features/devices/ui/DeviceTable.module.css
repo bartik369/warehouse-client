@@ -1,0 +1,59 @@
+.evenRow {
+  background-color: #fdfdfd;
+}
+
+.oddRow {
+  background-color: #ffffff;
+}
+
+.customPagination :global(.ant-pagination) {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.customPagination :global(.ant-pagination-item),
+.customPagination :global(.ant-pagination-prev),
+.customPagination :global(.ant-pagination-next) {
+  border-radius: 4px;
+  margin: 0 4px !important;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.customPagination :global(.ant-pagination-prev),
+.customPagination :global(.ant-pagination-next) {
+  min-width: 32px;
+  height: 32px;
+}
+
+.customPagination :global(.ant-pagination-prev button),
+.customPagination :global(.ant-pagination-next button),
+.customPagination :global(.ant-pagination-prev a),
+.customPagination :global(.ant-pagination-next a) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #000;
+}
+
+.customPagination :global(.ant-pagination-prev:hover),
+.customPagination :global(.ant-pagination-next:hover) {
+  background-color: #f0f8ff;
+  border-color: #d5dde5;
+}
+
+.customPagination :global(.ant-pagination-disabled button) {
+  color: #ccc !important;
+  cursor: not-allowed;
+}
+
+.customPagination :global(.ant-pagination-item-active) {
+  background-color: rgb(53, 194, 153);
+  border: 1px solid rgb(50, 186, 148);
+}
+
+.customPagination :global(.ant-pagination-item-active a) {
+  color: white !important;
+}
