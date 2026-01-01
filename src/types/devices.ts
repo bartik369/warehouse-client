@@ -1,6 +1,6 @@
-import { IssueStepType } from "../features/issue/model/issueTypes";
-import { Contractor } from "./content";
-import { Warehouse } from "./locations";
+import { IssueStepType } from '../features/issue/model/issueTypes';
+import { Contractor } from './content';
+import { Warehouse } from './locations';
 
 export interface Device {
   id: string;
@@ -146,7 +146,7 @@ export interface Manufacturer {
   icon?: React.ReactElement;
 }
 
-export type FieldType = "text" | "number";
+export type FieldType = 'text' | 'number';
 
 export interface Field {
   name: string;
@@ -216,6 +216,12 @@ export interface FilteredDevicesFromBack {
   };
 }
 
+export interface DevicesResponse {
+  devices: FilteredDevicesFromBack;
+  totalPages: number;
+  totalCount: number;
+}
+
 export interface FilterDeviceOptions {
   isAssigned: {
     isAssigned: boolean;
@@ -259,29 +265,27 @@ export interface DeviceFilters {
 }
 
 type FilterLabelsKeys =
-  | "manufacturer"
-  | "type"
-  | "model"
-  | "warehouse"
-  | "screenSize"
-  | "memorySize"
-  | "isFunctional"
-  | "isAssigned";
+  | 'manufacturer'
+  | 'type'
+  | 'model'
+  | 'warehouse'
+  | 'screenSize'
+  | 'memorySize'
+  | 'isFunctional'
+  | 'isAssigned';
 
-
-
-type DeviceLabelKeys = 
-| "name"
-| "typeName"
-| "modelName"
-| "manufacturerName"
-| "inventoryNumber"
-| "serialNumber"
+type DeviceLabelKeys =
+  | 'name'
+  | 'typeName'
+  | 'modelName'
+  | 'manufacturerName'
+  | 'inventoryNumber'
+  | 'serialNumber';
 
 export type DeviceLabel = {
-  key: DeviceLabelKeys,
+  key: DeviceLabelKeys;
   label: string;
-}
+};
 
 export type FilterLabel = {
   key: FilterLabelsKeys;
@@ -296,33 +300,32 @@ export interface DeviceInfo {
     slug: string;
   };
 }
-export type QueryParams = Record<string, string | number | boolean>
+export type QueryParams = Record<string, string | number | boolean>;
 
 export interface DeviceFormState {
   itemType: string;
   isUpdate: boolean;
   device: Device;
-  modelFields?: Record<string, string>,
+  modelFields?: Record<string, string>;
   checked: boolean;
   errors: Record<string, string>;
 }
 
-
 export interface DeviceFormActions {
-  handleTypeChange:(item: Entity) => void
-  handleModelChange:(item: Entity) => void
-  handleManufacturerChange:(item: Entity) => void
-  handleWarehouseChange:(item: Entity) => void
-  handleContractorChange:(item: Contractor) => void
-  handleInputChange: (name: keyof Device, e:string) => void
+  handleTypeChange: (item: Entity) => void;
+  handleModelChange: (item: Entity) => void;
+  handleManufacturerChange: (item: Entity) => void;
+  handleWarehouseChange: (item: Entity) => void;
+  handleContractorChange: (item: Contractor) => void;
+  handleInputChange: (name: keyof Device, e: string) => void;
   handleNumber: (num: number) => void;
   handleExtNumber: (num: number, fieldName: string) => void;
   handleChecked: () => void;
   handleAddDevice: () => void;
   handleResetDevice: () => void;
   resetModelData: () => void;
-  handleStartDateChange: (item:Date | null) => void;
-  handleEndDateChange: (item:Date | null) => void;
+  handleStartDateChange: (item: Date | null) => void;
+  handleEndDateChange: (item: Date | null) => void;
   handleSetTitle: (item: string) => void;
   handleSetType: (item: string) => void;
 }
@@ -338,26 +341,23 @@ export interface WarrantyFormActions {
 }
 
 export interface DeviceIssueData {
-  processId: string,
-  devices: string[],
+  processId: string;
+  devices: string[];
 }
 
 export interface BaseDeviceQuery {
-    handleCompleteProcess: (file: Blob) => void;
-    handleUserChange: (value: string) => void;
-    handleFullReset: () => void;
-    handleResetDeviceQuery: () => void;
-    handleSetUser: (id: string) => Promise<void>;
-    handleStartDeviceIssueWith: (id: string) => void;
-    handleGetDevice: () => void;
-    handleDeviceChange: (value: string) => void;
-    handleSetDevice: (item: Device) => void;
-    handleSetWarehouse: (item: Warehouse) => void;
-    handleGetWarehousesByUser: (id: string) => void;
-    handleNextStep: () => void;
-    handleDeleteDevice: (id: string) => void;
-    handleResetIssueDevices: () => void;
+  handleCompleteProcess: (file: Blob) => void;
+  handleUserChange: (value: string) => void;
+  handleFullReset: () => void;
+  handleResetDeviceQuery: () => void;
+  handleSetUser: (id: string) => Promise<void>;
+  handleStartDeviceIssueWith: (id: string) => void;
+  handleGetDevice: () => void;
+  handleDeviceChange: (value: string) => void;
+  handleSetDevice: (item: Device) => void;
+  handleSetWarehouse: (item: Warehouse) => void;
+  handleGetWarehousesByUser: (id: string) => void;
+  handleNextStep: () => void;
+  handleDeleteDevice: (id: string) => void;
+  handleResetIssueDevices: () => void;
 }
-
-
-

@@ -1,17 +1,17 @@
-import { useEffect, useMemo} from "react";
-import Select from "@/components/ui/select/Select";
-import Textarea from "@/components/ui/textarea/Textarea";
-import Checkbox from "@/components/ui/checkbox/Checkbox";
-import Actions from "../device/Actions";
-import { useGetLocationsQuery } from "@/store/api/locationApi";
-import { useLazyGetAssignableWarehousesQuery } from "@/store/api/warehousesApi";
-import { AccessFormActions, PermissionRole, Role } from "@/types/access";
-import { useGetPermissionsQuery } from "@/store/api/permissionApi";
-import { useGetAssignableRolesQuery } from "@/store/api/rolesApi";
-import { PermissionState } from "@/reducers/permission/permissionTypes";
-import { Entity } from "@/types/devices";
-import { LABELS } from "@/utils/constants/ui/labels";
-import { getRoleType, RoleType  } from "@/utils/roles/roles";
+import { useEffect, useMemo } from 'react';
+import Select from '@/components/ui/select/Select';
+import Textarea from '@/components/ui/textarea/Textarea';
+import Checkbox from '@/components/ui/checkbox/Checkbox';
+import Actions from '../device/Actions';
+import { useGetLocationsQuery } from '@/store/api/locationApi';
+import { useLazyGetAssignableWarehousesQuery } from '@/store/api/warehousesApi';
+import { AccessFormActions, PermissionRole, Role } from '@/types/access';
+import { useGetPermissionsQuery } from '@/store/api/permissionApi';
+import { useGetAssignableRolesQuery } from '@/store/api/rolesApi';
+import { PermissionState } from '@/reducers/permission/permissionTypes';
+import { Entity } from '@/types/devices';
+import { LABELS } from '@/utils/constants/ui/labels';
+import { getRoleType, RoleType } from '@/utils/roles/roles';
 import styles from './AccessForm.module.scss';
 
 interface AccessFormProps {
@@ -21,10 +21,10 @@ interface AccessFormProps {
   isUpdate: boolean;
   actions: AccessFormActions;
 }
-const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProps) => {
+const AccessForm = ({ title, state, entity, isUpdate, actions }: AccessFormProps) => {
   const { data: assignableRoles } = useGetAssignableRolesQuery();
   const { data: permissions } = useGetPermissionsQuery();
-  const [ getWarehouses, { data: warehouses } ] = useLazyGetAssignableWarehousesQuery();
+  const [getWarehouses, { data: warehouses }] = useLazyGetAssignableWarehousesQuery();
   const { data: locations } = useGetLocationsQuery();
 
   const roleType = useMemo(() => getRoleType(entity.roleName), [entity.roleName]);
@@ -33,7 +33,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
   useEffect(() => {
     if (entity.locationId && !isManager) {
       getWarehouses(entity.locationId);
-    };
+    }
   }, [entity.locationId]);
 
   return (
@@ -41,9 +41,9 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
       <div className={styles.title}>{title}</div>
       <Select<Role>
         name="roleName"
-        items={(assignableRoles || []) as Role[] }
+        items={(assignableRoles || []) as Role[]}
         label={LABELS.role}
-        value={state.entity.roleName || ""}
+        value={state.entity.roleName || ''}
         errors={state.errors}
         setValue={actions.handleRoleChange}
         getId={(item: Role) => item.id}
@@ -64,7 +64,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
         setValue={(val) => actions.handleLocationChange?.(val)}
         items={locations || []}
         label={LABELS.location}
-        value={state.entity.locationName || ""}
+        value={state.entity.locationName || ''}
         errors={state.errors}
         name="locationName"
         getId={(item: Entity) => item.id}
@@ -75,7 +75,7 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
           setValue={(val) => actions.handleWarehouseChange?.(val)}
           items={warehouses || []}
           label={LABELS.warehouse}
-          value={state.entity.warehouseName || ""}
+          value={state.entity.warehouseName || ''}
           errors={state.errors}
           name="warehouseName"
           getId={(item: Entity) => item.id}
@@ -83,8 +83,8 @@ const AccessForm = ({ title, state, entity, isUpdate,  actions }: AccessFormProp
         />
       )}
       <Textarea
-        onChange={(e) => actions.handleInputChange("comment", e.target.value)}
-        value={state.entity.comment || ""}
+        onChange={(e) => actions.handleInputChange('comment', e.target.value)}
+        value={state.entity.comment || ''}
         label={LABELS.description}
         name="comment"
         errors={state.errors}

@@ -1,0 +1,51 @@
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.iconWrapper svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.serviceable,
+.notServiceable,
+.inStock,
+.inUse {
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-size: 12px;
+    margin-left: 1px;
+  }
+}
+
+.serviceable {
+  color: #39b49e;
+}
+
+.notServiceable {
+  color: #71809d;
+}
+
+.inStock {
+  color: #39b49e;
+}
+
+.inUse {
+  color: #71809d;
+}
+
+.infoButton :global(.anticon) {
+  font-size: 17px !important;
+  color: #667592 !important;
+  transition: color 0.5s ease-in;
+  &:hover {
+    color: #39b49e !important;
+  }
+}
