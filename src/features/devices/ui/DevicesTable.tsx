@@ -77,7 +77,7 @@ const DevicesTable = ({
 
   const calculateTableWidth = () => {
     const totalWidth = columns.reduce((sum, col) => {
-      return sum + (col.width || 100);
+      return sum + (Number(col.width) || 100);
     }, 0);
     return totalWidth;
   };
