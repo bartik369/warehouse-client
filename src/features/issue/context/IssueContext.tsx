@@ -1,19 +1,14 @@
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  ReactNode,
-  useEffect,
-} from "react";
-import { IssueAction, IssueState } from "../model/issueTypes";
-import { useIssue } from "../model/useIssue";
-import { Device } from "@/types/devices";
-import { Warehouse } from "@/types/locations";
+import { Device } from '@/types/devices';
+import { Warehouse } from '@/types/locations';
+import { createContext, Dispatch, ReactNode, useContext, useEffect } from 'react';
+import { IssueAction, IssueState } from '../model/issueTypes';
+import { useIssue } from '../model/useIssue';
 
 type IssueContextType = {
   state: IssueState;
   dispatch: Dispatch<IssueAction>;
   actions: {
+    handleSetStep: (step: number) => void;
     handleCompleteProcess: (file: Blob) => void;
     handleUserChange: (value: string) => void;
     handleFullReset: () => void;
@@ -54,14 +49,12 @@ export const IssueProvider = ({
     }
   }, [initialDeviceId]);
 
-  return (
-    <IssueContext.Provider value={value}>{children}</IssueContext.Provider>
-  );
+  return <IssueContext.Provider value={value}>{children}</IssueContext.Provider>;
 };
 export const useIssueContext = () => {
   const context = useContext(IssueContext);
   if (!context) {
-    throw new Error("error");
+    throw new Error('error');
   }
   return context;
 };

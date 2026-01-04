@@ -1,29 +1,27 @@
-import UsersList from '../user/UsersList';
-import UserInfo from '../user/UserInfo';
-import BtnAction from '@/components/ui/buttons/BtnAction';
+import { BsCheck } from 'react-icons/bs';
+import { GrFormClose } from 'react-icons/gr';
+
 import Search from '@/components/deviceIssue/search/Search';
+import BtnAction from '@/components/ui/buttons/BtnAction';
 import NoData from '@/components/ui/no-data/NoData';
 import { useIssueContext } from '@/features/issue/context/IssueContext';
-import { BaseUserQuery } from '@/types/user';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
+import { BaseUserQuery } from '@/types/user';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
-import { BsCheck } from 'react-icons/bs';
-import { GrFormClose } from 'react-icons/gr';
+
+import UserInfo from '../user/UserInfo';
+import UsersList from '../user/UsersList';
 import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
   isSuccess: boolean;
   isFetching: boolean;
-  actions: BaseUserQuery; 
+  actions: BaseUserQuery;
 }
-const SelectUserStep = ({
-  isSuccess,
-  isFetching,
-  actions,
-}: SelectUserStepProps) => {
+const SelectUserStep = ({ isSuccess, isFetching, actions }: SelectUserStepProps) => {
   const { state } = useIssueContext();
   const user = useAppSelector((state: RootState) => state.user.user);
 
@@ -31,15 +29,15 @@ const SelectUserStep = ({
     <div className={styles.inner}>
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <Search
-          placeholder={PLACEHOLDER_LABELS.userSearch} 
+          placeholder={PLACEHOLDER_LABELS.userSearch}
           actions={{
             handleChange: actions.handleUserChange,
-            handleReset: actions.handleResetUserQuery
+            handleReset: actions.handleResetUserQuery,
           }}
           value={state.userQuery}
-          name='email'
+          name="email"
         />
-        {(state.isUsersListVisible && isSuccess && state.wasSearched) && (
+        {state.isUsersListVisible && isSuccess && state.wasSearched && (
           <div className={styles.result}>
             <UsersList
               isSuccess={isSuccess}
@@ -48,10 +46,9 @@ const SelectUserStep = ({
               actions={actions}
             />
           </div>
-      )}
+        )}
       </form>
-      {user?.id
-       ? (
+      {user?.id ? (
         <>
           <UserInfo />
           <div className={styles.actions}>
@@ -71,9 +68,9 @@ const SelectUserStep = ({
             />
           </div>
         </>
-      )
-      : <NoData />
-    }
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

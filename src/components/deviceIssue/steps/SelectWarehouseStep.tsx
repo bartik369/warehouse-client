@@ -1,14 +1,17 @@
-import { useEffect } from "react";
-import Select from "../select/Select";
-import BtnAction from "@/components/ui/buttons/BtnAction";
-import { useIssueContext } from "@/features/issue/context/IssueContext";
-import { useAppSelector } from "@/hooks/redux/useRedux";
-import { BaseDeviceQuery } from "@/types/devices";
-import { RootState } from "@/store/store";
-import { COLORS } from "@/utils/constants/ui/colors";
-import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
-import { BsCheck } from "react-icons/bs";
-import styles from "./Steps.module.scss";
+import { useEffect } from 'react';
+
+import { BsCheck } from 'react-icons/bs';
+
+import BtnAction from '@/components/ui/buttons/BtnAction';
+import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { RootState } from '@/store/store';
+import { BaseDeviceQuery } from '@/types/devices';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { COLORS } from '@/utils/constants/ui/colors';
+
+import Select from '../select/Select';
+import styles from './Steps.module.scss';
 
 interface SelectWarehouseStepProps {
   actions: BaseDeviceQuery;
@@ -16,9 +19,7 @@ interface SelectWarehouseStepProps {
 
 const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
   const { state } = useIssueContext();
-  const currentUserId = useAppSelector(
-    (state: RootState) => state.auth.user?.id
-  );
+  const currentUserId = useAppSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
     if (currentUserId) {
