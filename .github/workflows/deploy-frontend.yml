@@ -7,31 +7,48 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Нужно для Yarn 4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Обновили до 20
+          cache: 'yarn' # Добавили кэширование Yarn
+
+      - name: Enable Corepack (Yarn 4)
+        run: corepack enable
 
       - name: Create .env.production file for Vite build
         run: echo "${{ secrets.ENV_PROD }}" > .env.production
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable # Добавили --immutable для Yarn 4
 
       - name: Build frontend
-        run: yarn run build -- --mode production
+        run: yarn run build --mode production # Убрали лишние --
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ secrets.GHCR_USERNAME }}
-          password: ${{ secrets.GHCR_PAT }}
+          username: ${{ github.actor }} # Используем github.actor
+          password: ${{ secrets.GITHUB_TOKEN }} # Используем GITHUB_TOKEN
 
       - name: Build and push Docker image
         run: |
-          docker build -t ghcr.io/bartik369/frontend:latest .
+          # Добавляем аргумент для сборки
+          docker build \
+            --build-arg VITE_API_URL=${{ vars.VITE_API_URL || 'http://localhost:3000' }} \
+            -t ghcr.io/bartik369/frontend:latest \
+            -t ghcr.io/bartik369/frontend:${{ github.sha }} \
+            .
           docker push ghcr.io/bartik369/frontend:latest
+          docker push ghcr.io/bartik369/frontend:${{ github.sha }}
 
       - name: Залить .env на сервер
         uses: appleboy/ssh-action@v1
@@ -41,9 +58,10 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
           script: |
-           cat <<EOF > /srv/apps/frontend/.env
-           ${{ secrets.ENV_PROD }}
-           EOF
+            mkdir -p /srv/apps/frontend
+            cat <<EOF > /srv/apps/frontend/.env
+            ${{ secrets.ENV_PROD }}
+            EOF
 
       - name: Deploy on remote server.
         uses: appleboy/ssh-action@v1
@@ -53,10 +71,14 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
           script: |
-            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
             docker pull ghcr.io/${{ github.repository_owner }}/frontend:latest
             docker stop frontend || true
             docker rm frontend || true
-            docker run -d --name frontend -p 3000:3000 --restart unless-stopped \
+            # Исправляем порт: 3000:80 (т.к. nginx слушает 80)
+            docker run -d --name frontend -p 3000:80 --restart unless-stopped \
               --env-file /srv/apps/frontend/.env \
               ghcr.io/${{ github.repository_owner }}/frontend:latest
+
+            # Очищаем старые образы
+            docker image prune -af
