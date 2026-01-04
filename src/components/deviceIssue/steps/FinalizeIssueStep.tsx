@@ -1,14 +1,16 @@
-import BtnAction from "@/components/ui/buttons/BtnAction";
-import { useAppSelector } from "@/hooks/redux/useRedux";
-import { useIssueContext } from "@/features/issue/context/IssueContext";
-import { partnerUser } from "@/store/slices/userSlice";
-import { SIZES } from "@/utils/constants/ui/sizes";
-import { COLORS } from "@/utils/constants/ui/colors";
-import { MESSAGES } from "@/utils/constants/ui/messages";
-import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
-import { TbBookDownload } from "react-icons/tb";
-import { IoCheckboxOutline } from "react-icons/io5";
-import styles from "./Steps.module.scss";
+import { IoCheckboxOutline } from 'react-icons/io5';
+import { TbBookDownload } from 'react-icons/tb';
+
+import BtnAction from '@/components/ui/buttons/BtnAction';
+import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { partnerUser } from '@/store/slices/userSlice';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { COLORS } from '@/utils/constants/ui/colors';
+import { MESSAGES } from '@/utils/constants/ui/messages';
+import { SIZES } from '@/utils/constants/ui/sizes';
+
+import styles from './Steps.module.scss';
 
 const FinalizeIssueStep = () => {
   const { state } = useIssueContext();
@@ -21,7 +23,7 @@ const FinalizeIssueStep = () => {
       const url = URL.createObjectURL(state.pdfBlob);
       window.open(url);
 
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = url;
       a.download = `${state.deviceIssueData?.processId}.pdf`;
       a.click();

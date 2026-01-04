@@ -1,87 +1,85 @@
 import {
-  IssueState,
   IssueAction,
-  IssueStepType,
   IssueActionTypes,
+  IssueState,
   IssueStepTitle,
-} from "./issueTypes";
+  IssueStepType,
+} from './issueTypes';
 
 export const steps: IssueStepType[] = [
-  "select_warehouse",
-  "select_user",
-  "select_devices",
-  "sign_document",
-  "send_document",
+  'select_warehouse',
+  'select_user',
+  'select_devices',
+  'sign_document',
+  'send_document',
 ];
 const titles: IssueStepTitle[] = [
-  "Выбор склада",
-  "Выбор пользователя",
-  "Выбор оборудования",
-  "Подпись документа",
-  "Отправка документа",
-]
+  'Выбор склада',
+  'Выбор пользователя',
+  'Выбор оборудования',
+  'Подпись документа',
+  'Отправка документа',
+];
 export const initialIssueState: IssueState = {
-  step: "select_warehouse",
+  step: 0,
   pdfBlob: null,
   title: 'Выбор склада',
   issueId: null,
   errors: {},
-  userQuery: "",
-  deviceQuery: "",
+  userQuery: '',
+  deviceQuery: '',
   isUsersListVisible: false,
   isDevicesListVisible: false,
   devicesLoaded: false,
   wasSearched: false,
   warehouse: {
-    id: "",
-    name: "",
-    slug: "",
+    id: '',
+    name: '',
+    slug: '',
   },
   warehouses: [],
   deviceIssueData: {
-    processId: "",
+    processId: '',
     devices: [],
   },
   assignedDevices: [],
 };
 
-export function issueReducer(
-  state: IssueState,
-  action: IssueAction
-): IssueState {
+export function issueReducer(state: IssueState, action: IssueAction): IssueState {
   switch (action.type) {
     case IssueActionTypes.NEXT_STEP: {
-      const currentStep = steps.indexOf(state.step);
-      const nextStep = steps[currentStep + 1] ?? currentStep;
+      const currentStep = state.step;
+      const nextStep = currentStep + 1 || currentStep;
       const currentTitle = titles.indexOf(state.title);
       const nextTitle = titles[currentTitle + 1] ?? currentTitle;
       return {
-         ...state, 
-        step: nextStep,
+        ...state,
+        step: currentStep + 1,
         title: nextTitle,
-       };
+      };
     }
     case IssueActionTypes.PREV_STEP: {
-      const currentStep = steps.indexOf(state.step);
-      const prevStep = steps[currentStep - 1] ?? currentStep;
+      const currentStep = state.step;
+      const prevStep = currentStep - 1 || currentStep;
       const currentTitle = titles.indexOf(state.title);
       const prevTitle = titles[currentTitle - 1] ?? currentTitle;
-      return { 
-        ...state, 
-        step: prevStep,
+      return {
+        ...state,
+        step: currentStep - 1,
         title: prevTitle,
-       };
+      };
     }
     case IssueActionTypes.SET_STEP:
       return {
         ...state,
-        step: action.payload
-      }
-      case IssueActionTypes.RESET_STEP:
-        return {
-          ...state,
-          step: "select_warehouse"
-        }
+        step: action.payload,
+        title: titles[action.payload],
+      };
+    case IssueActionTypes.RESET_STEP:
+      return {
+        ...state,
+        step: 0,
+      };
     case IssueActionTypes.SET_ISSUE_ID:
       return {
         ...state,
@@ -96,9 +94,7 @@ export function issueReducer(
       //   manufacturerName: model.manufacturer.name,
       // }
       const existingIds = new Set(state.assignedDevices.map((item) => item.id));
-      const newDevices = action.payload.filter(
-        (item) => !existingIds.has(item.id)
-      );
+      const newDevices = action.payload.filter((item) => !existingIds.has(item.id));
       return {
         ...state,
         assignedDevices: [...state.assignedDevices, ...newDevices],
@@ -108,7 +104,7 @@ export function issueReducer(
     case IssueActionTypes.RESET: {
       return {
         ...state,
-        step: steps[0],
+        step: 0,
         issueId: null,
       };
     }
@@ -125,13 +121,13 @@ export function issueReducer(
     case IssueActionTypes.SET_USER_QUERY:
       return { ...state, userQuery: action.payload };
     case IssueActionTypes.RESET_USER_QUERY:
-      return { ...state, userQuery: "" };
+      return { ...state, userQuery: '' };
     case IssueActionTypes.SET_DEVICE_QUERY:
       return { ...state, deviceQuery: action.payload };
     case IssueActionTypes.SET_DEVICES_LOADED:
       return { ...state, devicesLoaded: action.payload };
     case IssueActionTypes.RESET_DEVICE_QUERY:
-      return { ...state, deviceQuery: "" };
+      return { ...state, deviceQuery: '' };
     case IssueActionTypes.SET_USERS_LIST_VISIBLE:
       return { ...state, isUsersListVisible: action.payload };
     case IssueActionTypes.SET_DEVICES_LIST_VISIBLE:
@@ -141,11 +137,11 @@ export function issueReducer(
     case IssueActionTypes.SET_FULL_RESET:
       return {
         ...state,
-        step: steps[0],
+        step: 0,
         issueId: null,
         errors: {},
-        userQuery: "",
-        deviceQuery: "",
+        userQuery: '',
+        deviceQuery: '',
         isUsersListVisible: false,
         wasSearched: false,
       };
@@ -167,17 +163,17 @@ export function issueReducer(
         deviceIssueData: {
           ...state.deviceIssueData,
           processId: action.payload,
-        }
-      }
+        },
+      };
     case IssueActionTypes.DELETE_DEVICE:
       return {
         ...state,
         deviceIssueData: {
           ...state.deviceIssueData,
-          devices: state.deviceIssueData.devices.filter((item) => item !== action.payload)
+          devices: state.deviceIssueData.devices.filter((item) => item !== action.payload),
         },
-        assignedDevices: state.assignedDevices.filter((item) => item.id !== action.payload)
-      }
+        assignedDevices: state.assignedDevices.filter((item) => item.id !== action.payload),
+      };
     case IssueActionTypes.SET_WAREHOUSE:
       return { ...state, warehouse: action.payload };
     case IssueActionTypes.RESET_WAREHOUSE:
@@ -191,12 +187,12 @@ export function issueReducer(
       return { ...state, warehouses: [] };
     case IssueActionTypes.RESET_DEVICE_ISSUE_DATA:
       return {
-        ...state, 
-        deviceIssueData: {...initialIssueState.deviceIssueData },
+        ...state,
+        deviceIssueData: { ...initialIssueState.deviceIssueData },
         assignedDevices: [],
-      }
+      };
     case IssueActionTypes.SET_PDF_FILE:
-      return { ...state, pdfBlob: action.payload }
+      return { ...state, pdfBlob: action.payload };
     default:
       return state;
   }
