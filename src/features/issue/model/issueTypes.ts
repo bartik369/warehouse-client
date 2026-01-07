@@ -1,4 +1,5 @@
 import { Device, DeviceIssueData } from '@/types/devices';
+import { AssignedDevice } from '@/types/issue';
 import { Warehouse } from '@/types/locations';
 
 export type IssueStepType =
@@ -15,10 +16,10 @@ export type IssueStepTitle =
   | 'Отправка документа';
 
 export interface IssueState {
-  step: number;
+  assignedDevices: AssignedDevice[];
+  issueStep: number;
   pdfBlob: Blob | null;
-  title: IssueStepTitle;
-  issueId?: string | null;
+  issueId: string | null;
   errors: Record<string, string>;
   userQuery: string;
   deviceQuery: string;
@@ -29,7 +30,6 @@ export interface IssueState {
   warehouse: Warehouse;
   warehouses: Warehouse[];
   deviceIssueData: DeviceIssueData;
-  assignedDevices: Device[];
 }
 
 export enum IssueActionTypes {
@@ -65,7 +65,8 @@ export enum IssueActionTypes {
 export type IssueAction =
   | { type: IssueActionTypes.SET_DEVICE_ID; payload: string }
   | { type: IssueActionTypes.SET_PROCESS_ID; payload: string }
-  | { type: IssueActionTypes.SET_ASSIGNED_DEVICES; payload: Device[] }
+  // | { type: IssueActionTypes.SET_ASSIGNED_DEVICES; payload: Device[] }
+  | { type: IssueActionTypes.SET_ASSIGNED_DEVICES; payload: AssignedDevice[] }
   | { type: IssueActionTypes.SET_WAREHOUSE; payload: Warehouse }
   | { type: IssueActionTypes.RESET_WAREHOUSE }
   | { type: IssueActionTypes.SET_WAREHOUSES; payload: Warehouse[] }

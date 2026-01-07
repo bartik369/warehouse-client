@@ -1,10 +1,13 @@
-import { Device, DeviceMedia, FilteredDevicesFromBack } from '@/types/devices';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { Device, DeviceMedia } from '@/types/devices';
+import { AssignedDevice } from '@/types/issue';
 
 type DeviceAction = {
   device: Device;
   devices: Device[];
-  selectedDevices: FilteredDevicesFromBack[];
+  // selectedDevices: FilteredDevicesFromBack[];
+  selectedDevices: AssignedDevice[];
   errors: Partial<Record<keyof Device, string>>;
   title: string;
   fieldType: string;
@@ -74,8 +77,8 @@ const deviceSlice = createSlice({
     setError: (state, action: PayloadAction<Record<string, string>>) => {
       state.errors = {
         ...state.errors,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     },
     resetError: (state) => {
       state.errors = {};
@@ -92,47 +95,43 @@ const deviceSlice = createSlice({
     setItemType: (state, action: PayloadAction<string>) => {
       state.itemType = action.payload;
     },
-    setDevice: (
-      state,
-      action: PayloadAction<{ device: Device}>
-    ) => {
+    setDevice: (state, action: PayloadAction<{ device: Device }>) => {
       state.device = action.payload.device;
     },
-    updateDevice:<K extends keyof Device>(
+    updateDevice: <K extends keyof Device>(
       state: DeviceAction,
       action: PayloadAction<{ field: K; value: Device[K] }>
     ) => {
       state.device[action.payload.field] = action.payload.value;
     },
     patchDevice: (state, action: PayloadAction<Partial<Device>>) => {
-      state.device = {...state.device, ...action.payload }
+      state.device = { ...state.device, ...action.payload };
     },
-    setSelectedDevices: (state, action: PayloadAction<FilteredDevicesFromBack[]>) => {
+    setSelectedDevices: (state, action: PayloadAction<AssignedDevice[]>) => {
+      console.log('selected from list', action.payload);
       state.selectedDevices = action.payload;
     },
     resetDevice: (state) => {
-      state.device = {...initialState.device};
+      state.device = { ...initialState.device };
     },
-    setDevices:(state, action: PayloadAction<Device[]>) => {
+    setDevices: (state, action: PayloadAction<Device[]>) => {
       state.devices = action.payload;
       // const existingIds = new Set(state.devices.map(item => item.id));
       // const newDevices = action.payload.filter(item => !existingIds.has(item.id));
       // state.devices = [...state.devices, ...newDevices];
     },
-    resetDevices:(state) => {
+    resetDevices: (state) => {
       state.devices = [];
     },
     setDevicePic: (state, action: PayloadAction<string>) => {
       if (state?.media) state.media.prevImg = action.payload;
     },
     resetDevicePic: (state) => {
-      state.media.prevImg = ''; 
+      state.media.prevImg = '';
     },
     setDeviceFile: (state, action: PayloadAction<File | null>) => {
       if (state?.media)
-        state.media.file = action.payload
-          ? new File([action.payload], action.payload.name)
-          : null;
+        state.media.file = action.payload ? new File([action.payload], action.payload.name) : null;
     },
     resetDeviceFile: (state) => {
       state.media.file = null;
@@ -150,7 +149,7 @@ const deviceSlice = createSlice({
 });
 
 export default deviceSlice.reducer;
-export const { 
+export const {
   setError,
   resetError,
   setDevice,
@@ -168,7 +167,7 @@ export const {
   setDeviceFile,
   resetDeviceFile,
   setChecked,
-  setStatus, 
+  setStatus,
   resetStatus,
   setSelectedDevices,
- } = deviceSlice.actions;
+} = deviceSlice.actions;

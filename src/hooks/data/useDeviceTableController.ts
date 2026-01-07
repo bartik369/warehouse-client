@@ -1,12 +1,11 @@
-import { useEffect, useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 
 import { skipToken } from '@reduxjs/toolkit/query';
-import { TablePaginationConfig, FilterValue, SorterResult } from 'antd/es/table/interface';
+import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
+import { useParams, useSearchParams } from 'react-router-dom';
 
-import { useSearchParams, useParams } from 'react-router-dom';
-
-import { useGetDevicesQuery, useGetDeviceOptionsQuery } from '@/store/api/devicesApi';
-import { DeviceFilters, FilteredDevicesFromBack, FilterDeviceOptions } from '@/types/devices';
+import { useGetDeviceOptionsQuery, useGetDevicesQuery } from '@/store/api/devicesApi';
+import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
 import { formatFiltersToSearchParams } from '@/utils/data/filterUtils';
 
 import { useDeviceFilters } from './useDeviceFilters';

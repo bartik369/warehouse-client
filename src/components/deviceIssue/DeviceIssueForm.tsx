@@ -1,33 +1,35 @@
 import { useEffect } from 'react';
 
-import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { useIssue } from '@/features/issue/model/useIssue';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
+import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
 import Loader from '../ui/loader/Loader';
 import StepsProcess from '../ui/steps/StepsProcess';
 import styles from './DeviceIssueForm.module.scss';
 
 const DeviceIssueForm = ({ issueId = null }) => {
-  const { state, actions } = useIssueContext();
   const user = useAppSelector((state: RootState) => state.user.user);
+  const state = useAppSelector((state: RootState) => state.issue);
+  const actions = useIssue();
 
   useEffect(() => {
     return () => {
+      console.log('reload');
       actions.handleFullReset();
     };
   }, []);
 
-  if (!state.step && !user) return <Loader size="sm" color="green" />;
-  const currentStep = state.step;
+  if (!state.issueStep && !user) return <Loader size="sm" color="green" />;
 
   return (
     <section className={styles.inner}>
       <h1 className={styles.title}>
-        <span>{currentStep + 1}</span>
-        {state.title}
+        <span>{state.issueStep + 1}</span>
+        {BASE_STEPS[state.issueStep].title}
       </h1>
-      <StepsProcess />
+      <StepsProcess actions={actions} state={state} />
     </section>
   );
 };

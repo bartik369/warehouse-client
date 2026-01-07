@@ -1,52 +1,46 @@
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  Font,
-} from "@react-pdf/renderer";
-import { Device } from "@/types/devices";
-import { baseDeviceLabelConfig } from "@/utils/data/menus";
-import printLogo from "@/assets/elements/print_logo.png";
+import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+
+import printLogo from '@/assets/elements/print_logo.png';
+import { Device } from '@/types/devices';
+import { AssignedDevice } from '@/types/issue';
+import { baseDeviceLabelConfig } from '@/utils/data/menus';
 
 Font.register({
-  family: "Roboto",
-  src: "/fonts/Roboto/Roboto-Regular.ttf",
-  fontWeight: "normal",
+  family: 'Roboto',
+  src: '/fonts/Roboto/Roboto-Regular.ttf',
+  fontWeight: 'normal',
 });
 Font.register({
-  family: "Roboto",
-  src: "/fonts/Roboto/Roboto-Medium.ttf",
-  fontWeight: "medium",
+  family: 'Roboto',
+  src: '/fonts/Roboto/Roboto-Medium.ttf',
+  fontWeight: 'medium',
 });
 
 Font.register({
-  family: "Roboto",
-  src: "/fonts/Roboto/Roboto-Bold.ttf",
-  fontWeight: "bold",
+  family: 'Roboto',
+  src: '/fonts/Roboto/Roboto-Bold.ttf',
+  fontWeight: 'bold',
 });
 
 const styles = StyleSheet.create({
   page: {
     padding: 30,
     fontSize: 12,
-    fontFamily: "Roboto",
-    position: "relative",
+    fontFamily: 'Roboto',
+    position: 'relative',
   },
   headerLogo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginLeft: 'auto',
   },
   headerWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   logo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     alignItems: 'center',
   },
   logoIcon: {
@@ -57,13 +51,13 @@ const styles = StyleSheet.create({
   },
   logoText: {
     fontSize: 10,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   docNumberText: {
-    marginRight:5,
+    marginRight: 5,
   },
   docNumber: {
-    fontWeight: "medium",
+    fontWeight: 'medium',
   },
   act: {
     fontSize: 11,
@@ -72,7 +66,7 @@ const styles = StyleSheet.create({
   },
   numberBlock: {
     justifyContent: 'center',
-    marginBottom:4,
+    marginBottom: 4,
   },
   centeredBlock: {
     alignItems: 'center',
@@ -80,36 +74,36 @@ const styles = StyleSheet.create({
   },
   table: {
     fontSize: 9,
-    display: "flex",
-    width: "auto",
-    borderStyle: "solid",
+    display: 'flex',
+    width: 'auto',
+    borderStyle: 'solid',
     borderWidth: 1,
     borderRightWidth: 0,
     borderBottomWidth: 0,
     marginBottom: 20,
   },
   tableRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   tableColHeader: {
     width: `${100 / 3}%`,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    backgroundColor: "#eee",
+    backgroundColor: '#eee',
     padding: 5,
   },
   tableCol: {
     width: `${100 / 3}%`,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
     padding: 5,
   },
   bold: {
-    fontWeight: "medium",
+    fontWeight: 'medium',
   },
   infoText: {
     fontSize: 11,
@@ -120,20 +114,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   signaturesWrapper: {
-    alignContent: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 20,
   },
   signatureBlock: {
-    width: "48%",
+    width: '48%',
   },
 });
 
 interface IssueDocumentProps {
   date: string;
   docNumber: string;
-  tableData: Device[];
+  tableData: AssignedDevice[];
   firstNameRuCurrent: string;
   lastNameRuCurrent: string;
   firstNameRuPartner: string;
@@ -143,9 +137,9 @@ interface IssueDocumentProps {
 }
 
 const formatValue = (val: unknown): string => {
-  if (val === null || val === undefined) return "";
-  if (val instanceof Date) return val.toLocaleDateString("ru-RU");
-  if (typeof val === "boolean") return val ? "Да" : "Нет";
+  if (val === null || val === undefined) return '';
+  if (val instanceof Date) return val.toLocaleDateString('ru-RU');
+  if (typeof val === 'boolean') return val ? 'Да' : 'Нет';
   return String(val);
 };
 
@@ -170,27 +164,26 @@ const IssueDocument = ({
         </View>
       </View>
       <View style={styles.centeredBlock}>
-      <Text style={styles.numberBlock}>
-            <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
-            <Text style={styles.docNumber}>{docNumber}</Text>
-      </Text>
+        <Text style={styles.numberBlock}>
+          <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
+          <Text style={styles.docNumber}>{docNumber}</Text>
+        </Text>
         <Text style={styles.date}>{date}</Text>
       </View>
       {/* Текст */}
       <View>
         <Text style={styles.act}>
-          ООО «Компания Х», в лице директора Иванова Алексея Ивановича,
-          действующего на основании устава, именуемое в дальнейшем{" "}
+          ООО «Компания Х», в лице директора Иванова Алексея Ивановича, действующего на основании
+          устава, именуемое в дальнейшем{' '}
           <Text style={styles.bold}>
             {firstNameRuCurrent} {lastNameRuCurrent}
           </Text>
-          , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия
-          Сергеевича, действующего на основании устава, именуемое в дальнейшем{" "}
+          , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия Сергеевича,
+          действующего на основании устава, именуемое в дальнейшем{' '}
           <Text style={styles.bold}>
             {firstNameRuPartner} {lastNameRuPartner}
-          </Text>{" "}
-          подписали настоящий акт приема передачи на основании договора
-          №123456789
+          </Text>{' '}
+          подписали настоящий акт приема передачи на основании договора №123456789
         </Text>
       </View>
 
@@ -208,7 +201,7 @@ const IssueDocument = ({
           <View key={idx} style={styles.tableRow}>
             {baseDeviceLabelConfig.map((col, i) => (
               <Text key={i} style={styles.tableCol}>
-                {formatValue(row[col.key as keyof Device])}
+                {formatValue(row[col.key as keyof AssignedDevice])}
               </Text>
             ))}
           </View>
@@ -218,17 +211,17 @@ const IssueDocument = ({
       {/* Подписи */}
       <View style={styles.signaturesWrapper}>
         <View style={styles.signatureBlock}>
-          <Text style={styles.infoText}>{firstNameRuCurrent} {lastNameRuCurrent}</Text>
-          {issuerSignature && (
-            <Image style={styles.image} src={issuerSignature} />
-          )}
+          <Text style={styles.infoText}>
+            {firstNameRuCurrent} {lastNameRuCurrent}
+          </Text>
+          {issuerSignature && <Image style={styles.image} src={issuerSignature} />}
         </View>
 
         <View style={styles.signatureBlock}>
-          <Text style={styles.infoText}>{firstNameRuPartner} {lastNameRuPartner}</Text>
-          {receiverSignature && (
-            <Image style={styles.image} src={receiverSignature} />
-          )}
+          <Text style={styles.infoText}>
+            {firstNameRuPartner} {lastNameRuPartner}
+          </Text>
+          {receiverSignature && <Image style={styles.image} src={receiverSignature} />}
         </View>
       </View>
     </Page>

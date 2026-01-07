@@ -2,7 +2,7 @@ import { IoCheckboxOutline } from 'react-icons/io5';
 import { TbBookDownload } from 'react-icons/tb';
 
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { IssueState } from '@/features/issue/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { partnerUser } from '@/store/slices/userSlice';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
@@ -12,8 +12,11 @@ import { SIZES } from '@/utils/constants/ui/sizes';
 
 import styles from './Steps.module.scss';
 
-const FinalizeIssueStep = () => {
-  const { state } = useIssueContext();
+interface FinalizeIssueStepProps {
+  state: IssueState;
+}
+
+const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
   const recipient = useAppSelector(partnerUser);
 
   const handleDownload = async () => {
