@@ -7,8 +7,8 @@ import DeviceTableRow from './DeviceTableRow';
 
 interface DeviceTableProps {
   showDeleteIcon?: boolean;
-  actions: BaseDeviceQuery;
-  state: IssueState;
+  actions?: BaseDeviceQuery;
+  state?: IssueState;
 }
 
 const DeviceTable = ({ showDeleteIcon, actions, state }: DeviceTableProps) => {
@@ -22,12 +22,12 @@ const DeviceTable = ({ showDeleteIcon, actions, state }: DeviceTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {state.assignedDevices?.map((device) => (
+        {state?.assignedDevices?.map((device) => (
           <DeviceTableRow
             showDeleteIcon={showDeleteIcon}
             key={device.id}
             device={device}
-            actions={actions}
+            actions={actions!}
           />
         ))}
       </tbody>
