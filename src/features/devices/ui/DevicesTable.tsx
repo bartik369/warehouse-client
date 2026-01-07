@@ -1,19 +1,23 @@
-import ru_RU from 'antd/es/locale/ru_RU';
-import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
-import { useGetTypesQuery } from '@/store/api/typesApi';
-import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
-import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
+import { useState } from 'react';
+
 import { ConfigProvider, Table } from 'antd';
+import ru_RU from 'antd/es/locale/ru_RU';
 import {
   FilterValue,
   SorterResult,
   TablePaginationConfig,
   TableRowSelection,
 } from 'antd/es/table/interface';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDevicesColumns } from '../model/devices.columns';
+
+import { IssueActionTypes } from '@/features/issue/model/issueTypes';
 import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
+import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
+import { useGetTypesQuery } from '@/store/api/typesApi';
+import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
+import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
+
+import { getDevicesColumns } from '../model/devices.columns';
 import styles from './DeviceTable.module.css';
 
 interface DeviceTableProps {
@@ -127,3 +131,6 @@ const DevicesTable = ({
 };
 
 export default DevicesTable;
+function dispatch(arg0: { type: IssueActionTypes }) {
+  throw new Error('Function not implemented.');
+}

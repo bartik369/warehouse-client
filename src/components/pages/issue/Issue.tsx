@@ -1,4 +1,5 @@
-import DeviceIssueForm from "@/components/deviceIssue/DeviceIssueForm";
+import DeviceIssueForm from '@/components/deviceIssue/DeviceIssueForm';
+
 const Issue = () => {
   return <DeviceIssueForm />;
 };

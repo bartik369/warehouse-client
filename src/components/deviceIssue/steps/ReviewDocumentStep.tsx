@@ -3,7 +3,8 @@ import { TbArrowBackUp } from 'react-icons/tb';
 
 import Search from '@/components/deviceIssue/search/Search';
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { IssueState } from '@/features/issue/model/issueTypes';
+import { useAppSelector } from '@/hooks/redux/useRedux';
 import { BaseDeviceQuery } from '@/types/devices';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
@@ -16,9 +17,9 @@ import styles from './Steps.module.scss';
 
 interface ReviewDocumentStepProps {
   actions: BaseDeviceQuery;
+  state: IssueState;
 }
-const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
-  const { state } = useIssueContext();
+const ReviewDocumentStep = ({ actions, state }: ReviewDocumentStepProps) => {
   return (
     <div className={styles.inner}>
       <form
@@ -44,9 +45,9 @@ const ReviewDocumentStep = ({ actions }: ReviewDocumentStepProps) => {
         )}
       </form>
       <>
-        {state?.assignedDevices.length > 0 ? (
+        {state.assignedDevices.length > 0 ? (
           <>
-            <DeviceTable showDeleteIcon={true} />
+            <DeviceTable actions={actions} state={state} showDeleteIcon={true} />
             <div className={styles.actions}>
               <BtnAction
                 icon={<TbArrowBackUp />}

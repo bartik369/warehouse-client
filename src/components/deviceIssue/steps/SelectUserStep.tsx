@@ -4,9 +4,10 @@ import { GrFormClose } from 'react-icons/gr';
 import Search from '@/components/deviceIssue/search/Search';
 import BtnAction from '@/components/ui/buttons/BtnAction';
 import NoData from '@/components/ui/no-data/NoData';
-import { useIssueContext } from '@/features/issue/context/IssueContext';
+import { IssueState } from '@/features/issue/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
+import { BaseDeviceQuery } from '@/types/devices';
 import { BaseUserQuery } from '@/types/user';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
@@ -17,12 +18,10 @@ import UsersList from '../user/UsersList';
 import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
-  isSuccess: boolean;
-  isFetching: boolean;
-  actions: BaseUserQuery;
+  state: IssueState;
+  actions: BaseDeviceQuery;
 }
-const SelectUserStep = ({ isSuccess, isFetching, actions }: SelectUserStepProps) => {
-  const { state } = useIssueContext();
+const SelectUserStep = ({ state, actions }: SelectUserStepProps) => {
   const user = useAppSelector((state: RootState) => state.user.user);
 
   return (
@@ -37,11 +36,11 @@ const SelectUserStep = ({ isSuccess, isFetching, actions }: SelectUserStepProps)
           value={state.userQuery}
           name="email"
         />
-        {state.isUsersListVisible && isSuccess && state.wasSearched && (
+        {state.isUsersListVisible && actions.isSuccess && state.wasSearched && (
           <div className={styles.result}>
             <UsersList
-              isSuccess={isSuccess}
-              isFetching={isFetching}
+              isSuccess={actions.isSuccess}
+              isFetching={actions.isFetching}
               state={state}
               actions={actions}
             />

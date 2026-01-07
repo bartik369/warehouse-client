@@ -1,25 +1,32 @@
-import IssueActContent from "./IssueActContent";
-import IssueDocument from "@/components/pdf/issue/IssueDocument";
-import BtnAction from "@/components/ui/buttons/BtnAction";
-import Signatures from "./Signatures";
-import EnvelopeLoader from "@/components/ui/loader/envelope/EnvelopeLoader";
-import { useIssueContext } from "../issue/context/IssueContext";
-import { useAppSelector } from "@/hooks/redux/useRedux";
-import { currentUser } from "@/store/slices/authSlice";
-import { partnerUser } from "@/store/slices/userSlice";
-import { selectIssuerSignature, selectReceiverSignature } from "@/store/slices/signatureSlice";
-import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
-import { pdf } from "@react-pdf/renderer";
-import { IoBarcodeOutline } from "react-icons/io5";
-import { MdOutlineDone } from "react-icons/md";
-import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
-import { SECTION_TITLES } from "@/utils/constants/ui/titles";
-import { COLORS } from "@/utils/constants/ui/colors";
-import { SIZES } from "@/utils/constants/ui/sizes";
-import styles from "./Document.module.scss";
+import { pdf } from '@react-pdf/renderer';
+import { IoBarcodeOutline } from 'react-icons/io5';
+import { MdOutlineDone } from 'react-icons/md';
 
-const DocumentWithSignatures = () => {
-  const { actions, state, isIssueLoading } = useIssueContext();
+import IssueDocument from '@/components/pdf/issue/IssueDocument';
+import BtnAction from '@/components/ui/buttons/BtnAction';
+import EnvelopeLoader from '@/components/ui/loader/envelope/EnvelopeLoader';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { currentUser } from '@/store/slices/authSlice';
+import { selectIssuerSignature, selectReceiverSignature } from '@/store/slices/signatureSlice';
+import { partnerUser } from '@/store/slices/userSlice';
+import { BaseDeviceQuery } from '@/types/devices';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { COLORS } from '@/utils/constants/ui/colors';
+import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
+import { SIZES } from '@/utils/constants/ui/sizes';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+
+import { IssueState } from '../issue/model/issueTypes';
+import styles from './Document.module.scss';
+import IssueActContent from './IssueActContent';
+import Signatures from './Signatures';
+
+interface DocumentWithSignaturesProps {
+  actions: BaseDeviceQuery;
+  state: IssueState;
+}
+
+const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps) => {
   const issuerSignature = useAppSelector(selectIssuerSignature);
   const receiverSignature = useAppSelector(selectReceiverSignature);
   const issueUser = useAppSelector(currentUser);
@@ -30,7 +37,7 @@ const DocumentWithSignatures = () => {
     const doc = (
       <IssueDocument
         date={date.toLocaleDateString('Ru-ru')}
-        docNumber={ state.deviceIssueData?.processId || '' }
+        docNumber={state.deviceIssueData?.processId || ''}
         tableData={state.assignedDevices}
         firstNameRuCurrent={issueUser?.firstNameRu || ''}
         lastNameRuCurrent={issueUser?.lastNameRu || ''}
@@ -53,16 +60,17 @@ const DocumentWithSignatures = () => {
       const blob = await generatePDFBlob();
       actions.handleCompleteProcess(blob);
     } catch (err) {
-      console.error("Ошибка при отправке PDF:", err);
+      console.error('Ошибка при отправке PDF:', err);
     }
   };
 
   return (
     <div className={styles.wrapper}>
-      {isIssueLoading && 
-      <div className={styles.loader}>
-        <EnvelopeLoader />
-      </div>}
+      {actions.isIssueLoading && (
+        <div className={styles.loader}>
+          <EnvelopeLoader />
+        </div>
+      )}
       <div className={styles.innerWrapper}>
         <div className={styles.logo}>
           <IoBarcodeOutline className={styles.icon} />
@@ -71,10 +79,11 @@ const DocumentWithSignatures = () => {
         <div className={styles.inner}>
           <header className={styles.header}>
             <div className={styles.number}>
-              <span>{SECTION_TITLES.actIssueTitle}</span>{state.deviceIssueData?.processId}
+              <span>{SECTION_TITLES.actIssueTitle}</span>
+              {state.deviceIssueData?.processId}
             </div>
             <time className={styles.date} dateTime={date.toISOString()}>
-              {date.toLocaleDateString("ru-RU")}
+              {date.toLocaleDateString('ru-RU')}
             </time>
           </header>
           <div className={styles.info}>

@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { BsCheck } from 'react-icons/bs';
 
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import { useIssueContext } from '@/features/issue/context/IssueContext';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { BaseDeviceQuery } from '@/types/devices';
+import { Warehouse } from '@/types/locations';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 
@@ -15,10 +15,11 @@ import styles from './Steps.module.scss';
 
 interface SelectWarehouseStepProps {
   actions: BaseDeviceQuery;
+  warehouse: Warehouse;
+  warehouses: Warehouse[];
 }
 
-const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
-  const { state } = useIssueContext();
+const SelectWarehouseStep = ({ actions, warehouse, warehouses }: SelectWarehouseStepProps) => {
   const currentUserId = useAppSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
@@ -30,9 +31,9 @@ const SelectWarehouseStep = ({ actions }: SelectWarehouseStepProps) => {
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
-        <Select actions={actions} warehouses={state.warehouses} />
+        <Select actions={actions} warehouses={warehouses} warehouse={warehouse} />
       </form>
-      {state.warehouse.name && (
+      {warehouse.name && (
         <div className={styles.actions}>
           <BtnAction
             icon={<BsCheck />}

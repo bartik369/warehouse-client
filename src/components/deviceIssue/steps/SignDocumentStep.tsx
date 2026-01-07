@@ -1,10 +1,18 @@
-import React from "react";
-import DocumentWithSignatures from "@/features/documents/DocumentWithSignatures";
+import React from 'react';
 
-const SignDocumentStep = () => {
+import DocumentWithSignatures from '@/features/documents/DocumentWithSignatures';
+import { IssueState } from '@/features/issue/model/issueTypes';
+import { BaseDeviceQuery } from '@/types/devices';
+
+interface SignDocumentStepProps {
+  actions: BaseDeviceQuery;
+  state: IssueState;
+}
+
+const SignDocumentStep = ({ actions, state }: SignDocumentStepProps) => {
   return (
     <>
-      <DocumentWithSignatures />
+      <DocumentWithSignatures actions={actions} state={state} />
     </>
   );
 };

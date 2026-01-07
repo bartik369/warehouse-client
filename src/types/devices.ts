@@ -1,5 +1,6 @@
 import { IssueStepType } from '../features/issue/model/issueTypes';
 import { Contractor } from './content';
+import { AssignedDevice } from './issue';
 import { Warehouse } from './locations';
 
 export interface Device {
@@ -40,6 +41,32 @@ export interface Device {
   providerName: string;
   providerSlug: string;
   contractorId: string;
+}
+export interface FilteredDevicesFromBack {
+  id: string;
+  name: string;
+  inventoryNumber: string;
+  serialNumber: string;
+  isAssigned: boolean;
+  isFunctional: boolean;
+  memorySize: number;
+  screenSize: number;
+  model: {
+    name: string;
+    slug: string;
+    manufacturer: {
+      name: string;
+      slug: string;
+    };
+    type: {
+      name: string;
+      slug: string;
+    };
+  };
+  warehouse: {
+    name: string;
+    slug: string;
+  };
 }
 
 export interface AggregateDeviceInfo extends Device {
@@ -189,33 +216,6 @@ export interface Entity {
   warehouseName?: string;
 }
 
-export interface FilteredDevicesFromBack {
-  id: string;
-  name: string;
-  inventoryNumber: string;
-  serialNumber: string;
-  isAssigned: boolean;
-  isFunctional: boolean;
-  memorySize: number;
-  screenSize: number;
-  model: {
-    name: string;
-    slug: string;
-    manufacturer: {
-      name: string;
-      slug: string;
-    };
-    type: {
-      name: string;
-      slug: string;
-    };
-  };
-  warehouse: {
-    name: string;
-    slug: string;
-  };
-}
-
 export interface DevicesResponse {
   devices: FilteredDevicesFromBack;
   totalPages: number;
@@ -354,10 +354,17 @@ export interface BaseDeviceQuery {
   handleStartDeviceIssueWith: (id: string) => void;
   handleGetDevice: () => void;
   handleDeviceChange: (value: string) => void;
-  handleSetDevice: (item: Device) => void;
+  handleSetDevice: (item: AssignedDevice) => void;
   handleSetWarehouse: (item: Warehouse) => void;
   handleGetWarehousesByUser: (id: string) => void;
   handleNextStep: () => void;
   handleDeleteDevice: (id: string) => void;
   handleResetIssueDevices: () => void;
+  handleSetStep: (step: number) => void;
+  handleResetUser: () => void;
+  handleResetUserQuery: () => void;
+  isSuccess: boolean;
+  isFetching: boolean;
+  isIssueSuccess: boolean;
+  isIssueLoading: boolean;
 }
