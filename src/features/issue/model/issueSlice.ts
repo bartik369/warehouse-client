@@ -33,12 +33,17 @@ const issueSlice = createSlice({
   name: 'issue',
   initialState,
   reducers: {
-    setAssignedDevice: (state, action: PayloadAction<AssignedDevice>) => {
-      const index = state.assignedDevices.findIndex((device) => device.id === action.payload.id);
-      if (index >= 0) {
-        state.assignedDevices[index] = action.payload;
+    setAssignedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
+      if (Array.isArray(action.payload)) {
+        state.assignedDevices = action.payload;
       } else {
-        state.assignedDevices.push(action.payload);
+        const device = action.payload;
+        const existDevice = state.assignedDevices.some((item) => item.id === device.id);
+        if (existDevice) {
+          state.assignedDevices = state.assignedDevices.filter((item) => item.id !== device.id);
+        } else {
+          state.assignedDevices.push(action.payload);
+        }
       }
     },
     setDeviceId: (state, action: PayloadAction<string>) => {
