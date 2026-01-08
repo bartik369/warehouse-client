@@ -1,13 +1,12 @@
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
-import { BaseDeviceQuery, Device } from '@/types/devices';
-import { AssignedDevice } from '@/types/issue';
+import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
 
 import styles from './DeviceTable.module.scss';
 
 interface DeviceTableRowProps {
   device: AssignedDevice;
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   showDeleteIcon?: boolean | null;
 }
 

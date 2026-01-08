@@ -1,5 +1,5 @@
 import { IssueState } from '@/features/issue/model/issueTypes';
-import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 import { baseDeviceLabelConfig } from '@/utils/data/menus';
 
 import styles from './DeviceTable.module.scss';
@@ -7,7 +7,7 @@ import DeviceTableRow from './DeviceTableRow';
 
 interface DeviceTableProps {
   showDeleteIcon?: boolean;
-  actions?: BaseDeviceQuery;
+  actions?: BaseIssueQuery;
   state?: IssueState;
 }
 
