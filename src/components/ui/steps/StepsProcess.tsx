@@ -6,14 +6,13 @@ import SelectUserStep from '@/components/deviceIssue/steps/SelectUserStep';
 import SelectWarehouseStep from '@/components/deviceIssue/steps/SelectWarehouseStep';
 import SignDocumentStep from '@/components/deviceIssue/steps/SignDocumentStep';
 import { IssueState } from '@/features/issue/model/issueTypes';
-import { BaseDeviceQuery } from '@/types/devices';
-import { ItemType } from '@/types/issue';
+import { BaseIssueQuery, ItemType } from '@/types/issue';
 import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
 import styles from './Steps.module.scss';
 
 interface StepsProcessProps {
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   state: IssueState;
 }
 

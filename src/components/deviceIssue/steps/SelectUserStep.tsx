@@ -7,8 +7,7 @@ import NoData from '@/components/ui/no-data/NoData';
 import { IssueState } from '@/features/issue/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
-import { BaseDeviceQuery } from '@/types/devices';
-import { BaseUserQuery } from '@/types/user';
+import { BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
@@ -19,7 +18,7 @@ import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
   state: IssueState;
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
 }
 const SelectUserStep = ({ state, actions }: SelectUserStepProps) => {
   const user = useAppSelector((state: RootState) => state.user.user);
