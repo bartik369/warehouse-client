@@ -8,7 +8,6 @@ interface SignDocumentStepProps {
 }
 
 const SignDocumentStep = ({ actions, state }: SignDocumentStepProps) => {
-  console.log(state.assignedDevices);
   return (
     <>
       <DocumentWithSignatures actions={actions} state={state} />
