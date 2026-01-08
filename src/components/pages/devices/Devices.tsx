@@ -6,7 +6,7 @@ import DevicesTable from '@/features/devices/ui/DevicesTable';
 import { setAssignedDevice, setIssueStep } from '@/features/issue/model/issueSlice';
 import { useDeviceTableController } from '@/hooks/data/useDeviceTableController';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
-import { resetDevice, resetStatus, setSelectedDevices } from '@/store/slices/deviceSlice';
+import { resetDevice, resetStatus } from '@/store/slices/deviceSlice';
 import { FilteredDevicesFromBack } from '@/types/devices';
 
 import styles from './Devices.module.scss';

@@ -1,7 +1,6 @@
 import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 
 import printLogo from '@/assets/elements/print_logo.png';
-import { Device } from '@/types/devices';
 import { AssignedDevice } from '@/types/issue';
 import { baseDeviceLabelConfig } from '@/utils/data/menus';
 
@@ -153,79 +152,81 @@ const IssueDocument = ({
   lastNameRuPartner,
   receiverSignature,
   issuerSignature,
-}: IssueDocumentProps) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      {/* Шапка */}
-      <View style={styles.headerLogo}>
-        <View style={styles.logo}>
-          <Image src={printLogo} style={styles.logoIcon} />
-          <Text style={styles.logoText}>ITAM</Text>
+}: IssueDocumentProps) => {
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        {/* Шапка */}
+        <View style={styles.headerLogo}>
+          <View style={styles.logo}>
+            <Image src={printLogo} style={styles.logoIcon} />
+            <Text style={styles.logoText}>ITAM</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.centeredBlock}>
-        <Text style={styles.numberBlock}>
-          <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
-          <Text style={styles.docNumber}>{docNumber}</Text>
-        </Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
-      {/* Текст */}
-      <View>
-        <Text style={styles.act}>
-          ООО «Компания Х», в лице директора Иванова Алексея Ивановича, действующего на основании
-          устава, именуемое в дальнейшем{' '}
-          <Text style={styles.bold}>
-            {firstNameRuCurrent} {lastNameRuCurrent}
+        <View style={styles.centeredBlock}>
+          <Text style={styles.numberBlock}>
+            <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
+            <Text style={styles.docNumber}>{docNumber}</Text>
           </Text>
-          , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия Сергеевича,
-          действующего на основании устава, именуемое в дальнейшем{' '}
-          <Text style={styles.bold}>
-            {firstNameRuPartner} {lastNameRuPartner}
-          </Text>{' '}
-          подписали настоящий акт приема передачи на основании договора №123456789
-        </Text>
-      </View>
-
-      <View style={styles.table}>
-        {/* Заголовки */}
-        <View style={styles.tableRow}>
-          {baseDeviceLabelConfig.map((col) => (
-            <Text key={col.key} style={styles.tableColHeader}>
-              {col.label}
-            </Text>
-          ))}
+          <Text style={styles.date}>{date}</Text>
         </View>
-        {/* Данные */}
-        {tableData.map((row, idx) => (
-          <View key={idx} style={styles.tableRow}>
-            {baseDeviceLabelConfig.map((col, i) => (
-              <Text key={i} style={styles.tableCol}>
-                {formatValue(row[col.key as keyof AssignedDevice])}
+        {/* Текст */}
+        <View>
+          <Text style={styles.act}>
+            ООО «Компания Х», в лице директора Иванова Алексея Ивановича, действующего на основании
+            устава, именуемое в дальнейшем{' '}
+            <Text style={styles.bold}>
+              {firstNameRuCurrent} {lastNameRuCurrent}
+            </Text>
+            , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия Сергеевича,
+            действующего на основании устава, именуемое в дальнейшем{' '}
+            <Text style={styles.bold}>
+              {firstNameRuPartner} {lastNameRuPartner}
+            </Text>{' '}
+            подписали настоящий акт приема передачи на основании договора №123456789
+          </Text>
+        </View>
+
+        <View style={styles.table}>
+          {/* Заголовки */}
+          <View style={styles.tableRow}>
+            {baseDeviceLabelConfig.map((col) => (
+              <Text key={col.key} style={styles.tableColHeader}>
+                {col.label}
               </Text>
             ))}
           </View>
-        ))}
-      </View>
-
-      {/* Подписи */}
-      <View style={styles.signaturesWrapper}>
-        <View style={styles.signatureBlock}>
-          <Text style={styles.infoText}>
-            {firstNameRuCurrent} {lastNameRuCurrent}
-          </Text>
-          {issuerSignature && <Image style={styles.image} src={issuerSignature} />}
+          {/* Данные */}
+          {tableData.map((row, idx) => (
+            <View key={idx} style={styles.tableRow}>
+              {baseDeviceLabelConfig.map((col, i) => (
+                <Text key={i} style={styles.tableCol}>
+                  {formatValue(row[col.key as keyof AssignedDevice])}
+                </Text>
+              ))}
+            </View>
+          ))}
         </View>
 
-        <View style={styles.signatureBlock}>
-          <Text style={styles.infoText}>
-            {firstNameRuPartner} {lastNameRuPartner}
-          </Text>
-          {receiverSignature && <Image style={styles.image} src={receiverSignature} />}
+        {/* Подписи */}
+        <View style={styles.signaturesWrapper}>
+          <View style={styles.signatureBlock}>
+            <Text style={styles.infoText}>
+              {firstNameRuCurrent} {lastNameRuCurrent}
+            </Text>
+            {issuerSignature && <Image style={styles.image} src={issuerSignature} />}
+          </View>
+
+          <View style={styles.signatureBlock}>
+            <Text style={styles.infoText}>
+              {firstNameRuPartner} {lastNameRuPartner}
+            </Text>
+            {receiverSignature && <Image style={styles.image} src={receiverSignature} />}
+          </View>
         </View>
-      </View>
-    </Page>
-  </Document>
-);
+      </Page>
+    </Document>
+  );
+};
 
 export default IssueDocument;

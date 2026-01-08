@@ -61,7 +61,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
       const blob = await generatePDFBlob();
       actions.handleCompleteProcess(blob);
     } catch (err) {
-      // console.error('Ошибка при отправке PDF:', err);
+      console.error('Ошибка при отправке PDF:', err);
     }
   };
 
@@ -88,7 +88,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
             </time>
           </header>
           <div className={styles.info}>
-            <IssueActContent />
+            <IssueActContent state={state} actions={actions} />
           </div>
           <Signatures
             issuerSignature={issuerSignature}

@@ -9,9 +9,12 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tsParser, // объект parser
+      parser: tsParser,
       parserOptions: {
         project: './tsconfig.json',
+      },
+      globals: {
+        console: 'readonly',
       },
     },
     plugins: {
@@ -19,12 +22,9 @@ export default [
       react: reactPlugin,
     },
     rules: {
-      // console.log разрешён
       'no-console': 'off',
-      // отключаем проверку неиспользуемых переменных
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
-      // React правила
       'react/react-in-jsx-scope': 'off',
     },
     settings: {

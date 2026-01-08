@@ -1,6 +1,6 @@
-import { IssueStepType } from '../features/issue/model/issueTypes';
+import React from 'react';
+
 import { Contractor } from './content';
-import { AssignedDevice } from './issue';
 import { Warehouse } from './locations';
 
 export interface Device {
@@ -276,9 +276,9 @@ type FilterLabelsKeys =
 
 type DeviceLabelKeys =
   | 'name'
-  | 'typeName'
+  | 'modelType'
   | 'modelName'
-  | 'manufacturerName'
+  | 'manufacturer'
   | 'inventoryNumber'
   | 'serialNumber';
 
