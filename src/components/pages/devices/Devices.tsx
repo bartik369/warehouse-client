@@ -42,16 +42,7 @@ const Devices = () => {
       inventoryNumber: device.inventoryNumber ?? '',
       serialNumber: device.serialNumber ?? '',
     }));
-    // dispatch({
-    //   type: IssueActionTypes.SET_STEP,
-    //   payload: 2,
-    // });
-
-    // dispatch({
-    //   type: IssueActionTypes.SET_ASSIGNED_DEVICES,
-    //   payload: devices,
-    // });
-    devices.forEach((item) => dispatch(setAssignedDevice(item)));
+    dispatch(setAssignedDevice(devices));
     dispatch(setIssueStep(1));
   };
 
