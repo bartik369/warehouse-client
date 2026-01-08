@@ -3,7 +3,6 @@ import React from 'react';
 import { IssueState } from '@/features/issue/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
-import { BaseDeviceQuery } from '@/types/devices';
 import { BaseIssueQuery } from '@/types/issue';
 import { MESSAGES } from '@/utils/constants/ui/messages';
 

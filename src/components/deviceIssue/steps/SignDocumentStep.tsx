@@ -3,9 +3,10 @@ import React from 'react';
 import DocumentWithSignatures from '@/features/documents/DocumentWithSignatures';
 import { IssueState } from '@/features/issue/model/issueTypes';
 import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 
 interface SignDocumentStepProps {
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   state: IssueState;
 }
 

@@ -1,4 +1,4 @@
-import { BaseDeviceQuery, Device } from '@/types/devices';
+import { Device } from '@/types/devices';
 import { BaseIssueQuery } from '@/types/issue';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
