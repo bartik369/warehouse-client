@@ -10,6 +10,7 @@ import { currentUser } from '@/store/slices/authSlice';
 import { selectIssuerSignature, selectReceiverSignature } from '@/store/slices/signatureSlice';
 import { partnerUser } from '@/store/slices/userSlice';
 import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
@@ -22,7 +23,7 @@ import IssueActContent from './IssueActContent';
 import Signatures from './Signatures';
 
 interface DocumentWithSignaturesProps {
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   state: IssueState;
 }
 
@@ -60,7 +61,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
       const blob = await generatePDFBlob();
       actions.handleCompleteProcess(blob);
     } catch (err) {
-      console.error('Ошибка при отправке PDF:', err);
+      // console.error('Ошибка при отправке PDF:', err);
     }
   };
 
