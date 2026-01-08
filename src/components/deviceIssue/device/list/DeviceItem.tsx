@@ -1,11 +1,10 @@
 import { BaseDeviceQuery, Device } from '@/types/devices';
-import { BaseIssueQuery } from '@/types/issue';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
 import styles from './DeviceItem.module.scss';
 
 interface DeviceItemProps {
-  actions: BaseIssueQuery;
+  actions: BaseDeviceQuery;
   devices: Device[];
 }
 const DeviceItem = ({ actions, devices }: DeviceItemProps) => {

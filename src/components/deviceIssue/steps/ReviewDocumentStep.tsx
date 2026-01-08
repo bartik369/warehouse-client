@@ -4,7 +4,7 @@ import { TbArrowBackUp } from 'react-icons/tb';
 import Search from '@/components/deviceIssue/search/Search';
 import BtnAction from '@/components/ui/buttons/BtnAction';
 import { IssueState } from '@/features/issue/model/issueTypes';
-import { BaseIssueQuery } from '@/types/issue';
+import { BaseDeviceQuery } from '@/types/devices';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
@@ -15,7 +15,7 @@ import DeviceList from '../device/list/DeviceList';
 import styles from './Steps.module.scss';
 
 interface ReviewDocumentStepProps {
-  actions: BaseIssueQuery;
+  actions: BaseDeviceQuery;
   state: IssueState;
 }
 const ReviewDocumentStep = ({ actions, state }: ReviewDocumentStepProps) => {
