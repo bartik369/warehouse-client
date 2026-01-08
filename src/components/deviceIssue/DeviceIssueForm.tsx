@@ -16,8 +16,7 @@ const DeviceIssueForm = ({ issueId = null }) => {
 
   useEffect(() => {
     return () => {
-      console.log('reload');
-      // actions.handleFullReset();
+      actions.handleFullReset();
     };
   }, []);
 
