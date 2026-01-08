@@ -5,7 +5,7 @@ import { BsCheck } from 'react-icons/bs';
 import BtnAction from '@/components/ui/buttons/BtnAction';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
-import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 import { Warehouse } from '@/types/locations';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
@@ -14,7 +14,7 @@ import Select from '../select/Select';
 import styles from './Steps.module.scss';
 
 interface SelectWarehouseStepProps {
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   warehouse: Warehouse;
   warehouses: Warehouse[];
 }

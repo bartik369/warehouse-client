@@ -3,14 +3,14 @@ import { useEffect, useRef } from 'react';
 import { TbSelector } from 'react-icons/tb';
 
 import { useModal } from '@/hooks/data/useModal';
-import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 import { Warehouse } from '@/types/locations';
 import { SELECTS } from '@/utils/constants/ui/selects';
 
 import styles from './Select.module.scss';
 
 interface SelectProps {
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
   warehouse: Warehouse;
   warehouses: Warehouse[];
 }

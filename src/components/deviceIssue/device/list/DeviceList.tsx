@@ -4,6 +4,7 @@ import { IssueState } from '@/features/issue/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { BaseDeviceQuery } from '@/types/devices';
+import { BaseIssueQuery } from '@/types/issue';
 import { MESSAGES } from '@/utils/constants/ui/messages';
 
 import DeviceItem from './DeviceItem';
@@ -11,7 +12,7 @@ import styles from './DeviceItem.module.scss';
 
 interface DeviceListProps {
   state: IssueState;
-  actions: BaseDeviceQuery;
+  actions: BaseIssueQuery;
 }
 const DeviceList = ({ state, actions }: DeviceListProps) => {
   const devices = useAppSelector((state: RootState) => state.device.devices);
