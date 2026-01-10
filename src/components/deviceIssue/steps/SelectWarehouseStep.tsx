@@ -5,7 +5,6 @@ import { BsCheck } from 'react-icons/bs';
 import BtnAction from '@/components/ui/buttons/BtnAction';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
-import { BaseIssueQuery } from '@/types/issue';
 import { Warehouse } from '@/types/locations';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
@@ -14,24 +13,39 @@ import Select from '../select/Select';
 import styles from './Steps.module.scss';
 
 interface SelectWarehouseStepProps {
-  actions: BaseIssueQuery;
+  userWarehouse: (id: string) => void;
+  nextStep: () => void;
+  setWarehouse: (item: Warehouse) => void;
+  fullReset: () => void;
   warehouse: Warehouse;
   warehouses: Warehouse[];
 }
 
-const SelectWarehouseStep = ({ actions, warehouse, warehouses }: SelectWarehouseStepProps) => {
+const SelectWarehouseStep = ({
+  warehouse,
+  warehouses,
+  userWarehouse,
+  nextStep,
+  setWarehouse,
+  fullReset,
+}: SelectWarehouseStepProps) => {
   const currentUserId = useAppSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
     if (currentUserId) {
-      actions.handleGetWarehousesByUser(currentUserId);
+      userWarehouse(currentUserId);
     }
-  }, [currentUserId]);
+  }, [currentUserId, userWarehouse]);
 
   return (
     <div className={styles.inner}>
       <form className={styles.form}>
-        <Select actions={actions} warehouses={warehouses} warehouse={warehouse} />
+        <Select
+          warehouses={warehouses}
+          warehouse={warehouse}
+          setWarehouse={setWarehouse}
+          fullReset={fullReset}
+        />
       </form>
       {warehouse.name && (
         <div className={styles.actions}>
@@ -40,7 +54,7 @@ const SelectWarehouseStep = ({ actions, warehouse, warehouses }: SelectWarehouse
             size="lg"
             color={COLORS.darkGreen}
             title={BUTTON_LABELS.select}
-            click={actions.handleNextStep}
+            click={nextStep}
           />
         </div>
       )}

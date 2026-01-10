@@ -1,21 +1,21 @@
 import { Device } from '@/types/devices';
-import { BaseIssueQuery } from '@/types/issue';
+import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
 import styles from './DeviceItem.module.scss';
 
 interface DeviceItemProps {
-  actions: BaseIssueQuery;
+  setDevice: (item: AssignedDevice) => void;
   devices: Device[];
 }
-const DeviceItem = ({ actions, devices }: DeviceItemProps) => {
+const DeviceItem = ({ devices, setDevice }: DeviceItemProps) => {
   return (
     <>
       {devices.map((item: Device) => (
         <div
           className={styles.list}
           key={item.id}
-          onClick={() => actions.handleSetDevice(prepareIssueDeviceData(item))}
+          onClick={() => setDevice(prepareIssueDeviceData(item))}
         >
           <span className={styles.name}>
             {item.name} {item.inventoryNumber}

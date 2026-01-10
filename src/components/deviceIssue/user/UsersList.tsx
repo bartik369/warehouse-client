@@ -1,24 +1,21 @@
-import { memo } from "react"
-import { BaseUserQuery, User } from "@/types/user";
-import { useAppSelector } from "@/hooks/redux/useRedux";
-import { RootState } from "@/store/store";
-import { IssueState } from "@/features/issue/model/issueTypes";
-import { MESSAGES } from "@/utils/constants/ui/messages";
-import styles from "./UsersList.module.scss";
+import React, { memo } from 'react';
+
+import { IssueState } from '@/features/issue/model/issueTypes';
+import { useAppSelector } from '@/hooks/redux/useRedux';
+import { RootState } from '@/store/store';
+import { BaseUserQuery, User } from '@/types/user';
+import { MESSAGES } from '@/utils/constants/ui/messages';
+
+import styles from './UsersList.module.scss';
 
 interface UsersListProps {
   state: IssueState;
-  actions: BaseUserQuery;
   isSuccess: boolean;
   isFetching: boolean;
+  setUser: (id: string) => Promise<void>;
 }
 
-const UsersList = memo(({
-  state,
-  actions,
-  isSuccess,
-  isFetching
-}: UsersListProps) => {
+const UsersList = memo(({ state, isSuccess, isFetching, setUser }: UsersListProps) => {
   const users = useAppSelector((state: RootState) => state.user.users);
   let content: React.ReactNode = null;
   if (isFetching) {
@@ -29,11 +26,7 @@ const UsersList = memo(({
     return null;
   } else {
     content = users.map((item: User) => (
-      <div
-        className={styles.list}
-        key={item.id}
-        onClick={() => actions.handleSetUser(item.id)}
-      >
+      <div className={styles.list} key={item.id} onClick={() => setUser(item.id)}>
         <span className={styles.name}>
           {item.firstNameRu} {item.lastNameRu}
         </span>

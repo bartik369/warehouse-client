@@ -7,11 +7,11 @@ import DeviceTableRow from './DeviceTableRow';
 
 interface DeviceTableProps {
   showDeleteIcon?: boolean;
-  actions?: BaseIssueQuery;
   state?: IssueState;
+  deleteDevice: (id: string) => void;
 }
 
-const DeviceTable = ({ showDeleteIcon, actions, state }: DeviceTableProps) => {
+const DeviceTable = ({ showDeleteIcon, state, deleteDevice }: DeviceTableProps) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -27,7 +27,7 @@ const DeviceTable = ({ showDeleteIcon, actions, state }: DeviceTableProps) => {
             showDeleteIcon={showDeleteIcon}
             key={device.id}
             device={device}
-            actions={actions!}
+            deleteDevice={() => deleteDevice(device.id)}
           />
         ))}
       </tbody>

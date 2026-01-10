@@ -18,9 +18,24 @@ import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
   state: IssueState;
-  actions: BaseIssueQuery;
+  isSuccess: boolean;
+  isFetching: boolean;
+  userChange: (value: string) => void;
+  resetUserQuery: () => void;
+  setUser: (id: string) => Promise<void>;
+  resetUser: () => void;
+  nextStep: () => void;
 }
-const SelectUserStep = ({ state, actions }: SelectUserStepProps) => {
+const SelectUserStep = ({
+  state,
+  isSuccess,
+  isFetching,
+  userChange,
+  resetUserQuery,
+  setUser,
+  resetUser,
+  nextStep,
+}: SelectUserStepProps) => {
   const user = useAppSelector((state: RootState) => state.user.user);
 
   return (
@@ -29,19 +44,19 @@ const SelectUserStep = ({ state, actions }: SelectUserStepProps) => {
         <Search
           placeholder={PLACEHOLDER_LABELS.userSearch}
           actions={{
-            handleChange: actions.handleUserChange,
-            handleReset: actions.handleResetUserQuery,
+            handleChange: userChange,
+            handleReset: resetUserQuery,
           }}
           value={state.userQuery}
           name="email"
         />
-        {state.isUsersListVisible && actions.isSuccess && state.wasSearched && (
+        {state.isUsersListVisible && isSuccess && state.wasSearched && (
           <div className={styles.result}>
             <UsersList
-              isSuccess={actions.isSuccess}
-              isFetching={actions.isFetching}
+              isSuccess={isSuccess}
+              isFetching={isFetching}
               state={state}
-              actions={actions}
+              setUser={setUser}
             />
           </div>
         )}
@@ -55,14 +70,14 @@ const SelectUserStep = ({ state, actions }: SelectUserStepProps) => {
               size="lg"
               color={COLORS.grey}
               title={BUTTON_LABELS.reset}
-              click={actions.handleResetUser}
+              click={resetUser}
             />
             <BtnAction
               icon={<BsCheck />}
               size="lg"
               color={COLORS.darkGreen}
               title={BUTTON_LABELS.select}
-              click={actions.handleNextStep}
+              click={nextStep}
             />
           </div>
         </>

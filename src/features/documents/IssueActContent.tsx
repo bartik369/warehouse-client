@@ -8,10 +8,10 @@ import { IssueState } from '../issue/model/issueTypes';
 
 interface IssueActContentProps {
   state: IssueState;
-  actions: BaseIssueQuery;
+  deleteDevice: (id: string) => void;
 }
 
-const IssueActContent = ({ state, actions }: IssueActContentProps) => {
+const IssueActContent = ({ state, deleteDevice }: IssueActContentProps) => {
   const issueUser = useAppSelector(currentUser);
   const receiveUser = useAppSelector(partnerUser);
   return (
@@ -29,7 +29,7 @@ const IssueActContent = ({ state, actions }: IssueActContentProps) => {
         </strong>{' '}
         подписали настоящий акт приема передачи на основании договора №123456789
       </p>
-      <DeviceTable state={state} actions={actions} />
+      <DeviceTable state={state} deleteDevice={deleteDevice} />
     </>
   );
 };

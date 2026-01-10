@@ -2,6 +2,7 @@ import jsPlugin from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
+import globals from 'globals';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -14,6 +15,7 @@ export default [
         project: './tsconfig.json',
       },
       globals: {
+        ...globals.browser,
         console: 'readonly',
       },
     },

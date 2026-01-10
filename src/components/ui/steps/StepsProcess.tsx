@@ -24,13 +24,39 @@ const StepsProcess = ({ actions, state }: StepsProcessProps) => {
 
   const stepContent = [
     <SelectWarehouseStep
-      actions={actions}
       warehouse={state.warehouse}
       warehouses={state.warehouses}
+      userWarehouse={actions.handleGetWarehousesByUser}
+      nextStep={actions.handleNextStep}
+      setWarehouse={actions.handleSetWarehouse}
+      fullReset={actions.handleFullReset}
     />,
-    <SelectUserStep actions={actions} state={state} />,
-    <ReviewDocumentStep actions={actions} state={state} />,
-    <SignDocumentStep actions={actions} state={state} />,
+    <SelectUserStep
+      state={state}
+      isSuccess={actions.isSuccess}
+      isFetching={actions.isFetching}
+      setUser={actions.handleSetUser}
+      resetUser={actions.handleResetUser}
+      nextStep={actions.handleNextStep}
+      userChange={actions.handleUserChange}
+      resetUserQuery={actions.handleResetUserQuery}
+    />,
+    <ReviewDocumentStep
+      state={state}
+      nextStep={actions.handleNextStep}
+      setDevice={actions.handleSetDevice}
+      deleteDevice={actions.handleDeleteDevice}
+      resetDevices={actions.handleResetIssueDevices}
+      getDevice={actions.handleGetDevice}
+      changeDevice={actions.handleDeviceChange}
+      resetDeviceQuery={actions.handleResetDeviceQuery}
+    />,
+    <SignDocumentStep
+      state={state}
+      isIssueLoading={actions.isIssueLoading}
+      deleteDevice={actions.handleDeleteDevice}
+      handleComplete={actions.handleCompleteProcess}
+    />,
     <FinalizeIssueStep state={state} />,
   ];
   const getStepItems = (): ItemType[] => {
