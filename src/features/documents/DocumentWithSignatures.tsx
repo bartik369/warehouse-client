@@ -23,11 +23,18 @@ import IssueActContent from './IssueActContent';
 import Signatures from './Signatures';
 
 interface DocumentWithSignaturesProps {
-  actions: BaseIssueQuery;
   state: IssueState;
+  isIssueLoading: boolean;
+  deleteDevice: (id: string) => void;
+  handleComplete: (file: Blob) => void;
 }
 
-const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps) => {
+const DocumentWithSignatures = ({
+  state,
+  isIssueLoading,
+  deleteDevice,
+  handleComplete,
+}: DocumentWithSignaturesProps) => {
   const issuerSignature = useAppSelector(selectIssuerSignature);
   const receiverSignature = useAppSelector(selectReceiverSignature);
   const issueUser = useAppSelector(currentUser);
@@ -59,7 +66,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
   const handleSend = async () => {
     try {
       const blob = await generatePDFBlob();
-      actions.handleCompleteProcess(blob);
+      handleComplete(blob);
     } catch (err) {
       console.error('Ошибка при отправке PDF:', err);
     }
@@ -67,7 +74,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
 
   return (
     <div className={styles.wrapper}>
-      {actions.isIssueLoading && (
+      {isIssueLoading && (
         <div className={styles.loader}>
           <EnvelopeLoader />
         </div>
@@ -88,7 +95,7 @@ const DocumentWithSignatures = ({ actions, state }: DocumentWithSignaturesProps)
             </time>
           </header>
           <div className={styles.info}>
-            <IssueActContent state={state} actions={actions} />
+            <IssueActContent state={state} deleteDevice={deleteDevice} />
           </div>
           <Signatures
             issuerSignature={issuerSignature}

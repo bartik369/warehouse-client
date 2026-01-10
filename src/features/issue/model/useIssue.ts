@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useDebounce } from '@/hooks/data/useDebounce.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
@@ -40,6 +40,7 @@ import {
 } from './issueSlice';
 
 export const useIssue = () => {
+  const [issueFile, setIssueFile] = useState<Blob>();
   const state = useAppSelector((state) => state.issue);
   const { processId, devices } = state.deviceIssueData;
   const userDebouncedQuery = useDebounce(state.userQuery, 700);
@@ -112,13 +113,14 @@ export const useIssue = () => {
     async (file: Blob) => {
       if (!file) return;
       try {
-        issueDispatch(setPdfFile(file));
+        setIssueFile(file);
         const issueData = new FormData();
         issueData.append('processId', state.deviceIssueData?.processId);
         issueData.append('file', file);
         const data = await finalizeIssue(issueData).unwrap();
         if (data) {
           issueDispatch(setIssueNextStep());
+          issueDispatch(setIssueStep(0));
         }
       } catch (err: unknown) {
         handleApiError(err);

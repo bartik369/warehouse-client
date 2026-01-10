@@ -6,11 +6,11 @@ import styles from './DeviceTable.module.scss';
 
 interface DeviceTableRowProps {
   device: AssignedDevice;
-  actions: BaseIssueQuery;
   showDeleteIcon?: boolean | null;
+  deleteDevice: (id: string) => void;
 }
 
-const DeviceTableRow = ({ device, actions, showDeleteIcon }: DeviceTableRowProps) => {
+const DeviceTableRow = ({ device, showDeleteIcon, deleteDevice }: DeviceTableRowProps) => {
   return (
     <tr className={styles.row}>
       <td>{device.name}</td>
@@ -21,10 +21,7 @@ const DeviceTableRow = ({ device, actions, showDeleteIcon }: DeviceTableRowProps
       <td>{device.serialNumber}</td>
       {showDeleteIcon && (
         <td>
-          <RiDeleteBin4Line
-            className={styles.icon}
-            onClick={() => actions.handleDeleteDevice(device.id)}
-          />
+          <RiDeleteBin4Line className={styles.icon} onClick={() => deleteDevice(device.id)} />
         </td>
       )}
     </tr>

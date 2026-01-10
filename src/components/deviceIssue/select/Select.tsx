@@ -3,18 +3,18 @@ import { useEffect, useRef } from 'react';
 import { TbSelector } from 'react-icons/tb';
 
 import { useModal } from '@/hooks/data/useModal';
-import { BaseIssueQuery } from '@/types/issue';
 import { Warehouse } from '@/types/locations';
 import { SELECTS } from '@/utils/constants/ui/selects';
 
 import styles from './Select.module.scss';
 
 interface SelectProps {
-  actions: BaseIssueQuery;
   warehouse: Warehouse;
   warehouses: Warehouse[];
+  setWarehouse: (item: Warehouse) => void;
+  fullReset: () => void;
 }
-const Select = ({ warehouse, warehouses, actions }: SelectProps) => {
+const Select = ({ warehouse, warehouses, setWarehouse, fullReset }: SelectProps) => {
   const { setIsOpen, isOpen } = useModal(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -45,8 +45,8 @@ const Select = ({ warehouse, warehouses, actions }: SelectProps) => {
                 key={option.id}
                 className={styles.option}
                 onClick={() => {
-                  actions.handleSetWarehouse(option);
-                  actions.handleFullReset();
+                  setWarehouse(option);
+                  fullReset();
                   setIsOpen(false);
                 }}
                 role="button"

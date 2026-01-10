@@ -3,14 +3,26 @@ import { IssueState } from '@/features/issue/model/issueTypes';
 import { BaseIssueQuery } from '@/types/issue';
 
 interface SignDocumentStepProps {
-  actions: BaseIssueQuery;
   state: IssueState;
+  isIssueLoading: boolean;
+  deleteDevice: (id: string) => void;
+  handleComplete: (file: Blob) => void;
 }
 
-const SignDocumentStep = ({ actions, state }: SignDocumentStepProps) => {
+const SignDocumentStep = ({
+  state,
+  isIssueLoading,
+  deleteDevice,
+  handleComplete,
+}: SignDocumentStepProps) => {
   return (
     <>
-      <DocumentWithSignatures actions={actions} state={state} />
+      <DocumentWithSignatures
+        state={state}
+        isIssueLoading={isIssueLoading}
+        deleteDevice={deleteDevice}
+        handleComplete={handleComplete}
+      />
     </>
   );
 };
