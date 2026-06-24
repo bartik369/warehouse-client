@@ -681,6 +681,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "@hookform/resolvers@npm:5.4.0"
+  dependencies:
+    "@standard-schema/utils": "npm:^0.3.0"
+  peerDependencies:
+    react-hook-form: ^7.55.0
+  checksum: 10c0/ea312948a8ee4dd711287295c95ddd4cefc69d3e01ecf196477aaf5179fbb28b10801486cb3e909abaea169ee7199ce9e725fcded8a98a539ba07aa278753a42
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -5408,12 +5419,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.69.0":
-  version: 7.70.0
-  resolution: "react-hook-form@npm:7.70.0"
+"react-hook-form@npm:^7.80.0":
+  version: 7.80.0
+  resolution: "react-hook-form@npm:7.80.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10c0/009c9c86b9ddb4f68964a121693fedcf61d656bc30052b217d4c87002ee26d6c5540cabd193abca4eb290775fdcd3c0a06b3b96fd54d9fead0c0d268a1760a5e
+  checksum: 10c0/9a2a1316a562d3a144e3854ce22123b08fe886c8e0327a0682d3d30312a851beac115049f285bacd20d9dd1bdfe7d05333b5dab8ecb9b18c2976557220c8e648
   languageName: node
   linkType: hard
 
@@ -6917,6 +6928,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": "npm:^6.7.2"
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.2"
+    "@hookform/resolvers": "npm:^5.4.0"
     "@react-pdf/renderer": "npm:^4.3.0"
     "@reduxjs/toolkit": "npm:^2.3.0"
     "@trivago/prettier-plugin-sort-imports": "npm:^6.0.1"
@@ -6929,6 +6941,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.51.0"
     "@vitejs/plugin-react": "npm:^4.3.1"
     antd: "npm:^6.1.1"
+    clsx: "npm:^2.1.1"
     date-fns: "npm:^4.1.0"
     eslint: "npm:^9.39.2"
     eslint-plugin-import: "npm:^2.32.0"
@@ -6945,7 +6958,7 @@ __metadata:
     react-datepicker: "npm:^8.1.0"
     react-dom: "npm:^18.3.1"
     react-error-boundary: "npm:^6.0.0"
-    react-hook-form: "npm:^7.69.0"
+    react-hook-form: "npm:^7.80.0"
     react-icons: "npm:^5.4.0"
     react-redux: "npm:^9.1.2"
     react-router: "npm:^6.28.0"
@@ -6959,6 +6972,7 @@ __metadata:
     typescript: "npm:^5.7.2"
     vite: "npm:^6.2.0"
     xlsx: "npm:^0.18.5"
+    zod: "npm:^4.4.3"
   languageName: unknown
   linkType: soft
 
@@ -7135,5 +7149,12 @@ __metadata:
   version: 3.2.1
   resolution: "yoga-layout@npm:3.2.1"
   checksum: 10c0/9001e51be993c85e03757e5a04a2b61b8b30c9e5a7865d0156ca87a6431a3b717d51eb4990bfe588189fcfeac688dd9c3de707bbd50d1c344a84e63974cc54a8
+  languageName: node
+  linkType: hard
+
+"zod@npm:^4.4.3":
+  version: 4.4.3
+  resolution: "zod@npm:4.4.3"
+  checksum: 10c0/7ea31b558e88f9faf44f31dd185e2e1cbf51fed3081787fb96cc2534749b50c0acfc6da7f0922a7353ed092dd358c7d50c28ea96c94d04af64191bd33152eca3
   languageName: node
   linkType: hard
