@@ -25,6 +25,7 @@ export default [
     },
     rules: {
       'no-console': 'off',
+      'no-undef': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',

@@ -1,0 +1,41 @@
+.root {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  .input {
+    height: 40px;
+    border: 1px solid var(--border-primary);
+  }
+  .label {
+    position: absolute;
+    z-index: 99;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 12px;
+    background: #fff;
+    padding: 0 4px;
+    pointer-events: none;
+    transition: 0.15s ease;
+    &.labelActive {
+      top: 0;
+      transform: translateY(-50%);
+    }
+  }
+  &:focus-within {
+    .label {
+      border-radius: 4px 4px 0 0;
+      padding: 2px 6px;
+      top: 0;
+    }
+  }
+}
+
+.error {
+  margin: 4px 0 0;
+  color: #ff4d4f;
+  font-size: 12px;
+}

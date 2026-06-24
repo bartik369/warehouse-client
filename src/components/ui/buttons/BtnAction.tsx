@@ -1,19 +1,21 @@
-import React, { memo } from "react";
-import styles from "./Buttons.module.scss";
+import React, { memo } from 'react';
+
+import styles from './Buttons.module.scss';
 
 interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   icon?: JSX.Element;
-  size: "sm" | "md" | "lg";
+  size: 'sm' | 'md' | 'lg';
   color: string;
   title: string;
   click?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const BtnAction = memo(({ icon, size, title, color, click }: ButtonProps) => {
+const BtnAction = memo(({ icon, size, title, color, type = 'button', click }: ButtonProps) => {
   return (
     <button
       onClick={click}
-      type="button"
+      type={type}
       tabIndex={0}
       className={`${styles.button} ${styles[size]} ${styles[color]}`}
     >

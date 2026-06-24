@@ -1,85 +1,41 @@
 @mixin border {
-    border: 1px solid #5d5f6e;
-    outline: none;
+  border: 1px solid #5d5f6e;
+  outline: none;
 }
 
 .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  .logo {
+    background-color: #5d5f6e;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100dvh;
-    .inner {
-        max-width: 750px;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 10px;
-        background-color: #37b6a3;
-        .logo {
-            background-color: #5d5f6e;
-            display: flex;
-            justify-content: center;
-        }
-        .right {
-            position: relative;
-            width: 55%;
-            .title {
-                position: absolute;
-                color: #ffffff;
-                font-size: 20px;
-                font-weight: 800;
-                text-transform: uppercase;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            img {
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-            }
-        }
-        .left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            padding: 30px;
-            .input {
-                position: relative;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                .label {
-                    display: none;
-                }
-                input {
-                    border: 1px solid #0f5ca9 !important;
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 45px;
-                    border-radius: 20px;
-                    padding: 0px 24px;
-                    margin: 0;
-                    transition: border-color .4s ease-in;
-                    font-size: 14px;
-                    color: #15141f;
-                    &:focus {
-                        @include border;
-                    }
-                     ::placeholder {
-                        color: #9ba4a9;
-                        font-size: 12px;
-                        font-weight: 100;
-                    }
-                    &:hover {
-                        @include border;
-                    }
-                }
-            }
-        }
+  }
+  .left {
+    overflow: hidden;
+    flex: 1;
+    height: 100%;
+    img {
+      display: block;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    background-color: var(--bg-primary);
+    .form {
+      width: 100%;
+      padding: 20px;
+      max-width: 400px;
+    }
+  }
 }

@@ -1,0 +1,111 @@
+:root {
+  /* COLORS */
+  --white: #ffffff;
+  --gray-50: #fafbfc;
+  --gray-100: #f5f7f9;
+  --gray-150: #f1f4f6;
+  --gray-200: #e8ebef;
+  --gray-300: #d9dde3;
+  --gray-400: #c3c8d0;
+  --gray-500: #9ca3af;
+  --gray-600: #6b7280;
+  --gray-700: #4b5563;
+  --gray-800: #374151;
+  --gray-900: #1f2937;
+  --orange-50: #fff7f2;
+  --orange-100: #fff1e8;
+  --orange-200: #ffe3d1;
+  --orange-500: #fe7126;
+  --orange-600: #e9641c;
+  --green-50: #ecfdf3;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --yellow-50: #fff8e1;
+  --yellow-500: #f6bc0f;
+  --red-50: #fef2f2;
+  --red-500: #ef4444;
+  --blue-50: #eff6ff;
+  --blue-500: #3b82f6;
+  /* TEXT  */
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
+  --text-disabled: var(--gray-400);
+  --text-inverse: var(--white);
+  /* BACKGROUND */
+  --bg-primary: var(--gray-100);
+  --bg-secondary: var(--gray-50);
+  --bg-sidebar: #f7f8fa;
+  --bg-card: var(--white);
+  --bg-hover: var(--gray-50);
+  --bg-selected: var(--orange-100);
+  --bg-disabled: var(--gray-150);
+  /* BORDER */
+  --border-primary: var(--gray-300);
+  --border-secondary: var(--gray-200);
+  --border-focus: var(--orange-500);
+  /* BRAND */
+  --brand-primary: var(--orange-500);
+  --brand-primary-hover: var(--orange-600);
+  --brand-primary-soft: var(--orange-100);
+  /* BUTTONS */
+  --button-primary-bg: var(--brand-primary);
+  --button-primary-bg-hover: var(--brand-primary-hover);
+  --button-primary-text: var(--white);
+  --button-secondary-bg: var(--white);
+  --button-secondary-border: var(--border-primary);
+  --button-secondary-text: var(--gray-800);
+  /* INPUTS */
+  --input-bg: var(--white);
+  --input-border: var(--border-primary);
+  --input-placeholder: var(--gray-500);
+  /* TABLE  */
+  --table-header-bg: var(--white);
+  --table-row-bg: var(--white);
+  --table-row-hover: var(--gray-50);
+  --table-row-selected: var(--orange-100);
+  /* STATUS  */
+  --success: var(--green-500);
+  --success-bg: var(--green-50);
+  --warning: var(--yellow-500);
+  --warning-bg: var(--yellow-50);
+  --danger: var(--red-500);
+  --danger-bg: var(--red-50);
+  --info: var(--blue-500);
+  --info-bg: var(--blue-50);
+  /* STATUSES */
+  --status-hot-bg: #fff4e8;
+  --status-hot-text: #d97706;
+  --status-open-bg: #f3f4f6;
+  --status-open-text: #6b7280;
+  --status-qualified-bg: #ecfdf3;
+  --status-qualified-text: #16a34a;
+  --status-progress-bg: #eff6ff;
+  --status-progress-text: #2563eb;
+  --status-pending-bg: #faf5ff;
+  --status-pending-text: #9333ea;
+  /* CHARTS */
+  --chart-primary: var(--orange-500);
+  --chart-success: var(--green-500);
+  --chart-warning: var(--yellow-500);
+  --chart-danger: var(--red-500);
+  /* SHADOWS */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+  /* RADIUS */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+  /* SPACING */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+}

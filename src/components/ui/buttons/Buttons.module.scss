@@ -1,127 +1,128 @@
 .button {
-    border: none;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color .3s ease-in;
-    margin-top: 15px;
-    cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in;
+  margin-top: 15px;
+  cursor: pointer;
 }
 
 .sm {
-    padding: 9px 9px;
-    border-radius: 4px;
-    font-size: 12px;
-    .icon {
-        display: flex;
-        align-items: center;
-        font-size: 18px;
-        margin-right: 2px;
-    }
+  padding: 9px 9px;
+  border-radius: 4px;
+  font-size: 12px;
+  .icon {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 2px;
+  }
 }
 
 .md {
-    padding: 10px 25px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 400;
-    transition: color .4s ease-in-out;
-    .icon {
-        display: flex;
-        align-items: center;
-        font-size: 24px;
-        margin-right: 2px;
-    }
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  transition: color 0.4s ease-in-out;
+  .icon {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 2px;
+  }
 }
 
 .lg {
-    padding: 12px 20px;
-    border-radius: 8px;
-    max-width: 120px;
-    width: 100%;
-    font-size: 13px;
-    .icon {
-        display: flex;
-        align-items: center;
-        font-size: 23px;
-    }
+  padding: 12px 20px;
+  border-radius: 8px;
+  max-width: 120px;
+  width: 100%;
+  font-size: 13px;
+  .icon {
+    display: flex;
+    align-items: center;
+    font-size: 23px;
+  }
 }
 
 .light {
-    background-color: transparent;
-    font-size: 14px;
-    &:hover {
-        color: #3cb3a1;
-    }
+  background-color: transparent;
+  font-size: 14px;
+  &:hover {
+    color: #3cb3a1;
+  }
 }
 
 .blue-green {
-    background-color: #81c4db;
-    color: #fff;
-    &:hover {
-        background-color: #60abc5;
-    }
+  background-color: #81c4db;
+  color: #fff;
+  &:hover {
+    background-color: #60abc5;
+  }
 }
 
 .green,
 .dark-green {
-    color: #fff;
-    transition: background-color .3s ease-in;
-    &:hover {
-        background-color: #41c0ad;
-    }
+  color: #fff;
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: #41c0ad;
+  }
 }
 
 .green {
-    background-color: #3cb3a1;
+  background-color: #3cb3a1;
 }
 
-.dark-green {
-    background-color: #379492;
+.orange {
+  background-color: var(--button-primary-bg);
+  color: #ffffff;
 }
 
 .grey-light {
-    background-color: #aeb2bd;
-    color: #fff;
-    &:hover {
-        background-color: #b4b9c5;
-    }
+  background-color: #aeb2bd;
+  color: #fff;
+  &:hover {
+    background-color: #b4b9c5;
+  }
 }
 
 .dark-grey {
-    background-color: rgb(79, 91, 114);
-    transition: background-color .3s ease-in;
-    color: #fff;
-    &:hover {
-        background-color: rgb(89, 103, 128);
-    }
+  background-color: rgb(79, 91, 114);
+  transition: background-color 0.3s ease-in;
+  color: #fff;
+  &:hover {
+    background-color: rgb(89, 103, 128);
+  }
 }
 
 .grey {
-    background-color: #6b7993;
-    color: #fff;
-    &:hover {
-        background-color: #7786a3;
-    }
+  background-color: #6b7993;
+  color: #fff;
+  &:hover {
+    background-color: #7786a3;
+  }
 }
 
 .red {
-    background-color: #ff6a73;
-    color: #ffffff;
-    &:hover {
-        background-color: #ff8991;
-    }
+  background-color: #ff6a73;
+  color: #ffffff;
+  &:hover {
+    background-color: #ff8991;
+  }
 }
 
 .dark {
-    background-color: #5c5f6e;
-    color: #fff;
-    margin: 10px;
-    &:hover {
-        background-color: #a2a6b7;
-    }
-    &:focus {
-        border: 2px solid #000000;
-    }
+  background-color: #5c5f6e;
+  color: #fff;
+  margin: 10px;
+  &:hover {
+    background-color: #a2a6b7;
+  }
+  &:focus {
+    border: 2px solid #000000;
+  }
 }
