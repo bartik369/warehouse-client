@@ -1,0 +1,25 @@
+@mixin commonSettings {
+  position: fixed;
+  height: 100dvh;
+  padding-top: 25px;
+  z-index: 10;
+  transition: all 0.08s ease-in;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid #e1e4e3;
+  // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.active {
+  @include commonSettings;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notactive {
+  @include commonSettings;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

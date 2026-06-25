@@ -1,16 +1,11 @@
 import React from 'react';
 
 import { AiOutlineUnlock } from 'react-icons/ai';
-import { BiMessageSquareDetail } from 'react-icons/bi';
 import { BsArrowsMove } from 'react-icons/bs';
 import { FiUserMinus, FiUserPlus } from 'react-icons/fi';
-import { IoCalendarNumberOutline, IoStatsChartOutline } from 'react-icons/io5';
 import { LiaCitySolid } from 'react-icons/lia';
-import { LuHandshake, LuUsers, LuWarehouse } from 'react-icons/lu';
-import { LuSquareChevronUp } from 'react-icons/lu';
-import { MdOutlineLibraryAddCheck, MdSupportAgent } from 'react-icons/md';
+import { MdSupportAgent } from 'react-icons/md';
 import { MdOutlineLockReset } from 'react-icons/md';
-import { MdOutlineInventory } from 'react-icons/md';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { TbArrowsMove } from 'react-icons/tb';
 import {
@@ -41,26 +36,7 @@ export const profileMenuData = [
   { id: 3, title: 'Сброс пароля', path: '#', icon: MdOutlineLockReset },
   { id: 4, title: 'Настройки', path: '#', icon: TbSettings },
 ];
-export const sidebarMenuData = [
-  {
-    id: 1,
-    title: 'Локации',
-    path: 'devices/locations',
-    icon: LuWarehouse,
-    subMenu: [
-      { id: 1, title: 'Московский офис', path: 'msk' },
-      { id: 2, title: 'Екатеринбург', path: 'ekb' },
-    ],
-  },
-  { id: 2, title: 'Выдать', path: '/issue/create-issue', icon: LuSquareChevronUp },
-  { id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail },
-  { id: 4, title: 'Пользователи', path: '/admin/users', icon: LuUsers },
-  { id: 5, title: 'Инвентаризации', path: '/inventory/inventory-create', icon: MdOutlineInventory },
-  { id: 6, title: 'Подрядчики', path: '/contractors', icon: LuHandshake },
-  { id: 7, title: 'Календарь', path: '/calendar', icon: IoCalendarNumberOutline },
-  { id: 8, title: 'Статистика', path: '/statistics', icon: IoStatsChartOutline },
-  { id: 9, title: 'База знаний', path: '/knowledge', icon: MdOutlineLibraryAddCheck },
-];
+
 export const deviceActionsMenu = [
   { id: 1, title: 'Выдать', icon: FiUserPlus },
   { id: 2, title: 'Принять', icon: FiUserMinus },

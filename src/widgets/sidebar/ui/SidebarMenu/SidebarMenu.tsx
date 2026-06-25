@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import SubMenu from './SubMenu';
-import { sidebarMenuData } from '@/utils/data/menus';
+
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { NavLink } from 'react-router-dom';
+
+import { sidebarMenuData } from '../../model/sidebarMenuData';
 import styles from './SidebarMenu.module.scss';
+import SubMenu from './SubMenu';
 
 interface SidebarMenuProps {
   open: boolean;
@@ -29,14 +31,10 @@ const SidebarMenu = ({ open }: SidebarMenuProps) => {
         {sidebarMenuData.map((item) => (
           <li key={item.id} className={styles.menuItem}>
             <NavLink
-              to={item.subMenu ? "" : item.path}
+              to={item.subMenu ? '' : item.path}
               className={({ isActive }) =>
                 `${styles.menuItemHeader} ${
-                  isActive
-                    ? styles.activeMenu
-                    : item.subMenu
-                    ? styles.hasSubmenu
-                    : ""
+                  isActive ? styles.activeMenu : item.subMenu ? styles.hasSubmenu : ''
                 }`
               }
               onClick={() => item.subMenu && toggleSubmenu(item.id)}
@@ -45,18 +43,8 @@ const SidebarMenu = ({ open }: SidebarMenuProps) => {
             >
               <span className={!open ? styles.icon : styles.openIcon}>
                 {!item.subMenu
-                  ? item.icon && (
-                      <item.icon
-                        className={styles.icon}
-                        aria-label={item.title}
-                      />
-                    )
-                  : item.icon && (
-                      <item.icon
-                        className={styles.icon}
-                        aria-label={item.title}
-                      />
-                    )}
+                  ? item.icon && <item.icon className={styles.icon} aria-label={item.title} />
+                  : item.icon && <item.icon className={styles.icon} aria-label={item.title} />}
               </span>
               {!open && hoveredItem === item.id && !item.subMenu && (
                 <div className={styles.title}>{item.title}</div>
@@ -66,7 +54,7 @@ const SidebarMenu = ({ open }: SidebarMenuProps) => {
               ) : open && item.subMenu ? (
                 <div className={styles.subTitle}>{item.title}</div>
               ) : (
-                ""
+                ''
               )}
               {!open && hoveredItem === item.id && item.subMenu && (
                 <div className={styles.closedSubmenu}>
@@ -75,11 +63,7 @@ const SidebarMenu = ({ open }: SidebarMenuProps) => {
               )}
               {item.subMenu && open && (
                 <span className={styles.toggleSubmenu}>
-                  {openSubmenu === item.id ? (
-                    <IoIosArrowUp />
-                  ) : (
-                    <IoIosArrowDown />
-                  )}
+                  {openSubmenu === item.id ? <IoIosArrowUp /> : <IoIosArrowDown />}
                 </span>
               )}
             </NavLink>
