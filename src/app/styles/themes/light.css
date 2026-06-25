@@ -35,7 +35,7 @@
   /* BACKGROUND */
   --bg-primary: var(--gray-100);
   --bg-secondary: var(--gray-50);
-  --bg-sidebar: #f7f8fa;
+  --bg-sidebar: var(--gray-800);
   --bg-card: var(--white);
   --bg-hover: var(--gray-50);
   --bg-selected: var(--orange-100);
