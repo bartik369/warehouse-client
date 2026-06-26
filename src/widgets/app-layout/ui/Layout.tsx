@@ -4,13 +4,13 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import LocalFallback from '@/components/ui/error/LocalFallback';
+import Header from '@/widgets/header/ui/Header/Header';
 
-import Breadcrumbs from '../components/breadcrumbs/Breadcrumbs';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/Header';
-import { GlobalModal } from '../components/modal/GlobalModal';
-import AdminMenu from '../components/navigates/admin/AdminMenu';
-import Sidebar from '../widgets/sidebar/ui/Sidebar/Sidebar';
+import Breadcrumbs from '../../../components/breadcrumbs/Breadcrumbs';
+import Footer from '../../../components/footer/Footer';
+import { GlobalModal } from '../../../components/modal/GlobalModal';
+import AdminMenu from '../../../components/navigates/admin/AdminMenu';
+import Sidebar from '../../sidebar/ui/Sidebar/Sidebar';
 import styles from './Layout.module.scss';
 
 const Layout = () => {

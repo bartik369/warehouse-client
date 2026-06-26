@@ -5,8 +5,6 @@ import { BsArrowsMove } from 'react-icons/bs';
 import { FiUserMinus, FiUserPlus } from 'react-icons/fi';
 import { LiaCitySolid } from 'react-icons/lia';
 import { MdSupportAgent } from 'react-icons/md';
-import { MdOutlineLockReset } from 'react-icons/md';
-import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { TbArrowsMove } from 'react-icons/tb';
 import {
   TbBrandComedyCentral,
@@ -14,8 +12,6 @@ import {
   TbFileDescription,
   TbLocationPlus,
 } from 'react-icons/tb';
-import { TbSettings } from 'react-icons/tb';
-import { TbUserCircle } from 'react-icons/tb';
 
 import ekb from '@/assets/elements/ekb.png';
 import msk from '@/assets/elements/msk.png';
@@ -29,12 +25,6 @@ export const headerMenuData = [
   { id: 2, title: 'Ссылка 2', path: '#' },
   { id: 3, title: 'Ссылка 3', path: '#' },
   { id: 4, title: 'Ссылка 4', path: '#' },
-];
-export const profileMenuData = [
-  { id: 1, title: 'Админ-панель', path: '/admin/add-device', icon: MdOutlineAdminPanelSettings },
-  { id: 2, title: 'Профиль', path: '#', icon: TbUserCircle },
-  { id: 3, title: 'Сброс пароля', path: '#', icon: MdOutlineLockReset },
-  { id: 4, title: 'Настройки', path: '#', icon: TbSettings },
 ];
 
 export const deviceActionsMenu = [
