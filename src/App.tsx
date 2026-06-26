@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useValidateMutation } from './store/api/authApi';
-import { useAppDispatch} from './hooks/redux/useRedux';
-import { setCredentials, setAuth } from './store/slices/authSlice';
-import PrivateRoutes from './routes/PrivateRoutes';
-import Layout from './routes/Layout';
-import PublicRoutes from './routes/PublicRoutes';
+
+import { Route, Routes } from 'react-router-dom';
+
+import './App.scss';
+import PrivateRoutes from './app/router/PrivateRoutes';
+import PublicRoutes from './app/router/PublicRoutes';
+import Page404 from './components/pages/404/page404';
 import privateRoutes from './config/routes/privateRoutes';
 import publicRoutes from './config/routes/publicRoutes';
+import { useAppDispatch } from './hooks/redux/useRedux';
+import { useValidateMutation } from './store/api/authApi';
+import { setAuth, setCredentials } from './store/slices/authSlice';
 import { handleApiError } from './utils/errors/handleApiError';
-import Page404 from './components/pages/404/page404';
-import './App.scss';
+import Layout from './widgets/app-layout/ui/Layout';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,7 +28,7 @@ function App() {
       try {
         const data = await validToken(null).unwrap();
         if (data) {
-          localStorage.setItem('hasAccessToken', 'true')
+          localStorage.setItem('hasAccessToken', 'true');
           dispatch(setCredentials(data));
         }
       } catch (err) {
@@ -35,7 +37,7 @@ function App() {
       }
     })();
   }, []);
-  
+
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
@@ -57,4 +59,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
