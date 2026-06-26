@@ -9,7 +9,7 @@ import Header from '@/widgets/header/ui/Header/Header';
 import Breadcrumbs from '../../../components/breadcrumbs/Breadcrumbs';
 import Footer from '../../../components/footer/Footer';
 import { GlobalModal } from '../../../components/modal/GlobalModal';
-import AdminMenu from '../../../components/navigates/admin/AdminMenu';
+import AdminMenu from '../../admin-menu/ui/AdminMenu';
 import Sidebar from '../../sidebar/ui/Sidebar/Sidebar';
 import styles from './Layout.module.scss';
 
