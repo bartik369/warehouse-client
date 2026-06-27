@@ -18,7 +18,7 @@ import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
 
 import { getDevicesColumns } from '../model/devices.columns';
-import styles from './DeviceTable.module.css';
+import styles from './DeviceTable.module.scss';
 
 interface DeviceTableProps {
   devices: FilteredDevicesFromBack[];
@@ -37,7 +37,7 @@ interface DeviceTableProps {
   ) => void;
 }
 
-const DevicesTable = ({
+export const DevicesTable = ({
   devices,
   options,
   filters,
@@ -103,6 +103,7 @@ const DevicesTable = ({
 
   const DeviceTable = (
     <Table
+      className={styles.devicesTable}
       rowKey="id"
       size="small"
       bordered={false}
@@ -113,6 +114,7 @@ const DevicesTable = ({
       scroll={{ x: calculateTableWidth() }}
       onChange={onTableChange}
       pagination={{
+        className: styles.pagination,
         pageSize: limit,
         current: page,
         total: totalCount,
@@ -129,8 +131,3 @@ const DevicesTable = ({
     </div>
   );
 };
-
-export default DevicesTable;
-function dispatch(arg0: { type: IssueActionTypes }) {
-  throw new Error('Function not implemented.');
-}

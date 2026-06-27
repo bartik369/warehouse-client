@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px;
+  .checkboxes {
+    padding: 12px;
+  }
+}
+
+.filterCheckbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: #ff6600;
+    border-color: #ff6600;
+  }
+  :global(.ant-checkbox:hover .ant-checkbox-inner) {
+    border-color: #ff6600;
+  }
+  :global(.ant-checkbox-checked:hover .ant-checkbox-inner) {
+    background-color: #ff6600;
+    border-color: #ff6600;
+  }
+  :global(.ant-checkbox-wrapper:hover .ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: #ff6600;
+    border-color: #ff6600;
+  }
+  :global(
+    .ant-checkbox-wrapper:hover
+      .ant-checkbox-checked:not(.ant-checkbox-disabled)
+      .ant-checkbox-inner
+  ) {
+    background-color: #ff6600;
+    border-color: #ff6600;
+  }
+  :global {
+    .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+      border-color: var(--orange-500) !important;
+    }
+    .ant-checkbox-wrapper:hover .ant-checkbox::after {
+      border-color: var(--orange-500) !important;
+    }
+  }
+}

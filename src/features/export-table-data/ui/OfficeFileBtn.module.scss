@@ -1,0 +1,22 @@
+.icons {
+  font-size: 18px;
+  .items {
+    display: flex;
+    gap: 6px;
+    cursor: pointer;
+    .green {
+      color: #52627d;
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: var(--green-500);
+      }
+    }
+    .yellow {
+      color: #52627d;
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: var(--yellow-500);
+      }
+    }
+  }
+}

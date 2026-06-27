@@ -1,0 +1,76 @@
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.iconWrapper svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.serviceable,
+.notServiceable,
+.inStock,
+.inUse {
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-size: 12px;
+    margin-left: 1px;
+  }
+}
+
+.serviceable {
+  color: var(--green-500);
+}
+
+.notServiceable {
+  color: var(--gray-500);
+}
+
+.inStock {
+  color: var(--green-500);
+}
+
+.inUse {
+  color: var(--gray-500);
+}
+
+.infoButton :global(.anticon) {
+  font-size: 17px !important;
+  color: #667592 !important;
+  transition: color 0.5s ease-in;
+  &:hover {
+    color: var(--orange-500) !important;
+  }
+}
+
+:global {
+  .ant-table-column-sorter-up,
+  .ant-table-column-sorter-down {
+    color: var(--gray-400) !important;
+    svg {
+      color: var(--gray-400) !important;
+      fill: var(--gray-400) !important;
+    }
+  }
+  .ant-table-column-sorter-up.active,
+  .ant-table-column-sorter-down.active {
+    color: var(--orange-500) !important;
+    svg {
+      color: var(--orange-500) !important;
+      fill: var(--orange-500) !important;
+    }
+  }
+}
+
+:global {
+  .ant-table-filter-trigger.active {
+    color: var(--orange-500) !important;
+  }
+}
