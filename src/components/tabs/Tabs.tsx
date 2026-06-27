@@ -2,7 +2,7 @@ import { Suspense, useState } from 'react';
 
 import { Tab } from '@/widgets/sidebar/model/types';
 
-import Loader from '../ui/loader/Loader';
+import Loader from '../../shared/ui/loader/Loader';
 import styles from './Tabs.module.scss';
 
 interface TabsProps {
