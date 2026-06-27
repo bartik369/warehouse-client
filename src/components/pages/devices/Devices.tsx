@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import Loader from '@/components/ui/loader/Loader';
 import OfficeFileBtn from '@/features/export-table-data/ui/OfficeFileBtn';
 import { setAssignedDevice, setIssueStep } from '@/features/issue/model/issueSlice';
 import { useDeviceTableController } from '@/hooks/data/useDeviceTableController';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
+import Loader from '@/shared/ui/loader/Loader';
 import { resetDevice, resetStatus } from '@/store/slices/deviceSlice';
 import { FilteredDevicesFromBack } from '@/types/devices';
 import { DevicesTable } from '@/widgets/devices-table/ui/DevicesTable';
@@ -46,7 +46,7 @@ const Devices = () => {
     dispatch(setIssueStep(1));
   };
 
-  if (!devices || !options) return <Loader size="lg" color="green" />;
+  if (!devices || !options) return <Loader size="lg" color="orange" />;
 
   return (
     <>

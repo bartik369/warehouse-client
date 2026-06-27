@@ -1,0 +1,41 @@
+@mixin base {
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100dvh - 100px);
+  .sm {
+    width: 22px;
+    height: 22px;
+    @include base;
+  }
+  .md {
+    width: 32px;
+    height: 32px;
+    @include base;
+  }
+  .lg {
+    width: 50px;
+    height: 50px;
+    @include base;
+  }
+  .orange {
+    border: 6px dotted var(--orange-500);
+    border-radius: 50%;
+  }
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

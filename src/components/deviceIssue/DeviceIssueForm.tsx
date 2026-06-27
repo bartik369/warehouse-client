@@ -5,7 +5,7 @@ import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
-import Loader from '../ui/loader/Loader';
+import Loader from '../../shared/ui/loader/Loader';
 import StepsProcess from '../ui/steps/StepsProcess';
 import styles from './DeviceIssueForm.module.scss';
 

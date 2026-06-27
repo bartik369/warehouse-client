@@ -189,7 +189,7 @@ export const getDevicesColumns = ({
       dataIndex: 'isFunctional',
       width: 160,
       align: 'center',
-      sorter: true,
+      sorter: (a, b) => Number(a.isFunctional) - Number(b.isFunctional),
       filteredValue: filters.isFunctional.length ? filters.isFunctional : null,
       filterDropdown: (props) => (
         <FilterDropdown
@@ -216,7 +216,7 @@ export const getDevicesColumns = ({
       dataIndex: 'isAssigned',
       width: 130,
       align: 'center',
-      sorter: true,
+      sorter: (a, b) => Number(a.isAssigned) - Number(b.isAssigned),
       filteredValue: filters.isAssigned.length ? filters.isAssigned : null,
       filterDropdown: (props) => (
         <FilterDropdown
