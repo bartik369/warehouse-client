@@ -20,7 +20,7 @@ const DeviceIssueForm = ({ issueId = null }) => {
     };
   }, []);
 
-  if (!state.issueStep && !user) return <Loader size="sm" color="green" />;
+  if (!state.issueStep && !user) return <Loader size="sm" color="orange" />;
 
   return (
     <section className={styles.inner}>

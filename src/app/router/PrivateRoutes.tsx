@@ -15,7 +15,7 @@ const PrivateRoutes = () => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   if (!isAuthChecked) {
-    return <Loader size="lg" color="blue" />;
+    return <Loader size="lg" color="orange" />;
   }
   if (isAuth) {
     return <Outlet />;
