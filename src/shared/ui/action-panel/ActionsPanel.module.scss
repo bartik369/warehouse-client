@@ -1,0 +1,20 @@
+.container {
+  :global(.ant-btn).reset {
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    color: var(--gray-900) !important;
+    box-shadow: none;
+    &:hover {
+      background-color: var(--gray-200);
+      border: 1px solid var(--gray-300);
+    }
+  }
+  :global(.ant-btn).apply {
+    background-color: var(--orange-500);
+    border: 1px solid var(--orange-600);
+    box-shadow: none;
+    &:hover {
+      background-color: var(--orange-600);
+    }
+  }
+}

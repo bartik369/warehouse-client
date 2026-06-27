@@ -6,16 +6,16 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { PiCheckCircleFill } from 'react-icons/pi';
 
+import { FilterDropdown } from '@/shared/ui/filter-dropdown/FilterDropdown';
 import {
   DeviceFilters,
   Entity,
   FilterDeviceOptions,
   FilteredDevicesFromBack,
 } from '@/types/devices';
+import { sortNumbers } from '@/utils/data/sortNums';
 
 import styles from './Columns.module.scss';
-import { FilterDropdownContent } from '@/shared/ui/filterDropdown/FilterDropdownContent';
-import { sortNumbers } from '@/utils/data/sortNums';
 
 export const getDevicesColumns = ({
   filters,
@@ -62,6 +62,14 @@ export const getDevicesColumns = ({
       text: m.memorySize,
       value: m.memorySize,
     })) || [];
+  const functionalityOptions = [
+    { text: 'Исправен', value: 'true' },
+    { text: 'Неисправен', value: 'false' },
+  ];
+  const assignedOptions = [
+    { text: 'В использовании', value: 'true' },
+    { text: 'На складе', value: 'false' },
+  ];
 
   return [
     {
@@ -78,7 +86,7 @@ export const getDevicesColumns = ({
         value: manufacturer.slug!,
       })),
       filterDropdown: (props) => (
-        <FilterDropdownContent
+        <FilterDropdown
           {...props}
           options={manufacturerOptions}
           filterKey="manufacturer"
@@ -100,7 +108,7 @@ export const getDevicesColumns = ({
         value: type.slug!,
       })),
       filterDropdown: (props) => (
-        <FilterDropdownContent
+        <FilterDropdown
           {...props}
           options={typeOptions}
           filterKey="type"
@@ -130,7 +138,7 @@ export const getDevicesColumns = ({
         value: warehouse.slug!,
       })),
       filterDropdown: (props) => (
-        <FilterDropdownContent
+        <FilterDropdown
           {...props}
           options={warehouseOptions}
           filterKey="warehouse"
@@ -148,7 +156,7 @@ export const getDevicesColumns = ({
       sorter: (a, b, sortNumber) => sortNumbers(a.screenSize, b.screenSize, sortNumber!),
       filteredValue: filters.screenSize.length ? filters.screenSize : null,
       filterDropdown: (props) => (
-        <FilterDropdownContent
+        <FilterDropdown
           {...props}
           options={screenSizeOptions}
           filterKey="screenSize"
@@ -166,7 +174,7 @@ export const getDevicesColumns = ({
       sorter: (a, b, sortOrder) => sortNumbers(a.memorySize, b.memorySize, sortOrder),
       filteredValue: filters.memorySize.length ? filters.memorySize : null,
       filterDropdown: (props) => (
-        <FilterDropdownContent
+        <FilterDropdown
           {...props}
           options={memorySizeOptions}
           filterKey="memorySize"
@@ -183,10 +191,15 @@ export const getDevicesColumns = ({
       align: 'center',
       sorter: true,
       filteredValue: filters.isFunctional.length ? filters.isFunctional : null,
-      filters: [
-        { text: 'Исправен', value: 'true' },
-        { text: 'Неисправен', value: 'false' },
-      ],
+      filterDropdown: (props) => (
+        <FilterDropdown
+          {...props}
+          options={functionalityOptions}
+          filterKey="isFunctional"
+          setFilters={setFilters}
+          resetSingleFilter={resetSingleFilter}
+        />
+      ),
       render: (isFunctional: boolean) => (
         <div className={styles.iconWrapper}>
           {isFunctional ? (
@@ -205,10 +218,15 @@ export const getDevicesColumns = ({
       align: 'center',
       sorter: true,
       filteredValue: filters.isAssigned.length ? filters.isAssigned : null,
-      filters: [
-        { text: 'В использовании', value: 'true' },
-        { text: 'На складе', value: 'false' },
-      ],
+      filterDropdown: (props) => (
+        <FilterDropdown
+          {...props}
+          options={assignedOptions}
+          filterKey="isAssigned"
+          setFilters={setFilters}
+          resetSingleFilter={resetSingleFilter}
+        />
+      ),
       render: (isAssigned: boolean) => (
         <div className={styles.iconWrapper}>
           {isAssigned ? (

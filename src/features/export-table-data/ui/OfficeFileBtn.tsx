@@ -1,8 +1,10 @@
-import { exportToCSV, exportToExcel } from "@/utils/file/export-file";
-import { SECTION_TITLES } from "@/utils/constants/ui/titles";
-import { FaFileExcel } from "react-icons/fa";
-import { FaFileCsv } from "react-icons/fa6";
-import styles from "./OfficeFileBtn.module.scss";
+import { FaFileExcel } from 'react-icons/fa';
+import { FaFileCsv } from 'react-icons/fa6';
+
+import { exportToCSV, exportToExcel } from '@/shared/lib/export/export-file';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+
+import styles from './OfficeFileBtn.module.scss';
 
 interface OfficeFileBtnProps<T> {
   stack: T[];
