@@ -8,7 +8,7 @@ const AddDeviceConfig = {
   title: 'AddDevices',
   path: '/admin/add-device',
   element: (
-    <Suspense fallback={<Loader color="green" size="lg" />}>
+    <Suspense fallback={<Loader color="orange" size="lg" />}>
       <LazyAddDevice />
     </Suspense>
   ),

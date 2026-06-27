@@ -8,6 +8,7 @@ import styles from './Tabs.module.scss';
 interface TabsProps {
   tabs: Tab[];
 }
+
 const Tabs = ({ tabs }: TabsProps) => {
   const [activeTab, setActiveTab] = useState<number>(tabs[0].id);
   return (
@@ -26,7 +27,7 @@ const Tabs = ({ tabs }: TabsProps) => {
       <div className={styles['tab-content']}>
         {tabs.map((tab) =>
           tab.id === activeTab ? (
-            <Suspense fallback={<Loader color="blue" size="sm" />} key={tab.id}>
+            <Suspense fallback={<Loader color="orange" size="sm" />} key={tab.id}>
               <tab.component />
             </Suspense>
           ) : null
