@@ -8,6 +8,7 @@ import styles from './Tabs.module.scss';
 interface TabsProps {
   tabs: Tab[];
 }
+
 const Tabs = ({ tabs }: TabsProps) => {
   const [activeTab, setActiveTab] = useState<number>(tabs[0].id);
   return (
