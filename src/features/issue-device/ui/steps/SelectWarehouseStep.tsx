@@ -52,7 +52,7 @@ const SelectWarehouseStep = ({
           <BtnAction
             icon={<BsCheck />}
             size="lg"
-            color={COLORS.darkGreen}
+            color={COLORS.orange}
             title={BUTTON_LABELS.select}
             click={nextStep}
           />
