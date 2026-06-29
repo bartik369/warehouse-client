@@ -1,0 +1,106 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  .form {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
+    .input {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #c5c8ce;
+      border-radius: 20px;
+      transition: border-color 0.3s ease-in-out;
+      &:hover,
+      &:active {
+        border: 1px solid #40495a;
+      }
+      input {
+        font-size: 22px;
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        &::placeholder {
+          color: #b9babf;
+        }
+      }
+      .icon {
+        position: absolute;
+        right: 10px;
+        font-size: 30px;
+        color: #d3d9df;
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: #40495a;
+        }
+      }
+    }
+    .result {
+      position: absolute;
+      max-height: 280px;
+      overflow-y: auto;
+      top: 105%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      z-index: 9;
+      padding: 6px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow:
+        rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+        rgba(42, 51, 69, 0.04) 0px 2px 2px -1px,
+        rgba(42, 51, 70, 0.04) 0px 5px 5px -2px,
+        rgba(42, 51, 70, 0.04) 0px 10px 10px -6px,
+        rgba(14, 63, 126, 0.04) 0px 25px 25px -10px,
+        rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  gap: 30px;
+}
+
+.doneProcess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px 0 40px;
+  .icon {
+    font-size: 50px;
+    color: #379492;
+    margin-bottom: 5px;
+  }
+  .header {
+    font-size: 20px;
+    line-height: 30px;
+    span {
+      font-weight: 800;
+      font-size: 23px;
+      color: #414a5b;
+      padding: 0 5px;
+    }
+  }
+  .text {
+    span {
+      color: #379492;
+    }
+  }
+}

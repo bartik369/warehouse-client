@@ -1,4 +1,4 @@
-import { IssueStepType } from '../features/issue/model/issueTypes';
+import { IssueStepType } from '../features/issue-device/model/issueTypes';
 
 export interface User {
   id: string;

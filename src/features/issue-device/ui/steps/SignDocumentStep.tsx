@@ -1,6 +1,5 @@
-import DocumentWithSignatures from '@/features/documents/DocumentWithSignatures';
-import { IssueState } from '@/features/issue/model/issueTypes';
-import { BaseIssueQuery } from '@/types/issue';
+import { DocumentWithSignatures } from '@/features/documents/DocumentWithSignatures';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
 
 interface SignDocumentStepProps {
   state: IssueState;

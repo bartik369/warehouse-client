@@ -1,14 +1,17 @@
-import React, { useRef } from "react";
-import BtnAction from "../ui/buttons/BtnAction";
-import SignatureCanvas from "react-signature-canvas";
-import { useGlobalModal } from "@/hooks/data/useGlobalModal";
-import { SignatureActions } from "@/types/signature";
-import { BUTTON_LABELS } from "@/utils/constants/ui/buttons";
-import { COLORS } from "@/utils/constants/ui/colors";
-import { RiResetLeftFill } from "react-icons/ri";
-import { IoSaveOutline } from "react-icons/io5";
-import { RiDeleteBack2Line } from "react-icons/ri";
-import styles from "./Signature.module.scss";
+import React, { useRef } from 'react';
+
+import { IoSaveOutline } from 'react-icons/io5';
+import { RiResetLeftFill } from 'react-icons/ri';
+import { RiDeleteBack2Line } from 'react-icons/ri';
+import SignatureCanvas from 'react-signature-canvas';
+
+import { useGlobalModal } from '@/hooks/data/useGlobalModal';
+import { SignatureActions } from '@/types/signature';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { COLORS } from '@/utils/constants/ui/colors';
+
+import BtnAction from '../ui/buttons/BtnAction';
+import styles from './Signature.module.scss';
 
 interface SignatureProps {
   actions: SignatureActions;
@@ -20,7 +23,7 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
   const { closeModal } = useGlobalModal();
 
   const handleSave = () => {
-    const img = canvasRef.current?.getCanvas().toDataURL("image/png");
+    const img = canvasRef.current?.getCanvas().toDataURL('image/png');
     if (img && role) {
       actions.handleSetSignature(img, role);
     }
@@ -34,11 +37,11 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
       <div
         className={styles.signatures}
         style={{
-          display: "flex",
-          justifyContent: "space-around",
-          backgroundColor: "#f6f7fb",
-          flexDirection: "row",
-          marginTop: "auto",
+          display: 'flex',
+          justifyContent: 'space-around',
+          backgroundColor: '#f6f7fb',
+          flexDirection: 'row',
+          marginTop: 'auto',
           cursor: 'url(/src/assets/elements/write.png) 0 32, auto',
         }}
       >
@@ -57,21 +60,21 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
       <div className={styles.actions}>
         <BtnAction
           size="sm"
-          color={COLORS.darkGrey}
+          color={COLORS.grey}
           title={BUTTON_LABELS.cancel}
           icon={<RiDeleteBack2Line />}
           click={closeModal}
         />
         <BtnAction
           size="sm"
-          color={COLORS.greyLight}
+          color={COLORS.grey}
           title={BUTTON_LABELS.clean}
           icon={<RiResetLeftFill />}
           click={handleClear}
         />
         <BtnAction
           size="sm"
-          color={COLORS.darkGreen}
+          color={COLORS.orange}
           title={BUTTON_LABELS.save}
           icon={<IoSaveOutline />}
           click={handleSave}

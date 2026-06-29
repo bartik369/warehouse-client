@@ -1,10 +1,10 @@
-import DeviceTable from '@/components/tables/DeviceTable';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { currentUser } from '@/store/slices/authSlice';
 import { partnerUser } from '@/store/slices/userSlice';
 import { BaseIssueQuery } from '@/types/issue';
 
-import { IssueState } from '../issue/model/issueTypes';
+import { IssueState } from '../issue-device/model/issueTypes';
+import { AssignedDevicesTable } from '../issue-device/ui/AssignedDevicesTable/AssignedDevicesTable';
 
 interface IssueActContentProps {
   state: IssueState;
@@ -29,7 +29,7 @@ const IssueActContent = ({ state, deleteDevice }: IssueActContentProps) => {
         </strong>{' '}
         подписали настоящий акт приема передачи на основании договора №123456789
       </p>
-      <DeviceTable state={state} deleteDevice={deleteDevice} />
+      <AssignedDevicesTable devices={state.assignedDevices} deleteDevice={deleteDevice} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import { IoCheckboxOutline } from 'react-icons/io5';
 import { TbBookDownload } from 'react-icons/tb';
 
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { partnerUser } from '@/store/slices/userSlice';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
@@ -54,7 +54,7 @@ const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
       </div>
       <BtnAction
         size={SIZES.md}
-        color={COLORS.darkGrey}
+        color={COLORS.orange}
         click={handleDownload}
         title={BUTTON_LABELS.download}
         icon={<TbBookDownload />}

@@ -1,19 +1,19 @@
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 
-import Search from '@/components/deviceIssue/search/Search';
 import BtnAction from '@/components/ui/buttons/BtnAction';
 import NoData from '@/components/ui/no-data/NoData';
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
+import Search from '@/shared/ui/search/Search';
 import { RootState } from '@/store/store';
 import { BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 
-import UserInfo from '../user/UserInfo';
-import UsersList from '../user/UsersList';
+import UserInfo from '../../../../components/deviceIssue/user/UserInfo';
+import UsersList from '../../../../components/deviceIssue/user/UsersList';
 import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
@@ -75,7 +75,7 @@ const SelectUserStep = ({
             <BtnAction
               icon={<BsCheck />}
               size="lg"
-              color={COLORS.darkGreen}
+              color={COLORS.orange}
               title={BUTTON_LABELS.select}
               click={nextStep}
             />

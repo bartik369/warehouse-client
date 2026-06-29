@@ -1,22 +1,22 @@
 import { Steps } from 'antd';
 
-import FinalizeIssueStep from '@/components/deviceIssue/steps/FinalizeIssueStep';
-import ReviewDocumentStep from '@/components/deviceIssue/steps/ReviewDocumentStep';
-import SelectUserStep from '@/components/deviceIssue/steps/SelectUserStep';
-import SelectWarehouseStep from '@/components/deviceIssue/steps/SelectWarehouseStep';
-import SignDocumentStep from '@/components/deviceIssue/steps/SignDocumentStep';
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
+import FinalizeIssueStep from '@/features/issue-device/ui/steps/FinalizeIssueStep';
+import ReviewDocumentStep from '@/features/issue-device/ui/steps/ReviewDocumentStep';
+import SelectUserStep from '@/features/issue-device/ui/steps/SelectUserStep';
+import SelectWarehouseStep from '@/features/issue-device/ui/steps/SelectWarehouseStep';
+import SignDocumentStep from '@/features/issue-device/ui/steps/SignDocumentStep';
 import { BaseIssueQuery, ItemType } from '@/types/issue';
 import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
-import styles from './Steps.module.scss';
+import styles from './IssueProcess.module.scss';
 
-interface StepsProcessProps {
+interface IssueProcessProps {
   actions: BaseIssueQuery;
   state: IssueState;
 }
 
-const StepsProcess = ({ actions, state }: StepsProcessProps) => {
+export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
   const onChange = (value: number) => {
     if (value > state.issueStep) return;
     actions.handleSetStep(value);
@@ -91,5 +91,3 @@ const StepsProcess = ({ actions, state }: StepsProcessProps) => {
     </div>
   );
 };
-
-export default StepsProcess;

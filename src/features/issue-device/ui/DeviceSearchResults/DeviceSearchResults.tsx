@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
 import { MESSAGES } from '@/utils/constants/ui/messages';
 
-import DeviceItem from './DeviceItem';
-import styles from './DeviceItem.module.scss';
+import { DeviceList } from './DeviceList';
+import styles from './DeviceSearchResults.module.scss';
 
-interface DeviceListProps {
+interface DeviceSearchResultsProps {
   state: IssueState;
   setDevice: (item: AssignedDevice) => void;
 }
-const DeviceList = ({ state, setDevice }: DeviceListProps) => {
+export const IssueDeviceList = ({ state, setDevice }: DeviceSearchResultsProps) => {
   const devices = useAppSelector((state: RootState) => state.device.devices);
 
   let content: React.ReactNode = null;
@@ -22,9 +22,7 @@ const DeviceList = ({ state, setDevice }: DeviceListProps) => {
   } else if (!devices.length) {
     return null;
   } else {
-    content = <DeviceItem setDevice={setDevice} devices={devices} />;
+    content = <DeviceList setDevice={setDevice} devices={devices} />;
   }
   return <div className={styles.userList}>{content}</div>;
 };
-
-export default DeviceList;

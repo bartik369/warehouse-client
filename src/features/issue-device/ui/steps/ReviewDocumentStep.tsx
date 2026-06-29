@@ -1,17 +1,18 @@
+import { Empty } from 'antd';
 import { AiOutlineSignature } from 'react-icons/ai';
 import { TbArrowBackUp } from 'react-icons/tb';
 
-import Search from '@/components/deviceIssue/search/Search';
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
+import { IssueDeviceList } from '@/features/issue-device/ui/DeviceSearchResults/DeviceSearchResults';
+import Search from '@/shared/ui/search/Search';
 import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 
-import DeviceTable from '../../tables/DeviceTable';
-import NoData from '../../ui/no-data/NoData';
-import DeviceList from '../device/list/DeviceList';
+import NoData from '../../../../components/ui/no-data/NoData';
+import { AssignedDevicesTable } from '../AssignedDevicesTable/AssignedDevicesTable';
 import styles from './Steps.module.scss';
 
 interface ReviewDocumentStepProps {
@@ -34,6 +35,9 @@ const ReviewDocumentStep = ({
   changeDevice,
   resetDeviceQuery,
 }: ReviewDocumentStepProps) => {
+  const hasAssignedDevices = state.assignedDevices?.length > 0;
+  const shouldShowSearchResult = state.devicesLoaded && state.wasSearched;
+
   return (
     <div className={styles.inner}>
       <form
@@ -52,37 +56,36 @@ const ReviewDocumentStep = ({
           }}
           value={state.deviceQuery}
         />
-        {state.devicesLoaded && state.wasSearched && (
+        {shouldShowSearchResult && (
           <div className={styles.result}>
-            <DeviceList state={state} setDevice={setDevice} />
+            <IssueDeviceList state={state} setDevice={setDevice} />
           </div>
         )}
       </form>
-      <>
-        {state.assignedDevices?.length > 0 ? (
-          <>
-            <DeviceTable state={state} showDeleteIcon={true} deleteDevice={deleteDevice} />
-            <div className={styles.actions}>
-              <BtnAction
-                icon={<TbArrowBackUp />}
-                size="lg"
-                color={COLORS.grey}
-                title={BUTTON_LABELS.clean}
-                click={resetDevices}
-              />
-              <BtnAction
-                icon={<AiOutlineSignature />}
-                size="lg"
-                color={COLORS.darkGreen}
-                title={BUTTON_LABELS.signature}
-                click={nextStep}
-              />
-            </div>
-          </>
-        ) : (
-          <NoData />
-        )}
-      </>
+      {hasAssignedDevices ? (
+        <>
+          <AssignedDevicesTable devices={state.assignedDevices} deleteDevice={deleteDevice} />
+          <div className={styles.actions}>
+            <BtnAction
+              icon={<TbArrowBackUp />}
+              size="lg"
+              color={COLORS.grey}
+              title={BUTTON_LABELS.clean}
+              click={resetDevices}
+            />
+            <BtnAction
+              icon={<AiOutlineSignature />}
+              size="lg"
+              color={COLORS.orange}
+              title={BUTTON_LABELS.signature}
+              click={nextStep}
+            />
+          </div>
+        </>
+      ) : (
+        <Empty />
+        // <NoData />
+      )}
     </div>
   );
 };

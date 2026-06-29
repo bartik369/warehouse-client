@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { useIssue } from '@/features/issue/model/useIssue';
+import { IssueProcess } from '@/features/issue-device/IssueProcess/IssueProcess';
+import { useIssue } from '@/features/issue-device/model/useIssue';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
 import Loader from '../../shared/ui/loader/Loader';
-import StepsProcess from '../ui/steps/StepsProcess';
 import styles from './DeviceIssueForm.module.scss';
 
 const DeviceIssueForm = ({ issueId = null }) => {
@@ -28,7 +28,7 @@ const DeviceIssueForm = ({ issueId = null }) => {
         <span>{state.issueStep + 1}</span>
         {BASE_STEPS[state.issueStep].title}
       </h1>
-      <StepsProcess actions={actions} state={state} />
+      <IssueProcess actions={actions} state={state} />
     </section>
   );
 };
