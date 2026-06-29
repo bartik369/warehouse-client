@@ -9,7 +9,7 @@ import { Warehouse } from '@/types/locations';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 
-import Select from '../select/Select';
+import Select from '../../../../components/deviceIssue/select/Select';
 import styles from './Steps.module.scss';
 
 interface SelectWarehouseStepProps {
@@ -52,7 +52,7 @@ const SelectWarehouseStep = ({
           <BtnAction
             icon={<BsCheck />}
             size="lg"
-            color={COLORS.darkGreen}
+            color={COLORS.orange}
             title={BUTTON_LABELS.select}
             click={nextStep}
           />

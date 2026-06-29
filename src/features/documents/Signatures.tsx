@@ -1,7 +1,9 @@
-import { useGlobalModal } from "@/hooks/data/useGlobalModal";
-import { User } from "@/types/user";
-import { BsPen } from "react-icons/bs";
-import styles from "./Document.module.scss";
+import { BsPen } from 'react-icons/bs';
+
+import { useGlobalModal } from '@/hooks/data/useGlobalModal';
+import { User } from '@/types/user';
+
+import styles from './Document.module.scss';
 
 interface SignaturesProps {
   issuerSignature: string | null;
@@ -24,18 +26,20 @@ const Signatures = ({
           {issueUser?.firstNameRu} {issueUser?.lastNameRu}
         </div>
         <div
-          className={`${styles.pic} ${issuerSignature 
-            ? styles.filed 
-            : styles.empty
-          }`}
-          onClick={() => openModal("signature", {
+          className={`${styles.pic} ${issuerSignature ? styles.filed : styles.empty}`}
+          onClick={() =>
+            openModal('signature', {
               maxWidth: 400,
-              role: "issuer",
+              role: 'issuer',
             })
           }
         >
-          { issuerSignature && <img src={issuerSignature} /> }
-          { !issuerSignature && <span><BsPen /></span> }
+          {issuerSignature && <img src={issuerSignature} />}
+          {!issuerSignature && (
+            <span>
+              <BsPen />
+            </span>
+          )}
         </div>
       </div>
 
@@ -43,20 +47,21 @@ const Signatures = ({
         <div className={styles.user}>
           {receiverUser?.firstNameRu} {receiverUser?.lastNameRu}
         </div>
-        <div className={`${styles.pic} ${receiverSignature 
-          ? styles.filed 
-          : styles.empty
-          }`}
-          onClick={() => openModal("signature", {
+        <div
+          className={`${styles.pic} ${receiverSignature ? styles.filed : styles.empty}`}
+          onClick={() =>
+            openModal('signature', {
               maxWidth: 400,
-              role: "receiver",
+              role: 'receiver',
             })
           }
         >
-            { !receiverSignature && <span><BsPen /></span> }
-          {receiverSignature && (
-            <img src={receiverSignature} alt="Подпись получателя" />
+          {!receiverSignature && (
+            <span>
+              <BsPen />
+            </span>
           )}
+          {receiverSignature && <img src={receiverSignature} alt="Подпись получателя" />}
         </div>
       </div>
     </div>

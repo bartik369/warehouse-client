@@ -9,15 +9,13 @@ import { useAppSelector } from '@/hooks/redux/useRedux';
 import { currentUser } from '@/store/slices/authSlice';
 import { selectIssuerSignature, selectReceiverSignature } from '@/store/slices/signatureSlice';
 import { partnerUser } from '@/store/slices/userSlice';
-import { BaseDeviceQuery } from '@/types/devices';
-import { BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
 import { SIZES } from '@/utils/constants/ui/sizes';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 
-import { IssueState } from '../issue/model/issueTypes';
+import { IssueState } from '../issue-device/model/issueTypes';
 import styles from './Document.module.scss';
 import IssueActContent from './IssueActContent';
 import Signatures from './Signatures';
@@ -29,7 +27,7 @@ interface DocumentWithSignaturesProps {
   handleComplete: (file: Blob) => void;
 }
 
-const DocumentWithSignatures = ({
+export const DocumentWithSignatures = ({
   state,
   isIssueLoading,
   deleteDevice,
@@ -108,7 +106,7 @@ const DocumentWithSignatures = ({
       <div className={styles.actions}>
         <BtnAction
           size={SIZES.md}
-          color={COLORS.darkGreen}
+          color={COLORS.orange}
           click={handleSend}
           title={BUTTON_LABELS.issue}
           icon={<MdOutlineDone />}
@@ -117,5 +115,3 @@ const DocumentWithSignatures = ({
     </div>
   );
 };
-
-export default DocumentWithSignatures;

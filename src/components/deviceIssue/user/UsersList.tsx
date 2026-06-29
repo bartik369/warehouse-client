@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { IssueState } from '@/features/issue/model/issueTypes';
+import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 import { BaseUserQuery, User } from '@/types/user';

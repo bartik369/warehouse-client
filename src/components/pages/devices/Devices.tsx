@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import OfficeFileBtn from '@/features/export-table-data/ui/OfficeFileBtn';
-import { setAssignedDevice, setIssueStep } from '@/features/issue/model/issueSlice';
+import { setAssignedDevice, setIssueStep } from '@/features/issue-device/model/issueSlice';
 import { useDeviceTableController } from '@/hooks/data/useDeviceTableController';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
 import Loader from '@/shared/ui/loader/Loader';

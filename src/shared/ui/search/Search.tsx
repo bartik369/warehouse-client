@@ -1,5 +1,6 @@
 import { CgCloseO } from 'react-icons/cg';
-import { IoSearch } from "react-icons/io5";
+import { IoSearch } from 'react-icons/io5';
+
 import styles from './Search.module.scss';
 
 interface BaseSearchActions {
@@ -24,19 +25,12 @@ const Search = ({ placeholder, actions, value, name }: SearchProps) => {
         placeholder={placeholder}
         onChange={(e) => actions.handleChange(e.target.value)}
       />
-      {value?.length > 0 && (
-        name === 'email' ? (
-          <CgCloseO
-            className={styles.icon}
-            onClick={actions.handleReset}
-          />
+      {value?.length > 0 &&
+        (name === 'email' ? (
+          <CgCloseO className={styles.icon} onClick={actions.handleReset} />
         ) : (
-          <IoSearch
-            className={styles.icon}
-            onClick={actions.handleSearch}
-          />
-        )
-      )}
+          <IoSearch className={styles.icon} onClick={actions.handleSearch} />
+        ))}
     </div>
   );
 };

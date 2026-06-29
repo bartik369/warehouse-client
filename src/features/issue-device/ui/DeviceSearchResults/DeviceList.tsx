@@ -2,13 +2,13 @@ import { Device } from '@/types/devices';
 import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
-import styles from './DeviceItem.module.scss';
+import styles from './DeviceSearchResults.module.scss';
 
 interface DeviceItemProps {
   setDevice: (item: AssignedDevice) => void;
   devices: Device[];
 }
-const DeviceItem = ({ devices, setDevice }: DeviceItemProps) => {
+export const DeviceList = ({ devices, setDevice }: DeviceItemProps) => {
   return (
     <>
       {devices.map((item: Device) => (
@@ -26,5 +26,3 @@ const DeviceItem = ({ devices, setDevice }: DeviceItemProps) => {
     </>
   );
 };
-
-export default DeviceItem;

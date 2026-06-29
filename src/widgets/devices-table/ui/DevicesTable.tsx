@@ -10,15 +10,15 @@ import {
 } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 
-import { IssueActionTypes } from '@/features/issue/model/issueTypes';
+import { IssueActionTypes } from '@/features/issue-device/model/issueTypes';
 import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
+import tableStyles from '@/shared/ui/table/table.module.scss';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
 
 import { getDevicesColumns } from '../model/devices.columns';
-import styles from './DeviceTable.module.scss';
 
 interface DeviceTableProps {
   devices: FilteredDevicesFromBack[];
@@ -103,18 +103,18 @@ export const DevicesTable = ({
 
   const DeviceTable = (
     <Table
-      className={styles.devicesTable}
+      className={tableStyles.devicesTable}
       rowKey="id"
       size="small"
       bordered={false}
       columns={columns}
       dataSource={devices}
       rowSelection={rowSelection}
-      rowClassName={(_, index) => (index % 2 !== 0 ? styles.evenRow : styles.oddRow)}
+      rowClassName={(_, index) => (index % 2 !== 0 ? tableStyles.evenRow : tableStyles.oddRow)}
       scroll={{ x: calculateTableWidth() }}
       onChange={onTableChange}
       pagination={{
-        className: styles.pagination,
+        className: tableStyles.pagination,
         pageSize: limit,
         current: page,
         total: totalCount,
@@ -126,7 +126,7 @@ export const DevicesTable = ({
   );
 
   return (
-    <div className={styles.customPagination}>
+    <div className={tableStyles.customPagination}>
       <ConfigProvider locale={customLocale}>{DeviceTable}</ConfigProvider>
     </div>
   );
