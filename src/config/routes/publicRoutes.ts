@@ -1,10 +1,6 @@
-import ResetPasswordConfig from "../pages/ResetPassword";
-import SigninConfig from "../pages/Signin";
+import ResetPasswordConfig from '../pages/ResetPassword';
+import SigninConfig from '../pages/Signin';
 
-
-const publicRoutes = [
-  SigninConfig,
-  ResetPasswordConfig,
-]
+const publicRoutes = [SigninConfig, ResetPasswordConfig];
 
 export default publicRoutes;

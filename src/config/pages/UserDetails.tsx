@@ -1,9 +1,19 @@
-import UserDetails from "@/components/pages/admin/users/UserDetails";
+import type { AppRouteConfig } from '@/app/router/config/types';
+import UserDetails from '@/components/pages/admin/users/UserDetails';
 
-const UserDetailsConfig = {
+const UserDetailsConfig: AppRouteConfig[] = [
+  {
     title: 'Users',
-    path: ['/users/:id', '/admin/users/:id'],
+    path: '/users/:id',
     element: <UserDetails />,
     requireAuth: true,
-}
+  },
+  {
+    title: 'Users',
+    path: '/admin/users/:id',
+    element: <UserDetails />,
+    requireAuth: true,
+  },
+];
+
 export default UserDetailsConfig;

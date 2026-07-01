@@ -4,9 +4,9 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import LocalFallback from '@/components/ui/error/LocalFallback';
+import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
 import Header from '@/widgets/header/ui/Header/Header';
 
-import Breadcrumbs from '../../../components/breadcrumbs/Breadcrumbs';
 import Footer from '../../../components/footer/Footer';
 import { GlobalModal } from '../../../components/modal/GlobalModal';
 import AdminMenu from '../../admin-menu/ui/AdminMenu';

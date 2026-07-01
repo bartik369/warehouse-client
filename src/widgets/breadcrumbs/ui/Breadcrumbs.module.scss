@@ -1,0 +1,37 @@
+.inner {
+  padding: 8px 0 4px 40px;
+  font-size: 12px;
+  :global(.ant-breadcrumb-link a) {
+    color: var(--gray-600);
+    transition: color 0.2s ease;
+    &:hover {
+      color: var(--orange-500);
+    }
+  }
+  :global(.ant-breadcrumb-link) {
+    color: var(--gray-900);
+  }
+  :global(.ant-breadcrumb-separator) {
+    color: var(--gray-400);
+  }
+  :global(.ant-breadcrumb > ol > li:last-child) {
+    color: var(--gray-900);
+    font-weight: 500;
+  }
+}
+
+.home {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.home span {
+  line-height: 1;
+}
+
+.icon {
+  transform: translateY(1px);
+  font-size: 13px;
+  margin-right: 4px;
+}
