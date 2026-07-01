@@ -27,7 +27,7 @@ import PermissionRoleConfig from '../pages/PermissionRole';
 import ProfileConfig from '../pages/Profile';
 import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
-import UsersConfig from '../pages/UsersList';
+import UsersListConfig from '../pages/UsersList';
 
 const privateRoutes = [
   HomeConfig,
@@ -41,7 +41,7 @@ const privateRoutes = [
   InventoryConfig,
   EditDeviceConfig,
   AddUserConfig,
-  ...UsersConfig,
+  ...UsersListConfig,
   ...UserDetailsConfig,
   AddLocationConfig,
   AddWarehouseConfig,
