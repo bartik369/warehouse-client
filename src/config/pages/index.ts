@@ -1,0 +1,67 @@
+import { AppRouteConfig } from '@/app/router/config/types';
+
+import AddContractorConfig from './AddContractor';
+import AddDeviceConfig from './AddDevice';
+import AddLocationConfig from './AddLocation';
+import AddManufacturerConfig from './AddManufacturer';
+import AddModelConfig from './AddModel';
+import AddPermissionConfig from './AddPermission';
+import AddRoleConfig from './AddRole';
+import AddTypeConfig from './AddType';
+import AddUserConfig from './AddUser';
+import AddWarehouseConfig from './AddWarehouse';
+import CalendarConfig from './Calendar';
+import ContractorsConfig from './Contractors';
+import DeviceConfig from './Device';
+import DevicesConfig from './Devices';
+import EditDeviceConfig from './EditDevice';
+import GrantUserRolesConfig from './GrantUserRoles';
+import HomeConfig from './Home';
+import InventoryConfig from './Inventory';
+import InventoryListConfig from './InventoryList';
+import IssueConfig from './Issue';
+import IssueListConfig from './IssueList';
+import KnowledgeConfig from './Knowledge';
+import LocationsConfig from './Locations';
+import MessagesConfig from './Messages';
+import PermissionRoleConfig from './PermissionRole';
+import ProfileConfig from './Profile';
+import ResetPasswordConfig from './ResetPassword';
+import SigninConfig from './Signin';
+import StatisticsConfig from './Statistics';
+import UserDetailsConfig from './UserDetails';
+import UsersListConfig from './UsersList';
+
+export const pageConfigs: AppRouteConfig[] = [
+  AddContractorConfig,
+  AddDeviceConfig,
+  AddLocationConfig,
+  AddManufacturerConfig,
+  AddModelConfig,
+  AddPermissionConfig,
+  AddRoleConfig,
+  AddTypeConfig,
+  AddUserConfig,
+  AddWarehouseConfig,
+  CalendarConfig,
+  ContractorsConfig,
+  DeviceConfig,
+  ...DevicesConfig,
+  EditDeviceConfig,
+  GrantUserRolesConfig,
+  HomeConfig,
+  InventoryConfig,
+  InventoryListConfig,
+  IssueConfig,
+  IssueListConfig,
+  KnowledgeConfig,
+  LocationsConfig,
+  MessagesConfig,
+  PermissionRoleConfig,
+  ProfileConfig,
+  ResetPasswordConfig,
+  SigninConfig,
+  StatisticsConfig,
+  ...UserDetailsConfig,
+  ...UsersListConfig,
+];
