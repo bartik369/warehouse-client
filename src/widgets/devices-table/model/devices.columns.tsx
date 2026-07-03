@@ -62,6 +62,7 @@ export const getDevicesColumns = ({
       text: m.memorySize,
       value: m.memorySize,
     })) || [];
+
   const functionalityOptions = [
     { text: 'Исправен', value: 'true' },
     { text: 'Неисправен', value: 'false' },

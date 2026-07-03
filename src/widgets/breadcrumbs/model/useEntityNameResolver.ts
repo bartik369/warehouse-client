@@ -1,5 +1,5 @@
-import { useLazyGetDeviceQuery } from "@/store/api/devicesApi";
-import { handleApiError } from "@/utils/errors/handleApiError";
+import { useLazyGetDeviceQuery } from '@/store/api/devicesApi';
+import { handleApiError } from '@/utils/errors/handleApiError';
 
 export function useEntityNameResolver() {
   const [getDevice] = useLazyGetDeviceQuery();
@@ -25,6 +25,6 @@ export function useEntityNameResolver() {
     const resolvedName = resolverMap[prefix];
     if (!resolvedName) return null;
     return await resolvedName(id);
-  }
-  return { resolveEntityName }
+  };
+  return { resolveEntityName };
 }

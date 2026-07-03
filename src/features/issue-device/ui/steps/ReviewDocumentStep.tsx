@@ -25,7 +25,7 @@ interface ReviewDocumentStepProps {
   resetDeviceQuery: () => void;
   state: IssueState;
 }
-const ReviewDocumentStep = ({
+export const ReviewDocumentStep = ({
   state,
   nextStep,
   setDevice,
@@ -84,10 +84,7 @@ const ReviewDocumentStep = ({
         </>
       ) : (
         <Empty />
-        // <NoData />
       )}
     </div>
   );
 };
-
-export default ReviewDocumentStep;

@@ -1,9 +1,5 @@
 import React from 'react';
 
-import { BsArrowsMove } from 'react-icons/bs';
-import { FiUserMinus, FiUserPlus } from 'react-icons/fi';
-import { TbFileDescription } from 'react-icons/tb';
-
 import ekb from '@/assets/elements/ekb.png';
 import msk from '@/assets/elements/msk.png';
 import { DeviceLabel } from '@/types/devices';
@@ -16,13 +12,6 @@ export const headerMenuData = [
   { id: 2, title: 'Ссылка 2', path: '#' },
   { id: 3, title: 'Ссылка 3', path: '#' },
   { id: 4, title: 'Ссылка 4', path: '#' },
-];
-
-export const deviceActionsMenu = [
-  { id: 1, title: 'Выдать', icon: FiUserPlus },
-  { id: 2, title: 'Принять', icon: FiUserMinus },
-  { id: 3, title: 'Переместить', icon: BsArrowsMove },
-  { id: 4, title: 'Информация', icon: TbFileDescription },
 ];
 
 export const deviceTabsMenu = [

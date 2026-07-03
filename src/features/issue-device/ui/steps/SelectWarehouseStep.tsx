@@ -21,7 +21,7 @@ interface SelectWarehouseStepProps {
   warehouses: Warehouse[];
 }
 
-const SelectWarehouseStep = ({
+export const SelectWarehouseStep = ({
   warehouse,
   warehouses,
   userWarehouse,
@@ -61,5 +61,3 @@ const SelectWarehouseStep = ({
     </div>
   );
 };
-
-export default SelectWarehouseStep;

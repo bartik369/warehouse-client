@@ -16,7 +16,7 @@ interface FinalizeIssueStepProps {
   state: IssueState;
 }
 
-const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
+export const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
   const recipient = useAppSelector(partnerUser);
 
   const handleDownload = async () => {
@@ -62,5 +62,3 @@ const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
     </div>
   );
 };
-
-export default FinalizeIssueStep;

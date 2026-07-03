@@ -9,7 +9,7 @@ import { BASE_STEPS } from '@/utils/constants/ui/titles';
 import Loader from '../../shared/ui/loader/Loader';
 import styles from './DeviceIssueForm.module.scss';
 
-const DeviceIssueForm = ({ issueId = null }) => {
+export const DeviceIssueForm = ({ issueId = null }) => {
   const user = useAppSelector((state: RootState) => state.user.user);
   const state = useAppSelector((state: RootState) => state.issue);
   const actions = useIssue();
@@ -32,5 +32,3 @@ const DeviceIssueForm = ({ issueId = null }) => {
     </section>
   );
 };
-
-export default DeviceIssueForm;

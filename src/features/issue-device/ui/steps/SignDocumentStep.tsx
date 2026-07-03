@@ -8,7 +8,7 @@ interface SignDocumentStepProps {
   handleComplete: (file: Blob) => void;
 }
 
-const SignDocumentStep = ({
+export const SignDocumentStep = ({
   state,
   isIssueLoading,
   deleteDevice,
@@ -25,5 +25,3 @@ const SignDocumentStep = ({
     </>
   );
 };
-
-export default SignDocumentStep;

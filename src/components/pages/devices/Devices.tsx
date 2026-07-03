@@ -41,6 +41,7 @@ const Devices = () => {
       manufacturer: device.model.manufacturer.name,
       inventoryNumber: device.inventoryNumber ?? '',
       serialNumber: device.serialNumber ?? '',
+      isAssigned: device.isAssigned ?? false,
     }));
     dispatch(setAssignedDevice(devices));
     dispatch(setIssueStep(1));

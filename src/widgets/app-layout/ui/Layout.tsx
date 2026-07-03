@@ -4,8 +4,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import LocalFallback from '@/components/ui/error/LocalFallback';
-import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
-import Header from '@/widgets/header/ui/Header/Header';
+// import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
+import { Header } from '@/widgets/header/ui/Header/Header';
 
 import Footer from '../../../components/footer/Footer';
 import { GlobalModal } from '../../../components/modal/GlobalModal';
@@ -22,7 +22,7 @@ const Layout = () => {
       <Sidebar open={isActive} />
       <div className={isActive ? styles.active : styles['not-active']}>
         <Header isActive={isActive} setIsActive={setIsActive} />
-        <Breadcrumbs />
+        {/* <Breadcrumbs /> */}
         <main className={styles.outlet}>
           {location.pathname.startsWith('/admin') && <AdminMenu />}
           <div className={styles.content}>

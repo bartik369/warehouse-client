@@ -1,6 +1,8 @@
 .inner {
   padding: 8px 0 4px 40px;
+  width: 100%;
   font-size: 12px;
+  white-space: nowrap;
   :global(.ant-breadcrumb-link a) {
     color: var(--gray-600);
     transition: color 0.2s ease;
