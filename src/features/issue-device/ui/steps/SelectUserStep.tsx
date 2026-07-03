@@ -1,8 +1,8 @@
+import { Empty } from 'antd';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 
 import BtnAction from '@/components/ui/buttons/BtnAction';
-import NoData from '@/components/ui/no-data/NoData';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import Search from '@/shared/ui/search/Search';
@@ -26,7 +26,7 @@ interface SelectUserStepProps {
   resetUser: () => void;
   nextStep: () => void;
 }
-const SelectUserStep = ({
+export const SelectUserStep = ({
   state,
   isSuccess,
   isFetching,
@@ -82,10 +82,8 @@ const SelectUserStep = ({
           </div>
         </>
       ) : (
-        <NoData />
+        <Empty />
       )}
     </div>
   );
 };
-
-export default SelectUserStep;

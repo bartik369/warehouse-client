@@ -1,14 +1,16 @@
+import { useMemo } from 'react';
+
 import { Steps } from 'antd';
 
 import { IssueState } from '@/features/issue-device/model/issueTypes';
-import FinalizeIssueStep from '@/features/issue-device/ui/steps/FinalizeIssueStep';
-import ReviewDocumentStep from '@/features/issue-device/ui/steps/ReviewDocumentStep';
-import SelectUserStep from '@/features/issue-device/ui/steps/SelectUserStep';
-import SelectWarehouseStep from '@/features/issue-device/ui/steps/SelectWarehouseStep';
-import SignDocumentStep from '@/features/issue-device/ui/steps/SignDocumentStep';
+import { FinalizeIssueStep } from '@/features/issue-device/ui/steps/FinalizeIssueStep';
+import { ReviewDocumentStep } from '@/features/issue-device/ui/steps/ReviewDocumentStep';
+import { SelectUserStep } from '@/features/issue-device/ui/steps/SelectUserStep';
+import { SelectWarehouseStep } from '@/features/issue-device/ui/steps/SelectWarehouseStep';
+import { SignDocumentStep } from '@/features/issue-device/ui/steps/SignDocumentStep';
 import { BaseIssueQuery, ItemType } from '@/types/issue';
-import { BASE_STEPS } from '@/utils/constants/ui/titles';
 
+import { getStepItems } from '../model/getStepsItems';
 import styles from './IssueProcess.module.scss';
 
 interface IssueProcessProps {
@@ -59,23 +61,8 @@ export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
     />,
     <FinalizeIssueStep state={state} />,
   ];
-  const getStepItems = (): ItemType[] => {
-    return BASE_STEPS.map((item, index) => {
-      let status: 'finish' | 'process' | 'wait' = 'wait';
-      if (index < state.issueStep) {
-        status = 'finish';
-      } else if (index === state.issueStep) {
-        status = 'process';
-      }
 
-      const isDisabled = state.issueStep < index;
-      return {
-        ...item,
-        status: status,
-        disabled: isDisabled,
-      };
-    });
-  };
+  const stepsItems = useMemo(() => getStepItems(state.issueStep), [state.issueStep]);
 
   return (
     <div className={styles.stepsContainer}>
@@ -86,7 +73,7 @@ export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
         size="default"
         current={state.issueStep}
         onChange={onChange}
-        items={getStepItems()}
+        items={stepsItems}
       />
     </div>
   );

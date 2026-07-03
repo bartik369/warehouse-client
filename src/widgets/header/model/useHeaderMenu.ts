@@ -2,26 +2,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { RootState } from '@/store/store';
 import { accept, deviceInfo, issue, move } from '@/utils/constants/device';
-import { deviceActionsMenu } from '@/utils/data/menus';
 
-import { useAppSelector } from '../redux/useRedux';
+import { useAppSelector } from '../../../hooks/redux/useRedux';
+import { deviceActionsMenu } from './deviceActionMenu';
 
-export const useDevice = () => {
+export const useHeaderMenu = () => {
   const navigate = useNavigate();
   const device = useAppSelector((state: RootState) => state.device.device);
   const { isAssigned } = device || {};
   const isDevicePage = /^\/devices\/[a-f0-9-]+$/.test(location.pathname);
 
   const filteredMenu = deviceActionsMenu.filter((item) => {
-    //   if (isAssigned) {
-    //     return !isDevicePage
-    //     ? [accept, deviceInfo].includes(item.title)
-    //     : [accept].includes(item.title)
-    // } else {
-    //   return isDevicePage
-    //   ?  [move, issue].includes(item.title)
-    //   :  item.title !== accept
-    // }
     if (isAssigned) {
       return [accept].includes(item.title);
     } else {

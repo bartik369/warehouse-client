@@ -14,6 +14,7 @@ export interface AssignedDevice {
   manufacturer?: string | null;
   inventoryNumber?: string | null;
   serialNumber?: string | null;
+  isAssigned?: boolean;
 }
 
 export interface BaseIssueQuery {

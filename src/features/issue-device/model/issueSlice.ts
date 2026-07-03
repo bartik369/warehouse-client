@@ -34,6 +34,8 @@ const issueSlice = createSlice({
   initialState,
   reducers: {
     setAssignedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
+      console.log(action.payload);
+      console.log('777');
       if (Array.isArray(action.payload)) {
         state.assignedDevices = action.payload;
       } else {

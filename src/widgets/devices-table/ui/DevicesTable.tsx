@@ -50,6 +50,7 @@ export const DevicesTable = ({
   resetSingleFilter,
 }: DeviceTableProps) => {
   const [selectedWarehouseSlug, setSelectedWarehouseSlug] = useState<string | null>(null);
+  const [selectedDeviceStatus, setSelectedDeviceStatus] = useState<boolean | null>(null);
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: warehouses = [] } = useGetWarehousesQuery();
   const { data: types = [] } = useGetTypesQuery();
@@ -92,12 +93,16 @@ export const DevicesTable = ({
       setDevices(selectedRows);
       if (selectedRowKeys.length === 0) {
         setSelectedWarehouseSlug(null);
+        setSelectedDeviceStatus(null);
       } else {
         setSelectedWarehouseSlug(selectedRows[0].warehouse.slug);
+        setSelectedDeviceStatus(selectedRows[0].isAssigned);
       }
     },
     getCheckboxProps: (record) => ({
-      disabled: selectedWarehouseSlug !== null && record.warehouse.slug !== selectedWarehouseSlug,
+      disabled:
+        (selectedWarehouseSlug !== null && record.warehouse.slug !== selectedWarehouseSlug) ||
+        (selectedDeviceStatus !== null && selectedDeviceStatus !== record.isAssigned),
     }),
   };
 

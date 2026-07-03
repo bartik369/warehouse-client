@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerActions {
+  margin-left: auto;
+  min-width: 320px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  .button {
+    font-size: 12px;
+    background-color: #fff;
+    box-shadow: none;
+    border: 1px solid var(--gray-600);
+    &:hover {
+      background-color: var(--orange-600);
+    }
+  }
+}
