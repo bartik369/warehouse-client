@@ -43,7 +43,7 @@ export const HeaderActions = ({ isDevicePage, hasSelection, isAssigned }: Header
           className={styles.button}
           key={action.key}
           icon={action.icon}
-          onClick={() => handleProcessRoute(action.key)}
+          onClick={() => handleProcessRoute(action.key as any)} // todo change type
         >
           {action.label}
         </Button>
