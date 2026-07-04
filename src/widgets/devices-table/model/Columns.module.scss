@@ -41,12 +41,12 @@
   color: var(--gray-500);
 }
 
-.infoButton :global(.anticon) {
-  font-size: 17px !important;
-  color: #667592 !important;
-  transition: color 0.5s ease-in;
-  &:hover {
-    color: var(--orange-500) !important;
+.infoButton {
+  &:global(.ant-btn-link) {
+    color: var(--gray-500);
+    &:hover {
+      color: var(--gray-700) !important;
+    }
   }
 }
 

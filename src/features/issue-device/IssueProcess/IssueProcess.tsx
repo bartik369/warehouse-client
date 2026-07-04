@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Steps } from 'antd';
 
@@ -8,7 +8,7 @@ import { ReviewDocumentStep } from '@/features/issue-device/ui/steps/ReviewDocum
 import { SelectUserStep } from '@/features/issue-device/ui/steps/SelectUserStep';
 import { SelectWarehouseStep } from '@/features/issue-device/ui/steps/SelectWarehouseStep';
 import { SignDocumentStep } from '@/features/issue-device/ui/steps/SignDocumentStep';
-import { BaseIssueQuery, ItemType } from '@/types/issue';
+import { BaseIssueQuery } from '@/types/issue';
 
 import { getStepItems } from '../model/getStepsItems';
 import styles from './IssueProcess.module.scss';

@@ -1,11 +1,12 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { ColumnType } from 'antd/es/table';
 import { CgUnavailable } from 'react-icons/cg';
+import { FaCircleInfo } from 'react-icons/fa6';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { PiCheckCircleFill } from 'react-icons/pi';
 
+import { sortNumbers } from '@/shared/lib/export/sortNums';
 import { FilterDropdown } from '@/shared/ui/filter-dropdown/FilterDropdown';
 import {
   DeviceFilters,
@@ -13,7 +14,6 @@ import {
   FilterDeviceOptions,
   FilteredDevicesFromBack,
 } from '@/types/devices';
-import { sortNumbers } from '@/utils/data/sortNums';
 
 import styles from './Columns.module.scss';
 
@@ -72,10 +72,23 @@ export const getDevicesColumns = ({
     { text: 'На складе', value: 'false' },
   ];
 
+  const TABLE_TITLES = {
+    manufacturer: 'Производитель',
+    type: 'Тип',
+    model: 'Модель',
+    warehouse: 'Склад',
+    screenSize: 'Размер экрана',
+    memorySize: 'ОЗУ(Гб)',
+    isFunctional: 'Исправность',
+    isAssigned: 'Используется',
+    inventoryNumber: 'Инвентарный номер',
+    serialNumber: 'Серийный номер',
+  };
+
   return [
     {
       key: 'manufacturer',
-      title: 'Производитель',
+      title: TABLE_TITLES.manufacturer,
       dataIndex: ['model', 'manufacturer', 'name'],
       width: 220,
       align: 'center',
@@ -98,7 +111,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'type',
-      title: 'Тип',
+      title: TABLE_TITLES.type,
       dataIndex: ['model', 'type', 'name'],
       width: 220,
       align: 'center',
@@ -120,7 +133,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'model',
-      title: 'Модель',
+      title: TABLE_TITLES.model,
       dataIndex: ['model', 'name'],
       width: 170,
       align: 'center',
@@ -128,7 +141,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'warehouse',
-      title: 'Склад',
+      title: TABLE_TITLES.warehouse,
       dataIndex: ['warehouse', 'name'],
       width: 200,
       align: 'center',
@@ -150,7 +163,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'screenSize',
-      title: 'Размер экрана',
+      title: TABLE_TITLES.screenSize,
       dataIndex: 'screenSize',
       width: 160,
       align: 'center',
@@ -168,7 +181,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'memorySize',
-      title: 'Размер ОЗУ',
+      title: TABLE_TITLES.memorySize,
       dataIndex: 'memorySize',
       width: 160,
       align: 'center',
@@ -186,7 +199,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'isFunctional',
-      title: 'Исправность',
+      title: TABLE_TITLES.isFunctional,
       dataIndex: 'isFunctional',
       width: 160,
       align: 'center',
@@ -213,9 +226,9 @@ export const getDevicesColumns = ({
     },
     {
       key: 'isAssigned',
-      title: 'Доступно',
+      title: TABLE_TITLES.isAssigned,
       dataIndex: 'isAssigned',
-      width: 130,
+      width: 150,
       align: 'center',
       sorter: (a, b) => Number(a.isAssigned) - Number(b.isAssigned),
       filteredValue: filters.isAssigned.length ? filters.isAssigned : null,
@@ -240,7 +253,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'inventoryNumber',
-      title: 'Инвентарный номер',
+      title: TABLE_TITLES.inventoryNumber,
       dataIndex: 'inventoryNumber',
       width: 200,
       align: 'center',
@@ -248,7 +261,7 @@ export const getDevicesColumns = ({
     },
     {
       key: 'serialNumber',
-      title: 'Серийный номер',
+      title: TABLE_TITLES.serialNumber,
       dataIndex: 'serialNumber',
       width: 220,
       align: 'center',
@@ -264,9 +277,9 @@ export const getDevicesColumns = ({
         <Button
           className={styles.infoButton}
           type="link"
-          icon={<InfoCircleOutlined />}
+          icon={<FaCircleInfo />}
           onClick={() => onView?.(record.id)}
-          title="Редактировать"
+          title="Информация"
         />
       ),
     },

@@ -17,6 +17,7 @@ export type IssueStepTitle =
 
 export interface IssueState {
   assignedDevices: AssignedDevice[];
+  selectedDevices: AssignedDevice[];
   issueStep: number;
   pdfBlob: Blob | null;
   issueId: string | null;

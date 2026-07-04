@@ -1,4 +1,4 @@
-import { CheckOutlined, InfoCircleOutlined, LoginOutlined, SwapOutlined } from '@ant-design/icons';
+import { CheckOutlined, LoginOutlined, SwapOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 import { useHeaderActions } from '../../model/useHeaderActions';

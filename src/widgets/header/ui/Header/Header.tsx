@@ -20,11 +20,11 @@ export const Header = ({ isActive, setIsActive }: HeaderProps) => {
   const location = useLocation();
   const { isSticky } = useStickyHeader();
   const isDevicePage = /^\/devices\/[a-f0-9-]+$/.test(location.pathname);
-  const hasSelectedDevices =
-    useAppSelector((state: RootState) => state.issue.assignedDevices)?.length > 0;
-  const areSelectedDevicesAssigned = useAppSelector(
-    (state) => state.issue.assignedDevices[0]?.isAssigned
-  );
+  const isDeviceLocationsList = /^\/devices\/locations\/[^/]+$/.test(location.pathname);
+  const selectedDevices = useAppSelector((state: RootState) => state.issue.selectedDevices);
+  const hasSelectedDevices = selectedDevices.length > 0;
+  const areSelectedDevicesAssigned = selectedDevices[0]?.isAssigned;
+  const shouldShowHeaderActions = isDevicePage || (isDeviceLocationsList && hasSelectedDevices);
 
   return (
     <header className={`${styles.header} ${isSticky ? styles.sticky : styles.relative}`}>
@@ -36,7 +36,7 @@ export const Header = ({ isActive, setIsActive }: HeaderProps) => {
         <Search />
       </div>
       <div className={styles.right}>
-        {(isDevicePage || hasSelectedDevices) && (
+        {shouldShowHeaderActions && (
           <HeaderActions
             isDevicePage={isDevicePage}
             hasSelection={hasSelectedDevices}
