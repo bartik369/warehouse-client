@@ -7,9 +7,9 @@ import LocalFallback from '@/components/ui/error/LocalFallback';
 // import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
 import { Header } from '@/widgets/header/ui/Header/Header';
 
-import Footer from '../../../components/footer/Footer';
 import { GlobalModal } from '../../../components/modal/GlobalModal';
 import AdminMenu from '../../admin-menu/ui/AdminMenu';
+import Footer from '../../footer/Footer';
 import Sidebar from '../../sidebar/ui/Sidebar/Sidebar';
 import styles from './Layout.module.scss';
 

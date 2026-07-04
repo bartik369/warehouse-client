@@ -7,6 +7,7 @@ import { IssueState } from './issueTypes';
 
 const initialState: IssueState = {
   assignedDevices: [],
+  selectedDevices: [],
   issueStep: 0,
   pdfBlob: null,
   issueId: null,
@@ -34,8 +35,6 @@ const issueSlice = createSlice({
   initialState,
   reducers: {
     setAssignedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
-      console.log(action.payload);
-      console.log('777');
       if (Array.isArray(action.payload)) {
         state.assignedDevices = action.payload;
       } else {
@@ -48,6 +47,19 @@ const issueSlice = createSlice({
         }
       }
     },
+    setSelectedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
+      if (Array.isArray(action.payload)) {
+        state.selectedDevices = action.payload;
+      } else {
+        const device = action.payload;
+        const existDevice = state.selectedDevices.some((item) => item.id === device.id);
+        if (existDevice) {
+          state.selectedDevices = state.selectedDevices.filter((item) => item.id !== device.id);
+        } else {
+          state.selectedDevices.push(action.payload);
+        }
+      }
+    },
     setDeviceId: (state, action: PayloadAction<string>) => {
       const existDeviceId = state.deviceIssueData.devices.includes(action.payload);
       if (!existDeviceId) {
@@ -56,6 +68,12 @@ const issueSlice = createSlice({
     },
     deleteAssignedDevice: (state, action: PayloadAction<string>) => {
       state.assignedDevices = state.assignedDevices.filter((item) => item.id !== action.payload);
+    },
+    clearAssignedDevices: (state) => {
+      state.assignedDevices = [];
+    },
+    clearSelectedDevices: (state) => {
+      state.selectedDevices = [];
     },
     setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
       state.warehouse = action.payload;
@@ -110,7 +128,10 @@ const issueSlice = createSlice({
 export default issueSlice.reducer;
 export const {
   setAssignedDevice,
+  setSelectedDevice,
   deleteAssignedDevice,
+  clearAssignedDevices,
+  clearSelectedDevices,
   setWarehouseIssue,
   setIssueStep,
   setIssueNextStep,

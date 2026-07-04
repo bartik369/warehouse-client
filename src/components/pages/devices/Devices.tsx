@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 
 import OfficeFileBtn from '@/features/export-table-data/ui/OfficeFileBtn';
-import { setAssignedDevice, setIssueStep } from '@/features/issue-device/model/issueSlice';
+import {
+  setAssignedDevice,
+  setIssueStep,
+  setSelectedDevice,
+} from '@/features/issue-device/model/issueSlice';
 import { useDeviceTableController } from '@/hooks/data/useDeviceTableController';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
 import Loader from '@/shared/ui/loader/Loader';
@@ -43,7 +47,8 @@ const Devices = () => {
       serialNumber: device.serialNumber ?? '',
       isAssigned: device.isAssigned ?? false,
     }));
-    dispatch(setAssignedDevice(devices));
+    // dispatch(setAssignedDevice(devices)); todo чекнуть
+    dispatch(setSelectedDevice(devices));
     dispatch(setIssueStep(1));
   };
 
