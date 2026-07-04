@@ -11,6 +11,7 @@ const Search = () => {
 
   return (
     <Input.Search
+      classNames={styles.search}
       placeholder={PLACEHOLDER_LABELS.search}
       allowClear
       value={searchQuery}
