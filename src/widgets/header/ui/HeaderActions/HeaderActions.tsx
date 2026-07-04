@@ -1,7 +1,5 @@
 import { CheckOutlined, InfoCircleOutlined, LoginOutlined, SwapOutlined } from '@ant-design/icons';
-import { Button, Dropdown } from 'antd';
-
-import BtnAction from '@/components/ui/buttons/BtnAction';
+import { Button } from 'antd';
 
 import { useHeaderActions } from '../../model/useHeaderActions';
 import styles from './HeaderActions.module.scss';
