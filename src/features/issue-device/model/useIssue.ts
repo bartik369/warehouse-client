@@ -30,7 +30,6 @@ import {
   setDevicesLoaded,
   setIssueNextStep,
   setIssueStep,
-  setPdfFile,
   setProcessId,
   setUserListVisible,
   setUserQuery,
@@ -159,7 +158,6 @@ export const useIssue = () => {
       try {
         const data = await getBasicUser(id).unwrap();
         userDispatch(setUser({ user: data }));
-        handleNextStep();
         userDispatch(resetUsers());
         issueDispatch(setWasSearched(false));
         issueDispatch(setProcessId(generateActNumber()));
@@ -253,6 +251,12 @@ export const useIssue = () => {
     issueDispatch(setIssueNextStep());
   };
 
+  const handleResetIssue = () => {
+    issueDispatch(resetIssueData());
+    issueDispatch(setIssueStep(0));
+    userDispatch(resetUser());
+  };
+
   useEffect(() => {
     if (userDebouncedQuery.length > 1) {
       handleUsers(userDebouncedQuery);
@@ -283,6 +287,7 @@ export const useIssue = () => {
       isFetching,
       isIssueSuccess,
       isIssueLoading,
+      handleResetIssue,
       handleCompleteProcess,
       handleUserChange,
       handleFullReset,
@@ -306,6 +311,7 @@ export const useIssue = () => {
       isFetching,
       isIssueSuccess,
       isIssueLoading,
+      handleResetIssue,
       handleCompleteProcess,
       handleUserChange,
       handleFullReset,

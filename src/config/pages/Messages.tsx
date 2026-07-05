@@ -1,9 +1,9 @@
-import Messages from "@/components/pages/messages/Messages";
+import Messages from '@/pages/messages/Messages';
 
 const MessagesConfig = {
-    title: 'Messages',
-    path: '/messages',
-    element: <Messages />,
-    requireAuth: true,
-}
+  title: 'Messages',
+  path: '/messages',
+  element: <Messages />,
+  requireAuth: true,
+};
 export default MessagesConfig;

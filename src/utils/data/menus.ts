@@ -4,8 +4,8 @@ import ekb from '@/assets/elements/ekb.png';
 import msk from '@/assets/elements/msk.png';
 import { DeviceLabel } from '@/types/devices';
 
-const DeviceHistory = React.lazy(() => import('@/components/pages/device/DeviceHistory'));
-const Another = React.lazy(() => import('@/components/pages/device/Another'));
+const DeviceHistory = React.lazy(() => import('@/pages/device/DeviceHistory'));
+const Another = React.lazy(() => import('@/pages/device/Another'));
 
 export const headerMenuData = [
   { id: 1, title: 'Ссылка 1', path: '#' },

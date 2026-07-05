@@ -1,0 +1,31 @@
+import MultiForm from '@/components/forms/multi/MultiForm';
+import { roleFormFields } from '@/components/forms/multi/formConfigs/modelFormFields';
+import { useAddAdminEntities } from '@/hooks/data/useAddAdminEntities';
+import { useGetRolesQuery } from '@/store/api/rolesApi';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+
+import styles from '../Admin.module.scss';
+import ItemsList from '../ItemsList';
+
+const AddRole = () => {
+  const { data: roles } = useGetRolesQuery();
+  const { actions, state } = useAddAdminEntities();
+  return (
+    <section className={styles.inner}>
+      <div className={styles.form}>
+        <MultiForm
+          fields={roleFormFields}
+          title={SECTION_TITLES.addRole}
+          actions={actions}
+          state={state}
+          locationType="role"
+        />
+      </div>
+      <aside className={styles.list}>
+        <ItemsList field="role" items={roles || []} actions={actions} />
+      </aside>
+    </section>
+  );
+};
+
+export default AddRole;

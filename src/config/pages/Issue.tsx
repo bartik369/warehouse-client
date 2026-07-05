@@ -1,4 +1,4 @@
-import Issue from '@/components/pages/issue/Issue';
+import Issue from '@/pages/issue/Issue';
 
 const IssueWrapper = () => {
   return <Issue />;

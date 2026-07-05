@@ -1,5 +1,5 @@
 import type { AppRouteConfig } from '@/app/router/config/types';
-import UsersList from '@/components/pages/admin/users/UsersList';
+import UsersList from '@/pages/admin/users/UsersList';
 
 const UsersListConfig: AppRouteConfig[] = [
   {

@@ -1,4 +1,4 @@
-import { Empty } from 'antd';
+import { Button, Empty } from 'antd';
 import { BsCheck } from 'react-icons/bs';
 import { GrFormClose } from 'react-icons/gr';
 
@@ -7,13 +7,12 @@ import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import Search from '@/shared/ui/search/Search';
 import { RootState } from '@/store/store';
-import { BaseIssueQuery } from '@/types/issue';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 
-import UserInfo from '../../../../components/deviceIssue/user/UserInfo';
-import UsersList from '../../../../components/deviceIssue/user/UsersList';
+import UserInfo from '../../../user-data/UserInfo';
+import UsersList from '../../../user-data/UsersList';
 import styles from './Steps.module.scss';
 
 interface SelectUserStepProps {
@@ -61,7 +60,7 @@ export const SelectUserStep = ({
           </div>
         )}
       </form>
-      {user?.id ? (
+      {user?.id && (
         <>
           <UserInfo />
           <div className={styles.actions}>
@@ -81,8 +80,6 @@ export const SelectUserStep = ({
             />
           </div>
         </>
-      ) : (
-        <Empty />
       )}
     </div>
   );

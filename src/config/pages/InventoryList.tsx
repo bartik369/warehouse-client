@@ -1,9 +1,9 @@
-import InventoryList from "@/components/pages/inventory/InventoryList";
+import InventoryList from '@/pages/inventory/InventoryList';
 
 const InventoryListConfig = {
-    title: 'Inventory',
-    path: '/inventory',
-    element: <InventoryList />,
-    requireAuth: true,
-}
+  title: 'Inventory',
+  path: '/inventory',
+  element: <InventoryList />,
+  requireAuth: true,
+};
 export default InventoryListConfig;
