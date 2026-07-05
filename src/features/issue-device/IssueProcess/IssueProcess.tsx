@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { Steps } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
+import { Button, Steps } from 'antd';
 
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { FinalizeIssueStep } from '@/features/issue-device/ui/steps/FinalizeIssueStep';
@@ -63,9 +64,19 @@ export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
   ];
 
   const stepsItems = useMemo(() => getStepItems(state.issueStep), [state.issueStep]);
-
+  // todo скрыть кнопку отмены выдачи на послденем этапе
   return (
     <div className={styles.stepsContainer}>
+      <div className={styles.header}>
+        <Button
+          icon={<CloseCircleOutlined />}
+          onClick={actions.handleResetIssue}
+          className={styles.cancelBtn}
+          type="text"
+        >
+          Отменить выдачу
+        </Button>
+      </div>
       <div className={styles.stepsContent}>{stepContent[state.issueStep]}</div>
       <Steps
         className={styles.customSteps}

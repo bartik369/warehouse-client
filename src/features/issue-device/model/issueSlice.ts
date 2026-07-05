@@ -78,6 +78,9 @@ const issueSlice = createSlice({
     setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
       state.warehouse = action.payload;
     },
+    resetWarehouseIssue: (state) => {
+      state.warehouse = { ...initialState.warehouse };
+    },
     setWarehouses: (state, action: PayloadAction<Warehouse[]>) => {
       state.warehouses = action.payload;
     },
@@ -122,6 +125,7 @@ const issueSlice = createSlice({
       state.deviceIssueData = initialState.deviceIssueData;
       state.assignedDevices = initialState.assignedDevices;
     },
+    resetIssueState: () => initialState,
   },
 });
 
@@ -133,6 +137,7 @@ export const {
   clearAssignedDevices,
   clearSelectedDevices,
   setWarehouseIssue,
+  resetWarehouseIssue,
   setIssueStep,
   setIssueNextStep,
   setWasSearched,

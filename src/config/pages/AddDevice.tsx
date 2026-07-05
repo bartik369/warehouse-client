@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 
 import Loader from '@/shared/ui/loader/Loader';
 
-const LazyAddDevice = lazy(() => import('@/components/pages/admin/device/AddDevice'));
+const LazyAddDevice = lazy(() => import('@/pages/admin/device/AddDevice'));
 
 const AddDeviceConfig = {
   title: 'AddDevices',

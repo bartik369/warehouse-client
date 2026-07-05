@@ -1,9 +1,9 @@
-import ResetPassword from "@/components/pages/reset/ResetPassword";
+import ResetPassword from '@/pages/reset/ResetPassword';
 
 const ResetPasswordConfig = {
-    title: 'ResetPassword',
-    path: '/reset-password',
-    element: <ResetPassword />,
-    requireAuth: true,
-}
+  title: 'ResetPassword',
+  path: '/reset-password',
+  element: <ResetPassword />,
+  requireAuth: true,
+};
 export default ResetPasswordConfig;

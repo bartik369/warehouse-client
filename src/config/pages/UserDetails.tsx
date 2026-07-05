@@ -1,5 +1,5 @@
 import type { AppRouteConfig } from '@/app/router/config/types';
-import UserDetails from '@/components/pages/admin/users/UserDetails';
+import UserDetails from '@/pages/admin/users/UserDetails';
 
 const UserDetailsConfig: AppRouteConfig[] = [
   {

@@ -35,6 +35,7 @@ export interface BaseIssueQuery {
   handleSetStep: (step: number) => void;
   handleResetUser: () => void;
   handleResetUserQuery: () => void;
+  handleResetIssue: () => void;
   isSuccess: boolean;
   isFetching: boolean;
   isIssueSuccess: boolean;
