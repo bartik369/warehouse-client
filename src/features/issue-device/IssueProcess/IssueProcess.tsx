@@ -24,6 +24,7 @@ export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
     if (value > state.issueStep) return;
     actions.handleSetStep(value);
   };
+  const isAvailableReset = state.issueStep !== 0 && state.issueStep !== 4;
 
   const stepContent = [
     <SelectWarehouseStep
@@ -68,14 +69,16 @@ export const IssueProcess = ({ actions, state }: IssueProcessProps) => {
   return (
     <div className={styles.stepsContainer}>
       <div className={styles.header}>
-        <Button
-          icon={<CloseCircleOutlined />}
-          onClick={actions.handleResetIssue}
-          className={styles.cancelBtn}
-          type="text"
-        >
-          Отменить выдачу
-        </Button>
+        {isAvailableReset && (
+          <Button
+            icon={<CloseCircleOutlined />}
+            onClick={actions.handleResetIssue}
+            className={styles.cancelBtn}
+            type="text"
+          >
+            Отменить выдачу
+          </Button>
+        )}
       </div>
       <div className={styles.stepsContent}>{stepContent[state.issueStep]}</div>
       <Steps

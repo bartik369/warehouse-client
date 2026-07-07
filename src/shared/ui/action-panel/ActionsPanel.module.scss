@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   :global(.ant-btn).reset {
     background-color: var(--gray-100);
     border: 1px solid var(--gray-200);
@@ -16,5 +19,16 @@
     &:hover {
       background-color: var(--orange-600);
     }
+  }
+  :global(.ant-btn.ant-btn-lg) {
+    font-size: 13px !important;
+    height: 42px;
+    padding: 0 14px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  :global(.ant-btn.ant-btn-sm) {
+    height: 28px;
   }
 }

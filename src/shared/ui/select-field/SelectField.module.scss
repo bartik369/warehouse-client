@@ -1,0 +1,67 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.selectWrapper {
+  position: relative;
+
+  &:focus-within {
+    .label {
+      top: 0;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.select {
+  width: 100%;
+  height: $form-control-height;
+  border-radius: $form-control-radius;
+
+  --ant-color-primary: var(--orange-250);
+  --ant-control-outline: rgba(255, 227, 209, 0.5);
+  --ant-select-active-border-color: var(--orange-250);
+  --ant-select-hover-border-color: var(--orange-250);
+  --ant-select-active-outline-color: rgba(255, 227, 209, 0.5);
+
+  &:focus-within {
+    border-color: var(--orange-250) !important;
+    box-shadow: 0 0 0 2px rgba(255, 227, 209, 0.5) !important;
+    outline: none !important;
+  }
+
+  &:hover {
+    border-color: var(--orange-250);
+  }
+}
+
+.label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  padding: 0 4px;
+  background: #fff;
+  color: var(--text-secondary) !important;
+  font-size: 12px;
+  pointer-events: none;
+  transition: all 0.15s ease;
+}
+
+.labelActive {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.error {
+  margin-top: 4px;
+  color: #ff4d4f;
+  font-size: 12px;
+}
