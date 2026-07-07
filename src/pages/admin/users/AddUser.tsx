@@ -1,5 +1,5 @@
-import UserForm from '@/components/forms/user/UserForm';
-import { createFormFields } from '@/components/forms/user/formConfigs/userFormConfigs';
+import { createUserFields } from '@/features/create-user/model/createUserFields';
+import { CreateUserForm } from '@/features/create-user/ui/CreateUserForm';
 import { useUser } from '@/hooks/data/useUser';
 import { useGetDepartmentsQuery } from '@/store/api/departmentApi';
 import { useGetLocationsQuery } from '@/store/api/locationApi';
@@ -10,9 +10,9 @@ const AddUser = () => {
   const { actions } = useUser();
   return (
     <section>
-      <UserForm
+      <CreateUserForm
         actions={actions}
-        fields={createFormFields}
+        fields={createUserFields}
         locations={locations || []}
         departments={departments || []}
       />

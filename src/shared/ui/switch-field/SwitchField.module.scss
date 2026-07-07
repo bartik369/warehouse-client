@@ -1,0 +1,32 @@
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.switch {
+  :global(.ant-switch) {
+    background-color: var(--gray-500);
+    transition: background-color 0.25s ease;
+  }
+
+  :global(.ant-switch.ant-switch-checked) {
+    background-color: var(--orange-400);
+  }
+
+  :global(.ant-switch:hover:not(.ant-switch-disabled)) {
+    background-color: var(--gray-500);
+  }
+
+  :global(.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled)) {
+    background-color: var(--orange-400);
+  }
+}
+
+.activeText {
+  color: var(--gray-800);
+}
+
+.inactiveText {
+  color: var(--gray-500);
+}
