@@ -30,13 +30,23 @@
     pointer-events: none;
     transition:
       top 0.15s ease,
-      transform 0.15s ease;
+      transform 0.15s ease,
+      left 0.15s ease;
+  }
+
+  .labelWithPrefix {
+    left: 28px;
   }
 
   .label.labelActive,
   &:focus-within .label {
     top: 0;
     transform: translateY(-50%);
+  }
+
+  .labelWithPrefix.labelActive,
+  &:focus-within .labelWithPrefix {
+    left: 28px;
   }
 }
 
