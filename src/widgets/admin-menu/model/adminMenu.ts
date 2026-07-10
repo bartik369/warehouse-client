@@ -20,7 +20,7 @@ export const adminMenu = [
       { id: 2, title: 'Редактировать', path: '/admin/users' },
     ],
   },
-  { id: 2, title: 'Склады', path: '/admin/add-warehouse', icon: TbLocationPlus },
+  { id: 2, title: 'Склады', path: '/admin/warehouses', icon: TbLocationPlus },
   {
     id: 3,
     title: 'Устройства',
@@ -48,5 +48,5 @@ export const adminMenu = [
       { id: 4, title: 'Роли пользователей', path: '/admin/grant-access' },
     ],
   },
-  { id: 8, title: 'Производители', path: '/admin/add-manufacturer', icon: TbBrandComedyCentral },
+  { id: 8, title: 'Производители', path: '/admin/manufacturers', icon: TbBrandComedyCentral },
 ];

@@ -25,4 +25,10 @@ export type FormFieldConfig<T extends FieldValues> =
       checkedChildren?: ReactNode;
       unCheckedChildren?: ReactNode;
       col?: ColProps;
+    }
+  | {
+      type: 'textarea';
+      name: Path<T>;
+      label: string;
+      col?: ColProps;
     };

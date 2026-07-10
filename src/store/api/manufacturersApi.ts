@@ -1,6 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { Manufacturer } from '@/entities/manufacturer/model/type';
+
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { Entity } from '@/types/devices';
 
 export const manufacturersApi = createApi({
   reducerPath: 'manufacturersApi',
@@ -12,7 +14,7 @@ export const manufacturersApi = createApi({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
       }),
     }),
-    getManufacturers: build.query<Entity[], void>({
+    getManufacturers: build.query<Manufacturer[], void>({
       query() {
         return {
           url: `${import.meta.env.VITE_MANUFACTURERS}`,
@@ -30,7 +32,7 @@ export const manufacturersApi = createApi({
             ]
           : [{ type: 'Manufacturer', id: 'LIST' }],
     }),
-    createManufacturer: build.mutation<{ message: string; manufacturer: Entity }, Entity>({
+    createManufacturer: build.mutation<Manufacturer, Omit<Manufacturer, 'id'>>({
       query(body) {
         return {
           url: `${import.meta.env.VITE_MANUFACTURERS}`,
@@ -40,10 +42,7 @@ export const manufacturersApi = createApi({
       },
       invalidatesTags: ['Manufacturer'],
     }),
-    updateManufacturer: build.mutation<
-      { message: string; manufacturer: Entity },
-      { id: string } & Partial<Entity>
-    >({
+    updateManufacturer: build.mutation<Manufacturer, Manufacturer>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
         method: 'PUT',
@@ -58,5 +57,5 @@ export const {
   useGetManufacturersQuery,
   useCreateManufacturerMutation,
   useUpdateManufacturerMutation,
-  useLazyGetManufacturerQuery,
+  useGetManufacturerQuery,
 } = manufacturersApi;

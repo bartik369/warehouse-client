@@ -7,7 +7,7 @@ import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 import styles from '../Admin.module.scss';
 import ItemsList from '../ItemsList';
 
-const AddWarehouse = () => {
+const WarehousesPage = () => {
   const { data: warehouses } = useGetWarehousesQuery();
   const { actions, state } = useAddAdminEntities();
 
@@ -29,4 +29,4 @@ const AddWarehouse = () => {
   );
 };
 
-export default AddWarehouse;
+export default WarehousesPage;

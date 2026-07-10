@@ -2,13 +2,11 @@ import AddContractorConfig from '../pages/AddContractor';
 import AddDepartmentConfig from '../pages/AddDepartment';
 import AddDeviceConfig from '../pages/AddDevice';
 import AddLocationConfig from '../pages/AddLocation';
-import AddManufacturerConfig from '../pages/AddManufacturer';
 import AddModelConfig from '../pages/AddModel';
 import AddPermissionConfig from '../pages/AddPermission';
 import AddRoleConfig from '../pages/AddRole';
 import AddTypeConfig from '../pages/AddType';
 import AddUserConfig from '../pages/AddUser';
-import AddWarehouseConfig from '../pages/AddWarehouse';
 import CalendarConfig from '../pages/Calendar';
 import ContractorsConfig from '../pages/Contractors';
 import DeviceConfig from '../pages/Device';
@@ -22,12 +20,14 @@ import IssueConfig from '../pages/Issue';
 import IssueListConfig from '../pages/IssueList';
 import KnowledgeConfig from '../pages/Knowledge';
 import LocationsConfig from '../pages/Locations';
+import AddManufacturerConfig from '../pages/Manufacturers';
 import MessagesConfig from '../pages/Messages';
 import PermissionRoleConfig from '../pages/PermissionRole';
 import ProfileConfig from '../pages/Profile';
 import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
 import UsersListConfig from '../pages/UsersList';
+import WarehousesConfig from '../pages/Warehouses';
 
 const privateRoutes = [
   HomeConfig,
@@ -44,7 +44,7 @@ const privateRoutes = [
   ...UsersListConfig,
   ...UserDetailsConfig,
   AddLocationConfig,
-  AddWarehouseConfig,
+  WarehousesConfig, // done
   AddDepartmentConfig,
   AddContractorConfig,
   AddRoleConfig,
