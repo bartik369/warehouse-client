@@ -1,62 +1,62 @@
-import { useCallback, useReducer, useRef } from "react";
-import { toast } from "react-toastify";
-import { useInputMask } from "./useInputMask";
-import {
-  FormValidation,
-  ValidateField,
-} from "@/utils/validation/AdminEntityValidation";
-import {
-  useLazyGetManufacturerQuery,
-  useCreateManufacturerMutation,
-  useUpdateManufacturerMutation,
-} from "@/store/api/manufacturersApi";
-import {
-  useCreateDepartmentMutation,
-  useLazyGetDepartmentQuery,
-  useUpdateDepartmentMutation,
-} from "@/store/api/departmentApi";
-import {
-  useCreateLocationMutation,
-  useLazyGetLocationQuery,
-  useUpdateLocationMutation,
-} from "@/store/api/locationApi";
-import {
-  useCreateWarehouseMutation,
-  useLazyGetWarehouseQuery,
-  useUpdateWarehouseMutation,
-} from "@/store/api/warehousesApi";
+import { useCallback, useReducer, useRef } from 'react';
+
+import { toast } from 'react-toastify';
+
+import { adminEntityReducer, initialState } from '@/reducers/admin-entity/adminEntityReducer';
+import { AdminEntityActionTypes } from '@/reducers/admin-entity/adminEntityTypes';
 import {
   useCreateContractorMutation,
   useLazyGetContractorQuery,
   useUpdateContractorMutation,
-} from "@/store/api/contractorApi";
+} from '@/store/api/contractorApi';
+import {
+  useCreateDepartmentMutation,
+  useLazyGetDepartmentQuery,
+  useUpdateDepartmentMutation,
+} from '@/store/api/departmentApi';
+import {
+  useCreateLocationMutation,
+  useLazyGetLocationQuery,
+  useUpdateLocationMutation,
+} from '@/store/api/locationApi';
+import {
+  useCreateManufacturerMutation,
+  useGetManufacturerQuery,
+  useUpdateManufacturerMutation,
+} from '@/store/api/manufacturersApi';
 import {
   useCreateModelMutation,
   useLazyGetModelQuery,
   useUpdateModelMutation,
-} from "@/store/api/modelsApi";
+} from '@/store/api/modelsApi';
+import {
+  useCreatePermissionMutation,
+  useDeletePermissionMutation,
+  useLazyGetPermissionQuery,
+  useUpdatePermissionMutation,
+} from '@/store/api/permissionApi';
+import {
+  useCreateRoleMutation,
+  useDeleteRoleMutation,
+  useLazyGetRoleQuery,
+  useUpdateRoleMutation,
+} from '@/store/api/rolesApi';
 import {
   useCreateTypeMutation,
   useLazyGetTypeQuery,
   useUpdateTypeMutation,
-} from "@/store/api/typesApi";
+} from '@/store/api/typesApi';
 import {
-  useCreatePermissionMutation,
-  useLazyGetPermissionQuery,
-  useUpdatePermissionMutation,
-  useDeletePermissionMutation,
-} from "@/store/api/permissionApi";
-import { 
-  useLazyGetRoleQuery, 
-  useCreateRoleMutation, 
-  useUpdateRoleMutation,
-  useDeleteRoleMutation
-} from "@/store/api/rolesApi";
-import { Entity } from "@/types/devices";
-import { handleApiError } from "@/utils/errors/handleApiError";
-import { adminEntityReducer, initialState } from "@/reducers/admin-entity/adminEntityReducer";
-import { AdminEntityActionTypes } from "@/reducers/admin-entity/adminEntityTypes";
-import { ELEMENTS_LABELS } from "@/utils/constants/ui/elements";
+  useCreateWarehouseMutation,
+  useLazyGetWarehouseQuery,
+  useUpdateWarehouseMutation,
+} from '@/store/api/warehousesApi';
+import { Entity } from '@/types/devices';
+import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
+import { handleApiError } from '@/utils/errors/handleApiError';
+import { FormValidation, ValidateField } from '@/utils/validation/AdminEntityValidation';
+
+import { useInputMask } from './useInputMask';
 
 export const useAddAdminEntities = () => {
   const [state, dispatch] = useReducer(adminEntityReducer, initialState);
@@ -69,7 +69,7 @@ export const useAddAdminEntities = () => {
   const [getLocation] = useLazyGetLocationQuery();
   const [getDepartment] = useLazyGetDepartmentQuery();
   const [getContractor] = useLazyGetContractorQuery();
-  const [getManufacturer] = useLazyGetManufacturerQuery();
+  // const [getManufacturer] = useGetManufacturerQuery();
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
   const [getRole] = useLazyGetRoleQuery();
@@ -98,16 +98,12 @@ export const useAddAdminEntities = () => {
   const [deleteRole] = useDeleteRoleMutation();
   const [deletePermission] = useDeletePermissionMutation();
 
-  const entityDeleteFunctions: Record<
-    string,
-    (item: any) => { unwrap: () => Promise<any> }
-  > = {
+  const entityDeleteFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     role: deleteRole,
-    permission: deletePermission
-  }
+    permission: deletePermission,
+  };
 
-  const entityCreateFunctions: Record<string,
-    (item: any) => { unwrap: () => Promise<any> }> = {
+  const entityCreateFunctions: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     department: isUpdate ? updateDepartment : createDepartment,
     warehouse: isUpdate ? updateWarehouse : createWarehouse,
     location: isUpdate ? updateLocation : createLocation,
@@ -118,12 +114,11 @@ export const useAddAdminEntities = () => {
     role: isUpdate ? updateRole : createRole,
     permission: isUpdate ? updatePermission : createPermission,
   };
-  const entityById: Record<string, 
-  (item: any) => { unwrap: () => Promise<any> } > = {
+  const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     department: getDepartment,
     warehouse: getWarehouse,
     location: getLocation,
-    manufacturer: getManufacturer,
+    // manufacturer: getManufacturer,
     contractor: getContractor,
     model: getModel,
     type: getType,
@@ -134,27 +129,29 @@ export const useAddAdminEntities = () => {
     <T extends string | Entity>(field: keyof Entity, value: T) => {
       dispatch({
         type: AdminEntityActionTypes.SET_ERROR,
-        payload: { [field]: ValidateField(field, value) || "" },
+        payload: { [field]: ValidateField(field, value) || '' },
       });
       dispatch({
         type: AdminEntityActionTypes.SET_ENTITY,
         payload: { [field]: value },
       });
     },
-  []);
+    []
+  );
 
-  const handleCreateEntity = useCallback(async (fieldType: string) => {
+  const handleCreateEntity = useCallback(
+    async (fieldType: string) => {
       try {
         const createEntityFunction = entityCreateFunctions[fieldType];
         const validationErrors = FormValidation(entity, fieldType);
-        dispatch({ 
-          type: AdminEntityActionTypes.SET_ERROR, 
-          payload: validationErrors as Record<string, string>
+        dispatch({
+          type: AdminEntityActionTypes.SET_ERROR,
+          payload: validationErrors as Record<string, string>,
         });
 
         if (Object.keys(validationErrors).length === 0) {
           if (!entity) return;
-          if (fieldType === "model") {
+          if (fieldType === 'model') {
             const formData = new FormData();
             (Object.keys(entity) as (keyof Entity)[]).forEach((key) => {
               const value = entity[key];
@@ -163,20 +160,20 @@ export const useAddAdminEntities = () => {
               }
             });
 
-            if (state.media.file) formData.append("file", state.media.file);
+            if (state.media.file) formData.append('file', state.media.file);
             const data = await createEntityFunction(formData).unwrap();
             if (data) {
               dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
             }
           } else {
             const updateData = {
               ...entity,
-              phoneNumber: changeFormatPhone(entity.phoneNumber || ""),
+              phoneNumber: changeFormatPhone(entity.phoneNumber || ''),
             };
             const data = await createEntityFunction(updateData).unwrap();
             if (data) {
-              toast(data?.message, { type: "success" });
+              toast(data?.message, { type: 'success' });
               handleResetEntity();
             }
           }
@@ -190,7 +187,7 @@ export const useAddAdminEntities = () => {
 
   const handleResetEntity = useCallback(() => {
     dispatch({ type: AdminEntityActionTypes.RESET_ENTITY });
-    dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: false});
+    dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: false });
     dispatch({ type: AdminEntityActionTypes.RESET_ERROR });
   }, []);
 
@@ -199,10 +196,10 @@ export const useAddAdminEntities = () => {
       const getEntityByIdFunction = entityById[field];
       const data = await getEntityByIdFunction(id).unwrap();
       if (data) {
-        console.log(data)
+        console.log(data);
         dispatch({ type: AdminEntityActionTypes.SET_ENTITY, payload: data });
       }
-      dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true});
+      dispatch({ type: AdminEntityActionTypes.SET_IS_UPDATE, payload: true });
     } catch (err: unknown) {
       handleApiError(err);
     }
@@ -212,32 +209,29 @@ export const useAddAdminEntities = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
-        if (file && (file.type.startsWith("image/")) && !file.type.endsWith(".gif")) {
+        if (file && file.type.startsWith('image/') && !file.type.endsWith('.gif')) {
           const objectUrl = URL.createObjectURL(file);
           dispatch({ type: AdminEntityActionTypes.SET_FILE, payload: file });
           dispatch({ type: AdminEntityActionTypes.SET_PREVIEW, payload: objectUrl });
           return () => URL.revokeObjectURL(objectUrl);
         } else {
-          toast(ELEMENTS_LABELS.selectPhoto, { type: "error" });
+          toast(ELEMENTS_LABELS.selectPhoto, { type: 'error' });
         }
       }
     },
     [state.media]
   );
-  const handleDeleteEntity = useCallback(
-    async (id: string, fieldType: string) => {
-      try {
-        const deleteEntityFunction = entityDeleteFunctions[fieldType];
-        const data = await deleteEntityFunction(id).unwrap();
-        if (data) {
-          toast(data?.message, { type: "success" });
-        }
-      } catch (err: unknown) {
-        handleApiError(err);
+  const handleDeleteEntity = useCallback(async (id: string, fieldType: string) => {
+    try {
+      const deleteEntityFunction = entityDeleteFunctions[fieldType];
+      const data = await deleteEntityFunction(id).unwrap();
+      if (data) {
+        toast(data?.message, { type: 'success' });
       }
-    },
-    []
-  );
+    } catch (err: unknown) {
+      handleApiError(err);
+    }
+  }, []);
 
   return {
     entity,
@@ -251,6 +245,6 @@ export const useAddAdminEntities = () => {
       handleResetEntity,
       handleGetEntity,
       handleDeleteEntity,
-    }
+    },
   };
 };

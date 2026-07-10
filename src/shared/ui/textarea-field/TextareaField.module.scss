@@ -1,0 +1,51 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.textareaWrapper {
+  position: relative;
+
+  &:focus-within {
+    .label {
+      top: 0;
+      padding: 2px 6px;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+}
+
+.textarea {
+  min-height: 96px;
+  padding-top: 18px;
+  font-size: $form-control-font-size;
+  border-radius: $form-control-radius;
+  resize: vertical;
+}
+
+.label {
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  top: 18px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 12px;
+  background: #fff;
+  padding: 0 4px;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+
+.labelActive {
+  top: 0;
+  padding: 2px 6px;
+  border-radius: 4px 4px 0 0;
+}
+
+.error {
+  margin: 4px 0 0;
+  color: #ff4d4f;
+  font-size: 12px;
+}

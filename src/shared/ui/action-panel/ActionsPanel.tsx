@@ -10,6 +10,7 @@ import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import styles from './ActionsPanel.module.scss';
 
 interface ActionsPanelProps {
+  mode?: string;
   titleApply?: string;
   titleReset?: string;
   size?: SizeType;
@@ -22,6 +23,7 @@ interface ActionsPanelProps {
 
 export const ActionsPanel = ({
   children,
+  mode = 'create',
   titleApply = BUTTON_LABELS.add,
   titleReset = BUTTON_LABELS.reset,
   size = 'middle',
@@ -30,6 +32,7 @@ export const ActionsPanel = ({
   onReset,
   onApply,
 }: ActionsPanelProps) => {
+  const isCreate = mode === 'create';
   return (
     <div className={styles.container}>
       {children}
@@ -44,7 +47,7 @@ export const ActionsPanel = ({
           size={size}
           onClick={onApply}
         >
-          {titleApply}
+          {isCreate ? titleApply : 'Обновить'}
         </Button>
       </Space>
     </div>

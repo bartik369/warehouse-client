@@ -1,10 +1,19 @@
-import { Input } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Input, Tooltip } from 'antd';
 import clsx from 'clsx';
 
 import styles from './styles.module.scss';
 import { TextFieldProps } from './types';
 
-export const TextField = ({ label, error, value, className, prefix, ...props }: TextFieldProps) => {
+export const TextField = ({
+  label,
+  error,
+  value,
+  tooltip,
+  className,
+  prefix,
+  ...props
+}: TextFieldProps) => {
   const isFilled = Boolean(value);
   const hasPrefix = Boolean(prefix);
 
@@ -20,7 +29,6 @@ export const TextField = ({ label, error, value, className, prefix, ...props }: 
           allowClear
           status={error ? 'error' : undefined}
         />
-
         <label
           className={clsx(
             styles.label,
@@ -28,7 +36,14 @@ export const TextField = ({ label, error, value, className, prefix, ...props }: 
             hasPrefix && styles.labelWithPrefix
           )}
         >
-          {label}
+          <span>{label}</span>
+          {tooltip && (
+            <Tooltip title={tooltip} trigger="hover" placement="top">
+              <span className={styles.tooltipIcon}>
+                <QuestionCircleOutlined />
+              </span>
+            </Tooltip>
+          )}
         </label>
       </div>
 

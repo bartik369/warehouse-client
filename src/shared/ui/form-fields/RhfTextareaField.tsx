@@ -1,33 +1,28 @@
 import { Controller, type FieldValues, type Path, useFormContext } from 'react-hook-form';
 
-import { TextField } from '../text-field/TextField';
-import { TextFieldProps } from '../text-field/types';
+import { TextareaField } from '../textarea-field/TextareaField';
+import { TextareaFieldProps } from '../textarea-field/types';
 
-type RhfTextFieldProps<T extends FieldValues> = Omit<
-  TextFieldProps,
+type RhfTextareaFieldProps<T extends FieldValues> = Omit<
+  TextareaFieldProps,
   'name' | 'value' | 'onChange' | 'error'
-> & {
-  name: Path<T>;
-  tooltip?: string;
-};
+> & { name: Path<T> };
 
-export const RhfTextField = <T extends FieldValues>({
+export const RhfTextareaField = <T extends FieldValues>({
   name,
-  tooltip,
   ...props
-}: RhfTextFieldProps<T>) => {
+}: RhfTextareaFieldProps<T>) => {
   const { control } = useFormContext<T>();
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <TextField
+        <TextareaField
           {...props}
           {...field}
           value={field.value ?? ''}
           error={fieldState.error?.message}
-          tooltip={tooltip}
         />
       )}
     />

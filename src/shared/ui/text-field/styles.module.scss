@@ -48,6 +48,15 @@
   &:focus-within .labelWithPrefix {
     left: 28px;
   }
+  .tooltipIcon {
+    display: inline-flex;
+    margin-left: 6px;
+    color: #8c8c8c;
+    cursor: help;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .error {
