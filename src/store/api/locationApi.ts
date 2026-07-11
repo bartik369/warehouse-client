@@ -1,50 +1,46 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { Location } from '@/entities/location/model/type';
+
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { Entity } from '@/types/devices';
 
 export const locationApi = createApi({
-  reducerPath: "locationApi",
+  reducerPath: 'locationApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Location"],
+  tagTypes: ['Location'],
   endpoints: (build) => ({
-    getLocations: build.query<Entity[], void>({
+    getLocations: build.query<Location[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
       }),
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Location" as const, id })),
-              { type: "Location", id: "LIST" },
+              ...result.map(({ id }) => ({ type: 'Location' as const, id })),
+              { type: 'Location', id: 'LIST' },
             ]
-          : [{ type: "Location", id: "LIST" }],
+          : [{ type: 'Location', id: 'LIST' }],
     }),
-    getLocation: build.query<Entity, string>({
+    getLocation: build.query<Location, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),
     }),
-    createLocation: build.mutation<
-      { message: string; location: Entity },
-      Entity
-    >({
+    createLocation: build.mutation<Location, Omit<Location, 'id'>>({
       query: (body) => ({
         url: `${import.meta.env.VITE_LOCATIONS}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Location"],
+      invalidatesTags: ['Location'],
     }),
-    updateLocation: build.mutation<
-      { message: string; updatedLocation: Entity },
-      { id: string } & Partial<Entity>
-    >({
+    updateLocation: build.mutation<Location, Location>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Location"],
+      invalidatesTags: ['Location'],
     }),
     deleteLocation: build.query({
       query: () => ({

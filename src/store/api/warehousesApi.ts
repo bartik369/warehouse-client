@@ -1,64 +1,85 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
-import { Entity } from "@/types/devices";
-import { Warehouse } from "@/types/locations";
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { Warehouse } from '@/entities/warehouse/model/type';
+
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const warehousesApi = createApi({
-  reducerPath: "warehousesApi",
+  reducerPath: 'warehousesApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Warehouse"],
+  tagTypes: ['Warehouse'],
   endpoints: (build) => ({
-    getWarehouses: build.query<Entity[], void>({
+    getWarehouses: build.query<Warehouse[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_WAREHOUSES}`,
-        method: "GET",
+        method: 'GET',
       }),
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Warehouse" as const, id })),
-              { type: "Warehouse", id: "LIST" },
+              ...result.map(({ id }) => ({ type: 'Warehouse' as const, id })),
+              { type: 'Warehouse', id: 'LIST' },
             ]
-          : [{ type: "Warehouse", id: "LIST" }],
+          : [{ type: 'Warehouse', id: 'LIST' }],
     }),
-    getWarehouse: build.query<Entity, string>({
+    getWarehouse: build.query<Warehouse, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
       }),
+      providesTags: (_result, _error, id) => [
+        {
+          type: 'Warehouse',
+          id,
+        },
+      ],
     }),
-    getAssignableWarehouses: build.query<Entity[], string>({
+    getAssignableWarehouses: build.query<Warehouse[], string>({
       query: (locationId) => ({
         url: `${import.meta.env.VITE_ASSIGNABLE_WAREHOUSES}${locationId}`,
       }),
     }),
-    createWarehouse: build.mutation<{ message: string, warehouse: Entity }, Entity>({
+    createWarehouse: build.mutation<Warehouse, Omit<Warehouse, 'id'>>({
       query: (body) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Warehouse"],
+      invalidatesTags: [
+        {
+          type: 'Warehouse',
+          id: 'LIST',
+        },
+      ],
     }),
-    updateWarehouse: build.mutation<{ message: string, updatedWarehouse: Entity }, Entity>({
+    updateWarehouse: build.mutation<Warehouse, Warehouse>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_WAREHOUSES}${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Warehouse"],
+      invalidatesTags: (_result, _error, { id }) => [
+        {
+          type: 'Warehouse',
+          id,
+        },
+        {
+          type: 'Warehouse',
+          id: 'LIST',
+        },
+      ],
     }),
     getWarehousesByUser: build.query<Warehouse[], string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_WAREHOUSES_BY_USER}${id}`,
-      })
-    })
+      }),
+    }),
   }),
 });
 
 export const {
   useGetWarehousesQuery,
   useCreateWarehouseMutation,
-  useLazyGetWarehouseQuery,
+  useGetWarehouseQuery,
   useUpdateWarehouseMutation,
   useLazyGetAssignableWarehousesQuery,
   useLazyGetWarehousesByUserQuery,

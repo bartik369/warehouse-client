@@ -13,6 +13,12 @@ export const manufacturersApi = createApi({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_MANUFACTURERS}${id}`,
       }),
+      providesTags: (_result, _error, id) => [
+        {
+          type: 'Manufacturer',
+          id,
+        },
+      ],
     }),
     getManufacturers: build.query<Manufacturer[], void>({
       query() {
@@ -40,7 +46,12 @@ export const manufacturersApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['Manufacturer'],
+      invalidatesTags: [
+        {
+          type: 'Manufacturer',
+          id: 'LIST',
+        },
+      ],
     }),
     updateManufacturer: build.mutation<Manufacturer, Manufacturer>({
       query: ({ id, ...body }) => ({
@@ -48,7 +59,16 @@ export const manufacturersApi = createApi({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Manufacturer'],
+      invalidatesTags: (_result, _error, { id }) => [
+        {
+          type: 'Manufacturer',
+          id,
+        },
+        {
+          type: 'Manufacturer',
+          id: 'LIST',
+        },
+      ],
     }),
   }),
 });
