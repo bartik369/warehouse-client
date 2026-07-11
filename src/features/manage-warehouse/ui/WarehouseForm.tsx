@@ -1,40 +1,45 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { Location } from '@/entities/location/model/type';
 import { FormMode } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
+import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import { TITLE } from '../model/constants';
-import { ManufacturerFormValues, manufacturerSchema } from '../model/schema';
-import { Manufacturer } from '../model/types';
+import { WarehouseFormValues, warehouseSchema } from '../model/schema';
+import { Warehouse } from '../model/type';
 
-interface ManufacturerFormProps {
-  data?: Manufacturer;
+interface WarehouseFormProps {
+  data?: Warehouse;
+  locations: Location[];
   mode: FormMode;
   resetId: () => void;
-  onSave: (data: ManufacturerFormValues) => Promise<void>;
+  onSave: (data: WarehouseFormValues) => Promise<void>;
 }
-
-export const ManufacturerForm = ({ data, mode, onSave, resetId }: ManufacturerFormProps) => {
-  const defaultValues: ManufacturerFormValues = {
+export const WarehouseForm = ({ data, locations, mode, resetId, onSave }: WarehouseFormProps) => {
+  const defaultValues = {
     name: '',
     slug: '',
+    locationId: '',
     comment: '',
   };
-  const form = useForm<ManufacturerFormValues>({
-    resolver: zodResolver(manufacturerSchema),
+
+  const form = useForm<WarehouseFormValues>({
+    resolver: zodResolver(warehouseSchema),
     defaultValues,
   });
+
   const { reset, handleSubmit } = form;
 
-  const onSubmit = async (formData: ManufacturerFormValues) => {
+  const onSubmit = async (formData: WarehouseFormValues) => {
     try {
       await onSave(formData);
       handleClear();
@@ -48,12 +53,20 @@ export const ManufacturerForm = ({ data, mode, onSave, resetId }: ManufacturerFo
     reset(defaultValues);
     resetId();
   };
-
   useEffect(() => {
     if (data) {
       reset(data);
     }
   }, [data, reset]);
+
+  const locationOptions = useMemo(
+    () =>
+      locations.map((item) => ({
+        value: item.id,
+        label: item.name,
+      })),
+    [locations]
+  );
 
   return (
     <FormProvider {...form}>
@@ -62,13 +75,10 @@ export const ManufacturerForm = ({ data, mode, onSave, resetId }: ManufacturerFo
           <Flex vertical gap={24}>
             <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
-              <RhfTextField<ManufacturerFormValues> name="name" label={LABELS.name} />
-              <RhfTextField<ManufacturerFormValues>
-                name="slug"
-                tooltip={FIELD_TOOLTIPS.slug}
-                label={LABELS.slug}
-              />
-              <RhfTextareaField<ManufacturerFormValues> name="comment" label={LABELS.description} />
+              <RhfTextField name="name" label={LABELS.name} />
+              <RhfTextField name="slug" label={LABELS.slug} tooltip={FIELD_TOOLTIPS.slug} />
+              <RhfSelectField name="locationId" options={locationOptions} label={LABELS.location} />
+              <RhfTextareaField name="comment" label={LABELS.description} />
             </Flex>
           </Flex>
         </form>

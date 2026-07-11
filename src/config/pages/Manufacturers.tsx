@@ -1,9 +1,9 @@
-import Manufacturers from '@/pages/admin/manufacturer/Manufacturers';
+import ManufacturersPage from '@/pages/admin/manufacturer/ManufacturersPage';
 
 const ManufacturersConfig = {
   title: 'Manufacturers',
   path: '/admin/manufacturers',
-  element: <Manufacturers />,
+  element: <ManufacturersPage />,
   requireAuth: true,
 };
 export default ManufacturersConfig;

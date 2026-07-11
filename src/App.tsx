@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import './App.scss';
 import PrivateRoutes from './app/router/PrivateRoutes';
@@ -39,23 +40,34 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route element={<PrivateRoutes />}>
-        <Route path="/" element={<Layout />}>
-          {privateRoutes.flatMap(({ path, element }) =>
-            (Array.isArray(path) ? path : [path]).map((p) => (
-              <Route key={p} path={p} element={element} />
-            ))
-          )}
+    <>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<Layout />}>
+            {privateRoutes.flatMap(({ path, element }) =>
+              (Array.isArray(path) ? path : [path]).map((p) => (
+                <Route key={p} path={p} element={element} />
+              ))
+            )}
+          </Route>
         </Route>
-      </Route>
-      <Route element={<PublicRoutes />}>
-        {publicRoutes.map(({ path, element }) => (
-          <Route key={path} path={path} element={element} />
-        ))}
-      </Route>
-      <Route path="*" element={<Page404 />} />
-    </Routes>
+        <Route element={<PublicRoutes />}>
+          {publicRoutes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+        </Route>
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
+    </>
   );
 }
 

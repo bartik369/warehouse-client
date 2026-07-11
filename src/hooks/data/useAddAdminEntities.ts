@@ -21,7 +21,7 @@ import {
 } from '@/store/api/locationApi';
 import {
   useCreateManufacturerMutation,
-  useGetManufacturerQuery,
+  // useGetManufacturerQuery,
   useUpdateManufacturerMutation,
 } from '@/store/api/manufacturersApi';
 import {
@@ -48,7 +48,7 @@ import {
 } from '@/store/api/typesApi';
 import {
   useCreateWarehouseMutation,
-  useLazyGetWarehouseQuery,
+  useGetWarehouseQuery,
   useUpdateWarehouseMutation,
 } from '@/store/api/warehousesApi';
 import { Entity } from '@/types/devices';
@@ -65,7 +65,7 @@ export const useAddAdminEntities = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const { changeFormatPhone } = useInputMask();
-  const [getWarehouse] = useLazyGetWarehouseQuery();
+  // const [getWarehouse] = useGetWarehouseQuery();
   const [getLocation] = useLazyGetLocationQuery();
   const [getDepartment] = useLazyGetDepartmentQuery();
   const [getContractor] = useLazyGetContractorQuery();
@@ -116,7 +116,7 @@ export const useAddAdminEntities = () => {
   };
   const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     department: getDepartment,
-    warehouse: getWarehouse,
+    // warehouse: getWarehouse,
     location: getLocation,
     // manufacturer: getManufacturer,
     contractor: getContractor,

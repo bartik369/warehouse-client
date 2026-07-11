@@ -1,6 +1,6 @@
 import { ManageManufacturer } from '@/features/manage-manufacturer/ui/ManageManufacturer';
 
-const Manufacturers = () => {
+const ManufacturersPage = () => {
   return (
     <>
       <ManageManufacturer />
@@ -8,4 +8,4 @@ const Manufacturers = () => {
   );
 };
 
-export default Manufacturers;
+export default ManufacturersPage;
