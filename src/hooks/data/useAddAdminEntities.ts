@@ -11,7 +11,7 @@ import {
 } from '@/store/api/contractorApi';
 import {
   useCreateDepartmentMutation,
-  useLazyGetDepartmentQuery,
+  // useLazyGetDepartmentQuery,
   useUpdateDepartmentMutation,
 } from '@/store/api/departmentApi';
 import {
@@ -67,7 +67,7 @@ export const useAddAdminEntities = () => {
   const { changeFormatPhone } = useInputMask();
   // const [getWarehouse] = useGetWarehouseQuery();
   // const [getLocation] = useLazyGetLocationQuery();
-  const [getDepartment] = useLazyGetDepartmentQuery();
+  // const [getDepartment] = useLazyGetDepartmentQuery();
   const [getContractor] = useLazyGetContractorQuery();
   // const [getManufacturer] = useGetManufacturerQuery();
   const [getModel] = useLazyGetModelQuery();
@@ -115,7 +115,7 @@ export const useAddAdminEntities = () => {
     permission: isUpdate ? updatePermission : createPermission,
   };
   const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
-    department: getDepartment,
+    // department: getDepartment,
     // warehouse: getWarehouse,
     // location: getLocation,
     // manufacturer: getManufacturer,

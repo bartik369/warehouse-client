@@ -1,50 +1,66 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { Department } from '@/entities/department/model/type';
+
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
-import { Entity } from '@/types/devices';
 
 export const departmentApi = createApi({
-  reducerPath: "departmentApi",
+  reducerPath: 'departmentApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Department"],
+  tagTypes: ['Department'],
   endpoints: (build) => ({
-    getDepartments: build.query<Entity[], void>({
+    getDepartments: build.query<Department[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
       }),
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Department" as const, id })),
-              { type: "Department", id: "LIST" },
+              ...result.map(({ id }) => ({ type: 'Department' as const, id })),
+              { type: 'Department', id: 'LIST' },
             ]
-          : [{ type: "Department", id: "LIST" }],
+          : [{ type: 'Department', id: 'LIST' }],
     }),
-    getDepartment: build.query<Entity, string>({
+    getDepartment: build.query<Department, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
       }),
+      providesTags: (_result, _error, id) => [
+        {
+          type: 'Department',
+          id,
+        },
+      ],
     }),
-    createDepartment: build.mutation<
-      { message: string; department: Entity },
-      Entity
-    >({
+    createDepartment: build.mutation<Department, Omit<Department, 'id'>>({
       query: (body) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Department"],
+      invalidatesTags: [
+        {
+          type: 'Department',
+          id: 'LIST',
+        },
+      ],
     }),
-    updateDepartment: build.mutation<
-      { message: string; updatedDepartment: Entity },
-      { id: string } & Partial<Entity>
-    >({
+    updateDepartment: build.mutation<Department, Department>({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Department"],
+      invalidatesTags: (_result, _error, { id }) => [
+        {
+          type: 'Department',
+          id,
+        },
+        {
+          type: 'Department',
+          id: 'LIST',
+        },
+      ],
     }),
     deleteDepartment: build.query<{ message: string }, string>({
       query: () => ({
@@ -55,7 +71,7 @@ export const departmentApi = createApi({
 });
 
 export const {
-  useLazyGetDepartmentQuery,
+  useGetDepartmentQuery,
   useGetDepartmentsQuery,
   useCreateDepartmentMutation,
   useUpdateDepartmentMutation,
