@@ -1,5 +1,5 @@
-import type { LocationFormValue } from '@/features/manage-location/model/schema';
+import type { LocationFormValues } from '@/features/manage-location/model/schema';
 
-export type Location = LocationFormValue & {
+export type Location = LocationFormValues & {
   id: string;
 };
