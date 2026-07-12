@@ -8,4 +8,4 @@ export const locationSchema = z.object({
   comment: z.string().optional(),
 });
 
-export type LocationFormValue = z.infer<typeof locationSchema>;
+export type LocationFormValues = z.infer<typeof locationSchema>;

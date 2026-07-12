@@ -16,7 +16,7 @@ import {
 } from '@/store/api/departmentApi';
 import {
   useCreateLocationMutation,
-  useLazyGetLocationQuery,
+  // useLazyGetLocationQuery,
   useUpdateLocationMutation,
 } from '@/store/api/locationApi';
 import {
@@ -66,7 +66,7 @@ export const useAddAdminEntities = () => {
 
   const { changeFormatPhone } = useInputMask();
   // const [getWarehouse] = useGetWarehouseQuery();
-  const [getLocation] = useLazyGetLocationQuery();
+  // const [getLocation] = useLazyGetLocationQuery();
   const [getDepartment] = useLazyGetDepartmentQuery();
   const [getContractor] = useLazyGetContractorQuery();
   // const [getManufacturer] = useGetManufacturerQuery();
@@ -117,7 +117,7 @@ export const useAddAdminEntities = () => {
   const entityById: Record<string, (item: any) => { unwrap: () => Promise<any> }> = {
     department: getDepartment,
     // warehouse: getWarehouse,
-    location: getLocation,
+    // location: getLocation,
     // manufacturer: getManufacturer,
     contractor: getContractor,
     model: getModel,

@@ -1,7 +1,6 @@
 import AddContractorConfig from '../pages/AddContractor';
 import AddDepartmentConfig from '../pages/AddDepartment';
 import AddDeviceConfig from '../pages/AddDevice';
-import AddLocationConfig from '../pages/AddLocation';
 import AddModelConfig from '../pages/AddModel';
 import AddPermissionConfig from '../pages/AddPermission';
 import AddRoleConfig from '../pages/AddRole';
@@ -20,6 +19,7 @@ import IssueConfig from '../pages/Issue';
 import IssueListConfig from '../pages/IssueList';
 import KnowledgeConfig from '../pages/Knowledge';
 import LocationsConfig from '../pages/Locations';
+import AddLocationConfig from '../pages/Locations';
 import AddManufacturerConfig from '../pages/Manufacturers';
 import MessagesConfig from '../pages/Messages';
 import PermissionRoleConfig from '../pages/PermissionRole';

@@ -25,6 +25,12 @@ export const locationApi = createApi({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),
+      providesTags: (_result, _error, id) => [
+        {
+          type: 'Location',
+          id,
+        },
+      ],
     }),
     createLocation: build.mutation<Location, Omit<Location, 'id'>>({
       query: (body) => ({
@@ -32,7 +38,12 @@ export const locationApi = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Location'],
+      invalidatesTags: [
+        {
+          type: 'Location',
+          id: 'LIST',
+        },
+      ],
     }),
     updateLocation: build.mutation<Location, Location>({
       query: ({ id, ...body }) => ({
@@ -40,7 +51,16 @@ export const locationApi = createApi({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Location'],
+      invalidatesTags: (_result, _error, { id }) => [
+        {
+          type: 'Location',
+          id,
+        },
+        {
+          type: 'Location',
+          id: 'LIST',
+        },
+      ],
     }),
     deleteLocation: build.query({
       query: () => ({
@@ -52,7 +72,7 @@ export const locationApi = createApi({
 
 export const {
   useGetLocationsQuery,
-  useLazyGetLocationQuery,
+  useGetLocationQuery,
   useCreateLocationMutation,
   useUpdateLocationMutation,
   useDeleteLocationQuery,

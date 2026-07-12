@@ -2,7 +2,6 @@ import { AppRouteConfig } from '@/app/router/config/types';
 
 import AddContractorConfig from './AddContractor';
 import AddDeviceConfig from './AddDevice';
-import AddLocationConfig from './AddLocation';
 import AddModelConfig from './AddModel';
 import AddPermissionConfig from './AddPermission';
 import AddRoleConfig from './AddRole';
@@ -20,6 +19,7 @@ import InventoryListConfig from './InventoryList';
 import IssueConfig from './Issue';
 import IssueListConfig from './IssueList';
 import KnowledgeConfig from './Knowledge';
+import AddLocationConfig from './Locations';
 import LocationsConfig from './Locations';
 import AddManufacturerConfig from './Manufacturers';
 import MessagesConfig from './Messages';
