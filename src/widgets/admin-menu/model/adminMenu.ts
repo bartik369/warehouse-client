@@ -33,8 +33,8 @@ export const adminMenu = [
       { id: 4, title: 'Типы', path: '/admin/add-type' },
     ],
   },
-  { id: 4, title: 'Города', path: '/admin/add-location', icon: LiaCitySolid },
-  { id: 5, title: 'Отделы', path: '/admin/add-department', icon: TbArrowsMove },
+  { id: 4, title: 'Города', path: '/admin/locations', icon: LiaCitySolid },
+  { id: 5, title: 'Отделы', path: '/admin/departments', icon: TbArrowsMove },
   { id: 6, title: 'Подрядчики', path: '/admin/add-contractor', icon: MdSupportAgent },
   {
     id: 7,
