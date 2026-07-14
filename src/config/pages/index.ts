@@ -1,6 +1,5 @@
 import { AppRouteConfig } from '@/app/router/config/types';
 
-import AddContractorConfig from './AddContractor';
 import AddDeviceConfig from './AddDevice';
 import AddModelConfig from './AddModel';
 import AddPermissionConfig from './AddPermission';
@@ -8,7 +7,8 @@ import AddRoleConfig from './AddRole';
 import AddTypeConfig from './AddType';
 import AddUserConfig from './AddUser';
 import CalendarConfig from './Calendar';
-import ContractorsConfig from './Contractors';
+import AddContractorConfig from './Contractors';
+import ContractorsConfig from './Contractors2';
 import DeviceConfig from './Device';
 import DevicesConfig from './Devices';
 import EditDeviceConfig from './EditDevice';
