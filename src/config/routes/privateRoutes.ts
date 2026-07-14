@@ -1,4 +1,3 @@
-import AddContractorConfig from '../pages/AddContractor';
 import AddDeviceConfig from '../pages/AddDevice';
 import AddModelConfig from '../pages/AddModel';
 import AddPermissionConfig from '../pages/AddPermission';
@@ -6,6 +5,7 @@ import AddRoleConfig from '../pages/AddRole';
 import AddTypeConfig from '../pages/AddType';
 import AddUserConfig from '../pages/AddUser';
 import CalendarConfig from '../pages/Calendar';
+import AddContractorConfig from '../pages/Contractors';
 import ContractorsConfig from '../pages/Contractors';
 import DepartmentConfig from '../pages/Departments';
 import DeviceConfig from '../pages/Device';
@@ -44,7 +44,7 @@ const privateRoutes = [
   ...UsersListConfig,
   ...UserDetailsConfig,
   AddLocationConfig,
-  WarehousesConfig, // done
+  WarehousesConfig,
   DepartmentConfig,
   AddContractorConfig,
   AddRoleConfig,

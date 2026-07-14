@@ -1,0 +1,97 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: $form-control-height;
+  border-radius: $form-control-radius;
+  border: 1px solid var(--border-primary);
+  padding-left: 15px;
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: var(--orange-200);
+    box-shadow: rgba(255, 227, 209, 0.4) 0px 3px 5px;
+  }
+
+  &:focus-within {
+    .label {
+      top: 0;
+      padding: 2px 6px;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+  .input {
+    width: 100%;
+  }
+
+  .input :global(.PhoneInputInput) {
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+  }
+
+  .input :global(.PhoneInputCountry) {
+    margin-right: 8px;
+  }
+
+  .input :global(.PhoneInputCountrySelectArrow) {
+    opacity: 0.6;
+  }
+
+  .label {
+    position: absolute;
+    z-index: 2;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 4px;
+    color: var(--text-secondary);
+    background: #fff;
+    font-size: 12px;
+    pointer-events: none;
+    transition: 0.15s ease;
+  }
+  .prefix {
+    color: var(--gray-600);
+  }
+
+  .labelActive {
+    top: 0;
+    padding: 2px 6px;
+    border-radius: 4px 4px 0 0;
+  }
+  .clearButton {
+    position: absolute;
+    font-size: 12px;
+    top: 50%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    outline: none !important;
+    color: var(--gray-450);
+    background: transparent;
+    cursor: pointer;
+    transform: translateY(-50%);
+    &:hover {
+      color: var(--gray-500) !important;
+    }
+  }
+}
+
+.error {
+  margin: 4px 0 0;
+
+  color: #ff4d4f;
+  font-size: 12px;
+}

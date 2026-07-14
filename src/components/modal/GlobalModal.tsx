@@ -1,22 +1,22 @@
-import { useGlobalModal } from "@/hooks/data/useGlobalModal";
-import ContractorForm from "../forms/contractor/ContractorForm";
-import EntityForm from "../forms/device/EntityForm";
-import Modal from "./Modal";
-import Signature from "../signature/Signature";
-import { useSignature } from "../signature/useSignature";
+import { useGlobalModal } from '@/hooks/data/useGlobalModal';
 
+// import ContractorForm from "../forms/contractor/ContractorForm";
+import EntityForm from '../forms/device/EntityForm';
+import Signature from '../signature/Signature';
+import { useSignature } from '../signature/useSignature';
+import Modal from './Modal';
 
 export const GlobalModal = () => {
   const { isOpen, modalType, modalProps, closeModal } = useGlobalModal();
   const { actions } = useSignature();
-  
+
   if (!isOpen) return null;
 
   const renderContent = () => {
     switch (modalType) {
-      case "type":
-      case "model":
-      case "manufacturer":
+      case 'type':
+      case 'model':
+      case 'manufacturer':
         return (
           <EntityForm
             typeId={modalProps.typeId}
@@ -24,10 +24,10 @@ export const GlobalModal = () => {
             fieldType={modalProps.fieldType}
           />
         );
-      case "contractor":
-        return <ContractorForm {...modalProps} />;
-      case "signature":
-        return <Signature actions={actions} {...modalProps}/>
+      // case "contractor":
+      //   return <ContractorForm {...modalProps} />;
+      case 'signature':
+        return <Signature actions={actions} {...modalProps} />;
       default:
         return null;
     }
@@ -38,7 +38,7 @@ export const GlobalModal = () => {
       maxWidth={modalProps.maxWidth}
       isOpen={isOpen}
       setIsOpen={closeModal}
-      title={modalProps.title || ""}
+      title={modalProps.title || ''}
     >
       {renderContent()}
     </Modal>

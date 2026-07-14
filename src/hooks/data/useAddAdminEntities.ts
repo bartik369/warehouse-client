@@ -6,7 +6,7 @@ import { adminEntityReducer, initialState } from '@/reducers/admin-entity/adminE
 import { AdminEntityActionTypes } from '@/reducers/admin-entity/adminEntityTypes';
 import {
   useCreateContractorMutation,
-  useLazyGetContractorQuery,
+  // useLazyGetContractorQuery,
   useUpdateContractorMutation,
 } from '@/store/api/contractorApi';
 import {
@@ -68,7 +68,7 @@ export const useAddAdminEntities = () => {
   // const [getWarehouse] = useGetWarehouseQuery();
   // const [getLocation] = useLazyGetLocationQuery();
   // const [getDepartment] = useLazyGetDepartmentQuery();
-  const [getContractor] = useLazyGetContractorQuery();
+  // const [getContractor] = useLazyGetContractorQuery();
   // const [getManufacturer] = useGetManufacturerQuery();
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
@@ -119,7 +119,7 @@ export const useAddAdminEntities = () => {
     // warehouse: getWarehouse,
     // location: getLocation,
     // manufacturer: getManufacturer,
-    contractor: getContractor,
+    // contractor: getContractor,
     model: getModel,
     type: getType,
     role: getRole,
