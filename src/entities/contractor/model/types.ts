@@ -1,4 +1,4 @@
-import { ContractorFormValues } from '@/features/manage-contractors/model/schema';
+import { ContractorFormValues } from '@/features/manage-contractor/model/schema';
 
 export type Contractor = ContractorFormValues & {
   id: string;

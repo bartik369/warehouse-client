@@ -1,7 +1,6 @@
 import AddDeviceConfig from '../pages/AddDevice';
 import AddModelConfig from '../pages/AddModel';
 import AddPermissionConfig from '../pages/AddPermission';
-import AddRoleConfig from '../pages/AddRole';
 import AddTypeConfig from '../pages/AddType';
 import AddUserConfig from '../pages/AddUser';
 import CalendarConfig from '../pages/Calendar';
@@ -24,6 +23,7 @@ import AddManufacturerConfig from '../pages/Manufacturers';
 import MessagesConfig from '../pages/Messages';
 import PermissionRoleConfig from '../pages/PermissionRole';
 import ProfileConfig from '../pages/Profile';
+import AddRoleConfig from '../pages/Roles';
 import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
 import UsersListConfig from '../pages/UsersList';

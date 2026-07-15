@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Warehouse } from '@/entities/warehouse/model/type';
+import { Warehouse } from '@/entities/warehouse/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 

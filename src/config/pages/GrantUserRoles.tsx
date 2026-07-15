@@ -1,4 +1,4 @@
-import GrantUserRoles from '@/pages/admin/roles/GrantUserRoles';
+import GrantUserRoles from '@/pages/admin/roles2/GrantUserRoles';
 
 const GrantUserRolesConfig = {
   title: 'Grant access',
