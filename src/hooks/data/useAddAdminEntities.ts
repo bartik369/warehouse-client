@@ -38,7 +38,7 @@ import {
 import {
   useCreateRoleMutation,
   useDeleteRoleMutation,
-  useLazyGetRoleQuery,
+  // useLazyGetRoleQuery,
   useUpdateRoleMutation,
 } from '@/store/api/rolesApi';
 import {
@@ -72,7 +72,7 @@ export const useAddAdminEntities = () => {
   // const [getManufacturer] = useGetManufacturerQuery();
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
-  const [getRole] = useLazyGetRoleQuery();
+  // const [getRole] = useLazyGetRoleQuery();
   const [getPermission] = useLazyGetPermissionQuery();
 
   const [createDepartment] = useCreateDepartmentMutation();
@@ -122,7 +122,7 @@ export const useAddAdminEntities = () => {
     // contractor: getContractor,
     model: getModel,
     type: getType,
-    role: getRole,
+    // role: getRole,
     permission: getPermission,
   };
   const handleInputChange = useCallback(

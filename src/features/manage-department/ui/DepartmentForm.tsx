@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Department } from '@/entities/department/model/type';
+import { Department } from '@/entities/department/model/types';
 import { FormMode } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';

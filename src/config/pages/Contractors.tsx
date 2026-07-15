@@ -1,4 +1,4 @@
-import { ManageContractor } from '@/features/manage-contractors/ui/ManageContractor';
+import { ManageContractor } from '@/features/manage-contractor/ui/ManageContractor';
 
 const ContractorsConfig = {
   title: 'Contractors',

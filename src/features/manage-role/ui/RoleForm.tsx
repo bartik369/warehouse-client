@@ -4,35 +4,35 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Location } from '@/entities/location/model/types';
+import { Role } from '@/entities/role/model/types';
 import { FormMode } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
-import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import { TITLE } from '../model/constants';
-import { LocationFormValues, locationSchema } from '../model/schema';
+import { RoleFormValues, roleSchema } from '../model/schema';
 
-interface LocationFormProps {
-  data?: Location;
+interface RoleFormProps {
+  data?: Role;
   mode: FormMode;
   resetId: () => void;
-  onSave: (data: LocationFormValues) => Promise<void>;
+  onSave: (data: RoleFormValues) => Promise<void>;
 }
-export const LocationForm = ({ data, mode, onSave, resetId }: LocationFormProps) => {
+
+export const RoleForm = ({ data, mode, onSave, resetId }: RoleFormProps) => {
   const defaultValues = {
     name: '',
-    slug: '',
     comment: '',
   };
-  const form = useForm<LocationFormValues>({
-    resolver: zodResolver(locationSchema),
+  const form = useForm<RoleFormValues>({
+    resolver: zodResolver(roleSchema),
     defaultValues,
   });
   const { reset, handleSubmit } = form;
-  const onSubmit = async (formData: LocationFormValues) => {
+
+  const onSubmit = async (formData: RoleFormValues) => {
     try {
       await onSave(formData);
       handleClear();
@@ -40,8 +40,8 @@ export const LocationForm = ({ data, mode, onSave, resetId }: LocationFormProps)
       console.log(error);
     }
   };
-
   const submit = handleSubmit(onSubmit);
+
   const handleClear = () => {
     reset(defaultValues);
     resetId();
@@ -55,18 +55,13 @@ export const LocationForm = ({ data, mode, onSave, resetId }: LocationFormProps)
 
   return (
     <FormProvider {...form}>
-      <ActionsPanel size="large" mode={mode} onReset={handleClear} onApply={submit}>
+      <ActionsPanel size="large" mode={mode} onApply={submit} onReset={handleClear}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
             <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
-              <RhfTextField<LocationFormValues> name="name" label={LABELS.name} />
-              <RhfTextField<LocationFormValues>
-                name="slug"
-                tooltip={FIELD_TOOLTIPS.slug}
-                label={LABELS.slug}
-              />
-              <RhfTextareaField<LocationFormValues> name="comment" label={LABELS.description} />
+              <RhfTextField<RoleFormValues> name="name" label={LABELS.name} />
+              <RhfTextareaField<RoleFormValues> name="comment" label={LABELS.description} />
             </Flex>
           </Flex>
         </form>
