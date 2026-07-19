@@ -29,7 +29,7 @@ const UserInfo = ({ userRoles }: UserInfoProps) => {
             <TechnicalOptions name={LABELS.location} value={user?.location ?? ''} />
           </section>
           <div className={styles.title}>{SECTION_TITLES.userListRoles}</div>
-          <PermissionList roles={roles} />
+          {/* <PermissionList roles={roles} /> */}
         </>
       )}
     </div>
