@@ -1,9 +1,9 @@
-import PermissionRole from '@/pages/admin/permission/PermissionRole';
+import { ManagePermissionRole } from '@/features/manage-permission-role/ui/ManagePermissionRole';
 
 const PermissionRoleConfig = {
-  title: 'Profile',
-  path: '/admin/add-permission_role',
-  element: <PermissionRole />,
+  title: 'Permission role',
+  path: '/admin/permission_roles',
+  element: <ManagePermissionRole />,
   requireAuth: true,
 };
 export default PermissionRoleConfig;

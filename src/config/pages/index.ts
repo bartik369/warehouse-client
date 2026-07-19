@@ -2,7 +2,6 @@ import { AppRouteConfig } from '@/app/router/config/types';
 
 import AddDeviceConfig from './AddDevice';
 import AddModelConfig from './AddModel';
-import AddPermissionConfig from './AddPermission';
 import AddTypeConfig from './AddType';
 import AddUserConfig from './AddUser';
 import CalendarConfig from './Calendar';
@@ -23,6 +22,7 @@ import LocationsConfig from './Locations';
 import AddManufacturerConfig from './Manufacturers';
 import MessagesConfig from './Messages';
 import PermissionRoleConfig from './PermissionRole';
+import AddPermissionConfig from './Permissions';
 import ProfileConfig from './Profile';
 import ResetPasswordConfig from './ResetPassword';
 import AddRoleConfig from './Roles';

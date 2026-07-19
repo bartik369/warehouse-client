@@ -1,0 +1,72 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+
+  &:focus-within {
+    .label {
+      top: 0;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.select {
+  width: 100%;
+  min-width: 0;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  z-index: 2;
+  padding: 0 4px;
+  color: var(--text-secondary);
+  background: #fff;
+  font-size: 12px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.15s ease;
+}
+
+.labelActive {
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.error {
+  margin-top: 4px;
+  color: var(--ant-color-error);
+  font-size: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.code {
+  color: var(--ant-color-text-secondary);
+  font-size: 12px;
+  line-height: 18px;
+}

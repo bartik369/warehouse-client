@@ -23,7 +23,7 @@ const GrantUserRoles = () => {
         />
       </section>
       <section className={styles.layoutRight}>
-        <UserInfo userRoles={roleState.assignedUserRoles} />
+        {/* <UserInfo userRoles={roleState.assignedUserRoles} /> */}
       </section>
     </section>
   );

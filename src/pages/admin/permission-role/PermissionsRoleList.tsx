@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import PermissionList from '@/components/ui/permissions/PermissionList';
+// import PermissionList from '@/features/manage-permission-role/ui/permission-role-list/PermissionList';
 import { AccessFormActions, UserRolesList } from '@/types/access';
 
 import styles from './PermissionsRoleList.module.scss';
@@ -12,7 +12,7 @@ interface PermissionsRoleListProps {
 const PermissionsRoleList = memo(({ roles, actions }: PermissionsRoleListProps) => {
   return (
     <div className={styles.items}>
-      {roles &&
+      {/* {roles &&
         roles.map((role) => (
           <PermissionList
             key={`${role.roleName}_${role.locationName}_${role.warehouseName}`}
@@ -21,7 +21,7 @@ const PermissionsRoleList = memo(({ roles, actions }: PermissionsRoleListProps) 
             showEdit={true}
             showDelete={true}
           />
-        ))}
+        ))} */}
     </div>
   );
 });
