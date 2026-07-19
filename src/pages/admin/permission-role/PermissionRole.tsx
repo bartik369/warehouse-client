@@ -21,7 +21,7 @@ const PermissionRole = () => {
         />
       </div>
       <aside className={styles.list}>
-        <PermissionsRoleList roles={permissionsRoles || []} actions={actions} />
+        {/* <PermissionsRoleList roles={permissionsRoles || []} actions={actions} /> */}
       </aside>
     </section>
   );
