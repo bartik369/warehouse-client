@@ -32,7 +32,7 @@ import {
 import {
   useCreatePermissionMutation,
   useDeletePermissionMutation,
-  useLazyGetPermissionQuery,
+  // useLazyGetPermissionQuery,
   useUpdatePermissionMutation,
 } from '@/store/api/permissionApi';
 import {
@@ -73,7 +73,7 @@ export const useAddAdminEntities = () => {
   const [getModel] = useLazyGetModelQuery();
   const [getType] = useLazyGetTypeQuery();
   // const [getRole] = useLazyGetRoleQuery();
-  const [getPermission] = useLazyGetPermissionQuery();
+  // const [getPermission] = useLazyGetPermissionQuery();
 
   const [createDepartment] = useCreateDepartmentMutation();
   const [createLocation] = useCreateLocationMutation();
@@ -123,7 +123,7 @@ export const useAddAdminEntities = () => {
     model: getModel,
     type: getType,
     // role: getRole,
-    permission: getPermission,
+    // permission: getPermission,
   };
   const handleInputChange = useCallback(
     <T extends string | Entity>(field: keyof Entity, value: T) => {

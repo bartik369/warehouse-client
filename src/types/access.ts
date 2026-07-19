@@ -1,7 +1,8 @@
-import { ChangeEvent } from "react";
-import { CheckedPermissionOptions } from "./content";
-import { Entity } from "./devices";
-import { User } from "./user";
+import { ChangeEvent } from 'react';
+
+import { CheckedPermissionOptions } from './content';
+import { Entity } from './devices';
+import { User } from './user';
 
 export interface Role {
   id: string;
@@ -38,16 +39,11 @@ export interface PermissionRole {
 
 export type PermissionRoleRes = Pick<
   PermissionRole,
-  | "roleName"
-  | "roleId"
-  | "warehouseName"
-  | "locationName"
-  | "permissionsName"
-  | "permissionIds"
+  'roleName' | 'roleId' | 'warehouseName' | 'locationName' | 'permissionsName' | 'permissionIds'
 >;
 export type ListRoleRes = Pick<
   PermissionRole,
-  "roleName" | "roleId" | "warehouseName" | "locationName"
+  'roleName' | 'roleId' | 'warehouseName' | 'locationName'
 >;
 
 export interface AccessFormActions {
@@ -90,10 +86,10 @@ export interface UserRoleFormActions {
   handleUserInfo: (item: User) => void;
 }
 export interface UserRolesList {
-    locationName: string;
-    warehouseName: string;
-    roleName: string;
-    permissionsName: string[];
+  locationName: string;
+  warehouseName: string;
+  roleName: string;
+  permissionsName: string[];
 }
 
 export interface UserRolesResponse {

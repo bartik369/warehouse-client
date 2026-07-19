@@ -1,6 +1,6 @@
 import TechnicalOptions from '@/components/ui/options/TechnicalOptions';
-import PermissionList from '@/components/ui/permissions/PermissionList';
-import { UserRolesResponse } from '@/types/access';
+import { UserRolesResponse } from '@/entities/permission-role/model/types';
+import { PermissionList } from '@/features/manage-permission-role/ui/permission-role-list/PermissionList';
 import { LABELS } from '@/utils/constants/ui/labels';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 
@@ -29,14 +29,7 @@ const UserInfo = ({ userRoles }: UserInfoProps) => {
             <TechnicalOptions name={LABELS.location} value={user?.location ?? ''} />
           </section>
           <div className={styles.title}>{SECTION_TITLES.userListRoles}</div>
-          {roles.map((role) => (
-            <PermissionList
-              role={role}
-              key={`${role.locationName}::${role.warehouseName}::${role.roleName}`}
-              showEdit={false}
-              showDelete={true}
-            />
-          ))}
+          <PermissionList roles={roles} />
         </>
       )}
     </div>

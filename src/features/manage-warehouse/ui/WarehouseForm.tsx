@@ -75,10 +75,18 @@ export const WarehouseForm = ({ data, locations, mode, resetId, onSave }: Wareho
           <Flex vertical gap={24}>
             <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
-              <RhfTextField name="name" label={LABELS.name} />
-              <RhfTextField name="slug" label={LABELS.slug} tooltip={FIELD_TOOLTIPS.slug} />
-              <RhfSelectField name="locationId" options={locationOptions} label={LABELS.location} />
-              <RhfTextareaField name="comment" label={LABELS.description} />
+              <RhfTextField<WarehouseFormValues> name="name" label={LABELS.name} />
+              <RhfTextField<WarehouseFormValues>
+                name="slug"
+                label={LABELS.slug}
+                tooltip={FIELD_TOOLTIPS.slug}
+              />
+              <RhfSelectField<WarehouseFormValues>
+                name="locationId"
+                options={locationOptions}
+                label={LABELS.location}
+              />
+              <RhfTextareaField<WarehouseFormValues> name="comment" label={LABELS.description} />
             </Flex>
           </Flex>
         </form>
