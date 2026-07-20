@@ -1,6 +1,7 @@
-import { Empty, Spin } from 'antd';
+import { Empty } from 'antd';
 import { MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
 
+import { Spinner } from '../spinner/Spinner';
 import styles from './AdminEntityList.module.scss';
 
 type AdminEntityListItem = {
@@ -28,7 +29,9 @@ export const AdminEntityList = <T extends AdminEntityListItem>({
   return (
     <div className={styles.list}>
       {isLoading ? (
-        <Spin />
+        <div className={styles.spinner}>
+          <Spinner fontSize={40} />
+        </div>
       ) : items.length === 0 ? (
         <Empty />
       ) : (

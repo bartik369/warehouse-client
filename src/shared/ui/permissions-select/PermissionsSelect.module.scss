@@ -19,6 +19,17 @@
 .select {
   width: 100%;
   min-width: 0;
+  :global(.ant-select-selector) {
+    padding-right: 56px !important;
+  }
+
+  :global(.ant-select-clear) {
+    right: 32px;
+  }
+
+  :global(.ant-select-arrow) {
+    right: 12px;
+  }
 }
 
 .label {

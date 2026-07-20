@@ -3,10 +3,9 @@ import z from 'zod';
 export const permissionRoleSchema = z.object({
   roleId: z.string(),
   roleName: z.string().min(1, 'Обязательное поле'),
-  name: z.string().min(1, 'Введите навание'),
   permissionIds: z.array(z.string()).min(1, 'Обязательное поле'),
   warehouseId: z.string().optional(),
-  locationId: z.string(),
+  locationId: z.string().optional(),
   comment: z.string().optional(),
 });
 

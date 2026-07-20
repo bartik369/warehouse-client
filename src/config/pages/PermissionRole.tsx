@@ -1,7 +1,7 @@
 import { ManagePermissionRole } from '@/features/manage-permission-role/ui/ManagePermissionRole';
 
 const PermissionRoleConfig = {
-  title: 'Permission role',
+  title: 'Доступы роли',
   path: '/admin/permission_roles',
   element: <ManagePermissionRole />,
   requireAuth: true,

@@ -22,6 +22,22 @@
   font-size: $form-control-font-size;
   border-radius: $form-control-radius;
   resize: vertical;
+
+  --ant-color-primary: var(--orange-250);
+  --ant-control-outline: rgba(255, 227, 209, 0.5);
+  --ant-input-active-border-color: var(--orange-250);
+  --ant-input-hover-border-color: var(--orange-250);
+
+  &:hover {
+    border-color: var(--orange-250);
+  }
+
+  &:focus,
+  &:focus-within {
+    border-color: var(--orange-250);
+    box-shadow: 0 0 0 2px rgba(255, 227, 209, 0.5);
+    outline: none;
+  }
 }
 
 .label {

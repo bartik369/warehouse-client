@@ -37,6 +37,17 @@
   &:hover {
     border-color: var(--orange-250);
   }
+  :global(.ant-select-selector) {
+    padding-right: 56px !important;
+  }
+
+  :global(.ant-select-clear) {
+    right: 32px;
+  }
+
+  :global(.ant-select-arrow) {
+    right: 12px;
+  }
 }
 
 .label {
