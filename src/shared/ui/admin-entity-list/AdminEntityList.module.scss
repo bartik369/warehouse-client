@@ -5,6 +5,7 @@
   min-width: 300px;
   max-width: 350px;
   max-height: 450px;
+  height: 100%;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -55,5 +56,11 @@
         }
       }
     }
+  }
+  .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 }

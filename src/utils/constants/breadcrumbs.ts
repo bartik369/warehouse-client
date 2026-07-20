@@ -5,6 +5,8 @@ export const routeNameMap: Record<string, string> = {
   users: 'Пользователи',
   settings: 'Настройки',
   locations: 'Города',
+  departments: 'Управление отделами',
+  contractors: 'Управление подрядчиками',
   msk: 'Москва',
   ekb: 'Екатеринбург',
   issue: 'Выдачи устройств',
@@ -25,4 +27,7 @@ export const routeNameMap: Record<string, string> = {
   'add-permission_role': 'Назначение разрешения',
   'grant-access': 'Предоставление доступа',
   manufacturers: 'Управление производителями',
+  roles: 'Управление ролями',
+  permissions: 'Управление разрешениями',
+  permission_roles: 'Управление доступом ролей',
 };

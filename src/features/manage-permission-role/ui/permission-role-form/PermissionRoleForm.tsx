@@ -3,17 +3,16 @@ import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 
-import type { Location } from '@/entities/location/model/types';
-import { PermissionRole, UserRolesList } from '@/entities/permission-role/model/types';
+import { PermissionRole } from '@/entities/permission-role/model/types';
 import { Permission } from '@/entities/permission/model/types';
 import { Role } from '@/entities/role/model/types';
-import { Warehouse } from '@/entities/warehouse/model/types';
 import { FormMode, SelectOption } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfPermissionsSelect } from '@/shared/ui/form-fields/RhfPermissionsSelect';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
-import { CheckedPermissionOptions } from '@/types/content';
+import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import { TITLE } from '../../model/constants';
@@ -21,7 +20,6 @@ import { PermissionRoleFormValues, permissionRoleSchema } from '../../model/sche
 
 interface PermissionRoleFormProps {
   roles: Role[];
-  locations: Location[];
   selectedRole: PermissionRole | null;
   warehouseOptions: SelectOption[];
   roleOptions: SelectOption[];
@@ -36,7 +34,6 @@ interface PermissionRoleFormProps {
 
 export const PermissionRoleForm = ({
   roles,
-  locations,
   permissions,
   selectedRole,
   warehouseOptions,
@@ -58,7 +55,16 @@ export const PermissionRoleForm = ({
   });
 
   const { reset, handleSubmit } = form;
+  const roleId = useWatch({
+    control: form.control,
+    name: 'roleId',
+  });
+
+  const manageRole = roles.find((role) => role.id === roleId); // todo  норм название
+  const isManager = manageRole?.name === 'manager';
+
   const onSubmit = async (formData: PermissionRoleFormValues) => {
+    console.log('1212');
     try {
       await onSave(formData);
       handleClear();
@@ -66,11 +72,13 @@ export const PermissionRoleForm = ({
       console.log(error);
     }
   };
+
   const submit = handleSubmit(onSubmit);
   const handleClear = () => {
     reset(defaultValues);
     resetId();
   };
+  console.log(form.getValues());
 
   useEffect(() => {
     if (selectedRole) {
@@ -90,20 +98,28 @@ export const PermissionRoleForm = ({
                 options={roleOptions}
                 label={LABELS.role}
               />
-              <RhfSelectField<PermissionRoleFormValues>
-                name="warehouseId"
-                options={warehouseOptions}
-                label={LABELS.warehouse}
-              />
+              {!isManager && (
+                <RhfSelectField<PermissionRoleFormValues>
+                  name="warehouseId"
+                  options={warehouseOptions}
+                  label={LABELS.warehouse}
+                />
+              )}
               <RhfSelectField<PermissionRoleFormValues>
                 name="locationId"
                 options={locationOptions}
                 label={LABELS.location}
               />
-              <RhfPermissionsSelect<PermissionRoleFormValues>
-                name="permissionIds"
-                label="Разрешения"
-                permissions={permissions}
+              {!isManager && (
+                <RhfPermissionsSelect<PermissionRoleFormValues>
+                  name="permissionIds"
+                  label="Разрешения"
+                  permissions={permissions}
+                />
+              )}
+              <RhfTextareaField<PermissionRoleFormValues>
+                name="comment"
+                label={LABELS.description}
               />
             </Flex>
           </Flex>
