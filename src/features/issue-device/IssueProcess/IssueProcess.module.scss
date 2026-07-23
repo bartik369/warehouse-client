@@ -39,7 +39,7 @@
     flex: 1;
     min-height: 80px;
     .active {
-      background-color: var(--orange-500);
+      background-color: var(--blue-500);
     }
   }
 }
@@ -53,7 +53,7 @@
     cursor: pointer;
   }
   :global(.ant-steps-item:hover .ant-steps-item-title) {
-    color: var(--orange-500) !important;
+    color: var(--blue-500) !important;
   }
   :global(.ant-steps-item-process.ant-steps-item-active .ant-steps-item-title) {
     font-weight: 600;
@@ -65,18 +65,18 @@
     font-size: 14px;
   }
   :global(.ant-steps-item-process .ant-steps-item-icon) {
-    background-color: var(--orange-400) !important;
-    border-color: var(--orange-500) !important;
+    background-color: var(--blue-400) !important;
+    border-color: var(--blue-500) !important;
   }
   :global(.ant-steps-item-finish .ant-steps-item-icon) {
-    background-color: var(--orange-400) !important;
-    border-color: var(--orange-500) !important;
+    background-color: var(--blue-400) !important;
+    border-color: var(--blue-500) !important;
   }
   :global(.ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon) {
     color: white;
   }
   :global(.ant-steps-item-process.ant-steps-item-active::before) {
-    background-color: var(--orange-500) !important;
+    background-color: var(--blue-500) !important;
   }
 }
 

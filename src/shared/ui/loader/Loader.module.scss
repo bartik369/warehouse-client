@@ -27,7 +27,7 @@
     @include base;
   }
   .orange {
-    border: 6px dotted var(--orange-500);
+    border: 6px dotted var(--blue-500);
     border-radius: 50%;
   }
   @keyframes rotation {

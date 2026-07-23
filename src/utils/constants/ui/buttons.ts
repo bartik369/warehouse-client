@@ -1,5 +1,6 @@
 export const BUTTON_LABELS = {
   reset: 'Сбросить',
+  apply: 'Применить',
   clean: 'Очистить',
   cancel: 'Отменить',
   add: 'Добавить',

@@ -22,20 +22,20 @@
   height: $form-control-height;
   border-radius: $form-control-radius;
 
-  --ant-color-primary: var(--orange-250);
+  --ant-color-primary: var(--blue-250);
   --ant-control-outline: rgba(255, 227, 209, 0.5);
-  --ant-select-active-border-color: var(--orange-250);
-  --ant-select-hover-border-color: var(--orange-250);
+  --ant-select-active-border-color: var(--blue-250);
+  --ant-select-hover-border-color: var(--blue-250);
   --ant-select-active-outline-color: rgba(255, 227, 209, 0.5);
 
   &:focus-within {
-    border-color: var(--orange-250) !important;
+    border-color: var(--blue-250) !important;
     box-shadow: 0 0 0 2px rgba(255, 227, 209, 0.5) !important;
     outline: none !important;
   }
 
   &:hover {
-    border-color: var(--orange-250);
+    border-color: var(--blue-250);
   }
   :global(.ant-select-selector) {
     padding-right: 56px !important;

@@ -61,16 +61,16 @@
   }
   .ant-table-column-sorter-up.active,
   .ant-table-column-sorter-down.active {
-    color: var(--orange-500) !important;
+    color: var(--blue-500) !important;
     svg {
-      color: var(--orange-500) !important;
-      fill: var(--orange-500) !important;
+      color: var(--blue-500) !important;
+      fill: var(--blue-500) !important;
     }
   }
 }
 
 :global {
   .ant-table-filter-trigger.active {
-    color: var(--orange-500) !important;
+    color: var(--blue-500) !important;
   }
 }

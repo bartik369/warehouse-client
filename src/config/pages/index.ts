@@ -1,5 +1,6 @@
 import { AppRouteConfig } from '@/app/router/config/types';
 
+import GrantUserRolesConfig from './Access';
 import AddDeviceConfig from './AddDevice';
 import AddModelConfig from './AddModel';
 import AddTypeConfig from './AddType';
@@ -10,7 +11,6 @@ import ContractorsConfig from './Contractors2';
 import DeviceConfig from './Device';
 import DevicesConfig from './Devices';
 import EditDeviceConfig from './EditDevice';
-import GrantUserRolesConfig from './GrantUserRoles';
 import HomeConfig from './Home';
 import InventoryConfig from './Inventory';
 import InventoryListConfig from './InventoryList';

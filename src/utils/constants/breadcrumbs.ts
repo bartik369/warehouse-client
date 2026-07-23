@@ -25,7 +25,7 @@ export const routeNameMap: Record<string, string> = {
   'add-role': 'Добавление роли',
   'add-permission': 'Добавление разрешения',
   'add-permission_role': 'Назначение разрешения',
-  'grant-access': 'Предоставление доступа',
+  access: 'Управление доступом',
   manufacturers: 'Управление производителями',
   roles: 'Управление ролями',
   permissions: 'Управление разрешениями',

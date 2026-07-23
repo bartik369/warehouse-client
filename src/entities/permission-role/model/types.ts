@@ -1,7 +1,7 @@
 import { User } from '@/entities/ user/model/types';
 
 export type PermissionRole = {
-  id: string;
+  // id: string;
   roleId: string;
   roleName?: string;
   permissionIds: string[];
@@ -15,17 +15,21 @@ export type PermissionRole = {
   comment?: string;
 };
 
-export type UserRolesList = {
-  id: string;
-  locationName: string;
-  warehouseName: string;
-  roleName: string;
-  permissionsName: string[];
+export type UserRoleAssignment = PermissionRole & {
+  assignmentId: string;
 };
+
+// export type UserRolesList = {
+//   id: string;
+//   locationName: string;
+//   warehouseName: string;
+//   roleName: string;
+//   permissionsName: string[];
+// };
 
 export type UserRolesResponse = {
   user: Partial<User>;
-  roles: UserRolesList[];
+  roles: UserRoleAssignment[];
 };
 
 export type RoleList = {
