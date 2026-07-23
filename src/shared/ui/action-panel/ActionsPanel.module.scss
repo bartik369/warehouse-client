@@ -13,11 +13,11 @@
     }
   }
   :global(.ant-btn).apply {
-    background-color: var(--orange-500);
-    border: 1px solid var(--orange-600);
+    background-color: var(--blue-500);
+    border: 1px solid var(--blue-600);
     box-shadow: none;
     &:hover {
-      background-color: var(--orange-600);
+      background-color: var(--blue-600);
     }
   }
   :global(.ant-btn.ant-btn-lg) {

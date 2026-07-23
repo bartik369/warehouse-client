@@ -13,14 +13,16 @@
   --gray-700: #4b5563;
   --gray-800: #374151;
   --gray-900: #1f2937;
-  --orange-50: #fff7f2;
-  --orange-100: #fff1e8;
-  --orange-200: #ffe3d1;
-  --orange-250: #fdcfb3;
-  --orange-300: #fc8342;
-  --orange-400: #fa7933;
-  --orange-500: #fe7126;
-  --orange-600: #e9641c;
+  --blue-25: #f8faff;
+  --blue-50: #f1f5ff;
+  --blue-100: #dfe9ff;
+  --blue-200: #c7d8ff;
+  --blue-250: #b1c8ff;
+  --blue-300: #7ea6ff;
+  --blue-400: #5d8df7;
+  --blue-500: #3574e5;
+  --blue-550: #5a94ff;
+  --blue-600: #1d5fd0;
   --green-50: #ecfdf3;
   --green-500: #22c55e;
   --green-600: #16a34a;
@@ -28,8 +30,7 @@
   --yellow-500: #f6bc0f;
   --red-50: #fef2f2;
   --red-500: #ef4444;
-  --blue-50: #eff6ff;
-  --blue-500: #3b82f6;
+
   /* TEXT  */
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-600);
@@ -42,16 +43,16 @@
   --bg-sidebar: var(--gray-800);
   --bg-card: var(--white);
   --bg-hover: var(--gray-50);
-  --bg-selected: var(--orange-100);
+  --bg-selected: var(--blue-100);
   --bg-disabled: var(--gray-150);
   /* BORDER */
   --border-primary: var(--gray-300);
   --border-secondary: var(--gray-200);
-  --border-focus: var(--orange-500);
+  --border-focus: var(--blue-500);
   /* BRAND */
-  --brand-primary: var(--orange-500);
-  --brand-primary-hover: var(--orange-600);
-  --brand-primary-soft: var(--orange-100);
+  --brand-primary: var(--blue-500);
+  --brand-primary-hover: var(--blue-600);
+  --brand-primary-soft: var(--blue-100);
   /* BUTTONS */
   --button-primary-bg: var(--brand-primary);
   --button-primary-bg-hover: var(--brand-primary-hover);
@@ -67,7 +68,7 @@
   --table-header-bg: var(--white);
   --table-row-bg: var(--white);
   --table-row-hover: var(--gray-50);
-  --table-row-selected: var(--orange-100);
+  --table-row-selected: var(--blue-100);
   /* STATUS  */
   --success: var(--green-500);
   --success-bg: var(--green-50);
@@ -89,7 +90,7 @@
   --status-pending-bg: #faf5ff;
   --status-pending-text: #9333ea;
   /* CHARTS */
-  --chart-primary: var(--orange-500);
+  --chart-primary: var(--blue-500);
   --chart-success: var(--green-500);
   --chart-warning: var(--yellow-500);
   --chart-danger: var(--red-500);

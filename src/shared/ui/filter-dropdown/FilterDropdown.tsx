@@ -4,6 +4,7 @@ import { Checkbox, CheckboxOptionType, Space } from 'antd';
 import { ColumnFilterItem, FilterDropdownProps } from 'antd/es/table/interface';
 
 import { DeviceFilters } from '@/types/devices';
+import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 
 import { ActionsPanel } from '../action-panel/ActionsPanel';
 import styles from './FilterDropdown.module.scss';
@@ -47,7 +48,12 @@ export const FilterDropdown = ({
   };
   return (
     <div className={styles.wrapper}>
-      <ActionsPanel onReset={handleReset} onApply={handleApply} size="small">
+      <ActionsPanel
+        titleApply={BUTTON_LABELS.apply}
+        onReset={handleReset}
+        onApply={handleApply}
+        size="small"
+      >
         <div className={styles.checkboxes}>
           <Checkbox.Group
             options={checkboxOptions}

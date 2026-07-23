@@ -11,7 +11,7 @@
   }
 
   :global(.ant-switch.ant-switch-checked) {
-    background-color: var(--orange-400);
+    background-color: var(--blue-400);
   }
 
   :global(.ant-switch:hover:not(.ant-switch-disabled)) {
@@ -19,7 +19,7 @@
   }
 
   :global(.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled)) {
-    background-color: var(--orange-400);
+    background-color: var(--blue-400);
   }
 }
 

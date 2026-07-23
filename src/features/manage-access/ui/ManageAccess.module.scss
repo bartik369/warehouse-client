@@ -1,0 +1,14 @@
+.page {
+  height: 100%;
+  min-width: 0;
+}
+
+.formColumn {
+  flex: 0 0 400px;
+  min-width: 0;
+}
+
+.listColumn {
+  flex: 1;
+  min-width: 0;
+}

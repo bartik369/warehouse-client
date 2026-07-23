@@ -1,3 +1,4 @@
+import AccessConfig from '../pages/Access';
 import AddDeviceConfig from '../pages/AddDevice';
 import AddModelConfig from '../pages/AddModel';
 import AddTypeConfig from '../pages/AddType';
@@ -9,7 +10,6 @@ import DepartmentConfig from '../pages/Departments';
 import DeviceConfig from '../pages/Device';
 import DevicesConfig from '../pages/Devices';
 import EditDeviceConfig from '../pages/EditDevice';
-import GrantUserRolesConfig from '../pages/GrantUserRoles';
 import HomeConfig from '../pages/Home';
 import InventoryConfig from '../pages/Inventory';
 import InventoryListConfig from '../pages/InventoryList';
@@ -58,7 +58,7 @@ const privateRoutes = [
   AddModelConfig,
   AddTypeConfig,
   PermissionRoleConfig,
-  GrantUserRolesConfig,
+  AccessConfig,
   LocationsConfig,
 ];
 

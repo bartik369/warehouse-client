@@ -1,5 +1,6 @@
 import { Empty, Flex } from 'antd';
 
+import { createRoleScopeKey } from '@/entities/permission-role/lib/create-role-scope-key';
 import { PermissionRole } from '@/entities/permission-role/model/types';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 
@@ -33,7 +34,12 @@ export const PermissionList = ({
       ) : (
         <Flex vertical>
           {roles.map((role) => (
-            <PermissionItem key={role.id} role={role} onEdit={onEdit} onDelete={onDelete} />
+            <PermissionItem
+              key={createRoleScopeKey(role)}
+              role={role}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           ))}
         </Flex>
       )}

@@ -54,8 +54,8 @@ export const PermissionsSelect = ({
               Select: {
                 optionSelectedBg: 'var(--gray-100)',
                 optionActiveBg: 'var(--gray-100)',
-                hoverBorderColor: 'var(--orange-200)',
-                activeBorderColor: 'var(--orange-200)',
+                hoverBorderColor: 'var(--blue-200)',
+                activeBorderColor: 'var(--blue-200)',
                 multipleItemHeight: 34,
                 borderRadius: 8,
               },

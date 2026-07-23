@@ -72,27 +72,27 @@
 
 .devicesTable {
   :global(.ant-checkbox-checked .ant-checkbox-inner) {
-    background-color: var(--orange-500);
-    border-color: var(--orange-600);
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
   }
   :global(.ant-checkbox:hover .ant-checkbox-inner) {
-    border-color: var(--orange-600);
+    border-color: var(--blue-600);
   }
   :global(.ant-checkbox-checked:hover .ant-checkbox-inner) {
-    background-color: var(--orange-500);
-    border-color: var(--orange-600);
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
   }
   :global(.ant-checkbox-wrapper:hover .ant-checkbox-checked .ant-checkbox-inner) {
-    background-color: var(--orange-500);
-    border-color: var(--orange-600);
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
   }
   :global(
     .ant-checkbox-wrapper:hover
       .ant-checkbox-checked:not(.ant-checkbox-disabled)
       .ant-checkbox-inner
   ) {
-    background-color: var(--orange-500);
-    border-color: var(--orange-600);
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
   }
 }
 
@@ -102,8 +102,8 @@
     border: 1px solid #d9d9d9;
   }
   :global(.ant-pagination-item-active) {
-    background-color: var(--orange-500);
-    border-color: var(--orange-600);
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
   }
   :global(.ant-pagination-item-active a) {
     color: #fff;
@@ -115,10 +115,10 @@
   }
   :global(.ant-pagination-prev button),
   :global(.ant-pagination-next button) {
-    color: var(--orange-500);
+    color: var(--blue-500);
   }
   :global(.ant-pagination-item:hover) {
-    border-color: var(--orange-500);
+    border-color: var(--blue-500);
   }
 }
 

@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { PermissionRole, UserRolesList } from '@/entities/permission-role/model/types';
+import { PermissionRole } from '@/entities/permission-role/model/types';
 import { Permission } from '@/entities/permission/model/types';
 import { CheckedPermissionOptions } from '@/types/content';
 
