@@ -1,7 +1,6 @@
 import { User } from '@/entities/ user/model/types';
 
 export type PermissionRole = {
-  // id: string;
   roleId: string;
   roleName?: string;
   permissionIds: string[];
