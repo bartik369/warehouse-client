@@ -47,5 +47,6 @@ export const {
   useCreateUserMutation,
   useGetUsersQuery,
   useGetFilteredUsersQuery,
+  useLazyGetFilteredUsersQuery,
   useLazyGetUserQuery,
 } = userApi;

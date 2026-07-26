@@ -8,7 +8,7 @@ import {
   useCreateIssueProcessMutation,
   useFinalizeIssueProcessMutation,
 } from '@/store/api/issueApi';
-import { useGetFilteredUsersQuery, useLazyGetUserQuery } from '@/store/api/userApi';
+import { useLazyGetFilteredUsersQuery, useLazyGetUserQuery } from '@/store/api/userApi';
 import { useLazyGetWarehousesByUserQuery } from '@/store/api/warehousesApi';
 import { currentUser } from '@/store/slices/authSlice';
 import { resetDevices, setDevices } from '@/store/slices/deviceSlice';
@@ -53,7 +53,7 @@ export const useIssue = () => {
     useFinalizeIssueProcessMutation();
   const [createIssue] = useCreateIssueMutation();
   const [createIssueProcess] = useCreateIssueProcessMutation();
-  // const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
+  const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
   const [getBasicUser] = useLazyGetUserQuery();
   const [getDevice] = useLazyGetDeviceQuery();
   const [getWarehousesByUser] = useLazyGetWarehousesByUserQuery();
@@ -133,17 +133,17 @@ export const useIssue = () => {
     issueDispatch(setUserListVisible(true));
   }, []);
 
-  // const handleUsers = useCallback(
-  //   async (query: string) => {
-  //     try {
-  //       const data = await getFilteredUsers(query).unwrap();
-  //       userDispatch(setUsers(data));
-  //     } catch (err: unknown) {
-  //       handleApiError(err);
-  //     }
-  //   },
-  //   [getFilteredUsers, userDispatch]
-  // );
+  const handleUsers = useCallback(
+    async (query: string) => {
+      try {
+        const data = await getFilteredUsers(query).unwrap();
+        userDispatch(setUsers(data));
+      } catch (err: unknown) {
+        handleApiError(err);
+      }
+    },
+    [getFilteredUsers, userDispatch]
+  );
 
   const handleResetUser = useCallback(() => {
     userDispatch(resetUser());
@@ -259,7 +259,7 @@ export const useIssue = () => {
 
   useEffect(() => {
     if (userDebouncedQuery.length > 1) {
-      // handleUsers(userDebouncedQuery);
+      handleUsers(userDebouncedQuery);
       issueDispatch(setWasSearched(true));
     } else {
       userDispatch(resetUsers());
@@ -283,8 +283,8 @@ export const useIssue = () => {
 
   const actions = useMemo(
     () => ({
-      // isSuccess,
-      // isFetching,
+      isSuccess,
+      isFetching,
       isIssueSuccess,
       isIssueLoading,
       handleResetIssue,
@@ -307,8 +307,8 @@ export const useIssue = () => {
       handleSetStep,
     }),
     [
-      // isSuccess,
-      // isFetching,
+      isSuccess,
+      isFetching,
       isIssueSuccess,
       isIssueLoading,
       handleResetIssue,

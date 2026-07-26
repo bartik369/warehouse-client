@@ -16,7 +16,7 @@ export const DeviceIssueForm = ({ issueId = null }) => {
 
   useEffect(() => {
     return () => {
-      // actions.handleFullReset();
+      actions.handleFullReset();
     };
   }, []);
 
@@ -28,7 +28,7 @@ export const DeviceIssueForm = ({ issueId = null }) => {
         <span>{state.issueStep + 1}</span>
         {BASE_STEPS[state.issueStep].title}
       </h1>
-      {/* <IssueProcess actions={actions} state={state} /> */}
+      <IssueProcess actions={actions} state={state} />
     </section>
   );
 };
