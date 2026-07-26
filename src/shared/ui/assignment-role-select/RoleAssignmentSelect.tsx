@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Checkbox, Flex, Select, type SelectProps, Tag, Typography } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Checkbox, Flex, Select, type SelectProps, Tag, Tooltip, Typography } from 'antd';
 import clsx from 'clsx';
 import { LuWarehouse } from 'react-icons/lu';
 import { LuUser } from 'react-icons/lu';
@@ -98,7 +99,6 @@ export const RoleAssignmentSelect = ({
     return (
       <div className={styles.option}>
         <Checkbox checked={checked} disabled={optionDisabled} className={styles.checkbox} />
-
         <div className={styles.content}>
           <div className={styles.header}>
             <div className={styles.icon}>
@@ -107,7 +107,7 @@ export const RoleAssignmentSelect = ({
             <div className={styles.info}>
               <div className={styles.nameRow}>
                 <div className={styles.name}>{role.roleName ?? 'Без названия'}</div>
-                {optionDisabled && <Tag className={styles.assignedTag}>Уже назначено</Tag>}
+                {optionDisabled && <Tag className={styles.assignedTag}>Роль уже назначена</Tag>}
               </div>
               <div className={styles.location}>
                 <LuWarehouse />
@@ -117,6 +117,20 @@ export const RoleAssignmentSelect = ({
                 <span className={styles.city}>{role.locationName}</span>
               </div>
             </div>
+            {role.comment && (
+              <Tooltip
+                styles={{
+                  container: {
+                    fontSize: 12,
+                    lineHeight: 1.4,
+                  },
+                }}
+                color="blue"
+                title={role.comment}
+              >
+                <InfoCircleOutlined className={styles.infoIcon} />
+              </Tooltip>
+            )}
           </div>
           {!!role.permissionsName?.length && (
             <div className={styles.permissions}>

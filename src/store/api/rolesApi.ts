@@ -1,7 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Role, RoleList } from '@/entities/role/model/types';
-import { UserRolesResponse } from '@/types/access';
+import { Role, RoleList, UserRolesResponse } from '@/entities/role/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -104,5 +103,5 @@ export const {
   useDeleteRoleMutation,
   useGrantRoleMutation,
   useGetRolesListQuery,
-  useLazyGetUserRolesQuery,
+  useGetUserRolesQuery,
 } = rolesApi;

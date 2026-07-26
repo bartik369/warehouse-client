@@ -1,0 +1,44 @@
+.profile {
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    color: var(--white);
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: var(--blue-600);
+  }
+}
+.name {
+  .ru {
+    display: flex;
+    gap: 5px;
+    :global(.ant-typography) {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+  .en {
+    display: flex;
+    gap: 3px;
+    :global(.ant-typography) {
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+  }
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  .label {
+    color: var(--gray-600);
+    font-size: 12px;
+  }
+  .value {
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

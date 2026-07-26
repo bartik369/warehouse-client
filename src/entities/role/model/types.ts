@@ -18,6 +18,6 @@ export type UserRolesList = {
   permissionsName: string[];
 };
 export type UserRolesResponse = {
-  user: Partial<User>;
+  user: User;
   roles: UserRolesList[];
 };
