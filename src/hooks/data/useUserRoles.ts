@@ -35,7 +35,7 @@ export const useUserRoles = () => {
         payload: true,
       });
       // const data = await fetchUsers(debouncedQuery).unwrap();
-      dispatch(setUsers(data));
+      // dispatch(setUsers(data));
       // dispatchUser({ type: UserActionTypes.SET_USERS, payload: data });
     } catch (err: unknown) {
       handleApiError(err);
@@ -128,11 +128,11 @@ export const useUserRoles = () => {
         type: UserRoleActionsTypes.SET_USERS_LIST_VISIBLE,
         payload: false,
       });
-      const data = await fetchUserRolesData(item.id).unwrap();
-      dispatchUserRole({
-        type: UserRoleActionsTypes.SET_USER_ASSIGNED_ROLES,
-        payload: data,
-      });
+      // const data = await fetchUserRolesData(item.id).unwrap();
+      // dispatchUserRole({
+      //   type: UserRoleActionsTypes.SET_USER_ASSIGNED_ROLES,
+      //   payload: data,
+      // });
     } catch (err: unknown) {
       handleApiError(err);
     }
