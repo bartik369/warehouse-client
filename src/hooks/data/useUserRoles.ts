@@ -25,7 +25,7 @@ export const useUserRoles = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   // const [fetchUsers] = useLazyGetFilteredUsersQuery();
-  const [fetchUserRolesData] = useLazyGetUserRolesQuery();
+  // const [fetchUserRolesData] = useLazyGetUserRolesQuery();
   const [grantRole] = useGrantRoleMutation();
 
   const handleFetchUsers = useCallback(async () => {
@@ -34,7 +34,7 @@ export const useUserRoles = () => {
         type: UserRoleActionsTypes.SET_WAS_SEARCHED,
         payload: true,
       });
-      const data = await fetchUsers(debouncedQuery).unwrap();
+      // const data = await fetchUsers(debouncedQuery).unwrap();
       dispatch(setUsers(data));
       // dispatchUser({ type: UserActionTypes.SET_USERS, payload: data });
     } catch (err: unknown) {
