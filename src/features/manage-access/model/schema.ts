@@ -1,7 +1,7 @@
-import z, { email } from 'zod';
+import z from 'zod';
 
 export const accessSchema = z.object({
-  email: z.string().min(1, 'Укажите пользователя'),
+  userId: z.string().min(1, 'Укажите пользователя'),
   permissionRoleIds: z.array(z.string()).min(1, 'Выберите хотя бы одну роль'),
 });
 

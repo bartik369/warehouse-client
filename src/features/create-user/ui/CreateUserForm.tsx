@@ -9,7 +9,7 @@ import Input from '@/components/ui/input/Input';
 import Select from '@/components/ui/select/Select';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
-import { RhfSwitchField } from '@/shared/ui/form-fields/RgfSwitchField';
+import { RhfSwitchField } from '@/shared/ui/form-fields/RghSwitchField';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RootState } from '@/store/store';

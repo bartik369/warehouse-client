@@ -16,7 +16,7 @@ export const DeviceIssueForm = ({ issueId = null }) => {
 
   useEffect(() => {
     return () => {
-      // actions.handleFullReset();
+      actions.handleFullReset();
     };
   }, []);
 

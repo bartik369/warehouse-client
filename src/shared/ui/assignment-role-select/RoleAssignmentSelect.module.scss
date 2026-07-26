@@ -151,6 +151,19 @@
     gap: 12px;
     min-width: 0;
     margin-bottom: 6px;
+    .tooltip {
+      .ant-tooltip-inner {
+        background: blue;
+        color: white;
+      }
+
+      .ant-tooltip-arrow::before {
+        background: blue;
+      }
+      .infoIcon {
+        color: var(--gray-450);
+      }
+    }
     .icon {
       display: flex;
       align-items: center;
