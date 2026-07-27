@@ -19,5 +19,17 @@ export type UserRolesList = {
 };
 export type UserRolesResponse = {
   user: User;
-  roles: UserRolesList[];
+  roles: UserRoleAssignment[];
+};
+
+export type UserRoleAssignment = {
+  assignmentId: string;
+  roleId: string;
+  roleName: string;
+  locationId?: string;
+  locationName?: string;
+  warehouseId?: string;
+  warehouseName?: string;
+  permissionIds: string[];
+  permissionsName: string[];
 };

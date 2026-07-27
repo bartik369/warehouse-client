@@ -11,6 +11,7 @@ type RhfUserAutocompleteProps<T extends FieldValues> = Omit<
   loading?: boolean;
   searched?: boolean;
   onSearch?: (value: string) => void;
+  onClear?: () => void;
   onOptionSelect?: (value: string, option: UserAutocompleteOption) => void;
 };
 export const RhfUserAutocomplete = <T extends FieldValues>({
@@ -18,6 +19,7 @@ export const RhfUserAutocomplete = <T extends FieldValues>({
   loading,
   searched,
   onSearch,
+  onClear,
   onOptionSelect,
   ...props
 }: RhfUserAutocompleteProps<T>) => {
@@ -37,6 +39,7 @@ export const RhfUserAutocomplete = <T extends FieldValues>({
           onChange={field.onChange}
           onBlur={field.onBlur}
           onSearch={onSearch}
+          onClear={onClear}
           onOptionSelect={onOptionSelect}
         />
       )}

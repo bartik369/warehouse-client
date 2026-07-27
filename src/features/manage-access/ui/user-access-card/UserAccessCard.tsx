@@ -10,6 +10,7 @@ interface UserAccessCardProps {
   userRoles: UserRolesResponse;
 }
 export const UserAccessCard = ({ userRoles }: UserAccessCardProps) => {
+  console.log(userRoles.roles);
   return (
     <Card>
       <Flex gap={20} vertical>

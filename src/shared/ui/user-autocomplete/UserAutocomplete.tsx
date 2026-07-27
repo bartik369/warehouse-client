@@ -13,6 +13,7 @@ export const UserAutocomplete = ({
   onOptionSelect,
   onBlur,
   onSearch,
+  onClear,
   options,
   loading,
   searched,
@@ -48,6 +49,7 @@ export const UserAutocomplete = ({
             prefix={<HiOutlineEnvelope />}
             className={styles.input}
             placeholder={placeholder}
+            onClear={onClear}
           />
         </AutoComplete>
       </div>

@@ -1,14 +1,17 @@
+import { useEffect } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AutoCompleteProps, Flex, Typography } from 'antd';
+import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { LuKeyRound } from 'react-icons/lu';
 
+import { User } from '@/entities/ user/model/types';
+import { createRoleScopeKey } from '@/entities/permission-role/lib/create-role-scope-key';
 import { PermissionRole } from '@/entities/permission-role/model/types';
-import { SelectOption } from '@/shared/types/form';
+import { UserRoleAssignment } from '@/entities/role/model/types';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfRoleAssignmentSelect } from '@/shared/ui/form-fields/RhfRoleAssignmentSelect';
-import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfUserAutocomplete } from '@/shared/ui/form-fields/RhfUserAutocomplete';
 import { UserAutocompleteOption } from '@/shared/ui/user-autocomplete/types';
 import { LABELS } from '@/utils/constants/ui/labels';
@@ -17,21 +20,27 @@ import { TITLE } from '../../model/constants';
 import { AccessFromValues, accessSchema } from '../../model/schema';
 
 interface AccessFormProps {
+  selectedUser: User | null;
   roles: PermissionRole[];
+  userRoles?: UserRoleAssignment[];
   userListOptions: UserAutocompleteOption[];
   loading?: boolean;
   searched?: boolean;
   onSave: (data: AccessFromValues) => Promise<void>;
   onOptionSelect?: (value: string, option: UserAutocompleteOption) => void;
   onUserSearch: (value: string) => void;
+  onUserClear: () => void;
 }
 export const AccessForm = ({
+  selectedUser,
   roles,
+  userRoles,
   userListOptions,
   loading,
   searched,
   onUserSearch,
   onOptionSelect,
+  onUserClear,
   onSave,
 }: AccessFormProps) => {
   const defaultValues = {
@@ -42,7 +51,7 @@ export const AccessForm = ({
     resolver: zodResolver(accessSchema),
     defaultValues,
   });
-  const { reset, handleSubmit } = form;
+  const { reset, handleSubmit, setValue } = form;
 
   const onSubmit = async (formData: AccessFromValues) => {
     try {
@@ -54,10 +63,17 @@ export const AccessForm = ({
   };
   const handleClear = () => {
     reset(defaultValues);
-    // resetId();
+    onUserClear();
   };
 
   const submit = handleSubmit(onSubmit);
+
+  useEffect(() => {
+    if (userRoles && userRoles.length > 0 && selectedUser) {
+      const res = userRoles.map((item) => createRoleScopeKey(item));
+      setValue('permissionRoleIds', res);
+    }
+  }, [userRoles, selectedUser]);
 
   return (
     <FormProvider {...form}>
@@ -74,6 +90,7 @@ export const AccessForm = ({
                 loading={loading}
                 searched={searched}
                 onSearch={onUserSearch}
+                onClear={handleClear}
                 onOptionSelect={onOptionSelect}
               />
               <RhfRoleAssignmentSelect<AccessFromValues>

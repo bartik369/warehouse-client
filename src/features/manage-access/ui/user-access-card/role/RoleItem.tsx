@@ -1,20 +1,24 @@
-import { Avatar, Button, Card, Col, Flex, Row, Space, Tag, Typography } from 'antd';
-import Title from 'antd/es/skeleton/Title';
+import { Avatar, Button, Card, Col, Flex, Popconfirm, Row, Space, Tag, Typography } from 'antd';
 import { FiTrash2 } from 'react-icons/fi';
-import { LuWarehouse } from 'react-icons/lu';
+import { LiaWarehouseSolid } from 'react-icons/lia';
 import { LuKeyRound } from 'react-icons/lu';
-import { MdLocationOn } from 'react-icons/md';
+import { PiCityDuotone } from 'react-icons/pi';
 
 import { UserRolesList } from '@/entities/role/model/types';
+import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
 
 import styles from './RoleItem.module.scss';
+import { DESCRIPTION_ACTION, TITLES } from './constants';
 
 interface RoleItemProps {
   role: UserRolesList;
 }
 export const RoleItem = ({ role }: RoleItemProps) => {
+  const handleDeleteRole = () => {
+    console.log('was deleted');
+  };
   return (
-    <Card>
+    <Card className={styles.card}>
       <Row gutter={[32, 24]} wrap={false}>
         <Col flex="auto">
           <Flex gap={10} align="flex-start">
@@ -25,10 +29,10 @@ export const RoleItem = ({ role }: RoleItemProps) => {
                   <Typography.Title level={4}>{role.roleName}</Typography.Title>
                 </Space>
 
-                <Flex gap={16} align="center">
+                <Flex gap={30} align="center">
                   <Flex vertical>
-                    <Flex gap={4}>
-                      <LuWarehouse className={styles.icon} />
+                    <Flex gap={3}>
+                      <LiaWarehouseSolid className={styles.icon} />
                       <span className={styles.label}>Склад</span>
                     </Flex>
                     <Typography.Text className={styles.text}>{role.warehouseName}</Typography.Text>
@@ -36,7 +40,7 @@ export const RoleItem = ({ role }: RoleItemProps) => {
 
                   <Flex vertical>
                     <Flex gap={4}>
-                      <LuWarehouse className={styles.icon} />
+                      <PiCityDuotone className={styles.icon} />
                       <span className={styles.label}>Город</span>
                     </Flex>
                     <Typography.Text className={styles.text}>{role.locationName}</Typography.Text>
@@ -47,7 +51,7 @@ export const RoleItem = ({ role }: RoleItemProps) => {
           </Flex>
           <Flex>
             {!!role.permissionsName.length && (
-              <Space size={[8, 8]} wrap style={{ marginTop: 10 }}>
+              <Space size={[8, 8]} wrap style={{ marginTop: 15 }}>
                 {role.permissionsName.map((permission) => (
                   <Tag key={permission} color="blue" className={styles.permission}>
                     {permission}
@@ -57,8 +61,14 @@ export const RoleItem = ({ role }: RoleItemProps) => {
             )}
           </Flex>
         </Col>
-        <Col>
-          <Button type="text" danger icon={<FiTrash2 size={18} />} aria-label="Удалить" />
+        <Col className={styles.actions}>
+          <DeleteConfirm
+            title={TITLES.delete_role}
+            description={DESCRIPTION_ACTION}
+            onConfirm={handleDeleteRole}
+          >
+            <Button type="text" className={styles.deleteBtn} icon={<FiTrash2 size={18} />} />
+          </DeleteConfirm>
         </Col>
       </Row>
     </Card>
