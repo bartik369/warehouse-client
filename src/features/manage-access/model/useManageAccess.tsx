@@ -23,13 +23,23 @@ export const useManageAccess = () => {
       skip: debouncedSearchValue.length < 2,
     }
   );
-  const { data: userRoles } = useGetUserRolesQuery(selectedUser?.id ?? skipToken);
+  const {
+    data: userRoles,
+    isLoading: rolesLoading,
+    isSuccess,
+  } = useGetUserRolesQuery(selectedUser?.id ?? skipToken);
   const wasSearched = debouncedSearchValue.length > 2;
 
-  const userListOptions = users.map((user) => ({
-    value: user.email,
-    label: <UserAutocompleteItem key={user.id} user={user} />,
-  }));
+  const userListOptions = useMemo<UserAutocompleteOption[]>(
+    () =>
+      wasSearched
+        ? users.map((user) => ({
+            value: user.email,
+            label: <UserAutocompleteItem key={user.id} user={user} />,
+          }))
+        : [],
+    [users, wasSearched]
+  );
 
   const handleSubmit = async (data: AccessFromValues) => {};
   const handleUserSearch = (value: string) => {
@@ -39,17 +49,25 @@ export const useManageAccess = () => {
     if (!option?.label?.props?.user) return;
     setSelectedUser(option.label.props.user);
   };
+  const handleUserClear = () => {
+    setSelectedUser(null);
+    setSearchValue('');
+  };
 
   return {
     users,
-    userRoles,
+    selectedUser,
     roles: permissionRoles,
+    userRoles,
+    isSuccess,
     userListOptions,
     userListLoading,
+    rolesLoading,
     wasSearched,
     setSearchValue,
     onSave: handleSubmit,
     onSelect: handleUserInfo,
     onUserSearch: handleUserSearch,
+    onUserClear: handleUserClear,
   };
 };

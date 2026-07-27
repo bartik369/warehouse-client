@@ -1,4 +1,6 @@
-import { Flex } from 'antd';
+import { Empty, Flex } from 'antd';
+
+import { Spinner } from '@/shared/ui/spinner/Spinner';
 
 import { useManageAccess } from '../model/useManageAccess';
 import styles from './ManageAccess.module.scss';
@@ -9,28 +11,43 @@ export const ManageAccess = () => {
   const {
     roles,
     userRoles,
+    selectedUser,
     userListOptions,
     userListLoading,
+    rolesLoading,
+    isSuccess,
     wasSearched,
     onSave,
     onSelect,
     onUserSearch,
+    onUserClear,
   } = useManageAccess();
   return (
     <Flex gap={20} className={styles.page} wrap>
       <div className={styles.formColumn}>
         <AccessForm
-          onSave={onSave}
-          onOptionSelect={onSelect}
-          onUserSearch={onUserSearch}
+          selectedUser={selectedUser}
           roles={roles}
+          userRoles={userRoles?.roles}
           userListOptions={userListOptions}
           loading={userListLoading}
           searched={wasSearched}
+          onSave={onSave}
+          onOptionSelect={onSelect}
+          onUserSearch={onUserSearch}
+          onUserClear={onUserClear}
         />
       </div>
       <div className={styles.listColumn}>
-        {userRoles && userRoles.roles.length > 0 && <UserAccessCard userRoles={userRoles} />}
+        {rolesLoading ? (
+          <Spinner />
+        ) : selectedUser && isSuccess && userRoles ? (
+          userRoles.roles.length > 0 ? (
+            <UserAccessCard userRoles={userRoles} />
+          ) : (
+            <Empty />
+          )
+        ) : null}
       </div>
     </Flex>
   );

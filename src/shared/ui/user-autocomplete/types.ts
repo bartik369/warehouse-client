@@ -17,6 +17,7 @@ export type AutocompleteFieldProps = Omit<InputProps, 'placeholder'> & {
   value?: string;
   onChange?: (value: string) => void;
   onBlur?: () => void;
+  onClear?: () => void;
   onOptionSelect?: (value: string, option: UserAutocompleteOption) => void;
   options?: UserAutocompleteOption[];
   onSearch?: (value: string) => void;

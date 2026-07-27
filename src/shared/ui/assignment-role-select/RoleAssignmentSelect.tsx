@@ -8,11 +8,13 @@ import { LuUser } from 'react-icons/lu';
 
 import { createRoleScopeKey } from '@/entities/permission-role/lib/create-role-scope-key';
 import type { PermissionRole, UserRoleAssignment } from '@/entities/permission-role/model/types';
+import { UserRolesList } from '@/types/access';
 
 import styles from './RoleAssignmentSelect.module.scss';
 
 export interface RoleAssignmentSelectProps {
   roles: PermissionRole[];
+  userRoles?: UserRolesList[];
   value?: string[];
   assignedRoles?: UserRoleAssignment[];
   prefix?: React.ReactNode;
@@ -38,6 +40,7 @@ type RoleAssignmentOption = {
 export const RoleAssignmentSelect = ({
   roles,
   value = [],
+  userRoles,
   assignedRoles = [],
   label,
   error,
