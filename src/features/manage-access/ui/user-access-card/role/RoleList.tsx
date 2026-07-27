@@ -1,13 +1,13 @@
 import { Card, Flex, Typography } from 'antd';
 
 import { userRoleScopeKey } from '@/entities/access/lib/user-role-scope-key';
-import { UserRolesList } from '@/entities/role/model/types';
+import { UserRoleAssignment, UserRolesList } from '@/entities/role/model/types';
 
 import { RoleItem } from './RoleItem';
 import { TITLES } from './constants';
 
 interface RoleListProps {
-  roles: UserRolesList[];
+  roles: UserRoleAssignment[];
 }
 
 export const RoleList = ({ roles }: RoleListProps) => {

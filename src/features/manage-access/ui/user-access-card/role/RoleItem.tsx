@@ -4,14 +4,14 @@ import { LiaWarehouseSolid } from 'react-icons/lia';
 import { LuKeyRound } from 'react-icons/lu';
 import { PiCityDuotone } from 'react-icons/pi';
 
-import { UserRolesList } from '@/entities/role/model/types';
+import { UserRoleAssignment } from '@/entities/role/model/types';
 import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
 
 import styles from './RoleItem.module.scss';
 import { DESCRIPTION_ACTION, TITLES } from './constants';
 
 interface RoleItemProps {
-  role: UserRolesList;
+  role: UserRoleAssignment;
 }
 export const RoleItem = ({ role }: RoleItemProps) => {
   const handleDeleteRole = () => {

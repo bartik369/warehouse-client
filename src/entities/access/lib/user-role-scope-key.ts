@@ -1,6 +1,6 @@
-import { UserRolesList } from '@/entities/role/model/types';
+import { UserRoleAssignment } from '@/entities/role/model/types';
 
-type UserRoleScope = Omit<UserRolesList, 'permissionsName'>;
+type UserRoleScope = Omit<UserRoleAssignment, 'permissionsName'>;
 export const userRoleScopeKey = ({
   roleName,
   warehouseName,
