@@ -1,4 +1,4 @@
-import { Flex, Typography } from 'antd';
+import { Empty, Flex, Typography } from 'antd';
 
 import { userRoleScopeKey } from '@/entities/access/lib/user-role-scope-key';
 import { UserRoleAssignment } from '@/entities/role/model/types';
@@ -14,20 +14,25 @@ interface RoleListProps {
 }
 
 export const RoleList = ({ roles, loading, deletingId, onDelete }: RoleListProps) => {
+  const hasRoles = roles.length > 0;
   return (
     <Flex vertical gap={15}>
       <Flex justify="center">
         <Typography.Title level={3}>{TITLES.user_roles}</Typography.Title>
       </Flex>
-      {roles.map((role) => (
-        <RoleItem
-          key={userRoleScopeKey(role)}
-          deletingId={deletingId}
-          role={role}
-          loading={loading}
-          onDelete={onDelete}
-        />
-      ))}
+      {hasRoles ? (
+        roles.map((role) => (
+          <RoleItem
+            key={userRoleScopeKey(role)}
+            deletingId={deletingId}
+            role={role}
+            loading={loading}
+            onDelete={onDelete}
+          />
+        ))
+      ) : (
+        <Empty />
+      )}
     </Flex>
   );
 };

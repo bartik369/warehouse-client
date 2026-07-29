@@ -1,18 +1,21 @@
 import { Card, Flex } from 'antd';
 import { Divider } from 'antd';
 
+import { User } from '@/entities/ user/model/types';
 import { UserRolesResponse } from '@/entities/role/model/types';
 
 import { RoleList } from './role/RoleList';
 import { UserInfo } from './user/UserInfo';
 
 interface UserAccessCardProps {
-  userRoles: UserRolesResponse;
+  user: User;
+  userRoles: UserRolesResponse['roles'];
   deletingId: string | null;
   loading: boolean;
   onDelete: (id: string) => void;
 }
 export const UserAccessCard = ({
+  user,
   userRoles,
   loading,
   deletingId,
@@ -21,19 +24,14 @@ export const UserAccessCard = ({
   return (
     <Card>
       <Flex gap={20} vertical>
-        <UserInfo user={userRoles.user} />
+        <UserInfo user={user} />
         <Divider
           dashed
           style={{
             margin: '0',
           }}
         />
-        <RoleList
-          deletingId={deletingId}
-          roles={userRoles.roles}
-          onDelete={onDelete}
-          loading={loading}
-        />
+        <RoleList deletingId={deletingId} roles={userRoles} onDelete={onDelete} loading={loading} />
       </Flex>
     </Card>
   );
