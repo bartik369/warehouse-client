@@ -48,17 +48,14 @@ export const ManageAccess = () => {
       <div className={styles.listColumn}>
         {rolesLoading ? (
           <Spinner />
-        ) : selectedUser && isSuccess && userRoles ? (
-          userRoles.roles.length > 0 ? (
-            <UserAccessCard
-              deletingId={deletingId}
-              userRoles={userRoles}
-              loading={isRevokeLoading}
-              onDelete={onDelete}
-            />
-          ) : (
-            <Empty />
-          )
+        ) : selectedUser && isSuccess ? (
+          <UserAccessCard
+            deletingId={deletingId}
+            userRoles={userRoles?.roles ?? []}
+            user={selectedUser}
+            loading={isRevokeLoading}
+            onDelete={onDelete}
+          />
         ) : null}
       </div>
     </Flex>

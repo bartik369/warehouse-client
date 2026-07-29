@@ -22,7 +22,6 @@ export const useManageAccess = () => {
   const { data: permissionRoles = [] } = useGetPermissionsRolesQuery();
   const [revokeRole, { isLoading: isRevokeLoading }] = useRevokeRoleMutation();
   const [grantRoles, { isLoading: isGrantLoading }] = useGrantRoleMutation();
-
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearchValue = useDebounce(searchValue.trim(), 400);
   const { data: users = [], isLoading: userListLoading } = useGetFilteredUsersQuery(
