@@ -9,28 +9,35 @@ import { UserAccessCard } from './user-access-card/UserAccessCard';
 
 export const ManageAccess = () => {
   const {
+    mode,
     roles,
     userRoles,
     selectedUser,
     userListOptions,
     userListLoading,
     rolesLoading,
+    isGrantLoading,
+    isRevokeLoading,
+    deletingId,
     isSuccess,
     wasSearched,
     onSave,
     onSelect,
     onUserSearch,
     onUserClear,
+    onDelete,
   } = useManageAccess();
   return (
     <Flex gap={20} className={styles.page} wrap>
       <div className={styles.formColumn}>
         <AccessForm
+          mode={mode}
           selectedUser={selectedUser}
           roles={roles}
           userRoles={userRoles?.roles}
           userListOptions={userListOptions}
           loading={userListLoading}
+          grantLoading={isGrantLoading}
           searched={wasSearched}
           onSave={onSave}
           onOptionSelect={onSelect}
@@ -43,7 +50,12 @@ export const ManageAccess = () => {
           <Spinner />
         ) : selectedUser && isSuccess && userRoles ? (
           userRoles.roles.length > 0 ? (
-            <UserAccessCard userRoles={userRoles} />
+            <UserAccessCard
+              deletingId={deletingId}
+              userRoles={userRoles}
+              loading={isRevokeLoading}
+              onDelete={onDelete}
+            />
           ) : (
             <Empty />
           )

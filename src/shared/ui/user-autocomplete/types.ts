@@ -6,13 +6,9 @@ import { User } from '@/entities/ user/model/types';
 
 export interface UserAutocompleteOption {
   value: string;
-  label: {
-    props?: {
-      user?: User;
-    };
-  };
+  label: React.ReactNode;
+  user: User;
 }
-
 export type AutocompleteFieldProps = Omit<InputProps, 'placeholder'> & {
   value?: string;
   onChange?: (value: string) => void;

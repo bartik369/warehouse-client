@@ -2,6 +2,7 @@ import { Flex, Typography } from 'antd';
 import { FiUser } from 'react-icons/fi';
 
 import { User } from '@/entities/ user/model/types';
+import { LABELS } from '@/utils/constants/ui/labels';
 
 import styles from './UserInfo.module.scss';
 
@@ -28,11 +29,11 @@ export const UserInfo = ({ user }: UserInfoProps) => {
           </div>
         </div>
         <div className={styles.info}>
-          <span className={styles.label}>Рабочий ID</span>
+          <span className={styles.label}>{LABELS.workID}</span>
           <Typography.Text className={styles.value}>{user.workId}</Typography.Text>
         </div>
         <div className={styles.info}>
-          <span className={styles.label}>email</span>
+          <span className={styles.label}>{LABELS.email}</span>
           <Typography.Text className={styles.value}>{user.email}</Typography.Text>
         </div>
       </Flex>
