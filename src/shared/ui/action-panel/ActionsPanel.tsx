@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Button, Space } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import { IconType } from 'react-icons';
 import { HiArrowPath, HiPlus } from 'react-icons/hi2';
 
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
@@ -17,6 +16,7 @@ interface ActionsPanelProps {
   applyIcon?: React.ReactNode;
   resetIcon?: React.ReactNode;
   children: React.ReactNode;
+  loading?: boolean;
   onReset: () => void;
   onApply: () => void;
 }
@@ -29,6 +29,7 @@ export const ActionsPanel = ({
   size = 'middle',
   applyIcon = <HiPlus />,
   resetIcon = <HiArrowPath />,
+  loading,
   onReset,
   onApply,
 }: ActionsPanelProps) => {
@@ -41,6 +42,7 @@ export const ActionsPanel = ({
           {titleReset}
         </Button>
         <Button
+          loading={loading}
           icon={applyIcon}
           className={styles.apply}
           type="primary"

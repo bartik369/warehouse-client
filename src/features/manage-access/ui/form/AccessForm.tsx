@@ -9,7 +9,7 @@ import { LuKeyRound } from 'react-icons/lu';
 import { User } from '@/entities/ user/model/types';
 import { createRoleScopeKey } from '@/entities/permission-role/lib/create-role-scope-key';
 import { PermissionRole } from '@/entities/permission-role/model/types';
-import { UserRoleAssignment } from '@/entities/role/model/types';
+import { GrantUserRole, UserRoleAssignment } from '@/entities/role/model/types';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfRoleAssignmentSelect } from '@/shared/ui/form-fields/RhfRoleAssignmentSelect';
 import { RhfUserAutocomplete } from '@/shared/ui/form-fields/RhfUserAutocomplete';
@@ -20,23 +20,27 @@ import { TITLE } from '../../model/constants';
 import { AccessFromValues, accessSchema } from '../../model/schema';
 
 interface AccessFormProps {
+  mode: string;
   selectedUser: User | null;
   roles: PermissionRole[];
   userRoles?: UserRoleAssignment[];
   userListOptions: UserAutocompleteOption[];
   loading?: boolean;
+  grantLoading: boolean;
   searched?: boolean;
-  onSave: (data: AccessFromValues) => Promise<void>;
+  onSave: (data: GrantUserRole) => Promise<void>;
   onOptionSelect?: (value: string, option: UserAutocompleteOption) => void;
   onUserSearch: (value: string) => void;
   onUserClear: () => void;
 }
 export const AccessForm = ({
+  mode,
   selectedUser,
   roles,
   userRoles,
   userListOptions,
   loading,
+  grantLoading,
   searched,
   onUserSearch,
   onOptionSelect,
@@ -54,9 +58,20 @@ export const AccessForm = ({
   const { reset, handleSubmit, setValue } = form;
 
   const onSubmit = async (formData: AccessFromValues) => {
+    if (!selectedUser) return;
     try {
-      await onSave(formData);
-      handleClear();
+      const data = {
+        userId: selectedUser.id,
+        roles: formData.permissionRoleIds.map((role) => {
+          const [roleId, locationId, warehouseId] = role.split('::');
+          return {
+            roleId,
+            locationId,
+            warehouseId: warehouseId && warehouseId !== 'null' ? warehouseId : null,
+          };
+        }),
+      };
+      await onSave(data);
     } catch (error) {
       console.log(error);
     }
@@ -69,15 +84,23 @@ export const AccessForm = ({
   const submit = handleSubmit(onSubmit);
 
   useEffect(() => {
-    if (userRoles && userRoles.length > 0 && selectedUser) {
-      const res = userRoles.map((item) => createRoleScopeKey(item));
-      setValue('permissionRoleIds', res);
+    if (!selectedUser) {
+      setValue('permissionRoleIds', []);
+      return;
     }
-  }, [userRoles, selectedUser]);
+    const roleScopeKeys = userRoles?.map((item) => createRoleScopeKey(item)) ?? [];
+    setValue('permissionRoleIds', roleScopeKeys);
+  }, [userRoles, selectedUser, setValue]);
 
   return (
     <FormProvider {...form}>
-      <ActionsPanel size="large" onApply={submit} onReset={handleClear}>
+      <ActionsPanel
+        mode={mode}
+        loading={grantLoading}
+        size="large"
+        onApply={submit}
+        onReset={handleClear}
+      >
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
             <Typography.Title level={3}>{TITLE}</Typography.Title>

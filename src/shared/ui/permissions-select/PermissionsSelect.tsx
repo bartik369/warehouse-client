@@ -46,9 +46,9 @@ export const PermissionsSelect = ({
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: '#fe7126',
-              colorPrimaryHover: '#fe7126',
-              colorPrimaryActive: '#fe7126',
+              colorPrimary: '#1d5fd0',
+              colorPrimaryHover: '#3574e5',
+              colorPrimaryActive: '#3574e5',
             },
             components: {
               Select: {

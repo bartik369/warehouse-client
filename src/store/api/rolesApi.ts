@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Role, RoleList, UserRolesResponse } from '@/entities/role/model/types';
+import { GrantUserRole, Role, RoleList, UserRolesResponse } from '@/entities/role/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const rolesApi = createApi({
   reducerPath: 'rolesApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Role'],
+  tagTypes: ['Role', 'UserRoles'],
   endpoints: (build) => ({
     getRoles: build.query<Role[], void>({
       query: () => ({
@@ -41,6 +41,12 @@ export const rolesApi = createApi({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_USER_ROLES}${id}`,
       }),
+      providesTags: (_result, _error, userId) => [
+        {
+          type: 'UserRoles',
+          id: userId,
+        },
+      ],
     }),
     getAssignableRoles: build.query<Role, void>({
       query: () => ({
@@ -77,19 +83,45 @@ export const rolesApi = createApi({
         },
       ],
     }),
-    deleteRole: build.mutation<{ message: string }, string>({
+    deleteRole: build.mutation<string, string>({
       query: (id) => ({
         url: `${import.meta.env.VITE_ROLES}${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Role'],
     }),
-    grantRole: build.mutation({
+    grantRole: build.mutation<unknown, GrantUserRole>({
       query: (body) => ({
         url: `${import.meta.env.VITE_GRANT_ROLES}`,
         method: 'POST',
         body,
       }),
+
+      invalidatesTags: (_result, error, { userId }) =>
+        error
+          ? []
+          : [
+              {
+                type: 'UserRoles',
+                id: userId,
+              },
+            ],
+    }),
+    revokeRole: build.mutation<unknown, { assignmentId: string; userId?: string }>({
+      query: ({ assignmentId }) => ({
+        url: `${import.meta.env.VITE_USER_ROLES}${assignmentId}`,
+        method: 'DELETE',
+      }),
+
+      invalidatesTags: (_result, error, { userId }) =>
+        error
+          ? []
+          : [
+              {
+                type: 'UserRoles',
+                id: userId,
+              },
+            ],
     }),
   }),
 });
@@ -99,6 +131,7 @@ export const {
   useGetRoleQuery,
   useGetAssignableRolesQuery,
   useUpdateRoleMutation,
+  useRevokeRoleMutation,
   useCreateRoleMutation,
   useDeleteRoleMutation,
   useGrantRoleMutation,

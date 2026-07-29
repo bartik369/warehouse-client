@@ -8,9 +8,16 @@ import { UserInfo } from './user/UserInfo';
 
 interface UserAccessCardProps {
   userRoles: UserRolesResponse;
+  deletingId: string | null;
+  loading: boolean;
+  onDelete: (id: string) => void;
 }
-export const UserAccessCard = ({ userRoles }: UserAccessCardProps) => {
-  console.log(userRoles.roles);
+export const UserAccessCard = ({
+  userRoles,
+  loading,
+  deletingId,
+  onDelete,
+}: UserAccessCardProps) => {
   return (
     <Card>
       <Flex gap={20} vertical>
@@ -21,7 +28,12 @@ export const UserAccessCard = ({ userRoles }: UserAccessCardProps) => {
             margin: '0',
           }}
         />
-        <RoleList roles={userRoles.roles} />
+        <RoleList
+          deletingId={deletingId}
+          roles={userRoles.roles}
+          onDelete={onDelete}
+          loading={loading}
+        />
       </Flex>
     </Card>
   );

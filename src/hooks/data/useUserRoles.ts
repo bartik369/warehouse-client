@@ -92,26 +92,25 @@ export const useUserRoles = () => {
   );
 
   const handleAddUserRole = useCallback(async () => {
-    try {
-      const validateErrors = FormValidation(role);
-      dispatchUserRole({
-        type: UserRoleActionsTypes.SET_ERROR,
-        payload: validateErrors as Record<string, string>,
-      });
-
-      if (Object.values(validateErrors).length === 0) {
-        if (!role) return;
-        const updateData = {
-          ...role,
-        };
-        const data = await grantRole(updateData).unwrap();
-        if (data) {
-          toast(data?.message, { type: 'success' });
-        }
-      }
-    } catch (err) {
-      handleApiError(err);
-    }
+    // try {
+    //   const validateErrors = FormValidation(role);
+    //   dispatchUserRole({
+    //     type: UserRoleActionsTypes.SET_ERROR,
+    //     payload: validateErrors as Record<string, string>,
+    //   });
+    //   if (Object.values(validateErrors).length === 0) {
+    //     if (!role) return;
+    //     const updateData = {
+    //       ...role,
+    //     };
+    //     const data = await grantRole(updateData).unwrap();
+    //     if (data) {
+    //       toast(data?.message, { type: 'success' });
+    //     }
+    //   }
+    // } catch (err) {
+    //   handleApiError(err);
+    // }
   }, [role]);
 
   const handleUserInfo = async (item: User) => {

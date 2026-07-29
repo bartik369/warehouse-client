@@ -3,3 +3,4 @@ export const TITLES = {
   delete_role: 'Удаление роли',
 };
 export const DESCRIPTION_ACTION = 'Удалить ранее назначенную пользователю роль?';
+export const ALL_WAREHOUSES = 'Все склады';

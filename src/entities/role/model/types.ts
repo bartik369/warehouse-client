@@ -33,3 +33,12 @@ export type UserRoleAssignment = {
   permissionIds: string[];
   permissionsName: string[];
 };
+
+export type GrantUserRole = {
+  userId: string;
+  roles: {
+    roleId: string;
+    locationId: string;
+    warehouseId: string | null;
+  }[];
+};
