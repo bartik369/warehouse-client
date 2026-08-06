@@ -1,5 +1,5 @@
 import { Device } from '@/types/devices';
-import { AssignedDevice, BaseIssueQuery } from '@/types/issue';
+import { AssignedDevice } from '@/types/issue';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
 import styles from './DeviceSearchResults.module.scss';

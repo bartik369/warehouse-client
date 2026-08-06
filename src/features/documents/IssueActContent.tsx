@@ -1,7 +1,6 @@
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { currentUser } from '@/store/slices/authSlice';
 import { partnerUser } from '@/store/slices/userSlice';
-import { BaseIssueQuery } from '@/types/issue';
 
 import { IssueState } from '../issue-device/model/issueTypes';
 import { AssignedDevicesTable } from '../issue-device/ui/assigned-devices-table/AssignedDevicesTable';
