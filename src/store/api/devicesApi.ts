@@ -1,11 +1,13 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
+
 import {
+  AggregateDeviceInfo,
   Device,
   FilterDeviceOptions,
-  AggregateDeviceInfo,
-  QueryParams,
   FilteredDevicesFromBack,
+  QueryParams,
 } from '@/types/devices';
-import { createApi } from '@reduxjs/toolkit/query/react';
+
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const devicesApi = createApi({
@@ -92,4 +94,5 @@ export const {
   useLazyGetDeviceQuery,
   useGetDeviceOptionsQuery,
   useLazySearchDevicesQuery,
+  useSearchDevicesQuery,
 } = devicesApi;

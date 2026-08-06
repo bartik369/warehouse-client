@@ -1,0 +1,24 @@
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: fit-content;
+  height: fit-content;
+  padding: 3px 7px;
+  font-size: 11px !important;
+  font-weight: 400;
+  border-radius: 6px;
+}
+.success {
+  color: var(--green-500) !important;
+  border: 1px solid var(--green-200);
+  background: var(--green-100) !important;
+}
+.processing {
+}
+.default {
+}
+.error {
+}
+.warning {
+}

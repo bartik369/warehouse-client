@@ -10,7 +10,7 @@ import { COLORS } from '@/utils/constants/ui/colors';
 import { MESSAGES } from '@/utils/constants/ui/messages';
 import { SIZES } from '@/utils/constants/ui/sizes';
 
-import styles from './Steps.module.scss';
+import styles from '../../Steps.module.scss';
 
 interface FinalizeIssueStepProps {
   state: IssueState;

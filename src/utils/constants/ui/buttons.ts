@@ -1,4 +1,6 @@
 export const BUTTON_LABELS = {
+  prev: 'Назад',
+  next: 'Вперед',
   reset: 'Сбросить',
   apply: 'Применить',
   clean: 'Очистить',

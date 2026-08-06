@@ -1,12 +1,13 @@
 import TableHeaderFilters from './TableHeaderFilters';
 
 const AssetTable = () => {
-    return (
-        <>
-        <TableHeaderFilters />
-           List
-        </>
-    )
+  return (
+    <>
+      выввывывы
+      <TableHeaderFilters />
+      List
+    </>
+  );
 };
 
 export default AssetTable;

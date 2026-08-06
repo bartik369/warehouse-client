@@ -1,7 +1,7 @@
 export interface Warehouse {
   id: string;
   name: string;
-  locationId: string;
+  locationId?: string;
   slug: string;
   comment?: string;
 }

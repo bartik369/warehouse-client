@@ -21,12 +21,6 @@ export const SECTION_TITLES = {
   editDevice: 'Редактирование устройства',
   download: 'Скачать',
   section: 'Раздел',
+  availableDevices: 'Доступные устрйства',
+  selectedDevices: 'Выбранные устройства',
 };
-
-export const BASE_STEPS: ItemType[] = [
-  { title: 'Выбор склада' },
-  { title: 'Выбор пользователя' },
-  { title: 'Выбор устройств' },
-  { title: 'Подпись документа' },
-  { title: 'Отправка на почту' },
-];

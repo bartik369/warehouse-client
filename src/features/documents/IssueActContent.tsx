@@ -4,7 +4,7 @@ import { partnerUser } from '@/store/slices/userSlice';
 import { BaseIssueQuery } from '@/types/issue';
 
 import { IssueState } from '../issue-device/model/issueTypes';
-import { AssignedDevicesTable } from '../issue-device/ui/AssignedDevicesTable/AssignedDevicesTable';
+import { AssignedDevicesTable } from '../issue-device/ui/assigned-devices-table/AssignedDevicesTable';
 
 interface IssueActContentProps {
   state: IssueState;

@@ -21,7 +21,7 @@ export const departmentApi = createApi({
             ]
           : [{ type: 'Department', id: 'LIST' }],
     }),
-    getDepartment: build.query<Department, string>({
+    getDepartment: build.query<Department, string | undefined>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEPARTMENTS}${id}`,
       }),

@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { Device } from '@/entities/device/model/types';
+import { Warehouse } from '@/entities/warehouse/model/types';
 import { AssignedDevice } from '@/types/issue';
-import { Warehouse } from '@/types/locations';
 
 import { IssueState } from './issueTypes';
 
@@ -12,18 +13,19 @@ const initialState: IssueState = {
   pdfBlob: null,
   issueId: null,
   errors: {},
-  userQuery: '',
-  deviceQuery: '',
+  // userQuery: '',
+  // deviceQuery: '',
   isUsersListVisible: false,
   isDevicesListVisible: false,
   devicesLoaded: false,
   wasSearched: false,
-  warehouse: {
-    id: '',
-    name: '',
-    slug: '',
-  },
-  warehouses: [],
+  // warehouse: {
+  //   id: '',
+  //   name: '',
+  //   slug: '',
+  //   locationId: '',
+  // },
+  // warehouses: [],
   deviceIssueData: {
     processId: '',
     devices: [],
@@ -34,7 +36,7 @@ const issueSlice = createSlice({
   name: 'issue',
   initialState,
   reducers: {
-    setAssignedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
+    setAssignedDevice: (state, action: PayloadAction<Device | Device[]>) => {
       if (Array.isArray(action.payload)) {
         state.assignedDevices = action.payload;
       } else {
@@ -47,7 +49,7 @@ const issueSlice = createSlice({
         }
       }
     },
-    setSelectedDevice: (state, action: PayloadAction<AssignedDevice | AssignedDevice[]>) => {
+    setSelectedDevice: (state, action: PayloadAction<Device | Device[]>) => {
       if (Array.isArray(action.payload)) {
         state.selectedDevices = action.payload;
       } else {
@@ -75,24 +77,28 @@ const issueSlice = createSlice({
     clearSelectedDevices: (state) => {
       state.selectedDevices = [];
     },
-    setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
-      state.warehouse = action.payload;
-    },
-    resetWarehouseIssue: (state) => {
-      state.warehouse = { ...initialState.warehouse };
-    },
-    setWarehouses: (state, action: PayloadAction<Warehouse[]>) => {
-      state.warehouses = action.payload;
-    },
-    setWarehouse: (state, action: PayloadAction<Warehouse>) => {
-      state.warehouse = action.payload;
-    },
+    // setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
+    //   state.warehouse = action.payload;
+    // },
+    // resetWarehouseIssue: (state) => {
+    //   state.warehouse = { ...initialState.warehouse };
+    // },
+    // setWarehouses: (state, action: PayloadAction<Warehouse[]>) => {
+    //   state.warehouses = action.payload;
+    // },
+    // setWarehouse: (state, action: PayloadAction<Warehouse>) => {
+    //   state.warehouse = action.payload;
+    // },
     setIssueStep: (state, action: PayloadAction<number>) => {
       state.issueStep = action.payload;
     },
     setIssueNextStep: (state) => {
       const currentStep = state.issueStep;
       state.issueStep = currentStep + 1;
+    },
+    setIssueBackStep: (state) => {
+      const currentStep = state.issueStep;
+      state.issueStep = currentStep - 1;
     },
     setWasSearched: (state, action: PayloadAction<boolean>) => {
       state.wasSearched = action.payload;
@@ -106,15 +112,15 @@ const issueSlice = createSlice({
     setDevicesLoaded: (state, action: PayloadAction<boolean>) => {
       state.devicesLoaded = action.payload;
     },
-    setUserQuery: (state, action: PayloadAction<string>) => {
-      state.userQuery = action.payload;
-    },
-    resetUserQuery: (state) => {
-      state.userQuery = '';
-    },
-    setDeviceQuey: (state, action: PayloadAction<string>) => {
-      state.deviceQuery = action.payload;
-    },
+    // setUserQuery: (state, action: PayloadAction<string>) => {
+    //   state.userQuery = action.payload;
+    // },
+    // resetUserQuery: (state) => {
+    //   state.userQuery = '';
+    // },
+    // setDeviceQuey: (state, action: PayloadAction<string>) => {
+    //   state.deviceQuery = action.payload;
+    // },
     setProcessId: (state, action: PayloadAction<string>) => {
       state.deviceIssueData.processId = action.payload;
     },
@@ -136,20 +142,21 @@ export const {
   deleteAssignedDevice,
   clearAssignedDevices,
   clearSelectedDevices,
-  setWarehouseIssue,
-  resetWarehouseIssue,
+  // setWarehouseIssue,
+  // resetWarehouseIssue,
   setIssueStep,
   setIssueNextStep,
+  setIssueBackStep,
   setWasSearched,
   setDevicesListVisible,
   setUserListVisible,
   setDevicesLoaded,
-  setUserQuery,
-  resetUserQuery,
-  setDeviceQuey,
+  // setUserQuery,
+  // resetUserQuery,
+  // setDeviceQuey,
   setProcessId,
-  setWarehouses,
-  setWarehouse,
+  // setWarehouses,
+  // setWarehouse,
   setPdfFile,
   setDeviceId,
   resetIssueData,

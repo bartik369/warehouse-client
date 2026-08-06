@@ -1,0 +1,71 @@
+.user {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  align-items: center;
+  column-gap: 24px;
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    .userContent {
+      min-width: 0;
+      .fullName {
+        display: flex;
+        gap: 10px;
+        font-weight: 600;
+        .activeTag,
+        .inactiveTag {
+          color: var(--green-500);
+          font-size: 11px;
+          font-weight: 400;
+          border-radius: 4px;
+        }
+        .activeTag {
+          background: var(--green-100);
+        }
+
+        .inactiveTag {
+          background: var(--red-500);
+        }
+        .content {
+          display: flex;
+          gap: 3px;
+        }
+      }
+    }
+  }
+}
+
+.email,
+.workId {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+.employeeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 11px;
+  color: var(--white);
+  background: var(--blue-600);
+}
+.label {
+  color: var(--gray-500);
+  font-size: 12px;
+}
+.value {
+  font-size: 12px;
+  font-weight: 600;
+}

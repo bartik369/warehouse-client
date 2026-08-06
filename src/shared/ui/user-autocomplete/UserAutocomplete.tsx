@@ -1,6 +1,6 @@
 import { AutoComplete, Input } from 'antd';
 import clsx from 'clsx';
-import { HiOutlineEnvelope } from 'react-icons/hi2';
+import { FiSearch } from 'react-icons/fi';
 
 import { Spinner } from '../spinner/Spinner';
 import styles from './UserAutocomplete.module.scss';
@@ -23,7 +23,7 @@ export const UserAutocomplete = ({
 }: AutocompleteFieldProps) => {
   const notFoundContent = loading ? (
     <div className={styles.loading}>
-      <Spinner fontSize={11} />
+      <Spinner color="var(--blue-600)" fontSize={14} />
       <span>{SEARCH_PROCESS}</span>
     </div>
   ) : searched && options?.length === 0 ? (
@@ -46,7 +46,7 @@ export const UserAutocomplete = ({
         >
           <Input
             allowClear
-            prefix={<HiOutlineEnvelope />}
+            prefix={<FiSearch size={16} />}
             className={styles.input}
             placeholder={placeholder}
             onClear={onClear}

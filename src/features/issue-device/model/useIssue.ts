@@ -1,335 +1,379 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useDebounce } from '@/hooks/data/useDebounce.ts';
+import { Warehouse } from '@/entities/warehouse/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { useLazyGetDeviceQuery, useLazySearchDevicesQuery } from '@/store/api/devicesApi';
 import {
   useCreateIssueMutation,
   useCreateIssueProcessMutation,
   useFinalizeIssueProcessMutation,
 } from '@/store/api/issueApi';
+import { useGetLocationsQuery } from '@/store/api/locationApi';
 import { useLazyGetFilteredUsersQuery, useLazyGetUserQuery } from '@/store/api/userApi';
-import { useLazyGetWarehousesByUserQuery } from '@/store/api/warehousesApi';
+import { useGetWarehousesQuery, useLazyGetWarehousesByUserQuery } from '@/store/api/warehousesApi';
 import { currentUser } from '@/store/slices/authSlice';
 import { resetDevices, setDevices } from '@/store/slices/deviceSlice';
 import { resetAllSignatures } from '@/store/slices/signatureSlice';
 import { partnerUser, resetUser, resetUsers, setUser, setUsers } from '@/store/slices/userSlice';
 import { AssignedDevice } from '@/types/issue';
-import { Warehouse } from '@/types/locations';
 import { handleApiError } from '@/utils/errors/handleApiError';
 import { generateActNumber } from '@/utils/nums/generateActNumber';
 
 import {
-  deleteAssignedDevice,
   resetIssueData,
-  resetUserQuery,
   setAssignedDevice,
   setDeviceId,
-  setDeviceQuey,
   setDevicesListVisible,
   setDevicesLoaded,
+  setIssueBackStep,
   setIssueNextStep,
   setIssueStep,
-  setProcessId,
-  setUserListVisible,
-  setUserQuery,
-  setWarehouse,
-  setWarehouses,
   setWasSearched,
 } from './issueSlice';
+import { useDevice } from './useDevice';
+import { useUser } from './useUser';
+import { useWarehouse } from './useWarehouse';
 
 export const useIssue = () => {
-  const [issueFile, setIssueFile] = useState<Blob>();
-  const state = useAppSelector((state) => state.issue);
-  const { processId, devices } = state.deviceIssueData;
-  const userDebouncedQuery = useDebounce(state.userQuery, 700);
+  const userController = useUser();
+  const warehouseController = useWarehouse();
+  const deviceController = useDevice();
+
+  const dispatch = useAppDispatch();
+
+  const state = useAppSelector((rootState) => rootState.issue);
+
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
-  const userDispatch = useAppDispatch();
-  const deviceDispatch = useAppDispatch();
-  const issueDispatch = useAppDispatch();
-  const signatureDispatch = useAppDispatch();
-  const [finalizeIssue, { isSuccess: isIssueSuccess, isLoading: isIssueLoading }] =
-    useFinalizeIssueProcessMutation();
-  const [createIssue] = useCreateIssueMutation();
-  const [createIssueProcess] = useCreateIssueProcessMutation();
-  const [getFilteredUsers, { isSuccess, isFetching }] = useLazyGetFilteredUsersQuery();
-  const [getBasicUser] = useLazyGetUserQuery();
-  const [getDevice] = useLazyGetDeviceQuery();
-  const [getWarehousesByUser] = useLazyGetWarehousesByUserQuery();
-  const [searchDevices] = useLazySearchDevicesQuery();
+  const [issueFile, setIssueFile] = useState<Blob>();
+  const { processId, devices } = state.deviceIssueData;
+  const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
 
-  const handleGetDevice = useCallback(async () => {
-    try {
-      if (state.deviceQuery) {
-        const data = await searchDevices(state.deviceQuery).unwrap();
-        deviceDispatch(setDevices(data));
-        issueDispatch(setDevicesListVisible(true));
-        issueDispatch(setWasSearched(true));
-        issueDispatch(setDevicesLoaded(true));
-      }
-    } catch (err: unknown) {
-      handleApiError(err);
-    }
-  }, [deviceDispatch, searchDevices, state.deviceQuery]);
+  const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
 
-  const handleSetStep = useCallback((step: number) => {
-    issueDispatch(setIssueStep(step));
-  }, []);
+  const [getDevice, { isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
+
+  const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
+    useLazyGetWarehousesByUserQuery();
+
+  // const [
+  //   searchDevices,
+  //   { data: searchedDevices = [], isFetching: isDevicesSearching, error: devicesSearchError },
+  // ] = useLazySearchDevicesQuery();
+
+  /*
+   * Mutations
+   */
+
+  const [
+    finalizeIssue,
+    { isSuccess: isIssueSuccess, isLoading: isIssueLoading, error: finalizeIssueError },
+  ] = useFinalizeIssueProcessMutation();
+
+  const [createIssue, { isLoading: isCreateIssueLoading, error: createIssueError }] =
+    useCreateIssueMutation();
+
+  const [
+    createIssueProcess,
+    { isLoading: isCreateIssueProcessLoading, error: createIssueProcessError },
+  ] = useCreateIssueProcessMutation();
+
+  /*
+   * Actions
+   */
+
+  // const handleGetDevice = useCallback(async () => {
+  //   const query = state.deviceQuery.trim();
+
+  //   if (!query) {
+  //     return;
+  //   }
+
+  //   try {
+  //     const data = await searchDevices(query).unwrap();
+
+  //     dispatch(setDevices(data));
+  //     dispatch(setDevicesListVisible(true));
+  //     dispatch(setWasSearched(true));
+  //     dispatch(setDevicesLoaded(true));
+  //   } catch (error: unknown) {
+  //     handleApiError(error);
+  //   }
+  // }, [dispatch, searchDevices, state.deviceQuery]);
+
+  const handleSetStep = useCallback(
+    (step: number) => {
+      dispatch(setIssueStep(step));
+    },
+    [dispatch]
+  );
 
   const handleStartDeviceIssueWith = useCallback(
     async (id: string) => {
-      // if (!id) return;
-      // // dispatch({
-      // //   type: IssueActionTypes.SET_DEVICE_ID,
-      // //   payload: id,
-      // // });
-      // const data = await getDevice(id).unwrap();
-      // const { warehouse, warehouseId, model, ...rest } = data;
-      // const warehouseData = {
-      //   id: warehouseId,
-      //   name: warehouse.name,
-      //   slug: warehouse.slug,
-      // };
-      // const deviceData = {
-      //   ...rest,
-      //   modelName: model.name,
-      //   typeName: model.type.name,
-      //   manufacturerName: model.manufacturer.name,
-      //   warehouseId: warehouseId,
-      // };
-      // // issueDispatch(setAssignedDevice(deviceData));
-      // // dispatch({
-      // //   type: IssueActionTypes.SET_ASSIGNED_DEVICES,
-      // //   payload: [deviceData],
-      // // });
-      // issueDispatch(setWarehouse(warehouseData));
+      if (!id) {
+        return;
+      }
+
+      try {
+        const data = await getDevice(id).unwrap();
+
+        const { warehouse, warehouseId, model, ...device } = data;
+
+        const warehouseData = {
+          id: warehouseId,
+          name: warehouse.name,
+          slug: warehouse.slug,
+        };
+
+        const deviceData = {
+          ...device,
+          modelName: model.name,
+          typeName: model.type.name,
+          manufacturerName: model.manufacturer.name,
+          warehouseId,
+        };
+
+        // dispatch(setWarehouse(warehouseData));
+
+        dispatch(setAssignedDevice(deviceData));
+
+        dispatch(setDeviceId(deviceData.id));
+      } catch (error: unknown) {
+        handleApiError(error);
+      }
     },
-    [getDevice]
+    [dispatch, getDevice]
   );
 
   const handleCompleteProcess = useCallback(
     async (file: Blob) => {
-      if (!file) return;
+      if (!file || !processId) {
+        return;
+      }
+
       try {
         setIssueFile(file);
         const issueData = new FormData();
-        issueData.append('processId', state.deviceIssueData?.processId);
+        issueData.append('processId', processId);
         issueData.append('file', file);
-        const data = await finalizeIssue(issueData).unwrap();
-        if (data) {
-          issueDispatch(setIssueNextStep());
-          issueDispatch(setIssueStep(0));
-        }
-      } catch (err: unknown) {
-        handleApiError(err);
+        await finalizeIssue(issueData).unwrap();
+        dispatch(setIssueNextStep());
+      } catch (error: unknown) {
+        handleApiError(error);
       }
     },
-    [finalizeIssue, userDispatch, recipient, devices, processId]
+    [dispatch, finalizeIssue, processId]
   );
 
-  const handleUserChange = useCallback((value: string) => {
-    issueDispatch(setUserQuery(value));
-    issueDispatch(setUserListVisible(true));
-  }, []);
-
-  const handleUsers = useCallback(
-    async (query: string) => {
-      try {
-        const data = await getFilteredUsers(query).unwrap();
-        userDispatch(setUsers(data));
-      } catch (err: unknown) {
-        handleApiError(err);
-      }
-    },
-    [getFilteredUsers, userDispatch]
-  );
-
-  const handleResetUser = useCallback(() => {
-    userDispatch(resetUser());
-  }, [userDispatch]);
-
-  const handleDeviceChange = useCallback((value: string) => {
-    issueDispatch(setDeviceQuey(value));
-  }, []);
-
-  const handleSetUser = useCallback(
-    async (id: string) => {
-      try {
-        const data = await getBasicUser(id).unwrap();
-        userDispatch(setUser({ user: data }));
-        userDispatch(resetUsers());
-        issueDispatch(setWasSearched(false));
-        issueDispatch(setProcessId(generateActNumber()));
-      } catch (err: unknown) {
-        handleApiError(err);
-      }
-    },
-    [userDispatch, getBasicUser]
-  );
-
-  const handleGetWarehousesByUser = useCallback(
-    async (userId: string) => {
-      try {
-        const data = await getWarehousesByUser(userId).unwrap();
-        issueDispatch(setWarehouses(data));
-        issueDispatch(setWasSearched(false));
-      } catch (err: unknown) {
-        handleApiError(err);
-      }
-    },
-    [getWarehousesByUser]
-  );
-
-  const handleSetWarehouse = useCallback((item: Warehouse) => {
-    issueDispatch(setWarehouse(item));
-    handleNextStep();
-  }, []);
-
-  const handleSetDevice = useCallback(
-    (device: AssignedDevice) => {
-      issueDispatch(setAssignedDevice(device));
-      issueDispatch(setDeviceId(device.id));
-      issueDispatch(setWasSearched(false));
-      deviceDispatch(resetDevices());
-    },
-    [deviceDispatch]
-  );
-
-  const handleDeleteDevice = useCallback((id: string) => {
-    issueDispatch(deleteAssignedDevice(id));
-  }, []);
-
-  const handleFullReset = useCallback(() => {
-    userDispatch(resetUser());
-    signatureDispatch(resetAllSignatures());
-    deviceDispatch(resetDevices());
-    issueDispatch(resetIssueData());
-  }, [userDispatch, deviceDispatch]);
-
-  const handleResetUserQuery = useCallback(() => {
-    issueDispatch(resetUserQuery());
-  }, []);
-
-  const handleResetDeviceQuery = useCallback(() => {}, []);
+  const handleResetDeviceQuery = useCallback(() => {
+    // dispatch(setDeviceQuey(''));
+    dispatch(setDevicesListVisible(false));
+    dispatch(setWasSearched(false));
+    dispatch(resetDevices());
+  }, [dispatch]);
 
   const handleResetIssueDevices = useCallback(() => {
-    issueDispatch(resetIssueData());
-  }, []);
+    dispatch(resetIssueData());
+  }, [dispatch]);
 
-  const handleCreateIssueProcess = async () => {
+  const handleBackStep = useCallback(() => {
+    dispatch(setIssueBackStep());
+  }, [dispatch]);
+
+  const handleNextStep = useCallback(() => {
+    dispatch(setIssueNextStep());
+  }, [dispatch]);
+
+  const handleResetIssue = useCallback(() => {
+    dispatch(resetIssueData());
+    dispatch(setIssueStep(0));
+    dispatch(resetUser());
+  }, [dispatch]);
+
+  const handleFullReset = useCallback(() => {
+    dispatch(resetUser());
+    dispatch(resetUsers());
+    dispatch(resetAllSignatures());
+    dispatch(resetDevices());
+    dispatch(resetIssueData());
+  }, [dispatch]);
+
+  const handleCreateIssue = useCallback(async () => {
+    if (!processId || devices.length === 0) {
+      return;
+    }
+
     try {
-      const documentNumber = state.deviceIssueData.processId;
-      const partner = recipient.id;
-      const current = creator?.id;
-      const warehouse = state.warehouse.id;
-      if (!documentNumber || !partner || !warehouse || !current) return;
+      await createIssue(state.deviceIssueData).unwrap();
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
+  }, [createIssue, devices.length, processId, state.deviceIssueData]);
 
-      const processData = {
+  // useEffect(() => {
+  //   switch (state.issueStep) {
+  //     case 2:
+  //       void handleCreateIssueProcess();
+  //       break;
+
+  //     case 3:
+  //       void handleCreateIssue();
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // }, [handleCreateIssue, handleCreateIssueProcess, state.issueStep]);
+
+  const user = {
+    data: {
+      selectedUser: userController.user,
+      users: userController.users,
+      query: userController.userQuery,
+      options: userController.userOptions,
+      wasSearched: userController.wasSearched,
+    },
+    actions: {
+      handleChange: userController.handleChange,
+      handleSelect: userController.handleSelect,
+      handleReset: userController.handleReset,
+    },
+    status: {
+      isUsersLoading: userController.isLoading,
+      isUsersSuccess: userController.isSuccess,
+      isUsersFetching: userController.isFetching,
+    },
+  };
+
+  const warehouse = {
+    data: {
+      warehouse: warehouseController.warehouse,
+      warehouses: warehouseController.warehouses,
+      locations: warehouseController.locations,
+      selectedLocation: warehouseController.locationName,
+    },
+    actions: {
+      handleSelect: warehouseController.handleSelect,
+      handleReset: warehouseController.handleReset,
+    },
+    status: {
+      isLoadingWarehouses: warehouseController.isLoadingWarehouses,
+      isLoadingLocations: warehouseController.isLoadingLocations,
+    },
+  };
+
+  const handleCreateIssueProcess = useCallback(async () => {
+    const documentNumber = state.deviceIssueData.processId;
+    const partnerId = recipient?.id;
+    const currentUserId = creator?.id;
+    const warehouseId = warehouse.data.warehouse?.id;
+
+    if (!documentNumber || !partnerId || !currentUserId || !warehouseId) {
+      return;
+    }
+
+    try {
+      await createIssueProcess({
         documentNo: documentNumber,
-        userId: partner,
-        warehouseId: warehouse,
-        issuedById: current,
+        userId: partnerId,
+        warehouseId,
+        issuedById: currentUserId,
         status: state.issueStep,
-      };
-      const data = await createIssueProcess(processData).unwrap();
-    } catch (err: unknown) {
-      handleApiError(err);
+      }).unwrap();
+    } catch (error: unknown) {
+      handleApiError(error);
     }
+  }, [
+    createIssueProcess,
+    creator?.id,
+    recipient?.id,
+    state.deviceIssueData.processId,
+    state.issueStep,
+    warehouse.data.warehouse?.id,
+  ]);
+
+  const device = {
+    data: {
+      selectedDevice: deviceController.device,
+      devices: deviceController.devices,
+      options: deviceController.options,
+      query: deviceController.query,
+      value: deviceController.inputValue,
+    },
+    actions: {
+      handleChange: deviceController.handleChange,
+      handleSelect: deviceController.handleSelect,
+      handleDelete: deviceController.handleDelete,
+      handleReset: deviceController.handleReset,
+      handleResetList: deviceController.handleResetDeviceList,
+    },
+    status: {
+      isLoading: deviceController.isLoading,
+      wasSearched: deviceController.wasSearched,
+    },
   };
 
-  const handleCreateIssue = async () => {
-    try {
-      const { processId, devices } = state.deviceIssueData;
-      if (!processId || !devices.length) return;
-      const data = await createIssue(state.deviceIssueData).unwrap();
-    } catch (err: unknown) {
-      handleApiError(err);
-    }
-  };
-  const handleNextStep = () => {
-    issueDispatch(setIssueNextStep());
-  };
-
-  const handleResetIssue = () => {
-    issueDispatch(resetIssueData());
-    issueDispatch(setIssueStep(0));
-    userDispatch(resetUser());
+  const actions = {
+    handleNextStep,
+    handleBackStep,
+    handleCompleteProcess,
+    handleFullReset,
+    // handleGetDevice,
+    handleResetDeviceQuery,
+    handleResetIssue,
+    handleResetIssueDevices,
+    handleSetStep,
+    handleStartDeviceIssueWith,
+    // handleUserChange,
   };
 
-  useEffect(() => {
-    if (userDebouncedQuery.length > 1) {
-      handleUsers(userDebouncedQuery);
-      issueDispatch(setWasSearched(true));
-    } else {
-      userDispatch(resetUsers());
-      issueDispatch(setWasSearched(false));
-    }
-  }, [userDebouncedQuery]);
+  const data = {
+    // warehouses: warehouse.warehouses,
+    // locations: warehouse.locations,
+    // locations,
+    // warehouses,
+    // filteredUsers,
+    // searchedDevices,
+    // recipient,
+    // creator,
+    // issueFile,
+  };
 
-  useEffect(() => {
-    switch (state.issueStep) {
-      case 1:
-        break;
-      case 2:
-        handleCreateIssueProcess();
-        break;
-      case 3:
-        handleCreateIssue();
-        break;
-      default:
-    }
-  }, [state.issueStep]);
+  const status = {
+    isUserFetching,
+    isDeviceFetching,
+    // isDevicesSearching,
+    isWarehousesByUserFetching,
+    isIssueLoading,
+    isIssueSuccess,
+    isCreateIssueLoading,
+    isCreateIssueProcessLoading,
 
-  const actions = useMemo(
-    () => ({
-      isSuccess,
-      isFetching,
-      isIssueSuccess,
-      isIssueLoading,
-      handleResetIssue,
-      handleCompleteProcess,
-      handleUserChange,
-      handleFullReset,
-      handleSetUser,
-      handleResetUser,
-      handleResetUserQuery,
-      handleGetDevice,
-      handleStartDeviceIssueWith,
-      handleDeviceChange,
-      handleSetDevice,
-      handleSetWarehouse,
-      handleGetWarehousesByUser,
-      handleResetDeviceQuery,
-      handleDeleteDevice,
-      handleResetIssueDevices,
-      handleNextStep,
-      handleSetStep,
-    }),
-    [
-      isSuccess,
-      isFetching,
-      isIssueSuccess,
-      isIssueLoading,
-      handleResetIssue,
-      handleCompleteProcess,
-      handleUserChange,
-      handleFullReset,
-      handleSetUser,
-      handleNextStep,
-      handleResetUser,
-      handleResetUserQuery,
-      handleGetDevice,
-      handleStartDeviceIssueWith,
-      handleDeviceChange,
-      handleSetDevice,
-      handleSetWarehouse,
-      handleGetWarehousesByUser,
-      handleResetDeviceQuery,
-      handleDeleteDevice,
-      handleResetIssueDevices,
-      handleSetStep,
-    ]
-  );
-  return actions;
+    errors: {
+      createIssue: createIssueError,
+      createIssueProcess: createIssueProcessError,
+      finalizeIssue: finalizeIssueError,
+    },
+  };
+
+  return {
+    user,
+    device,
+    warehouse,
+    actions,
+    data,
+    status,
+    state,
+  };
 };
+
+export type UseIssueResult = ReturnType<typeof useIssue>;
+export type IssueActions = UseIssueResult['actions'];
+export type IssueData = UseIssueResult['data'];
+export type IssueStatus = UseIssueResult['status'];
+export type IssueState = UseIssueResult['state'];
+
+export type IssueUser = UseIssueResult['user'];
+export type IssueDevice = UseIssueResult['device'];
+export type IssueWarehouse = UseIssueResult['warehouse'];
