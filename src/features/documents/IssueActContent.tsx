@@ -7,10 +7,10 @@ import { AssignedDevicesTable } from '../issue-device/ui/assigned-devices-table/
 
 interface IssueActContentProps {
   state: IssueState;
-  deleteDevice: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-const IssueActContent = ({ state, deleteDevice }: IssueActContentProps) => {
+const IssueActContent = ({ state, onDelete }: IssueActContentProps) => {
   const issueUser = useAppSelector(currentUser);
   const receiveUser = useAppSelector(partnerUser);
   return (
@@ -28,7 +28,7 @@ const IssueActContent = ({ state, deleteDevice }: IssueActContentProps) => {
         </strong>{' '}
         подписали настоящий акт приема передачи на основании договора №123456789
       </p>
-      <AssignedDevicesTable devices={state.assignedDevices} deleteDevice={deleteDevice} />
+      <AssignedDevicesTable devices={state.assignedDevices} onDelete={onDelete} />
     </>
   );
 };

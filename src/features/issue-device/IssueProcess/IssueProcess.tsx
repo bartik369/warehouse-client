@@ -52,9 +52,9 @@ export const IssueProcess = ({
       actions={actions}
     />,
     <SignDocumentStep
+      onDelete={device.actions.handleDelete}
       state={state}
       isIssueLoading={status.isIssueLoading}
-      deleteDevice={device.actions.handleDelete}
       handleComplete={actions.handleCompleteProcess}
     />,
     <FinalizeIssueStep state={state} />,
