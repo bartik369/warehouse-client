@@ -5,6 +5,7 @@ import { Flex, Typography } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Location } from '@/entities/location/model/types';
+import { Warehouse } from '@/entities/warehouse/model/types';
 import { FormMode } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
@@ -15,7 +16,6 @@ import { LABELS } from '@/utils/constants/ui/labels';
 
 import { TITLE } from '../model/constants';
 import { WarehouseFormValues, warehouseSchema } from '../model/schema';
-import { Warehouse } from '../model/type';
 
 interface WarehouseFormProps {
   data?: Warehouse;
