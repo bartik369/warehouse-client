@@ -1,4 +1,5 @@
 import { Button, Typography } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
 import { Device } from '@/entities/device/model/types';
@@ -12,7 +13,7 @@ export const getAssignedDeviceColumns = ({
 }: {
   onDelete: (id: string) => void;
   hideActions?: boolean;
-}) => {
+}): ColumnsType<Device> => {
   return [
     {
       key: 'icon',
