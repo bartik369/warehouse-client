@@ -23,14 +23,14 @@ import Signatures from './Signatures';
 interface DocumentWithSignaturesProps {
   state: IssueState;
   isIssueLoading: boolean;
-  deleteDevice: (id: string) => void;
+  onDelete: (id: string) => void;
   handleComplete: (file: Blob) => void;
 }
 
 export const DocumentWithSignatures = ({
   state,
   isIssueLoading,
-  deleteDevice,
+  onDelete,
   handleComplete,
 }: DocumentWithSignaturesProps) => {
   const issuerSignature = useAppSelector(selectIssuerSignature);
@@ -93,7 +93,7 @@ export const DocumentWithSignatures = ({
             </time>
           </header>
           <div className={styles.info}>
-            <IssueActContent state={state} deleteDevice={deleteDevice} />
+            <IssueActContent state={state} onDelete={onDelete} />
           </div>
           <Signatures
             issuerSignature={issuerSignature}

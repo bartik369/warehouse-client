@@ -1,7 +1,7 @@
-import { DeviceIssueForm } from '@/components/deviceIssue/DeviceIssueForm';
+import { ManageIssue } from '@/features/issue-device/ui/ManageIssue';
 
 const Issue = () => {
-  return <DeviceIssueForm />;
+  return <ManageIssue />;
 };
 
 export default Issue;

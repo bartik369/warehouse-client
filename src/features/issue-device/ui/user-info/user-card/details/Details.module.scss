@@ -1,0 +1,29 @@
+.details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 48px;
+  row-gap: 28px;
+  width: 100%;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.detailLabel {
+  color: var(--gray-500);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.detailValue {
+  color: var(--gray-900);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+
+  overflow-wrap: anywhere;
+}

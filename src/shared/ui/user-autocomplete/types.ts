@@ -1,21 +1,24 @@
 import { ReactNode } from 'react';
 
-import { AutoCompleteProps, InputProps } from 'antd';
+import { InputProps } from 'antd';
 
 import { User } from '@/entities/ user/model/types';
 
 export interface UserAutocompleteOption {
   value: string;
-  label: React.ReactNode;
+  label: ReactNode;
   user: User;
 }
+
+export type UserAutocompleteOptions = UserAutocompleteOption[];
+
 export type AutocompleteFieldProps = Omit<InputProps, 'placeholder'> & {
   value?: string;
   onChange?: (value: string) => void;
   onBlur?: () => void;
   onClear?: () => void;
   onOptionSelect?: (value: string, option: UserAutocompleteOption) => void;
-  options?: UserAutocompleteOption[];
+  options?: UserAutocompleteOptions;
   onSearch?: (value: string) => void;
   loading?: boolean;
   searched?: boolean;

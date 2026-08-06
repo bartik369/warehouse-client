@@ -21,7 +21,7 @@ export const locationApi = createApi({
             ]
           : [{ type: 'Location', id: 'LIST' }],
     }),
-    getLocation: build.query<Location, string>({
+    getLocation: build.query<Location, string | undefined>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_LOCATIONS}${id}`,
       }),

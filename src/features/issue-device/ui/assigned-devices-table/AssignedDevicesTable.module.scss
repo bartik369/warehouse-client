@@ -1,0 +1,33 @@
+.table {
+  :global {
+    .ant-table-thead > tr > th {
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+    .ant-table-tbody > tr > td {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    .ant-pagination {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .ant-pagination-item,
+    .ant-pagination-prev,
+    .ant-pagination-next {
+      min-width: 18px;
+      height: 18px;
+      line-height: 18px;
+    }
+
+    .ant-pagination-item a {
+      line-height: 16px;
+    }
+
+    .ant-pagination-options {
+      font-size: 12px;
+    }
+  }
+}

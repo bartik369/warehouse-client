@@ -4,4 +4,4 @@ const IssueDetails = () => {
   return <div></div>;
 };
 
-export default IssueDetails;
+export default IssueDetails; // todo удалить компонент

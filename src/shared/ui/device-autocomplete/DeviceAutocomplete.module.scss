@@ -1,0 +1,148 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  .input {
+    height: $form-control-height;
+    border-radius: $form-control-radius;
+    border: 1px solid var(--border-primary);
+    &:hover,
+    &:focus,
+    &:focus-within {
+      border-color: var(--blue-200);
+      box-shadow: rgba(255, 227, 209, 0.4) 0px 3px 5px;
+    }
+  }
+  .label {
+    position: absolute;
+    z-index: 99;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 12px;
+    background: #fff;
+    padding: 0 4px;
+    pointer-events: none;
+    transition:
+      top 0.15s ease,
+      transform 0.15s ease,
+      left 0.15s ease;
+  }
+
+  .labelWithPrefix {
+    left: 28px;
+  }
+
+  .label.labelActive,
+  &:focus-within .label {
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  .labelWithPrefix.labelActive,
+  &:focus-within .labelWithPrefix {
+    left: 28px;
+  }
+  .tooltipIcon {
+    display: inline-flex;
+    margin-left: 6px;
+    color: #8c8c8c;
+    cursor: help;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.error {
+  margin: 4px 0 0;
+  color: #ff4d4f;
+  font-size: 12px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 20px 150px 1fr 1fr 1fr;
+  height: 30px;
+  align-items: center;
+  column-gap: 10px;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-700);
+    font-size: 20px;
+    line-height: 1;
+  }
+  .tooltipName {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    font-size: 13px;
+  }
+
+  .value {
+    font-size: 13px;
+  }
+}
+:global {
+  .ant-select-dropdown {
+    padding: 0;
+  }
+}
+:global {
+  .ant-select-dropdown .ant-select-item {
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .ant-select-dropdown .ant-select-item:last-child {
+    border-bottom: none;
+  }
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 35px 150px 1fr 1fr 1fr;
+  column-gap: 8px;
+  position: sticky;
+  align-items: center;
+  height: 38px;
+  top: 0;
+  z-index: 10;
+  font-weight: 600;
+  border-bottom: 1px solid var(--gray-200);
+  background-color: var(--gray-50);
+  box-shadow: rgba(33, 35, 38, 0.15) 0px 10px 10px -10px;
+  span {
+    font-size: 12px;
+  }
+}
+
+.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+
+  .icon,
+  .tooltipName,
+  .value {
+    color: var(--gray-500) !important;
+  }
+
+  svg {
+    color: var(--gray-500);
+  }
+
+  :global(.ant-typography) {
+    color: var(--gray-500) !important;
+  }
+}
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

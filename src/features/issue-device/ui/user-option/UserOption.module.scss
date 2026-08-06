@@ -1,0 +1,53 @@
+.userOption {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  align-items: center;
+  column-gap: 24px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.userContent {
+  min-width: 0;
+}
+
+.fullName {
+  display: flex;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.email,
+.workId {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+.employeeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.department {
+  font-weight: 600;
+}
+
+.initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--blue-600);
+}

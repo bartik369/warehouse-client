@@ -7,6 +7,7 @@ const AssignedList = () => {
   const { assignedDevices } = useAppSelector((state: RootState) => state.issue);
   return (
     <div className={styles.items}>
+      fdf
       {assignedDevices?.map((device) => (
         <div className={styles.item} key={device.id}>
           <div className={styles.info}>

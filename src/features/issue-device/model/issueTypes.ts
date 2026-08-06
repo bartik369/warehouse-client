@@ -1,6 +1,7 @@
-import { Device, DeviceIssueData } from '@/types/devices';
+import { Device } from '@/entities/device/model/types';
+import { Warehouse } from '@/entities/warehouse/model/types';
+import { DeviceIssueData } from '@/types/devices';
 import { AssignedDevice } from '@/types/issue';
-import { Warehouse } from '@/types/locations';
 
 export type IssueStepType =
   | 'select_warehouse'
@@ -16,20 +17,20 @@ export type IssueStepTitle =
   | 'Отправка документа';
 
 export interface IssueState {
-  assignedDevices: AssignedDevice[];
-  selectedDevices: AssignedDevice[];
+  assignedDevices: Device[];
+  selectedDevices: Device[];
   issueStep: number;
   pdfBlob: Blob | null;
   issueId: string | null;
   errors: Record<string, string>;
-  userQuery: string;
-  deviceQuery: string;
+  // userQuery: string;
+  // deviceQuery: string;
   isUsersListVisible: boolean;
   isDevicesListVisible: boolean;
   devicesLoaded: boolean;
   wasSearched: boolean;
-  warehouse: Warehouse;
-  warehouses: Warehouse[];
+  // warehouse: Warehouse;
+  // warehouses: Warehouse[];
   deviceIssueData: DeviceIssueData;
 }
 
@@ -53,8 +54,8 @@ export enum IssueActionTypes {
   RESET_ERROR = 'RESET_ERROR',
   SET_USER_QUERY = 'SET_USER_QUERY',
   RESET_USER_QUERY = 'RESET_USER_QUERY',
-  SET_DEVICE_QUERY = 'SET_DEVICE_QUERY',
-  RESET_DEVICE_QUERY = 'RESET_DEVICE_QUERY',
+  // SET_DEVICE_QUERY = 'SET_DEVICE_QUERY',
+  // RESET_DEVICE_QUERY = 'RESET_DEVICE_QUERY',
   SET_USERS_LIST_VISIBLE = 'SET_USERS_LIST_VISIBLE',
   SET_DEVICES_LIST_VISIBLE = 'SET_DEVICES_LIST_VISIBLE',
   SET_WAS_SEARCHED = 'SET_WAS_SEARCHED',
@@ -83,8 +84,8 @@ export type IssueAction =
   | { type: IssueActionTypes.SET_WAS_SEARCHED; payload: boolean }
   | { type: IssueActionTypes.SET_USER_QUERY; payload: string }
   | { type: IssueActionTypes.RESET_USER_QUERY }
-  | { type: IssueActionTypes.SET_DEVICE_QUERY; payload: string }
-  | { type: IssueActionTypes.RESET_DEVICE_QUERY }
+  // | { type: IssueActionTypes.SET_DEVICE_QUERY; payload: string }
+  // | { type: IssueActionTypes.RESET_DEVICE_QUERY }
   | { type: IssueActionTypes.SET_USERS_LIST_VISIBLE; payload: boolean }
   | { type: IssueActionTypes.SET_DEVICES_LIST_VISIBLE; payload: boolean }
   | { type: IssueActionTypes.SET_FULL_RESET }

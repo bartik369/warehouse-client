@@ -1,0 +1,36 @@
+.tag {
+  position: absolute;
+}
+.pick {
+  max-width: 550px;
+  position: relative;
+  img {
+    width: 100%;
+  }
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--blue-600);
+  background-color: var(--blue-50);
+  border: 1px solid var(--blue-100);
+  border-radius: 5px;
+}
+
+.label {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.department {
+  font-size: 11px;
+  color: var(--gray-500);
+}
