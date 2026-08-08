@@ -1,18 +1,13 @@
+import { User } from '@/entities/user/model/types';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { currentUser } from '@/store/slices/authSlice';
 import { partnerUser } from '@/store/slices/userSlice';
 
-import { IssueState } from '../issue-device/model/issueTypes';
-import { AssignedDevicesTable } from '../issue-device/ui/assigned-devices-table/AssignedDevicesTable';
-
 interface IssueActContentProps {
-  state: IssueState;
-  onDelete: (id: string) => void;
+  user: User | null;
 }
-
-const IssueActContent = ({ state, onDelete }: IssueActContentProps) => {
+const IssueActContent = ({ user }: IssueActContentProps) => {
   const issueUser = useAppSelector(currentUser);
-  const receiveUser = useAppSelector(partnerUser);
   return (
     <>
       <p>
@@ -24,11 +19,10 @@ const IssueActContent = ({ state, onDelete }: IssueActContentProps) => {
         , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия Сергеевича, действующего
         на основании устава, именуемое в дальнейшем{' '}
         <strong>
-          {receiveUser.firstNameRu} {receiveUser.lastNameRu}
+          {user?.firstNameRu} {user?.lastNameRu}
         </strong>{' '}
         подписали настоящий акт приема передачи на основании договора №123456789
       </p>
-      <AssignedDevicesTable devices={state.assignedDevices} onDelete={onDelete} />
     </>
   );
 };

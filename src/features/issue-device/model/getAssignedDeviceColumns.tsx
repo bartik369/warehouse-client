@@ -1,5 +1,5 @@
 import { Button, Typography } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnType, ColumnsType } from 'antd/es/table';
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
 import { Device } from '@/entities/device/model/types';
@@ -10,40 +10,54 @@ import { AssignedDevice } from '@/types/issue';
 export const getAssignedDeviceColumns = ({
   onDelete,
   hideActions = false,
+  currentPage,
+  pageSize,
 }: {
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
   hideActions?: boolean;
+  currentPage: number;
+  pageSize: number;
 }): ColumnsType<Device> => {
-  return [
-    {
-      key: 'icon',
-      width: 20,
-      onCell: () => ({
-        style: {
-          paddingLeft: 0,
-          paddingRight: 0,
-          textAlign: 'center',
-        },
-      }),
-      render: (record: Device) => {
-        const isDeviceType = (value: string): value is keyof typeof DEVICE_TYPES => {
-          return value in DEVICE_TYPES;
-        };
-        const Icon = isDeviceType(record.typeSlug) ? DEVICE_TYPES[record.typeSlug].icon : undefined;
-        return (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100%',
-            }}
-          >
-            {Icon && <Icon size={20} />}
-          </div>
-        );
+  const iconColumn: ColumnType<Device> = {
+    key: 'icon',
+    width: 20,
+    onCell: () => ({
+      style: {
+        paddingLeft: 0,
+        paddingRight: 0,
+        textAlign: 'center',
       },
+    }),
+    render: (_value: unknown, record: Device) => {
+      const Icon =
+        record.typeSlug in DEVICE_TYPES
+          ? DEVICE_TYPES[record.typeSlug as keyof typeof DEVICE_TYPES].icon
+          : undefined;
+
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          {Icon && <Icon size={20} />}
+        </div>
+      );
     },
+  };
+
+  const numberColumn: ColumnType<Device> = {
+    key: 'number',
+    title: '№',
+    width: 40,
+    align: 'center',
+    render: (_value, _record, index) => (currentPage - 1) * pageSize + index + 1,
+  };
+  return [
+    ...(!hideActions ? [iconColumn] : [numberColumn]),
     {
       key: 'name',
       title: 'Название',
@@ -70,7 +84,7 @@ export const getAssignedDeviceColumns = ({
       key: 'modelName',
       title: 'Модель',
       dataIndex: 'modelName',
-      width: 150,
+      width: 100,
     },
     {
       key: 'inventoryNumber',
@@ -82,7 +96,7 @@ export const getAssignedDeviceColumns = ({
       key: 'serialNumber',
       title: 'Сер. номер',
       dataIndex: 'serialNumber',
-      width: 150,
+      width: 130,
       render: (name: string) => (
         <Typography.Text
           style={{

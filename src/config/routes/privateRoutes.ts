@@ -13,8 +13,6 @@ import EditDeviceConfig from '../pages/EditDevice';
 import HomeConfig from '../pages/Home';
 import InventoryConfig from '../pages/Inventory';
 import InventoryListConfig from '../pages/InventoryList';
-import IssueConfig from '../pages/Issue';
-import IssueListConfig from '../pages/IssueList';
 import KnowledgeConfig from '../pages/Knowledge';
 import LocationsConfig from '../pages/Locations';
 import AddLocationConfig from '../pages/Locations';
@@ -28,6 +26,10 @@ import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
 import UsersListConfig from '../pages/UsersList';
 import WarehousesConfig from '../pages/Warehouses';
+import IssueConfig from '../pages/issue/IssueCreate';
+import IssueDetailsConfig from '../pages/issue/IssueDetails';
+import IssueEditConfig from '../pages/issue/IssueEdit';
+import IssueListConfig from '../pages/issue/IssueList';
 
 const privateRoutes = [
   HomeConfig,
@@ -35,7 +37,6 @@ const privateRoutes = [
   ...DevicesConfig,
   DeviceConfig,
   AddDeviceConfig,
-  IssueConfig,
   IssueListConfig,
   InventoryListConfig,
   InventoryConfig,
@@ -60,6 +61,10 @@ const privateRoutes = [
   PermissionRoleConfig,
   AccessConfig,
   LocationsConfig,
+  IssueConfig,
+  IssueDetailsConfig,
+  IssueEditConfig,
+  IssueListConfig,
 ];
 
 export default privateRoutes;

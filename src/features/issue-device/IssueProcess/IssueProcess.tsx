@@ -17,47 +17,49 @@ import { IssueHeader } from '../ui/issue-header/IssueHeader';
 import styles from './IssueProcess.module.scss';
 
 interface IssueProcessProps {
-  device: IssueDevice;
-  user: IssueUser;
-  warehouse: IssueWarehouse;
+  deviceController: IssueDevice;
+  userController: IssueUser;
+  warehouseController: IssueWarehouse;
   actions: IssueActions;
   data: IssueData;
-  state: IssueState;
+  issueState: IssueState;
   status: IssueStatus;
 }
 
 export const IssueProcess = ({
-  user,
-  device,
-  warehouse,
-  state,
+  userController,
+  deviceController,
+  warehouseController,
+  issueState,
   actions,
   status,
 }: IssueProcessProps) => {
-  const currentStep = state.issueStep;
-  const isAvailableReset = state.issueStep !== 0 && state.issueStep !== 4;
+  const currentStep = issueState.issueStep;
+  const isAvailableReset = issueState.issueStep !== 0 && issueState.issueStep !== 4;
 
   const stepContent = [
     <SelectWarehouseStep
-      warehouse={warehouse}
+      warehouseController={warehouseController}
       actions={actions}
       currentStep={currentStep} // todo check
     />,
-    <SelectUserStep user={user} state={state} actions={actions} />,
+    <SelectUserStep userController={userController} issueState={issueState} actions={actions} />,
     <SelectDeviceStep
-      warehouse={warehouse}
-      user={user.data.selectedUser}
-      state={state}
-      device={device}
+      warehouseController={warehouseController}
+      user={userController.data.currentUser}
+      issueState={issueState}
+      deviceController={deviceController}
       actions={actions}
     />,
     <SignDocumentStep
-      onDelete={device.actions.handleDelete}
-      state={state}
+      actions={actions}
+      onDelete={deviceController.actions.handleDelete}
+      issueState={issueState}
+      user={userController.data.currentUser}
       isIssueLoading={status.isIssueLoading}
       handleComplete={actions.handleCompleteProcess}
     />,
-    <FinalizeIssueStep state={state} />,
+    <FinalizeIssueStep issueState={issueState} />,
   ];
 
   // todo скрыть кнопку отмены выдачи на послденем этапе
@@ -69,7 +71,7 @@ export const IssueProcess = ({
         onChange={actions.handleSetStep}
         onReset={actions.handleResetIssue}
       />
-      <div className={styles.stepsContent}>{stepContent[state.issueStep]}</div>
+      <div className={styles.stepsContent}>{stepContent[issueState.issueStep]}</div>
     </div>
   );
 };

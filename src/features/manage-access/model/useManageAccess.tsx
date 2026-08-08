@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react';
 
 import { skipToken } from '@reduxjs/toolkit/query';
 
-import { User } from '@/entities/ user/model/types';
 import { GrantUserRole } from '@/entities/role/model/types';
+import { User } from '@/entities/user/model/types';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { FormMode } from '@/shared/types/form';
 import { UserAutocompleteItem } from '@/shared/ui/user-autocomplete/UserAutocompleteItem';

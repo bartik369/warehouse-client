@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { InputProps } from 'antd';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 
 export interface UserAutocompleteOption {
   value: string;

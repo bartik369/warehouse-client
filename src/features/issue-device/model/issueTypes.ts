@@ -21,7 +21,7 @@ export interface IssueState {
   selectedDevices: Device[];
   issueStep: number;
   pdfBlob: Blob | null;
-  issueId: string | null;
+  issueNumber: string;
   errors: Record<string, string>;
   // userQuery: string;
   // deviceQuery: string;
@@ -29,7 +29,7 @@ export interface IssueState {
   isDevicesListVisible: boolean;
   devicesLoaded: boolean;
   wasSearched: boolean;
-  // warehouse: Warehouse;
+  warehouse: Warehouse;
   // warehouses: Warehouse[];
   deviceIssueData: DeviceIssueData;
 }

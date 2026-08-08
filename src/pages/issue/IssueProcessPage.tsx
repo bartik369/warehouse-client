@@ -1,7 +1,7 @@
 import { ManageIssue } from '@/features/issue-device/ui/ManageIssue';
 
-const Issue = () => {
+const IssueProcessPage = () => {
   return <ManageIssue />;
 };
 
-export default Issue;
+export default IssueProcessPage;

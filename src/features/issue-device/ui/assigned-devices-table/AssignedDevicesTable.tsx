@@ -10,14 +10,19 @@ import styles from './AssignedDevicesTable.module.scss';
 
 interface AssignedDevicesTableProps {
   devices: Device[];
-  onDelete: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTableProps) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const issueStep = useAppSelector((state) => state.issue.issueStep);
   const isReadonlyStep = issueStep === 3;
-  const columns = getAssignedDeviceColumns({ onDelete, hideActions: isReadonlyStep });
+  const columns = getAssignedDeviceColumns({
+    onDelete,
+    hideActions: isReadonlyStep,
+    pageSize,
+    currentPage: page,
+  });
 
   return (
     <Table<Device>

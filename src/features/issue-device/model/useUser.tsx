@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import { User } from '@/entities/ user/model/types';
-import { useAppDispatch } from '@/hooks/redux/useRedux';
+import { User } from '@/entities/user/model/types';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import {
   UserAutocompleteOption,
@@ -10,12 +10,15 @@ import {
 import { useGetDepartmentsQuery } from '@/store/api/departmentApi';
 import { useGetLocationsQuery } from '@/store/api/locationApi';
 import { useGetFilteredUsersQuery } from '@/store/api/userApi';
+import { resetUser, setUser } from '@/store/slices/userSlice';
+import { RootState } from '@/store/store';
 
 import { UserOption } from '../ui/user-option/UserOption';
 
 export const useUser = () => {
+  const currentUser = useAppSelector((state: RootState) => state.user.user);
   const [userQuery, setUserQuery] = useState('');
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
   const debounceSearchValue = useDebounce(userQuery.trim(), 700);
   const {
     data: filteredUsers = [],
@@ -23,7 +26,7 @@ export const useUser = () => {
     isSuccess,
     isFetching,
   } = useGetFilteredUsersQuery(debounceSearchValue, {
-    skip: debounceSearchValue.length < 2 || user?.email === debounceSearchValue,
+    skip: debounceSearchValue.length < 2 || currentUser?.email === debounceSearchValue,
   });
   const { data: departments = [] } = useGetDepartmentsQuery();
   const { data: locations = [] } = useGetLocationsQuery();
@@ -33,16 +36,17 @@ export const useUser = () => {
   const handleChange = (value: string) => {
     setUserQuery(value);
 
-    if (user && value !== user.email) {
-      setUser(null);
+    if (currentUser && value !== currentUser.email) {
+      dispatch(resetUser());
+      // setUser(null);
     }
   };
   const handleSelect = (_value: string, option: UserAutocompleteOption) => {
-    setUser(option.user);
+    dispatch(setUser(option.user));
     setUserQuery(option.user.email);
   };
   const handleReset = () => {
-    setUser(null);
+    dispatch(resetUser());
     setUserQuery('');
   };
 
@@ -69,7 +73,7 @@ export const useUser = () => {
   );
 
   return {
-    user,
+    currentUser,
     users: filteredUsers,
     userOptions,
     userQuery,

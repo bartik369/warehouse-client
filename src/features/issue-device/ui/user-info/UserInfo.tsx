@@ -1,7 +1,7 @@
 import { Flex, Typography } from 'antd';
 import { Divider } from 'antd';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 
 import { ASSIGNED_USER_DEVICES } from '../../model/constants';
 import { Details } from './user-card/details/Details';

@@ -1,7 +1,7 @@
 import { Flex, Typography } from 'antd';
 import { FiUser } from 'react-icons/fi';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import styles from './UserInfo.module.scss';

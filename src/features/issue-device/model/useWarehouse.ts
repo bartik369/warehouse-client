@@ -1,30 +1,36 @@
 import { useMemo, useState } from 'react';
 
 import { Warehouse } from '@/entities/warehouse/model/types';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useGetLocationsQuery } from '@/store/api/locationApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
+import { resetWarehouse, setWarehouse } from '@/store/slices/issueSlice';
+import { RootState } from '@/store/store';
 
 export const useWarehouse = () => {
-  const [warehouse, setWarehouse] = useState<Warehouse | null>(null);
+  const currentWarehouse = useAppSelector((state: RootState) => state.issue.warehouse);
+  const dispatch = useAppDispatch();
+
   const { data: warehouses = [], isLoading: isLoadingWarehouses } = useGetWarehousesQuery();
   const { data: locations = [], isLoading: isLoadingLocations } = useGetLocationsQuery();
 
   const handleSelect = (warehouse: Warehouse) => {
     if (!warehouse) return;
-    setWarehouse(warehouse);
+    dispatch(setWarehouse(warehouse));
   };
+
   const locationName = useMemo(() => {
-    if (!warehouse?.id || locations.length === 0) return;
-    return locations.find((item) => item.id === warehouse.locationId)?.name;
-  }, [locations, warehouse?.locationId]);
+    if (!currentWarehouse?.id || locations.length === 0) return;
+    return locations.find((item) => item.id === currentWarehouse.locationId)?.name;
+  }, [locations, currentWarehouse?.locationId]);
 
   const handleReset = () => {
-    setWarehouse(null);
+    dispatch(resetWarehouse());
   };
 
   return {
     locationName,
-    warehouse,
+    currentWarehouse,
     warehouses,
     locations,
     isLoadingWarehouses,

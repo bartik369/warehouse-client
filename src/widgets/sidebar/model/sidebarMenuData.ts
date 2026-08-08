@@ -14,7 +14,7 @@ export const sidebarMenuData = [
       { id: 2, title: 'Екатеринбург', path: 'ekb' },
     ],
   },
-  { id: 2, title: 'Выдать', path: '/issue/create-issue', icon: LuSquareChevronUp },
+  { id: 2, title: 'Список выдач', path: '/issues', icon: LuSquareChevronUp },
   { id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail },
   { id: 4, title: 'Пользователи', path: '/admin/users', icon: LuUsers },
   { id: 5, title: 'Инвентаризации', path: '/inventory/inventory-create', icon: MdOutlineInventory },

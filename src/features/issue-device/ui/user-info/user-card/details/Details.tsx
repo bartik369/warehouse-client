@@ -1,4 +1,4 @@
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 import { formatDate } from '@/shared/lib/date/formatDate';
 import { LABELS } from '@/utils/constants/ui/labels';
 

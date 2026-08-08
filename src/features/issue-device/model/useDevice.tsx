@@ -7,7 +7,11 @@ import { DeviceAutocompleteItem } from '@/shared/ui/device-autocomplete/DeviceAu
 import { DeviceAutocompleteOption } from '@/shared/ui/device-autocomplete/types';
 import { useSearchDevicesQuery } from '@/store/api/devicesApi';
 
-import { clearAssignedDevices, deleteAssignedDevice, setAssignedDevice } from './issueSlice';
+import {
+  clearAssignedDevices,
+  deleteAssignedDevice,
+  setAssignedDevice,
+} from '../../../store/slices/issueSlice';
 
 export const useDevice = () => {
   const dispatch = useAppDispatch();

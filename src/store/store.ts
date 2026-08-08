@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import issueReducer from '../features/issue-device/model/issueSlice';
 import { modalReducer } from '../reducers/modal/modalReducer';
 import { authApi } from './api/authApi';
 import { contractorApi } from './api/contractorApi';
@@ -17,6 +16,7 @@ import { userApi } from './api/userApi';
 import { warehousesApi } from './api/warehousesApi';
 import authReducer from './slices/authSlice';
 import deviceReducer from './slices/deviceSlice';
+import issueReducer from './slices/issueSlice';
 import signatureReducer from './slices/signatureSlice';
 import userReducer from './slices/userSlice';
 

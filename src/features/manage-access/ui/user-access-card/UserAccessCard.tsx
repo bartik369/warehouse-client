@@ -1,8 +1,8 @@
 import { Card, Flex } from 'antd';
 import { Divider } from 'antd';
 
-import { User } from '@/entities/ user/model/types';
 import { UserRolesResponse } from '@/entities/role/model/types';
+import { User } from '@/entities/user/model/types';
 
 import { RoleList } from './role/RoleList';
 import { UserInfo } from './user/UserInfo';

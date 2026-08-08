@@ -13,22 +13,22 @@ import { SIZES } from '@/utils/constants/ui/sizes';
 import styles from '../../Steps.module.scss';
 
 interface FinalizeIssueStepProps {
-  state: IssueState;
+  issueState: IssueState;
 }
 
-export const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
+export const FinalizeIssueStep = ({ issueState }: FinalizeIssueStepProps) => {
   const recipient = useAppSelector(partnerUser);
 
   const handleDownload = async () => {
     try {
-      if (!state.pdfBlob) return;
+      if (!issueState.pdfBlob) return;
 
-      const url = URL.createObjectURL(state.pdfBlob);
+      const url = URL.createObjectURL(issueState.pdfBlob);
       window.open(url);
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${state.deviceIssueData?.processId}.pdf`;
+      a.download = `${issueState.deviceIssueData?.processId}.pdf`;
       a.click();
 
       URL.revokeObjectURL(url);
@@ -45,7 +45,7 @@ export const FinalizeIssueStep = ({ state }: FinalizeIssueStepProps) => {
       <div className={styles.info}>
         <header className={styles.header}>
           {MESSAGES.document}
-          <span>{state.deviceIssueData.processId}</span>
+          <span>{issueState.deviceIssueData.processId}</span>
           {MESSAGES.formed}
         </header>
         <div className={styles.text}>
