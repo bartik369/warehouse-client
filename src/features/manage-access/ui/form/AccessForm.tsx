@@ -6,10 +6,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { LuKeyRound } from 'react-icons/lu';
 
-import { User } from '@/entities/ user/model/types';
 import { createRoleScopeKey } from '@/entities/permission-role/lib/create-role-scope-key';
 import { PermissionRole } from '@/entities/permission-role/model/types';
 import { GrantUserRole, UserRoleAssignment } from '@/entities/role/model/types';
+import { User } from '@/entities/user/model/types';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfRoleAssignmentSelect } from '@/shared/ui/form-fields/RhfRoleAssignmentSelect';
 import { RhfUserAutocomplete } from '@/shared/ui/form-fields/RhfUserAutocomplete';

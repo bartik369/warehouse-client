@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
+import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
 import { useLazyGetDeviceQuery, useLazySearchDevicesQuery } from '@/store/api/devicesApi';
 import {
   useCreateIssueMutation,
@@ -28,9 +29,10 @@ import {
   setDevicesLoaded,
   setIssueBackStep,
   setIssueNextStep,
+  setIssueNumber,
   setIssueStep,
   setWasSearched,
-} from './issueSlice';
+} from '../../../store/slices/issueSlice';
 import { useDevice } from './useDevice';
 import { useUser } from './useUser';
 import { useWarehouse } from './useWarehouse';
@@ -42,12 +44,12 @@ export const useIssue = () => {
 
   const dispatch = useAppDispatch();
 
-  const state = useAppSelector((rootState) => rootState.issue);
+  const issueState = useAppSelector((rootState) => rootState.issue);
 
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
   const [issueFile, setIssueFile] = useState<Blob>();
-  const { processId, devices } = state.deviceIssueData;
+  const { processId, devices } = issueState.deviceIssueData;
   const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
 
   const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
@@ -185,6 +187,13 @@ export const useIssue = () => {
     dispatch(setIssueNextStep());
   }, [dispatch]);
 
+  const handleProceedToSigning = useCallback(() => {
+    if (!issueState.issueNumber) {
+      dispatch(setIssueNumber(generateDocumentNumber('AV')));
+    }
+    handleNextStep();
+  }, [dispatch]);
+
   const handleResetIssue = useCallback(() => {
     dispatch(resetIssueData());
     dispatch(setIssueStep(0));
@@ -205,11 +214,11 @@ export const useIssue = () => {
     }
 
     try {
-      await createIssue(state.deviceIssueData).unwrap();
+      await createIssue(issueState.deviceIssueData).unwrap();
     } catch (error: unknown) {
       handleApiError(error);
     }
-  }, [createIssue, devices.length, processId, state.deviceIssueData]);
+  }, [createIssue, devices.length, processId, issueState.deviceIssueData]);
 
   // useEffect(() => {
   //   switch (state.issueStep) {
@@ -228,7 +237,7 @@ export const useIssue = () => {
 
   const user = {
     data: {
-      selectedUser: userController.user,
+      currentUser: userController.currentUser,
       users: userController.users,
       query: userController.userQuery,
       options: userController.userOptions,
@@ -248,7 +257,7 @@ export const useIssue = () => {
 
   const warehouse = {
     data: {
-      warehouse: warehouseController.warehouse,
+      currentWarehouse: warehouseController.currentWarehouse,
       warehouses: warehouseController.warehouses,
       locations: warehouseController.locations,
       selectedLocation: warehouseController.locationName,
@@ -264,10 +273,10 @@ export const useIssue = () => {
   };
 
   const handleCreateIssueProcess = useCallback(async () => {
-    const documentNumber = state.deviceIssueData.processId;
+    const documentNumber = issueState.deviceIssueData.processId;
     const partnerId = recipient?.id;
     const currentUserId = creator?.id;
-    const warehouseId = warehouse.data.warehouse?.id;
+    const warehouseId = warehouseController.currentWarehouse.id;
 
     if (!documentNumber || !partnerId || !currentUserId || !warehouseId) {
       return;
@@ -279,7 +288,7 @@ export const useIssue = () => {
         userId: partnerId,
         warehouseId,
         issuedById: currentUserId,
-        status: state.issueStep,
+        status: issueState.issueStep,
       }).unwrap();
     } catch (error: unknown) {
       handleApiError(error);
@@ -288,9 +297,9 @@ export const useIssue = () => {
     createIssueProcess,
     creator?.id,
     recipient?.id,
-    state.deviceIssueData.processId,
-    state.issueStep,
-    warehouse.data.warehouse?.id,
+    issueState.deviceIssueData.processId,
+    issueState.issueStep,
+    warehouseController.currentWarehouse.id,
   ]);
 
   const device = {
@@ -317,6 +326,7 @@ export const useIssue = () => {
   const actions = {
     handleNextStep,
     handleBackStep,
+    handleProceedToSigning,
     handleCompleteProcess,
     handleFullReset,
     // handleGetDevice,
@@ -329,21 +339,13 @@ export const useIssue = () => {
   };
 
   const data = {
-    // warehouses: warehouse.warehouses,
-    // locations: warehouse.locations,
-    // locations,
-    // warehouses,
-    // filteredUsers,
-    // searchedDevices,
-    // recipient,
-    // creator,
+    issueState,
     // issueFile,
   };
 
   const status = {
     isUserFetching,
     isDeviceFetching,
-    // isDevicesSearching,
     isWarehousesByUserFetching,
     isIssueLoading,
     isIssueSuccess,
@@ -358,13 +360,13 @@ export const useIssue = () => {
   };
 
   return {
-    user,
-    device,
-    warehouse,
+    userController: user,
+    deviceController: device,
+    warehouseController: warehouse,
     actions,
     data,
     status,
-    state,
+    issueState,
   };
 };
 
@@ -372,8 +374,8 @@ export type UseIssueResult = ReturnType<typeof useIssue>;
 export type IssueActions = UseIssueResult['actions'];
 export type IssueData = UseIssueResult['data'];
 export type IssueStatus = UseIssueResult['status'];
-export type IssueState = UseIssueResult['state'];
+export type IssueState = UseIssueResult['issueState'];
 
-export type IssueUser = UseIssueResult['user'];
-export type IssueDevice = UseIssueResult['device'];
-export type IssueWarehouse = UseIssueResult['warehouse'];
+export type IssueUser = UseIssueResult['userController'];
+export type IssueDevice = UseIssueResult['deviceController'];
+export type IssueWarehouse = UseIssueResult['warehouseController'];

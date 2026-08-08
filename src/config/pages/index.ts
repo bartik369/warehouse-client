@@ -14,8 +14,6 @@ import EditDeviceConfig from './EditDevice';
 import HomeConfig from './Home';
 import InventoryConfig from './Inventory';
 import InventoryListConfig from './InventoryList';
-import IssueConfig from './Issue';
-import IssueListConfig from './IssueList';
 import KnowledgeConfig from './Knowledge';
 import AddLocationConfig from './Locations';
 import LocationsConfig from './Locations';
@@ -31,6 +29,8 @@ import StatisticsConfig from './Statistics';
 import UserDetailsConfig from './UserDetails';
 import UsersListConfig from './UsersList';
 import AddWarehouseConfig from './Warehouses';
+import IssueConfig from './issue/IssueCreate';
+import IssueListConfig from './issue/IssueList';
 
 export const pageConfigs: AppRouteConfig[] = [
   AddContractorConfig,

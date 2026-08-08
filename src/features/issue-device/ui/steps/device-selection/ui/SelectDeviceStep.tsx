@@ -1,6 +1,6 @@
 import { Flex, Typography } from 'antd';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { IssueActions, IssueDevice, IssueWarehouse } from '@/features/issue-device/model/useIssue';
 import { DeviceAutocomplete } from '@/shared/ui/device-autocomplete/DeviceAutocomplete';
@@ -13,19 +13,19 @@ import { IssueSummary } from './issue-summary/ IssueSummary';
 
 interface ReviewDocumentStepProps {
   user: User | null;
-  state: IssueState;
-  device: IssueDevice;
-  warehouse: IssueWarehouse;
+  issueState: IssueState;
+  deviceController: IssueDevice;
+  warehouseController: IssueWarehouse;
   actions: IssueActions;
 }
 export const SelectDeviceStep = ({
-  state,
+  issueState,
   actions,
-  device,
+  deviceController,
   user,
-  warehouse,
+  warehouseController,
 }: ReviewDocumentStepProps) => {
-  const isNextDisabled = state.assignedDevices.length === 0;
+  const isNextDisabled = issueState.assignedDevices.length === 0;
 
   const left = (
     <>
@@ -33,26 +33,32 @@ export const SelectDeviceStep = ({
         {SECTION_TITLES.availableDevices}
       </Typography.Title>
       <DeviceAutocomplete
-        searched={device.status.wasSearched}
-        loading={device.status.isLoading}
-        value={device.data.value}
-        options={device.data.options}
-        onChange={device.actions.handleChange}
-        onOptionSelect={device.actions.handleSelect}
-        onClear={device.actions.handleReset}
+        searched={deviceController.status.wasSearched}
+        loading={deviceController.status.isLoading}
+        value={deviceController.data.value}
+        options={deviceController.data.options}
+        onChange={deviceController.actions.handleChange}
+        onOptionSelect={deviceController.actions.handleSelect}
+        onClear={deviceController.actions.handleReset}
       />
     </>
   );
-  const center = <IssueSummary user={user} warehouse={warehouse.data.warehouse} />;
+  const center = (
+    <IssueSummary
+      user={user}
+      warehouse={warehouseController.data.currentWarehouse}
+      location={warehouseController.data.selectedLocation}
+    />
+  );
   const right = (
     <>
       <Typography.Title
         className={styles.title}
-      >{`${SECTION_TITLES.selectedDevices} (${state.assignedDevices.length})`}</Typography.Title>
+      >{`${SECTION_TITLES.selectedDevices} (${issueState.assignedDevices.length})`}</Typography.Title>
       <DeviceList
-        devices={state.assignedDevices}
-        onDelete={device.actions.handleDelete}
-        onResetList={device.actions.handleResetList}
+        devices={issueState.assignedDevices}
+        onDelete={deviceController.actions.handleDelete}
+        onResetList={deviceController.actions.handleResetList}
       />
     </>
   );
@@ -62,10 +68,10 @@ export const SelectDeviceStep = ({
       left={left}
       center={center}
       right={right}
-      currentStep={state.issueStep}
+      currentStep={issueState.issueStep}
       disabledStep={isNextDisabled}
       leftWidth={550}
-      onNext={actions.handleNextStep}
+      onNext={actions.handleProceedToSigning}
       onBack={actions.handleBackStep}
     />
   );

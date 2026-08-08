@@ -14,32 +14,34 @@ import { Information } from './warehouse-card/Information';
 
 interface SelectWarehouseStepProps {
   actions: IssueActions;
-  warehouse: IssueWarehouse;
+  warehouseController: IssueWarehouse;
   currentStep: number;
 }
 
 export const SelectWarehouseStep = ({
   actions,
-  warehouse,
+  warehouseController,
   currentStep,
 }: SelectWarehouseStepProps) => {
-  const currentUserId = useAppSelector((state: RootState) => state.auth.user?.id);
-  const isNextDisabled = !warehouse.data.warehouse;
+  const isNextDisabled = !warehouseController.data.currentWarehouse;
 
   const left = (
     <WarehouseSelect
-      loading={warehouse.status.isLoadingWarehouses}
+      loading={warehouseController.status.isLoadingWarehouses}
       prefix={<LiaWarehouseSolid />}
-      value={warehouse.data.warehouse}
-      warehouses={warehouse.data.warehouses}
-      locations={warehouse.data.locations}
-      onChange={warehouse.actions.handleSelect} // todo чекнуть название
-      onReset={warehouse.actions.handleReset}
+      value={warehouseController.data.currentWarehouse}
+      warehouses={warehouseController.data.warehouses}
+      locations={warehouseController.data.locations}
+      onChange={warehouseController.actions.handleSelect} // todo чекнуть название
+      onReset={warehouseController.actions.handleReset}
       label="Выбрать склад"
     />
   );
   const right = (
-    <Information warehouse={warehouse.data.warehouse} location={warehouse.data.selectedLocation} />
+    <Information
+      warehouse={warehouseController.data.currentWarehouse}
+      location={warehouseController.data.selectedLocation}
+    />
   );
 
   return (

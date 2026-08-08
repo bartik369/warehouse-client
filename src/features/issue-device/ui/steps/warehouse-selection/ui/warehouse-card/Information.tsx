@@ -17,9 +17,10 @@ interface InformationProps {
 }
 // todo изменить замоканную логику информации по отвественному и инвентаризации
 export const Information = ({ warehouse, location }: InformationProps) => {
+  console.log(warehouse);
   return (
     <>
-      {warehouse ? (
+      {warehouse?.name ? (
         <Flex vertical>
           <div className={styles.pick}>
             <div className={styles.tag}>

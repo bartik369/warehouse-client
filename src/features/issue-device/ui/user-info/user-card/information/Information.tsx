@@ -1,7 +1,7 @@
 import { Flex, Tag } from 'antd';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { LABELS } from '@/utils/constants/ui/labels';
 

@@ -1,7 +1,7 @@
-import { Flex, Tag } from 'antd';
+import { Flex } from 'antd';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { LABELS } from '@/utils/constants/ui/labels';
@@ -11,9 +11,13 @@ import styles from './ IssueSummary.module.scss';
 interface IssueSummaryProps {
   user: User | null;
   warehouse: Warehouse | null;
+  location?: string;
 }
-export const IssueSummary = ({ user, warehouse }: IssueSummaryProps) => {
-  const userInitials = `${user?.lastNameRu[0]}${user?.firstNameRu[0]}`;
+export const IssueSummary = ({ user, warehouse, location }: IssueSummaryProps) => {
+  if (!user || !location || !warehouse) {
+    return <div className={styles.empty}>Не все данные выбраны</div>;
+  }
+  const userInitials = `${user.lastNameRu[0]}${user.firstNameRu[0]}`;
 
   return (
     <Flex gap={50}>
@@ -23,31 +27,31 @@ export const IssueSummary = ({ user, warehouse }: IssueSummaryProps) => {
           <div className={styles.userContent}>
             <div className={styles.fullName}>
               <div className={styles.content}>
-                <span>{user?.lastNameRu}</span>
-                <span>{user?.firstNameRu}</span>
+                <span>{user.lastNameRu}</span>
+                <span>{user.firstNameRu}</span>
               </div>
               <CustomTag
                 icon={IoCheckmarkCircleOutline}
-                title={user?.isActive ? 'Активен' : 'Неактивен'}
-                variant={user?.isActive ? 'success' : 'error'}
+                title={user.isActive ? 'Активен' : 'Неактивен'}
+                variant={user.isActive ? 'success' : 'error'}
                 iconSize={15}
               />
             </div>
-            <span className={styles.email}>{user?.email}</span>
+            <span className={styles.email}>{user.email}</span>
           </div>
         </div>
         <div className={styles.employeeInfo}>
           <span className={styles.label}>{LABELS.workID}</span>
-          <span className={styles.value}>{user?.workId}</span>
+          <span className={styles.value}>{user.workId}</span>
         </div>
       </div>
       <Flex vertical>
         <span className={styles.label}>{LABELS.warehouse}</span>
-        <span className={styles.value}>{warehouse?.name}</span>
+        <span className={styles.value}>{warehouse.name}</span>
       </Flex>
       <Flex vertical>
         <span className={styles.label}>{LABELS.location}</span>
-        <span className={styles.value}>{warehouse?.name}</span>
+        <span className={styles.value}>{location}</span>
       </Flex>
     </Flex>
   );

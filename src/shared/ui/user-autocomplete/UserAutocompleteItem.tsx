@@ -1,6 +1,6 @@
 import { Flex, Typography } from 'antd';
 
-import { User } from '@/entities/ user/model/types';
+import { User } from '@/entities/user/model/types';
 
 interface UserAutocompleteItemProps {
   user: User;

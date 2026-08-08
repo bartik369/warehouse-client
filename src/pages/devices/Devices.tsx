@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
 
 import OfficeFileBtn from '@/features/export-table-data/ui/OfficeFileBtn';
-import {
-  setAssignedDevice,
-  setIssueStep,
-  setSelectedDevice,
-} from '@/features/issue-device/model/issueSlice';
 import { useDeviceTableController } from '@/hooks/data/useDeviceTableController';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
 import Loader from '@/shared/ui/loader/Loader';
 import { resetDevice, resetStatus } from '@/store/slices/deviceSlice';
+import { setAssignedDevice, setIssueStep, setSelectedDevice } from '@/store/slices/issueSlice';
 import { FilteredDevicesFromBack } from '@/types/devices';
 import { DevicesTable } from '@/widgets/devices-table/ui/DevicesTable';
 

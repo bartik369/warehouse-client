@@ -4,14 +4,14 @@ import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { AssignedDevice } from '@/types/issue';
 
-import { IssueState } from './issueTypes';
+import { IssueState } from '../../features/issue-device/model/issueTypes';
 
 const initialState: IssueState = {
   assignedDevices: [],
   selectedDevices: [],
   issueStep: 0,
   pdfBlob: null,
-  issueId: null,
+  issueNumber: '',
   errors: {},
   // userQuery: '',
   // deviceQuery: '',
@@ -19,12 +19,12 @@ const initialState: IssueState = {
   isDevicesListVisible: false,
   devicesLoaded: false,
   wasSearched: false,
-  // warehouse: {
-  //   id: '',
-  //   name: '',
-  //   slug: '',
-  //   locationId: '',
-  // },
+  warehouse: {
+    id: '',
+    name: '',
+    slug: '',
+    locationId: '',
+  },
   // warehouses: [],
   deviceIssueData: {
     processId: '',
@@ -80,15 +80,15 @@ const issueSlice = createSlice({
     // setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
     //   state.warehouse = action.payload;
     // },
-    // resetWarehouseIssue: (state) => {
-    //   state.warehouse = { ...initialState.warehouse };
-    // },
+    resetWarehouse: (state) => {
+      state.warehouse = { ...initialState.warehouse };
+    },
     // setWarehouses: (state, action: PayloadAction<Warehouse[]>) => {
     //   state.warehouses = action.payload;
     // },
-    // setWarehouse: (state, action: PayloadAction<Warehouse>) => {
-    //   state.warehouse = action.payload;
-    // },
+    setWarehouse: (state, action: PayloadAction<Warehouse>) => {
+      state.warehouse = action.payload;
+    },
     setIssueStep: (state, action: PayloadAction<number>) => {
       state.issueStep = action.payload;
     },
@@ -121,8 +121,8 @@ const issueSlice = createSlice({
     // setDeviceQuey: (state, action: PayloadAction<string>) => {
     //   state.deviceQuery = action.payload;
     // },
-    setProcessId: (state, action: PayloadAction<string>) => {
-      state.deviceIssueData.processId = action.payload;
+    setIssueNumber: (state, action: PayloadAction<string>) => {
+      state.issueNumber = action.payload;
     },
     setPdfFile: (state, action: PayloadAction<Blob>) => {
       state.pdfBlob = action.payload;
@@ -151,12 +151,14 @@ export const {
   setDevicesListVisible,
   setUserListVisible,
   setDevicesLoaded,
+  setIssueNumber,
   // setUserQuery,
   // resetUserQuery,
   // setDeviceQuey,
-  setProcessId,
+  // setProscessId,
   // setWarehouses,
-  // setWarehouse,
+  setWarehouse,
+  resetWarehouse,
   setPdfFile,
   setDeviceId,
   resetIssueData,

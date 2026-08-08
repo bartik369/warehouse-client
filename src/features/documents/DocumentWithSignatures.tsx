@@ -93,14 +93,14 @@ export const DocumentWithSignatures = ({
             </time>
           </header>
           <div className={styles.info}>
-            <IssueActContent state={state} onDelete={onDelete} />
+            {/* <IssueActContent state={state} onDelete={onDelete} /> */}
           </div>
-          <Signatures
+          {/* <Signatures
             issuerSignature={issuerSignature}
             receiverSignature={receiverSignature}
             issueUser={issueUser}
             receiverUser={receiverUser}
-          />
+          /> */}
         </div>
       </div>
       <div className={styles.actions}>

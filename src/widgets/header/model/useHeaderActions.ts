@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import { clearSelectedDevices, setAssignedDevice } from '@/features/issue-device/model/issueSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { clearSelectedDevices, setAssignedDevice } from '@/store/slices/issueSlice';
 import { RootState } from '@/store/store';
 
 type HeaderActionKey = 'issue' | 'move' | 'accept' | 'info';

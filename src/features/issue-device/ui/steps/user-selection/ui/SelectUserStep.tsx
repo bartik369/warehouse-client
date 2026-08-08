@@ -1,37 +1,39 @@
-import { Empty } from 'antd';
-
 import { IssueState } from '@/features/issue-device/model/issueTypes';
-import { IssueActions, IssueStatus, IssueUser } from '@/features/issue-device/model/useIssue';
+import { IssueActions, IssueUser } from '@/features/issue-device/model/useIssue';
 import { UserAutocomplete } from '@/shared/ui/user-autocomplete/UserAutocomplete';
 
 import { UserInfo } from '../../../user-info/UserInfo';
 import { StepLayout } from '../../layout/StepLayout';
 
 interface SelectUserStepProps {
-  user: IssueUser;
-  state: IssueState;
+  userController: IssueUser;
+  issueState: IssueState;
   actions: IssueActions;
 }
-export const SelectUserStep = ({ state, actions, user }: SelectUserStepProps) => {
-  const isNextDisabled = !user.data.selectedUser; // todo  чекнуть
+export const SelectUserStep = ({ issueState, actions, userController }: SelectUserStepProps) => {
+  const isNextDisabled = !userController.data.currentUser?.id;
+
+  console.log(userController.data.currentUser);
 
   const left = (
     <UserAutocomplete
-      loading={user.status.isUsersLoading}
-      onSearch={user.actions.handleChange}
-      onOptionSelect={user.actions.handleSelect}
-      searched={user.data.wasSearched}
-      value={user.data.query}
-      options={user.data.options}
+      loading={userController.status.isUsersLoading}
+      onSearch={userController.actions.handleChange}
+      onOptionSelect={userController.actions.handleSelect}
+      searched={userController.data.wasSearched}
+      value={userController.data.query}
+      options={userController.data.options}
     />
   );
-  const right = user.data.selectedUser ? <UserInfo user={user.data.selectedUser} /> : null;
+  const right = userController.data.currentUser?.id ? (
+    <UserInfo user={userController.data.currentUser} />
+  ) : null;
 
   return (
     <StepLayout
       left={left}
       right={right}
-      currentStep={state.issueStep}
+      currentStep={issueState.issueStep}
       disabledStep={isNextDisabled}
       leftWidth={550}
       onNext={actions.handleNextStep}
