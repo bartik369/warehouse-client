@@ -29,7 +29,7 @@ import StatisticsConfig from './Statistics';
 import UserDetailsConfig from './UserDetails';
 import UsersListConfig from './UsersList';
 import AddWarehouseConfig from './Warehouses';
-import IssueConfig from './issue/Issue';
+import IssueConfig from './issue/IssueCreate';
 import IssueListConfig from './issue/IssueList';
 
 export const pageConfigs: AppRouteConfig[] = [
