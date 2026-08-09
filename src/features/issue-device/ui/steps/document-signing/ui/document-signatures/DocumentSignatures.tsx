@@ -2,7 +2,7 @@ import { Flex, Typography } from 'antd';
 
 import { User } from '@/entities/user/model/types';
 import { useAppSelector } from '@/hooks/redux/useRedux';
-import { SignatureCanvas } from '@/shared/ui/signature-canvas/SignatureCanvas';
+import { SignatureCanvas } from '@/shared/ui/signature-canvas/ui/SignatureCanvas';
 import { currentUser } from '@/store/slices/authSlice';
 import { selectIssuerSignature, selectReceiverSignature } from '@/store/slices/signatureSlice';
 

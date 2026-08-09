@@ -112,15 +112,6 @@ const issueSlice = createSlice({
     setDevicesLoaded: (state, action: PayloadAction<boolean>) => {
       state.devicesLoaded = action.payload;
     },
-    // setUserQuery: (state, action: PayloadAction<string>) => {
-    //   state.userQuery = action.payload;
-    // },
-    // resetUserQuery: (state) => {
-    //   state.userQuery = '';
-    // },
-    // setDeviceQuey: (state, action: PayloadAction<string>) => {
-    //   state.deviceQuery = action.payload;
-    // },
     setIssueNumber: (state, action: PayloadAction<string>) => {
       state.issueNumber = action.payload;
     },
@@ -132,6 +123,9 @@ const issueSlice = createSlice({
       state.assignedDevices = initialState.assignedDevices;
     },
     resetIssueState: () => initialState,
+    setProcessId: (state, action: PayloadAction<string>) => {
+      state.deviceIssueData.processId = action.payload;
+    },
   },
 });
 
@@ -155,7 +149,7 @@ export const {
   // setUserQuery,
   // resetUserQuery,
   // setDeviceQuey,
-  // setProscessId,
+  setProcessId,
   // setWarehouses,
   setWarehouse,
   resetWarehouse,

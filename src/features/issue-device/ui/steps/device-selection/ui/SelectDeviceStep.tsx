@@ -69,6 +69,7 @@ export const SelectDeviceStep = ({
       center={center}
       right={right}
       currentStep={issueState.issueStep}
+      hideBack={true}
       disabledStep={isNextDisabled}
       leftWidth={550}
       onNext={actions.handleProceedToSigning}

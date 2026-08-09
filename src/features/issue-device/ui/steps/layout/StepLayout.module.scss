@@ -26,6 +26,7 @@
   .nextBtn {
     background-color: var(--blue-600);
     color: var(--white);
+    margin-left: auto;
     &:hover {
       background-color: var(--blue-500);
     }

@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
+import { Button } from 'antd';
 import { IoSaveOutline } from 'react-icons/io5';
 import { RiResetLeftFill } from 'react-icons/ri';
 import { RiDeleteBack2Line } from 'react-icons/ri';
@@ -10,26 +11,34 @@ import { SignatureActions } from '@/types/signature';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { COLORS } from '@/utils/constants/ui/colors';
 
-import BtnAction from '../ui/buttons/BtnAction';
+import BtnAction from '../../../../components/ui/buttons/BtnAction';
 import styles from './Signature.module.scss';
 
 interface SignatureProps {
   actions: SignatureActions;
-  role?: string;
+  role: string;
+  onClose: () => void;
 }
 
-const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
+const Signature: React.FC<SignatureProps> = ({ actions, role, onClose }) => {
   const canvasRef = useRef<SignatureCanvas>(null);
-  const { closeModal } = useGlobalModal();
+  const [isEmpty, setIsEmpty] = useState(true);
 
   const handleSave = () => {
+    if (canvasRef.current?.isEmpty()) return;
+
     const img = canvasRef.current?.getCanvas().toDataURL('image/png');
+
     if (img && role) {
       actions.handleSetSignature(img, role);
     }
+    onClose();
   };
+
   const handleClear = () => {
     canvasRef.current?.clear();
+    actions.handleResetSignature(role);
+    setIsEmpty(true);
   };
 
   return (
@@ -55,6 +64,7 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
             height: 300,
             className: styles.wrapper,
           }}
+          onBegin={() => setIsEmpty(false)}
         />
       </div>
       <div className={styles.actions}>
@@ -63,7 +73,7 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
           color={COLORS.grey}
           title={BUTTON_LABELS.cancel}
           icon={<RiDeleteBack2Line />}
-          click={closeModal}
+          click={onClose}
         />
         <BtnAction
           size="sm"
@@ -72,13 +82,9 @@ const Signature: React.FC<SignatureProps> = ({ actions, role }) => {
           icon={<RiResetLeftFill />}
           click={handleClear}
         />
-        <BtnAction
-          size="sm"
-          color={COLORS.orange}
-          title={BUTTON_LABELS.save}
-          icon={<IoSaveOutline />}
-          click={handleSave}
-        />
+        <Button disabled={isEmpty} icon={<IoSaveOutline />} onClick={handleSave}>
+          {BUTTON_LABELS.save}
+        </Button>
       </div>
     </div>
   );
