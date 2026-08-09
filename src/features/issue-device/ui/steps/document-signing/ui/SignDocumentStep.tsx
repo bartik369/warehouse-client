@@ -44,11 +44,3 @@ export const SignDocumentStep = ({
     />
   );
 };
-{
-  /* <DocumentWithSignatures
-  state={state}
-  isIssueLoading={isIssueLoading}
-  onDelete={onDelete}
-  handleComplete={handleComplete}
-/>; */
-}

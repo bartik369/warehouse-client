@@ -23,7 +23,7 @@ export const SelectWarehouseStep = ({
   warehouseController,
   currentStep,
 }: SelectWarehouseStepProps) => {
-  const isNextDisabled = !warehouseController.data.currentWarehouse;
+  const isNextDisabled = !warehouseController.data.currentWarehouse?.id;
 
   const left = (
     <WarehouseSelect

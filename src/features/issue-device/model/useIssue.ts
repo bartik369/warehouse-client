@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
@@ -31,6 +33,7 @@ import {
   setIssueNextStep,
   setIssueNumber,
   setIssueStep,
+  setProcessId,
   setWasSearched,
 } from '../../../store/slices/issueSlice';
 import { useDevice } from './useDevice';
@@ -43,6 +46,7 @@ export const useIssue = () => {
   const deviceController = useDevice();
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const issueState = useAppSelector((rootState) => rootState.issue);
 
@@ -51,9 +55,7 @@ export const useIssue = () => {
   const [issueFile, setIssueFile] = useState<Blob>();
   const { processId, devices } = issueState.deviceIssueData;
   const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
-
   const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
-
   const [getDevice, { isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
 
   const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
@@ -180,12 +182,12 @@ export const useIssue = () => {
   }, [dispatch]);
 
   const handleBackStep = useCallback(() => {
+    const processId = issueState.deviceIssueData.processId;
+    if (processId && issueState.issueStep <= 2) {
+      return;
+    }
     dispatch(setIssueBackStep());
-  }, [dispatch]);
-
-  const handleNextStep = useCallback(() => {
-    dispatch(setIssueNextStep());
-  }, [dispatch]);
+  }, [dispatch, processId, issueState.issueStep]);
 
   const handleProceedToSigning = useCallback(() => {
     if (!issueState.issueNumber) {
@@ -273,33 +275,57 @@ export const useIssue = () => {
   };
 
   const handleCreateIssueProcess = useCallback(async () => {
-    const documentNumber = issueState.deviceIssueData.processId;
+    const documentNo = issueState.issueNumber || generateDocumentNumber('AV');
     const partnerId = recipient?.id;
     const currentUserId = creator?.id;
     const warehouseId = warehouseController.currentWarehouse.id;
 
-    if (!documentNumber || !partnerId || !currentUserId || !warehouseId) {
-      return;
+    if (!documentNo || !partnerId || !currentUserId || !warehouseId) {
+      return null;
     }
 
     try {
-      await createIssueProcess({
-        documentNo: documentNumber,
+      const process = await createIssueProcess({
+        documentNo,
         userId: partnerId,
         warehouseId,
         issuedById: currentUserId,
-        status: issueState.issueStep,
+        status: 'draft',
       }).unwrap();
+      dispatch(setProcessId(process.id));
+      dispatch(setIssueNumber(process.documentNo));
+      navigate(`/issues/${process.id}/edit`, {
+        replace: true,
+      });
+
+      return process;
     } catch (error: unknown) {
       handleApiError(error);
+      return null;
     }
   }, [
     createIssueProcess,
     creator?.id,
     recipient?.id,
-    issueState.deviceIssueData.processId,
-    issueState.issueStep,
+    issueState.issueNumber,
     warehouseController.currentWarehouse.id,
+    dispatch,
+    navigate,
+  ]);
+
+  const handleNextStep = useCallback(async () => {
+    if (issueState.issueStep === 1 && !issueState.deviceIssueData.processId) {
+      const process = await handleCreateIssueProcess();
+
+      if (!process) return;
+    }
+
+    dispatch(setIssueNextStep());
+  }, [
+    dispatch,
+    issueState.issueStep,
+    issueState.deviceIssueData.processId,
+    handleCreateIssueProcess,
   ]);
 
   const device = {

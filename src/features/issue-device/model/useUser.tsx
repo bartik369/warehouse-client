@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { User } from '@/entities/user/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import {
@@ -18,7 +17,6 @@ import { UserOption } from '../ui/user-option/UserOption';
 export const useUser = () => {
   const currentUser = useAppSelector((state: RootState) => state.user.user);
   const [userQuery, setUserQuery] = useState('');
-  // const [user, setUser] = useState<User | null>(null);
   const debounceSearchValue = useDebounce(userQuery.trim(), 700);
   const {
     data: filteredUsers = [],

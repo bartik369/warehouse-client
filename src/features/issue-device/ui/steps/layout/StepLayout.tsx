@@ -12,6 +12,7 @@ interface StepLayoutProps {
   right: ReactNode;
   currentStep: number;
   disabledStep: boolean;
+  hideBack?: boolean;
   leftWidth?: number | string;
   onNext: () => void;
   onBack: () => void;
@@ -22,6 +23,7 @@ export const StepLayout = ({
   right,
   currentStep,
   disabledStep,
+  hideBack = false,
   leftWidth = 400,
   onBack,
   onNext,
@@ -50,10 +52,17 @@ export const StepLayout = ({
         <Card className={styles.rightBlock}>{right}</Card>
       </Flex>
       <Flex gap={20} justify="space-between">
-        <button className={styles.prevBtn} disabled={currentStep === 0} onClick={onBack}>
-          {BUTTON_LABELS.prev}
-        </button>
-        <button className={styles.nextBtn} disabled={disabledStep} onClick={onNext}>
+        {!hideBack && (
+          <button className={styles.prevBtn} disabled={currentStep === 0} onClick={onBack}>
+            {BUTTON_LABELS.prev}
+          </button>
+        )}
+        <button
+          style={{ marginLeft: 'auto' }}
+          className={styles.nextBtn}
+          disabled={disabledStep}
+          onClick={onNext}
+        >
           {BUTTON_LABELS.next}
         </button>
       </Flex>

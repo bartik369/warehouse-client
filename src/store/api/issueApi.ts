@@ -1,8 +1,11 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../baseQueryWithReauth";
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { CreateIssueProcessRequest, IssueProcessDto } from '@/features/issue-device/model/types';
+
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const issueApi = createApi({
-  reducerPath: "issueApi",
+  reducerPath: 'issueApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: [],
   endpoints: (build) => ({
@@ -11,10 +14,10 @@ export const issueApi = createApi({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}${id}`,
       }),
     }),
-    createIssueProcess: build.mutation({
+    createIssueProcess: build.mutation<IssueProcessDto, CreateIssueProcessRequest>({
       query: (body) => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
     }),
@@ -23,17 +26,17 @@ export const issueApi = createApi({
         url: `${import.meta.env.VITE_ISSUE}`,
         method: 'POST',
         body,
-      })
+      }),
     }),
-    getIssueProcess: build.query({
+    getIssueProcess: build.query<any, string>({
       query: (processid) => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}${processid}`,
-      })
+      }),
     }),
     finalizeIssueProcess: build.mutation({
       query: (body) => ({
         url: `${import.meta.env.VITE_ISSUE_FINALIZE}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
     }),
@@ -41,7 +44,7 @@ export const issueApi = createApi({
 });
 
 export const {
-  useLazyGetIssueProcessByIdQuery,
+  useGetIssueProcessByIdQuery,
   useCreateIssueMutation,
   useFinalizeIssueProcessMutation,
   useCreateIssueProcessMutation,

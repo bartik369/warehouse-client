@@ -1,9 +1,9 @@
 import { useGlobalModal } from '@/hooks/data/useGlobalModal';
 
+import { useSignature } from '../../shared/ui/signature-canvas/model/useSignature';
+import Signature from '../../shared/ui/signature-canvas/ui/Signature';
 // import ContractorForm from "../forms/contractor/ContractorForm";
 import EntityForm from '../forms/device/EntityForm';
-import Signature from '../signature/Signature';
-import { useSignature } from '../signature/useSignature';
 import Modal from './Modal';
 
 export const GlobalModal = () => {
