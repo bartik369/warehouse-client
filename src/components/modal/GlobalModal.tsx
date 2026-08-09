@@ -1,7 +1,7 @@
 import { useGlobalModal } from '@/hooks/data/useGlobalModal';
+import Signature from '@/shared/ui/signature-canvas/ui/Signature';
 
 import { useSignature } from '../../shared/ui/signature-canvas/model/useSignature';
-import Signature from '../../shared/ui/signature-canvas/ui/Signature';
 // import ContractorForm from "../forms/contractor/ContractorForm";
 import EntityForm from '../forms/device/EntityForm';
 import Modal from './Modal';
@@ -24,10 +24,6 @@ export const GlobalModal = () => {
             fieldType={modalProps.fieldType}
           />
         );
-      // case "contractor":
-      //   return <ContractorForm {...modalProps} />;
-      case 'signature':
-        return <Signature actions={actions} {...modalProps} />;
       default:
         return null;
     }
