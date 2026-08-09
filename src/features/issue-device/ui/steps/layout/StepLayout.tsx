@@ -57,12 +57,7 @@ export const StepLayout = ({
             {BUTTON_LABELS.prev}
           </button>
         )}
-        <button
-          style={{ marginLeft: 'auto' }}
-          className={styles.nextBtn}
-          disabled={disabledStep}
-          onClick={onNext}
-        >
+        <button className={styles.nextBtn} disabled={disabledStep} onClick={onNext}>
           {BUTTON_LABELS.next}
         </button>
       </Flex>
