@@ -36,6 +36,7 @@ import {
   setProcessId,
   setWasSearched,
 } from '../../../store/slices/issueSlice';
+import { IssueProcessStatus } from './types';
 import { useDevice } from './useDevice';
 import { useUser } from './useUser';
 import { useWarehouse } from './useWarehouse';
@@ -290,7 +291,7 @@ export const useIssue = () => {
         userId: partnerId,
         warehouseId,
         issuedById: currentUserId,
-        status: 'draft',
+        status: IssueProcessStatus.Draft,
       }).unwrap();
       dispatch(setProcessId(process.id));
       dispatch(setIssueNumber(process.documentNo));

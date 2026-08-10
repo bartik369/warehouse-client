@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
 
 import { AutoCompleteProps, StepsProps } from 'antd';
+import { IconType } from 'react-icons';
+
+import { Status } from '@/shared/ui/custom-tag/types';
 
 type StepsItemsType = StepsProps['items'];
 type NonNullableStepsItems = NonNullable<StepsItemsType>;
@@ -19,7 +22,6 @@ export interface AssignedDevice {
   isAssigned?: boolean;
 }
 
-export type IssueProcessStatus = 'draft' | 'sign_document' | 'completed';
 export type IssueProcessDto = {
   id: string;
   documentNo: string;
@@ -46,4 +48,50 @@ export type CreateIssueProcessRequest = {
   status: IssueProcessStatus;
   userId: string;
   warehouseId: string;
+};
+
+export type IssueProcessListItem = {
+  id: string;
+  documentNo: string;
+  status: string;
+  issueDate: string;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    id: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    department: {
+      id: string;
+      name: string;
+    } | null;
+  };
+  warehouse: {
+    id: string;
+    name: string;
+    location: {
+      id: string;
+      name: string;
+    } | null;
+  };
+  issuedBy: {
+    id: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    department: {
+      id: string;
+      name: string;
+    } | null;
+  };
+};
+
+export enum IssueProcessStatus {
+  Draft = 'draft',
+  Completed = 'completed',
+}
+export type IssueProcessStatusConfig = {
+  title: string;
+  variant: Status;
+  icon?: IconType;
+  iconSize?: number;
 };

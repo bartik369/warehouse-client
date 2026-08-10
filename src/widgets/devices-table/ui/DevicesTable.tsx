@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { ConfigProvider, Table } from 'antd';
-import ru_RU from 'antd/es/locale/ru_RU';
 import {
   FilterValue,
   SorterResult,
@@ -10,8 +9,8 @@ import {
 } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 
-import { IssueActionTypes } from '@/features/issue-device/model/issueTypes';
 import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
+import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
@@ -72,14 +71,6 @@ export const DevicesTable = ({
     resetSingleFilter: resetSingleFilter,
   });
 
-  const customLocale = {
-    ...ru_RU,
-    Pagination: {
-      ...ru_RU.Pagination,
-      items_per_page: '',
-    },
-  };
-
   const calculateTableWidth = () => {
     const totalWidth = columns.reduce((sum, col) => {
       return sum + (Number(col.width) || 100);
@@ -132,7 +123,7 @@ export const DevicesTable = ({
 
   return (
     <div className={tableStyles.customPagination}>
-      <ConfigProvider locale={customLocale}>{DeviceTable}</ConfigProvider>
+      <ConfigProvider locale={antdLocale}>{DeviceTable}</ConfigProvider>
     </div>
   );
 };

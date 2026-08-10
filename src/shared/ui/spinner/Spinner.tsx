@@ -1,11 +1,23 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { Flex, Spin } from 'antd';
+
+import styles from './Spinner.module.scss';
 
 interface SpinnerProps {
   color?: string;
   fontSize?: number;
+  title?: string;
 }
 
-export const Spinner = ({ color = 'var(--gray-600)', fontSize = 32 }: SpinnerProps) => {
-  return <Spin indicator={<LoadingOutlined spin style={{ color: color, fontSize: fontSize }} />} />;
+export const Spinner = ({
+  color = 'var(--gray-600)',
+  fontSize = 32,
+  title = 'Загрузка',
+}: SpinnerProps) => {
+  return (
+    <Flex vertical align="center" gap={10}>
+      <Spin indicator={<LoadingOutlined spin style={{ color: color, fontSize: fontSize }} />} />
+      <span className={styles.title}>{title}</span>
+    </Flex>
+  );
 };
