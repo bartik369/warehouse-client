@@ -30,4 +30,6 @@ export const routeNameMap: Record<string, string> = {
   roles: 'Управление ролями',
   permissions: 'Управление разрешениями',
   permission_roles: 'Управление доступом ролей',
+  issues: 'Выдачи устройств',
+  new: 'Новый процесс',
 };

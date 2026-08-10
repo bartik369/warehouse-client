@@ -8,8 +8,8 @@ import { useGetDeviceOptionsQuery, useGetDevicesQuery } from '@/store/api/device
 import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
 import { formatFiltersToSearchParams } from '@/utils/data/filterUtils';
 
+import { useTablePagination } from '../../shared/hooks/useTablePagination';
 import { useDeviceFilters } from './useDeviceFilters';
-import { useTablePagination } from './useTablePagination';
 
 const emptyOptions: FilterDeviceOptions = {
   manufacturer: [],
