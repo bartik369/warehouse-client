@@ -6,15 +6,17 @@ import { useGetIssueProcessesQuery } from '@/store/api/issueApi';
 
 export const useIssueList = () => {
   const { page, limit, setPage, setLimit, resetPage } = useTablePagination();
+  const [selectedIssue, setSelectedIssue] = useState<IssueProcessListItem | null>(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const { data: issueProcesses = [], isLoading } = useGetIssueProcessesQuery();
   const handleSelect = (record: IssueProcessListItem, selected: boolean) => {
     if (selected) {
       setSelectedRowKeys([record.id]);
-      console.log(record);
+      setSelectedIssue(record);
     } else {
       setSelectedRowKeys([]);
+      setSelectedIssue(null);
     }
   };
 
@@ -23,6 +25,7 @@ export const useIssueList = () => {
     limit,
     selectedRowKeys,
     issueProcesses,
+    selectedIssue,
     isLoading,
     onSelect: handleSelect,
   };

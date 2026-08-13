@@ -211,6 +211,11 @@ export const useIssue = () => {
     dispatch(resetIssueData());
   }, [dispatch]);
 
+  const handleStartNewIssue = () => {
+    handleFullReset();
+    navigate('/issues/new');
+  };
+
   const handleCreateIssue = useCallback(async () => {
     if (!processId || devices.length === 0) {
       return;
@@ -273,6 +278,11 @@ export const useIssue = () => {
       isLoadingWarehouses: warehouseController.isLoadingWarehouses,
       isLoadingLocations: warehouseController.isLoadingLocations,
     },
+  };
+
+  const handleDeleteIssueProcess = (id: string) => {
+    if (!id) return;
+    console.log(id);
   };
 
   const handleCreateIssueProcess = useCallback(async () => {
@@ -362,6 +372,8 @@ export const useIssue = () => {
     handleResetIssueDevices,
     handleSetStep,
     handleStartDeviceIssueWith,
+    handleStartNewIssue,
+    handleDeleteIssueProcess,
     // handleUserChange,
   };
 

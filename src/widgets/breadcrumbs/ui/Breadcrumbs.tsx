@@ -14,22 +14,25 @@ const UUID_REGEXP = /^[0-9a-fA-F-]{36}$/;
 
 export const Breadcrumbs = () => {
   const location = useLocation();
+
   const pathnames = location.pathname.split('/').filter(Boolean);
 
   const [pathName, setPathName] = useState<string | null>(null);
+
   const { resolveEntityName } = useEntityNameResolver();
 
-  const lastSegment = pathnames.at(-1);
-  const isUuidFormat = UUID_REGEXP.test(lastSegment || '');
+  const uuidSegment = pathnames.find((segment) => UUID_REGEXP.test(segment));
+
+  const isEditPage = pathnames.at(-1) === 'edit';
 
   useEffect(() => {
-    if (!isUuidFormat) {
+    if (!uuidSegment) {
       setPathName(null);
       return;
     }
 
     resolveEntityName(location.pathname).then(setPathName);
-  }, [isUuidFormat, location.pathname, resolveEntityName]);
+  }, [uuidSegment, location.pathname, resolveEntityName]);
 
   const items = [
     {
@@ -40,17 +43,28 @@ export const Breadcrumbs = () => {
         </Link>
       ),
     },
+
     ...pathnames.map((segment, index) => {
       const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
       const isLast = index === pathnames.length - 1;
+      const isUuid = UUID_REGEXP.test(segment);
+      const title = isUuid ? pathName || 'Загрузка...' : routeNameMap[segment] || segment;
+      const shouldDisableEntityLink = isEditPage && isUuid;
 
-      const title =
-        isUuidFormat && isLast ? pathName || 'Загрузка...' : routeNameMap[segment] || segment;
+      if (isLast) {
+        return {
+          title: <span className={styles.active}>{title}</span>,
+        };
+      }
+
+      if (shouldDisableEntityLink) {
+        return {
+          title: <span className={styles.link}>{title}</span>,
+        };
+      }
 
       return {
-        title: isLast ? (
-          <span className={styles.active}>{title}</span>
-        ) : (
+        title: (
           <Link className={styles.link} to={routeTo}>
             {title}
           </Link>

@@ -77,15 +77,10 @@ const issueSlice = createSlice({
     clearSelectedDevices: (state) => {
       state.selectedDevices = [];
     },
-    // setWarehouseIssue: (state, action: PayloadAction<Warehouse>) => {
-    //   state.warehouse = action.payload;
-    // },
+
     resetWarehouse: (state) => {
       state.warehouse = { ...initialState.warehouse };
     },
-    // setWarehouses: (state, action: PayloadAction<Warehouse[]>) => {
-    //   state.warehouses = action.payload;
-    // },
     setWarehouse: (state, action: PayloadAction<Warehouse>) => {
       state.warehouse = action.payload;
     },
@@ -121,6 +116,8 @@ const issueSlice = createSlice({
     resetIssueData: (state) => {
       state.deviceIssueData = initialState.deviceIssueData;
       state.assignedDevices = initialState.assignedDevices;
+      state.issueStep = initialState.issueStep;
+      state.warehouse = initialState.warehouse;
     },
     resetIssueState: () => initialState,
     setProcessId: (state, action: PayloadAction<string>) => {

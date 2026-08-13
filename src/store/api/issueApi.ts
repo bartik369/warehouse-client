@@ -59,4 +59,5 @@ export const {
   useFinalizeIssueProcessMutation,
   useCreateIssueProcessMutation,
   useGetIssueProcessesQuery,
+  useLazyGetIssueProcessQuery,
 } = issueApi;

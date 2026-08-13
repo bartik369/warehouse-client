@@ -45,7 +45,7 @@ export const getIssueProcessesColumns = () => {
         return aName.localeCompare(bName);
       },
       render: (issuedBy: IssueProcessListItem['issuedBy']) => {
-        const userInfo = `${issuedBy.firstNameRu} ${issuedBy.lastNameRu}`;
+        const userInfo = `${issuedBy.lastNameRu} ${issuedBy.firstNameRu}`;
         return <TwoLineText primary={userInfo} secondary={issuedBy.department?.name} />;
       },
     },
@@ -61,7 +61,7 @@ export const getIssueProcessesColumns = () => {
         return aName.localeCompare(bName);
       },
       render: (user: IssueProcessListItem['user']) => {
-        const userInfo = `${user.firstNameRu} ${user.lastNameRu}`;
+        const userInfo = `${user.lastNameRu} ${user.firstNameRu}`;
         return <TwoLineText primary={userInfo} secondary={user.department?.name} />;
       },
     },
