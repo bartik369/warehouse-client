@@ -54,7 +54,7 @@ export const ManageAccess = () => {
             userRoles={userRoles?.roles ?? []}
             user={selectedUser}
             loading={isRevokeLoading}
-            onDelete={x}
+            onDelete={onDelete}
           />
         ) : null}
       </div>

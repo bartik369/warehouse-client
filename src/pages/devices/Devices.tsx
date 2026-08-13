@@ -43,7 +43,7 @@ const Devices = () => {
       serialNumber: device.serialNumber ?? '',
       isAssigned: device.isAssigned ?? false,
     }));
-    dispatch(setSelectedDevice(devices)); // todo выдача устройств через список
+    dispatch(setSelectedDevice(devices as any)); // todo тут ошибка без any
     dispatch(setIssueStep(1));
   };
 
