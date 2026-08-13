@@ -20,7 +20,7 @@ export const PAGE_TITLES = {
   inventoryCreate: 'Создание инвенторизации',
   inventoryList: 'Список инвенторизаций',
   createIssue: 'Выдача устройств',
-  issueList: 'Список выдач',
+  issueList: 'Список выдач устройств',
   issues: 'Выдачи',
   knowledge: 'База знаний',
   locations: 'Локации',

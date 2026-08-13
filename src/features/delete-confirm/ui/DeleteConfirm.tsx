@@ -1,10 +1,8 @@
+import { useEffect } from 'react';
+
 import { Popconfirm } from 'antd';
 import { TooltipPlacement } from 'antd/es/tooltip';
 import { FiAlertTriangle } from 'react-icons/fi';
-import { HiOutlineExclamationTriangle } from 'react-icons/hi2';
-import { IoIosWarning } from 'react-icons/io';
-import { PiWarningThin } from 'react-icons/pi';
-import { PiWarningCircleBold } from 'react-icons/pi';
 
 import styles from './DeleteConfirm.module.scss';
 

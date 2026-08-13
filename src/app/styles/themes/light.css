@@ -35,7 +35,21 @@
   --yellow-50: #fff8e1;
   --yellow-500: #f6bc0f;
   --red-50: #fef2f2;
+  --red-25: #fffbfb;
+  --red-50: #fef2f2;
+  --red-100: #fde8e8;
+  --red-150: #fcd5d5;
+  --red-200: #f9baba;
+  --red-250: #f7a0a0;
+  --red-300: #f28080;
+  --red-400: #ee5a5a;
+  --red-450: #ea4a4a;
   --red-500: #ef4444;
+  --red-550: #e63b3b;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
 
   /* TEXT  */
   --text-primary: var(--gray-900);
