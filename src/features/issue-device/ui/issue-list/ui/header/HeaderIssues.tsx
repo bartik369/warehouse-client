@@ -2,6 +2,7 @@ import { Flex, Typography } from 'antd';
 import { AiOutlineFileDone } from 'react-icons/ai';
 import { IoTrashOutline } from 'react-icons/io5';
 import { RxOpenInNewWindow } from 'react-icons/rx';
+import { TbListDetails } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
 import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
@@ -9,6 +10,7 @@ import { IssueProcessListItem, IssueProcessStatus } from '@/features/issue-devic
 import { PAGE_TITLES } from '@/shared/config/page-titles';
 import { ActionButton } from '@/shared/ui/action-button/ActionButton';
 import { ISSUE_LIST_DESCRIPTION } from '@/shared/ui/action-button/constants';
+import { StartProcessButton } from '@/shared/ui/start-process-button/StartProcessButton';
 
 import { DELETE_ISSUE_DESCRIPTION, TITLES } from '../../model/constants';
 import styles from './HeaderIssues.module.scss';
@@ -54,11 +56,20 @@ export const HeaderIssues = ({ selectedIssue, onStart, onDelete }: HeaderIssuesP
             </DeleteConfirm>
           </Flex>
         )}
-        {isCompleted && <button>Открыть</button>}
-        <button className={styles.addBtn} onClick={onStart}>
-          <RxOpenInNewWindow size={17} />
-          <span>Выдать устройства</span>
-        </button>
+        {isCompleted && (
+          <ActionButton
+            title="Детали выдачи"
+            variant="apply"
+            iconSize={16}
+            icon={TbListDetails}
+            onClick={() =>
+              navigate(`/issues/${selectedIssue.id}`, {
+                replace: true,
+              })
+            }
+          />
+        )}
+        <StartProcessButton title="Выдать устройства" onClick={onStart} icon={RxOpenInNewWindow} />
       </Flex>
     </Flex>
   );

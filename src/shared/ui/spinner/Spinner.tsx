@@ -9,11 +9,7 @@ interface SpinnerProps {
   title?: string;
 }
 
-export const Spinner = ({
-  color = 'var(--gray-600)',
-  fontSize = 32,
-  title = 'Загрузка',
-}: SpinnerProps) => {
+export const Spinner = ({ color = 'var(--gray-600)', fontSize = 32, title }: SpinnerProps) => {
   return (
     <Flex vertical align="center" gap={10}>
       <Spin indicator={<LoadingOutlined spin style={{ color: color, fontSize: fontSize }} />} />

@@ -20,7 +20,7 @@ export const ManageIssue = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const { data: process } = useGetIssueProcessByIdQuery(id!, {
+  const { data: process, isLoading } = useGetIssueProcessByIdQuery(id!, {
     skip: !id,
   });
 
@@ -48,8 +48,13 @@ export const ManageIssue = () => {
     };
   }, []);
 
-  if (!issueState.issueStep && !userController.data.currentUser) return <Spinner fontSize={34} />;
-  // todo чекнуть что это\
+  if (isLoading) {
+    return <Spinner fontSize={34} />;
+  }
+
+  if (id && issueState.deviceIssueData.processId !== id) {
+    return <Spinner fontSize={34} />;
+  }
 
   return (
     <IssueProcess

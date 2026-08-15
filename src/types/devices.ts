@@ -274,18 +274,18 @@ type FilterLabelsKeys =
   | 'isFunctional'
   | 'isAssigned';
 
-type DeviceLabelKeys =
-  | 'name'
-  | 'modelType'
-  | 'modelName'
-  | 'manufacturer'
-  | 'inventoryNumber'
-  | 'serialNumber';
+// type DeviceLabelKeys =
+//   | 'name'
+//   | 'modelType'
+//   | 'modelName'
+//   | 'manufacturer'
+//   | 'inventoryNumber'
+//   | 'serialNumber';
 
-export type DeviceLabel = {
-  key: DeviceLabelKeys;
-  label: string;
-};
+// export type DeviceLabel = {
+//   key: DeviceLabelKeys;
+//   label: string;
+// };
 
 export type FilterLabel = {
   key: FilterLabelsKeys;

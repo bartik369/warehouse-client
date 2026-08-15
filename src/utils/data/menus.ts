@@ -2,7 +2,6 @@ import React from 'react';
 
 import ekb from '@/assets/elements/ekb.png';
 import msk from '@/assets/elements/msk.png';
-import { DeviceLabel } from '@/types/devices';
 
 const DeviceHistory = React.lazy(() => import('@/pages/device/DeviceHistory'));
 const Another = React.lazy(() => import('@/pages/device/Another'));
@@ -27,14 +26,13 @@ export const deviceIssueSteps = [
   { id: 'send_document', label: 'Отправка документа' },
 ];
 
-export const baseDeviceLabelConfig: DeviceLabel[] = [
-  { key: 'name', label: 'Название' },
-  { key: 'modelName', label: 'Модель' },
-  { key: 'modelType', label: 'Тип' },
-  { key: 'manufacturer', label: 'Производитель' },
-  { key: 'inventoryNumber', label: 'Инвентарный номер' },
-  { key: 'serialNumber', label: 'Серийный номер' },
-];
+// export const baseDeviceLabelConfig: DeviceLabel[] = [
+//   { key: 'name', label: 'Название' },
+//   { key: 'modelName', label: 'Модель' },
+//   { key: 'manufacturer', label: 'Производитель' },
+//   { key: 'inventoryNumber', label: 'Инвентарный номер' },
+//   { key: 'serialNumber', label: 'Серийный номер' },
+// ];
 
 export const locations = [
   {

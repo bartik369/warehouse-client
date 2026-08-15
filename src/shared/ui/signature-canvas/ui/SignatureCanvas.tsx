@@ -2,15 +2,16 @@ import { useState } from 'react';
 
 import { Flex, Modal } from 'antd';
 
+import { SignatureItemType } from '@/store/slices/signatureSlice';
 import { User } from '@/types/user';
 
 import { useSignature } from '../model/useSignature';
-import Signature from './Signature';
+import { Signature } from './Signature';
 import { SignatureItem } from './SignatureItem';
 
 interface SignatureCanvasProps {
-  performerSignature: string | null;
-  responsibleSignature: string | null;
+  performerSignature: SignatureItemType;
+  responsibleSignature: SignatureItemType;
   performer: User | null;
   responsible: User | null;
   performerTitle?: string;
@@ -31,6 +32,7 @@ export const SignatureCanvas = ({
   const handleClose = () => {
     setOpenedRole(null);
   };
+  const currentSignature = openedRole === 'issuer' ? performerSignature : responsibleSignature;
 
   return (
     <>
@@ -49,7 +51,14 @@ export const SignatureCanvas = ({
         />
       </Flex>
       <Modal open={openedRole !== null} onCancel={handleClose} footer={null} width={500}>
-        {openedRole && <Signature actions={actions} role={openedRole} onClose={handleClose} />}
+        {openedRole && (
+          <Signature
+            signature={currentSignature}
+            actions={actions}
+            role={openedRole}
+            onClose={handleClose}
+          />
+        )}
       </Modal>
     </>
   );

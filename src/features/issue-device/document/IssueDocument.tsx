@@ -2,14 +2,15 @@ import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/
 
 import printLogo from '@/assets/elements/print_logo.png';
 import { Device } from '@/entities/device/model/types';
-import { AssignedDevice } from '@/types/issue';
-import { baseDeviceLabelConfig } from '@/utils/data/menus';
+
+import { baseDeviceLabelConfig } from './constants';
 
 Font.register({
   family: 'Roboto',
   src: '/fonts/Roboto/Roboto-Regular.ttf',
   fontWeight: 'normal',
 });
+
 Font.register({
   family: 'Roboto',
   src: '/fonts/Roboto/Roboto-Medium.ttf',
@@ -29,49 +30,59 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     position: 'relative',
   },
+
   headerLogo: {
     flexDirection: 'row',
     marginLeft: 'auto',
   },
-  headerWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-    alignItems: 'center',
-  },
+
   logo: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   logoIcon: {
     width: 20,
   },
-  date: {
-    fontSize: 11,
-  },
+
   logoText: {
     fontSize: 10,
     fontWeight: 'bold',
   },
-  docNumberText: {
-    marginRight: 5,
-  },
-  docNumber: {
-    fontWeight: 'medium',
-  },
-  act: {
-    fontSize: 11,
-    marginTop: 30,
-    marginBottom: 30,
-  },
-  numberBlock: {
-    justifyContent: 'center',
-    marginBottom: 4,
-  },
+
   centeredBlock: {
     alignItems: 'center',
     textAlign: 'center',
   },
+
+  numberBlock: {
+    justifyContent: 'center',
+    marginBottom: 4,
+  },
+
+  docNumberText: {
+    marginRight: 5,
+  },
+
+  docNumber: {
+    fontWeight: 'medium',
+  },
+
+  date: {
+    fontSize: 11,
+  },
+
+  act: {
+    fontSize: 11,
+    marginTop: 30,
+    marginBottom: 30,
+    lineHeight: 1.5,
+  },
+
+  bold: {
+    fontWeight: 'medium',
+  },
+
   table: {
     fontSize: 9,
     display: 'flex',
@@ -82,9 +93,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     marginBottom: 20,
   },
+
   tableRow: {
     flexDirection: 'row',
   },
+
   tableColHeader: {
     width: `${100 / 3}%`,
     borderStyle: 'solid',
@@ -94,6 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     padding: 5,
   },
+
   tableCol: {
     width: `${100 / 3}%`,
     borderStyle: 'solid',
@@ -102,29 +116,35 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     padding: 5,
   },
-  bold: {
-    fontWeight: 'medium',
-  },
-  infoText: {
-    fontSize: 11,
-  },
-  image: {
-    width: 140,
-    height: 90,
-    marginTop: 10,
-  },
+
   signaturesWrapper: {
-    alignContent: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
   },
+
   signatureBlock: {
     width: '48%',
   },
+
+  infoText: {
+    fontSize: 11,
+  },
+
+  image: {
+    width: 140,
+    height: 90,
+    marginTop: 10,
+    objectFit: 'contain',
+  },
+
+  signatureDate: {
+    fontSize: 9,
+    marginTop: 5,
+  },
 });
 
-interface IssueDocumentProps {
+export interface IssueDocumentProps {
   date: string;
   docNumber: string;
   tableData: Device[];
@@ -134,16 +154,41 @@ interface IssueDocumentProps {
   lastNameRuPartner: string;
   receiverSignature: string | null;
   issuerSignature: string | null;
+  receiverSignedAt: string | null;
+  issuerSignedAt: string | null;
 }
 
 const formatValue = (val: unknown): string => {
-  if (val === null || val === undefined) return '';
-  if (val instanceof Date) return val.toLocaleDateString('ru-RU');
-  if (typeof val === 'boolean') return val ? 'Да' : 'Нет';
+  if (val === null || val === undefined) {
+    return '';
+  }
+
+  if (val instanceof Date) {
+    return val.toLocaleDateString('ru-RU');
+  }
+
+  if (typeof val === 'boolean') {
+    return val ? 'Да' : 'Нет';
+  }
+
   return String(val);
 };
 
-const IssueDocument = ({
+const formatSignatureDate = (value: string | null): string => {
+  if (!value) {
+    return '';
+  }
+
+  const parsedDate = new Date(value);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return value;
+  }
+
+  return parsedDate.toLocaleDateString('ru-RU');
+};
+
+export const IssueDocument = ({
   date,
   docNumber,
   tableData,
@@ -153,25 +198,32 @@ const IssueDocument = ({
   lastNameRuPartner,
   receiverSignature,
   issuerSignature,
+  receiverSignedAt,
+  issuerSignedAt,
 }: IssueDocumentProps) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Шапка */}
+        {/* Логотип */}
         <View style={styles.headerLogo}>
           <View style={styles.logo}>
             <Image src={printLogo} style={styles.logoIcon} />
             <Text style={styles.logoText}>ITAM</Text>
           </View>
         </View>
+
+        {/* Номер акта и дата документа */}
         <View style={styles.centeredBlock}>
           <Text style={styles.numberBlock}>
             <Text style={styles.docNumberText}>Номер акта выдачи: </Text>
+
             <Text style={styles.docNumber}>{docNumber}</Text>
           </Text>
+
           <Text style={styles.date}>{date}</Text>
         </View>
-        {/* Текст */}
+
+        {/* Основной текст акта */}
         <View>
           <Text style={styles.act}>
             ООО «Компания Х», в лице директора Иванова Алексея Ивановича, действующего на основании
@@ -184,12 +236,13 @@ const IssueDocument = ({
             <Text style={styles.bold}>
               {firstNameRuPartner} {lastNameRuPartner}
             </Text>{' '}
-            подписали настоящий акт приема передачи на основании договора №123456789
+            подписали настоящий акт приема-передачи на основании договора №123456789.
           </Text>
         </View>
 
+        {/* Таблица оборудования */}
         <View style={styles.table}>
-          {/* Заголовки */}
+          {/* Заголовки таблицы */}
           <View style={styles.tableRow}>
             {baseDeviceLabelConfig.map((col) => (
               <Text key={col.key} style={styles.tableColHeader}>
@@ -197,11 +250,12 @@ const IssueDocument = ({
               </Text>
             ))}
           </View>
-          {/* Данные */}
+
+          {/* Данные таблицы */}
           {tableData.map((row, idx) => (
             <View key={idx} style={styles.tableRow}>
-              {baseDeviceLabelConfig.map((col, i) => (
-                <Text key={i} style={styles.tableCol}>
+              {baseDeviceLabelConfig.map((col) => (
+                <Text key={col.key} style={styles.tableCol}>
                   {formatValue(row[col.key as keyof Device])}
                 </Text>
               ))}
@@ -211,23 +265,45 @@ const IssueDocument = ({
 
         {/* Подписи */}
         <View style={styles.signaturesWrapper}>
+          {/* Подпись выдающей стороны */}
           <View style={styles.signatureBlock}>
             <Text style={styles.infoText}>
               {firstNameRuCurrent} {lastNameRuCurrent}
             </Text>
-            {issuerSignature && <Image style={styles.image} src={issuerSignature} />}
+
+            {issuerSignature && (
+              <>
+                <Image style={styles.image} src={issuerSignature} />
+
+                {issuerSignedAt && (
+                  <Text style={styles.signatureDate}>
+                    Дата подписания: {formatSignatureDate(issuerSignedAt)}
+                  </Text>
+                )}
+              </>
+            )}
           </View>
 
+          {/* Подпись принимающей стороны */}
           <View style={styles.signatureBlock}>
             <Text style={styles.infoText}>
               {firstNameRuPartner} {lastNameRuPartner}
             </Text>
-            {receiverSignature && <Image style={styles.image} src={receiverSignature} />}
+
+            {receiverSignature && (
+              <>
+                <Image style={styles.image} src={receiverSignature} />
+
+                {receiverSignedAt && (
+                  <Text style={styles.signatureDate}>
+                    Дата подписания: {formatSignatureDate(receiverSignedAt)}
+                  </Text>
+                )}
+              </>
+            )}
           </View>
         </View>
       </Page>
     </Document>
   );
 };
-
-export default IssueDocument;

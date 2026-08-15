@@ -35,8 +35,6 @@ export const IssueProcess = ({
   status,
 }: IssueProcessProps) => {
   const currentStep = issueState.issueStep;
-  const isAvailableReset = issueState.issueStep !== 0 && issueState.issueStep !== 4;
-
   const stepContent = [
     <SelectWarehouseStep
       warehouseController={warehouseController}
@@ -57,7 +55,6 @@ export const IssueProcess = ({
       issueState={issueState}
       user={userController.data.currentUser}
       isIssueLoading={status.isIssueLoading}
-      handleComplete={actions.handleCompleteProcess}
     />,
     <FinalizeIssueStep issueState={issueState} />,
   ];
@@ -66,7 +63,6 @@ export const IssueProcess = ({
   return (
     <div className={styles.container}>
       <IssueHeader
-        isAvailableReset={isAvailableReset}
         step={currentStep}
         onChange={actions.handleSetStep}
         onReset={actions.handleResetIssue}

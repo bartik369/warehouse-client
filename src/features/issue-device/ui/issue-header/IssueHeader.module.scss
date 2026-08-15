@@ -20,25 +20,6 @@
 .rightSide {
   flex: 1;
   min-width: 0;
-
-  .cancelWrapper {
-    display: flex;
-    justify-content: flex-end;
-    height: 34px;
-    margin-bottom: 10px;
-  }
-
-  .cancelBtn {
-    padding: 2px 10px;
-    font-size: 11px;
-    color: var(--gray-600);
-    border: 1px dashed var(--gray-600);
-
-    &:hover {
-      color: var(--white) !important;
-      background-color: var(--red-500) !important;
-    }
-  }
 }
 
 .steps {
@@ -55,7 +36,7 @@
   min-width: 0;
 }
 
-.stepButton {
+.stepIcon {
   position: relative;
   z-index: 2;
   display: flex;
@@ -67,7 +48,7 @@
   font: inherit;
   background: transparent;
   border: 0;
-  cursor: pointer;
+  // cursor: pointer;
 
   &:disabled {
     cursor: default;

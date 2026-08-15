@@ -1,18 +1,17 @@
-import { CheckOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { Button, Flex, Typography } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
+import { Flex, Typography } from 'antd';
 import clsx from 'clsx';
 
 import { BASE_STEPS } from '../../model/constants';
 import styles from './IssueHeader.module.scss';
 
 interface IssueHeaderProps {
-  isAvailableReset: boolean;
   step: number;
   onChange: (step: number) => void;
   onReset: () => void;
 }
 
-export const IssueHeader = ({ isAvailableReset, step, onChange, onReset }: IssueHeaderProps) => {
+export const IssueHeader = ({ step, onChange }: IssueHeaderProps) => {
   const currentStep = BASE_STEPS[step];
 
   return (
@@ -26,18 +25,6 @@ export const IssueHeader = ({ isAvailableReset, step, onChange, onReset }: Issue
       </div>
 
       <div className={styles.rightSide}>
-        <div className={styles.cancelWrapper}>
-          {isAvailableReset && (
-            <Button
-              icon={<CloseCircleOutlined />}
-              onClick={onReset}
-              className={styles.cancelBtn}
-              type="text"
-            >
-              Отменить выдачу
-            </Button>
-          )}
-        </div>
         <div className={styles.steps}>
           {BASE_STEPS.map((item, index) => {
             const isFinished = index < step;
@@ -46,12 +33,7 @@ export const IssueHeader = ({ isAvailableReset, step, onChange, onReset }: Issue
 
             return (
               <div key={index} className={styles.step}>
-                <button
-                  type="button"
-                  className={styles.stepButton}
-                  disabled={!isAvailable}
-                  onClick={() => onChange(index)}
-                >
+                <span className={styles.stepIcon}>
                   <span
                     className={clsx(
                       styles.circle,
@@ -70,7 +52,7 @@ export const IssueHeader = ({ isAvailableReset, step, onChange, onReset }: Issue
                   >
                     {item.title}
                   </span>
-                </button>
+                </span>
 
                 {index < BASE_STEPS.length - 1 && (
                   <span className={clsx(styles.line, isFinished && styles.lineFinished)} />

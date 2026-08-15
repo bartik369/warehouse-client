@@ -1,23 +1,22 @@
-import { type ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 
 import clsx from 'clsx';
-import type { IconType } from 'react-icons';
+import { IconType } from 'react-icons';
 
 import styles from './ActionButton.module.scss';
-import type { Actions } from './types';
+import { Actions } from './types';
 
 interface ActionButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
+  icon?: IconType;
   variant: Actions;
   iconSize?: number;
-  icon?: IconType;
 }
-
 export const ActionButton = ({
   title,
   variant,
-  iconSize = 16,
   icon: Icon,
+  iconSize = 16,
   type = 'button',
   className,
   ...buttonProps

@@ -1,42 +1,58 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { RootState } from '../store';
+
+export type SignatureItemType = {
+  signature: string | null;
+  time: string | null;
+};
 
 type SignatureState = {
-  issuerSignature: null | string;
-  receiverSignature: null | string;
+  issuer: SignatureItemType;
+  receiver: SignatureItemType;
+};
+
+const emptySignature: SignatureItemType = {
+  signature: null,
+  time: null,
 };
 
 const initialState: SignatureState = {
-  issuerSignature: null,
-  receiverSignature: null,
+  issuer: { ...emptySignature },
+  receiver: { ...emptySignature },
 };
 
 const signatureSlice = createSlice({
-  name: "signature",
+  name: 'signature',
   initialState,
   reducers: {
-    setIssuerSignature: (state, action: PayloadAction<string>) => {
-      state.issuerSignature = action.payload;
+    setIssuerSignature: (state, action: PayloadAction<SignatureItemType>) => {
+      state.issuer = action.payload;
     },
-    setReceiverSignature: (state, action: PayloadAction<string>) => {
-      state.receiverSignature = action.payload;
+
+    setReceiverSignature: (state, action: PayloadAction<SignatureItemType>) => {
+      state.receiver = action.payload;
     },
+
     resetIssuerSignature: (state) => {
-      state.issuerSignature = null;
+      state.issuer = { ...emptySignature };
     },
+
     resetReceiverSignature: (state) => {
-      state.receiverSignature = null;
+      state.receiver = { ...emptySignature };
     },
+
     resetAllSignatures: (state) => {
-      state.issuerSignature = null;
-      state.receiverSignature = null;
+      state.issuer = { ...emptySignature };
+      state.receiver = { ...emptySignature };
     },
-    resetState: (state) => {
-      state.issuerSignature = null;
-      state.receiverSignature = null;
-    }
+
+    resetState: () => initialState,
   },
 });
+
 export default signatureSlice.reducer;
+
 export const {
   setIssuerSignature,
   setReceiverSignature,
@@ -46,9 +62,6 @@ export const {
   resetState,
 } = signatureSlice.actions;
 
-import { RootState } from "../store";
+export const selectIssuerSignature = (state: RootState) => state.signature.issuer;
 
-export const selectIssuerSignature = (state: RootState) =>
-  state.signature.issuerSignature;
-export const selectReceiverSignature = (state: RootState) =>
-  state.signature.receiverSignature;
+export const selectReceiverSignature = (state: RootState) => state.signature.receiver;

@@ -62,15 +62,6 @@ export const useIssue = () => {
   const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
     useLazyGetWarehousesByUserQuery();
 
-  // const [
-  //   searchDevices,
-  //   { data: searchedDevices = [], isFetching: isDevicesSearching, error: devicesSearchError },
-  // ] = useLazySearchDevicesQuery();
-
-  /*
-   * Mutations
-   */
-
   const [
     finalizeIssue,
     { isSuccess: isIssueSuccess, isLoading: isIssueLoading, error: finalizeIssueError },
@@ -83,29 +74,6 @@ export const useIssue = () => {
     createIssueProcess,
     { isLoading: isCreateIssueProcessLoading, error: createIssueProcessError },
   ] = useCreateIssueProcessMutation();
-
-  /*
-   * Actions
-   */
-
-  // const handleGetDevice = useCallback(async () => {
-  //   const query = state.deviceQuery.trim();
-
-  //   if (!query) {
-  //     return;
-  //   }
-
-  //   try {
-  //     const data = await searchDevices(query).unwrap();
-
-  //     dispatch(setDevices(data));
-  //     dispatch(setDevicesListVisible(true));
-  //     dispatch(setWasSearched(true));
-  //     dispatch(setDevicesLoaded(true));
-  //   } catch (error: unknown) {
-  //     handleApiError(error);
-  //   }
-  // }, [dispatch, searchDevices, state.deviceQuery]);
 
   const handleSetStep = useCallback(
     (step: number) => {
@@ -153,17 +121,18 @@ export const useIssue = () => {
 
   const handleCompleteProcess = useCallback(
     async (file: Blob) => {
-      if (!file || !processId) {
-        return;
-      }
+      console.log(file);
+      // if (!file || !processId) {
+      //   return;
+      // }
 
       try {
-        setIssueFile(file);
-        const issueData = new FormData();
-        issueData.append('processId', processId);
-        issueData.append('file', file);
-        await finalizeIssue(issueData).unwrap();
-        dispatch(setIssueNextStep());
+        // setIssueFile(file);
+        // const issueData = new FormData();
+        // issueData.append('processId', processId);
+        // issueData.append('file', file);
+        // await finalizeIssue(issueData).unwrap();
+        // dispatch(setIssueNextStep());
       } catch (error: unknown) {
         handleApiError(error);
       }
