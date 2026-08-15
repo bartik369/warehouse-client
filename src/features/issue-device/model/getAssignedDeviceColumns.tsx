@@ -20,7 +20,7 @@ export const getAssignedDeviceColumns = ({
 }): ColumnsType<Device> => {
   const iconColumn: ColumnType<Device> = {
     key: 'icon',
-    width: 20,
+    width: 30,
     onCell: () => ({
       style: {
         paddingLeft: 0,
@@ -90,7 +90,7 @@ export const getAssignedDeviceColumns = ({
       key: 'inventoryNumber',
       title: 'Инв. номер',
       dataIndex: 'inventoryNumber',
-      width: 100,
+      width: 90,
     },
     {
       key: 'serialNumber',
@@ -113,7 +113,7 @@ export const getAssignedDeviceColumns = ({
       ? [
           {
             key: 'actions',
-            width: 40,
+            width: 50,
             render: (record: AssignedDevice) => (
               <Button
                 type="link"

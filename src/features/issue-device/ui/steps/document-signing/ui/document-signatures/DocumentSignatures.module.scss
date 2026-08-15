@@ -1,0 +1,12 @@
+.info {
+  gap: 5px;
+  align-items: center;
+  color: var(--blue-500);
+  background-color: var(--blue-25);
+  border: 1px solid var(--blue-200);
+  padding: 8px;
+  border-radius: 4px;
+  .icon {
+    color: var(--blue-400);
+  }
+}

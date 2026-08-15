@@ -23,4 +23,5 @@ export const SECTION_TITLES = {
   section: 'Раздел',
   availableDevices: 'Доступные устрйства',
   selectedDevices: 'Выбранные устройства',
+  signatureSides: 'Подписи сторон',
 };

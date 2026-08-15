@@ -1,34 +1,50 @@
 import { useCallback } from 'react';
 
+import { formatDate } from '@/shared/lib/date/formatDate';
+
 import { useGlobalModal } from '../../../../hooks/data/useGlobalModal';
 import { useAppDispatch } from '../../../../hooks/redux/useRedux';
 import {
   resetAllSignatures,
   resetIssuerSignature,
+  resetReceiverSignature,
   setIssuerSignature,
   setReceiverSignature,
 } from '../../../../store/slices/signatureSlice';
+import { SignatureRole } from './types';
 
 export const useSignature = () => {
   const dispatch = useAppDispatch();
-  const { openModal, closeModal } = useGlobalModal();
+  const { closeModal } = useGlobalModal();
 
   const handleSetSignature = useCallback(
-    (signature: string, role: string) => {
+    (signature: string, role: SignatureRole) => {
+      const date = new Date();
+      const time = formatDate(date, 'datetime');
+      const data = {
+        signature,
+        time,
+      };
       if (role === 'issuer') {
-        dispatch(setIssuerSignature(signature));
-        closeModal();
+        dispatch(setIssuerSignature(data));
       } else if (role === 'receiver') {
-        dispatch(setReceiverSignature(signature));
-        closeModal();
+        dispatch(setReceiverSignature(data));
       }
+      closeModal();
     },
-    [dispatch, openModal]
+    [dispatch, closeModal]
   );
 
   const handleResetSignature = useCallback(
-    (role: string) => {
-      dispatch(resetIssuerSignature());
+    (role: SignatureRole) => {
+      if (role === 'issuer') {
+        dispatch(resetIssuerSignature());
+        return;
+      }
+      if (role === 'receiver') {
+        dispatch(resetReceiverSignature());
+        return;
+      }
     },
     [dispatch]
   );

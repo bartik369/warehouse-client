@@ -26,6 +26,7 @@ export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTable
 
   return (
     <Table<Device>
+      bordered
       className={styles.table}
       tableLayout="fixed"
       pagination={

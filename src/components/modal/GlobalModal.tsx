@@ -1,5 +1,4 @@
 import { useGlobalModal } from '@/hooks/data/useGlobalModal';
-import Signature from '@/shared/ui/signature-canvas/ui/Signature';
 
 import { useSignature } from '../../shared/ui/signature-canvas/model/useSignature';
 // import ContractorForm from "../forms/contractor/ContractorForm";
