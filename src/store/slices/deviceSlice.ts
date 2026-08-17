@@ -24,6 +24,7 @@ const initialState: DeviceAction = {
     inventoryNumber: '',
     modelId: '',
     modelName: '',
+    assignedUserId: null,
     modelSlug: '',
     modelCode: '',
     serialNumber: '',
