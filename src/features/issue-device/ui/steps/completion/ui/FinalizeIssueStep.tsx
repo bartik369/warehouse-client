@@ -28,7 +28,7 @@ export const FinalizeIssueStep = ({ issueState }: FinalizeIssueStepProps) => {
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${issueState.deviceIssueData?.processId}.pdf`;
+      a.download = `${issueState.processId}.pdf`;
       a.click();
 
       URL.revokeObjectURL(url);
@@ -45,7 +45,7 @@ export const FinalizeIssueStep = ({ issueState }: FinalizeIssueStepProps) => {
       <div className={styles.info}>
         <header className={styles.header}>
           {MESSAGES.document}
-          <span>{issueState.deviceIssueData.processId}</span>
+          <span>{issueState.processId}</span>
           {MESSAGES.formed}
         </header>
         <div className={styles.text}>
