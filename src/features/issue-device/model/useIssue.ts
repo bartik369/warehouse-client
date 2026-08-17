@@ -26,7 +26,7 @@ import { generateActNumber } from '@/utils/nums/generateActNumber';
 import {
   resetIssueData,
   setAssignedDevice,
-  setDeviceId,
+  // setDeviceId,
   setDevicesListVisible,
   setDevicesLoaded,
   setIssueBackStep,
@@ -54,10 +54,12 @@ export const useIssue = () => {
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
   const [issueFile, setIssueFile] = useState<Blob>();
-  const { processId, devices } = issueState.deviceIssueData;
+  const { processId, assignedDevices } = issueState;
   const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
   const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
   const [getDevice, { isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
+
+  console.log(assignedDevices);
 
   const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
     useLazyGetWarehousesByUserQuery();
@@ -111,7 +113,7 @@ export const useIssue = () => {
 
         dispatch(setAssignedDevice(deviceData));
 
-        dispatch(setDeviceId(deviceData.id));
+        // dispatch(setDeviceId(deviceData.id));
       } catch (error: unknown) {
         handleApiError(error);
       }
@@ -122,22 +124,22 @@ export const useIssue = () => {
   const handleCompleteProcess = useCallback(
     async (file: Blob) => {
       console.log(file);
-      // if (!file || !processId) {
-      //   return;
-      // }
+      if (!file || !processId) return;
 
       try {
-        // setIssueFile(file);
-        // const issueData = new FormData();
-        // issueData.append('processId', processId);
-        // issueData.append('file', file);
-        // await finalizeIssue(issueData).unwrap();
-        // dispatch(setIssueNextStep());
+        setIssueFile(file);
+        const data = {
+          processId,
+          deviceIds: assignedDevices.map((item) => item.id),
+          file,
+        };
+        await finalizeIssue(data).unwrap();
+        dispatch(setIssueNextStep());
       } catch (error: unknown) {
         handleApiError(error);
       }
     },
-    [dispatch, finalizeIssue, processId]
+    [processId, assignedDevices, dispatch, finalizeIssue]
   );
 
   const handleResetDeviceQuery = useCallback(() => {
@@ -152,7 +154,7 @@ export const useIssue = () => {
   }, [dispatch]);
 
   const handleBackStep = useCallback(() => {
-    const processId = issueState.deviceIssueData.processId;
+    const processId = issueState.processId;
     if (processId && issueState.issueStep <= 2) {
       return;
     }
@@ -185,17 +187,17 @@ export const useIssue = () => {
     navigate('/issues/new');
   };
 
-  const handleCreateIssue = useCallback(async () => {
-    if (!processId || devices.length === 0) {
-      return;
-    }
+  // const handleCreateIssue = useCallback(async () => {
+  //   if (!processId || selectedDevices.length === 0) {
+  //     return;
+  //   }
 
-    try {
-      await createIssue(issueState.deviceIssueData).unwrap();
-    } catch (error: unknown) {
-      handleApiError(error);
-    }
-  }, [createIssue, devices.length, processId, issueState.deviceIssueData]);
+  //   try {
+  //     await createIssue(issueState.deviceIssueData).unwrap();
+  //   } catch (error: unknown) {
+  //     handleApiError(error);
+  //   }
+  // }, [createIssue, devices.length, processId, issueState.deviceIssueData]);
 
   // useEffect(() => {
   //   switch (state.issueStep) {
@@ -215,6 +217,7 @@ export const useIssue = () => {
   const user = {
     data: {
       currentUser: userController.currentUser,
+      assignedUserDevices: userController.assignedUserDevices,
       users: userController.users,
       query: userController.userQuery,
       options: userController.userOptions,
@@ -229,6 +232,7 @@ export const useIssue = () => {
       isUsersLoading: userController.isLoading,
       isUsersSuccess: userController.isSuccess,
       isUsersFetching: userController.isFetching,
+      assignedDevicesLoading: userController.assignedDevicesLoading,
     },
   };
 
@@ -294,19 +298,14 @@ export const useIssue = () => {
   ]);
 
   const handleNextStep = useCallback(async () => {
-    if (issueState.issueStep === 1 && !issueState.deviceIssueData.processId) {
+    if (issueState.issueStep === 1 && !issueState.processId) {
       const process = await handleCreateIssueProcess();
 
       if (!process) return;
     }
 
     dispatch(setIssueNextStep());
-  }, [
-    dispatch,
-    issueState.issueStep,
-    issueState.deviceIssueData.processId,
-    handleCreateIssueProcess,
-  ]);
+  }, [dispatch, issueState.issueStep, issueState.processId, handleCreateIssueProcess]);
 
   const device = {
     data: {

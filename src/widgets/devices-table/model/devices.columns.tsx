@@ -243,7 +243,7 @@ export const getDevicesColumns = ({
       ),
       render: (isAssigned: boolean) => (
         <div className={styles.iconWrapper}>
-          {isAssigned ? (
+          {!isAssigned ? (
             <CgUnavailable className={styles.inUse} />
           ) : (
             <IoCheckmarkCircle className={styles.inStock} />

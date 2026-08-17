@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { SearchDevicesParams } from '@/features/issue-device/model/types';
 import {
   AggregateDeviceInfo,
   Device,
@@ -64,10 +65,10 @@ export const devicesApi = createApi({
         };
       },
     }),
-    searchDevices: build.query<Device[], string>({
-      query: (q: string) => ({
+    searchDevices: build.query<Device[], SearchDevicesParams>({
+      query: ({ q, warehouseId }) => ({
         url: `${import.meta.env.VITE_SEARCH_DEVICES}`,
-        params: { q },
+        params: { q, warehouseId },
       }),
     }),
     updateDevice: build.mutation<
@@ -76,13 +77,18 @@ export const devicesApi = createApi({
     >({
       query: ({ id, ...body }) => ({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
-        method: 'PUT',
         body,
       }),
       invalidatesTags: (result, error, { id }) => [
         { type: 'Device', id },
         { type: 'Device', id: 'LIST' },
       ],
+    }),
+    getAssignedDevices: build.query<Device[], { userId: string }>({
+      query: ({ userId }) => ({
+        url: `${import.meta.env.VITE_DEVICES_ASSIGNED_USER}${userId}`,
+        method: 'GET',
+      }),
     }),
   }),
 });
@@ -95,4 +101,5 @@ export const {
   useGetDeviceOptionsQuery,
   useLazySearchDevicesQuery,
   useSearchDevicesQuery,
+  useGetAssignedDevicesQuery,
 } = devicesApi;

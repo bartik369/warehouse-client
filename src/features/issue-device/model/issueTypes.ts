@@ -30,8 +30,9 @@ export interface IssueState {
   devicesLoaded: boolean;
   wasSearched: boolean;
   warehouse: Warehouse;
+  processId: string;
   // warehouses: Warehouse[];
-  deviceIssueData: DeviceIssueData;
+  // deviceIssueData: DeviceIssueData;
 }
 
 export enum IssueActionTypes {

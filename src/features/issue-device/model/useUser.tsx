@@ -7,6 +7,7 @@ import {
   UserAutocompleteOptions,
 } from '@/shared/ui/user-autocomplete/types';
 import { useGetDepartmentsQuery } from '@/store/api/departmentApi';
+import { useGetAssignedDevicesQuery } from '@/store/api/devicesApi';
 import { useGetLocationsQuery } from '@/store/api/locationApi';
 import { useGetFilteredUsersQuery } from '@/store/api/userApi';
 import { resetUser, setUser } from '@/store/slices/userSlice';
@@ -28,6 +29,13 @@ export const useUser = () => {
   });
   const { data: departments = [] } = useGetDepartmentsQuery();
   const { data: locations = [] } = useGetLocationsQuery();
+  const { data: assignedUserDevices = [], isLoading: assignedDevicesLoading } =
+    useGetAssignedDevicesQuery(
+      { userId: currentUser.id },
+      {
+        skip: !currentUser.id,
+      }
+    );
   const wasSearched = debounceSearchValue.length >= 2;
   const dispatch = useAppDispatch();
 
@@ -72,6 +80,7 @@ export const useUser = () => {
 
   return {
     currentUser,
+    assignedUserDevices,
     users: filteredUsers,
     userOptions,
     userQuery,
@@ -79,6 +88,7 @@ export const useUser = () => {
     isLoading,
     isSuccess,
     isFetching,
+    assignedDevicesLoading,
     handleChange,
     handleSelect,
     handleReset,

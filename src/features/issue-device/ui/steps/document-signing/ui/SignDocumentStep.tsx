@@ -1,5 +1,3 @@
-import { pdf } from '@react-pdf/renderer';
-
 import { User } from '@/entities/user/model/types';
 import { generateIssuePdfFile } from '@/features/issue-device/document/generateIssuePdfFile';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
@@ -23,7 +21,6 @@ export const SignDocumentStep = ({ actions, issueState, user }: SignDocumentStep
   const signatureState = useAppSelector((state) => state.signature);
   const currentUser = useAppSelector((state) => state.auth.user);
   const isNextDisabled = !signatureState.issuer.signature || !signatureState.receiver.signature;
-  const date = new Date();
 
   const generatePdf = () => {
     if (!user || !currentUser) return null;

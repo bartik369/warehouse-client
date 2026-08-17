@@ -42,6 +42,7 @@ export const ManageIssue = () => {
     status,
     issueState,
   } = useIssue();
+
   useEffect(() => {
     return () => {
       actions.handleFullReset();
@@ -52,7 +53,7 @@ export const ManageIssue = () => {
     return <Spinner fontSize={34} />;
   }
 
-  if (id && issueState.deviceIssueData.processId !== id) {
+  if (id && issueState.processId !== id) {
     return <Spinner fontSize={34} />;
   }
 

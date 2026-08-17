@@ -59,7 +59,6 @@ export const IssueProcess = ({
     <FinalizeIssueStep issueState={issueState} />,
   ];
 
-  // todo скрыть кнопку отмены выдачи на послденем этапе
   return (
     <div className={styles.container}>
       <IssueHeader

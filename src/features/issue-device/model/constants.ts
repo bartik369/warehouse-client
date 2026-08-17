@@ -33,7 +33,7 @@ export const BASE_STEPS: ItemType[] = [
   },
 ];
 
-export const ASSIGNED_USER_DEVICES = 'Текущие устройства';
+export const ASSIGNED_USER_DEVICES = 'Текущие устройства пользователя';
 
 export const ISSUE_PROCESS_STATUS_CONFIG: Record<IssueProcessStatus, IssueProcessStatusConfig> = {
   [IssueProcessStatus.Draft]: {

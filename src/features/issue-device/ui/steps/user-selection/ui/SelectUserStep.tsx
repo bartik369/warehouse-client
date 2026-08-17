@@ -26,7 +26,11 @@ export const SelectUserStep = ({ issueState, actions, userController }: SelectUs
     />
   );
   const right = userController.data.currentUser?.id ? (
-    <UserInfo user={userController.data.currentUser} />
+    <UserInfo
+      isLoading={userController.status.assignedDevicesLoading}
+      user={userController.data.currentUser}
+      assignedUserDevices={userController.data.assignedUserDevices}
+    />
   ) : null;
 
   return (
