@@ -12,6 +12,7 @@ export interface Device {
   modelSlug?: string;
   modelName?: string;
   serialNumber?: string;
+  assignedUserId: string | null;
   weight?: number;
   screenSize?: number | null;
   memorySize?: number | null;
@@ -273,19 +274,6 @@ type FilterLabelsKeys =
   | 'memorySize'
   | 'isFunctional'
   | 'isAssigned';
-
-// type DeviceLabelKeys =
-//   | 'name'
-//   | 'modelType'
-//   | 'modelName'
-//   | 'manufacturer'
-//   | 'inventoryNumber'
-//   | 'serialNumber';
-
-// export type DeviceLabel = {
-//   key: DeviceLabelKeys;
-//   label: string;
-// };
 
 export type FilterLabel = {
   key: FilterLabelsKeys;

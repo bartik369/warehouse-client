@@ -13,8 +13,6 @@ const initialState: IssueState = {
   pdfBlob: null,
   issueNumber: '',
   errors: {},
-  // userQuery: '',
-  // deviceQuery: '',
   isUsersListVisible: false,
   isDevicesListVisible: false,
   devicesLoaded: false,
@@ -25,11 +23,11 @@ const initialState: IssueState = {
     slug: '',
     locationId: '',
   },
-  // warehouses: [],
-  deviceIssueData: {
-    processId: '',
-    devices: [],
-  },
+  processId: '',
+  // deviceIssueData: {
+  //   processId: '',
+  //   devices: [],
+  // },
 };
 
 const issueSlice = createSlice({
@@ -62,12 +60,12 @@ const issueSlice = createSlice({
         }
       }
     },
-    setDeviceId: (state, action: PayloadAction<string>) => {
-      const existDeviceId = state.deviceIssueData.devices.includes(action.payload);
-      if (!existDeviceId) {
-        state.deviceIssueData.devices.push(action.payload);
-      }
-    },
+    // setDeviceId: (state, action: PayloadAction<string>) => {
+    //   const existDeviceId = state.deviceIssueData.devices.includes(action.payload);
+    //   if (!existDeviceId) {
+    //     state.deviceIssueData.devices.push(action.payload);
+    //   }
+    // },
     deleteAssignedDevice: (state, action: PayloadAction<string>) => {
       state.assignedDevices = state.assignedDevices.filter((item) => item.id !== action.payload);
     },
@@ -114,14 +112,14 @@ const issueSlice = createSlice({
       state.pdfBlob = action.payload;
     },
     resetIssueData: (state) => {
-      state.deviceIssueData = initialState.deviceIssueData;
+      // state.deviceIssueData = initialState.deviceIssueData;
       state.assignedDevices = initialState.assignedDevices;
       state.issueStep = initialState.issueStep;
       state.warehouse = initialState.warehouse;
     },
     resetIssueState: () => initialState,
     setProcessId: (state, action: PayloadAction<string>) => {
-      state.deviceIssueData.processId = action.payload;
+      state.processId = action.payload;
     },
   },
 });
@@ -151,6 +149,6 @@ export const {
   setWarehouse,
   resetWarehouse,
   setPdfFile,
-  setDeviceId,
+  // setDeviceId,
   resetIssueData,
 } = issueSlice.actions;

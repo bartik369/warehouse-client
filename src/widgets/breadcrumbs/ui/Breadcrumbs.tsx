@@ -14,15 +14,10 @@ const UUID_REGEXP = /^[0-9a-fA-F-]{36}$/;
 
 export const Breadcrumbs = () => {
   const location = useLocation();
-
   const pathnames = location.pathname.split('/').filter(Boolean);
-
   const [pathName, setPathName] = useState<string | null>(null);
-
   const { resolveEntityName } = useEntityNameResolver();
-
   const uuidSegment = pathnames.find((segment) => UUID_REGEXP.test(segment));
-
   const isEditPage = pathnames.at(-1) === 'edit';
 
   useEffect(() => {

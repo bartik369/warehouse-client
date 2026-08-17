@@ -95,3 +95,14 @@ export type IssueProcessStatusConfig = {
   icon?: IconType;
   iconSize?: number;
 };
+
+export type FinalizeIssueRequest = {
+  processId: string;
+  deviceIds: string[];
+  file: Blob;
+};
+
+export type SearchDevicesParams = {
+  q: string;
+  warehouseId: string;
+};

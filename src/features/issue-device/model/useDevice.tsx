@@ -22,16 +22,14 @@ export const useDevice = () => {
   const debouncedQuery = useDebounce(query.trim(), 700);
   const wasSearched = debouncedQuery.length >= 2;
   const state = useAppSelector((rootState) => rootState.issue);
+  const warehouseId = state.warehouse.id;
 
-  const {
-    data: devices = [],
-    isLoading,
-    isFetching,
-    isSuccess,
-    error,
-  } = useSearchDevicesQuery(debouncedQuery, {
-    skip: !wasSearched,
-  });
+  const { data: devices = [], isLoading } = useSearchDevicesQuery(
+    { q: debouncedQuery, warehouseId },
+    {
+      skip: !wasSearched || !warehouseId,
+    }
+  );
 
   const handleChange = (value: string) => {
     setQuery(value);

@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import {
   CreateIssueProcessRequest,
+  FinalizeIssueRequest,
   IssueProcessDto,
   IssueProcessListItem,
 } from '@/features/issue-device/model/types';
@@ -43,12 +44,20 @@ export const issueApi = createApi({
         url: `${import.meta.env.VITE_ISSUE_PROCESSES}`,
       }),
     }),
-    finalizeIssueProcess: build.mutation({
-      query: (body) => ({
-        url: `${import.meta.env.VITE_ISSUE_FINALIZE}`,
-        method: 'POST',
-        body,
-      }),
+    finalizeIssueProcess: build.mutation<void, FinalizeIssueRequest>({
+      query: ({ processId, deviceIds, file }) => {
+        const formData = new FormData();
+        formData.append('processId', processId);
+        deviceIds.forEach((item) => {
+          formData.append('deviceIds', item);
+        });
+        formData.append('file', file);
+        return {
+          url: `${import.meta.env.VITE_ISSUE_FINALIZE}`,
+          method: 'POST',
+          body: formData,
+        };
+      },
     }),
   }),
 });

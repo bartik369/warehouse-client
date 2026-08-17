@@ -16,7 +16,7 @@ export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTable
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const issueStep = useAppSelector((state) => state.issue.issueStep);
-  const isReadonlyStep = issueStep === 3;
+  const isReadonlyStep = issueStep === 3 || issueStep === 1;
   const columns = getAssignedDeviceColumns({
     onDelete,
     hideActions: isReadonlyStep,
