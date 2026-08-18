@@ -17,7 +17,12 @@ interface SignDocumentStepProps {
   onDelete: (id: string) => void;
 }
 
-export const SignDocumentStep = ({ actions, issueState, user }: SignDocumentStepProps) => {
+export const SignDocumentStep = ({
+  actions,
+  issueState,
+  user,
+  isIssueLoading,
+}: SignDocumentStepProps) => {
   const signatureState = useAppSelector((state) => state.signature);
   const currentUser = useAppSelector((state) => state.auth.user);
   const isNextDisabled = !signatureState.issuer.signature || !signatureState.receiver.signature;
@@ -48,29 +53,8 @@ export const SignDocumentStep = ({ actions, issueState, user }: SignDocumentStep
     await actions.handleCompleteProcess(file);
   };
 
-  const handleDownload = async () => {
-    const file = await generatePdf();
-
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    const link = document.createElement('a');
-
-    link.href = url;
-    link.download = file.name;
-
-    link.click();
-
-    URL.revokeObjectURL(url);
-  };
-
   const left = (
-    <IssueDocument
-      devices={issueState.assignedDevices}
-      user={user}
-      state={issueState}
-      onDownload={handleDownload}
-    />
+    <IssueDocument devices={issueState.assignedDevices} user={user} state={issueState} />
   );
 
   const right = <DocumentSignatures user={user} />;
@@ -82,6 +66,7 @@ export const SignDocumentStep = ({ actions, issueState, user }: SignDocumentStep
       currentStep={issueState.issueStep}
       disabledStep={isNextDisabled}
       leftWidth={750}
+      loading={isIssueLoading}
       onNext={handleComplete}
       onBack={actions.handleBackStep}
     />

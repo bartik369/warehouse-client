@@ -13,8 +13,6 @@ interface SelectUserStepProps {
 export const SelectUserStep = ({ issueState, actions, userController }: SelectUserStepProps) => {
   const isNextDisabled = !userController.data.currentUser?.id;
 
-  console.log(userController.data.currentUser);
-
   const left = (
     <UserAutocomplete
       loading={userController.status.isUsersLoading}

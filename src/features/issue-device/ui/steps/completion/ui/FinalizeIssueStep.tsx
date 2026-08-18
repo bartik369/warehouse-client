@@ -1,64 +1,121 @@
-import { IoCheckboxOutline } from 'react-icons/io5';
-import { TbBookDownload } from 'react-icons/tb';
+import { Flex, Typography } from 'antd';
+import { Divider } from 'antd';
+import { BsBoxSeam } from 'react-icons/bs';
+import { BsFillSendFill } from 'react-icons/bs';
+import { FcIdea } from 'react-icons/fc';
+import { GrInfo } from 'react-icons/gr';
+import { HiOutlineEnvelope } from 'react-icons/hi2';
+import { IoDocumentTextOutline } from 'react-icons/io5';
+import { LuDownload } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
-import BtnAction from '@/components/ui/buttons/BtnAction';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
-import { useAppSelector } from '@/hooks/redux/useRedux';
-import { partnerUser } from '@/store/slices/userSlice';
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
-import { COLORS } from '@/utils/constants/ui/colors';
-import { MESSAGES } from '@/utils/constants/ui/messages';
-import { SIZES } from '@/utils/constants/ui/sizes';
+import { ROUTES } from '@/shared/config/routes/routes';
 
-import styles from '../../Steps.module.scss';
+import successIcon from '../../../../../../assets/elements/success.png';
+import styles from './FinalizeIssueStep.module.scss';
 
 interface FinalizeIssueStepProps {
   issueState: IssueState;
+  file: Blob | null;
 }
 
-export const FinalizeIssueStep = ({ issueState }: FinalizeIssueStepProps) => {
-  const recipient = useAppSelector(partnerUser);
+export const FinalizeIssueStep = ({ issueState, file }: FinalizeIssueStepProps) => {
+  const navigate = useNavigate();
+  const issueNumber = issueState.issueNumber;
 
-  const handleDownload = async () => {
-    try {
-      if (!issueState.pdfBlob) return;
+  const handleDownload = () => {
+    if (!file) return;
 
-      const url = URL.createObjectURL(issueState.pdfBlob);
-      window.open(url);
+    const url = URL.createObjectURL(file);
+    const link = document.createElement('a');
 
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${issueState.processId}.pdf`;
-      a.click();
+    link.href = url;
+    link.download = `Акт-выдачи-${issueState.issueNumber}.pdf`;
 
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error(err);
-    }
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
   };
 
   return (
-    <div className={styles.doneProcess}>
-      <div className={styles.icon}>
-        <IoCheckboxOutline />
-      </div>
-      <div className={styles.info}>
-        <header className={styles.header}>
-          {MESSAGES.document}
-          <span>{issueState.processId}</span>
-          {MESSAGES.formed}
-        </header>
-        <div className={styles.text}>
-          {MESSAGES.documentSent} <span>{recipient.email}</span>
+    <Flex vertical gap={40}>
+      <Flex align="center" vertical gap={10}>
+        <div className={styles.successIcon}>
+          <img src={successIcon} alt="" />
         </div>
-      </div>
-      <BtnAction
-        size={SIZES.md}
-        color={COLORS.orange}
-        click={handleDownload}
-        title={BUTTON_LABELS.download}
-        icon={<TbBookDownload />}
-      />
-    </div>
+        <Typography.Title level={4}>
+          Выдача оборудования <span className={styles.issueNumber}>{issueNumber}</span> завершена!
+        </Typography.Title>
+        <Typography.Text>
+          Оборудование успешно выдано пользователю, все документы сформированы и отправлены .
+        </Typography.Text>
+      </Flex>
+      <Flex gap={30} className={styles.cards}>
+        <Flex align="flex-start" gap={10} className={styles.block}>
+          <div className={styles.icon}>
+            <BsBoxSeam size={20} />
+          </div>
+          <Flex vertical>
+            <Typography.Text strong>Оборудование выдано</Typography.Text>
+            <Typography.Text className={styles.description}>
+              Оборудование передано пользовтелю и зафиксировано в системе
+            </Typography.Text>
+          </Flex>
+        </Flex>
+
+        <Flex align="flex-start" gap={10} className={styles.block}>
+          <div className={styles.icon}>
+            <HiOutlineEnvelope size={22} />
+          </div>
+          <Flex vertical>
+            <Typography.Text strong>Письмо отправлено</Typography.Text>
+            <Typography.Text className={styles.description}>
+              Пользователю отправлено письмо на почту с PDF-файлом акта выдачи.
+            </Typography.Text>
+          </Flex>
+        </Flex>
+
+        <Flex align="flex-start" gap={10} className={styles.block}>
+          <div className={styles.icon}>
+            <IoDocumentTextOutline size={22} />
+          </div>
+          <Flex vertical>
+            <Typography.Text strong>Документы сохранены</Typography.Text>
+            <Typography.Text className={styles.description}>
+              Акт выдачи сохранен в системе и доступен для просмотра и скачивания.
+            </Typography.Text>
+          </Flex>
+        </Flex>
+      </Flex>
+      <Divider style={{ margin: '0' }} />
+      <Flex className={styles.information}>
+        <Flex gap={10} align="center">
+          <div className={styles.icon}>
+            <FcIdea size={26} />
+          </div>
+          <Flex vertical>
+            <Typography.Title level={4}>Что дальше?</Typography.Title>
+            <Typography.Text className={styles.description}>
+              Пользователь получит письмо с актом выдачи оборудования.
+            </Typography.Text>
+            <Typography.Text className={styles.description}>
+              Вы можете посмотреть выданное оборудование в разделе "Выдачи"
+            </Typography.Text>
+          </Flex>
+        </Flex>
+        <Flex gap={15}>
+          <button className={styles.primary} onClick={() => navigate(ROUTES.ISSUES)}>
+            Перейти к выдачам
+          </button>
+          <button className={styles.secondary} onClick={handleDownload}>
+            <LuDownload size={17} />
+            <span>Скачать акт выдачи</span>
+          </button>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };
