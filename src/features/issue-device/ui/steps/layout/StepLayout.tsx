@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Card, Flex } from 'antd';
+import { Button, Card, Flex } from 'antd';
 
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 
@@ -14,6 +14,7 @@ interface StepLayoutProps {
   disabledStep: boolean;
   hideBack?: boolean;
   leftWidth?: number | string;
+  loading?: boolean;
   onNext: () => void;
   onBack: () => void;
 }
@@ -25,6 +26,7 @@ export const StepLayout = ({
   disabledStep,
   hideBack = false,
   leftWidth = 400,
+  loading = false,
   onBack,
   onNext,
 }: StepLayoutProps) => {
@@ -53,13 +55,18 @@ export const StepLayout = ({
       </Flex>
       <Flex gap={20} justify="space-between">
         {!hideBack && (
-          <button className={styles.prevBtn} disabled={currentStep === 0} onClick={onBack}>
+          <Button className={styles.prevBtn} disabled={currentStep === 0} onClick={onBack}>
             {BUTTON_LABELS.prev}
-          </button>
+          </Button>
         )}
-        <button className={styles.nextBtn} disabled={disabledStep} onClick={onNext}>
-          {BUTTON_LABELS.next}
-        </button>
+        <Button
+          loading={currentStep === 3 && loading}
+          className={styles.nextBtn}
+          disabled={disabledStep}
+          onClick={onNext}
+        >
+          {currentStep === 3 ? 'Завершить' : BUTTON_LABELS.next}
+        </Button>
       </Flex>
     </Flex>
   );

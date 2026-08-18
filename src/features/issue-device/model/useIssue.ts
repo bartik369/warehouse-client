@@ -53,7 +53,7 @@ export const useIssue = () => {
 
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
-  const [issueFile, setIssueFile] = useState<Blob>();
+  const [issueFile, setIssueFile] = useState<Blob | null>(null);
   const { processId, assignedDevices } = issueState;
   const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
   const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
@@ -123,17 +123,16 @@ export const useIssue = () => {
 
   const handleCompleteProcess = useCallback(
     async (file: Blob) => {
-      console.log(file);
       if (!file || !processId) return;
 
       try {
-        setIssueFile(file);
         const data = {
           processId,
           deviceIds: assignedDevices.map((item) => item.id),
           file,
         };
         await finalizeIssue(data).unwrap();
+        setIssueFile(file);
         dispatch(setIssueNextStep());
       } catch (error: unknown) {
         handleApiError(error);
@@ -347,7 +346,7 @@ export const useIssue = () => {
 
   const data = {
     issueState,
-    // issueFile,
+    issueFile,
   };
 
   const status = {

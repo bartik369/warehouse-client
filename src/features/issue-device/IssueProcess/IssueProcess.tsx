@@ -33,6 +33,7 @@ export const IssueProcess = ({
   issueState,
   actions,
   status,
+  data,
 }: IssueProcessProps) => {
   const currentStep = issueState.issueStep;
   const stepContent = [
@@ -56,7 +57,7 @@ export const IssueProcess = ({
       user={userController.data.currentUser}
       isIssueLoading={status.isIssueLoading}
     />,
-    <FinalizeIssueStep issueState={issueState} />,
+    <FinalizeIssueStep issueState={issueState} file={data.issueFile} />,
   ];
 
   return (

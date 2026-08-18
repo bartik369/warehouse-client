@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '@/hooks/redux/useRedux';
+import { ROUTES } from '@/shared/config/routes/routes';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 import { useGetIssueProcessByIdQuery } from '@/store/api/issueApi';
 import {
@@ -14,11 +15,13 @@ import {
 import { setUser } from '@/store/slices/userSlice';
 
 import { IssueProcess } from '../IssueProcess/IssueProcess';
+import { IssueProcessStatus } from '../model/types';
 import { useIssue } from '../model/useIssue';
 
 export const ManageIssue = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { data: process, isLoading } = useGetIssueProcessByIdQuery(id!, {
     skip: !id,
@@ -26,12 +29,19 @@ export const ManageIssue = () => {
 
   useEffect(() => {
     if (!process) return;
+
+    if (process.status === IssueProcessStatus.Completed) {
+      navigate(ROUTES.ISSUE(process.id), {
+        replace: true,
+      });
+      return;
+    }
     dispatch(setProcessId(process.id));
     dispatch(setIssueNumber(process.documentNo));
     dispatch(setUser(process.user));
     dispatch(setWarehouse(process.warehouse));
     dispatch(setIssueStep(2));
-  }, [process, dispatch]);
+  }, [process, dispatch, navigate]);
 
   const {
     userController,

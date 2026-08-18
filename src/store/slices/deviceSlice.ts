@@ -6,7 +6,6 @@ import { AssignedDevice } from '@/types/issue';
 type DeviceAction = {
   device: Device;
   devices: Device[];
-  // selectedDevices: FilteredDevicesFromBack[];
   selectedDevices: AssignedDevice[];
   errors: Partial<Record<keyof Device, string>>;
   title: string;

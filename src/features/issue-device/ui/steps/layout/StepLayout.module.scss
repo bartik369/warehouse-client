@@ -1,46 +1,81 @@
 .container {
   width: 100%;
+
   .content {
     width: 100%;
     gap: 20px;
-    .leftBlock {
-      min-width: 0;
-    }
+
+    .leftBlock,
     .centerBlock {
       min-width: 0;
     }
+
     .rightBlock {
       flex: 1;
       overflow: auto;
       min-width: 0;
     }
   }
-  .nextBtn,
-  .prevBtn {
-    padding: 12px 24px;
+
+  button.nextBtn,
+  button.prevBtn {
+    height: auto;
+    padding: 10px 22px;
+    font-size: 12px;
+    border: 1px solid transparent;
     border-radius: 6px;
-    border: none;
-    transition: background-color ease 0.5s;
+    transition: background-color 0.5s ease;
     cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: transparent;
+      box-shadow: none;
+    }
   }
-  .nextBtn {
+
+  button.nextBtn {
+    margin-left: auto;
     background-color: var(--blue-600);
     color: var(--white);
-    margin-left: auto;
-    &:hover {
+
+    &:hover:not(:disabled) {
       background-color: var(--blue-500);
+      border-color: transparent;
+      color: var(--white);
     }
+
+    &:active:not(:disabled),
+    &:focus:not(:disabled) {
+      background-color: var(--blue-600);
+      border-color: transparent;
+      color: var(--white);
+    }
+
     &:disabled {
       background-color: var(--blue-100);
+      border-color: transparent;
       color: var(--blue-300);
       cursor: not-allowed;
     }
   }
-  .prevBtn {
+
+  button.prevBtn {
     background-color: var(--gray-200);
     color: var(--gray-600);
+
+    &:hover:not(:disabled),
+    &:active:not(:disabled),
+    &:focus:not(:disabled) {
+      background-color: var(--gray-200);
+      border-color: transparent;
+      color: var(--gray-600);
+    }
+
     &:disabled {
       background-color: var(--gray-100);
+      border-color: transparent;
       color: var(--gray-300);
       cursor: not-allowed;
     }
