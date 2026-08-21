@@ -1,23 +1,22 @@
-import { IoBarcodeOutline } from 'react-icons/io5';
-import { MdBarcodeReader } from 'react-icons/md';
-
 import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
 
+import logo from '../../../../assets/elements/logo.png';
 import styles from './Logo.module.scss';
 
 interface LogoProps {
   open: boolean;
 }
 
-const Logo = ({ open }: LogoProps) => {
-  const Icon = open ? IoBarcodeOutline : MdBarcodeReader;
-  const style = open ? styles.icon : styles.active;
+export const Logo = ({ open }: LogoProps) => {
   return (
     <div className={styles.logo}>
-      <Icon className={style} />
-      {open && <span>{ELEMENTS_LABELS.logoText}</span>}
+      <img className={styles.image} src={logo} alt="" />
+      {open && (
+        <div className={styles.content}>
+          <span className={styles.title}>IT ASSET PORTAL</span>
+          <span className={styles.description}>{ELEMENTS_LABELS.logoText}</span>
+        </div>
+      )}
     </div>
   );
 };
-
-export default Logo;

@@ -2,18 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   width: 100%;
   height: 40px;
   margin-bottom: 30px;
-  span {
-    color: #f6f7fb;
-    font-weight: 800;
-    display: inline-block;
-    padding: 0 3px;
+  padding: 10px;
+  img {
+    width: 30px;
   }
-  .icon {
-    font-size: 45px;
-    color: var(--blue-500);
+  .content {
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .description {
+      font-size: 10px;
+      color: var(--gray-400);
+    }
   }
   .active {
     font-size: 30px;

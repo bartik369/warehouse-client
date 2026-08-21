@@ -1,3 +1,5 @@
+import { Department } from '@/entities/department/model/types';
+
 export type User = {
   id: string;
   userName: string;
@@ -7,13 +9,13 @@ export type User = {
   lastNameRu: string;
   firstNameEn: string;
   lastNameEn: string;
-  department: string;
+  department?: Department;
   departmentId: string;
   isActive: boolean;
-  location: string;
+  location?: string;
   locationId: string;
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type UserLabelsKeys =

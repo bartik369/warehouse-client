@@ -1,0 +1,80 @@
+.content {
+  flex: 3 1 0;
+  min-width: 0;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 14px !important;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 12px !important;
+}
+
+.bgIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  background-color: var(--blue-50);
+  .icon {
+    font-size: 20px;
+    color: var(--blue-600);
+  }
+}
+.fileIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  background-color: var(--blue-50);
+  .icon {
+    font-size: 20px;
+    color: var(--blue-500);
+  }
+}
+
+.userInfo {
+  .name {
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 600;
+  }
+  .department {
+    color: var(--gray-600);
+    font-size: 11px;
+  }
+}
+
+.block {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  padding: 2px;
+  row-gap: 20px;
+
+  .label,
+  .value {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 12px;
+    line-height: 1;
+  }
+  .label {
+    color: var(--gray-600);
+  }
+}
+.file {
+  .label {
+    font-weight: 600;
+  }
+  .value {
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+}

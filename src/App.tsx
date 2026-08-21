@@ -13,7 +13,7 @@ import Page404 from './pages/404/page404';
 import { useValidateMutation } from './store/api/authApi';
 import { setAuth, setCredentials } from './store/slices/authSlice';
 import { handleApiError } from './utils/errors/handleApiError';
-import Layout from './widgets/app-layout/ui/Layout';
+import { Layout } from './widgets/app-layout/ui/Layout';
 
 function App() {
   const dispatch = useAppDispatch();

@@ -40,11 +40,7 @@ export const HeaderIssues = ({ selectedIssue, onStart, onDelete }: HeaderIssuesP
               variant="apply"
               iconSize={18}
               icon={AiOutlineFileDone}
-              onClick={() =>
-                navigate(`/issues/${selectedIssue.id}/edit`, {
-                  replace: true,
-                })
-              }
+              onClick={() => navigate(`/issues/${selectedIssue.id}/edit`)}
             />
             <DeleteConfirm
               placement="topRight"

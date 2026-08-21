@@ -277,9 +277,7 @@ export const useIssue = () => {
       }).unwrap();
       dispatch(setProcessId(process.id));
       dispatch(setIssueNumber(process.documentNo));
-      navigate(`/issues/${process.id}/edit`, {
-        replace: true,
-      });
+      navigate(`/issues/${process.id}/edit`);
 
       return process;
     } catch (error: unknown) {

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 
+import { skipToken } from '@reduxjs/toolkit/query';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '@/hooks/redux/useRedux';
 import { ROUTES } from '@/shared/config/routes/routes';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
-import { useGetIssueProcessByIdQuery } from '@/store/api/issueApi';
+import { useGetIssueProcessQuery } from '@/store/api/issueApi';
 import {
   setIssueNumber,
   setIssueStep,
@@ -23,17 +24,13 @@ export const ManageIssue = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { data: process, isLoading } = useGetIssueProcessByIdQuery(id!, {
-    skip: !id,
-  });
+  const { data: process, isLoading } = useGetIssueProcessQuery(id ?? skipToken);
 
   useEffect(() => {
     if (!process) return;
 
     if (process.status === IssueProcessStatus.Completed) {
-      navigate(ROUTES.ISSUE(process.id), {
-        replace: true,
-      });
+      navigate(ROUTES.ISSUE(process.id));
       return;
     }
     dispatch(setProcessId(process.id));

@@ -12,7 +12,7 @@ import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { MESSAGES } from '@/utils/constants/ui/messages';
 import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
 
-import { LoginFormValues, loginSchema } from '../model/schema';
+import { LoginFormValues, loginSchema } from '../../model/schema';
 import styles from './AuthForm.module.scss';
 
 const AuthForm = () => {
@@ -30,9 +30,6 @@ const AuthForm = () => {
   return (
     <FormProvider {...form}>
       <Flex className={styles.auth} vertical>
-        <Typography.Title className={styles.title} level={4}>
-          Войдите в аккаунт
-        </Typography.Title>
         <form onSubmit={form.handleSubmit(authHandler)}>
           <Flex vertical gap={15}>
             <RhfTextField<LoginFormValues>

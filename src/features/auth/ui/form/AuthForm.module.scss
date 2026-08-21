@@ -1,13 +1,5 @@
 .auth {
   width: 100%;
-  .title {
-    color: #262626;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.2px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
   .actions {
     display: flex;
     justify-content: center;
@@ -27,6 +19,7 @@
   }
   form {
     width: 100%;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
   }

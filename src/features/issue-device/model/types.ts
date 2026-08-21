@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { AutoCompleteProps, StepsProps } from 'antd';
 import { IconType } from 'react-icons';
 
+import { User } from '@/entities/user/model/types';
+import { Warehouse } from '@/entities/warehouse/model/types';
 import { Status } from '@/shared/ui/custom-tag/types';
 
 type StepsItemsType = StepsProps['items'];
@@ -105,4 +107,35 @@ export type FinalizeIssueRequest = {
 export type SearchDevicesParams = {
   q: string;
   warehouseId: string;
+};
+
+export type EquipmentIssuance = {
+  id: string;
+  documentNo: string;
+  userId: string;
+  warehouseId: string;
+  issuedById: string;
+  issueDate: string;
+  comment: string | null;
+  status: IssueProcessStatus;
+  fileId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  user: User;
+  issuedBy: {
+    id: string;
+    userName: string;
+    email: string;
+    workId: string;
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
+    isActive: boolean;
+    locationId: string;
+    createdAt: string;
+    updatedAt: string;
+    departmentId: string;
+  };
+  warehouse: Warehouse;
 };

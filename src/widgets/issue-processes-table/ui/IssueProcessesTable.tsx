@@ -1,9 +1,11 @@
 import type { Key } from 'react';
 
 import { ConfigProvider, Table } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import { IssueProcessListItem } from '@/features/issue-device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
+import { ROUTES } from '@/shared/config/routes/routes';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 
 import { getIssueProcessesColumns } from '../model/issue-processes.columns';
@@ -23,7 +25,25 @@ export const IssueProcessesTable = ({
   issueProcesses,
   onSelect,
 }: IssueProcessesTableProps) => {
-  const columns = getIssueProcessesColumns();
+  const navigate = useNavigate();
+
+  const handleOpenProcess = (id: string) => {
+    if (!id) return;
+    navigate(ROUTES.ISSUE(id));
+  };
+  const handleContinueProcess = (id: string) => {
+    if (!id) return;
+    navigate(`/issues/${id}/edit`);
+  };
+  const handleDeleteProcess = (id: string) => {
+    if (!id) return;
+  };
+
+  const columns = getIssueProcessesColumns({
+    onOpen: handleOpenProcess,
+    onContinue: handleContinueProcess,
+    onDelete: handleDeleteProcess,
+  });
 
   const IssueProcessTable = (
     <Table

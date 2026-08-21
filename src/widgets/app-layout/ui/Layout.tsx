@@ -6,14 +6,14 @@ import { Outlet, useLocation } from 'react-router-dom';
 import LocalFallback from '@/components/ui/error/LocalFallback';
 // import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
 import { Header } from '@/widgets/header/ui/Header/Header';
+import { Sidebar } from '@/widgets/sidebar/ui/Sidebar/Sidebar';
 
 import { GlobalModal } from '../../../components/modal/GlobalModal';
 import AdminMenu from '../../admin-menu/ui/AdminMenu';
 import Footer from '../../footer/Footer';
-import Sidebar from '../../sidebar/ui/Sidebar/Sidebar';
 import styles from './Layout.module.scss';
 
-const Layout = () => {
+export const Layout = () => {
   const [isActive, setIsActive] = useState(false);
   const location = useLocation();
 
@@ -37,5 +37,3 @@ const Layout = () => {
     </div>
   );
 };
-
-export default Layout;
