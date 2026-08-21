@@ -1,3 +1,5 @@
+import { Department } from '@/entities/department/model/types';
+
 import { IssueStepType } from '../features/issue-device/model/issueTypes';
 
 export interface User {
@@ -9,8 +11,7 @@ export interface User {
   lastNameRu: string;
   firstNameEn: string;
   lastNameEn: string;
-  department: string;
-  departmentId: string;
+  department: Department;
   isActive: boolean;
   location: string;
   locationId: string;
