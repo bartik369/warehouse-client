@@ -1,53 +1,52 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { logOut } from '../slices/authSlice';
-import { Signin, AuthRes, User } from '../../types/user';
+
+import { User } from '@/entities/user/model/types';
+
+import { AuthRes, Signin } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
+import { logOut } from '../slices/authSlice';
 
 export const authApi = createApi({
-    reducerPath:'authApi',
-    baseQuery: baseQueryWithReauth,
-    tagTypes:[],
-    endpoints: build =>({
-        signin:build.mutation<AuthRes, Signin>({
-            query: (credentials) => ({
-                url: `${import.meta.env.VITE_AUTH}`,
-                method: 'POST',
-                body: {...credentials},
-            })
-        }),
-        logoutUser: build.mutation<{ message: string }, string>({
-            query: (id) => ({
-                url: `${import.meta.env.VITE_LOGOUT}`,
-                method: 'POST',
-                body: {id: id}
-            }),
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                try {
-                    await queryFulfilled
-                    dispatch(logOut());
-                } catch (err) {
-                    console.log(err)
-                }
-            }
-        }),
-        refresh: build.mutation({
-            query:() => ({
-                url: import.meta.env.VITE_REFRESH_TOKEN,
-                method: 'POST',
-            }),
-        }),
-        validate: build.mutation<User, null>({
-            query:() => ({
-                url: import.meta.env.VITE_VALIDATE,
-                method: 'POST',
-            })
-        }),
-    })
+  reducerPath: 'authApi',
+  baseQuery: baseQueryWithReauth,
+  tagTypes: [],
+  endpoints: (build) => ({
+    signin: build.mutation<AuthRes, Signin>({
+      query: (credentials) => ({
+        url: `${import.meta.env.VITE_AUTH}`,
+        method: 'POST',
+        body: { ...credentials },
+      }),
+    }),
+    logoutUser: build.mutation<{ message: string }, string>({
+      query: (id) => ({
+        url: `${import.meta.env.VITE_LOGOUT}`,
+        method: 'POST',
+        body: { id: id },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(logOut());
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+    refresh: build.mutation({
+      query: () => ({
+        url: import.meta.env.VITE_REFRESH_TOKEN,
+        method: 'POST',
+      }),
+    }),
+    validate: build.mutation<User, null>({
+      query: () => ({
+        url: import.meta.env.VITE_VALIDATE,
+        method: 'POST',
+      }),
+    }),
+  }),
 });
 
-export const {
-    useSigninMutation, 
-    useLogoutUserMutation,
-    useRefreshMutation,
-    useValidateMutation
-} = authApi;
+export const { useSigninMutation, useLogoutUserMutation, useRefreshMutation, useValidateMutation } =
+  authApi;

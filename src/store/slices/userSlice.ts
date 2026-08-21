@@ -28,7 +28,6 @@ const initialState: UserAction = {
       slug: '',
       comment: '',
     },
-    departmentId: '',
     location: '',
     locationId: '',
   },
