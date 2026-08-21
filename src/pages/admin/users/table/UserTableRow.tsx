@@ -22,7 +22,7 @@ const UserTableRow = ({ user, isAdmin, actions }: UserTableRowProps) => {
       <td>{user.lastNameEn}</td>
       <td>{user.email}</td>
       <td>{user.location}</td>
-      <td>{user.department}</td>
+      <td>{user.department?.name}</td>
       <td>{user.workId}</td>
       <td className={`${styles.status} ${user.isActive ? styles.active : ''}`}>
         {user.isActive ? <GoCheckCircleFill /> : <IoCloseCircle />}
