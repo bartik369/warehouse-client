@@ -1,4 +1,4 @@
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 
 import { User } from '@/entities/user/model/types';
 
