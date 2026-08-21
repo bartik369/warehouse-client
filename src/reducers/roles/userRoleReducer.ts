@@ -1,48 +1,46 @@
-import {
-  UserRoleState,
-  UserRoleAction,
-  UserRoleActionsTypes,
-} from "./userRoleTypes";
+import { UserRoleAction, UserRoleActionsTypes, UserRoleState } from './userRoleTypes';
 
 export const userRoleInitialState: UserRoleState = {
   role: {
-    id: "",
-    email: "",
-    userId: "",
-    roleName: "",
-    roleId: "",
+    id: '',
+    email: '',
+    userId: '',
+    roleName: '',
+    roleId: '',
   },
   errors: {},
-  query: "",
+  query: '',
   isUsersListVisible: false,
   wasSearched: false,
   assignedUserRoles: {
     user: {
-      userName: "",
-      email: "",
-      workId: "",
-      firstNameRu: "",
-      lastNameRu: "",
-      firstNameEn: "",
-      lastNameEn: "",
-      department: "",
-      location: "",
+      userName: '',
+      email: '',
+      workId: '',
+      firstNameRu: '',
+      lastNameRu: '',
+      firstNameEn: '',
+      lastNameEn: '',
+      department: {
+        id: '',
+        name: '',
+        slug: '',
+        comment: '',
+      },
+      location: '',
     },
     roles: [
       {
-        locationName: "",
-        warehouseName: "",
-        roleName: "",
+        locationName: '',
+        warehouseName: '',
+        roleName: '',
         permissionsName: [],
       },
     ],
   },
 };
 
-export function userRoleReducer(
-  state: UserRoleState,
-  action: UserRoleAction
-): UserRoleState {
+export function userRoleReducer(state: UserRoleState, action: UserRoleAction): UserRoleState {
   switch (action.type) {
     case UserRoleActionsTypes.SET_ROLE:
       return {
@@ -75,15 +73,17 @@ export function userRoleReducer(
       return { ...state, wasSearched: action.payload };
     case UserRoleActionsTypes.SET_USER_ASSIGNED_ROLES:
       return {
-        ...state, assignedUserRoles: action.payload
-      }
+        ...state,
+        assignedUserRoles: action.payload,
+      };
     case UserRoleActionsTypes.RESET_USER_ASSIGNED_ROLES:
       return {
-        ...state, assignedUserRoles: {
+        ...state,
+        assignedUserRoles: {
           user: {},
-          roles: []
-        }
-      }
+          roles: [],
+        },
+      };
     default:
       return state;
   }
