@@ -22,7 +22,12 @@ const initialState: UserAction = {
     firstNameEn: '',
     lastNameEn: '',
     isActive: true,
-    department: '',
+    department: {
+      id: '',
+      name: '',
+      slug: '',
+      comment: '',
+    },
     departmentId: '',
     location: '',
     locationId: '',
