@@ -25,7 +25,7 @@ const UserInfo = ({ userRoles }: UserInfoProps) => {
             <TechnicalOptions name={LABELS.email} value={user?.email ?? ''} />
             <TechnicalOptions name={LABELS.login} value={user?.userName ?? ''} />
             <TechnicalOptions name={LABELS.workID} value={user?.workId ?? ''} />
-            <TechnicalOptions name={LABELS.department} value={user?.department ?? ''} />
+            <TechnicalOptions name={LABELS.department} value={user?.department?.name ?? ''} />
             <TechnicalOptions name={LABELS.location} value={user?.location ?? ''} />
           </section>
           <div className={styles.title}>{SECTION_TITLES.userListRoles}</div>

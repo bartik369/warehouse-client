@@ -1,4 +1,4 @@
-import styles from "./TechnicalOptions.module.scss";
+import styles from './TechnicalOptions.module.scss';
 
 interface TechnicalOptionsProps {
   name: string;

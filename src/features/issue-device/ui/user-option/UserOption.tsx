@@ -22,7 +22,7 @@ export const UserOption = ({ user }: UserOptionProps) => {
         </div>
       </div>
       <div className={styles.employeeInfo}>
-        <span className={styles.department}>{user.department}</span>
+        <span className={styles.department}>{user.department?.name}</span>
         <span className={styles.workId}>{user.workId}</span>
       </div>
     </div>

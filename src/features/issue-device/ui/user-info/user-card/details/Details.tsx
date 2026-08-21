@@ -17,7 +17,7 @@ export const Details = ({ user }: DetailsProps) => {
       </div>
       <div className={styles.detail}>
         <span className={styles.detailLabel}>{LABELS.department}</span>
-        <span className={styles.detailValue}>{user.department}</span>
+        <span className={styles.detailValue}>{user.department?.name}</span>
       </div>
       <div className={styles.detail}>
         <span className={styles.detailLabel}>{LABELS.login}</span>

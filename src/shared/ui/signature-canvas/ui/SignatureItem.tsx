@@ -1,10 +1,9 @@
 import { Flex, Typography } from 'antd';
 import { BsVectorPen } from 'react-icons/bs';
-import { HiOutlinePencil } from 'react-icons/hi2';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 
+import { User } from '@/entities/user/model/types';
 import { SignatureItemType } from '@/store/slices/signatureSlice';
-import { User } from '@/types/user';
 
 import { CustomTag } from '../../custom-tag/CustomTag';
 import styles from './SignatureItem.module.scss';
