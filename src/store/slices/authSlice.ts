@@ -31,7 +31,6 @@ const initialState: AuthState = {
     location: '',
     createdAt: '',
     updatedAt: '',
-    departmentId: '',
     locationId: '',
   },
 

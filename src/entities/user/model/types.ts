@@ -10,7 +10,6 @@ export type User = {
   firstNameEn: string;
   lastNameEn: string;
   department?: Department;
-  departmentId: string;
   isActive: boolean;
   location?: string;
   locationId: string;
