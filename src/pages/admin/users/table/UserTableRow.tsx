@@ -2,7 +2,8 @@ import { GoCheckCircleFill } from 'react-icons/go';
 import { IoCloseCircle } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
 
-import { User, UserFormActions } from '@/types/user';
+import { User } from '@/entities/user/model/types';
+import { UserFormActions } from '@/types/user';
 
 import styles from './UserTableRow.module.scss';
 
