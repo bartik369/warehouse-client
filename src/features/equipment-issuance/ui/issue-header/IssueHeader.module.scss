@@ -1,0 +1,15 @@
+.header {
+  justify-content: space-between;
+  width: 100%;
+  .info {
+    display: flex;
+    gap: 10px;
+    .title {
+      line-height: 1;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+  }
+}

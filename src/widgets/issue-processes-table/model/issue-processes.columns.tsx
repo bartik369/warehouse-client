@@ -1,16 +1,62 @@
 import { Flex } from 'antd';
+import { ColumnType } from 'antd/es/table';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { FaInfo } from 'react-icons/fa6';
 import { IoCopyOutline } from 'react-icons/io5';
-import { record } from 'zod';
+import { IoDocumentTextOutline } from 'react-icons/io5';
 
 import { ISSUE_PROCESS_STATUS_CONFIG } from '@/features/issue-device/model/constants';
 import { IssueProcessListItem, IssueProcessStatus } from '@/features/issue-device/model/types';
 import { copyToClipboard } from '@/shared/lib/clipboard/copyToClipboard';
-import { formatDate } from '@/shared/lib/date/formatDate';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { DateTime } from '@/shared/ui/date-time/DateTime';
+import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import { TwoLineText } from '@/shared/ui/two-line-text/TwoLineText';
 
-export const getIssueProcessesColumns = () => {
+export const getIssueProcessesColumns = ({
+  onOpen,
+  onContinue,
+  onDelete,
+}: {
+  onOpen: (id: string) => void;
+  onContinue: (id: string) => void;
+  onDelete: (id: string) => void;
+}) => {
+  const actionColumn: ColumnType<IssueProcessListItem> = {
+    key: 'icon',
+    width: 60,
+    onCell: () => ({
+      style: {
+        paddingLeft: 0,
+        paddingRight: 0,
+        textAlign: 'center',
+        cursor: 'pointer',
+      },
+    }),
+    render: (_value: unknown, record: IssueProcessListItem) => {
+      if (record.status === IssueProcessStatus.Completed) {
+        return (
+          <Flex justify="flex-end" style={{ paddingRight: '5px' }}>
+            <IconButton onClick={() => onOpen(record.id)}>
+              <FaInfo size={10} />
+            </IconButton>
+          </Flex>
+        );
+      } else {
+        return (
+          <Flex gap={5} justify="flex-end" style={{ paddingRight: '5px' }}>
+            <IconButton variant="primary" onClick={() => onContinue(record.id)}>
+              <IoDocumentTextOutline />
+            </IconButton>
+            <IconButton variant="danger" onClick={() => onDelete(record.id)}>
+              <AiOutlineDelete />
+            </IconButton>
+          </Flex>
+        );
+      }
+    },
+  };
+
   return [
     {
       key: 'documentNo',
@@ -100,5 +146,6 @@ export const getIssueProcessesColumns = () => {
         return <TwoLineText primary={warehouse?.name} secondary={warehouse.location?.name} />;
       },
     },
+    ...[actionColumn],
   ];
 };

@@ -1,8 +1,9 @@
 import { ChangeEvent } from 'react';
 
+import { User } from '@/entities/user/model/types';
+
 import { CheckedPermissionOptions } from './content';
 import { Entity } from './devices';
-import { User } from './user';
 
 export interface Role {
   id: string;

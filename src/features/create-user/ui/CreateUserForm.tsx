@@ -15,7 +15,7 @@ import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RootState } from '@/store/store';
 import { FieldUserFormConfig } from '@/types/content';
 import { Entity } from '@/types/devices';
-import { User, UserFormActions } from '@/types/user';
+import { UserFormActions } from '@/types/user';
 import { LABELS } from '@/utils/constants/ui/labels';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 

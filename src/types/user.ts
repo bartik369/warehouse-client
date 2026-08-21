@@ -1,22 +1,24 @@
+import { Department } from '@/entities/department/model/types';
+import { User } from '@/entities/user/model/types';
+
 import { IssueStepType } from '../features/issue-device/model/issueTypes';
 
-export interface User {
-  id: string;
-  userName: string;
-  email: string;
-  workId: string;
-  firstNameRu: string;
-  lastNameRu: string;
-  firstNameEn: string;
-  lastNameEn: string;
-  department: string;
-  departmentId: string;
-  isActive: boolean;
-  location: string;
-  locationId: string;
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
-}
+// export interface User {
+//   id: string;
+//   userName: string;
+//   email: string;
+//   workId: string;
+//   firstNameRu: string;
+//   lastNameRu: string;
+//   firstNameEn: string;
+//   lastNameEn: string;
+//   department: Department;
+//   isActive: boolean;
+//   location: string;
+//   locationId: string;
+//   createdAt?: Date | null;
+//   updatedAt?: Date | null;
+// }
 
 type UserLabelsKeys =
   | 'firstNameRu'

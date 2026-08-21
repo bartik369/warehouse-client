@@ -1,4 +1,5 @@
-import { User, UserFormActions, UserLabel } from '@/types/user';
+import { User } from '@/entities/user/model/types';
+import { UserFormActions, UserLabel } from '@/types/user';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import styles from './UserTable.module.scss';

@@ -64,9 +64,10 @@ export const useUser = () => {
           location:
             locations.find((location) => location.id === user.locationId)?.name ??
             'Локация не указана',
+
           department:
-            departments.find((department) => department.id === user.departmentId)?.name ??
-            'Отдел не указан',
+            departments.find((department) => department.id === user.department?.id) ??
+            user.department,
         };
 
         return {
@@ -75,7 +76,7 @@ export const useUser = () => {
           user: enrichedUser,
         };
       }),
-    [filteredUsers, departments]
+    [filteredUsers, departments, locations]
   );
 
   return {

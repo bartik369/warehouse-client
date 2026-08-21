@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Flex, Modal } from 'antd';
 
+import { User } from '@/entities/user/model/types';
 import { SignatureItemType } from '@/store/slices/signatureSlice';
-import { User } from '@/types/user';
 
 import { useSignature } from '../model/useSignature';
 import { Signature } from './Signature';

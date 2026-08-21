@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import {
   CreateIssueProcessRequest,
+  EquipmentIssuance,
   FinalizeIssueRequest,
   IssueProcessDto,
   IssueProcessListItem,
@@ -14,11 +15,6 @@ export const issueApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: [],
   endpoints: (build) => ({
-    getIssueProcessById: build.query<any, string>({
-      query: (id: string) => ({
-        url: `${import.meta.env.VITE_ISSUE_PROCESS}${id}`,
-      }),
-    }),
     createIssueProcess: build.mutation<IssueProcessDto, CreateIssueProcessRequest>({
       query: (body) => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}`,
@@ -33,8 +29,7 @@ export const issueApi = createApi({
         body,
       }),
     }),
-    getIssueProcess: build.query<any, string>({
-      // todo указать норм тип
+    getIssueProcess: build.query<EquipmentIssuance, string>({
       query: (processid) => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}${processid}`,
       }),
@@ -63,10 +58,10 @@ export const issueApi = createApi({
 });
 
 export const {
-  useGetIssueProcessByIdQuery,
   useCreateIssueMutation,
   useFinalizeIssueProcessMutation,
   useCreateIssueProcessMutation,
   useGetIssueProcessesQuery,
   useLazyGetIssueProcessQuery,
+  useGetIssueProcessQuery,
 } = issueApi;

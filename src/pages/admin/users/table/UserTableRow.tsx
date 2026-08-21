@@ -2,7 +2,8 @@ import { GoCheckCircleFill } from 'react-icons/go';
 import { IoCloseCircle } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
 
-import { User, UserFormActions } from '@/types/user';
+import { User } from '@/entities/user/model/types';
+import { UserFormActions } from '@/types/user';
 
 import styles from './UserTableRow.module.scss';
 
@@ -21,7 +22,7 @@ const UserTableRow = ({ user, isAdmin, actions }: UserTableRowProps) => {
       <td>{user.lastNameEn}</td>
       <td>{user.email}</td>
       <td>{user.location}</td>
-      <td>{user.department}</td>
+      <td>{user.department?.name}</td>
       <td>{user.workId}</td>
       <td className={`${styles.status} ${user.isActive ? styles.active : ''}`}>
         {user.isActive ? <GoCheckCircleFill /> : <IoCloseCircle />}

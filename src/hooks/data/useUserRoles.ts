@@ -3,12 +3,12 @@ import { useCallback, useEffect, useReducer } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { User } from '@/entities/user/model/types';
 import { userRoleInitialState, userRoleReducer } from '@/reducers/roles/userRoleReducer';
 import { UserRoleActionsTypes } from '@/reducers/roles/userRoleTypes';
 import { useGrantRoleMutation } from '@/store/api/rolesApi';
 import { resetUsers, setUsers } from '@/store/slices/userSlice';
 import { UserRole } from '@/types/access';
-import { User } from '@/types/user';
 import { handleApiError } from '@/utils/errors/handleApiError';
 // import { useLazyGetFilteredUsersQuery } from '@/store/api/userApi';
 // import { useLazyGetUserRolesQuery } from '@/store/api/rolesApi';
