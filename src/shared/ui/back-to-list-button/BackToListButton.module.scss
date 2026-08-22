@@ -1,0 +1,35 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  background-color: var(--gray-50);
+  border: 1px solid var(--gray-500);
+  color: var(--gray-700);
+  border-radius: 6px;
+  transition: all ease 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--blue-500);
+    border-color: var(--blue-250);
+    background: var(--blue-25);
+  }
+}
+
+.sm {
+  min-height: 28px;
+  font-size: 12px;
+}
+
+.md {
+  gap: 5px;
+  padding: 6px 12px;
+  min-height: 34px;
+  font-size: 12px;
+}
+
+.lg {
+  min-height: 40px;
+  font-size: 14px;
+}

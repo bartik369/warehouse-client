@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import clsx from 'clsx';
 
 import styles from './IconButton.module.scss';
@@ -7,6 +8,7 @@ interface IconButtonProps {
   onClick?: () => void;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'primary' | 'danger';
+  loading?: boolean;
 }
 
 export const IconButton = ({
@@ -14,14 +16,15 @@ export const IconButton = ({
   onClick,
   size = 'sm',
   variant = 'default',
+  loading,
 }: IconButtonProps) => {
   return (
-    <button
-      type="button"
+    <Button
+      loading={loading}
       onClick={onClick}
       className={clsx(styles.button, styles[size], styles[variant])}
     >
       {children}
-    </button>
+    </Button>
   );
 };

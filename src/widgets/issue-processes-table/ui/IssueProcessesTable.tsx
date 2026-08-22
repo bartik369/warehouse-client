@@ -14,6 +14,7 @@ interface IssueProcessesTableProps {
   page: number;
   limit: number;
   selectedRowKeys: Key[];
+  loading: boolean;
   issueProcesses: IssueProcessListItem[];
   onSelect: (record: IssueProcessListItem, selected: boolean) => void;
 }
@@ -23,6 +24,7 @@ export const IssueProcessesTable = ({
   limit,
   selectedRowKeys,
   issueProcesses,
+  loading,
   onSelect,
 }: IssueProcessesTableProps) => {
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ export const IssueProcessesTable = ({
 
   const IssueProcessTable = (
     <Table
+      loading={loading}
       className={tableStyles.devicesTable}
       rowKey="id"
       size="small"

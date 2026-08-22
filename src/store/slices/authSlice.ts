@@ -21,6 +21,7 @@ const initialState: AuthState = {
     lastNameRu: '',
     firstNameEn: '',
     lastNameEn: '',
+    departmentId: '',
     department: {
       id: '',
       name: '',

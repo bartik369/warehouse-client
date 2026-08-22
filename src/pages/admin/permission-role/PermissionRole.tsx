@@ -1,4 +1,3 @@
-import AccessForm from '@/components/forms/access/AccessForm';
 import { usePermission } from '@/hooks/data/usePermission';
 import { useGetPermissionsRolesQuery } from '@/store/api/permissionApi';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
@@ -12,13 +11,13 @@ const PermissionRole = () => {
   return (
     <section className={styles.inner}>
       <div className={styles.form}>
-        <AccessForm
+        {/* <AccessForm
           title={SECTION_TITLES.addRolePermission}
           state={state}
           entity={entity}
           isUpdate={isUpdate}
           actions={actions}
-        />
+        /> */}
       </div>
       <aside className={styles.list}>
         {/* <PermissionsRoleList roles={permissionsRoles || []} actions={actions} /> */}

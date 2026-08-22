@@ -25,6 +25,22 @@
     color: var(--blue-600);
   }
 }
+.container {
+  cursor: pointer;
+  .fileIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background-color: var(--blue-50);
+    .icon {
+      font-size: 20px;
+      color: var(--blue-500);
+    }
+  }
+}
 .fileIcon {
   display: flex;
   align-items: center;
