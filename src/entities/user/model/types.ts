@@ -9,6 +9,7 @@ export type User = {
   lastNameRu: string;
   firstNameEn: string;
   lastNameEn: string;
+  departmentId: string;
   department?: Department;
   isActive: boolean;
   location?: string;

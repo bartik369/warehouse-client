@@ -62,16 +62,20 @@ export const getIssueProcessesColumns = ({
       key: 'documentNo',
       title: 'Номер выдачи',
       dataIndex: 'documentNo',
-      with: 150,
+      width: 200,
       sorter: (a: IssueProcessListItem, b: IssueProcessListItem) =>
         a.documentNo.localeCompare(b.documentNo),
       render: (value: string) => {
         return (
-          <Flex align="center" gap={10}>
-            <span>{value}</span>
+          <Flex align="center" style={{ width: '100%' }}>
+            <span style={{ flex: 1 }}>{value}</span>
             <IoCopyOutline
               size={12}
-              style={{ color: 'var(--gray-500)', cursor: 'pointer' }}
+              style={{
+                flexShrink: 0,
+                color: 'var(--gray-500)',
+                cursor: 'pointer',
+              }}
               onClick={() => copyToClipboard(value)}
               title="Копировать"
             />

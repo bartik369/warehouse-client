@@ -1,7 +1,6 @@
 import { Flex } from 'antd';
 
 import { useIssue } from '@/features/issue-device/model/useIssue';
-import { Spinner } from '@/shared/ui/spinner/Spinner';
 import { IssueProcessesTable } from '@/widgets/issue-processes-table/ui/IssueProcessesTable';
 
 import { useIssueList } from '../model/useIssueList';
@@ -14,24 +13,19 @@ export const IssueList = () => {
 
   return (
     <Flex vertical gap={20} justify="center">
-      {isLoading ? (
-        <Spinner fontSize={30} color="var(--blue-600)" />
-      ) : (
-        <>
-          <HeaderIssues
-            selectedIssue={selectedIssue}
-            onStart={actions.handleStartNewIssue}
-            onDelete={actions.handleDeleteIssueProcess}
-          />
-          <IssueProcessesTable
-            page={page}
-            limit={limit}
-            selectedRowKeys={selectedRowKeys}
-            issueProcesses={issueProcesses}
-            onSelect={onSelect}
-          />
-        </>
-      )}
+      <HeaderIssues
+        selectedIssue={selectedIssue}
+        onStart={actions.handleStartNewIssue}
+        onDelete={actions.handleDeleteIssueProcess}
+      />
+      <IssueProcessesTable
+        loading={isLoading}
+        page={page}
+        limit={limit}
+        selectedRowKeys={selectedRowKeys}
+        issueProcesses={issueProcesses}
+        onSelect={onSelect}
+      />
     </Flex>
   );
 };

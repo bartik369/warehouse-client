@@ -7,14 +7,15 @@ import styles from '../EquipmentIssuanceInfo.module.scss';
 
 interface DeviceListProps {
   devices: Device[];
+  loading: boolean;
 }
-export const DeviceList = ({ devices }: DeviceListProps) => {
+export const DeviceList = ({ devices, loading }: DeviceListProps) => {
   return (
     <Card>
       <Typography.Title className={styles.title} level={2}>
         Выданыe устройства: {`(${devices.length})`}
       </Typography.Title>
-      <DeviceListTable devices={devices} />
+      <DeviceListTable devices={devices} loading={loading} />
     </Card>
   );
 };

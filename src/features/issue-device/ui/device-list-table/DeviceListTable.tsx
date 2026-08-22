@@ -7,12 +7,14 @@ import styles from './DeviceListTable.module.scss';
 
 interface DeviceListTableProps {
   devices: Device[];
+  loading: boolean;
 }
-export const DeviceListTable = ({ devices }: DeviceListTableProps) => {
+export const DeviceListTable = ({ devices, loading }: DeviceListTableProps) => {
   const columns = getDeviceListColumns();
 
   return (
     <Table<Device>
+      loading={loading}
       bordered
       className={styles.table}
       tableLayout="fixed"

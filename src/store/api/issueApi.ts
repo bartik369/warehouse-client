@@ -39,6 +39,13 @@ export const issueApi = createApi({
         url: `${import.meta.env.VITE_ISSUE_PROCESSES}`,
       }),
     }),
+    downloadIssueFile: build.mutation<Blob, string>({
+      query: (fileId: string) => ({
+        url: `${import.meta.env.VITE_ISSUE_PROCESS}${fileId}/file`,
+        method: 'GET',
+        responseHandler: (response) => response.blob(),
+      }),
+    }),
     finalizeIssueProcess: build.mutation<void, FinalizeIssueRequest>({
       query: ({ processId, deviceIds, file }) => {
         const formData = new FormData();
@@ -64,4 +71,5 @@ export const {
   useGetIssueProcessesQuery,
   useLazyGetIssueProcessQuery,
   useGetIssueProcessQuery,
+  useDownloadIssueFileMutation,
 } = issueApi;
