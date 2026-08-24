@@ -62,11 +62,7 @@ export const IssueProcess = ({
 
   return (
     <div className={styles.container}>
-      <IssueHeader
-        step={currentStep}
-        onChange={actions.handleSetStep}
-        onReset={actions.handleResetIssue}
-      />
+      <IssueHeader step={currentStep} />
       <div className={styles.stepsContent}>{stepContent[issueState.issueStep]}</div>
     </div>
   );

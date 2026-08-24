@@ -1,21 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
-import { clearSelectedDevices, setAssignedDevice } from '@/store/slices/issueSlice';
+import { useIssue } from '@/features/issue-device/model/useIssue';
+import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
 
 type HeaderActionKey = 'issue' | 'move' | 'accept' | 'info';
 export const useHeaderActions = () => {
   const device = useAppSelector((state: RootState) => state.device.device);
-  const selectedDevices = useAppSelector((state: RootState) => state.issue.selectedDevices);
+  const { actions } = useIssue();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+
   const handleProcessRoute = (key: HeaderActionKey) => {
     switch (key) {
       case 'issue':
-        dispatch(setAssignedDevice(selectedDevices));
-        dispatch(clearSelectedDevices());
-        navigate(`/issue/create-issue`);
+        actions.handleStartIssueByList();
         break;
       case 'move':
         console.log('issue');

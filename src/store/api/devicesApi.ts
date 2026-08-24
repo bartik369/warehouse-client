@@ -1,13 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Device } from '@/entities/device/model/types';
+import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
-import {
-  AggregateDeviceInfo,
-  FilterDeviceOptions,
-  FilteredDevicesFromBack,
-  QueryParams,
-} from '@/types/devices';
+import { AggregateDeviceInfo, FilterDeviceOptions, QueryParams } from '@/types/devices';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -65,7 +60,7 @@ export const devicesApi = createApi({
         };
       },
     }),
-    searchDevices: build.query<Device[], SearchDevicesParams>({
+    searchDevices: build.query<FilteredDevicesFromBack[], SearchDevicesParams>({
       query: ({ q, warehouseId }) => ({
         url: `${import.meta.env.VITE_SEARCH_DEVICES}`,
         params: { q, warehouseId },
@@ -84,7 +79,7 @@ export const devicesApi = createApi({
         { type: 'Device', id: 'LIST' },
       ],
     }),
-    getAssignedDevices: build.query<Device[], { userId: string }>({
+    getAssignedDevices: build.query<FilteredDevicesFromBack[], { userId: string }>({
       query: ({ userId }) => ({
         url: `${import.meta.env.VITE_DEVICES_ASSIGNED_USER}${userId}`,
         method: 'GET',

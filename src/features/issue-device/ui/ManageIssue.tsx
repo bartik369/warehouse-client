@@ -50,12 +50,6 @@ export const ManageIssue = () => {
     issueState,
   } = useIssue();
 
-  useEffect(() => {
-    return () => {
-      actions.handleFullReset();
-    };
-  }, []);
-
   if (isLoading) {
     return <Spinner fontSize={34} />;
   }

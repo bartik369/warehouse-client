@@ -4,12 +4,13 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
 import { useParams, useSearchParams } from 'react-router-dom';
 
+import { FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { useGetDeviceOptionsQuery, useGetDevicesQuery } from '@/store/api/devicesApi';
-import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
+import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 import { formatFiltersToSearchParams } from '@/utils/data/filterUtils';
 
-import { useTablePagination } from '../../shared/hooks/useTablePagination';
-import { useDeviceFilters } from './useDeviceFilters';
+import { useDeviceFilters } from '../../../hooks/data/useDeviceFilters';
+import { useTablePagination } from '../../../shared/hooks/useTablePagination';
 
 const emptyOptions: FilterDeviceOptions = {
   manufacturer: [],
@@ -40,11 +41,11 @@ export const useDeviceTableController = () => {
   const deviceQueryArgs = city ? { ...queryParams, city } : skipToken;
 
   const { data: optionsData } = useGetDeviceOptionsQuery(deviceOptionsArgs);
-  const { data: devicesData } = useGetDevicesQuery(deviceQueryArgs);
+  const { data: devicesData, isLoading } = useGetDevicesQuery(deviceQueryArgs);
 
   const options = optionsData || emptyOptions;
-  const devices = devicesData;
   const totalCount = devicesData?.totalCount ?? 0;
+  const devices = devicesData?.devices ?? [];
 
   const handleTableChange = useCallback(
     (
@@ -110,6 +111,7 @@ export const useDeviceTableController = () => {
     page,
     limit,
     totalCount,
+    isLoading,
     setPage,
     handleTableChange,
     resetFilters,

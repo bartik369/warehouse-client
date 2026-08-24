@@ -9,13 +9,14 @@ import {
 } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 
+import { FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
-import { DeviceFilters, FilterDeviceOptions, FilteredDevicesFromBack } from '@/types/devices';
+import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 
 import { getDevicesColumns } from '../model/devices.columns';
 
@@ -26,6 +27,7 @@ interface DeviceTableProps {
   page: number;
   limit: number;
   totalCount: number;
+  isLoading: boolean;
   setDevices: (devices: FilteredDevicesFromBack[]) => void;
   resetSingleFilter: (key: keyof DeviceFilters) => void;
   setPage: (page: number) => void;
@@ -43,6 +45,7 @@ export const DevicesTable = ({
   page,
   limit,
   totalCount,
+  isLoading,
   setPage,
   setDevices,
   onTableChange,
@@ -99,6 +102,7 @@ export const DevicesTable = ({
 
   const DeviceTable = (
     <Table
+      loading={isLoading}
       className={tableStyles.devicesTable}
       rowKey="id"
       size="small"

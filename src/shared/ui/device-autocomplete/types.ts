@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 import { InputProps } from 'antd';
 
-import { Device } from '@/entities/device/model/types';
+import { FilteredDevicesFromBack } from '@/entities/device/model/types';
 
 export interface DeviceAutocompleteOption {
   value: string;
   label: ReactNode;
-  device: Device;
+  device: FilteredDevicesFromBack;
 }
 
 export type DeviceAutocompleteOptions = DeviceAutocompleteOption[];
@@ -32,16 +32,3 @@ export type AutocompleteFieldProps = Omit<
   prefix?: ReactNode;
   disabled?: boolean;
 };
-
-type DeviceType =
-  | 'accessory'
-  | 'network'
-  | 'monitor'
-  | 'projector'
-  | 'tv'
-  | 'toner'
-  | 'mobile_phone'
-  | 'laptop'
-  | 'desktop'
-  | 'desktop_phone'
-  | 'printer';

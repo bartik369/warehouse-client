@@ -1,38 +1,32 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Warehouse } from '@/entities/warehouse/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
-import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
-import { useLazyGetDeviceQuery, useLazySearchDevicesQuery } from '@/store/api/devicesApi';
 import {
   useCreateIssueProcessMutation,
   useFinalizeIssueProcessMutation,
 } from '@/store/api/issueApi';
-import { useGetLocationsQuery } from '@/store/api/locationApi';
-import { useLazyGetFilteredUsersQuery, useLazyGetUserQuery } from '@/store/api/userApi';
-import { useGetWarehousesQuery, useLazyGetWarehousesByUserQuery } from '@/store/api/warehousesApi';
 import { currentUser } from '@/store/slices/authSlice';
-import { resetDevices, setDevices } from '@/store/slices/deviceSlice';
+import { resetDevices } from '@/store/slices/deviceSlice';
 import { resetAllSignatures } from '@/store/slices/signatureSlice';
-import { partnerUser, resetUser, resetUsers, setUser, setUsers } from '@/store/slices/userSlice';
-import { AssignedDevice } from '@/types/issue';
+import { partnerUser, resetUser, resetUsers } from '@/store/slices/userSlice';
+import { RootState } from '@/store/store';
 import { handleApiError } from '@/utils/errors/handleApiError';
-import { generateActNumber } from '@/utils/nums/generateActNumber';
 
 import {
+  clearSelectedDevices,
   resetIssueData,
   setAssignedDevice,
   // setDeviceId,
   setDevicesListVisible,
-  setDevicesLoaded,
   setIssueBackStep,
   setIssueNextStep,
   setIssueNumber,
   setIssueStep,
   setProcessId,
+  setWarehouse,
   setWasSearched,
 } from '../../../store/slices/issueSlice';
 import { IssueProcessStatus } from './types';
@@ -52,14 +46,10 @@ export const useIssue = () => {
 
   const recipient = useAppSelector(partnerUser);
   const creator = useAppSelector(currentUser);
+  const selectedDevices = useAppSelector((state: RootState) => state.issue.selectedDevices);
+
   const [issueFile, setIssueFile] = useState<Blob | null>(null);
   const { processId, assignedDevices } = issueState;
-  const userDebouncedQuery = useDebounce(userController.userQuery.trim(), 700);
-  const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
-  const [getDevice, { isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
-
-  const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
-    useLazyGetWarehousesByUserQuery();
 
   const [
     finalizeIssue,
@@ -76,43 +66,6 @@ export const useIssue = () => {
       dispatch(setIssueStep(step));
     },
     [dispatch]
-  );
-
-  const handleStartDeviceIssueWith = useCallback(
-    async (id: string) => {
-      if (!id) {
-        return;
-      }
-
-      try {
-        const data = await getDevice(id).unwrap();
-
-        const { warehouse, warehouseId, model, ...device } = data;
-
-        const warehouseData = {
-          id: warehouseId,
-          name: warehouse.name,
-          slug: warehouse.slug,
-        };
-
-        const deviceData = {
-          ...device,
-          modelName: model.name,
-          typeName: model.type.name,
-          manufacturerName: model.manufacturer.name,
-          warehouseId,
-        };
-
-        // dispatch(setWarehouse(warehouseData));
-
-        dispatch(setAssignedDevice(deviceData));
-
-        // dispatch(setDeviceId(deviceData.id));
-      } catch (error: unknown) {
-        handleApiError(error);
-      }
-    },
-    [dispatch, getDevice]
   );
 
   const handleCompleteProcess = useCallback(
@@ -136,7 +89,6 @@ export const useIssue = () => {
   );
 
   const handleResetDeviceQuery = useCallback(() => {
-    // dispatch(setDeviceQuey(''));
     dispatch(setDevicesListVisible(false));
     dispatch(setWasSearched(false));
     dispatch(resetDevices());
@@ -179,33 +131,16 @@ export const useIssue = () => {
     handleFullReset();
     navigate('/issues/new');
   };
+  const handleStartIssueByList = () => {
+    if (selectedDevices.length === 0) return;
 
-  // const handleCreateIssue = useCallback(async () => {
-  //   if (!processId || selectedDevices.length === 0) {
-  //     return;
-  //   }
-
-  //   try {
-  //     await createIssue(issueState.deviceIssueData).unwrap();
-  //   } catch (error: unknown) {
-  //     handleApiError(error);
-  //   }
-  // }, [createIssue, devices.length, processId, issueState.deviceIssueData]);
-
-  // useEffect(() => {
-  //   switch (state.issueStep) {
-  //     case 2:
-  //       void handleCreateIssueProcess();
-  //       break;
-
-  //     case 3:
-  //       void handleCreateIssue();
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // }, [handleCreateIssue, handleCreateIssueProcess, state.issueStep]);
+    const device = selectedDevices[0];
+    dispatch(setWarehouse(device.warehouse));
+    dispatch(setIssueStep(1));
+    dispatch(setAssignedDevice(selectedDevices));
+    dispatch(clearSelectedDevices());
+    navigate(`/issues/new`);
+  };
 
   const user = {
     data: {
@@ -255,7 +190,7 @@ export const useIssue = () => {
     const documentNo = issueState.issueNumber || generateDocumentNumber('AV');
     const partnerId = recipient?.id;
     const currentUserId = creator?.id;
-    const warehouseId = warehouseController.currentWarehouse.id;
+    const warehouseId = warehouseController.currentWarehouse?.id;
 
     if (!documentNo || !partnerId || !currentUserId || !warehouseId) {
       return null;
@@ -283,7 +218,7 @@ export const useIssue = () => {
     creator?.id,
     recipient?.id,
     issueState.issueNumber,
-    warehouseController.currentWarehouse.id,
+    warehouseController.currentWarehouse?.id,
     dispatch,
     navigate,
   ]);
@@ -325,15 +260,14 @@ export const useIssue = () => {
     handleProceedToSigning,
     handleCompleteProcess,
     handleFullReset,
-    // handleGetDevice,
     handleResetDeviceQuery,
     handleResetIssue,
     handleResetIssueDevices,
     handleSetStep,
-    handleStartDeviceIssueWith,
+    // handleStartDeviceIssueWith,
     handleStartNewIssue,
+    handleStartIssueByList,
     handleDeleteIssueProcess,
-    // handleUserChange,
   };
 
   const data = {
@@ -342,9 +276,9 @@ export const useIssue = () => {
   };
 
   const status = {
-    isUserFetching,
-    isDeviceFetching,
-    isWarehousesByUserFetching,
+    // isUserFetching,
+    // isDeviceFetching,
+    // isWarehousesByUserFetching,
     isIssueLoading,
     isIssueSuccess,
     isCreateIssueProcessLoading,

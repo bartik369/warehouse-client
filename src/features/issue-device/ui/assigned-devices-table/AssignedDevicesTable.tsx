@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import { Table } from 'antd';
 
-import { Device } from '@/entities/device/model/types';
+import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 
 import { getAssignedDeviceColumns } from '../../model/getAssignedDeviceColumns';
 import styles from './AssignedDevicesTable.module.scss';
 
 interface AssignedDevicesTableProps {
-  devices: Device[];
+  devices: FilteredDevicesFromBack[];
   onDelete?: (id: string) => void;
 }
 export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTableProps) => {
@@ -25,7 +25,7 @@ export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTable
   });
 
   return (
-    <Table<Device>
+    <Table<FilteredDevicesFromBack>
       bordered
       className={styles.table}
       tableLayout="fixed"

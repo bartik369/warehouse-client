@@ -2,7 +2,7 @@ import { Button, Typography } from 'antd';
 import type { ColumnType, ColumnsType } from 'antd/es/table';
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
-import { Device } from '@/entities/device/model/types';
+import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { DEVICE_TYPES } from '@/shared/ui/device-autocomplete/constants';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 import { AssignedDevice } from '@/types/issue';
@@ -17,8 +17,8 @@ export const getAssignedDeviceColumns = ({
   hideActions?: boolean;
   currentPage: number;
   pageSize: number;
-}): ColumnsType<Device> => {
-  const iconColumn: ColumnType<Device> = {
+}): ColumnsType<FilteredDevicesFromBack> => {
+  const iconColumn: ColumnType<FilteredDevicesFromBack> = {
     key: 'icon',
     width: 30,
     onCell: () => ({
@@ -28,10 +28,12 @@ export const getAssignedDeviceColumns = ({
         textAlign: 'center',
       },
     }),
-    render: (_value: unknown, record: Device) => {
+    render: (_value: unknown, record: FilteredDevicesFromBack) => {
+      console.log(record);
+      const typeSlug = record.model?.type?.slug;
       const Icon =
-        record.typeSlug in DEVICE_TYPES
-          ? DEVICE_TYPES[record.typeSlug as keyof typeof DEVICE_TYPES].icon
+        typeSlug in DEVICE_TYPES
+          ? DEVICE_TYPES[typeSlug as keyof typeof DEVICE_TYPES].icon
           : undefined;
 
       return (
@@ -49,7 +51,7 @@ export const getAssignedDeviceColumns = ({
     },
   };
 
-  const numberColumn: ColumnType<Device> = {
+  const numberColumn: ColumnType<FilteredDevicesFromBack> = {
     key: 'number',
     title: '№',
     width: 40,

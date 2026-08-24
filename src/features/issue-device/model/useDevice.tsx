@@ -1,6 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { Device } from '@/entities/device/model/types';
+import { skipToken } from '@reduxjs/toolkit/query';
+
+import { FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { DeviceAutocompleteItem } from '@/shared/ui/device-autocomplete/DeviceAutocompleteItem';
@@ -17,18 +19,20 @@ export const useDevice = () => {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState('');
   const [inputValue, setInputValue] = useState<string | undefined>('');
-  const [device, setDevice] = useState<Device | null>(null);
+  const [device, setDevice] = useState<FilteredDevicesFromBack | null>(null);
   const [deviceId, setDeviceId] = useState('');
   const debouncedQuery = useDebounce(query.trim(), 700);
   const wasSearched = debouncedQuery.length >= 2;
   const state = useAppSelector((rootState) => rootState.issue);
-  const warehouseId = state.warehouse.id;
+  const warehouseId = state.warehouse?.id;
 
   const { data: devices = [], isLoading } = useSearchDevicesQuery(
-    { q: debouncedQuery, warehouseId },
-    {
-      skip: !wasSearched || !warehouseId,
-    }
+    wasSearched && warehouseId
+      ? {
+          q: debouncedQuery,
+          warehouseId,
+        }
+      : skipToken
   );
 
   const handleChange = (value: string) => {
