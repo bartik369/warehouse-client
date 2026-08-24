@@ -60,7 +60,7 @@ export const devicesApi = createApi({
         };
       },
     }),
-    searchDevices: build.query<Device[], SearchDevicesParams>({
+    searchDevices: build.query<FilteredDevicesFromBack[], SearchDevicesParams>({
       query: ({ q, warehouseId }) => ({
         url: `${import.meta.env.VITE_SEARCH_DEVICES}`,
         params: { q, warehouseId },

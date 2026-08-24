@@ -256,7 +256,7 @@ export const IssueDocument = ({
             <View key={idx} style={styles.tableRow}>
               {baseDeviceLabelConfig.map((col) => (
                 <Text key={col.key} style={styles.tableCol}>
-                  {formatValue(row[col.key as keyof Device])}
+                  {formatValue(row[col.key as keyof FilteredDevicesFromBack])}
                 </Text>
               ))}
             </View>
