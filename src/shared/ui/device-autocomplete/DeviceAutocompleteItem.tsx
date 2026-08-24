@@ -26,7 +26,7 @@ export const DeviceAutocompleteItem = ({
       <Typography.Text className={styles.tooltipName} ellipsis={{ tooltip: device.name }}>
         {device.name}
       </Typography.Text>
-      <span className={styles.value}>{device.manufacturerName}</span>
+      <span className={styles.value}>{device.model.manufacturer.name}</span>
       <Typography.Text className={styles.tooltipName} ellipsis={{ tooltip: device.serialNumber }}>
         {device.serialNumber}
       </Typography.Text>

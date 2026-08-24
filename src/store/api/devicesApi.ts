@@ -79,7 +79,7 @@ export const devicesApi = createApi({
         { type: 'Device', id: 'LIST' },
       ],
     }),
-    getAssignedDevices: build.query<Device[], { userId: string }>({
+    getAssignedDevices: build.query<FilteredDevicesFromBack[], { userId: string }>({
       query: ({ userId }) => ({
         url: `${import.meta.env.VITE_DEVICES_ASSIGNED_USER}${userId}`,
         method: 'GET',
