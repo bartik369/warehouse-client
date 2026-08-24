@@ -7,8 +7,16 @@ import { useIssueList } from '../model/useIssueList';
 import { HeaderIssues } from './header/HeaderIssues';
 
 export const IssueList = () => {
-  const { page, limit, selectedRowKeys, issueProcesses, isLoading, selectedIssue, onSelect } =
-    useIssueList();
+  const {
+    page,
+    limit,
+    selectedRowKeys,
+    issueProcesses,
+    isLoading,
+    selectedIssue,
+    onSelect,
+    onDelete,
+  } = useIssueList();
   const { actions } = useIssue();
 
   return (
@@ -25,6 +33,7 @@ export const IssueList = () => {
         selectedRowKeys={selectedRowKeys}
         issueProcesses={issueProcesses}
         onSelect={onSelect}
+        onDelete={onDelete}
       />
     </Flex>
   );

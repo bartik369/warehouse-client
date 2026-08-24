@@ -24,10 +24,6 @@ const initialState: IssueState = {
     locationId: '',
   },
   processId: '',
-  // deviceIssueData: {
-  //   processId: '',
-  //   devices: [],
-  // },
 };
 
 const issueSlice = createSlice({

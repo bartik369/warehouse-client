@@ -1,12 +1,17 @@
-import { Flex } from 'antd';
+import { Flex, Tooltip } from 'antd';
 import { ColumnType } from 'antd/es/table';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaInfo } from 'react-icons/fa6';
 import { IoCopyOutline } from 'react-icons/io5';
 import { IoDocumentTextOutline } from 'react-icons/io5';
 
+import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
 import { ISSUE_PROCESS_STATUS_CONFIG } from '@/features/issue-device/model/constants';
 import { IssueProcessListItem, IssueProcessStatus } from '@/features/issue-device/model/types';
+import {
+  DELETE_ISSUE_DESCRIPTION,
+  TITLES,
+} from '@/features/issue-device/ui/issue-list/model/constants';
 import { copyToClipboard } from '@/shared/lib/clipboard/copyToClipboard';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { DateTime } from '@/shared/ui/date-time/DateTime';
@@ -37,20 +42,58 @@ export const getIssueProcessesColumns = ({
       if (record.status === IssueProcessStatus.Completed) {
         return (
           <Flex justify="flex-end" style={{ paddingRight: '5px' }}>
-            <IconButton onClick={() => onOpen(record.id)}>
-              <FaInfo size={10} />
-            </IconButton>
+            <Tooltip
+              styles={{
+                container: {
+                  fontSize: 12,
+                },
+              }}
+              color="var(--gray-600)"
+              title="Детали выдачи"
+              mouseEnterDelay={0}
+            >
+              <IconButton onClick={() => onOpen(record.id)} icon={FaInfo} iconSize={11} />
+            </Tooltip>
           </Flex>
         );
       } else {
         return (
           <Flex gap={5} justify="flex-end" style={{ paddingRight: '5px' }}>
-            <IconButton variant="primary" onClick={() => onContinue(record.id)}>
-              <IoDocumentTextOutline />
-            </IconButton>
-            <IconButton variant="danger" onClick={() => onDelete(record.id)}>
-              <AiOutlineDelete />
-            </IconButton>
+            <Tooltip
+              styles={{
+                container: {
+                  fontSize: 12,
+                },
+              }}
+              color="var(--blue-500)"
+              title="Продолжить выдачу"
+              mouseEnterDelay={0}
+            >
+              <IconButton
+                variant="primary"
+                onClick={() => onContinue(record.id)}
+                icon={IoDocumentTextOutline}
+              />
+            </Tooltip>
+            <DeleteConfirm
+              placement="topRight"
+              title={TITLES.deleteIssueProcess}
+              description={`${DELETE_ISSUE_DESCRIPTION} ${record.documentNo}?`}
+              onConfirm={() => onDelete(record.id)}
+            >
+              <Tooltip
+                styles={{
+                  container: {
+                    fontSize: 12,
+                  },
+                }}
+                color="var(--red-400)"
+                title="Удалить выдачу"
+                mouseEnterDelay={0}
+              >
+                <IconButton variant="danger" icon={AiOutlineDelete} />
+              </Tooltip>
+            </DeleteConfirm>
           </Flex>
         );
       }

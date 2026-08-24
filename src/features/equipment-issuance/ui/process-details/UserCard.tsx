@@ -1,5 +1,7 @@
 import { Flex, Typography } from 'antd';
 import { Divider } from 'antd';
+import { PiCreditCardDuotone } from 'react-icons/pi';
+import { PiEnvelopeSimpleDuotone } from 'react-icons/pi';
 import { PiUserBold } from 'react-icons/pi';
 
 import { User } from '@/entities/user/model/types';
@@ -31,11 +33,13 @@ export const UserCard = ({ user, entity }: UserCardProps) => {
         </div>
       </Flex>
       <Divider style={{ margin: '10px 0px' }} />
-      <div className={styles.block}>
+      <div className={styles.block3}>
+        <PiEnvelopeSimpleDuotone className={styles.icon} />
         <div className={styles.label}>{LABELS.email}</div>
         <div className={styles.value}>{user.email}</div>
       </div>
-      <div className={styles.block}>
+      <div className={styles.block3}>
+        <PiCreditCardDuotone className={styles.icon} />
         <div className={styles.label}>{LABELS.workID}</div>
         <div className={styles.value}>{user.workId}</div>
       </div>
