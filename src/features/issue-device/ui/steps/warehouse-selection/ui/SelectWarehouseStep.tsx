@@ -34,7 +34,7 @@ export const SelectWarehouseStep = ({
       locations={warehouseController.data.locations}
       onChange={warehouseController.actions.handleSelect} // todo чекнуть название
       onReset={warehouseController.actions.handleReset}
-      label="Выбрать склад"
+      label="Выбрать склад(демо IT-склад 1 этаж / 4 этаж)"
     />
   );
   const right = (

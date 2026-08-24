@@ -17,6 +17,7 @@ interface IssueProcessesTableProps {
   loading: boolean;
   issueProcesses: IssueProcessListItem[];
   onSelect: (record: IssueProcessListItem, selected: boolean) => void;
+  onDelete: (processId: string) => void;
 }
 
 export const IssueProcessesTable = ({
@@ -26,6 +27,7 @@ export const IssueProcessesTable = ({
   issueProcesses,
   loading,
   onSelect,
+  onDelete,
 }: IssueProcessesTableProps) => {
   const navigate = useNavigate();
 
@@ -37,14 +39,11 @@ export const IssueProcessesTable = ({
     if (!id) return;
     navigate(`/issues/${id}/edit`);
   };
-  const handleDeleteProcess = (id: string) => {
-    if (!id) return;
-  };
 
   const columns = getIssueProcessesColumns({
     onOpen: handleOpenProcess,
     onContinue: handleContinueProcess,
-    onDelete: handleDeleteProcess,
+    onDelete,
   });
 
   const IssueProcessTable = (

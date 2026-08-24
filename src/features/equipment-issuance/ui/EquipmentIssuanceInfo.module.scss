@@ -26,7 +26,6 @@
   }
 }
 .container {
-  cursor: pointer;
   .fileIcon {
     display: flex;
     align-items: center;
@@ -67,12 +66,26 @@
   }
 }
 
+.block3 {
+  display: grid;
+  grid-template-columns: 20px 120px 1fr;
+  padding: 2px;
+  row-gap: 20px;
+  align-items: center;
+  .icon {
+    color: var(--muted-blue-400);
+    font-size: 16px;
+  }
+}
+
 .block {
   display: grid;
   grid-template-columns: 120px 1fr;
   padding: 2px;
   row-gap: 20px;
-
+}
+.block,
+.block3 {
   .label,
   .value {
     display: flex;
@@ -85,6 +98,7 @@
     color: var(--gray-600);
   }
 }
+
 .file {
   .label {
     font-weight: 600;

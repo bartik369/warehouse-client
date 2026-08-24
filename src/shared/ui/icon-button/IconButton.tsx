@@ -1,30 +1,47 @@
-import { Button } from 'antd';
-import clsx from 'clsx';
+import { type ButtonHTMLAttributes, forwardRef } from 'react';
 
+import clsx from 'clsx';
+import type { IconType } from 'react-icons';
+
+import { Spinner } from '../spinner/Spinner';
 import styles from './IconButton.module.scss';
 
-interface IconButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
+interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  iconSize?: number;
+  icon?: IconType;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'primary' | 'danger';
   loading?: boolean;
+  title?: string;
 }
 
-export const IconButton = ({
-  children,
-  onClick,
-  size = 'sm',
-  variant = 'default',
-  loading,
-}: IconButtonProps) => {
-  return (
-    <Button
-      loading={loading}
-      onClick={onClick}
-      className={clsx(styles.button, styles[size], styles[variant])}
-    >
-      {children}
-    </Button>
-  );
-};
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  (
+    {
+      iconSize = 16,
+      icon: Icon,
+      size = 'sm',
+      variant = 'default',
+      loading = false,
+      title,
+      type = 'button',
+      className,
+      disabled,
+      ...buttonProps
+    },
+    ref
+  ) => {
+    return (
+      <button
+        title={title}
+        ref={ref}
+        type={type}
+        {...buttonProps}
+        disabled={loading || disabled}
+        className={clsx(styles.button, styles[size], styles[variant], className)}
+      >
+        {loading ? <Spinner fontSize={12} /> : Icon && <Icon size={iconSize} />}
+      </button>
+    );
+  }
+);

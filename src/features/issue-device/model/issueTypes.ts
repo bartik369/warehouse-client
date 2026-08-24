@@ -23,16 +23,12 @@ export interface IssueState {
   pdfBlob: Blob | null;
   issueNumber: string;
   errors: Record<string, string>;
-  // userQuery: string;
-  // deviceQuery: string;
   isUsersListVisible: boolean;
   isDevicesListVisible: boolean;
   devicesLoaded: boolean;
   wasSearched: boolean;
   warehouse: Warehouse;
   processId: string;
-  // warehouses: Warehouse[];
-  // deviceIssueData: DeviceIssueData;
 }
 
 export enum IssueActionTypes {

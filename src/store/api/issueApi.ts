@@ -13,7 +13,7 @@ import { baseQueryWithReauth } from '../baseQueryWithReauth';
 export const issueApi = createApi({
   reducerPath: 'issueApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: [],
+  tagTypes: ['Issue'],
   endpoints: (build) => ({
     createIssueProcess: build.mutation<IssueProcessDto, CreateIssueProcessRequest>({
       query: (body) => ({
@@ -21,23 +21,38 @@ export const issueApi = createApi({
         method: 'POST',
         body,
       }),
-    }),
-    createIssue: build.mutation({
-      query: (body) => ({
-        url: `${import.meta.env.VITE_ISSUE}`,
-        method: 'POST',
-        body,
-      }),
+      invalidatesTags: [{ type: 'Issue', id: 'LIST' }],
     }),
     getIssueProcess: build.query<EquipmentIssuance, string>({
       query: (processid) => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}${processid}`,
       }),
+      providesTags: (_result, _error, processId) => [{ type: 'Issue', id: processId }],
     }),
     getIssueProcesses: build.query<IssueProcessListItem[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_ISSUE_PROCESSES}`,
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({
+                type: 'Issue' as const,
+                id,
+              })),
+              { type: 'Issue', id: 'LIST' },
+            ]
+          : [{ type: 'Issue', id: 'LIST' }],
+    }),
+    deleteIssueProcess: build.mutation({
+      query: (id) => ({
+        url: `${import.meta.env.VITE_ISSUE_PROCESS}${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_result, _error, id) => [
+        { type: 'Issue', id },
+        { type: 'Issue', id: 'LIST' },
+      ],
     }),
     downloadIssueFile: build.mutation<Blob, string>({
       query: (fileId: string) => ({
@@ -60,16 +75,20 @@ export const issueApi = createApi({
           body: formData,
         };
       },
+      invalidatesTags: (_result, _error, { processId }) => [
+        { type: 'Issue', id: processId },
+        { type: 'Issue', id: 'LIST' },
+      ],
     }),
   }),
 });
 
 export const {
-  useCreateIssueMutation,
   useFinalizeIssueProcessMutation,
   useCreateIssueProcessMutation,
   useGetIssueProcessesQuery,
   useLazyGetIssueProcessQuery,
   useGetIssueProcessQuery,
   useDownloadIssueFileMutation,
+  useDeleteIssueProcessMutation,
 } = issueApi;

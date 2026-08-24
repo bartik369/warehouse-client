@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   logoIcon: {
-    width: 20,
+    width: 22,
   },
 
   logoText: {
@@ -208,7 +208,7 @@ export const IssueDocument = ({
         <View style={styles.headerLogo}>
           <View style={styles.logo}>
             <Image src={printLogo} style={styles.logoIcon} />
-            <Text style={styles.logoText}>ITAM</Text>
+            <Text style={styles.logoText}>IT ASSET PORTAL</Text>
           </View>
         </View>
 
@@ -229,12 +229,12 @@ export const IssueDocument = ({
             ООО «Компания Х», в лице директора Иванова Алексея Ивановича, действующего на основании
             устава, именуемое в дальнейшем{' '}
             <Text style={styles.bold}>
-              {firstNameRuCurrent} {lastNameRuCurrent}
+              {lastNameRuCurrent} {firstNameRuCurrent}
             </Text>
             , и ООО «Фирма У», в лице генерального директора Сидорова Анатолия Сергеевича,
             действующего на основании устава, именуемое в дальнейшем{' '}
             <Text style={styles.bold}>
-              {firstNameRuPartner} {lastNameRuPartner}
+              {lastNameRuPartner} {firstNameRuPartner}
             </Text>{' '}
             подписали настоящий акт приема-передачи на основании договора №123456789.
           </Text>

@@ -18,7 +18,7 @@ export const ProcessFile = ({ detail }: ProcessFileProps) => {
   const [downloadIssueFile, { isLoading }] = useDownloadIssueFileMutation();
   const handleGetIssueFile = async () => {
     try {
-      if (!detail.fileId) return;
+      if (!detail.fileId || isLoading) return;
       const blob = await downloadIssueFile(detail.fileId).unwrap();
       downloadFile(blob, `${detail.documentNo ?? 'document'}.pdf`);
     } catch (error) {
@@ -33,7 +33,7 @@ export const ProcessFile = ({ detail }: ProcessFileProps) => {
       </Typography.Title>
       <Card>
         <Flex justify="space-between" align="center">
-          <Flex gap={10} onClick={handleGetIssueFile} className={styles.container}>
+          <Flex gap={10} className={styles.container}>
             <div className={styles.fileIcon}>
               <FaFilePdf className={styles.icon} size={20} />
             </div>
@@ -43,9 +43,14 @@ export const ProcessFile = ({ detail }: ProcessFileProps) => {
             </Flex>
           </Flex>
           {isLoading && <Spinner fontSize={25} />}
-          <IconButton size="lg" variant="primary" onClick={handleGetIssueFile}>
-            <TbDownload size={17} />
-          </IconButton>
+          <IconButton
+            size="lg"
+            variant="primary"
+            onClick={handleGetIssueFile}
+            loading={isLoading}
+            icon={TbDownload}
+            iconSize={17}
+          />
         </Flex>
       </Card>
     </Card>

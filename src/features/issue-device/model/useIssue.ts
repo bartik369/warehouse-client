@@ -8,7 +8,6 @@ import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
 import { useLazyGetDeviceQuery, useLazySearchDevicesQuery } from '@/store/api/devicesApi';
 import {
-  useCreateIssueMutation,
   useCreateIssueProcessMutation,
   useFinalizeIssueProcessMutation,
 } from '@/store/api/issueApi';
@@ -59,8 +58,6 @@ export const useIssue = () => {
   const [getBasicUser, { isFetching: isUserFetching }] = useLazyGetUserQuery();
   const [getDevice, { isFetching: isDeviceFetching }] = useLazyGetDeviceQuery();
 
-  console.log(assignedDevices);
-
   const [getWarehousesByUser, { isFetching: isWarehousesByUserFetching }] =
     useLazyGetWarehousesByUserQuery();
 
@@ -68,9 +65,6 @@ export const useIssue = () => {
     finalizeIssue,
     { isSuccess: isIssueSuccess, isLoading: isIssueLoading, error: finalizeIssueError },
   ] = useFinalizeIssueProcessMutation();
-
-  const [createIssue, { isLoading: isCreateIssueLoading, error: createIssueError }] =
-    useCreateIssueMutation();
 
   const [
     createIssueProcess,
@@ -165,7 +159,7 @@ export const useIssue = () => {
       dispatch(setIssueNumber(generateDocumentNumber('AV')));
     }
     handleNextStep();
-  }, [dispatch]);
+  }, [dispatch, issueState.issueNumber]);
 
   const handleResetIssue = useCallback(() => {
     dispatch(resetIssueData());
@@ -353,11 +347,9 @@ export const useIssue = () => {
     isWarehousesByUserFetching,
     isIssueLoading,
     isIssueSuccess,
-    isCreateIssueLoading,
     isCreateIssueProcessLoading,
 
     errors: {
-      createIssue: createIssueError,
       createIssueProcess: createIssueProcessError,
       finalizeIssue: finalizeIssueError,
     },
