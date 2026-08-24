@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
-import Devices from '@/pages/devices/Devices';
+import Devices from '@/pages/devices/DevicesPage';
+import DevicesPage from '@/pages/devices/DevicesPage';
 
 const DevicesConfig = [
   {
@@ -12,7 +13,7 @@ const DevicesConfig = [
   {
     title: 'Devices',
     path: '/devices/locations/:city',
-    element: <Devices />,
+    element: <DevicesPage />,
     requireAuth: true,
   },
 ];

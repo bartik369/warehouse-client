@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Device } from '@/entities/device/model/types';
+import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { AssignedDevice } from '@/types/issue';
 
@@ -17,12 +17,7 @@ const initialState: IssueState = {
   isDevicesListVisible: false,
   devicesLoaded: false,
   wasSearched: false,
-  warehouse: {
-    id: '',
-    name: '',
-    slug: '',
-    locationId: '',
-  },
+  warehouse: null,
   processId: '',
 };
 
@@ -30,7 +25,10 @@ const issueSlice = createSlice({
   name: 'issue',
   initialState,
   reducers: {
-    setAssignedDevice: (state, action: PayloadAction<Device | Device[]>) => {
+    setAssignedDevice: (
+      state,
+      action: PayloadAction<FilteredDevicesFromBack | FilteredDevicesFromBack[]>
+    ) => {
       if (Array.isArray(action.payload)) {
         state.assignedDevices = action.payload;
       } else {
@@ -43,7 +41,10 @@ const issueSlice = createSlice({
         }
       }
     },
-    setSelectedDevice: (state, action: PayloadAction<Device | Device[]>) => {
+    setSelectedDevice: (
+      state,
+      action: PayloadAction<FilteredDevicesFromBack | FilteredDevicesFromBack[]>
+    ) => {
       if (Array.isArray(action.payload)) {
         state.selectedDevices = action.payload;
       } else {
@@ -73,7 +74,7 @@ const issueSlice = createSlice({
     },
 
     resetWarehouse: (state) => {
-      state.warehouse = { ...initialState.warehouse };
+      state.warehouse = null;
     },
     setWarehouse: (state, action: PayloadAction<Warehouse>) => {
       state.warehouse = action.payload;

@@ -6,14 +6,10 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { PiCheckCircleFill } from 'react-icons/pi';
 
+import { FilteredDevicesFromBack } from '@/entities/device/model/types';
 import { sortNumbers } from '@/shared/lib/export/sortNums';
 import { FilterDropdown } from '@/shared/ui/filter-dropdown/FilterDropdown';
-import {
-  DeviceFilters,
-  Entity,
-  FilterDeviceOptions,
-  FilteredDevicesFromBack,
-} from '@/types/devices';
+import { DeviceFilters, Entity, FilterDeviceOptions } from '@/types/devices';
 
 import styles from './Columns.module.scss';
 

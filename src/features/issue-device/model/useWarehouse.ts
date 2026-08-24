@@ -9,10 +9,10 @@ import { RootState } from '@/store/store';
 
 export const useWarehouse = () => {
   const currentWarehouse = useAppSelector((state: RootState) => state.issue.warehouse);
-  const dispatch = useAppDispatch();
-
   const { data: warehouses = [], isLoading: isLoadingWarehouses } = useGetWarehousesQuery();
   const { data: locations = [], isLoading: isLoadingLocations } = useGetLocationsQuery();
+
+  const dispatch = useAppDispatch();
 
   const handleSelect = (warehouse: Warehouse) => {
     if (!warehouse) return;

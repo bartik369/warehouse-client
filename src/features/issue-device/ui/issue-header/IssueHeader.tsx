@@ -7,11 +7,9 @@ import styles from './IssueHeader.module.scss';
 
 interface IssueHeaderProps {
   step: number;
-  onChange: (step: number) => void;
-  onReset: () => void;
 }
 
-export const IssueHeader = ({ step, onChange }: IssueHeaderProps) => {
+export const IssueHeader = ({ step }: IssueHeaderProps) => {
   const currentStep = BASE_STEPS[step];
 
   return (

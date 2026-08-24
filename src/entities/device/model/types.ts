@@ -50,3 +50,32 @@ type DeviceType =
   | 'desktop'
   | 'desktop_phone'
   | 'printer';
+
+export interface FilteredDevicesFromBack {
+  id: string;
+  name: string;
+  inventoryNumber: string;
+  serialNumber: string;
+  isAssigned: boolean;
+  isFunctional: boolean;
+  memorySize: number;
+  screenSize: number;
+  model: {
+    name: string;
+    slug: string;
+    manufacturer: {
+      name: string;
+      slug: string;
+    };
+    type: {
+      name: string;
+      slug: string;
+    };
+  };
+  warehouse: {
+    id: string;
+    name: string;
+    slug: string;
+    locationId: string;
+  };
+}
