@@ -40,7 +40,7 @@ const Device = () => {
           id: itemDevice.id,
           name: itemDevice.name,
           isAssigned: itemDevice.isAssigned,
-          warehouseName: itemDevice.warehouse?.name || '',
+          warehouseName: itemDevice.warehouse.name || '',
           warehouseSlug: itemDevice.warehouse?.slug || '',
         })
       );
