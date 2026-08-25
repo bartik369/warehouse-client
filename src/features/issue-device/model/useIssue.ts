@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { Warehouse } from '@/entities/warehouse/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
 import {
@@ -135,7 +136,7 @@ export const useIssue = () => {
     if (selectedDevices.length === 0) return;
 
     const device = selectedDevices[0];
-    dispatch(setWarehouse(device.warehouse)); // todo
+    dispatch(setWarehouse(device.warehouse as Warehouse)); // todo
     dispatch(setIssueStep(1));
     dispatch(setAssignedDevice(selectedDevices));
     dispatch(clearSelectedDevices());
