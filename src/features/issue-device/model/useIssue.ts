@@ -264,7 +264,6 @@ export const useIssue = () => {
     handleResetIssue,
     handleResetIssueDevices,
     handleSetStep,
-    // handleStartDeviceIssueWith,
     handleStartNewIssue,
     handleStartIssueByList,
     handleDeleteIssueProcess,
@@ -276,9 +275,6 @@ export const useIssue = () => {
   };
 
   const status = {
-    // isUserFetching,
-    // isDeviceFetching,
-    // isWarehousesByUserFetching,
     isIssueLoading,
     isIssueSuccess,
     isCreateIssueProcessLoading,

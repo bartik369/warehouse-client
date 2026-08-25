@@ -4,10 +4,6 @@
   gap: 3px;
   width: fit-content;
   height: fit-content;
-  padding: 3px 7px;
-  font-size: 11px !important;
-  font-weight: 400;
-  border-radius: 6px;
 }
 .success {
   color: var(--green-500) !important;
@@ -16,7 +12,6 @@
 }
 .processing {
   color: var(--blue-500) !important;
-  // border: 1px solid var(--blue-200);
   background: var(--blue-50) !important;
 }
 .default {
@@ -24,4 +19,25 @@
 .error {
 }
 .warning {
+  color: var(--red-400) !important;
+  border: 1px solid var(--red-200);
+  background: var(--red-50) !important;
+}
+.sm {
+  padding: 0px 6px;
+  font-size: 10px !important;
+  font-weight: 400;
+  border-radius: 4px;
+}
+.md {
+  padding: 3px 7px;
+  font-size: 11px !important;
+  font-weight: 400;
+  border-radius: 6px;
+}
+.lg {
+  padding: 6px 12px;
+  font-size: 12px !important;
+  font-weight: 400;
+  border-radius: 8px;
 }

@@ -1,43 +1,3 @@
-export interface Device {
-  id: string;
-  name: string;
-  inventoryNumber?: string;
-  modelCode?: string;
-  modelId?: string;
-  modelSlug?: string;
-  modelName?: string;
-  serialNumber?: string;
-  weight?: number;
-  screenSize?: number | null;
-  memorySize?: number | null;
-  inStock: boolean;
-  isFunctional: boolean;
-  isAssigned: boolean;
-  warehouseId: string;
-  warehouseSlug?: string;
-  warehouseName: string;
-  description?: string;
-  typeSlug: string;
-  typeName: string;
-  typeId: string;
-  manufacturerSlug: string;
-  manufacturerName: string;
-  manufacturerId: string;
-  addedById: string;
-  updatedById: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  price_with_vat?: number | null;
-  price_without_vat?: number | null;
-  residual_price?: number | null;
-  warrantyNumber?: string;
-  startWarrantyDate?: Date | null;
-  endWarrantyDate?: Date | null;
-  providerName: string;
-  providerSlug: string;
-  contractorId: string;
-}
-
 type DeviceType =
   | 'accessory'
   | 'network'
@@ -51,31 +11,62 @@ type DeviceType =
   | 'desktop_phone'
   | 'printer';
 
-export interface FilteredDevicesFromBack {
+export interface Device {
   id: string;
   name: string;
-  inventoryNumber: string;
-  serialNumber: string;
-  isAssigned: boolean;
+  inventoryNumber: string | null;
+  modelCode: string | null;
+  modelId: string | null;
+  serialNumber: string | null;
+  weight: number | null;
+  screenSize: number | null;
+  memorySize: number | null;
+  inStock: boolean;
   isFunctional: boolean;
-  memorySize: number;
-  screenSize: number;
+  isAssigned: boolean;
+  assignedUserId: string | null;
+  warehouseId: string | null;
+  description: string | null;
+  addedById: string;
+  updatedById: string;
+  lastIssuedAt: Date | null;
+  lastReturnedAt: Date | null;
+  createdAt: string;
+  updatedAt: string;
+  price_with_vat: number | null;
+  price_without_vat: number | null;
+  residual_price: number | null;
   model: {
+    id: string;
     name: string;
     slug: string;
     manufacturer: {
+      id: string;
       name: string;
       slug: string;
     };
     type: {
+      id: string;
       name: string;
       slug: string;
     };
-  };
+  } | null;
   warehouse: {
     id: string;
     name: string;
     slug: string;
-    locationId: string;
-  };
+    locationId: string | null;
+  } | null;
+  warranty: {
+    warrantyNumber: string;
+    startWarrantyDate: Date;
+    endWarrantyDate: Date;
+    provider: string;
+    contractorId: string | null;
+    contractor: {
+      id: string;
+      name: string;
+      slug: string;
+    } | null;
+  } | null;
 }

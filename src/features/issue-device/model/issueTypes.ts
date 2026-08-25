@@ -1,4 +1,4 @@
-import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { DeviceIssueData } from '@/types/devices';
 import { AssignedDevice } from '@/types/issue';
@@ -17,8 +17,8 @@ export type IssueStepTitle =
   | 'Отправка документа';
 
 export interface IssueState {
-  assignedDevices: FilteredDevicesFromBack[];
-  selectedDevices: FilteredDevicesFromBack[];
+  assignedDevices: Device[];
+  selectedDevices: Device[];
   issueStep: number;
   pdfBlob: Blob | null;
   issueNumber: string;

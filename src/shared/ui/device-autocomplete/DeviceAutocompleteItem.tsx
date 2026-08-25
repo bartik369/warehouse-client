@@ -1,13 +1,13 @@
 import { Typography } from 'antd';
 import clsx from 'clsx';
 
-import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 
 import styles from './DeviceAutocomplete.module.scss';
 import { DEVICE_TYPES } from './constants';
 
 interface DeviceAutocompleteItemProps {
-  device: FilteredDevicesFromBack;
+  device: Device;
   disabled?: boolean;
 }
 export const DeviceAutocompleteItem = ({
@@ -17,7 +17,7 @@ export const DeviceAutocompleteItem = ({
   const isDeviceType = (value: string): value is keyof typeof DEVICE_TYPES => {
     return value in DEVICE_TYPES;
   };
-  const typeSlug = device.model?.type?.slug;
+  const typeSlug = device.model?.type?.slug ?? '';
   const Icon = isDeviceType(typeSlug) ? DEVICE_TYPES[typeSlug].icon : undefined;
 
   return (
@@ -26,7 +26,7 @@ export const DeviceAutocompleteItem = ({
       <Typography.Text className={styles.tooltipName} ellipsis={{ tooltip: device.name }}>
         {device.name}
       </Typography.Text>
-      <span className={styles.value}>{device.model.manufacturer.name}</span>
+      <span className={styles.value}>{device.model?.manufacturer?.name}</span>
       <Typography.Text className={styles.tooltipName} ellipsis={{ tooltip: device.serialNumber }}>
         {device.serialNumber}
       </Typography.Text>

@@ -1,12 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Device, DeviceMedia } from '@/types/devices';
+import { Device } from '@/entities/device/model/types';
+import { DeviceMedia } from '@/types/devices';
 import { AssignedDevice } from '@/types/issue';
 
 type DeviceAction = {
   device: Device;
   devices: Device[];
-  selectedDevices: AssignedDevice[];
+  selectedDevices: Device[];
   errors: Partial<Record<keyof Device, string>>;
   title: string;
   fieldType: string;
@@ -20,40 +21,31 @@ const initialState: DeviceAction = {
   device: {
     id: '',
     name: '',
-    inventoryNumber: '',
-    modelId: '',
-    modelName: '',
-    assignedUserId: null,
-    modelSlug: '',
-    modelCode: '',
-    serialNumber: '',
-    weight: 0,
-    screenSize: 0,
-    memorySize: 0,
+    inventoryNumber: null,
+    modelCode: null,
+    modelId: null,
+    serialNumber: null,
+    weight: null,
+    screenSize: null,
+    memorySize: null,
     inStock: true,
     isFunctional: true,
     isAssigned: false,
-    warehouseId: '',
-    warehouseName: '',
-    warehouseSlug: '',
-    description: '',
-    typeName: '',
-    typeSlug: '',
-    typeId: '',
-    manufacturerName: '',
-    manufacturerSlug: '',
-    manufacturerId: '',
+    assignedUserId: null,
+    warehouseId: null,
+    description: null,
     addedById: '',
     updatedById: '',
-    price_with_vat: 0,
-    price_without_vat: 0,
-    residual_price: 0,
-    warrantyNumber: '',
-    startWarrantyDate: null,
-    endWarrantyDate: null,
-    providerName: '',
-    providerSlug: '',
-    contractorId: '',
+    lastIssuedAt: null,
+    lastReturnedAt: null,
+    createdAt: '',
+    updatedAt: '',
+    price_with_vat: null,
+    price_without_vat: null,
+    residual_price: null,
+    model: null,
+    warehouse: null,
+    warranty: null,
   },
   devices: [],
   selectedDevices: [],
@@ -107,7 +99,7 @@ const deviceSlice = createSlice({
     patchDevice: (state, action: PayloadAction<Partial<Device>>) => {
       state.device = { ...state.device, ...action.payload };
     },
-    setSelectedDevices: (state, action: PayloadAction<AssignedDevice[]>) => {
+    setSelectedDevices: (state, action: PayloadAction<Device[]>) => {
       console.log('selected from list', action.payload);
       state.selectedDevices = action.payload;
     },

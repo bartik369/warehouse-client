@@ -9,7 +9,7 @@ import {
 } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
@@ -21,20 +21,20 @@ import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 import { getDevicesColumns } from '../model/devices.columns';
 
 interface DeviceTableProps {
-  devices: FilteredDevicesFromBack[];
+  devices: Device[];
   options: FilterDeviceOptions;
   filters: DeviceFilters;
   page: number;
   limit: number;
   totalCount: number;
   isLoading: boolean;
-  setDevices: (devices: FilteredDevicesFromBack[]) => void;
+  setDevices: (devices: Device[]) => void;
   resetSingleFilter: (key: keyof DeviceFilters) => void;
   setPage: (page: number) => void;
   onTableChange: (
     _pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
-    _sorter: SorterResult<FilteredDevicesFromBack>[] | SorterResult<FilteredDevicesFromBack>
+    _sorter: SorterResult<Device>[] | SorterResult<Device>
   ) => void;
 }
 
@@ -81,7 +81,7 @@ export const DevicesTable = ({
     return totalWidth;
   };
 
-  const rowSelection: TableRowSelection<FilteredDevicesFromBack> = {
+  const rowSelection: TableRowSelection<Device> = {
     type: 'checkbox',
     onChange: (selectedRowKeys, selectedRows) => {
       setDevices(selectedRows);
@@ -89,13 +89,13 @@ export const DevicesTable = ({
         setSelectedWarehouseSlug(null);
         setSelectedDeviceStatus(null);
       } else {
-        setSelectedWarehouseSlug(selectedRows[0].warehouse.slug);
+        setSelectedWarehouseSlug(selectedRows[0].warehouse?.slug ?? '');
         setSelectedDeviceStatus(selectedRows[0].isAssigned);
       }
     },
     getCheckboxProps: (record) => ({
       disabled:
-        (selectedWarehouseSlug !== null && record.warehouse.slug !== selectedWarehouseSlug) ||
+        (selectedWarehouseSlug !== null && record.warehouse?.slug !== selectedWarehouseSlug) ||
         (selectedDeviceStatus !== null && selectedDeviceStatus !== record.isAssigned),
     }),
   };

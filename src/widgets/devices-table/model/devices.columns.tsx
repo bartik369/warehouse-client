@@ -1,13 +1,12 @@
 import { Button } from 'antd';
 import { ColumnType } from 'antd/es/table';
-import { CgUnavailable } from 'react-icons/cg';
 import { FaCircleInfo } from 'react-icons/fa6';
-import { IoIosCloseCircle } from 'react-icons/io';
-import { IoCheckmarkCircle } from 'react-icons/io5';
-import { PiCheckCircleFill } from 'react-icons/pi';
+import { IoCheckmark } from 'react-icons/io5';
+import { RxCross2 } from 'react-icons/rx';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { sortNumbers } from '@/shared/lib/export/sortNums';
+import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { FilterDropdown } from '@/shared/ui/filter-dropdown/FilterDropdown';
 import { DeviceFilters, Entity, FilterDeviceOptions } from '@/types/devices';
 
@@ -28,7 +27,7 @@ export const getDevicesColumns = ({
   onView: (deviceId: string) => void;
   setFilters: React.Dispatch<React.SetStateAction<DeviceFilters>>;
   resetSingleFilter: (key: keyof DeviceFilters) => void;
-}): ColumnType<FilteredDevicesFromBack>[] => {
+}): ColumnType<Device>[] => {
   const manufacturerOptions =
     options.manufacturer?.map((m) => ({
       text: m.name,
@@ -75,7 +74,7 @@ export const getDevicesColumns = ({
     warehouse: 'Склад',
     screenSize: 'Размер экрана',
     memorySize: 'ОЗУ(Гб)',
-    isFunctional: 'Исправность',
+    isFunctional: 'Состояние',
     isAssigned: 'Используется',
     inventoryNumber: 'Инвентарный номер',
     serialNumber: 'Серийный номер',
@@ -111,7 +110,7 @@ export const getDevicesColumns = ({
       dataIndex: ['model', 'type', 'name'],
       width: 220,
       align: 'center',
-      sorter: (a, b) => (a.model?.type?.name || '').localeCompare(b.model?.type?.name),
+      sorter: (a, b) => (a.model?.type?.name || '').localeCompare(b.model?.type?.name || ''),
       filteredValue: filters.type.length ? filters.type : null,
       filters: options.type?.map((type) => ({
         text: type.name,
@@ -213,9 +212,21 @@ export const getDevicesColumns = ({
       render: (isFunctional: boolean) => (
         <div className={styles.iconWrapper}>
           {isFunctional ? (
-            <PiCheckCircleFill className={styles.serviceable} />
+            <CustomTag
+              variant="success"
+              title="Исправно"
+              size="sm"
+              icon={IoCheckmark}
+              iconSize={11}
+            />
           ) : (
-            <IoIosCloseCircle className={styles.notServiceable} />
+            <CustomTag
+              variant="warning"
+              title="Неисправно"
+              size="sm"
+              icon={RxCross2}
+              iconSize={11}
+            />
           )}
         </div>
       ),
@@ -240,9 +251,9 @@ export const getDevicesColumns = ({
       render: (isAssigned: boolean) => (
         <div className={styles.iconWrapper}>
           {!isAssigned ? (
-            <CgUnavailable className={styles.inUse} />
+            <CustomTag variant="success" title="Нет" size="sm" icon={IoCheckmark} iconSize={11} />
           ) : (
-            <IoCheckmarkCircle className={styles.inStock} />
+            <CustomTag variant="warning" title="Да" size="sm" icon={RxCross2} iconSize={11} />
           )}
         </div>
       ),
@@ -269,7 +280,7 @@ export const getDevicesColumns = ({
       fixed: 'right',
       width: 60,
       align: 'center',
-      render: (_, record: FilteredDevicesFromBack) => (
+      render: (_, record: Device) => (
         <Button
           className={styles.infoButton}
           type="link"

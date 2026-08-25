@@ -1,7 +1,7 @@
 import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 
 import printLogo from '@/assets/elements/print_logo.png';
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 
 import { baseDeviceLabelConfig } from './constants';
 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
 export interface IssueDocumentProps {
   date: string;
   docNumber: string;
-  tableData: FilteredDevicesFromBack[];
+  tableData: Device[];
   firstNameRuCurrent: string;
   lastNameRuCurrent: string;
   firstNameRuPartner: string;
@@ -256,7 +256,7 @@ export const IssueDocument = ({
             <View key={idx} style={styles.tableRow}>
               {baseDeviceLabelConfig.map((col) => (
                 <Text key={col.key} style={styles.tableCol}>
-                  {formatValue(row[col.key as keyof FilteredDevicesFromBack])}
+                  {formatValue(row[col.key as keyof Device])}
                 </Text>
               ))}
             </View>

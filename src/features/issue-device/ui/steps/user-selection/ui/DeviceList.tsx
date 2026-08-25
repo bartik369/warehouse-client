@@ -1,13 +1,13 @@
 import { Button } from 'antd';
 import { LuTrash2 } from 'react-icons/lu';
 
-import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 
 import { AssignedDevicesTable } from '../../../assigned-devices-table/AssignedDevicesTable';
 import styles from './SelectUserStep.module.scss';
 
 interface DeviceListProps {
-  devices: FilteredDevicesFromBack[];
+  devices: Device[];
   onDelete: (id: string) => void;
   onResetList: () => void;
 }

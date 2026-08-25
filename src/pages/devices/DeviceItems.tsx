@@ -5,14 +5,14 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 import { PiCheckCircleFill } from 'react-icons/pi';
 
-import { FilteredDevicesFromBack } from '@/types/devices';
+import { Device } from '@/types/devices';
 
 import styles from './Devices.module.scss';
 
 interface DeviceItemsProps {
-  devices: FilteredDevicesFromBack[];
+  devices: Device[];
   checks: Record<string, boolean>;
-  handleCheck: (device: FilteredDevicesFromBack, e: ChangeEvent<HTMLInputElement>) => void;
+  handleCheck: (device: Device, e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const DeviceItems = memo(({ devices, checks, handleCheck }: DeviceItemsProps) => {

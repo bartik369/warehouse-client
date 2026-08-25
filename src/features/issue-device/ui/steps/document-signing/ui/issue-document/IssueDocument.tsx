@@ -1,6 +1,6 @@
 import { Card, Flex, Typography } from 'antd';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { User } from '@/entities/user/model/types';
 import IssueActContent from '@/features/documents/IssueActContent';
 import { IssueState } from '@/features/issue-device/model/useIssue';
@@ -10,7 +10,7 @@ import styles from './IssueDocument.module.scss';
 
 interface IssueDocumentProps {
   user: User | null;
-  devices: FilteredDevicesFromBack[];
+  devices: Device[];
   state: IssueState;
 }
 export const IssueDocument = ({ devices, user, state }: IssueDocumentProps) => {
