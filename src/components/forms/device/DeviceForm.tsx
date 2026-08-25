@@ -1,23 +1,26 @@
-import { useEffect, memo } from "react";
-import Textarea from "@/components/ui/textarea/Textarea";
-import DeviceTechnicalSection from "./DeviceTechnicalSection";
-import Actions from "./Actions";
-import PriceForm from "./PriceForm";
-import WarrantyForm from "./WarrantyForm";
-import DevicePreview from "./DevicePreview";
-import { ToastContainer } from "react-toastify";
-import { RootState } from "@/store/store";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux/useRedux";
-import { setDevicePic } from "@/store/slices/deviceSlice";
-import { useGetWarehousesQuery } from "@/store/api/warehousesApi";
-import { useLazyGetModelsQuery } from "@/store/api/modelsApi";
-import { useGetTypesQuery } from "@/store/api/typesApi";
-import { useGetManufacturersQuery } from "@/store/api/manufacturersApi";
-import { Entity, DeviceFormActions } from "@/types/devices";
-import { Contractor } from "@/types/content";
-import { LABELS } from "@/utils/constants/ui/labels";
-import { SECTION_TITLES } from "@/utils/constants/ui/titles";
-import styles from "./DeviceForm.module.scss";
+import { memo, useEffect } from 'react';
+
+import { ToastContainer } from 'react-toastify';
+
+import Textarea from '@/components/ui/textarea/Textarea';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
+import { useLazyGetModelsQuery } from '@/store/api/modelsApi';
+import { useGetTypesQuery } from '@/store/api/typesApi';
+import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
+import { setDevicePic } from '@/store/slices/deviceSlice';
+import { RootState } from '@/store/store';
+import { Contractor } from '@/types/content';
+import { DeviceFormActions, Entity } from '@/types/devices';
+import { LABELS } from '@/utils/constants/ui/labels';
+import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+
+import Actions from './Actions';
+import styles from './DeviceForm.module.scss';
+import DevicePreview from './DevicePreview';
+import DeviceTechnicalSection from './DeviceTechnicalSection';
+import PriceForm from './PriceForm';
+import WarrantyForm from './WarrantyForm';
 
 interface DeviceFormProps {
   actions: DeviceFormActions;
@@ -28,35 +31,35 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
   const { data: types } = useGetTypesQuery();
   const [getModels, { data: models }] = useLazyGetModelsQuery();
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state:RootState) => state.device.device);
-  const errors = useAppSelector((state:RootState) => state.device.errors);
-  const isUpdate = useAppSelector((state:RootState) => state.device.isUpdate);
-  const checked = useAppSelector((state:RootState) => state.device.checked);
+  const state = useAppSelector((state: RootState) => state.device.device);
+  const errors = useAppSelector((state: RootState) => state.device.errors);
+  const isUpdate = useAppSelector((state: RootState) => state.device.isUpdate);
+  const checked = useAppSelector((state: RootState) => state.device.checked);
 
   // Allow model query by manufacturer and type
   useEffect(() => {
-    if (state.modelName && models) {
+    if (state.model?.name && models) {
       models.forEach((model: Entity) => {
-        if (model.name === state.modelName) {
-          dispatch(setDevicePic(model.imagePath || ""));
+        if (model.name === state.model?.name) {
+          dispatch(setDevicePic(model.imagePath || ''));
         }
       });
     }
-  }, [state.modelName, models, dispatch]);
+  }, [state.model?.name, models, dispatch]);
 
   // Resetting the model and preview of the device when changing the manufacturer and type
   useEffect(() => {
-    if (state.manufacturerSlug && state.typeSlug) {
+    if (state.model?.manufacturer.slug && state.model.type.slug) {
       getModels({
-        manufacturer: state.manufacturerSlug,
-        type: state.typeSlug,
+        manufacturer: state.model.manufacturer.slug,
+        type: state.model.type.slug,
       });
       // resetModel();
     }
-  }, [state.manufacturerSlug, state.typeSlug, models]);
+  }, [state.model?.manufacturer?.slug, state.model?.type?.slug, models]);
   // Reset image state after unmount
   useEffect(() => {
-    dispatch(setDevicePic(""));
+    dispatch(setDevicePic(''));
   }, [dispatch]);
 
   return (
@@ -76,11 +79,7 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
             types={types || []}
           />
           <div className={styles.title}>{SECTION_TITLES.financialOptions}</div>
-          <PriceForm
-            device={state}
-            errors={errors}
-            handleExtNumber={actions.handleExtNumber}
-          />
+          <PriceForm device={state} errors={errors} handleExtNumber={actions.handleExtNumber} />
           <div className={styles.title}>{SECTION_TITLES.warrantyOptions}</div>
           <WarrantyForm
             getId={(item: Contractor) => item.id}
@@ -91,10 +90,8 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
           />
           <form className={styles.additionalForm}>
             <Textarea
-              onChange={(e) =>
-                state && actions.handleInputChange("description", e.target.value)
-              }
-              value={state.description || ""}
+              onChange={(e) => state && actions.handleInputChange('description', e.target.value)}
+              value={state.description || ''}
               label={LABELS.description}
               errors={errors}
               name="description"
