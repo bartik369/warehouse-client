@@ -1,11 +1,10 @@
-import { Device } from '@/types/devices';
-import { AssignedDevice } from '@/types/issue';
+import { Device } from '@/entities/device/model/types';
 import { prepareIssueDeviceData } from '@/utils/data/transformers';
 
 import styles from './DeviceSearchResults.module.scss';
 
 interface DeviceItemProps {
-  setDevice: (item: AssignedDevice) => void;
+  setDevice: (item: Partial<Device>) => void;
   devices: Device[];
 }
 export const DeviceList = ({ devices, setDevice }: DeviceItemProps) => {

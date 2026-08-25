@@ -49,9 +49,11 @@ const WarrantyForm = <T,>({ state, actions, errors, isUpdate }: WarrantyFormProp
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={state.startWarrantyDate ? new Date(state.startWarrantyDate) : null}
+          selected={
+            state.warranty?.startWarrantyDate ? new Date(state.warranty.startWarrantyDate) : null
+          }
           onChange={(date) => actions.handleStartDateChange(date)}
-          maxDate={state.endWarrantyDate ?? undefined}
+          maxDate={state.warranty?.endWarrantyDate ?? undefined}
           placeholderText={PLACEHOLDER_LABELS.selectDate}
         />
         <div className={styles.label}>{LABELS.startWarranty}</div>
@@ -64,9 +66,11 @@ const WarrantyForm = <T,>({ state, actions, errors, isUpdate }: WarrantyFormProp
           locale="ru"
           showIcon
           dateFormat="dd.MM.yyyy"
-          selected={state.endWarrantyDate ? new Date(state.endWarrantyDate) : null}
+          selected={
+            state.warranty?.endWarrantyDate ? new Date(state.warranty.endWarrantyDate) : null
+          }
           onChange={(date) => actions.handleEndDateChange(date)}
-          minDate={state.startWarrantyDate ?? undefined}
+          minDate={state.warranty?.startWarrantyDate ?? undefined}
           placeholderText={PLACEHOLDER_LABELS.selectDate}
         />
         <div className={styles.label}>{LABELS.endWarranty}</div>
@@ -77,7 +81,7 @@ const WarrantyForm = <T,>({ state, actions, errors, isUpdate }: WarrantyFormProp
           setValue={actions.handleContractorChange}
           items={(contractors || []) as Contractor[]}
           label={LABELS.contractor}
-          value={state.providerName}
+          value={state.warranty?.provider ?? ''}
           errors={errors}
           name="provider"
           getId={(item) => item.id}
@@ -88,7 +92,7 @@ const WarrantyForm = <T,>({ state, actions, errors, isUpdate }: WarrantyFormProp
       <Input
         type="text"
         name="warrantyNumber"
-        value={state.warrantyNumber || ''}
+        value={state.warranty?.warrantyNumber || ''}
         label={LABELS.warrantyNumber}
         errors={errors}
         onChange={(e) => actions.handleInputChange('warrantyNumber', e.target.value)}

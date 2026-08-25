@@ -135,7 +135,7 @@ export const useIssue = () => {
     if (selectedDevices.length === 0) return;
 
     const device = selectedDevices[0];
-    dispatch(setWarehouse(device.warehouse));
+    dispatch(setWarehouse(device.warehouse)); // todo
     dispatch(setIssueStep(1));
     dispatch(setAssignedDevice(selectedDevices));
     dispatch(clearSelectedDevices());
