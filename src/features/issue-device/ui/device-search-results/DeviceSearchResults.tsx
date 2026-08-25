@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Device } from '@/entities/device/model/types';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { RootState } from '@/store/store';
@@ -11,7 +12,7 @@ import styles from './DeviceSearchResults.module.scss';
 
 interface DeviceSearchResultsProps {
   state: IssueState;
-  setDevice: (item: AssignedDevice) => void;
+  setDevice: (item: Device) => void;
 }
 export const IssueDeviceList = ({ state, setDevice }: DeviceSearchResultsProps) => {
   const devices = useAppSelector((state: RootState) => state.device.devices);

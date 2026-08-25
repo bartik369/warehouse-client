@@ -4,7 +4,7 @@ import { prepareIssueDeviceData } from '@/utils/data/transformers';
 import styles from './DeviceSearchResults.module.scss';
 
 interface DeviceItemProps {
-  setDevice: (item: Partial<Device>) => void;
+  setDevice: (item: Device) => void;
   devices: Device[];
 }
 export const DeviceList = ({ devices, setDevice }: DeviceItemProps) => {
