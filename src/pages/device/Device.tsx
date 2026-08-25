@@ -35,15 +35,15 @@ const Device = () => {
   async function fetchDevice(id: string) {
     try {
       const itemDevice = await getDevice(id).unwrap();
-      dispatch(
-        patchDevice({
-          id: itemDevice.id,
-          name: itemDevice.name,
-          isAssigned: itemDevice.isAssigned,
-          warehouseName: itemDevice.warehouse.name || '',
-          warehouseSlug: itemDevice.warehouse?.slug || '',
-        })
-      );
+      // dispatch(
+      //   patchDevice({
+      //     id: itemDevice.id,
+      //     name: itemDevice.name,
+      //     isAssigned: itemDevice.isAssigned,
+      //     warehouseName: itemDevice.warehouse.name || '',
+      //     warehouseSlug: itemDevice.warehouse?.slug || '',
+      //   })
+      // );
       dispatch(setDevicePic(itemDevice.model.imagePath || ''));
     } catch (err: unknown) {
       handleApiError(err);

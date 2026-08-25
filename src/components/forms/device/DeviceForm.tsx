@@ -98,7 +98,7 @@ const DeviceForm = memo(({ actions }: DeviceFormProps) => {
             />
             <Actions
               resetEntity={actions.handleResetDevice}
-              addEntity={actions.handleAddDevice}
+              addEntity={() => console.log('123')}
               isUpdate={isUpdate}
             />
           </form>
