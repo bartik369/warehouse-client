@@ -43,32 +43,32 @@ export interface Device {
   providerSlug: string;
   contractorId: string;
 }
-export interface FilteredDevicesFromBack {
-  id: string;
-  name: string;
-  inventoryNumber: string;
-  serialNumber: string;
-  isAssigned: boolean;
-  isFunctional: boolean;
-  memorySize: number;
-  screenSize: number;
-  model: {
-    name: string;
-    slug: string;
-    manufacturer: {
-      name: string;
-      slug: string;
-    };
-    type: {
-      name: string;
-      slug: string;
-    };
-  };
-  warehouse: {
-    name: string;
-    slug: string;
-  };
-}
+// export interface Device {
+//   id: string;
+//   name: string;
+//   inventoryNumber: string;
+//   serialNumber: string;
+//   isAssigned: boolean;
+//   isFunctional: boolean;
+//   memorySize: number;
+//   screenSize: number;
+//   model: {
+//     name: string;
+//     slug: string;
+//     manufacturer: {
+//       name: string;
+//       slug: string;
+//     };
+//     type: {
+//       name: string;
+//       slug: string;
+//     };
+//   };
+//   warehouse: {
+//     name: string;
+//     slug: string;
+//   };
+// }
 
 export interface AggregateDeviceInfo extends Device {
   addedBy: {
@@ -218,7 +218,7 @@ export interface Entity {
 }
 
 export interface DevicesResponse {
-  devices: FilteredDevicesFromBack;
+  devices: Device;
   totalPages: number;
   totalCount: number;
 }
@@ -309,7 +309,7 @@ export interface DeviceFormActions {
   handleNumber: (num: number) => void;
   handleExtNumber: (num: number, fieldName: string) => void;
   handleChecked: () => void;
-  handleAddDevice: () => void;
+  // handleAddDevice: () => void;
   handleResetDevice: () => void;
   resetModelData: () => void;
   handleStartDateChange: (item: Date | null) => void;

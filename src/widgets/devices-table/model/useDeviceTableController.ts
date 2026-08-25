@@ -4,7 +4,7 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { useGetDeviceOptionsQuery, useGetDevicesQuery } from '@/store/api/devicesApi';
 import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 import { formatFiltersToSearchParams } from '@/utils/data/filterUtils';
@@ -51,7 +51,7 @@ export const useDeviceTableController = () => {
     (
       pagination: TablePaginationConfig,
       antFilters: Record<string, FilterValue | null>,
-      _sorter: SorterResult<FilteredDevicesFromBack>[] | SorterResult<FilteredDevicesFromBack>
+      _sorter: SorterResult<Device>[] | SorterResult<Device>
     ) => {
       if (pagination.pageSize && pagination.pageSize !== limit) {
         setLimit(pagination.pageSize);

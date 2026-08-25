@@ -1,7 +1,8 @@
-import { devicePrices } from "@/utils/constants/device";
-import CustomNumber from "@/components/ui/number/CustomNumber";
-import { Device } from "@/types/devices";
-import styles from "./DeviceForm.module.scss";
+import CustomNumber from '@/components/ui/number/CustomNumber';
+import { Device } from '@/entities/device/model/types';
+import { devicePrices } from '@/utils/constants/device';
+
+import styles from './DeviceForm.module.scss';
 
 interface PriceFormProps {
   device: Device;

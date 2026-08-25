@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Device, FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
 import { AssignedDevice } from '@/types/issue';
 
@@ -25,10 +25,7 @@ const issueSlice = createSlice({
   name: 'issue',
   initialState,
   reducers: {
-    setAssignedDevice: (
-      state,
-      action: PayloadAction<FilteredDevicesFromBack | FilteredDevicesFromBack[]>
-    ) => {
+    setAssignedDevice: (state, action: PayloadAction<Device | Device[]>) => {
       if (Array.isArray(action.payload)) {
         state.assignedDevices = action.payload;
       } else {
@@ -41,10 +38,7 @@ const issueSlice = createSlice({
         }
       }
     },
-    setSelectedDevice: (
-      state,
-      action: PayloadAction<FilteredDevicesFromBack | FilteredDevicesFromBack[]>
-    ) => {
+    setSelectedDevice: (state, action: PayloadAction<Device | Device[]>) => {
       if (Array.isArray(action.payload)) {
         state.selectedDevices = action.payload;
       } else {

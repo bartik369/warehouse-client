@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 import { InputProps } from 'antd';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 
 export interface DeviceAutocompleteOption {
   value: string;
   label: ReactNode;
-  device: FilteredDevicesFromBack;
+  device: Device;
 }
 
 export type DeviceAutocompleteOptions = DeviceAutocompleteOption[];

@@ -1,15 +1,17 @@
+import Toggle from '@/components/ui/checkbox/Toggle';
 import Input from '@/components/ui/input/Input';
-import Ask from './Ask';
-import Select from '@/components/ui/select/Select';
-import { Entity, DeviceFormActions, Device } from '@/types/devices';
 import CustomNumber from '@/components/ui/number/CustomNumber';
 import Number from '@/components/ui/number/Number';
-import Toggle from '@/components/ui/checkbox/Toggle';
+import Select from '@/components/ui/select/Select';
+import { Device } from '@/entities/device/model/types';
 import { useGlobalModal } from '@/hooks/data/useGlobalModal';
 import { ModalType } from '@/reducers/modal/modalTypes';
+import { DeviceFormActions, Entity } from '@/types/devices';
+import { deviceTypes } from '@/utils/constants/device';
 import { LABELS } from '@/utils/constants/ui/labels';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
-import { deviceTypes } from '@/utils/constants/device';
+
+import Ask from './Ask';
 import styles from './DeviceForm.module.scss';
 
 interface DeviceTechnicalSectionProps {
@@ -60,7 +62,7 @@ const DeviceTechnicalSection = ({
             setValue={actions.handleTypeChange}
             items={types || []}
             label={LABELS.deviceType}
-            value={state.typeName || ''}
+            value={state.model?.type?.name || ''}
             errors={errors}
             name="typeName"
             getId={(item: Entity) => item.id}
@@ -73,21 +75,21 @@ const DeviceTechnicalSection = ({
             setValue={actions.handleManufacturerChange}
             items={manufacturers || []}
             label={LABELS.manufacturer}
-            value={state.manufacturerName || ''}
+            value={state.model?.manufacturer.name || ''}
             errors={errors}
             name="manufacturerName"
             getId={(item: Entity) => item.id}
             getLabel={(item) => item.name}
           />
         </div>
-        {state.typeSlug && state.manufacturerSlug && (
+        {state.model?.type.slug && state.model.manufacturer.slug && (
           <div className={styles.container}>
             <Ask onAsk={() => openEntityModal('model', SECTION_TITLES.addModel)} />
             <Select<Entity>
               setValue={actions.handleModelChange}
               items={models || []}
               label={LABELS.model}
-              value={state.modelName || ''}
+              value={state.model.name || ''}
               errors={errors}
               name="modelName"
               getId={(item: Entity) => item.id}
@@ -123,15 +125,15 @@ const DeviceTechnicalSection = ({
           setValue={actions.handleWarehouseChange}
           items={warehouses || []}
           label={LABELS.location}
-          value={state.warehouseName || ''}
+          value={state.warehouse?.name || ''}
           errors={errors}
           name="warehouseId"
           getId={(item: Entity) => item.id}
           getLabel={(item) => item.name}
         />
         <Number device={state} setDevice={actions.handleNumber} />
-        {state.typeSlug &&
-          deviceTypes[state.typeSlug]?.uniqueFields?.map((item) => (
+        {state.model?.type.slug &&
+          deviceTypes[state.model?.type.slug]?.uniqueFields?.map((item) => (
             <CustomNumber
               key={item.name}
               device={state}

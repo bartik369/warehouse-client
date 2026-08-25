@@ -1,6 +1,10 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
-import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
-import { Field, Device, ValidationErrors } from '@/types/devices';
+
+import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
+
+import { Device } from '@/entities/device/model/types';
+import { Field, ValidationErrors } from '@/types/devices';
+
 import style from './Number.module.scss';
 
 interface CustomNumberProps {
@@ -18,10 +22,10 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
     step: item.step,
   };
   const errorMessage = errors[item.name as keyof ValidationErrors];
-  
+
   const handleValueChange = (value: number, name: string) => {
     const parsedValue = parseFloat(value.toFixed(2));
-    
+
     if (!isNaN(parsedValue)) {
       const value = Math.min(Math.max(parsedValue, data.min), data.max);
       setDevice(value, name);
@@ -31,14 +35,14 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
   const handleIncrease = (e: React.MouseEvent) => {
     e.preventDefault();
     const currentValue = parseFloat(inputValue) || 0;
-    const value = typeof currentValue === "number" ? currentValue : 0;
+    const value = typeof currentValue === 'number' ? currentValue : 0;
     handleValueChange(value + data.step, item.name);
   };
 
   const handleDecrease = (e: React.MouseEvent) => {
     e.preventDefault();
     const currentValue = parseFloat(inputValue) || 0;
-    const value = typeof currentValue === "number" ? currentValue : 0;
+    const value = typeof currentValue === 'number' ? currentValue : 0;
     handleValueChange(value - data.step, item.name);
   };
 
@@ -48,7 +52,6 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
     if (/^\d*(\.\d{0,2})?$/.test(value) || value === '') {
       setInputValue(value);
     }
-   
   };
   useEffect(() => {
     const currentValue = device[item.name as keyof Device];
@@ -59,10 +62,7 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
     <div className={style.wrapper}>
       <div className={style.number}>
         <div className={style.label}>{item.label}</div>
-        <CiSquareMinus
-          className={style["btn-left"]}
-          onClick={handleDecrease}
-        />
+        <CiSquareMinus className={style['btn-left']} onClick={handleDecrease} />
         <input
           className={style.value}
           type={item.type}
@@ -73,14 +73,9 @@ const CustomNumber = memo(({ device, item, errors, setDevice }: CustomNumberProp
           max={data.max}
           onChange={handleInputChange}
         />
-        <CiSquarePlus
-          className={style["btn-right"]}
-          onClick={handleIncrease}
-        />
+        <CiSquarePlus className={style['btn-right']} onClick={handleIncrease} />
       </div>
-      <div className={style.error}>
-        {errorMessage && errorMessage }
-      </div>
+      <div className={style.error}>{errorMessage && errorMessage}</div>
     </div>
   );
 });

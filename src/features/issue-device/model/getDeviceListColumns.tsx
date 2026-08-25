@@ -16,9 +16,10 @@ export const getDeviceListColumns = (): ColumnsType<Device> => {
       },
     }),
     render: (_value: unknown, record: Device) => {
+      const typeSlug = record.model?.type?.slug ?? '';
       const Icon =
-        record.typeSlug in DEVICE_TYPES
-          ? DEVICE_TYPES[record.typeSlug as keyof typeof DEVICE_TYPES].icon
+        typeSlug in DEVICE_TYPES
+          ? DEVICE_TYPES[typeSlug as keyof typeof DEVICE_TYPES].icon
           : undefined;
 
       return (

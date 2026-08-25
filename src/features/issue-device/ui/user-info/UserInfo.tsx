@@ -1,7 +1,7 @@
 import { Empty, Flex, Typography } from 'antd';
 import { Divider } from 'antd';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { User } from '@/entities/user/model/types';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 
@@ -12,7 +12,7 @@ import { Information } from './user-card/information/Information';
 
 interface UserInfoProps {
   user: User;
-  assignedUserDevices: FilteredDevicesFromBack[];
+  assignedUserDevices: Device[];
   isLoading: boolean;
 }
 export const UserInfo = ({ user, assignedUserDevices, isLoading }: UserInfoProps) => {

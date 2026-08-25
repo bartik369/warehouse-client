@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { skipToken } from '@reduxjs/toolkit/query';
 
-import { FilteredDevicesFromBack } from '@/entities/device/model/types';
+import { Device } from '@/entities/device/model/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { DeviceAutocompleteItem } from '@/shared/ui/device-autocomplete/DeviceAutocompleteItem';
@@ -19,7 +19,7 @@ export const useDevice = () => {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState('');
   const [inputValue, setInputValue] = useState<string | undefined>('');
-  const [device, setDevice] = useState<FilteredDevicesFromBack | null>(null);
+  const [device, setDevice] = useState<Device | null>(null);
   const [deviceId, setDeviceId] = useState('');
   const debouncedQuery = useDebounce(query.trim(), 700);
   const wasSearched = debouncedQuery.length >= 2;
