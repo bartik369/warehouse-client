@@ -1,37 +1,26 @@
-import { CgCloseO } from 'react-icons/cg';
-import { IoSearch } from 'react-icons/io5';
+import { Input } from 'antd';
+import { CiSearch } from 'react-icons/ci';
 
 import styles from './Search.module.scss';
-
-interface BaseSearchActions {
-  handleChange: (value: string) => void;
-  handleReset: () => void;
-  handleSearch?: () => void;
-}
 
 interface SearchProps {
   placeholder: string;
   value: string;
   name?: string;
-  actions: BaseSearchActions;
+  onChange: (value: string) => void;
 }
 
-const Search = ({ placeholder, actions, value, name }: SearchProps) => {
+const Search = ({ placeholder, value, name, onChange }: SearchProps) => {
   return (
-    <div className={styles.input}>
-      <input
-        value={value}
-        type="text"
-        placeholder={placeholder}
-        onChange={(e) => actions.handleChange(e.target.value)}
-      />
-      {value?.length > 0 &&
-        (name === 'email' ? (
-          <CgCloseO className={styles.icon} onClick={actions.handleReset} />
-        ) : (
-          <IoSearch className={styles.icon} onClick={actions.handleSearch} />
-        ))}
-    </div>
+    <Input
+      className={styles.input}
+      allowClear
+      value={value}
+      type="text"
+      placeholder={placeholder}
+      suffix={<CiSearch className={styles.icon} />}
+      onChange={(e) => onChange(e.target.value)}
+    />
   );
 };
 

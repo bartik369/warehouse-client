@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-import Devices from '@/pages/devices/DevicesPage';
 import DevicesPage from '@/pages/devices/DevicesPage';
 
 const DevicesConfig = [

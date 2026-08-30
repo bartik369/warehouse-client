@@ -1,51 +1,37 @@
+@use '@/shared/styles/tokens' as *;
 .input {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    border-radius: 14px;
-    border: 1px solid #c5c8ce;
-    border-radius: 20px;
-    transition: border-color .3s ease-in-out;
-    &:hover,
-    &:active {
-        border: 1px solid #40495a;
-    }
-    input {
-        font-size: 20px;
-        width: 100%;
-        padding: 15px 60px 15px 20px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        &::placeholder {
-            color: #b9babf;
-        }
-    }
-    .icon {
-        position: absolute;
-        right: 18px;
-        font-size: 30px;
-        color: #d3d9df;
-        cursor: pointer;
-        transition: color .3s ease-in-out;
-        &:hover {
-            color: #40495a;
-        }
-    }
-}
+  width: 100%;
+  height: $form-control-height;
+  border-radius: $form-control-radius;
+  --ant-color-primary: var(--blue-250);
+  --ant-select-active-border-color: var(--blue-250);
+  --ant-select-hover-border-color: var(--blue-250);
+  --ant-select-active-outline-color: rgba(255, 227, 209, 0.5);
+  &:focus-within {
+    border-color: var(--blue-250) !important;
+    box-shadow: 0 0 0 2px rgba(209, 232, 255, 0.5) !important;
+    outline: none !important;
+  }
 
-.result {
-    position: absolute;
-    max-height: 180px;
-    overflow-y: auto;
-    top: 105%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    z-index: 9;
-    padding: 6px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 5px 5px -2px, rgba(42, 51, 70, 0.04) 0px 10px 10px -6px, rgba(14, 63, 126, 0.04) 0px 25px 25px -10px, rgba(14, 63, 126, 0.04) 0px 35px 35px -15px;
+  &:hover,
+  &:active {
+    border-color: var(--blue-250);
+  }
+  input {
+    font-size: 12px;
+  }
+
+  input::placeholder {
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+  .icon {
+    font-size: 17px;
+    color: var(--gray-500);
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      color: var(--blue-600);
+    }
+  }
 }

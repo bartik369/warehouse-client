@@ -1,0 +1,67 @@
+@use '@/shared/styles/tokens' as *;
+
+.root {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  .input {
+    height: $form-control-height;
+    border-radius: $form-control-radius;
+    border: 1px solid var(--border-primary);
+    width: 100%;
+    &:hover,
+    &:focus,
+    &:focus-within {
+      border-color: var(--blue-200);
+      box-shadow: rgba(255, 227, 209, 0.4) 0px 3px 5px;
+    }
+  }
+  .label {
+    position: absolute;
+    z-index: 99;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 12px;
+    background: #fff;
+    padding: 0 4px;
+    pointer-events: none;
+    transition:
+      top 0.15s ease,
+      transform 0.15s ease,
+      left 0.15s ease;
+  }
+
+  .labelWithPrefix {
+    left: 28px;
+  }
+
+  .label.labelActive,
+  &:focus-within .label {
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  .labelWithPrefix.labelActive,
+  &:focus-within .labelWithPrefix {
+    left: 28px;
+  }
+  .tooltipIcon {
+    display: inline-flex;
+    margin-left: 6px;
+    color: #8c8c8c;
+    cursor: help;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.error {
+  margin: 4px 0 0;
+  color: #ff4d4f;
+  font-size: 12px;
+}

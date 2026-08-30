@@ -7,7 +7,7 @@ import { PiCheckCircleFill } from 'react-icons/pi';
 
 import { Device } from '@/entities/device/model/types';
 
-import styles from './Devices.module.scss';
+import styles from './DevicesPage.module.scss';
 
 interface DeviceItemsProps {
   devices: Device[];

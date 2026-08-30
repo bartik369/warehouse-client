@@ -7,66 +7,15 @@ import { RxCross2 } from 'react-icons/rx';
 import { Device } from '@/entities/device/model/types';
 import { sortNumbers } from '@/shared/lib/export/sortNums';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
-import { FilterDropdown } from '@/shared/ui/filter-dropdown/FilterDropdown';
 import { DeviceFilters, Entity, FilterDeviceOptions } from '@/types/devices';
 
 import styles from './Columns.module.scss';
 
 export const getDevicesColumns = ({
-  filters,
-  options,
   onView,
-  setFilters,
-  resetSingleFilter,
 }: {
-  manufacturers: Entity[];
-  warehouses: Entity[];
-  types: Entity[];
-  filters: DeviceFilters;
-  options: FilterDeviceOptions;
   onView: (deviceId: string) => void;
-  setFilters: React.Dispatch<React.SetStateAction<DeviceFilters>>;
-  resetSingleFilter: (key: keyof DeviceFilters) => void;
 }): ColumnType<Device>[] => {
-  const manufacturerOptions =
-    options.manufacturer?.map((m) => ({
-      text: m.name,
-      value: m.slug,
-    })) || [];
-
-  const typeOptions =
-    options.type?.map((t) => ({
-      text: t.name,
-      value: t.slug,
-    })) || [];
-
-  const warehouseOptions =
-    options.warehouse.map((w) => ({
-      text: w.name,
-      value: w.slug,
-    })) || [];
-
-  const screenSizeOptions =
-    options.screenSize.map((s) => ({
-      text: s.screenSize,
-      value: s.screenSize,
-    })) || [];
-
-  const memorySizeOptions =
-    options.memorySize.map((m) => ({
-      text: m.memorySize,
-      value: m.memorySize,
-    })) || [];
-
-  const functionalityOptions = [
-    { text: 'Исправен', value: 'true' },
-    { text: 'Неисправен', value: 'false' },
-  ];
-  const assignedOptions = [
-    { text: 'В использовании', value: 'true' },
-    { text: 'На складе', value: 'false' },
-  ];
-
   const TABLE_TITLES = {
     manufacturer: 'Производитель',
     type: 'Тип',
@@ -89,20 +38,6 @@ export const getDevicesColumns = ({
       align: 'center',
       sorter: (a, b) =>
         (a.model?.manufacturer?.name ?? '').localeCompare(b.model?.manufacturer?.name ?? ''),
-      filteredValue: filters.manufacturer.length ? filters.manufacturer : null,
-      filters: options.manufacturer?.map((manufacturer) => ({
-        text: manufacturer.name,
-        value: manufacturer.slug!,
-      })),
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={manufacturerOptions}
-          filterKey="manufacturer"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
     },
     {
       key: 'type',
@@ -111,20 +46,6 @@ export const getDevicesColumns = ({
       width: 220,
       align: 'center',
       sorter: (a, b) => (a.model?.type?.name || '').localeCompare(b.model?.type?.name || ''),
-      filteredValue: filters.type.length ? filters.type : null,
-      filters: options.type?.map((type) => ({
-        text: type.name,
-        value: type.slug!,
-      })),
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={typeOptions}
-          filterKey="type"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
     },
     {
       key: 'model',
@@ -141,20 +62,6 @@ export const getDevicesColumns = ({
       width: 200,
       align: 'center',
       sorter: (a, b) => (a.warehouse?.name || '').localeCompare(b.warehouse?.name || ''),
-      filteredValue: filters.warehouse.length ? filters.warehouse : null,
-      filters: options.warehouse?.map((warehouse) => ({
-        text: warehouse.name,
-        value: warehouse.slug!,
-      })),
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={warehouseOptions}
-          filterKey="warehouse"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
     },
     {
       key: 'screenSize',
@@ -163,16 +70,6 @@ export const getDevicesColumns = ({
       width: 160,
       align: 'center',
       sorter: (a, b, sortNumber) => sortNumbers(a.screenSize, b.screenSize, sortNumber!),
-      filteredValue: filters.screenSize.length ? filters.screenSize : null,
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={screenSizeOptions}
-          filterKey="screenSize"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
     },
     {
       key: 'memorySize',
@@ -181,16 +78,6 @@ export const getDevicesColumns = ({
       width: 160,
       align: 'center',
       sorter: (a, b, sortOrder) => sortNumbers(a.memorySize, b.memorySize, sortOrder),
-      filteredValue: filters.memorySize.length ? filters.memorySize : null,
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={memorySizeOptions}
-          filterKey="memorySize"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
     },
     {
       key: 'isFunctional',
@@ -199,16 +86,6 @@ export const getDevicesColumns = ({
       width: 160,
       align: 'center',
       sorter: (a, b) => Number(a.isFunctional) - Number(b.isFunctional),
-      filteredValue: filters.isFunctional.length ? filters.isFunctional : null,
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={functionalityOptions}
-          filterKey="isFunctional"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
       render: (isFunctional: boolean) => (
         <div className={styles.iconWrapper}>
           {isFunctional ? (
@@ -238,16 +115,6 @@ export const getDevicesColumns = ({
       width: 150,
       align: 'center',
       sorter: (a, b) => Number(a.isAssigned) - Number(b.isAssigned),
-      filteredValue: filters.isAssigned.length ? filters.isAssigned : null,
-      filterDropdown: (props) => (
-        <FilterDropdown
-          {...props}
-          options={assignedOptions}
-          filterKey="isAssigned"
-          setFilters={setFilters}
-          resetSingleFilter={resetSingleFilter}
-        />
-      ),
       render: (isAssigned: boolean) => (
         <div className={styles.iconWrapper}>
           {!isAssigned ? (
