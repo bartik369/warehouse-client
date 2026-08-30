@@ -1,18 +1,15 @@
 import { BiMessageSquareDetail } from 'react-icons/bi';
 import { IoCalendarNumberOutline, IoStatsChartOutline } from 'react-icons/io5';
-import { LuHandshake, LuSquareChevronUp, LuUsers, LuWarehouse } from 'react-icons/lu';
+import { LuHandshake, LuSquareChevronUp, LuUsers } from 'react-icons/lu';
 import { MdOutlineInventory, MdOutlineLibraryAddCheck } from 'react-icons/md';
+import { PiDevicesBold } from 'react-icons/pi';
 
 export const sidebarMenuData = [
   {
     id: 1,
-    title: 'Локации',
-    path: 'devices/locations',
-    icon: LuWarehouse,
-    subMenu: [
-      { id: 1, title: 'Московский офис', path: 'msk' },
-      { id: 2, title: 'Екатеринбург', path: 'ekb' },
-    ],
+    title: 'Список устройств',
+    path: 'devices/locations/msk',
+    icon: PiDevicesBold,
   },
   { id: 2, title: 'Список выдач', path: '/issues', icon: LuSquareChevronUp },
   { id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail },

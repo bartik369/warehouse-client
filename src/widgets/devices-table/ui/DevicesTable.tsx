@@ -10,20 +10,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { Device } from '@/entities/device/model/types';
-import { useDeviceFilters } from '@/hooks/data/useDeviceFilters';
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
-import { useGetTypesQuery } from '@/store/api/typesApi';
-import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 
 import { getDevicesColumns } from '../model/devices.columns';
 
 interface DeviceTableProps {
   devices: Device[];
-  options: FilterDeviceOptions;
-  filters: DeviceFilters;
   page: number;
   limit: number;
   totalCount: number;
@@ -40,8 +34,6 @@ interface DeviceTableProps {
 
 export const DevicesTable = ({
   devices,
-  options,
-  filters,
   page,
   limit,
   totalCount,
@@ -49,29 +41,19 @@ export const DevicesTable = ({
   setPage,
   setDevices,
   onTableChange,
-  resetSingleFilter,
+  // resetSingleFilter,
 }: DeviceTableProps) => {
   const [selectedWarehouseSlug, setSelectedWarehouseSlug] = useState<string | null>(null);
   const [selectedDeviceStatus, setSelectedDeviceStatus] = useState<boolean | null>(null);
-  const { data: manufacturers = [] } = useGetManufacturersQuery();
-  const { data: warehouses = [] } = useGetWarehousesQuery();
-  const { data: types = [] } = useGetTypesQuery();
   const navigate = useNavigate();
-  const { setFilters } = useDeviceFilters();
+  // const { setFilters } = useDeviceFilters(); // todo удалить хук после новой логики филтрации
 
   const handleDeviceInfo = (deviceId: string) => {
     navigate(`/devices/${deviceId}`);
   };
 
   const columns = getDevicesColumns({
-    manufacturers: manufacturers,
-    warehouses: warehouses,
-    types: types,
-    filters: filters,
-    options: options,
     onView: handleDeviceInfo,
-    setFilters: setFilters,
-    resetSingleFilter: resetSingleFilter,
   });
 
   const calculateTableWidth = () => {
@@ -103,6 +85,7 @@ export const DevicesTable = ({
   const DeviceTable = (
     <Table
       loading={isLoading}
+      showSorterTooltip={false}
       className={tableStyles.devicesTable}
       rowKey="id"
       size="small"

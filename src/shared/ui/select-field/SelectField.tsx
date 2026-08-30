@@ -14,7 +14,6 @@ export const SelectField = ({ label, error, value, className, ...props }: Select
           className={styles.select}
           value={value || undefined}
           placeholder=""
-          allowClear
           status={error ? 'error' : undefined}
         />
         <label className={clsx(styles.label, isFiled && styles.labelActive)}>{label}</label>

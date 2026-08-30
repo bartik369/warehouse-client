@@ -1,0 +1,11 @@
+.select {
+  width: 200px;
+}
+.icon {
+  color: var(--gray-800);
+}
+.dropdown:global(.ant-select-dropdown) {
+  :global(.ant-select-item.ant-select-item-option) {
+    border-radius: 0 !important;
+  }
+}

@@ -8,7 +8,6 @@ import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
 
 import { HeaderActions } from '../HeaderActions/HeaderActions';
 import Profile from '../Profile/Profile';
-import Search from '../Search/Search';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
@@ -33,7 +32,6 @@ export const Header = ({ isActive, setIsActive }: HeaderProps) => {
         <div className={styles.breadcrumbsWrap}>
           <Breadcrumbs />
         </div>
-        <Search />
       </div>
       <div className={styles.right}>
         {shouldShowHeaderActions && (
