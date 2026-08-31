@@ -14,28 +14,29 @@ export const devicesApi = createApi({
     getDevices: build.query<{ devices: Device[]; totalCount: number }, QueryParams>({
       query: (queryParams) => {
         const { city, ...params } = queryParams;
+
         const urlParams = new URLSearchParams();
 
         Object.entries(params).forEach(([key, value]) => {
+          if (
+            value === null ||
+            value === undefined ||
+            value === '' ||
+            (Array.isArray(value) && value.length === 0)
+          ) {
+            return;
+          }
+
           if (Array.isArray(value)) {
             urlParams.append(key, value.join(','));
-          } else {
-            urlParams.append(key, String(value));
+            return;
           }
+
+          urlParams.append(key, String(value));
         });
-        const cityUrl = city ? `/locations/${city}` : '/locations';
-        return `/devices${cityUrl}?${urlParams.toString()}`;
+
+        return `/devices/locations/${city}?${urlParams.toString()}`;
       },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.devices.map(({ id }) => ({
-                type: 'Device' as const,
-                id,
-              })),
-              { type: 'Device', id: 'LIST' },
-            ]
-          : [{ type: 'Device', id: 'LIST' }],
     }),
     getDeviceOptions: build.query<FilterDeviceOptions, string>({
       query: (city) => ({

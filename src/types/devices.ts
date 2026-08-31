@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DeviceFiltersType } from '@/features/filter-devices/model/types';
+
 import { Contractor } from './content';
 import { Warehouse } from './locations';
 
@@ -288,7 +290,11 @@ export interface DeviceInfo {
     slug: string;
   };
 }
-export type QueryParams = Record<string, string | number | boolean>;
+export type QueryParams = DeviceFiltersType & {
+  city: string;
+  page: number;
+  limit: number;
+};
 
 export interface DeviceFormState {
   itemType: string;

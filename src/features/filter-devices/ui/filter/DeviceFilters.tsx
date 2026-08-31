@@ -58,6 +58,7 @@ export const DeviceFilters = ({
           onChange={handleWarehouseChange}
         />
         <CheckboxList
+          width={130}
           label="Состояние"
           allowClear
           value={filters.isFunctional == null ? null : String(filters.isFunctional)}

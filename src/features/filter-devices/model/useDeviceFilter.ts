@@ -1,50 +1,45 @@
 import { useState } from 'react';
 
+import { set } from 'zod';
+
+import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 
-import { cities } from './constants';
-import { DeviceFiltersType } from './types';
+import { availableStatus, cities, statuses } from './constants';
+import { AdvancedDeviceFiltersType, DeviceFiltersType } from './types';
 
 export const useDeviceFilters = () => {
   const initialFilters: DeviceFiltersType = {
     warehouseIds: [],
+    isFunctional: null,
+    search: '',
+  };
+
+  const initialAdvancedFilters: AdvancedDeviceFiltersType = {
     displaySize: null,
     memorySize: null,
     typeIds: [],
     manufacturerIds: [],
-    isFunctional: null,
     isAvailable: null,
-    search: '',
   };
   const { data: warehouses = [] } = useGetWarehousesQuery();
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: types = [] } = useGetTypesQuery();
 
   const [filters, setFilters] = useState(initialFilters);
+  const [advancedFilters, setAdvancedFilters] =
+    useState<AdvancedDeviceFiltersType>(initialAdvancedFilters);
+  const [appliedAdvancedFilters, setAppliedAdvancedFilters] =
+    useState<AdvancedDeviceFiltersType>(initialAdvancedFilters);
 
-  const statuses = [
-    {
-      label: 'Работает',
-      value: 'true',
-    },
-    {
-      label: 'Не работает',
-      value: 'false',
-    },
-  ];
-
-  const availableStatus = [
-    {
-      label: 'Используется',
-      value: 'false',
-    },
-    {
-      label: 'Не используется',
-      value: 'true',
-    },
-  ];
+  const debouncedSearch = useDebounce(filters.search, 500);
+  const queryFilters = {
+    ...filters,
+    ...appliedAdvancedFilters,
+    search: debouncedSearch,
+  };
 
   const citiesOptions =
     cities.map(({ label, value }) => ({
@@ -92,43 +87,61 @@ export const useDeviceFilters = () => {
   };
 
   const handleAssignedChange = (value: string) => {
-    setFilters((prev) => ({
+    setAdvancedFilters((prev) => ({
       ...prev,
       isAvailable: value === undefined ? null : value === 'true',
     }));
   };
 
   const handleDisplaySize = (value: [number, number]) => {
-    setFilters((prev) => ({
+    setAdvancedFilters((prev) => ({
       ...prev,
       displaySize: value,
     }));
   };
 
   const handleMemorySize = (value: [number, number]) => {
-    setFilters((prev) => ({
+    setAdvancedFilters((prev) => ({
       ...prev,
       memorySize: value,
     }));
   };
   const handleTypeChange = (value: string[]) => {
-    setFilters((prev) => ({
+    setAdvancedFilters((prev) => ({
       ...prev,
       typeIds: value,
     }));
   };
 
   const handleManufacturerChange = (value: string[]) => {
-    setFilters((prev) => ({
+    setAdvancedFilters((prev) => ({
       ...prev,
       manufacturerIds: value,
     }));
   };
 
-  const handleSearchChange = (value: string) => {};
+  const handleSearchChange = (value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      search: value,
+    }));
+  };
+  const handleResetFilters = () => {
+    setFilters(initialFilters);
+    setAdvancedFilters(initialAdvancedFilters);
+  };
+  const handleResetAdvancedFilters = () => {
+    setAdvancedFilters(initialAdvancedFilters);
+  };
+
+  const handleApply = () => {
+    setAppliedAdvancedFilters(advancedFilters);
+  };
 
   return {
     filters,
+    queryFilters,
+    advancedFilters,
     citiesOptions,
     warehousesOptions,
     statusesOptions,
@@ -143,5 +156,8 @@ export const useDeviceFilters = () => {
     handleManufacturerChange,
     handleDisplaySize,
     handleMemorySize,
+    handleResetFilters,
+    handleResetAdvancedFilters,
+    handleApply,
   };
 };

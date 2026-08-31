@@ -1,19 +1,18 @@
-import { useMemo, useState } from 'react';
-
 import { Flex, SelectProps, Typography } from 'antd';
 import { GrDocumentText } from 'react-icons/gr';
 import { HiOutlineSelector } from 'react-icons/hi';
-import { PiCodesandboxLogoLight } from 'react-icons/pi';
+import { LuBuilding2 } from 'react-icons/lu';
+import { TbCategory } from 'react-icons/tb';
 
 import { CheckboxList } from '@/shared/ui/checkbox-list/CheckboxList';
 import { ActionButton } from '@/shared/ui/signature-canvas/ui/action-button/ActionButton';
 import { ValueRange } from '@/shared/ui/value-range/ValueRange';
 
-import { DeviceFiltersType } from '../../model/types';
+import { AdvancedDeviceFiltersType } from '../../model/types';
 import styles from './FiltersContent.module.scss';
 
 interface FiltersContentProps {
-  filters: DeviceFiltersType;
+  advancedFilters: AdvancedDeviceFiltersType;
   manufacturersOptions: SelectProps['options'];
   typesOptions: SelectProps['options'];
   availableOptions: SelectProps['options'];
@@ -22,10 +21,12 @@ interface FiltersContentProps {
   handleAssignedChange: (value: string) => void;
   handleMemorySize: (value: [number, number]) => void;
   handleDisplaySize: (value: [number, number]) => void;
+  onReset: () => void;
+  handleApply: () => void;
 }
 
 export const FiltersContent = ({
-  filters,
+  advancedFilters,
   manufacturersOptions,
   typesOptions,
   availableOptions,
@@ -34,10 +35,12 @@ export const FiltersContent = ({
   handleAssignedChange,
   handleMemorySize,
   handleDisplaySize,
+  onReset,
+  handleApply,
 }: FiltersContentProps) => {
   return (
     <Flex vertical gap={20} className={styles.container}>
-      <Typography.Title level={5}>Активные фильтры</Typography.Title>
+      <Typography.Title level={5}>Дополнительные фильтры</Typography.Title>
       <Flex gap={10} vertical>
         <CheckboxList
           width={260}
@@ -46,9 +49,9 @@ export const FiltersContent = ({
           showSearch={false}
           mode="multiple"
           maxTagCount={1}
-          value={filters.manufacturerIds}
+          value={advancedFilters.manufacturerIds}
           options={manufacturersOptions}
-          prefix={<PiCodesandboxLogoLight size={16} className={styles.icon} />}
+          prefix={<LuBuilding2 size={15} className={styles.icon} />}
           onChange={handleManufacturerChange}
         />
         <CheckboxList
@@ -58,16 +61,16 @@ export const FiltersContent = ({
           showSearch={false}
           mode="multiple"
           maxTagCount={1}
-          value={filters.typeIds}
+          value={advancedFilters.typeIds}
           options={typesOptions}
-          prefix={<PiCodesandboxLogoLight size={16} className={styles.icon} />}
+          prefix={<TbCategory size={16} className={styles.icon} />}
           onChange={handleTypeChange}
         />
         <CheckboxList
           width={260}
           label="Доступность"
           allowClear
-          value={filters.isAvailable == null ? null : String(filters.isAvailable)}
+          value={advancedFilters.isAvailable == null ? null : String(advancedFilters.isAvailable)}
           options={availableOptions}
           suffix={<HiOutlineSelector size={14} />}
           prefix={<GrDocumentText size={14} className={styles.icon} />}
@@ -79,7 +82,7 @@ export const FiltersContent = ({
             unit="гб"
             min={2}
             max={128}
-            value={filters.memorySize ?? [2, 128]}
+            value={advancedFilters.memorySize ?? [2, 128]}
             onChange={handleMemorySize}
           />
           <ValueRange
@@ -87,14 +90,14 @@ export const FiltersContent = ({
             unit="дюйм"
             min={4}
             max={50}
-            value={filters.displaySize ?? [4, 150]}
+            value={advancedFilters.displaySize ?? [4, 150]}
             onChange={handleDisplaySize}
           />
         </Flex>
       </Flex>
       <Flex gap={10}>
-        <ActionButton title="Сбросить" variant="reset" />
-        <ActionButton title="Применить" variant="apply" />
+        <ActionButton title="Сбросить" variant="reset" onClick={onReset} />
+        <ActionButton title="Применить" variant="apply" onClick={handleApply} />
       </Flex>
     </Flex>
   );

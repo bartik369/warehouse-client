@@ -1,120 +1,37 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-
 import { skipToken } from '@reduxjs/toolkit/query';
-import { FilterValue, SorterResult, TablePaginationConfig } from 'antd/es/table/interface';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { Device } from '@/entities/device/model/types';
-import { useGetDeviceOptionsQuery, useGetDevicesQuery } from '@/store/api/devicesApi';
-import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
-import { formatFiltersToSearchParams } from '@/utils/data/filterUtils';
+import { DeviceFiltersType } from '@/features/filter-devices/model/types';
+import { useGetDevicesQuery } from '@/store/api/devicesApi';
 
-import { useDeviceFilters } from '../../../hooks/data/useDeviceFilters';
 import { useTablePagination } from '../../../shared/hooks/useTablePagination';
 
-const emptyOptions: FilterDeviceOptions = {
-  manufacturer: [],
-  isFunctional: [],
-  isAssigned: [],
-  type: [],
-  memorySize: [],
-  screenSize: [],
-  model: [],
-  warehouse: [],
-};
-
-export const useDeviceTableController = () => {
-  const [_, setSearchParams] = useSearchParams();
+export const useDeviceTableController = (filters: DeviceFiltersType) => {
   const { city } = useParams();
 
-  const { page, limit, setPage, setLimit, resetPage } = useTablePagination();
-  const { filters, setFilters, resetFilters } = useDeviceFilters();
-
-  const queryParams = useMemo(() => {
-    const params = formatFiltersToSearchParams(filters);
-    params.page = String(page);
-    params.limit = String(limit);
-    return params;
-  }, [filters, page, limit]);
-
-  const deviceOptionsArgs = city ?? skipToken;
-  const deviceQueryArgs = city ? { ...queryParams, city } : skipToken;
-
-  const { data: optionsData } = useGetDeviceOptionsQuery(deviceOptionsArgs);
+  const { page, limit, setPage, setLimit } = useTablePagination();
+  const deviceQueryArgs = city
+    ? {
+        city,
+        page,
+        limit,
+        ...filters,
+      }
+    : skipToken;
   const { data: devicesData, isLoading } = useGetDevicesQuery(deviceQueryArgs);
 
-  const options = optionsData || emptyOptions;
   const totalCount = devicesData?.totalCount ?? 0;
   const devices = devicesData?.devices ?? [];
 
-  const handleTableChange = useCallback(
-    (
-      pagination: TablePaginationConfig,
-      antFilters: Record<string, FilterValue | null>,
-      _sorter: SorterResult<Device>[] | SorterResult<Device>
-    ) => {
-      if (pagination.pageSize && pagination.pageSize !== limit) {
-        setLimit(pagination.pageSize);
-        setPage(1);
-
-        setSearchParams((prev) => {
-          prev.set('limit', pagination.pageSize!.toString());
-          prev.set('page', '1');
-          return prev;
-        });
-      } else {
-        setPage(pagination.current!);
-        setSearchParams((prev) => {
-          prev.set('page', pagination.current!.toString());
-          return prev;
-        });
-      }
-      const updatedFilters: Partial<DeviceFilters> = {};
-
-      Object.entries(antFilters).forEach(([key, value]) => {
-        const filterKey = key as keyof DeviceFilters;
-
-        if (filterKey in filters) {
-          const newValues = Array.isArray(value) ? (value as string[]) : [];
-          updatedFilters[filterKey] = newValues;
-        }
-      });
-
-      const mergedFilters = {
-        ...filters,
-        ...updatedFilters,
-      };
-
-      setFilters(mergedFilters as DeviceFilters);
-    },
-    [filters, setFilters]
-  );
-  const resetSingleFilter = useCallback(
-    (key: keyof DeviceFilters) => {
-      setFilters((prev) => ({
-        ...prev,
-        [key]: [],
-      }));
-      resetPage();
-    },
-    [setFilters]
-  );
-
-  useEffect(() => {
-    setSearchParams(queryParams);
-  }, [queryParams, setSearchParams]);
+  const handleTableChange = () => {};
 
   return {
     devices,
-    options,
-    filters,
     page,
     limit,
     totalCount,
     isLoading,
     setPage,
     handleTableChange,
-    resetFilters,
-    resetSingleFilter,
   };
 };
