@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from 'react';
 
 import { Button, Flex, Popover, Typography } from 'antd';
-import { BiFilterAlt } from 'react-icons/bi';
 import { IoAdd } from 'react-icons/io5';
+import { RiResetLeftLine } from 'react-icons/ri';
 import { TbFilterCog } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import { activeFiltersCount } from '@/features/filter-devices/model/utils';
 import { FiltersContent } from '@/features/filter-devices/ui/content/FiltersContent';
 import { DeviceFilters } from '@/features/filter-devices/ui/filter/DeviceFilters';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
+import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import Search from '@/shared/ui/search/Search';
 import { StartProcessButton } from '@/shared/ui/start-process-button/StartProcessButton';
 import { resetDevice, resetStatus } from '@/store/slices/deviceSlice';
@@ -24,17 +25,9 @@ import styles from './DevicesPage.module.scss';
 
 const DevicesPage = () => {
   const {
-    devices,
-    page,
-    limit,
-    totalCount,
-    isLoading,
-    setPage,
-    handleTableChange,
-    resetSingleFilter,
-  } = useDeviceTableController();
-  const {
     filters,
+    queryFilters,
+    advancedFilters,
     citiesOptions,
     warehousesOptions,
     statusesOptions,
@@ -48,10 +41,22 @@ const DevicesPage = () => {
     handleManufacturerChange,
     handleDisplaySize,
     handleMemorySize,
+    handleSearchChange,
+    handleResetFilters,
+    handleResetAdvancedFilters,
+    handleApply,
   } = useDeviceFilters();
+
+  const { devices, page, limit, totalCount, isLoading, setPage, handleTableChange } =
+    useDeviceTableController(queryFilters);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const filtersCount = useMemo(() => activeFiltersCount(filters), [filters]);
+
+  const filtersCount = useMemo(() => {
+    return activeFiltersCount(filters) + activeFiltersCount(advancedFilters);
+  }, [filters, advancedFilters]);
+  const isDisabled = filtersCount === 0;
 
   useEffect(() => {
     return () => {
@@ -62,9 +67,6 @@ const DevicesPage = () => {
 
   const handleCheck = (rowsInfo: Device[]) => {
     dispatch(setSelectedDevice(rowsInfo));
-  };
-  const handleChange = (value: string) => {
-    console.log(value);
   };
 
   return (
@@ -83,7 +85,7 @@ const DevicesPage = () => {
             icon={IoAdd}
           />
         </Flex>
-        <Flex justify="space-between" gap={20}>
+        <Flex justify="space-between" gap={20} align="center">
           <DeviceFilters
             filters={filters}
             citiesOptions={citiesOptions}
@@ -94,15 +96,15 @@ const DevicesPage = () => {
           />
           <Search
             placeholder="Поиск по инвентарному и серийному номерам"
-            value=""
-            onChange={handleChange}
+            value={filters.search}
+            onChange={handleSearchChange}
           />
           <Popover
             trigger="click"
             placement="bottomLeft"
             content={
               <FiltersContent
-                filters={filters}
+                advancedFilters={advancedFilters}
                 manufacturersOptions={manufacturersOptions}
                 availableOptions={availableOptions}
                 typesOptions={typesOptions}
@@ -111,6 +113,8 @@ const DevicesPage = () => {
                 handleMemorySize={handleMemorySize}
                 handleTypeChange={handleTypeChange}
                 handleManufacturerChange={handleManufacturerChange}
+                onReset={handleResetAdvancedFilters}
+                handleApply={handleApply}
               />
             }
           >
@@ -121,6 +125,15 @@ const DevicesPage = () => {
               Фильтры <div className={styles.count}>{filtersCount}</div>
             </Button>
           </Popover>
+          <IconButton
+            disabled={isDisabled}
+            iconSize={18}
+            icon={RiResetLeftLine}
+            onClick={handleResetFilters}
+            size="lg"
+            variant="danger"
+            background="no"
+          />
           <ExportFile stack={devices} />
         </Flex>
       </Flex>
@@ -134,7 +147,6 @@ const DevicesPage = () => {
         setPage={setPage}
         setDevices={handleCheck}
         onTableChange={handleTableChange}
-        resetSingleFilter={resetSingleFilter}
       />
     </Flex>
   );

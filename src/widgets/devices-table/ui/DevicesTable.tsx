@@ -23,7 +23,6 @@ interface DeviceTableProps {
   totalCount: number;
   isLoading: boolean;
   setDevices: (devices: Device[]) => void;
-  resetSingleFilter: (key: keyof DeviceFilters) => void;
   setPage: (page: number) => void;
   onTableChange: (
     _pagination: TablePaginationConfig,
@@ -41,12 +40,10 @@ export const DevicesTable = ({
   setPage,
   setDevices,
   onTableChange,
-  // resetSingleFilter,
 }: DeviceTableProps) => {
   const [selectedWarehouseSlug, setSelectedWarehouseSlug] = useState<string | null>(null);
   const [selectedDeviceStatus, setSelectedDeviceStatus] = useState<boolean | null>(null);
   const navigate = useNavigate();
-  // const { setFilters } = useDeviceFilters(); // todo удалить хук после новой логики филтрации
 
   const handleDeviceInfo = (deviceId: string) => {
     navigate(`/devices/${deviceId}`);
@@ -81,7 +78,6 @@ export const DevicesTable = ({
         (selectedDeviceStatus !== null && selectedDeviceStatus !== record.isAssigned),
     }),
   };
-
   const DeviceTable = (
     <Table
       loading={isLoading}

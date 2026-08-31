@@ -11,6 +11,7 @@ interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: IconType;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'primary' | 'danger';
+  background?: 'yes' | 'no';
   loading?: boolean;
   title?: string;
 }
@@ -22,6 +23,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       icon: Icon,
       size = 'sm',
       variant = 'default',
+      background = 'yes',
       loading = false,
       title,
       type = 'button',
@@ -38,7 +40,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         type={type}
         {...buttonProps}
         disabled={loading || disabled}
-        className={clsx(styles.button, styles[size], styles[variant], className)}
+        className={clsx(
+          styles.button,
+          styles[size],
+          styles[variant],
+          styles[background],
+          className
+        )}
       >
         {loading ? <Spinner fontSize={12} /> : Icon && <Icon size={iconSize} />}
       </button>

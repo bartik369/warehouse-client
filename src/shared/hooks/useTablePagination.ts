@@ -1,30 +1,36 @@
-import { useMemo, useState } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
 
-export const useTablePagination = (defaultLimit: number = 20) => {
-  const [searchParams] = useSearchParams();
+export const useTablePagination = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const initialPage = useMemo(() => {
-    const pageInUrl = searchParams.get('page');
-    return pageInUrl ? Number(pageInUrl) : 1;
-  }, [searchParams]);
+  const page = Number(searchParams.get('page')) || 1;
+  const limit = Number(searchParams.get('limit')) || 20;
 
-  const initialLimit = useMemo(() => {
-    const limitInUrl = searchParams.get('limit');
-    return limitInUrl ? Number(limitInUrl) : defaultLimit;
-  }, [searchParams, defaultLimit]);
+  const setPage = (page: number) => {
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
 
-  const [page, setPage] = useState(initialPage);
-  const [limit, setLimit] = useState(initialLimit);
+      params.set('page', String(page));
 
-  const resetPage = () => setPage(1);
+      return params;
+    });
+  };
+
+  const setLimit = (limit: number) => {
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+
+      params.set('limit', String(limit));
+      params.set('page', '1');
+
+      return params;
+    });
+  };
 
   return {
     page,
     limit,
-    setLimit,
     setPage,
-    resetPage,
+    setLimit,
   };
 };
