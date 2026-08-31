@@ -8,7 +8,7 @@ import { useDeleteIssueProcessMutation, useGetIssueProcessesQuery } from '@/stor
 import { NOTIFICATIONS } from './constants';
 
 export const useIssueList = () => {
-  const { page, limit, setPage, setLimit, resetPage } = useTablePagination();
+  const { page, limit, setPage, setLimit } = useTablePagination();
   const [selectedIssue, setSelectedIssue] = useState<IssueProcessListItem | null>(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 

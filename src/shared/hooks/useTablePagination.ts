@@ -19,8 +19,10 @@ export const useTablePagination = () => {
   const setLimit = (limit: number) => {
     setSearchParams((prev) => {
       const params = new URLSearchParams(prev);
+
       params.set('limit', String(limit));
       params.set('page', '1');
+
       return params;
     });
   };
