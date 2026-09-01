@@ -9,9 +9,11 @@ export const warehousesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Warehouse'],
   endpoints: (build) => ({
-    getWarehouses: build.query<Warehouse[], void>({
-      query: () => ({
-        url: `${import.meta.env.VITE_WAREHOUSES}`,
+    getWarehouses: build.query<Warehouse[], void | string>({
+      query: (city?: string) => ({
+        url: city
+          ? `${import.meta.env.VITE_WAREHOUSES}?city=${city}`
+          : `${import.meta.env.VITE_WAREHOUSES}`,
         method: 'GET',
       }),
       providesTags: (result) =>
