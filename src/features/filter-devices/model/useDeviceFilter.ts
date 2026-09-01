@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useParams } from 'react-router-dom';
+
 import { useQueryParams } from '@/shared/hooks/useQueryParams';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
@@ -23,7 +25,10 @@ export const useDeviceFilters = () => {
     manufacturerIds: [],
     isAvailable: null,
   };
-  const { data: warehouses = [] } = useGetWarehousesQuery();
+  const { city } = useParams();
+  const { data: warehouses = [] } = useGetWarehousesQuery(city, {
+    skip: !city,
+  });
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: types = [] } = useGetTypesQuery();
   const { updateSearchParam, updateSearchParams, resetSearchParams } = useQueryParams();
