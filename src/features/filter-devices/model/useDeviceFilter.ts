@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { set } from 'zod';
-
+import { useQueryParams } from '@/shared/hooks/useQueryParams';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
@@ -27,6 +26,7 @@ export const useDeviceFilters = () => {
   const { data: warehouses = [] } = useGetWarehousesQuery();
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: types = [] } = useGetTypesQuery();
+  const { updateSearchParam, updateSearchParams, resetSearchParams } = useQueryParams();
 
   const [filters, setFilters] = useState(initialFilters);
   const [advancedFilters, setAdvancedFilters] =
@@ -77,6 +77,7 @@ export const useDeviceFilters = () => {
       ...prev,
       warehouseIds: value,
     }));
+    updateSearchParam('warehouseId', value);
   };
 
   const handleStatusChange = (value?: string) => {
@@ -129,6 +130,9 @@ export const useDeviceFilters = () => {
   const handleResetFilters = () => {
     setFilters(initialFilters);
     setAdvancedFilters(initialAdvancedFilters);
+    setAppliedAdvancedFilters(initialAdvancedFilters);
+
+    resetSearchParams();
   };
   const handleResetAdvancedFilters = () => {
     setAdvancedFilters(initialAdvancedFilters);
@@ -136,6 +140,13 @@ export const useDeviceFilters = () => {
 
   const handleApply = () => {
     setAppliedAdvancedFilters(advancedFilters);
+    updateSearchParams({
+      manufacturerIds: advancedFilters.manufacturerIds,
+      typeIds: advancedFilters.typeIds,
+      displaySize: advancedFilters.displaySize,
+      memorySize: advancedFilters.memorySize,
+      isAvailable: advancedFilters.isAvailable,
+    });
   };
 
   return {
