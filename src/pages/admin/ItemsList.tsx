@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
+import { Empty } from 'antd';
 import { MdOutlineEdit } from 'react-icons/md';
 
-import NoData from '@/components/nodata/NoData';
 import { Entity } from '@/types/devices';
 import { EntityFormActions } from '@/types/entity';
 
@@ -14,7 +14,7 @@ interface ItemsListProps {
   items: Entity[];
 }
 const ItemsList = memo(({ field, items, actions }: ItemsListProps) => {
-  if (items.length === 0) return <NoData />;
+  if (items.length === 0) return <Empty />;
   return (
     <>
       <ul>
