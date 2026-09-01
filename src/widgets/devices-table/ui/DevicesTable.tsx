@@ -1,18 +1,12 @@
 import { useState } from 'react';
 
-import { ConfigProvider, Table } from 'antd';
-import {
-  FilterValue,
-  SorterResult,
-  TablePaginationConfig,
-  TableRowSelection,
-} from 'antd/es/table/interface';
+import { ConfigProvider, Table, TableProps } from 'antd';
+import { TableRowSelection } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 
 import { Device } from '@/entities/device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { DeviceFilters, FilterDeviceOptions } from '@/types/devices';
 
 import { getDevicesColumns } from '../model/devices.columns';
 
@@ -24,11 +18,7 @@ interface DeviceTableProps {
   isLoading: boolean;
   setDevices: (devices: Device[]) => void;
   setPage: (page: number) => void;
-  onTableChange: (
-    _pagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
-    _sorter: SorterResult<Device>[] | SorterResult<Device>
-  ) => void;
+  onTableChange: TableProps<Device>['onChange'];
 }
 
 export const DevicesTable = ({

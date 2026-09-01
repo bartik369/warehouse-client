@@ -47,7 +47,7 @@ const DevicesPage = () => {
     handleApply,
   } = useDeviceFilters();
 
-  const { devices, page, limit, totalCount, isLoading, setPage, handleTableChange } =
+  const { devices, page, limit, totalCount, isLoading, isFetching, setPage, handleTableChange } =
     useDeviceTableController(queryFilters);
 
   const dispatch = useAppDispatch();
@@ -139,7 +139,7 @@ const DevicesPage = () => {
       </Flex>
 
       <DevicesTable
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         devices={devices}
         page={page}
         limit={limit}
