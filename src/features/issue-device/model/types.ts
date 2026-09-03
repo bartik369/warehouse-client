@@ -139,3 +139,39 @@ export type EquipmentIssuance = {
   };
   warehouse: Warehouse;
 };
+
+export interface IssueProcessUser {
+  id: string;
+  firstNameRu: string;
+  lastNameRu: string;
+  firstNameEn: string;
+  lastNameEn: string;
+  email: string;
+  workId: string | null;
+  department: {
+    id: string;
+    name: string;
+  } | null;
+}
+
+export interface IssueProcessWarehouse {
+  id: string;
+  name: string;
+}
+
+export interface IssueProcessDetails {
+  id: string;
+  documentNo: string;
+  userId: string;
+  warehouseId: string;
+  issuedById: string;
+  issueDate: string;
+  comment: string | null;
+  status: string;
+  fileId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  user: IssueProcessUser;
+  issuedBy: IssueProcessUser;
+  warehouse: IssueProcessWarehouse;
+}

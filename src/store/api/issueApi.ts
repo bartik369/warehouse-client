@@ -4,6 +4,7 @@ import {
   CreateIssueProcessRequest,
   EquipmentIssuance,
   FinalizeIssueRequest,
+  IssueProcessDetails,
   IssueProcessDto,
   IssueProcessListItem,
 } from '@/features/issue-device/model/types';
@@ -22,6 +23,11 @@ export const issueApi = createApi({
         body,
       }),
       invalidatesTags: [{ type: 'Issue', id: 'LIST' }],
+    }),
+    getIssueByDevice: build.query<IssueProcessDetails, string>({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_ISSUE_PROCESS_BY_DEVICE}${id}`,
+      }),
     }),
     getIssueProcess: build.query<EquipmentIssuance, string>({
       query: (processid) => ({
@@ -91,4 +97,5 @@ export const {
   useGetIssueProcessQuery,
   useDownloadIssueFileMutation,
   useDeleteIssueProcessMutation,
+  useGetIssueByDeviceQuery,
 } = issueApi;
