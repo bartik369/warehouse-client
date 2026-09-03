@@ -1,4 +1,4 @@
-import { EquipmentIssuanceInfo } from '@/features/equipment-issuance/ui/EquipmentIssuanceInfo';
+import { EquipmentIssuanceInfo } from '@/widgets/equipment-issuance/ui/EquipmentIssuanceInfo';
 
 const IssueDetailsPage = () => {
   return <EquipmentIssuanceInfo />;

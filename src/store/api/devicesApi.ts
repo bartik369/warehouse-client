@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Device } from '@/entities/device/model/types';
+import { Device, DeviceDetails } from '@/entities/device/model/types';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
 import { AggregateDeviceInfo, FilterDeviceOptions, QueryParams } from '@/types/devices';
 
@@ -43,7 +43,7 @@ export const devicesApi = createApi({
         url: `${import.meta.env.VITE_OPTIONS}${city}`,
       }),
     }),
-    getDevice: build.query<AggregateDeviceInfo, string>({
+    getDevice: build.query<DeviceDetails, string>({
       query: (id: string) => ({
         url: `${import.meta.env.VITE_DEVICES}${id}`,
       }),
@@ -97,6 +97,7 @@ export const {
   useUpdateDeviceMutation,
   useGetDevicesQuery,
   useLazyGetDeviceQuery,
+  useGetDeviceQuery,
   useGetDeviceOptionsQuery,
   useLazySearchDevicesQuery,
   useSearchDevicesQuery,

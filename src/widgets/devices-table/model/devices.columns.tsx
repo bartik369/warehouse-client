@@ -64,22 +64,6 @@ export const getDevicesColumns = ({
       sorter: (a, b) => (a.warehouse?.name || '').localeCompare(b.warehouse?.name || ''),
     },
     {
-      key: 'screenSize',
-      title: TABLE_TITLES.screenSize,
-      dataIndex: 'screenSize',
-      width: 160,
-      align: 'center',
-      sorter: (a, b, sortNumber) => sortNumbers(a.screenSize, b.screenSize, sortNumber!),
-    },
-    {
-      key: 'memorySize',
-      title: TABLE_TITLES.memorySize,
-      dataIndex: 'memorySize',
-      width: 160,
-      align: 'center',
-      sorter: (a, b, sortOrder) => sortNumbers(a.memorySize, b.memorySize, sortOrder),
-    },
-    {
       key: 'isFunctional',
       title: TABLE_TITLES.isFunctional,
       dataIndex: 'isFunctional',
@@ -125,6 +109,23 @@ export const getDevicesColumns = ({
         </div>
       ),
     },
+    {
+      key: 'screenSize',
+      title: TABLE_TITLES.screenSize,
+      dataIndex: 'screenSize',
+      width: 160,
+      align: 'center',
+      sorter: (a, b, sortNumber) => sortNumbers(a.screenSize, b.screenSize, sortNumber!),
+    },
+    {
+      key: 'memorySize',
+      title: TABLE_TITLES.memorySize,
+      dataIndex: 'memorySize',
+      width: 160,
+      align: 'center',
+      sorter: (a, b, sortOrder) => sortNumbers(a.memorySize, b.memorySize, sortOrder),
+    },
+
     {
       key: 'inventoryNumber',
       title: TABLE_TITLES.inventoryNumber,
