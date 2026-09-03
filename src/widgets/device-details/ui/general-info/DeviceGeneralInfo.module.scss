@@ -1,0 +1,29 @@
+.container {
+  gap: 5px;
+
+  .name {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1;
+  }
+  .label {
+    font-size: 11px;
+  }
+  .badge {
+    width: fit-content;
+    align-items: center;
+    padding: 4px 10px;
+    background-color: var(--blue-50);
+    border-radius: 6px;
+    .inventoryNumber {
+      margin: 0;
+      font-size: 18px;
+      color: var(--muted-blue-700);
+      line-height: 1;
+    }
+  }
+  .icon {
+    color: var(--muted-blue-700);
+    cursor: pointer;
+  }
+}

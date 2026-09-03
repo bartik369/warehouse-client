@@ -70,3 +70,87 @@ export interface Device {
     } | null;
   } | null;
 }
+
+export interface DeviceDetails {
+  id: string;
+  name: string;
+  inventoryNumber: string | null;
+
+  modelId: string | null;
+  modelCode: string | null;
+  serialNumber: string | null;
+
+  weight: number | null;
+  screenSize: number | null;
+  memorySize: number | null;
+
+  inStock: boolean;
+  isFunctional: boolean;
+  isAssigned: boolean;
+
+  assignedUserId: string | null;
+  warehouseId: string | null;
+
+  description: string | null;
+
+  addedById: string;
+  updatedById: string;
+
+  lastIssuedAt: Date | string | null;
+  lastReturnedAt: Date | string | null;
+
+  createdAt: Date | string;
+  updatedAt: Date | string;
+
+  price_without_vat: string | null;
+  price_with_vat: string | null;
+  residual_price: string | null;
+
+  warehouse: {
+    name: string;
+    slug: string;
+  } | null;
+
+  model: {
+    name: string;
+    imagePath: string | null;
+
+    manufacturer: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+
+    type: {
+      name: string;
+      slug: string;
+    };
+  } | null;
+
+  warranty: {
+    warrantyNumber: string;
+    startWarrantyDate: Date | string;
+    endWarrantyDate: Date | string;
+    warrantyStatus: string;
+    isExpired: boolean;
+
+    contractor: {
+      name: string;
+      slug: string;
+    } | null;
+  } | null;
+
+  addedBy: {
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
+  };
+
+  updatedBy: {
+    firstNameRu: string;
+    lastNameRu: string;
+    firstNameEn: string;
+    lastNameEn: string;
+  };
+}

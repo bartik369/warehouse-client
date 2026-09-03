@@ -1,9 +1,9 @@
-import Device from '@/pages/device/Device';
+import DevicePage from '@/pages/device/DevicePage';
 
 const DeviceConfig = {
-  title: 'Device',
+  title: 'DevicePage',
   path: '/devices/:id',
-  element: <Device />,
+  element: <DevicePage />,
   requireAuth: true,
 };
 export default DeviceConfig;

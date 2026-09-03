@@ -17,11 +17,14 @@
 .default {
 }
 .error {
+  color: var(--red-500) !important;
+  border: 1px solid var(--red-200);
+  background: var(--red-100) !important;
 }
 .warning {
-  color: var(--red-400) !important;
-  border: 1px solid var(--red-200);
-  background: var(--red-50) !important;
+  color: var(--yellow-500) !important;
+  border: 1px solid var(--yellow-200) !important;
+  background: var(--yellow-100) !important;
 }
 .sm {
   padding: 0px 6px;
