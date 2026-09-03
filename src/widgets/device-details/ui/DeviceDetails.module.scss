@@ -2,6 +2,12 @@
   display: grid;
   grid-template-columns: 280px 1fr 1fr 1fr;
   gap: 20px;
+  .preview {
+    position: relative;
+    img {
+      width: 100%;
+    }
+  }
   .title {
     font-size: 16px;
     line-height: 1;
@@ -17,7 +23,7 @@
 
 .label {
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .dots {
@@ -27,6 +33,6 @@
 
 .value {
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--gray-600);
 }

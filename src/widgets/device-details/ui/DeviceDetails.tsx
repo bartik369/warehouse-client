@@ -34,7 +34,9 @@ const DeviceDetailsContent = ({ id }: { id: string }) => {
       <DeviceGeneralInfo device={device} />
       <div className={styles.content}>
         <Card>
-          <img src={`${PATHS.models}${device.model?.imagePath}`} alt="" />
+          <div className={styles.preview}>
+            <img src={`${PATHS.models}${device.model?.imagePath}`} alt="" />
+          </div>
         </Card>
         <TechnicalInfo device={device} />
         <DeviceStatusLocation device={device} />
