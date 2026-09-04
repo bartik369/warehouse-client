@@ -1,6 +1,6 @@
 .content {
   display: grid;
-  grid-template-columns: 280px 1fr 1fr 1fr;
+  grid-template-columns: 20% 1fr 220px 210px 220px;
   gap: 20px;
   .preview {
     position: relative;
@@ -8,10 +8,30 @@
       width: 100%;
     }
   }
-  .title {
-    font-size: 16px;
-    line-height: 1;
-    margin: 0;
+  .titleContent {
+    align-items: center;
+    gap: 8px;
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--gray-600);
+      font-size: 11px;
+      border-radius: 50%;
+      background-color: var(--blue-50);
+    }
+    .title {
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+    }
+  }
+}
+.container {
+  :global(.ant-card-body) {
+    padding: 16px;
   }
 }
 
@@ -19,11 +39,13 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
+  margin-bottom: 5px;
 }
 
 .label {
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 12px;
+  color: var(--gray-600);
 }
 
 .dots {
@@ -32,7 +54,11 @@
 }
 
 .value {
-  flex-shrink: 0;
-  font-size: 13px;
-  color: var(--gray-600);
+  min-width: 0;
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 600;
 }
