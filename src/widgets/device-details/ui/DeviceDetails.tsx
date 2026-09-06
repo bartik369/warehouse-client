@@ -5,7 +5,8 @@ import { PATHS } from '@/shared/api/paths';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 import { useGetDeviceHistoryQuery, useGetDeviceQuery } from '@/store/api/devicesApi';
 
-// import testImg from '../../../assets/elements/test-preview.jpg';
+import testImg from '../../../assets/elements/test-preview.jpg';
+import { useDeviceActivity } from '../model/useDeviceActivity';
 import styles from './DeviceDetails.module.scss';
 import { DeviceStatusLocation } from './DeviceStatusLocation';
 import { PriceInfo } from './PriceInfo';
@@ -22,8 +23,12 @@ export const DeviceDetails = () => {
 };
 
 const DeviceDetailsContent = ({ id }: { id: string }) => {
-  const { data: device, isLoading, isError } = useGetDeviceQuery(id);
-  const { data: deviceHistory = [], isLoading: isHistoryLoading } = useGetDeviceHistoryQuery(id);
+  const { page, limit, device, deviceHistory, isLoading, isHistoryLoading, isError } =
+    useDeviceActivity(id);
+  // const { data: device, isLoading, isError } = useGetDeviceQuery(id);
+  // const { data: deviceHistory = [], isLoading: isHistoryLoading } = useGetDeviceHistoryQuery(id);
+  // const { devices, page, limit, totalCount, isLoading, isFetching, setPage, handleTableChange } =
+  //   useDeviceTableController(queryFilters);
 
   if (isLoading) return <Spinner />;
 
@@ -38,8 +43,8 @@ const DeviceDetailsContent = ({ id }: { id: string }) => {
       <div className={styles.content}>
         <Card className={styles.container}>
           <div className={styles.preview}>
-            <img src={`${PATHS.models}${device.model?.imagePath}`} alt="" />
-            {/* <img src={testImg} alt="" /> */}
+            {/* <img src={`${PATHS.models}${device.model?.imagePath}`} alt="" /> */}
+            <img src={testImg} alt="" />
           </div>
         </Card>
         <TechnicalInfo device={device} />
@@ -48,7 +53,12 @@ const DeviceDetailsContent = ({ id }: { id: string }) => {
         <WarrantyInfo device={device} />
       </div>
       <Card>
-        <DeviceDetailsTabs deviceHistory={deviceHistory} isHistoryLoading={isHistoryLoading} />
+        <DeviceDetailsTabs
+          deviceHistory={deviceHistory}
+          isHistoryLoading={isHistoryLoading}
+          page={page}
+          limit={limit}
+        />
       </Card>
     </Flex>
   );
