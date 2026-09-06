@@ -2,7 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { Device, DeviceDetails } from '@/entities/device/model/types';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
-import { AggregateDeviceInfo, FilterDeviceOptions, QueryParams } from '@/types/devices';
+import { FilterDeviceOptions, QueryParams } from '@/types/devices';
+import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -89,6 +90,12 @@ export const devicesApi = createApi({
         method: 'GET',
       }),
     }),
+    getDeviceHistory: build.query<DeviceHistoryItem[], string>({
+      query: (id) => ({
+        url: `${import.meta.env.VITE_DEVICES}${id}/history`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -103,4 +110,5 @@ export const {
   useSearchDevicesQuery,
   useGetAssignedDevicesQuery,
   useGetDevicesByIssueProcessQuery,
+  useGetDeviceHistoryQuery,
 } = devicesApi;

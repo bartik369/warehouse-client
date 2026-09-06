@@ -1,13 +1,33 @@
 import { Tabs } from 'antd';
 
-import { DeviceHistory } from './history/DeviceHistory';
+import { DeviceHistoryItem } from '../../model/types';
+import { DeviceHistoryTable } from './history/DeviceHistoryTable';
 
-export const DeviceDetailsTabs = () => {
+interface DeviceDetailsTabsProps {
+  page: number;
+  limit: number;
+  isHistoryLoading: boolean;
+  deviceHistory: DeviceHistoryItem[];
+}
+
+export const DeviceDetailsTabs = ({
+  deviceHistory,
+  isHistoryLoading,
+  page,
+  limit,
+}: DeviceDetailsTabsProps) => {
   const items = [
     {
       key: 'history',
       label: 'История',
-      children: <DeviceHistory />,
+      children: (
+        <DeviceHistoryTable
+          data={deviceHistory}
+          loading={isHistoryLoading}
+          page={page}
+          limit={limit}
+        />
+      ),
     },
   ];
   return <Tabs items={items} />;

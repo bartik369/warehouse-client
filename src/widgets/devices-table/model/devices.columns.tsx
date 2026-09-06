@@ -1,12 +1,15 @@
 import { Button } from 'antd';
 import { ColumnType } from 'antd/es/table';
+import { BsInfo } from 'react-icons/bs';
 import { FaCircleInfo } from 'react-icons/fa6';
+import { FaInfo } from 'react-icons/fa6';
 import { IoCheckmark } from 'react-icons/io5';
 import { RxCross2 } from 'react-icons/rx';
 
 import { Device } from '@/entities/device/model/types';
 import { sortNumbers } from '@/shared/lib/export/sortNums';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
+import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import { DeviceFilters, Entity, FilterDeviceOptions } from '@/types/devices';
 
 import styles from './Columns.module.scss';
@@ -146,13 +149,12 @@ export const getDevicesColumns = ({
       key: 'actions',
       title: '',
       fixed: 'right',
-      width: 60,
+      width: 40,
       align: 'center',
       render: (_, record: Device) => (
-        <Button
-          className={styles.infoButton}
-          type="link"
-          icon={<FaCircleInfo />}
+        <IconButton
+          icon={FaInfo}
+          iconSize={10}
           onClick={() => onView?.(record.id)}
           title="Информация"
         />
