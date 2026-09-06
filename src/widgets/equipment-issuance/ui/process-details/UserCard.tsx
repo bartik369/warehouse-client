@@ -2,7 +2,8 @@ import { Flex, Typography } from 'antd';
 import { Divider } from 'antd';
 import { PiCreditCardDuotone } from 'react-icons/pi';
 import { PiEnvelopeSimpleDuotone } from 'react-icons/pi';
-import { PiUserBold } from 'react-icons/pi';
+import { RiUserReceivedLine } from 'react-icons/ri';
+import { RiUserSharedLine } from 'react-icons/ri';
 
 import { User } from '@/entities/user/model/types';
 import { CounterpartyRole } from '@/shared/types/counterparty';
@@ -23,7 +24,11 @@ export const UserCard = ({ user, entity }: UserCardProps) => {
       </Typography.Title>
       <Flex gap={10} align="center">
         <div className={styles.bgIcon}>
-          <PiUserBold className={styles.icon} />
+          {entity === 'receiver' ? (
+            <RiUserReceivedLine className={styles.icon} />
+          ) : (
+            <RiUserSharedLine className={styles.icon} />
+          )}
         </div>
         <div className={styles.userInfo}>
           <div className={styles.name}>
