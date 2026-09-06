@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { PATHS } from '@/shared/api/paths';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
-import { useGetDeviceQuery } from '@/store/api/devicesApi';
+import { useGetDeviceHistoryQuery, useGetDeviceQuery } from '@/store/api/devicesApi';
 
 // import testImg from '../../../assets/elements/test-preview.jpg';
 import styles from './DeviceDetails.module.scss';
@@ -23,6 +23,7 @@ export const DeviceDetails = () => {
 
 const DeviceDetailsContent = ({ id }: { id: string }) => {
   const { data: device, isLoading, isError } = useGetDeviceQuery(id);
+  const { data: deviceHistory = [], isLoading: isHistoryLoading } = useGetDeviceHistoryQuery(id);
 
   if (isLoading) return <Spinner />;
 
@@ -47,7 +48,7 @@ const DeviceDetailsContent = ({ id }: { id: string }) => {
         <WarrantyInfo device={device} />
       </div>
       <Card>
-        <DeviceDetailsTabs />
+        <DeviceDetailsTabs deviceHistory={deviceHistory} isHistoryLoading={isHistoryLoading} />
       </Card>
     </Flex>
   );

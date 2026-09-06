@@ -1,13 +1,19 @@
 import { Tabs } from 'antd';
 
-import { DeviceHistory } from './history/DeviceHistory';
+import { DeviceHistoryItem } from '../../model/types';
+import { DeviceHistoryTable } from './history/DeviceHistoryTable';
 
-export const DeviceDetailsTabs = () => {
+interface DeviceDetailsTabsProps {
+  isHistoryLoading: boolean;
+  deviceHistory: DeviceHistoryItem[];
+}
+
+export const DeviceDetailsTabs = ({ deviceHistory, isHistoryLoading }: DeviceDetailsTabsProps) => {
   const items = [
     {
       key: 'history',
       label: 'История',
-      children: <DeviceHistory />,
+      children: <DeviceHistoryTable data={deviceHistory} loading={isHistoryLoading} />,
     },
   ];
   return <Tabs items={items} />;

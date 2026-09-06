@@ -51,7 +51,7 @@ export const UserInfo = ({ device }: UserInfoProps) => {
         </Flex>
         <Flex className={styles.user}>
           <span className={styles.name}>
-            {issue?.issuedBy.lastNameEn} {issue?.issuedBy.firstNameEn}
+            {issue?.issuedBy.lastNameRu} {issue?.issuedBy.firstNameRu}
           </span>
           <span className={styles.value}>{issue?.issuedBy.email}</span>
           <span className={styles.value}>{issue?.issuedBy.workId}</span>

@@ -1,15 +1,15 @@
+import { AiOutlineLaptop } from 'react-icons/ai';
 import { BiMessageSquareDetail } from 'react-icons/bi';
 import { IoCalendarNumberOutline, IoStatsChartOutline } from 'react-icons/io5';
 import { LuHandshake, LuSquareChevronUp, LuUsers } from 'react-icons/lu';
 import { MdOutlineInventory, MdOutlineLibraryAddCheck } from 'react-icons/md';
-import { MdOutlineImportantDevices } from 'react-icons/md';
 
 export const sidebarMenuData = [
   {
     id: 1,
     title: 'Список устройств',
     path: 'devices/locations/msk',
-    icon: MdOutlineImportantDevices,
+    icon: AiOutlineLaptop,
   },
   { id: 2, title: 'Список выдач', path: '/issues', icon: LuSquareChevronUp },
   { id: 3, title: 'Сообщения', path: '/messages', icon: BiMessageSquareDetail },
