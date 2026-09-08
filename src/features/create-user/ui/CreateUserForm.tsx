@@ -4,22 +4,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Col, Row } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import Toggle from '@/components/ui/checkbox/Toggle';
-import Input from '@/components/ui/input/Input';
-import Select from '@/components/ui/select/Select';
 import { useAppSelector } from '@/hooks/redux/useRedux';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfSwitchField } from '@/shared/ui/form-fields/RghSwitchField';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RootState } from '@/store/store';
-import { FieldUserFormConfig } from '@/types/content';
 import { Entity } from '@/types/devices';
 import { UserFormActions } from '@/types/user';
-import { LABELS } from '@/utils/constants/ui/labels';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 
-import Actions from '../../../components/forms/device/Actions';
 import { mapEntityToOptions } from '../model/mapEntityToOptions';
 import { CreateUserFormValues, createUserSchema } from '../model/schema';
 import { FormFieldConfig } from '../model/types';

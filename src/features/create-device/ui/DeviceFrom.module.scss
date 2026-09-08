@@ -1,0 +1,38 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+.sticky {
+  position: sticky;
+  top: 74px;
+}
+.icon {
+  color: var(--gray-600);
+}
+.preview {
+  img {
+    width: 100%;
+  }
+}
+.block {
+  .icon {
+  }
+  .title {
+  }
+  .description {
+  }
+}
