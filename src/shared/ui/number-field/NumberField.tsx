@@ -1,4 +1,4 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { CloseCircleFilled, QuestionCircleOutlined } from '@ant-design/icons';
 import { InputNumber, Tooltip } from 'antd';
 import clsx from 'clsx';
 
@@ -12,10 +12,11 @@ export const NumberField = ({
   tooltip,
   className,
   prefix,
+  onChange,
   ...props
 }: NumberFieldProps) => {
-  const isFilled = Boolean(value);
   const hasPrefix = Boolean(prefix);
+  const hasValue = value !== null && value !== undefined;
 
   return (
     <div className={clsx(styles.root, className)}>
@@ -28,15 +29,18 @@ export const NumberField = ({
           value={value}
           placeholder=""
           status={error ? 'error' : undefined}
+          onChange={onChange}
         />
+
         <label
           className={clsx(
             styles.label,
-            isFilled && styles.labelActive,
+            hasValue && styles.labelActive,
             hasPrefix && styles.labelWithPrefix
           )}
         >
           <span>{label}</span>
+
           {tooltip && (
             <Tooltip title={tooltip} trigger="hover" placement="top">
               <span className={styles.tooltipIcon}>
@@ -45,6 +49,17 @@ export const NumberField = ({
             </Tooltip>
           )}
         </label>
+
+        {hasValue && (
+          <button
+            type="button"
+            className={styles.clearButton}
+            onClick={() => onChange?.(null)}
+            aria-label="Очистить поле"
+          >
+            <CloseCircleFilled size={8} className={styles.icon} />
+          </button>
+        )}
       </div>
 
       {error && <p className={styles.error}>{error}</p>}
