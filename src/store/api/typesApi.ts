@@ -1,13 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQueryWithReauth } from '../baseQueryWithReauth';
+
+import { DeviceType } from '@/entities/type/model/types';
 import { Entity } from '@/types/devices';
+
+import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const typesApi = createApi({
   reducerPath: 'typesApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Type'],
   endpoints: (build) => ({
-    getTypes: build.query<Entity[], void>({
+    getTypes: build.query<DeviceType[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_TYPES}`,
       }),
@@ -19,33 +22,33 @@ export const typesApi = createApi({
             ]
           : [{ type: 'Type', id: 'LIST' }],
     }),
-    getType: build.query<Entity, string>({
-        query: (id: string) => ({
-            url: `${import.meta.env.VITE_TYPES}${id}`,
-        }),
+    getType: build.query<DeviceType, string>({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_TYPES}${id}`,
+      }),
     }),
-    createType: build.mutation<Entity, Entity>({
-        query:(body) => ({
-            url: `${import.meta.env.VITE_TYPES}`,
-            method: 'POST',
-            body,
-        }),
-        invalidatesTags: ['Type']
+    createType: build.mutation<DeviceType, DeviceType>({
+      query: (body) => ({
+        url: `${import.meta.env.VITE_TYPES}`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Type'],
     }),
-    updateType: build.mutation<Entity, Entity>({
-        query: ({id, ...body}) => ({
-          url: `${import.meta.env.VITE_TYPES}${id}`,
-          method: 'PUT',
-          body,
-        }),
-        invalidatesTags: ['Type']
-    })
+    updateType: build.mutation<DeviceType, DeviceType>({
+      query: ({ id, ...body }) => ({
+        url: `${import.meta.env.VITE_TYPES}${id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Type'],
+    }),
   }),
 });
 
-export const { 
-    useGetTypesQuery, 
-    useLazyGetTypeQuery, 
-    useCreateTypeMutation, 
-    useUpdateTypeMutation 
+export const {
+  useGetTypesQuery,
+  useLazyGetTypeQuery,
+  useCreateTypeMutation,
+  useUpdateTypeMutation,
 } = typesApi;

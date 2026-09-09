@@ -14,7 +14,7 @@ import { DeviceFormValues } from '../model/schema';
 import styles from './DeviceFrom.module.scss';
 
 interface DeviceInfoSectionProps {
-  selectedType: DeviceType;
+  selectedType?: DeviceType;
 }
 
 export const DeviceInfoSection = ({ selectedType }: DeviceInfoSectionProps) => {
