@@ -12,6 +12,7 @@ export const DateField = ({ label, error, value, className, ...props }: DateFiel
       <div className={styles.dateWrapper}>
         <DatePicker
           {...props}
+          multiple={false}
           className={styles.date}
           value={value}
           placeholder=""

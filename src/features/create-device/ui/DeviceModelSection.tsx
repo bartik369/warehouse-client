@@ -13,7 +13,6 @@ import { DeviceFormValues } from '../model/schema';
 import styles from './DeviceFrom.module.scss';
 
 interface DeviceModelSectionProps {
-  showModelSelect: boolean;
   manufacturersOptions: SelectProps['options'];
   typesOptions: SelectProps['options'];
   modelsOptions: SelectProps['options'];
@@ -21,7 +20,6 @@ interface DeviceModelSectionProps {
 }
 
 export const DeviceModelSection = ({
-  showModelSelect,
   manufacturersOptions,
   typesOptions,
   modelsOptions,
@@ -33,40 +31,35 @@ export const DeviceModelSection = ({
         <Col span={12}>
           <RhfTextField<DeviceFormValues>
             name="name"
-            label="Имя"
+            label="Название"
             prefix={<CgNametag className={styles.icon} size={19} />}
           />
         </Col>
-
         <Col span={12}>
           <RhfSelectField<DeviceFormValues>
             options={typesOptions}
             name="typeId"
-            label="Тип"
+            label="Тип(demo - Ноутбук)"
             prefix={<VscTypeHierarchySuper className={styles.icon} size={15} />}
           />
         </Col>
-
         <Col span={12}>
           <RhfSelectField<DeviceFormValues>
             options={manufacturersOptions}
             name="manufacturerId"
-            label="Производитель"
+            label="Производитель(demo - Dell)"
             prefix={<LuFactory className={styles.icon} size={15} />}
           />
         </Col>
-
-        {showModelSelect && (
-          <Col span={12}>
-            <RhfSelectField<DeviceFormValues>
-              options={modelsOptions}
-              name="modelId"
-              label="Модель"
-              prefix={<LuBox className={styles.icon} size={16} />}
-              loading={isLoadingModels}
-            />
-          </Col>
-        )}
+        <Col span={12}>
+          <RhfSelectField<DeviceFormValues>
+            options={modelsOptions}
+            name="modelId"
+            label="Модель(demo - любая модель)"
+            prefix={<LuBox className={styles.icon} size={16} />}
+            loading={isLoadingModels}
+          />
+        </Col>
       </Row>
     </FormSection>
   );

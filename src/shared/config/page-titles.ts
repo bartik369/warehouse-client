@@ -1,7 +1,7 @@
 export const PAGE_TITLES = {
   addContractor: 'Добавить подрядчика',
   addDepartment: 'Добавить департамент',
-  addDevice: 'Добавление устройства',
+  addDevice: 'Добавление нового устройства',
   addLocation: 'Добавление локации',
   addManufacturer: 'Управление производителями',
   addModel: 'Добавление модели',

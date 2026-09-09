@@ -23,7 +23,7 @@ export const RhfDateField = <T extends FieldValues>({ name, ...props }: RhfDateF
           {...props}
           value={field.value ? dayjs(field.value) : null}
           onChange={(date) => {
-            field.onChange(date ? date.toString() : null);
+            field.onChange(date ? date.format('YYYY-MM-DD') : null);
           }}
           onBlur={field.onBlur}
           error={fieldState.error?.message}

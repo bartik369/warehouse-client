@@ -1,3 +1,8 @@
+import { PAGE_TITLES } from '@/shared/config/page-titles';
+import { ActionButtons } from '@/shared/ui/action-buttons/ActionButtons';
+import { PageHeader } from '@/shared/ui/page-header/PageHeader';
+
+import { CREATE_DEVICE_DESCRIPTION } from '../model/constants';
 import { useCreateDeviceForm } from '../model/useDeviceForm';
 import { DeviceAdditionalSection } from './DeviceAdditionalSection';
 import { DeviceFinancialSection } from './DeviceFinancialSection';
@@ -10,9 +15,8 @@ import { DeviceWarrantySection } from './DeviceWarrantySection';
 
 export const DeviceFormContent = () => {
   const {
-    manufacturerId,
-    typeId,
     selectedModel,
+    selectedType,
     manufacturersOptions,
     typesOptions,
     modelsOptions,
@@ -20,32 +24,49 @@ export const DeviceFormContent = () => {
     functionalOptions,
     contractorsOptions,
     isLoadingModels,
+    handleSubmitForm,
+    handleReset,
   } = useCreateDeviceForm();
-  return (
-    <div className={styles.layout}>
-      <div className={styles.content}>
-        <DeviceModelSection
-          showModelSelect={Boolean(manufacturerId && typeId)}
-          manufacturersOptions={manufacturersOptions}
-          typesOptions={typesOptions}
-          modelsOptions={modelsOptions}
-          isLoadingModels={isLoadingModels}
-        />
-        <DeviceInfoSection />
-        <DeviceStatusAndLocationSection
-          warehousesOptions={warehousesOptions}
-          functionalOptions={functionalOptions}
-        />
-        <DeviceFinancialSection />
-        <DeviceWarrantySection options={contractorsOptions} />
-        <DeviceAdditionalSection />
-      </div>
 
-      <aside className={styles.sidebar}>
-        <div className={styles.sticky}>
-          <DevicePreview model={selectedModel} />
+  return (
+    <>
+      <PageHeader
+        title={PAGE_TITLES.addDevice}
+        description={CREATE_DEVICE_DESCRIPTION}
+        actions={
+          <ActionButtons
+            titleApply="Сохранить устройство"
+            titleReset="Отмена"
+            size="middle"
+            onApply={handleSubmitForm}
+            onReset={handleReset}
+          />
+        }
+      />
+      <div className={styles.layout}>
+        <div className={styles.content}>
+          <DeviceModelSection
+            manufacturersOptions={manufacturersOptions}
+            typesOptions={typesOptions}
+            modelsOptions={modelsOptions}
+            isLoadingModels={isLoadingModels}
+          />
+          <DeviceInfoSection selectedType={selectedType} />
+          <DeviceStatusAndLocationSection
+            warehousesOptions={warehousesOptions}
+            functionalOptions={functionalOptions}
+          />
+          <DeviceFinancialSection />
+          <DeviceWarrantySection options={contractorsOptions} />
+          <DeviceAdditionalSection />
         </div>
-      </aside>
-    </div>
+
+        <aside className={styles.sidebar}>
+          <div className={styles.sticky}>
+            <DevicePreview model={selectedModel} />
+          </div>
+        </aside>
+      </div>
+    </>
   );
 };
