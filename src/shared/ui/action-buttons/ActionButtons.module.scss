@@ -1,0 +1,18 @@
+.container {
+  .reset,
+  .apply {
+    font-size: 11px;
+  }
+  .reset {
+  }
+  .apply {
+    background-color: var(--blue-500);
+    &:hover {
+    }
+    &:disabled {
+      opacity: 0.2;
+      color: var(--white) !important;
+      cursor: not-allowed;
+    }
+  }
+}

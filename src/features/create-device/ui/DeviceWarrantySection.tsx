@@ -23,6 +23,10 @@ export const DeviceWarrantySection = ({ options }: DeviceWarrantySectionProps) =
     control,
     name: 'startWarrantyDate',
   });
+  const endWarrantyDate = useWatch({
+    control,
+    name: 'endWarrantyDate',
+  });
 
   return (
     <FormSection title="Гарантия" icon={<BiSupport size={18} />}>
@@ -32,6 +36,7 @@ export const DeviceWarrantySection = ({ options }: DeviceWarrantySectionProps) =
             name="startWarrantyDate"
             label="Начало гарантии"
             format="DD.MM.YYYY"
+            maxDate={endWarrantyDate ? dayjs(endWarrantyDate) : undefined}
             prefix={<LuCalendarCheck className={styles.icon} size={16} />}
           />
         </Col>

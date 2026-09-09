@@ -10,4 +10,29 @@ export const DEVICE_FORM_INFO = {
     description:
       'Проверьте правильность заполнения инвентарного номера. Он должен быть уникальным в системе.',
   },
+};
+
+export const CREATE_DEVICE_DESCRIPTION = 'Заполните информацию об устройстве.';
+
+export const DEVICE_TYPE_FIELDS = {
+  laptop: {
+    screenSize: true,
+    memorySize: true,
+  },
+  desktop: {
+    screenSize: false,
+    memorySize: true,
+  },
+  monitor: {
+    screenSize: true,
+    memorySize: false,
+  },
+  tv: {
+    screenSize: true,
+    memorySize: false,
+  },
+  mobile_phone: {
+    screenSize: true,
+    memorySize: true,
+  },
 } as const;

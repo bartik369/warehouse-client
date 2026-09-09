@@ -4,14 +4,23 @@ import { LuScanBarcode, LuTag } from 'react-icons/lu';
 import { LuCpu } from 'react-icons/lu';
 import { LuMemoryStick, LuMonitor, LuWeight } from 'react-icons/lu';
 
+import { DeviceType } from '@/entities/type/model/types';
 import { RhfNumberField } from '@/shared/ui/form-fields/RhfNumberField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { FormSection } from '@/shared/ui/form-section/FormSection';
 
+import { DEVICE_TYPE_FIELDS } from '../model/constants';
 import { DeviceFormValues } from '../model/schema';
 import styles from './DeviceFrom.module.scss';
 
-export const DeviceInfoSection = () => {
+interface DeviceInfoSectionProps {
+  selectedType: DeviceType;
+}
+
+export const DeviceInfoSection = ({ selectedType }: DeviceInfoSectionProps) => {
+  const typeFields = selectedType
+    ? DEVICE_TYPE_FIELDS[selectedType.slug as keyof typeof DEVICE_TYPE_FIELDS]
+    : undefined;
   return (
     <FormSection title="Основаная информация" icon={<LuInfo size={18} />}>
       <Row gutter={[16, 16]}>
@@ -46,19 +55,14 @@ export const DeviceInfoSection = () => {
           />
         </Col>
         <Col span={8}>
-          <RhfNumberField<DeviceFormValues>
-            label="Диагональ экрана(дюйм)"
-            name="screeSize"
-            prefix={<LuMonitor className={styles.icon} size={15} />}
-          />
+          {typeFields?.screenSize && (
+            <RhfNumberField<DeviceFormValues> name="screenSize" label="Диагональ экрана" />
+          )}
         </Col>
         <Col span={8}>
-          <RhfNumberField<DeviceFormValues>
-            label="Объем памяти(гб)"
-            name="memorySize"
-            step={2}
-            prefix={<LuMemoryStick className={styles.icon} size={15} />}
-          />
+          {typeFields?.memorySize && (
+            <RhfNumberField<DeviceFormValues> name="memorySize" label="Оперативная память" />
+          )}
         </Col>
       </Row>
     </FormSection>

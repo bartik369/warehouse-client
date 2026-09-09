@@ -3,6 +3,7 @@ import { FaRegCircleDot } from 'react-icons/fa6';
 
 import { SelectStatus } from '@/shared/ui/select-status/SelectStatus';
 import { useGetContractorsQuery } from '@/store/api/contractorApi';
+import { useCreateDeviceMutation } from '@/store/api/devicesApi';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetModelsQuery } from '@/store/api/modelsApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
@@ -15,7 +16,8 @@ export const useCreateDeviceForm = () => {
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: warehouses = [] } = useGetWarehousesQuery();
   const { data: contractors } = useGetContractorsQuery();
-  const { control } = useFormContext<DeviceFormValues>();
+  const [createDevice, { isLoading }] = useCreateDeviceMutation();
+  const { control, handleSubmit, getValues } = useFormContext<DeviceFormValues>();
   const manufacturerId = useWatch({
     control,
     name: 'manufacturerId',
@@ -34,8 +36,9 @@ export const useCreateDeviceForm = () => {
       skip: !manufacturerId || !typeId,
     }
   );
-
   const selectedModel = models.find((model) => model.id === modelId);
+  const selectedType = types.find((type) => type.id === typeId);
+  console.log(selectedType);
 
   const manufacturersOptions = manufacturers.map((item) => ({
     value: item.id,
@@ -73,12 +76,25 @@ export const useCreateDeviceForm = () => {
     },
   ];
 
+  const handleCreate = async (data: DeviceFormValues) => {
+    try {
+      console.log(data);
+      // await createDevice(data).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleSubmitForm = handleSubmit(handleCreate);
+
+  const handleReset = () => {};
+
   return {
     manufacturerId,
     typeId,
     manufacturers,
     types,
     selectedModel,
+    selectedType,
     manufacturersOptions,
     typesOptions,
     modelsOptions,
@@ -86,5 +102,7 @@ export const useCreateDeviceForm = () => {
     functionalOptions,
     contractorsOptions,
     isLoadingModels,
+    handleSubmitForm,
+    handleReset,
   };
 };
