@@ -81,7 +81,7 @@ const DevicesPage = () => {
           </Flex>
           <StartProcessButton
             title="Добавить устройство"
-            onClick={() => navigate('/admin')}
+            onClick={() => navigate('/admin/add-device')}
             icon={IoAdd}
           />
         </Flex>

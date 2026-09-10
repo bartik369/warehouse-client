@@ -56,12 +56,12 @@ export const DeviceInfoSection = ({ selectedType }: DeviceInfoSectionProps) => {
         </Col>
         <Col span={8}>
           {typeFields?.screenSize && (
-            <RhfNumberField<DeviceFormValues> name="screenSize" label="Диагональ экрана" />
+            <RhfNumberField<DeviceFormValues> name="screenSize" label="Диагональ экрана(дюйм)" />
           )}
         </Col>
         <Col span={8}>
           {typeFields?.memorySize && (
-            <RhfNumberField<DeviceFormValues> name="memorySize" label="Оперативная память" />
+            <RhfNumberField<DeviceFormValues> name="memorySize" label="Оперативная память(гб)" />
           )}
         </Col>
       </Row>

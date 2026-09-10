@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { Device, DeviceDetails } from '@/entities/device/model/types';
+import { DeviceFormValues } from '@/features/create-device/model/schema';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
 import { FilterDeviceOptions, QueryParams } from '@/types/devices';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
@@ -50,7 +51,7 @@ export const devicesApi = createApi({
       }),
     }),
 
-    createDevice: build.mutation<{ message: string; device: Device }, Device>({
+    createDevice: build.mutation<Device, DeviceFormValues>({
       query(body) {
         return {
           url: `${import.meta.env.VITE_DEVICES}`,

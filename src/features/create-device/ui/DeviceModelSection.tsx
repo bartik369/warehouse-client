@@ -13,6 +13,7 @@ import { DeviceFormValues } from '../model/schema';
 import styles from './DeviceFrom.module.scss';
 
 interface DeviceModelSectionProps {
+  availableModel: boolean;
   manufacturersOptions: SelectProps['options'];
   typesOptions: SelectProps['options'];
   modelsOptions: SelectProps['options'];
@@ -20,6 +21,7 @@ interface DeviceModelSectionProps {
 }
 
 export const DeviceModelSection = ({
+  availableModel = false,
   manufacturersOptions,
   typesOptions,
   modelsOptions,
@@ -52,13 +54,15 @@ export const DeviceModelSection = ({
           />
         </Col>
         <Col span={12}>
-          <RhfSelectField<DeviceFormValues>
-            options={modelsOptions}
-            name="modelId"
-            label="Модель(demo - любая модель)"
-            prefix={<LuBox className={styles.icon} size={16} />}
-            loading={isLoadingModels}
-          />
+          {availableModel && (
+            <RhfSelectField<DeviceFormValues>
+              options={modelsOptions}
+              name="modelId"
+              label="Модель(demo - любая модель)"
+              prefix={<LuBox className={styles.icon} size={16} />}
+              loading={isLoadingModels}
+            />
+          )}
         </Col>
       </Row>
     </FormSection>
