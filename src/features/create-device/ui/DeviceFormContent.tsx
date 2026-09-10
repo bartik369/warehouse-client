@@ -15,6 +15,8 @@ import { DeviceWarrantySection } from './DeviceWarrantySection';
 
 export const DeviceFormContent = () => {
   const {
+    manufacturerId,
+    typeId,
     selectedModel,
     selectedType,
     manufacturersOptions,
@@ -24,6 +26,7 @@ export const DeviceFormContent = () => {
     functionalOptions,
     contractorsOptions,
     isLoadingModels,
+    isCreating,
     handleSubmitForm,
     handleReset,
   } = useCreateDeviceForm();
@@ -40,12 +43,14 @@ export const DeviceFormContent = () => {
             size="middle"
             onApply={handleSubmitForm}
             onReset={handleReset}
+            loading={isCreating}
           />
         }
       />
       <div className={styles.layout}>
         <div className={styles.content}>
           <DeviceModelSection
+            availableModel={Boolean(manufacturerId && typeId)}
             manufacturersOptions={manufacturersOptions}
             typesOptions={typesOptions}
             modelsOptions={modelsOptions}

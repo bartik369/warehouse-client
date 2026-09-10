@@ -1,6 +1,9 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { FaRegCircleDot } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
+import { isApiError } from '@/shared/lib/guards/is-api-error';
+import { appToast } from '@/shared/lib/toast/toast';
 import { SelectStatus } from '@/shared/ui/select-status/SelectStatus';
 import { useGetContractorsQuery } from '@/store/api/contractorApi';
 import { useCreateDeviceMutation } from '@/store/api/devicesApi';
@@ -8,37 +11,44 @@ import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import { useGetModelsQuery } from '@/store/api/modelsApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
+import { currentUser } from '@/store/slices/authSlice';
 
+import { NOTIFICATIONS } from './constants';
 import { DeviceFormValues } from './schema';
 
 export const useCreateDeviceForm = () => {
+  const user = useSelector(currentUser);
   const { data: types = [] } = useGetTypesQuery();
   const { data: manufacturers = [] } = useGetManufacturersQuery();
   const { data: warehouses = [] } = useGetWarehousesQuery();
   const { data: contractors } = useGetContractorsQuery();
-  const [createDevice, { isLoading }] = useCreateDeviceMutation();
-  const { control, handleSubmit, getValues } = useFormContext<DeviceFormValues>();
+  const [createDevice, { isLoading: isCreating }] = useCreateDeviceMutation();
+  const { control, handleSubmit, reset } = useFormContext<DeviceFormValues>();
+
   const manufacturerId = useWatch({
     control,
     name: 'manufacturerId',
   });
+
   const typeId = useWatch({
     control,
     name: 'typeId',
   });
+
   const modelId = useWatch({
     control,
     name: 'modelId',
   });
+
   const { data: models = [], isLoading: isLoadingModels } = useGetModelsQuery(
     { manufacturerId, typeId },
     {
       skip: !manufacturerId || !typeId,
     }
   );
+
   const selectedModel = models.find((model) => model.id === modelId);
   const selectedType = types.find((type) => type.id === typeId);
-  console.log(selectedType);
 
   const manufacturersOptions = manufacturers.map((item) => ({
     value: item.id,
@@ -76,17 +86,33 @@ export const useCreateDeviceForm = () => {
     },
   ];
 
-  const handleCreate = async (data: DeviceFormValues) => {
+  const handleCreate = async (formData: DeviceFormValues) => {
     try {
-      console.log(data);
-      // await createDevice(data).unwrap();
-    } catch (error) {
-      console.log(error);
+      if (!user?.id) {
+        console.error('User ID is missing');
+        return;
+      }
+      const data = {
+        ...formData,
+        inStock: true,
+        isAssigned: false,
+        addedById: user.id,
+        updatedById: user.id,
+      };
+      await createDevice(data).unwrap();
+      reset();
+      appToast.success(NOTIFICATIONS.added);
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        appToast.error(error.data.message);
+      }
     }
   };
   const handleSubmitForm = handleSubmit(handleCreate);
 
-  const handleReset = () => {};
+  const handleReset = () => {
+    reset();
+  };
 
   return {
     manufacturerId,
@@ -102,6 +128,7 @@ export const useCreateDeviceForm = () => {
     functionalOptions,
     contractorsOptions,
     isLoadingModels,
+    isCreating,
     handleSubmitForm,
     handleReset,
   };
