@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { Model } from '@/entities/model/model/types';
+import { DeviceModelResponse, Model } from '@/entities/model/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -23,7 +23,7 @@ export const modelsApi = createApi({
             ]
           : [{ type: 'Model', id: 'LIST' }],
     }),
-    getAllModels: build.query<Model[], void>({
+    getAllModels: build.query<DeviceModelResponse[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_MODELS_ALL}`,
       }),
@@ -41,10 +41,8 @@ export const modelsApi = createApi({
       }),
       invalidatesTags: ['Model'],
     }),
-    updateModel: build.mutation<Model, FormData>({
-      query: (body) => {
-        const id = body.get('id') as string;
-        if (!id) throw new Error('Something went wrong');
+    updateModel: build.mutation<Model, { id: string; body: FormData }>({
+      query: ({ id, body }) => {
         return {
           url: `${import.meta.env.VITE_MODELS}${id}`,
           method: 'PUT',
@@ -60,6 +58,7 @@ export const {
   useLazyGetModelsQuery,
   useGetModelsQuery,
   useLazyGetModelQuery,
+  useGetModelQuery,
   useCreateModelMutation,
   useUpdateModelMutation,
   useGetAllModelsQuery,
