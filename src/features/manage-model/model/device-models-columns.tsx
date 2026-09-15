@@ -21,7 +21,7 @@ export const DeviceModelsColumns = ({
       return (
         <div style={{ width: '50px', justifyContent: 'center', height: '30px' }}>
           <img
-            src={`${PATHS.models}${record.manufacturerId}`}
+            src={`${PATHS.models}${record.imagePath}`}
             style={{
               width: '100%',
               height: '100%',
