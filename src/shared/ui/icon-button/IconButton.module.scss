@@ -35,6 +35,7 @@
 }
 
 .default {
+  color: var(--gray-600);
   &:not(:disabled):hover {
     color: var(--gray-900);
   }
@@ -47,6 +48,7 @@
 }
 
 .danger {
+  color: var(--red-300);
   &:not(:disabled):hover {
     color: var(--red-500);
   }

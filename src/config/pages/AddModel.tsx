@@ -1,9 +1,9 @@
-import AddModel from '@/pages/admin/model/AddModel';
+import ModelPage from '@/pages/admin/model/ModelPage';
 
 const AddModelConfig = {
   title: 'AddModel',
   path: '/admin/add-model',
-  element: <AddModel />,
+  element: <ModelPage />,
   requireAuth: true,
 };
 export default AddModelConfig;
