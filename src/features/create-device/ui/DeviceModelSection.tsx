@@ -1,3 +1,4 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { Col, Row, SelectProps } from 'antd';
 import { CgNametag } from 'react-icons/cg';
 import { LuBox } from 'react-icons/lu';
@@ -5,6 +6,8 @@ import { LuFactory } from 'react-icons/lu';
 import { RxBoxModel } from 'react-icons/rx';
 import { VscTypeHierarchySuper } from 'react-icons/vsc';
 
+import { DeviceModelResponse, Model, SortedModelRes } from '@/entities/model/model/types';
+import { QueryParams } from '@/shared/types/api';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { FormSection } from '@/shared/ui/form-section/FormSection';
@@ -40,7 +43,7 @@ export const DeviceModelSection = ({
         <Col span={12}>
           <RhfSelectField<DeviceFormValues>
             options={typesOptions}
-            name="typeIds"
+            name="typeId"
             label="Тип(demo - Ноутбук)"
             prefix={<VscTypeHierarchySuper className={styles.icon} size={15} />}
           />
@@ -48,7 +51,7 @@ export const DeviceModelSection = ({
         <Col span={12}>
           <RhfSelectField<DeviceFormValues>
             options={manufacturersOptions}
-            name="manufacturerIds"
+            name="manufacturerId"
             label="Производитель(demo - Dell)"
             prefix={<LuFactory className={styles.icon} size={15} />}
           />
@@ -57,7 +60,7 @@ export const DeviceModelSection = ({
           {availableModel && (
             <RhfSelectField<DeviceFormValues>
               options={modelsOptions}
-              name="modelIds"
+              name="modelId"
               label="Модель(demo - любая модель)"
               prefix={<LuBox className={styles.icon} size={16} />}
               loading={isLoadingModels}

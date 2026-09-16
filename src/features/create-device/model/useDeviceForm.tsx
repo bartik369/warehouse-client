@@ -8,7 +8,7 @@ import { SelectStatus } from '@/shared/ui/select-status/SelectStatus';
 import { useGetContractorsQuery } from '@/store/api/contractorApi';
 import { useCreateDeviceMutation } from '@/store/api/devicesApi';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
-import { useGetModelsQuery } from '@/store/api/modelsApi';
+import { useGetModelsByManufacturerAndTypeQuery } from '@/store/api/modelsApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { currentUser } from '@/store/slices/authSlice';
@@ -25,25 +25,25 @@ export const useCreateDeviceForm = () => {
   const [createDevice, { isLoading: isCreating }] = useCreateDeviceMutation();
   const { control, handleSubmit, reset } = useFormContext<DeviceFormValues>();
 
-  const manufacturerIds = useWatch({
+  const manufacturerId = useWatch({
     control,
-    name: 'manufacturerIds',
+    name: 'manufacturerId',
   });
 
-  const typeIds = useWatch({
+  const typeId = useWatch({
     control,
-    name: 'typeIds',
+    name: 'typeId',
   });
 
   const modelId = useWatch({
     control,
-    name: 'modelIds',
+    name: 'modelId',
   });
 
-  const { data: models = [], isLoading: isLoadingModels } = useGetModelsQuery(
-    { manufacturerIds, typeIds },
+  const { data: models = [], isLoading: isLoadingModels } = useGetModelsByManufacturerAndTypeQuery(
+    { manufacturerId, typeId },
     {
-      skip: !manufacturerIds || !typeIds,
+      skip: !manufacturerId || !typeId,
     }
   );
 

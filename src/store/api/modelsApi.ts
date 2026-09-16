@@ -42,6 +42,23 @@ export const modelsApi = createApi({
             ]
           : [{ type: 'Model', id: 'LIST' }],
     }),
+    getModelsByManufacturerAndType: build.query<
+      Model[],
+      { manufacturerId: string; typeId: string }
+    >({
+      query({ manufacturerId, typeId }) {
+        return {
+          url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturerId}/${typeId}`,
+        };
+      },
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Model' as const, id })),
+              { type: 'Model', id: 'LIST' },
+            ]
+          : [{ type: 'Model', id: 'LIST' }],
+    }),
     getAllModels: build.query<DeviceModelResponse[], void>({
       query: () => ({
         url: `${import.meta.env.VITE_MODELS_ALL}`,
@@ -81,4 +98,5 @@ export const {
   useCreateModelMutation,
   useUpdateModelMutation,
   useGetAllModelsQuery,
+  useGetModelsByManufacturerAndTypeQuery,
 } = modelsApi;
