@@ -6,10 +6,10 @@ import tableStyles from '@/shared/ui/table/table.module.scss';
 import { DeviceModelsColumns } from '../model/device-models-columns';
 
 interface DeviceModelsTableProps {
-  totalCount: number;
+  totalCount?: number;
   page: number;
   limit: number;
-  data: Model[];
+  data?: Model[];
   loading: boolean;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;

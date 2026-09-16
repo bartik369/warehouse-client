@@ -16,6 +16,6 @@ export type DeviceModelResponse = Model & {
 };
 
 export type SortedModelRes = {
-  items: Model;
+  items: Model[];
   total: number;
 };

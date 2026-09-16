@@ -25,25 +25,25 @@ export const useCreateDeviceForm = () => {
   const [createDevice, { isLoading: isCreating }] = useCreateDeviceMutation();
   const { control, handleSubmit, reset } = useFormContext<DeviceFormValues>();
 
-  const manufacturerId = useWatch({
+  const manufacturerIds = useWatch({
     control,
-    name: 'manufacturerId',
+    name: 'manufacturerIds',
   });
 
-  const typeId = useWatch({
+  const typeIds = useWatch({
     control,
-    name: 'typeId',
+    name: 'typeIds',
   });
 
   const modelId = useWatch({
     control,
-    name: 'modelId',
+    name: 'modelIds',
   });
 
   const { data: models = [], isLoading: isLoadingModels } = useGetModelsQuery(
-    { manufacturerId, typeId },
+    { manufacturerIds, typeIds },
     {
-      skip: !manufacturerId || !typeId,
+      skip: !manufacturerIds || !typeIds,
     }
   );
 

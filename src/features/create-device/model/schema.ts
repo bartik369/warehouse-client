@@ -3,9 +3,9 @@ import { z } from 'zod';
 export const deviceSchema = z
   .object({
     name: z.string({ error: 'Поле обязательно к заполнению' }).min(2),
-    typeId: z.string({ error: 'Поле обязательно к заполнению' }),
-    manufacturerId: z.string({ error: 'Поле обязательно к заполнению' }),
-    modelId: z.string({ error: 'Поле обязательно к заполнению' }),
+    typeIds: z.array(z.string()).min(1, { error: 'Поле обязательно к заполнению' }),
+    manufacturerIds: z.array(z.string()).min(1, { error: 'Поле обязательно к заполнению' }),
+    modelIds: z.string({ error: 'Поле обязательно к заполнению' }),
     modelCode: z.string().optional(),
     inventoryNumber: z.string({ error: 'Поле обязательно к заполнению' }),
     serialNumber: z.string().optional(),
