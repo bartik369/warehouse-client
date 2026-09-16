@@ -14,3 +14,8 @@ export type DeviceModelResponse = Model & {
   manufacturer: Manufacturer;
   type: DeviceType;
 };
+
+export type SortedModelRes = {
+  items: Model;
+  total: number;
+};

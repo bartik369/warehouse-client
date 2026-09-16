@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { DeviceModelResponse, Model } from '@/entities/model/model/types';
+import { DeviceModelResponse, Model, SortedModelRes } from '@/entities/model/model/types';
+import { QueryParams } from '@/shared/types/api';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -9,16 +10,34 @@ export const modelsApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Model'],
   endpoints: (build) => ({
-    getModels: build.query<Model[], { manufacturerId: string; typeId: string }>({
-      query({ manufacturerId, typeId }) {
+    getModels: build.query<SortedModelRes, QueryParams>({
+      query(queryParams) {
+        const { ...params } = queryParams;
+        const urlParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          if (
+            value === null ||
+            value === undefined ||
+            (Array.isArray(value) && value.length === 0)
+          ) {
+            return;
+          }
+
+          if (Array.isArray(value)) {
+            urlParams.append(key, value.join(','));
+            return;
+          }
+
+          urlParams.append(key, String(value));
+        });
         return {
-          url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturerId}/${typeId}`,
+          url: `${import.meta.env.VITE_MODELS_UNITED}?${urlParams.toString()}`,
         };
       },
       providesTags: (result) =>
-        result
+        result?.items
           ? [
-              ...result.map(({ id }) => ({ type: 'Model' as const, id })),
+              ...result.items.map(({ id }) => ({ type: 'Model' as const, id })),
               { type: 'Model', id: 'LIST' },
             ]
           : [{ type: 'Model', id: 'LIST' }],

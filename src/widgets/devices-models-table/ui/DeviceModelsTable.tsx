@@ -3,9 +3,10 @@ import { Table } from 'antd';
 import { Model } from '@/entities/model/model/types';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 
-import { DeviceModelsColumns } from '../../model/device-models-columns';
+import { DeviceModelsColumns } from '../model/device-models-columns';
 
 interface DeviceModelsTableProps {
+  totalCount: number;
   page: number;
   limit: number;
   data: Model[];
@@ -14,6 +15,7 @@ interface DeviceModelsTableProps {
   onDelete: (id: string) => void;
 }
 export const DeviceModelsTable = ({
+  totalCount,
   page,
   limit,
   data,
@@ -36,7 +38,7 @@ export const DeviceModelsTable = ({
         className: tableStyles.pagination,
         pageSize: 10,
         current: page,
-        total: data.length,
+        total: totalCount,
         showSizeChanger: true,
         pageSizeOptions: ['10', '20', '50', '100'],
         showTotal: (total, range) => `${range[0]}-${range[1]} из ${total} записей`,
