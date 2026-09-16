@@ -6,8 +6,6 @@ import { LuFactory } from 'react-icons/lu';
 import { RxBoxModel } from 'react-icons/rx';
 import { VscTypeHierarchySuper } from 'react-icons/vsc';
 
-import { DeviceModelResponse, Model, SortedModelRes } from '@/entities/model/model/types';
-import { QueryParams } from '@/shared/types/api';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { FormSection } from '@/shared/ui/form-section/FormSection';
