@@ -8,7 +8,7 @@ import { SelectStatus } from '@/shared/ui/select-status/SelectStatus';
 import { useGetContractorsQuery } from '@/store/api/contractorApi';
 import { useCreateDeviceMutation } from '@/store/api/devicesApi';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
-import { useGetModelsQuery } from '@/store/api/modelsApi';
+import { useGetModelsByManufacturerAndTypeQuery } from '@/store/api/modelsApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { currentUser } from '@/store/slices/authSlice';
@@ -40,7 +40,7 @@ export const useCreateDeviceForm = () => {
     name: 'modelId',
   });
 
-  const { data: models = [], isLoading: isLoadingModels } = useGetModelsQuery(
+  const { data: models = [], isLoading: isLoadingModels } = useGetModelsByManufacturerAndTypeQuery(
     { manufacturerId, typeId },
     {
       skip: !manufacturerId || !typeId,

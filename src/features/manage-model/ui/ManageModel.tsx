@@ -1,23 +1,22 @@
 import { Flex } from 'antd';
 
 import { PageHeader } from '@/shared/ui/page-header/PageHeader';
+import { useModelTableController } from '@/widgets/devices-models-table/model/useModelTableController';
 
+import { DeviceModelsTable } from '../../../widgets/devices-models-table/ui/DeviceModelsTable';
 import { useManageModel } from '../model/useManageModel';
 import styles from './ManageModel.module.scss';
 import { ModelForm } from './model-form/ModelForm';
 import { ModelFilter } from './models-filter/ModelFilter';
-import { DeviceModelsTable } from './models-table/DeviceModelsTable';
 
 export const ManageModel = () => {
   const {
+    filters,
     previewUrl,
-    models,
     mode,
     editingModel,
-    page,
     manufacturersOptions,
     typesOptions,
-    modelsLoading,
     onSave,
     onPreview,
     onReset,
@@ -25,7 +24,12 @@ export const ManageModel = () => {
     onDelete,
     onResetFilter,
     resetId,
+    onSearch,
+    handleTypeChange,
+    handleManufacturerChange,
   } = useManageModel();
+  const { page, limit, models, totalCount, isLoading, isFetching } =
+    useModelTableController(filters);
   return (
     <Flex vertical>
       <PageHeader
@@ -47,15 +51,20 @@ export const ManageModel = () => {
           </div>
         </Flex>
         <ModelFilter
+          filters={filters}
           manufacturersOptions={manufacturersOptions}
           typesOptions={typesOptions}
+          handleManufacturerChange={handleManufacturerChange}
+          handleTypeChange={handleTypeChange}
           onResetFilter={onResetFilter}
+          onSearch={onSearch}
         />
         <DeviceModelsTable
           page={page}
+          totalCount={totalCount}
           limit={10}
           data={models}
-          loading={modelsLoading}
+          loading={isLoading}
           onEdit={onEdit}
           onDelete={onDelete}
         />

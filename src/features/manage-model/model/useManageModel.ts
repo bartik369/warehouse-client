@@ -1,44 +1,50 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Manufacturer } from '@/entities/manufacturer/model/types';
 import { DeviceType } from '@/entities/type/model/types';
 import { PATHS } from '@/shared/api/paths';
-import { useTablePagination } from '@/shared/hooks/useTablePagination';
+import { useQueryParams } from '@/shared/hooks/useQueryParams';
+import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { appToast } from '@/shared/lib/toast/toast';
 import { FormMode } from '@/shared/types/form';
-import {
-  useCreateDepartmentMutation,
-  useGetDepartmentQuery,
-  useGetDepartmentsQuery,
-  useUpdateDepartmentMutation,
-} from '@/store/api/departmentApi';
 import { useGetManufacturersQuery } from '@/store/api/manufacturersApi';
 import {
   useCreateModelMutation,
-  useGetAllModelsQuery,
   useGetModelQuery,
-  useGetModelsQuery,
   useUpdateModelMutation,
 } from '@/store/api/modelsApi';
 import { useGetTypesQuery } from '@/store/api/typesApi';
 
 import { NOTIFICATIONS } from './constants';
 import { ModelFormValues } from './schema';
-import { ModelFilter } from './types';
+import { ModelFilterState } from './types';
 
 export const useManageModel = () => {
-  const { page, limit, setPage, setLimit } = useTablePagination();
-  const [createModel] = useCreateModelMutation();
-  const [updateModel] = useUpdateModelMutation();
+  const { data: manufacturers = [] } = useGetManufacturersQuery();
+  const { data: types = [] } = useGetTypesQuery();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [modelImg, setModelImg] = useState<File | null>(null);
   const [localPreviewUrl, setLocalPreviewUrl] = useState<string | null>(null);
   const { data: editingModel } = useGetModelQuery(editingId!, {
     skip: !editingId,
   });
-  const [modelFilter, setModelFilter] = useState<ModelFilter | null>(null);
-  const { data: manufacturers = [] } = useGetManufacturersQuery();
-  const { data: types = [] } = useGetTypesQuery();
+  const [createModel] = useCreateModelMutation();
+  const [updateModel] = useUpdateModelMutation();
+
+  const initialFilters: ModelFilterState = {
+    manufacturerIds: null,
+    typeIds: null,
+    search: '',
+  };
+
+  const [filters, setFilters] = useState(initialFilters);
+  const { updateSearchParam, updateSearchParams, resetSearchParams } = useQueryParams();
+
+  const debouncedSearch = useDebounce(filters.search, 500);
+  const queryFilters = {
+    ...filters,
+    search: debouncedSearch,
+  };
 
   const manufacturersOptions = manufacturers.map((item: Manufacturer) => ({
     value: item.id,
@@ -49,12 +55,6 @@ export const useManageModel = () => {
     value: item.id,
     label: item.name,
   }));
-
-  const {
-    data: models = [],
-    isFetching: modelsFetching,
-    isLoading: modelsLoading,
-  } = useGetAllModelsQuery();
   const mode: FormMode = editingId ? 'update' : 'create';
 
   const serverImageUrl =
@@ -116,17 +116,36 @@ export const useManageModel = () => {
   };
   const handleResetFilter = () => {};
 
+  const handleSearchChange = (value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      search: value,
+    }));
+  };
+
+  const handleManufacturerChange = (value: string[]) => {
+    setFilters((prev) => ({
+      ...prev,
+      manufacturerIds: value,
+    }));
+    updateSearchParam('manufacturerIds', value);
+  };
+
+  const handleTypeChange = (value: string[]) => {
+    setFilters((prev) => ({
+      ...prev,
+      typeIds: value,
+    }));
+    updateSearchParam('typeIds', value);
+  };
+
   return {
-    page,
-    limit,
+    filters: queryFilters,
     previewUrl,
     mode,
-    models,
     editingModel,
     manufacturersOptions,
     typesOptions,
-    modelsFetching,
-    modelsLoading,
     onPreview: handleSetImg,
     onSave: handleSubmit,
     onEdit: handleGetModel,
@@ -134,5 +153,8 @@ export const useManageModel = () => {
     resetId: handleResetId,
     onReset: handleReset,
     onResetFilter: handleResetFilter,
+    onSearch: handleSearchChange,
+    handleManufacturerChange,
+    handleTypeChange,
   };
 };

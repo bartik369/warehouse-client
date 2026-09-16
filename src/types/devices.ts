@@ -290,11 +290,11 @@ export interface DeviceInfo {
     slug: string;
   };
 }
-export type QueryParams = DeviceFiltersType & {
-  city: string;
-  page: number;
-  limit: number;
-};
+// export type QueryParams = DeviceFiltersType & {
+//   city: string;
+//   page: number;
+//   limit: number;
+// };
 
 export interface DeviceFormState {
   itemType: string;

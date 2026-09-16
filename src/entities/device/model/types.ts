@@ -154,3 +154,9 @@ export interface DeviceDetails {
     lastNameEn: string;
   };
 }
+
+export type QueryParams = {
+  city: string;
+  page: number;
+  limit: number;
+};
