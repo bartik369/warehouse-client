@@ -28,7 +28,7 @@ export const ManageModel = () => {
     handleTypeChange,
     handleManufacturerChange,
   } = useManageModel();
-  const { page, limit, models, totalCount, isLoading, isFetching } =
+  const { page, limit, models, totalCount, isLoading, isFetching, setPage, setLimit } =
     useModelTableController(filters);
   return (
     <Flex vertical>
@@ -62,11 +62,13 @@ export const ManageModel = () => {
         <DeviceModelsTable
           page={page}
           totalCount={totalCount}
-          limit={10}
+          limit={limit}
           data={models}
           loading={isLoading}
           onEdit={onEdit}
           onDelete={onDelete}
+          setPage={setPage}
+          setLimit={setLimit}
         />
       </Flex>
     </Flex>

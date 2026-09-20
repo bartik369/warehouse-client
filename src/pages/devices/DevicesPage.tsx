@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { Device } from '@/entities/device/model/types';
 import { ExportFile } from '@/features/export-file/ui/ExportFile';
 import { useDeviceFilters } from '@/features/filter-devices/model/useDeviceFilter';
-import { activeFiltersCount } from '@/features/filter-devices/model/utils';
 import { FiltersContent } from '@/features/filter-devices/ui/content/FiltersContent';
 import { DeviceFilters } from '@/features/filter-devices/ui/filter/DeviceFilters';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
+import { activeFiltersCount } from '@/shared/lib/activeFiltersCount';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import Search from '@/shared/ui/search/Search';
 import { StartProcessButton } from '@/shared/ui/start-process-button/StartProcessButton';
@@ -137,7 +137,6 @@ const DevicesPage = () => {
           <ExportFile stack={devices} />
         </Flex>
       </Flex>
-
       <DevicesTable
         isLoading={isLoading || isFetching}
         devices={devices}

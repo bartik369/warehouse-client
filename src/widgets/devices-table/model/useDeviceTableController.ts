@@ -11,7 +11,9 @@ import { useTablePagination } from '../../../shared/hooks/useTablePagination';
 export const useDeviceTableController = (filters: DeviceFiltersType) => {
   const { city } = useParams();
 
-  const { page, limit, setPage, setLimit } = useTablePagination();
+  const { page, limit, setPage, setLimit } = useTablePagination({
+    itemLimit: 20,
+  });
   const deviceQueryArgs = city
     ? {
         city,

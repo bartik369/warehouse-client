@@ -3,7 +3,11 @@ import { useTablePagination } from '@/shared/hooks/useTablePagination';
 import { useGetModelsQuery } from '@/store/api/modelsApi';
 
 export const useModelTableController = (filters: ModelFilterState) => {
-  const { page, limit, setPage, setLimit } = useTablePagination();
+  const { page, limit, setPage, setLimit } = useTablePagination({
+    itemLimit: 10,
+  });
+
+  console.log(page, limit);
   const modelArgs = { ...filters };
   const { data: models, isLoading, isFetching } = useGetModelsQuery({ page, limit, ...modelArgs });
   return {
@@ -13,5 +17,7 @@ export const useModelTableController = (filters: ModelFilterState) => {
     isLoading,
     isFetching,
     totalCount: models?.total,
+    setPage,
+    setLimit,
   };
 };

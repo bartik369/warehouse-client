@@ -41,6 +41,7 @@ export const useManageModel = () => {
   const { updateSearchParam, updateSearchParams, resetSearchParams } = useQueryParams();
 
   const debouncedSearch = useDebounce(filters.search, 500);
+
   const queryFilters = {
     ...filters,
     search: debouncedSearch,
@@ -114,13 +115,17 @@ export const useManageModel = () => {
     setLocalPreviewUrl(null);
     setEditingId(null);
   };
-  const handleResetFilter = () => {};
+  const handleResetFilter = () => {
+    setFilters(initialFilters);
+    resetSearchParams();
+  };
 
   const handleSearchChange = (value: string) => {
     setFilters((prev) => ({
       ...prev,
       search: value,
     }));
+    updateSearchParam('search', value);
   };
 
   const handleManufacturerChange = (value: string[]) => {
@@ -140,7 +145,7 @@ export const useManageModel = () => {
   };
 
   return {
-    filters: queryFilters,
+    filters,
     previewUrl,
     mode,
     editingModel,
