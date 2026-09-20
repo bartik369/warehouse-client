@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
 
-export const useTablePagination = () => {
+export const useTablePagination = ({ itemLimit }: { itemLimit: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = Number(searchParams.get('page')) || 1;
-  const limit = Number(searchParams.get('limit')) || 20;
+  const limit = Number(searchParams.get('limit')) || itemLimit;
 
   const setPage = (page: number) => {
     setSearchParams((prev) => {

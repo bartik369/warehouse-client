@@ -1,13 +1,12 @@
 import { Flex, SelectProps } from 'antd';
-import { HiOutlineSelector } from 'react-icons/hi';
 import { LuBuilding2 } from 'react-icons/lu';
 import { RiResetLeftLine } from 'react-icons/ri';
 import { TbCategory } from 'react-icons/tb';
 
+import { activeFiltersCount } from '@/shared/lib/activeFiltersCount';
+import { ActionButton } from '@/shared/ui/action-button/ActionButton';
 import { CheckboxList } from '@/shared/ui/checkbox-list/CheckboxList';
-import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import Search from '@/shared/ui/search/Search';
-import { SelectField } from '@/shared/ui/select-field/SelectField';
 
 import { ModelFilterState } from '../../model/types';
 import styles from './ModelFilter.module.scss';
@@ -31,6 +30,8 @@ export const ModelFilter = ({
   handleManufacturerChange,
   handleTypeChange,
 }: ModelFilterProps) => {
+  const filtersCount = activeFiltersCount(filters);
+  const isDisabled = filtersCount === 0;
   return (
     <Flex justify="space-between" gap={40}>
       <Flex className={styles.search}>
@@ -66,32 +67,12 @@ export const ModelFilter = ({
           prefix={<LuBuilding2 size={16} className={styles.icon} />}
           onChange={handleManufacturerChange}
         />
-        {/* <SelectField
-          value={filters.typeId}
-          className={styles.select}
-          popupClassName={styles.citySelectDropdown}
-          label="Тип"
-          options={typesOptions}
-          suffixIcon={<HiOutlineSelector size={14} />}
-          prefix={<TbCategory size={16} className={styles.icon} />}
-        /> */}
-        {/* <SelectField
-          value={filters.manufacturerIds}
-          className={styles.select}
-          popupClassName={styles.citySelectDropdown}
-          label="Производители"
-          options={manufacturersOptions}
-          suffixIcon={<HiOutlineSelector size={14} />}
-          prefix={<LuBuilding2 size={15} className={styles.icon} />}
-        /> */}
-        <IconButton
-          //   disabled={isDisabled}
-          iconSize={18}
+        <ActionButton
+          disabled={isDisabled}
           icon={RiResetLeftLine}
+          variant="apply"
+          title="Сбросить"
           onClick={onResetFilter}
-          size="lg"
-          variant="danger"
-          background="no"
         />
       </Flex>
     </Flex>

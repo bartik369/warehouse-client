@@ -31,7 +31,7 @@ export const modelsApi = createApi({
           urlParams.append(key, String(value));
         });
         return {
-          url: `${import.meta.env.VITE_MODELS_UNITED}?${urlParams.toString()}`,
+          url: `${import.meta.env.VITE_MODELS_SEARCH}?${urlParams.toString()}`,
         };
       },
       providesTags: (result) =>
@@ -48,7 +48,7 @@ export const modelsApi = createApi({
     >({
       query({ manufacturerId, typeId }) {
         return {
-          url: `${import.meta.env.VITE_MODELS_UNITED}${manufacturerId}/${typeId}`,
+          url: `${import.meta.env.VITE_MODELS_BY_MANUFACTURER_TYPE}${manufacturerId}/${typeId}`,
         };
       },
       providesTags: (result) =>

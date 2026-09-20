@@ -5,10 +5,10 @@
   gap: 3px;
   padding: 7px 12px;
   font-size: 12px;
-  cursor: pointer;
+  border: none;
   border-radius: 7px;
-  background-color: transparent;
   transition: all ease 0.5s;
+  cursor: pointer;
 }
 .delete {
   border: 1px solid var(--gray-400);
@@ -28,11 +28,13 @@
   }
 }
 .apply {
-  border: 1px solid var(--gray-500);
-  color: var(--gray-700);
+  background-color: var(--blue-600);
+  color: var(--white);
   &:hover {
-    border: 1px solid var(--green-500);
-    background-color: var(--green-500);
-    color: var(--white);
+    background-color: var(--blue-500);
+  }
+  &:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
   }
 }
