@@ -27,7 +27,7 @@ export const typesApi = createApi({
         url: `${import.meta.env.VITE_TYPES}${id}`,
       }),
     }),
-    createType: build.mutation<DeviceType, DeviceType>({
+    createType: build.mutation<DeviceType, Omit<DeviceType, 'id'>>({
       query: (body) => ({
         url: `${import.meta.env.VITE_TYPES}`,
         method: 'POST',
@@ -51,4 +51,5 @@ export const {
   useLazyGetTypeQuery,
   useCreateTypeMutation,
   useUpdateTypeMutation,
+  useGetTypeQuery,
 } = typesApi;

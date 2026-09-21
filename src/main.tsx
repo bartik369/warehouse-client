@@ -8,8 +8,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import { ThemeProvider } from './app/providers/ThemeProvider';
-import GlobalFallback from './components/ui/error/LocalFallback';
 import { antdLocale } from './shared/config/antd-locale';
+import GlobalFallback from './shared/ui/error-fallback/LocalFallback';
 import store from './store/store';
 
 createRoot(document.getElementById('root')!).render(
