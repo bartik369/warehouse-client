@@ -5,8 +5,8 @@ import { GoLock } from 'react-icons/go';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
-import BtnAction from '@/components/ui/buttons/BtnAction';
 import { useAuth } from '@/hooks/data/useAuth';
+import { Button } from '@/shared/ui/button/Button';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
 import { MESSAGES } from '@/utils/constants/ui/messages';
@@ -45,7 +45,7 @@ const AuthForm = () => {
             />
           </Flex>
           <div className={styles.actions}>
-            <BtnAction type="submit" title={BUTTON_LABELS.signin} size="lg" color="orange" />
+            <Button type="submit" title={BUTTON_LABELS.signin} color="primary" size="md" />
           </div>
         </form>
         <div className={styles.reset}>
