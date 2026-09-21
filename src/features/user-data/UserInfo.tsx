@@ -1,5 +1,5 @@
-import TechnicalOptions from '@/components/ui/options/TechnicalOptions';
 import { useAppSelector } from '@/hooks/redux/useRedux';
+import TechnicalOptions from '@/shared/ui/options/TechnicalOptions';
 import { RootState } from '@/store/store';
 import { LABELS } from '@/utils/constants/ui/labels';
 
