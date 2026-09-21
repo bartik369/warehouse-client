@@ -1,10 +1,12 @@
 import { Divider, Flex } from 'antd';
 import { AiOutlineUser } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
+import { RiLogoutBoxLine } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useOutsideClick } from '@/hooks/data/useOutsideClick';
 import { useAppSelector } from '@/hooks/redux/useRedux';
+import { Button } from '@/shared/ui/button/Button';
 import { useLogoutUserMutation } from '@/store/api/authApi';
 import { RootState } from '@/store/store';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
@@ -95,9 +97,14 @@ export const Profile = () => {
               </nav>
             </div>
             <div className={styles.logout}>
-              <button type="button" className={styles.btn} onClick={logoutHandler}>
-                <span>{BUTTON_LABELS.signout}</span>
-              </button>
+              <Button
+                icon={<RiLogoutBoxLine />}
+                iconSize={15}
+                type="button"
+                size="sm"
+                title={BUTTON_LABELS.signout}
+                onClick={logoutHandler}
+              />
             </div>
           </div>
         )}
