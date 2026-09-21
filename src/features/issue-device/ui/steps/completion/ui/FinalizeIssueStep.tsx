@@ -1,9 +1,7 @@
 import { Flex, Typography } from 'antd';
 import { Divider } from 'antd';
 import { BsBoxSeam } from 'react-icons/bs';
-import { BsFillSendFill } from 'react-icons/bs';
 import { FcIdea } from 'react-icons/fc';
-import { GrInfo } from 'react-icons/gr';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { IoDocumentTextOutline } from 'react-icons/io5';
 import { LuDownload } from 'react-icons/lu';

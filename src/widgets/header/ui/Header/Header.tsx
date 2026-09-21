@@ -1,13 +1,13 @@
 import { useLocation } from 'react-router-dom';
 
-import BurgerBtn from '@/components/ui/buttons/burger/BurgerBtn';
 import { useStickyHeader } from '@/hooks/data/useStickyHeader';
 import { useAppSelector } from '@/hooks/redux/useRedux';
+import { BurgerBtn } from '@/shared/ui/burger-button/BurgerBtn';
 import { RootState } from '@/store/store';
 import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
 
 import { HeaderActions } from '../HeaderActions/HeaderActions';
-import Profile from '../Profile/Profile';
+import { Profile } from '../Profile/Profile';
 import styles from './Header.module.scss';
 
 interface HeaderProps {

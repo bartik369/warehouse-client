@@ -3,12 +3,10 @@ import { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import LocalFallback from '@/components/ui/error/LocalFallback';
-// import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';
+import LocalFallback from '@/shared/ui/error-fallback/LocalFallback';
 import { Header } from '@/widgets/header/ui/Header/Header';
 import { Sidebar } from '@/widgets/sidebar/ui/Sidebar/Sidebar';
 
-import { GlobalModal } from '../../../components/modal/GlobalModal';
 import AdminMenu from '../../admin-menu/ui/AdminMenu';
 import Footer from '../../footer/Footer';
 import styles from './Layout.module.scss';
@@ -22,7 +20,6 @@ export const Layout = () => {
       <Sidebar open={isActive} />
       <div className={isActive ? styles.active : styles['not-active']}>
         <Header isActive={isActive} setIsActive={setIsActive} />
-        {/* <Breadcrumbs /> */}
         <main className={styles.outlet}>
           {location.pathname.startsWith('/admin') && <AdminMenu />}
           <div className={styles.content}>
@@ -33,7 +30,6 @@ export const Layout = () => {
         </main>
         <Footer />
       </div>
-      <GlobalModal />
     </div>
   );
 };

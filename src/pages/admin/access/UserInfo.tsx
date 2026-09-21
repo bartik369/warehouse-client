@@ -1,6 +1,5 @@
-import TechnicalOptions from '@/components/ui/options/TechnicalOptions';
 import { UserRolesResponse } from '@/entities/permission-role/model/types';
-import { PermissionList } from '@/features/manage-permission-role/ui/permission-role-list/PermissionList';
+import TechnicalOptions from '@/shared/ui/options/TechnicalOptions';
 import { LABELS } from '@/utils/constants/ui/labels';
 import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 
