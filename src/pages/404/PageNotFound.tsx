@@ -7,7 +7,7 @@ import { Button } from '@/shared/ui/button/Button';
 import img404 from '../../assets/elements/404.png';
 import styles from './Page404.module.scss';
 
-const Page404 = () => {
+const PageNotFound = () => {
   const navigate = useNavigate();
   return (
     <Flex className={styles.container}>
@@ -31,4 +31,4 @@ const Page404 = () => {
   );
 };
 
-export default Page404;
+export default PageNotFound;
