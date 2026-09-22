@@ -9,7 +9,7 @@ import PublicRoutes from './app/router/PublicRoutes';
 import privateRoutes from './config/routes/privateRoutes';
 import publicRoutes from './config/routes/publicRoutes';
 import { useAppDispatch } from './hooks/redux/useRedux';
-import Page404 from './pages/404/page404';
+import PageNotFound from './pages/404/PageNotFound';
 import { useValidateMutation } from './store/api/authApi';
 import { setAuth, setCredentials } from './store/slices/authSlice';
 import { handleApiError } from './utils/errors/handleApiError';
@@ -56,7 +56,7 @@ function App() {
             <Route key={path} path={path} element={element} />
           ))}
         </Route>
-        <Route path="*" element={<Page404 />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <ToastContainer
         position="top-right"
