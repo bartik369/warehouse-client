@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/shared/ui/button/Button';
 
-import page404 from '../../assets/elements/404.png';
+import img404 from '../../assets/elements/404.png';
 import styles from './Page404.module.scss';
 
 const Page404 = () => {
@@ -12,7 +12,7 @@ const Page404 = () => {
   return (
     <Flex className={styles.container}>
       <div className={styles.block}>
-        <img src={page404} />
+        <img src={img404} />
         <div className={styles.information}>
           <div className={styles.title}>Страница не найдена</div>
           <div className={styles.description}>
