@@ -1,19 +1,20 @@
 const Home = () => {
   return (
     <div>
+      <p>На данный момент доступен функционал </p>
       <p>
-        На данный момент доступен функционал{' '}
-        <a style={{ fontSize: '26px', color: '#34c099' }} href="admin/add-device">
+        <a style={{ fontSize: '26px', color: 'var(--blue-600)' }} href="admin/add-device">
           админ-части
         </a>
-        ,
       </p>
-      <a style={{ fontSize: '26px', color: '#34c099' }} href="devices/locations/msk">
+      <p>
+        <a style={{ fontSize: '26px', color: 'var(--blue-600)' }} href="devices/locations/msk">
+          Информация по уcтройствам
+        </a>
+      </p>
+      <a style={{ fontSize: '26px', color: 'var(--blue-600)' }} href="/issues">
         Процесс выдачи устройства
-      </a>{' '}
-      где доступны все шаги выдачи + пример отправки файла на почту, который будет настроен,
-      например, на Nodemailer - тут можно потыкать, т.к отправка документа прерывается на
-      контроллере. Вся остальная логика находится в процессе
+      </a>
     </div>
   );
 };

@@ -1,0 +1,31 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  .block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 900px;
+    img {
+      width: 100%;
+    }
+    .information {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      position: absolute;
+      bottom: 8%;
+      .title {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .description {
+        font-size: 14px;
+        color: var(--gray-600);
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
