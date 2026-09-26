@@ -9,8 +9,8 @@ export const createUserSchema = z.object({
   email: z.email(),
   workId: z.string().min(1),
   isActive: z.boolean(),
-  department: z.string(),
-  location: z.string(),
+  departmentId: z.string(),
+  locationId: z.string(),
 });
 
 export type CreateUserFormValues = z.infer<typeof createUserSchema>;

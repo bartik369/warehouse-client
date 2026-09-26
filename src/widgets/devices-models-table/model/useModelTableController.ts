@@ -7,7 +7,6 @@ export const useModelTableController = (filters: ModelFilterState) => {
     itemLimit: 10,
   });
 
-  console.log(page, limit);
   const modelArgs = { ...filters };
   const { data: models, isLoading, isFetching } = useGetModelsQuery({ page, limit, ...modelArgs });
   return {

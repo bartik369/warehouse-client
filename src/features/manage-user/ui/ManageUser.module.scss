@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  width: 100%;
+
+  .card {
+    :global(.ant-card-body) {
+      padding: 15px;
+    }
+  }
+}

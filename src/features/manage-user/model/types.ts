@@ -32,3 +32,7 @@ export type FormFieldConfig<T extends FieldValues> =
       label: string;
       col?: ColProps;
     };
+
+export type UserFilterState = {
+  search: string;
+};

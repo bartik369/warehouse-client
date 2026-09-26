@@ -15,11 +15,7 @@ export const modelsApi = createApi({
         const { ...params } = queryParams;
         const urlParams = new URLSearchParams();
         Object.entries(params).forEach(([key, value]) => {
-          if (
-            value === null ||
-            value === undefined ||
-            (Array.isArray(value) && value.length === 0)
-          ) {
+          if (value == null || (Array.isArray(value) && value.length === 0)) {
             return;
           }
 

@@ -1,18 +1,41 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { keyof } from 'zod';
 
-import { User } from '@/entities/user/model/types';
+import { SortedUserRes, User } from '@/entities/user/model/types';
+import { UserQueryParams } from '@/shared/types/api';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: [],
+  tagTypes: ['User'],
   endpoints: (build) => ({
-    getUsers: build.query<User[], void>({
-      query: () => ({
-        url: `${import.meta.env.VITE_USERS}`,
-      }),
+    getUsers: build.query<SortedUserRes, UserQueryParams>({
+      query: (queryParams) => {
+        const { ...params } = queryParams;
+        const urlParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          if (value == null || (Array.isArray(value) && value.length === 0)) {
+            return;
+          }
+          if (Array.isArray(value)) {
+            urlParams.append(key, value.join(','));
+            return;
+          }
+          urlParams.append(key, String(value));
+        });
+        return {
+          url: `${import.meta.env.VITE_USERS_SEARCH}?${urlParams.toString()}`,
+        };
+      },
+      providesTags: (result) =>
+        result?.items
+          ? [
+              ...result.items.map(({ id }) => ({ type: 'User' as const, id })),
+              { type: 'User', id: 'LIST' },
+            ]
+          : [{ type: 'User', id: 'LIST' }],
     }),
     getUser: build.query<User, string | null>({
       query: (id: string) => ({

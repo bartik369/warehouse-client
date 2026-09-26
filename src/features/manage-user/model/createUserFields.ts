@@ -10,7 +10,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.firstNameRu,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -19,7 +19,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.lastNameRu,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -28,7 +28,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.firstNameEn,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -37,7 +37,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.lastNameEn,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -46,7 +46,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.userLogin,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -55,7 +55,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.email,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -64,27 +64,27 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.workID,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
     type: 'select',
-    name: 'department',
+    name: 'departmentId',
     label: LABELS.department,
     itemsKey: 'departments',
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
     type: 'select',
-    name: 'location',
+    name: 'locationId',
     label: LABELS.location,
     itemsKey: 'locations',
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
   {
@@ -93,7 +93,7 @@ export const createUserFields: FormFieldConfig<CreateUserFormValues>[] = [
     label: LABELS.isActive,
     col: {
       xs: 24,
-      md: 12,
+      md: 24,
     },
   },
 ];

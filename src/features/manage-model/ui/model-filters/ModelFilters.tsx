@@ -11,7 +11,7 @@ import Search from '@/shared/ui/search/Search';
 import { ModelFilterState } from '../../model/types';
 import styles from './ModelFilter.module.scss';
 
-interface ModelFilterProps {
+interface ModelFiltersProps {
   filters: ModelFilterState;
   manufacturersOptions: SelectProps['options'];
   typesOptions: SelectProps['options'];
@@ -21,7 +21,7 @@ interface ModelFilterProps {
   handleTypeChange: (value: string[]) => void;
 }
 
-export const ModelFilter = ({
+export const ModelFilters = ({
   filters,
   manufacturersOptions,
   typesOptions,
@@ -29,7 +29,7 @@ export const ModelFilter = ({
   onSearch,
   handleManufacturerChange,
   handleTypeChange,
-}: ModelFilterProps) => {
+}: ModelFiltersProps) => {
   const filtersCount = activeFiltersCount(filters);
   const isDisabled = filtersCount === 0;
   return (

@@ -6,8 +6,8 @@ import { useModelTableController } from '@/widgets/devices-models-table/model/us
 import { DeviceModelsTable } from '../../../widgets/devices-models-table/ui/DeviceModelsTable';
 import { useManageModel } from '../model/useManageModel';
 import styles from './ManageModel.module.scss';
+import { ModelFilters } from './model-filters/ModelFilters';
 import { ModelForm } from './model-form/ModelForm';
-import { ModelFilter } from './models-filter/ModelFilter';
 
 export const ManageModel = () => {
   const {
@@ -50,7 +50,7 @@ export const ManageModel = () => {
             />
           </div>
         </Flex>
-        <ModelFilter
+        <ModelFilters
           filters={filters}
           manufacturersOptions={manufacturersOptions}
           typesOptions={typesOptions}

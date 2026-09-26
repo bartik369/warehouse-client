@@ -1,5 +1,5 @@
-import { Logo } from '../Logo/Logo';
-import SidebarMenu from '../SidebarMenu/SidebarMenu';
+import { Logo } from '../logo/Logo';
+import SidebarMenu from '../sidebar-menu/SidebarMenu';
 import style from './Sidebar.module.scss';
 
 interface SidebarProps {
