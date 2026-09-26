@@ -4,7 +4,6 @@ import GrantUserRolesConfig from './Access';
 import AddDeviceConfig from './AddDevice';
 import AddModelConfig from './AddModel';
 import AddTypeConfig from './AddType';
-import AddUserConfig from './AddUser';
 import CalendarConfig from './Calendar';
 import AddContractorConfig from './Contractors';
 import ContractorsConfig from './Contractors2';
@@ -27,7 +26,7 @@ import AddRoleConfig from './Roles';
 import SigninConfig from './Signin';
 import StatisticsConfig from './Statistics';
 import UserDetailsConfig from './UserDetails';
-import UsersListConfig from './UsersList';
+import AddUserConfig from './Users';
 import AddWarehouseConfig from './Warehouses';
 import IssueConfig from './issue/IssueCreate';
 import IssueListConfig from './issue/IssueList';
@@ -63,5 +62,4 @@ export const pageConfigs: AppRouteConfig[] = [
   SigninConfig,
   StatisticsConfig,
   ...UserDetailsConfig,
-  ...UsersListConfig,
 ];

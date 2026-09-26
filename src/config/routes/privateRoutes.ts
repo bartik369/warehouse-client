@@ -2,7 +2,6 @@ import AccessConfig from '../pages/Access';
 import AddDeviceConfig from '../pages/AddDevice';
 import AddModelConfig from '../pages/AddModel';
 import AddTypeConfig from '../pages/AddType';
-import AddUserConfig from '../pages/AddUser';
 import CalendarConfig from '../pages/Calendar';
 import AddContractorConfig from '../pages/Contractors';
 import ContractorsConfig from '../pages/Contractors';
@@ -24,7 +23,7 @@ import ProfileConfig from '../pages/Profile';
 import AddRoleConfig from '../pages/Roles';
 import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
-import UsersListConfig from '../pages/UsersList';
+import AddUserConfig from '../pages/Users';
 import WarehousesConfig from '../pages/Warehouses';
 import IssueConfig from '../pages/issue/IssueCreate';
 import IssueDetailsConfig from '../pages/issue/IssueDetails';
@@ -42,7 +41,6 @@ const privateRoutes = [
   InventoryConfig,
   EditDeviceConfig,
   AddUserConfig,
-  ...UsersListConfig,
   ...UserDetailsConfig,
   AddLocationConfig,
   WarehousesConfig,

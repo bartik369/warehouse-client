@@ -61,3 +61,26 @@ export type ValidateUserErrors = {
   department?: string;
   location?: string;
 };
+
+export interface UserWithRelations {
+  id: string;
+  userName: string;
+  email: string;
+  workId: string | null;
+  firstNameEn: string;
+  lastNameEn: string;
+  firstNameRu: string;
+  lastNameRu: string;
+  isActive: boolean;
+  locationId: string;
+  departmentId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  department: Department | null;
+  location: Location;
+}
+
+export type SortedUserRes = {
+  items: UserWithRelations[];
+  total: number;
+};

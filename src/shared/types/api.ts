@@ -5,3 +5,9 @@ export type QueryParams = {
   typeIds: string[] | null;
   search: string;
 };
+
+export type UserQueryParams = {
+  page: number;
+  limit: number;
+  search: string;
+};

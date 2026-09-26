@@ -13,12 +13,8 @@ export const adminMenu = [
   {
     id: 1,
     title: 'Пользователи',
-    path: '#',
+    path: '/admin/users',
     icon: FiUserPlus,
-    subMenu: [
-      { id: 1, title: 'Добавить', path: '/admin/add-user' },
-      { id: 2, title: 'Редактировать', path: '/admin/users' },
-    ],
   },
   { id: 2, title: 'Склады', path: '/admin/warehouses', icon: TbLocationPlus },
   {
@@ -28,7 +24,7 @@ export const adminMenu = [
     icon: TbDeviceDesktopPlus,
     subMenu: [
       { id: 1, title: 'Добавить', path: '/admin/add-device' },
-      { id: 2, title: 'Редактировать', path: '/admin/edit-device' },
+      // { id: 2, title: 'Редактировать', path: '/admin/edit-device' },
       { id: 3, title: 'Модели', path: '/admin/add-model' },
       { id: 4, title: 'Типы', path: '/admin/add-type' },
     ],
