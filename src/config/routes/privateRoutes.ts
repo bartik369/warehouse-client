@@ -24,7 +24,6 @@ import AddRoleConfig from '../pages/Roles';
 import StatisticsConfig from '../pages/Statistics';
 import UserDetailsConfig from '../pages/UserDetails';
 import AddUserConfig from '../pages/Users';
-import UsersListConfig from '../pages/UsersList';
 import WarehousesConfig from '../pages/Warehouses';
 import IssueConfig from '../pages/issue/IssueCreate';
 import IssueDetailsConfig from '../pages/issue/IssueDetails';
@@ -42,7 +41,6 @@ const privateRoutes = [
   InventoryConfig,
   EditDeviceConfig,
   AddUserConfig,
-  ...UsersListConfig,
   ...UserDetailsConfig,
   AddLocationConfig,
   WarehousesConfig,
