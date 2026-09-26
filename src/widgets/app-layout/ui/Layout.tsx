@@ -5,7 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import LocalFallback from '@/shared/ui/error-fallback/LocalFallback';
 import { Header } from '@/widgets/header/ui/Header/Header';
-import { Sidebar } from '@/widgets/sidebar/ui/sidebar/Sidebar';
+import { Sidebar } from '@/widgets/sidebar/ui/Sidebar/Sidebar';
 
 import AdminMenu from '../../admin-menu/ui/AdminMenu';
 import Footer from '../../footer/Footer';
