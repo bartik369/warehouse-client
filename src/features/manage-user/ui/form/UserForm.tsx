@@ -42,7 +42,7 @@ export const UserForm = ({
   const dataSources = { departments: departmentsOptions, locations: locationsOptions };
 
   const handleReset = () => {
-    console.log('reset');
+    reset();
   };
 
   const onSubmit = () => {
