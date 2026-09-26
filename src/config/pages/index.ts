@@ -27,7 +27,6 @@ import SigninConfig from './Signin';
 import StatisticsConfig from './Statistics';
 import UserDetailsConfig from './UserDetails';
 import AddUserConfig from './Users';
-import UsersListConfig from './UsersList';
 import AddWarehouseConfig from './Warehouses';
 import IssueConfig from './issue/IssueCreate';
 import IssueListConfig from './issue/IssueList';
@@ -63,5 +62,4 @@ export const pageConfigs: AppRouteConfig[] = [
   SigninConfig,
   StatisticsConfig,
   ...UserDetailsConfig,
-  ...UsersListConfig,
 ];
