@@ -25,8 +25,8 @@ export const ManageModel = () => {
     onResetFilter,
     resetId,
     onSearch,
-    handleTypeChange,
-    handleManufacturerChange,
+    onTypeChange,
+    onManufacturerChange,
   } = useManageModel();
   const { page, limit, models, totalCount, isLoading, isFetching, setPage, setLimit } =
     useModelTableController(filters);
@@ -54,8 +54,8 @@ export const ManageModel = () => {
           filters={filters}
           manufacturersOptions={manufacturersOptions}
           typesOptions={typesOptions}
-          handleManufacturerChange={handleManufacturerChange}
-          handleTypeChange={handleTypeChange}
+          onManufacturerChange={onManufacturerChange}
+          onTypeChange={onTypeChange}
           onResetFilter={onResetFilter}
           onSearch={onSearch}
         />

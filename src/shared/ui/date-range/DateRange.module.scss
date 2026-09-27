@@ -1,0 +1,9 @@
+.dateRange {
+  :global(.ant-picker-input > input) {
+    font-size: 12px;
+  }
+
+  :global(.ant-picker-input > input::placeholder) {
+    font-size: 12px;
+  }
+}

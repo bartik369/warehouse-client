@@ -6,8 +6,9 @@ import {
   FinalizeIssueRequest,
   IssueProcessDetails,
   IssueProcessDto,
-  IssueProcessListItem,
+  SortedIssueProcessesRes,
 } from '@/features/issue-device/model/types';
+import { IssueProcessQueryParams } from '@/shared/types/api';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -35,14 +36,28 @@ export const issueApi = createApi({
       }),
       providesTags: (_result, _error, processId) => [{ type: 'Issue', id: processId }],
     }),
-    getIssueProcesses: build.query<IssueProcessListItem[], void>({
-      query: () => ({
-        url: `${import.meta.env.VITE_ISSUE_PROCESSES}`,
-      }),
+    getIssueProcesses: build.query<SortedIssueProcessesRes, IssueProcessQueryParams>({
+      query: (queryParams) => {
+        const { ...params } = queryParams;
+        const urlParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          if (value == null || (Array.isArray(value) && value.length === 0)) {
+            return;
+          }
+          if (Array.isArray(value)) {
+            urlParams.append(key, value.join(','));
+            return;
+          }
+          urlParams.append(key, String(value));
+        });
+        return {
+          url: `${import.meta.env.VITE_ISSUE_PROCESSES}?${urlParams.toString()}`,
+        };
+      },
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({
+              ...result.items.map(({ id }) => ({
                 type: 'Issue' as const,
                 id,
               })),

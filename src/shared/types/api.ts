@@ -11,3 +11,10 @@ export type UserQueryParams = {
   limit: number;
   search: string;
 };
+export type IssueProcessQueryParams = {
+  page: number;
+  limit: number;
+  search: string;
+  warehousesSlugs: string[] | null;
+  dateRange: [string, string] | null;
+};

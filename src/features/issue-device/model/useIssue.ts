@@ -171,6 +171,7 @@ export const useIssue = () => {
       warehouses: warehouseController.warehouses,
       locations: warehouseController.locations,
       selectedLocation: warehouseController.locationName,
+      options: warehouseController.warehousesOptions,
     },
     actions: {
       handleSelect: warehouseController.handleSelect,

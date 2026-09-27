@@ -6,10 +6,20 @@
 
 .inputWrapper {
   position: relative;
+  .icon {
+    font-size: 17px;
+    color: var(--gray-500);
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      color: var(--blue-600);
+    }
+  }
   .input {
     height: $form-control-height;
     border-radius: $form-control-radius;
     border: 1px solid var(--border-primary);
+    font-size: 12px;
     &:hover,
     &:focus,
     &:focus-within {

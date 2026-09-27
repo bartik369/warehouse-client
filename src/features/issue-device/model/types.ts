@@ -175,3 +175,16 @@ export interface IssueProcessDetails {
   issuedBy: IssueProcessUser;
   warehouse: IssueProcessWarehouse;
 }
+
+export type IssueFilterState = {
+  search: string;
+  warehousesSlugs: string[] | null;
+  fromId: string;
+  toId: string;
+  dateRange: [string, string] | null;
+};
+
+export type SortedIssueProcessesRes = {
+  items: IssueProcessListItem[];
+  total: number;
+};
