@@ -4,7 +4,14 @@ import clsx from 'clsx';
 import styles from './DateField.module.scss';
 import { DateFieldProps } from './types';
 
-export const DateField = ({ label, error, value, className, ...props }: DateFieldProps) => {
+export const DateField = ({
+  label,
+  error,
+  value,
+  className,
+  placeholder,
+  ...props
+}: DateFieldProps) => {
   const isFilled = value != null;
 
   return (
@@ -15,7 +22,7 @@ export const DateField = ({ label, error, value, className, ...props }: DateFiel
           multiple={false}
           className={styles.date}
           value={value}
-          placeholder=""
+          placeholder={placeholder}
           allowClear
           status={error ? 'error' : undefined}
         />

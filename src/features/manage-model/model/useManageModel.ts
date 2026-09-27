@@ -159,7 +159,7 @@ export const useManageModel = () => {
     onReset: handleReset,
     onResetFilter: handleResetFilter,
     onSearch: handleSearchChange,
-    handleManufacturerChange,
-    handleTypeChange,
+    onManufacturerChange: handleManufacturerChange,
+    onTypeChange: handleTypeChange,
   };
 };

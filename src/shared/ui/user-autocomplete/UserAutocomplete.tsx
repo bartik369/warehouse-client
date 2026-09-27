@@ -1,6 +1,6 @@
 import { AutoComplete, Input } from 'antd';
 import clsx from 'clsx';
-import { FiSearch } from 'react-icons/fi';
+import { CiSearch } from 'react-icons/ci';
 
 import { Spinner } from '../spinner/Spinner';
 import styles from './UserAutocomplete.module.scss';
@@ -9,17 +9,18 @@ import { AutocompleteFieldProps } from './types';
 
 export const UserAutocomplete = ({
   value,
-  onChange,
-  onOptionSelect,
-  onBlur,
-  onSearch,
-  onClear,
+  prefix,
   options,
   loading,
   searched,
   className,
   placeholder = USER_PLACEHOLDER,
   disabled,
+  onChange,
+  onOptionSelect,
+  onBlur,
+  onSearch,
+  onClear,
 }: AutocompleteFieldProps) => {
   const notFoundContent = loading ? (
     <div className={styles.loading}>
@@ -46,7 +47,8 @@ export const UserAutocomplete = ({
         >
           <Input
             allowClear
-            prefix={<FiSearch size={16} />}
+            prefix={prefix}
+            suffix={<CiSearch className={styles.icon} size={16} />}
             className={styles.input}
             placeholder={placeholder}
             onClear={onClear}

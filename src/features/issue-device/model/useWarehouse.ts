@@ -28,11 +28,17 @@ export const useWarehouse = () => {
     dispatch(resetWarehouse());
   };
 
+  const warehousesOptions = warehouses.map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
+
   return {
     locationName,
     currentWarehouse,
     warehouses,
     locations,
+    warehousesOptions,
     isLoadingWarehouses,
     isLoadingLocations,
     handleSelect,

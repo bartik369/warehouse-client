@@ -17,8 +17,8 @@ interface ModelFiltersProps {
   typesOptions: SelectProps['options'];
   onResetFilter: () => void;
   onSearch: (value: string) => void;
-  handleManufacturerChange: (value: string[]) => void;
-  handleTypeChange: (value: string[]) => void;
+  onManufacturerChange: (value: string[]) => void;
+  onTypeChange: (value: string[]) => void;
 }
 
 export const ModelFilters = ({
@@ -27,8 +27,8 @@ export const ModelFilters = ({
   typesOptions,
   onResetFilter,
   onSearch,
-  handleManufacturerChange,
-  handleTypeChange,
+  onManufacturerChange,
+  onTypeChange,
 }: ModelFiltersProps) => {
   const filtersCount = activeFiltersCount(filters);
   const isDisabled = filtersCount === 0;
@@ -53,7 +53,7 @@ export const ModelFilters = ({
           value={filters.typeIds}
           options={typesOptions}
           prefix={<TbCategory size={16} className={styles.icon} />}
-          onChange={handleTypeChange}
+          onChange={onTypeChange}
         />
         <CheckboxList
           width={245}
@@ -65,7 +65,7 @@ export const ModelFilters = ({
           value={filters.manufacturerIds}
           options={manufacturersOptions}
           prefix={<LuBuilding2 size={16} className={styles.icon} />}
-          onChange={handleManufacturerChange}
+          onChange={onManufacturerChange}
         />
         <ActionButton
           disabled={isDisabled}
