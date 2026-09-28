@@ -3,28 +3,32 @@ import { LuBriefcaseBusiness, LuUserRound } from 'react-icons/lu';
 import { MdOutlineWarehouse } from 'react-icons/md';
 
 import { IssueFilterState } from '@/features/issue-device/model/types';
+import {
+  IssueListActions,
+  IssueListData,
+  IssueListStatus,
+} from '@/features/issue-device/ui/issue-list/model/useIssueList';
 import { CheckboxList } from '@/shared/ui/checkbox-list/CheckboxList';
 import Search from '@/shared/ui/search/Search';
 import { UserAutocomplete } from '@/shared/ui/user-autocomplete/UserAutocomplete';
 
 import { DateRange } from '../date-range/DateRange';
+import { UserAutocompleteOption } from '../user-autocomplete/types';
 import styles from './MovementFilters.module.scss';
 
 interface MovementFiltersProps {
-  filters: IssueFilterState;
-  warehouseOptions: SelectProps['options'];
-  onSearch: (value: string) => void;
-  onWarehouseChange: (value: string[]) => void;
+  data: IssueListData;
+  status: IssueListStatus;
+  actions: IssueListActions;
 }
-export const MovementFilters = ({
-  filters,
-  warehouseOptions,
-  onSearch,
-  onWarehouseChange,
-}: MovementFiltersProps) => {
+export const MovementFilters = ({ data, status, actions }: MovementFiltersProps) => {
   return (
     <div className={styles.filters}>
-      <Search placeholder="Укажите номер документа" value={filters.search} onChange={onSearch} />
+      <Search
+        placeholder="Укажите номер документа"
+        value={data.filters.search}
+        onChange={actions.onSearch}
+      />
       <CheckboxList
         width={245}
         allowClear
@@ -32,32 +36,35 @@ export const MovementFilters = ({
         showSearch={false}
         mode="multiple"
         maxTagCount={1}
-        value={filters.warehousesSlugs}
-        options={warehouseOptions}
+        value={data.filters.warehousesSlugs}
+        options={data.warehousesOptions}
         prefix={<MdOutlineWarehouse size={16} className={styles.icon} />}
-        onChange={onWarehouseChange}
+        onChange={actions.onWarehouseChange}
       />
       <UserAutocomplete
         prefix={<LuBriefcaseBusiness size={15} />}
         placeholder="Представитель компании"
-        // loading={userController.status.isUsersLoading}
-        // onSearch={userController.actions.handleChange}
+        searched={status.wasCompanyPersonSearched}
+        onSearch={actions.onCompanyPersonSearch}
+        loading={status.isCompanyPersonsLoading}
         // onOptionSelect={userController.actions.handleSelect}
-        // searched={userController.data.wasSearched}
         // value={userController.data.query}
-        // options={userController.data.options}
+        options={data.companyPersonsOptions}
       />
       <UserAutocomplete
         placeholder="Сотрудник"
         prefix={<LuUserRound size={15} />}
-        // loading={userController.status.isUsersLoading}
-        // onSearch={userController.actions.handleChange}
+        searched={status.wasEmployeePersonSearched}
+        loading={status.isEmployeePersonsLoading}
+        onSearch={actions.onCompanyEmployeeSearch}
         // onOptionSelect={userController.actions.handleSelect}
-        // searched={userController.data.wasSearched}
         // value={userController.data.query}
-        // options={userController.data.options}
+        options={data.employeePersonsOptions}
       />
-      <DateRange placeholder={['Начало периода', 'Конец периода']} />
+      <DateRange
+        placeholder={['Начало периода', 'Конец периода']}
+        onChange={actions.onDateRangeChange}
+      />
     </div>
   );
 };

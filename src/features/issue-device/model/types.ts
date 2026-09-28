@@ -179,9 +179,13 @@ export interface IssueProcessDetails {
 export type IssueFilterState = {
   search: string;
   warehousesSlugs: string[] | null;
-  fromId: string;
-  toId: string;
+  companyPersonQuery: string;
+  employeePersonQuery: string;
   dateRange: [string, string] | null;
+};
+export type PersonState = {
+  company: string;
+  employee: string;
 };
 
 export type SortedIssueProcessesRes = {
