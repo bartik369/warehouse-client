@@ -62,6 +62,7 @@ export const IssueProcessesTable = ({
       bordered={false}
       columns={columns}
       dataSource={issueProcesses}
+      showSorterTooltip={false}
       rowClassName={(_, index) => (index % 2 !== 0 ? tableStyles.evenRow : tableStyles.oddRow)}
       rowSelection={{
         selectedRowKeys,

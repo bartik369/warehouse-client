@@ -9,42 +9,28 @@ import { useIssueTableController } from '../model/useIssueTableController';
 import { HeaderIssues } from './header/HeaderIssues';
 
 export const IssueList = () => {
-  const {
-    filters,
-    selectedRowKeys,
-    selectedIssue,
-    warehousesOptions,
-    onSelect,
-    onDelete,
-    onSearch,
-    onWarehouseChange,
-  } = useIssueList();
+  const { data, status, issueListActions } = useIssueList();
   const { actions, warehouseController } = useIssue();
   const { page, limit, issueProcesses, totalCount, isFetching, isLoading, setPage, setLimit } =
-    useIssueTableController(filters);
+    useIssueTableController(data.queryFilters);
 
   return (
     <Flex vertical gap={20} justify="center">
       <HeaderIssues
-        selectedIssue={selectedIssue}
+        selectedIssue={data.selectedIssue}
         onStart={actions.handleStartNewIssue}
         onDelete={actions.handleDeleteIssueProcess}
       />
-      <MovementFilters
-        filters={filters}
-        warehouseOptions={warehousesOptions}
-        onSearch={onSearch}
-        onWarehouseChange={onWarehouseChange}
-      />
+      <MovementFilters data={data} status={status} actions={issueListActions} />
       <IssueProcessesTable
-        loading={isLoading}
+        loading={isLoading || isFetching}
         page={page}
         limit={limit}
         totalCount={totalCount}
-        selectedRowKeys={selectedRowKeys}
+        selectedRowKeys={data.selectedRowKeys}
         issueProcesses={issueProcesses}
-        onSelect={onSelect}
-        onDelete={onDelete}
+        onSelect={issueListActions.onSelect}
+        onDelete={issueListActions.onDelete}
         setPage={setPage}
         setLimit={setLimit}
       />
