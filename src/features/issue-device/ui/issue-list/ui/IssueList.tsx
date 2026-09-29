@@ -10,7 +10,7 @@ import { HeaderIssues } from './header/HeaderIssues';
 
 export const IssueList = () => {
   const { data, status, issueListActions } = useIssueList();
-  const { actions, warehouseController } = useIssue();
+  const { actions } = useIssue();
   const { page, limit, issueProcesses, totalCount, isFetching, isLoading, setPage, setLimit } =
     useIssueTableController(data.queryFilters);
 
@@ -21,7 +21,12 @@ export const IssueList = () => {
         onStart={actions.handleStartNewIssue}
         onDelete={actions.handleDeleteIssueProcess}
       />
-      <MovementFilters data={data} status={status} actions={issueListActions} />
+      <MovementFilters
+        processes={issueProcesses}
+        data={data}
+        status={status}
+        actions={issueListActions}
+      />
       <IssueProcessesTable
         loading={isLoading || isFetching}
         page={page}
