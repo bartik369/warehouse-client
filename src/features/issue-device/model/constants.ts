@@ -49,3 +49,14 @@ export const ISSUE_PROCESS_STATUS_CONFIG: Record<IssueProcessStatus, IssueProces
     iconSize: 14,
   },
 };
+
+export const statusOptions = [
+  {
+    label: 'В процессе',
+    value: 'draft',
+  },
+  {
+    label: 'Завершено',
+    value: 'completed',
+  },
+];

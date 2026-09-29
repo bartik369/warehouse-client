@@ -1,9 +1,14 @@
+@use '@/shared/styles/tokens' as *;
+
 .dateRange {
+  width: 100%;
+  height: $form-control-height;
+
   :global(.ant-picker-input > input) {
     font-size: 12px;
-  }
 
-  :global(.ant-picker-input > input::placeholder) {
-    font-size: 12px;
+    &::placeholder {
+      font-size: 12px;
+    }
   }
 }

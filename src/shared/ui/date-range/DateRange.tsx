@@ -1,17 +1,18 @@
 import { DatePicker } from 'antd';
-import type { RangePickerProps } from 'antd/es/date-picker';
+import clsx from 'clsx';
 
 import styles from './DateRange.module.scss';
 
 const { RangePicker } = DatePicker;
 interface DateRangeProps {
   placeholder?: [string, string];
+  className?: string;
   onChange: (value: [string, string]) => void;
 }
-export const DateRange = ({ placeholder, onChange }: DateRangeProps) => {
+export const DateRange = ({ placeholder, className, onChange }: DateRangeProps) => {
   return (
     <RangePicker
-      className={styles.dateRange}
+      className={clsx(styles.dateRange, className)}
       placeholder={placeholder}
       format="DD.MM.YYYY"
       onChange={(dates) => {

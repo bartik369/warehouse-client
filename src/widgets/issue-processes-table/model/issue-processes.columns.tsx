@@ -30,6 +30,7 @@ export const getIssueProcessesColumns = ({
   const actionColumn: ColumnType<IssueProcessListItem> = {
     key: 'icon',
     width: 60,
+    fixed: true,
     onCell: () => ({
       style: {
         paddingLeft: 0,
