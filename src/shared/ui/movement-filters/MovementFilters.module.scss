@@ -1,5 +1,25 @@
 .filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
+
+  > :nth-child(1) {
+    flex: 1 1 150px;
+  }
+  > :nth-child(2) {
+    flex: 0 1 220px;
+  }
+  > :nth-child(3),
+  > :nth-child(4) {
+    flex: 0 1 240px;
+  }
+
+  > :nth-child(5) {
+    flex: 1 1 200px;
+  }
+
+  > :nth-child(6) {
+    flex: 0 0 30px;
+  }
 }

@@ -10,7 +10,7 @@ import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { appToast } from '@/shared/lib/toast/toast';
 import { UserAutocompleteItem } from '@/shared/ui/user-autocomplete/UserAutocompleteItem';
 import { UserAutocompleteOption } from '@/shared/ui/user-autocomplete/types';
-import { useDeleteIssueProcessMutation, useGetIssueProcessesQuery } from '@/store/api/issueApi';
+import { useDeleteIssueProcessMutation } from '@/store/api/issueApi';
 import { useGetFilteredUsersQuery } from '@/store/api/userApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 
@@ -20,8 +20,9 @@ export const useIssueList = () => {
   const initialFilters: IssueFilterState = {
     search: '',
     warehousesSlugs: null,
-    companyPersonQuery: '',
-    employeePersonQuery: '',
+    companyPersonId: '',
+    employeePersonId: '',
+    status: '',
     dateRange: null,
   };
   const initialPersons: PersonState = {
@@ -49,11 +50,15 @@ export const useIssueList = () => {
     useGetFilteredUsersQuery(debouncedEmployeePersonSearch, {
       skip: !debouncedEmployeePersonSearch,
     });
+
+  const [deleteIssueProcess, { isLoading: deleteLoading }] = useDeleteIssueProcessMutation();
+  const { data: warehouses = [], isLoading: isLoadingWarehouses } = useGetWarehousesQuery();
+
   const companyPersonsOptions = useMemo<UserAutocompleteOption[]>(
     () =>
       wasCompanyPersonSearched
         ? companyPersons.map((user) => ({
-            value: user.email,
+            value: user.id,
             label: <UserAutocompleteItem key={user.id} user={user} />,
             user,
           }))
@@ -65,7 +70,7 @@ export const useIssueList = () => {
     () =>
       wasEmployeePersonSearched
         ? employeePersons.map((user) => ({
-            value: user.email,
+            value: user.id,
             label: <UserAutocompleteItem key={user.id} user={user} />,
             user,
           }))
@@ -73,13 +78,15 @@ export const useIssueList = () => {
     [wasEmployeePersonSearched, employeePersons]
   );
 
+  const warehousesOptions = warehouses.map((item) => ({
+    value: item.slug,
+    label: item.name,
+  }));
+
   const queryFilters = {
     ...filters,
     search: debouncedSearch,
   };
-
-  const [deleteIssueProcess, { isLoading: deleteLoading }] = useDeleteIssueProcessMutation();
-  const { data: warehouses = [], isLoading: isLoadingWarehouses } = useGetWarehousesQuery();
 
   const handleSelect = (record: IssueProcessListItem, selected: boolean) => {
     if (selected) {
@@ -129,21 +136,77 @@ export const useIssueList = () => {
     }));
   };
 
-  const handleDateRangeChange = (value: [string, string]) => {
+  const handleCompanyPersonChange = (userId: string, option: UserAutocompleteOption) => {
     setFIlters((prev) => ({
       ...prev,
-      dateRange: value,
+      companyPersonId: userId,
     }));
-    updateSearchParam('dateRange', value);
+    setSearchPerson((prev) => ({
+      ...prev,
+      company: option.user.email,
+    })); // todo убрать повторный запрос
+    updateSearchParam('companyPersonId', userId);
+  };
+  const handleEmployeePersonChange = (userId: string, option: UserAutocompleteOption) => {
+    setFIlters((prev) => ({
+      ...prev,
+      employeePersonId: userId,
+    }));
+    setSearchPerson((prev) => ({
+      ...prev,
+      employee: option.user.email,
+    }));
+    updateSearchParam('employeePersonId', userId);
   };
 
-  const warehousesOptions = warehouses.map((item) => ({
-    value: item.slug,
-    label: item.name,
-  }));
+  const handleStatusChange = (status?: string) => {
+    setFIlters((prev) => ({
+      ...prev,
+      status: status ?? '',
+    }));
+    updateSearchParam('status', status ?? '');
+  };
+
+  const handleDateRangeChange = (range: [string, string]) => {
+    setFIlters((prev) => ({
+      ...prev,
+      dateRange: range,
+    }));
+    updateSearchParam('dateRange', range);
+  };
+
+  const handleResetFilter = () => {
+    resetSearchParams();
+    setFIlters(initialFilters);
+    setSearchPerson(initialPersons);
+  };
+  const handleResetCompanyPerson = () => {
+    setFIlters((prev) => ({
+      ...prev,
+      companyPersonId: '',
+    }));
+    setSearchPerson((prev) => ({
+      ...prev,
+      company: '',
+    }));
+    updateSearchParam('companyPersonId', '');
+  };
+
+  const handleResetEmployeePerson = () => {
+    setFIlters((prev) => ({
+      ...prev,
+      employeePersonId: '',
+    }));
+    setSearchPerson((prev) => ({
+      ...prev,
+      employee: '',
+    }));
+    updateSearchParam('employeePersonId', '');
+  };
 
   const data = {
     filters,
+    searchPerson,
     queryFilters,
     selectedRowKeys,
     selectedIssue,
@@ -167,6 +230,12 @@ export const useIssueList = () => {
     onDateRangeChange: handleDateRangeChange,
     onCompanyPersonSearch: handleCompanyPersonSearch,
     onCompanyEmployeeSearch: handleCompanyEmployeeSearch,
+    onCompanyPersonChange: handleCompanyPersonChange,
+    onEmployeePersonChange: handleEmployeePersonChange,
+    onStatusChange: handleStatusChange,
+    onResetFilter: handleResetFilter,
+    onResetCompanyPerson: handleResetCompanyPerson,
+    onResetEmployeePerson: handleResetEmployeePerson,
   };
 
   return {
