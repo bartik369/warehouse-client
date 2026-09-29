@@ -1,6 +1,9 @@
+import { RiUserSearchLine } from 'react-icons/ri';
+
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { IssueActions, IssueUser } from '@/features/issue-device/model/useIssue';
 import { UserAutocomplete } from '@/shared/ui/user-autocomplete/UserAutocomplete';
+import { USER_PLACEHOLDER } from '@/shared/ui/user-autocomplete/constants';
 
 import { UserInfo } from '../../../user-info/UserInfo';
 import { StepLayout } from '../../layout/StepLayout';
@@ -15,6 +18,8 @@ export const SelectUserStep = ({ issueState, actions, userController }: SelectUs
 
   const left = (
     <UserAutocomplete
+      label={USER_PLACEHOLDER}
+      prefix={<RiUserSearchLine size={17} />}
       loading={userController.status.isUsersLoading}
       onSearch={userController.actions.handleChange}
       onOptionSelect={userController.actions.handleSelect}

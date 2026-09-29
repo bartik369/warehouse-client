@@ -1,5 +1,6 @@
 import { DatePicker } from 'antd';
 import clsx from 'clsx';
+import { BiCalendar } from 'react-icons/bi';
 
 import styles from './DateRange.module.scss';
 
@@ -12,6 +13,8 @@ interface DateRangeProps {
 export const DateRange = ({ placeholder, className, onChange }: DateRangeProps) => {
   return (
     <RangePicker
+      prefix={<BiCalendar size={17} />}
+      suffixIcon={false}
       className={clsx(styles.dateRange, className)}
       placeholder={placeholder}
       format="DD.MM.YYYY"

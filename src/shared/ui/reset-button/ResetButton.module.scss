@@ -1,0 +1,12 @@
+@use '@/shared/styles/tokens' as *;
+
+.button {
+  height: $form-control-height;
+  color: var(--blue-500);
+  border-color: var(--blue-400);
+
+  &:not(:disabled):not(.ant-btn-disabled):hover {
+    color: var(--red-500);
+    border-color: var(--red-500);
+  }
+}

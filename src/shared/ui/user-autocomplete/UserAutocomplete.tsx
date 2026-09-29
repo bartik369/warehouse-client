@@ -4,17 +4,18 @@ import { CiSearch } from 'react-icons/ci';
 
 import { Spinner } from '../spinner/Spinner';
 import styles from './UserAutocomplete.module.scss';
-import { SEARCH_PROCESS, USER_NOT_FOUND, USER_PLACEHOLDER } from './constants';
+import { SEARCH_PROCESS, USER_NOT_FOUND } from './constants';
 import { AutocompleteFieldProps } from './types';
 
 export const UserAutocomplete = ({
+  label,
   value,
   prefix,
   options,
   loading,
   searched,
   className,
-  placeholder = USER_PLACEHOLDER,
+  placeholder,
   disabled,
   onChange,
   onOptionSelect,
@@ -30,6 +31,8 @@ export const UserAutocomplete = ({
   ) : searched && options?.length === 0 ? (
     USER_NOT_FOUND
   ) : null;
+
+  const isFilled = value != null && value !== '';
 
   return (
     <div className={clsx(styles.root, className)}>
@@ -54,6 +57,7 @@ export const UserAutocomplete = ({
             onClear={onClear}
           />
         </AutoComplete>
+        {<label className={clsx(styles.label, isFilled && styles.labelActive)}>{label}</label>}
       </div>
     </div>
   );
