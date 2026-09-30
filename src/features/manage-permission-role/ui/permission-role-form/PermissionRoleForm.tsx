@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useWatch } from 'react-hook-form';
 
@@ -15,7 +15,6 @@ import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../../model/constants';
 import { PermissionRoleFormValues, permissionRoleSchema } from '../../model/schema';
 
 interface PermissionRoleFormProps {
@@ -91,7 +90,6 @@ export const PermissionRoleForm = ({
       <ActionsPanel size="large" mode={mode} onApply={submit} onReset={handleClear}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfSelectField<PermissionRoleFormValues>
                 name="roleId"

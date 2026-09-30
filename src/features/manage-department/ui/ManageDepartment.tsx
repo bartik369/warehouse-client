@@ -1,7 +1,9 @@
-import { Flex } from 'antd';
+import { Card, Flex } from 'antd';
 
 import { AdminEntityList } from '@/shared/ui/admin-entity-list/AdminEntityList';
+import { PageHeader } from '@/shared/ui/page-header/PageHeader';
 
+import { DESCRIPTION, TITLE } from '../model/constants';
 import { useManageDepartment } from '../model/useManageDepartment';
 import { DepartmentForm } from './DepartmentForm';
 import styles from './ManageDepartment.module.scss';
@@ -19,19 +21,22 @@ export const ManageDepartment = () => {
     resetId,
   } = useManageDepartment();
   return (
-    <Flex gap={20} className={styles.page}>
-      <div className={styles.formColumn}>
-        <DepartmentForm data={editingDepartment} mode={mode} resetId={resetId} onSave={onSave} />
-      </div>
-      <div className={styles.listColumn}>
-        <AdminEntityList
-          loading={departmentsLoading}
-          fetching={departmentsFetching}
-          items={departments}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </div>
+    <Flex vertical>
+      <PageHeader title={TITLE} description={DESCRIPTION} />
+      <Flex gap={20} className={styles.container}>
+        <Card className={styles.card}>
+          <DepartmentForm data={editingDepartment} mode={mode} resetId={resetId} onSave={onSave} />
+        </Card>
+        <Card className={styles.card}>
+          <AdminEntityList
+            loading={departmentsLoading}
+            fetching={departmentsFetching}
+            items={departments}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </Card>
+      </Flex>
     </Flex>
   );
 };

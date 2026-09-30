@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Role } from '@/entities/role/model/types';
@@ -11,7 +11,6 @@ import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { RoleFormValues, roleSchema } from '../model/schema';
 
 interface RoleFormProps {
@@ -58,7 +57,6 @@ export const RoleForm = ({ data, mode, onSave, resetId }: RoleFormProps) => {
       <ActionsPanel size="large" mode={mode} onApply={submit} onReset={handleClear}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<RoleFormValues> name="name" label={LABELS.name} />
               <RhfTextareaField<RoleFormValues> name="comment" label={LABELS.description} />

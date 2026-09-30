@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Location } from '@/entities/location/model/types';
@@ -14,7 +14,6 @@ import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { WarehouseFormValues, warehouseSchema } from '../model/schema';
 
 interface WarehouseFormProps {
@@ -73,7 +72,6 @@ export const WarehouseForm = ({ data, locations, mode, resetId, onSave }: Wareho
       <ActionsPanel size="large" onReset={handleClear} onApply={submit} mode={mode}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<WarehouseFormValues> name="name" label={LABELS.name} />
               <RhfTextField<WarehouseFormValues>

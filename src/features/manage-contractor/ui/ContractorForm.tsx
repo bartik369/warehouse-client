@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Contractor } from '@/entities/contractor/model/types';
@@ -13,7 +13,6 @@ import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { ContractorFormValues, contractorSchema } from '../model/schema';
 
 interface ContractorFormProps {
@@ -57,14 +56,11 @@ export const ContractorForm = ({ data, mode, onSave, resetId }: ContractorFormPr
     }
   }, [data, reset]);
 
-  console.log(form.getValues());
-
   return (
     <FormProvider {...form}>
       <ActionsPanel size="large" mode={mode} onApply={submit} onReset={handleClear}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<ContractorFormValues> name="name" label={LABELS.name} />
               <RhfTextField<ContractorFormValues>

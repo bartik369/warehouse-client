@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Location } from '@/entities/location/model/types';
@@ -12,7 +12,6 @@ import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { LocationFormValues, locationSchema } from '../model/schema';
 
 interface LocationFormProps {
@@ -58,7 +57,6 @@ export const LocationForm = ({ data, mode, onSave, resetId }: LocationFormProps)
       <ActionsPanel size="large" mode={mode} onReset={handleClear} onApply={submit}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<LocationFormValues> name="name" label={LABELS.name} />
               <RhfTextField<LocationFormValues>

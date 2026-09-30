@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Permission } from '@/entities/permission/model/types';
@@ -11,7 +11,6 @@ import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { PermissionFormValues, permissionSchema } from '../model/schema';
 
 interface PermissionFormProps {
@@ -61,7 +60,6 @@ export const PermissionForm = ({ data, mode, onSave, resetId }: PermissionFormPr
       <ActionsPanel size="large" onApply={submit} onReset={handleClear}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<PermissionFormValues> name="name" label={LABELS.name} />
               <RhfTextareaField<PermissionFormValues> name="comment" label={LABELS.description} />
