@@ -4,6 +4,16 @@
   width: 100%;
   height: $form-control-height;
 
+  &:focus-within {
+    border-color: var(--blue-250) !important;
+    box-shadow: 0 0 0 2px rgba(209, 232, 255, 0.5) !important;
+    outline: none !important;
+  }
+
+  &:hover {
+    border-color: var(--blue-250);
+  }
+
   :global(.ant-picker-input > input) {
     font-size: 12px;
 

@@ -29,8 +29,8 @@ export const getIssueProcessesColumns = ({
 }) => {
   const actionColumn: ColumnType<IssueProcessListItem> = {
     key: 'icon',
-    width: 60,
-    fixed: true,
+    width: 64,
+    fixed: 'right',
     onCell: () => ({
       style: {
         paddingLeft: 0,
