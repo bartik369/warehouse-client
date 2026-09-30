@@ -8,7 +8,7 @@ const { RangePicker } = DatePicker;
 interface DateRangeProps {
   placeholder?: [string, string];
   className?: string;
-  onChange: (value: [string, string]) => void;
+  onChange: (value: [string, string] | null) => void;
 }
 export const DateRange = ({ placeholder, className, onChange }: DateRangeProps) => {
   return (
@@ -19,6 +19,10 @@ export const DateRange = ({ placeholder, className, onChange }: DateRangeProps) 
       placeholder={placeholder}
       format="DD.MM.YYYY"
       onChange={(dates) => {
+        if (!dates?.[0] || !dates[1]) {
+          onChange(null);
+          return;
+        }
         onChange([dates?.[0]?.format('YYYY-MM-DD') ?? '', dates?.[1]?.format('YYYY-MM-DD') ?? '']);
       }}
     />

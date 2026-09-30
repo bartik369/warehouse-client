@@ -144,7 +144,7 @@ export const useIssueList = () => {
     setSearchPerson((prev) => ({
       ...prev,
       company: option.user.email,
-    })); // todo убрать повторный запрос
+    }));
     updateSearchParam('companyPersonId', userId);
   };
   const handleEmployeePersonChange = (userId: string, option: UserAutocompleteOption) => {
@@ -167,7 +167,7 @@ export const useIssueList = () => {
     updateSearchParam('status', status ?? '');
   };
 
-  const handleDateRangeChange = (range: [string, string]) => {
+  const handleDateRangeChange = (range: [string, string] | null) => {
     setFIlters((prev) => ({
       ...prev,
       dateRange: range,
