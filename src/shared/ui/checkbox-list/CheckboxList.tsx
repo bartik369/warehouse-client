@@ -19,14 +19,14 @@ export const CheckboxList = ({
   allowClear = false,
   mode,
   prefix,
-  width = 180,
+  width,
   ...props
 }: CheckboxListProps) => {
   const isFilled =
     mode === 'multiple' ? Array.isArray(value) && value.length > 0 : value != null && value !== '';
 
   return (
-    <div className={clsx(styles.root, className)} style={{ width }}>
+    <div className={clsx(styles.root, className)} style={width ? { width } : undefined}>
       <div className={styles.selectWrapper}>
         <Select
           {...props}

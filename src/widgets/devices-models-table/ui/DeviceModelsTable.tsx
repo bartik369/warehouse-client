@@ -35,6 +35,7 @@ export const DeviceModelsTable = ({
       loading={loading}
       rowKey="id"
       size="small"
+      scroll={{ x: 'max-content' }}
       className={tableStyles.devicesTable}
       bordered={false}
       rowClassName={(_, index) => (index % 2 !== 0 ? tableStyles.evenRow : tableStyles.oddRow)}
