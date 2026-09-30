@@ -1,4 +1,4 @@
-import { Flex } from 'antd';
+import { Card, Flex } from 'antd';
 
 import { PageHeader } from '@/shared/ui/page-header/PageHeader';
 import { useModelTableController } from '@/widgets/devices-models-table/model/useModelTableController';
@@ -36,7 +36,31 @@ export const ManageModel = () => {
         title="Модели устройств"
         description="Упаравление моделями устройств. Добавление и редактирование."
       />
-      <Flex vertical gap={30}>
+      <div className={styles.container}>
+        <Card className={styles.card}>
+          <Flex vertical gap={20}>
+            <ModelFilters
+              filters={filters}
+              manufacturersOptions={manufacturersOptions}
+              typesOptions={typesOptions}
+              onManufacturerChange={onManufacturerChange}
+              onTypeChange={onTypeChange}
+              onResetFilter={onResetFilter}
+              onSearch={onSearch}
+            />
+            <DeviceModelsTable
+              page={page}
+              totalCount={totalCount}
+              limit={limit}
+              data={models}
+              loading={isLoading}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              setPage={setPage}
+              setLimit={setLimit}
+            />
+          </Flex>
+        </Card>
         <Flex gap={20}>
           <div className={styles.form}>
             <ModelForm
@@ -50,27 +74,7 @@ export const ManageModel = () => {
             />
           </div>
         </Flex>
-        <ModelFilters
-          filters={filters}
-          manufacturersOptions={manufacturersOptions}
-          typesOptions={typesOptions}
-          onManufacturerChange={onManufacturerChange}
-          onTypeChange={onTypeChange}
-          onResetFilter={onResetFilter}
-          onSearch={onSearch}
-        />
-        <DeviceModelsTable
-          page={page}
-          totalCount={totalCount}
-          limit={limit}
-          data={models}
-          loading={isLoading}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          setPage={setPage}
-          setLimit={setLimit}
-        />
-      </Flex>
+      </div>
     </Flex>
   );
 };

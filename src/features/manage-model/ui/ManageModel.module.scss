@@ -1,3 +1,16 @@
 .form {
   width: 800px;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 24px;
+  width: 100%;
+
+  .card {
+    :global(.ant-card-body) {
+      padding: 15px;
+    }
+  }
+}

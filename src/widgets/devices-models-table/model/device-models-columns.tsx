@@ -1,4 +1,5 @@
 import { Flex } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { MdOutlineDelete } from 'react-icons/md';
 
@@ -12,7 +13,7 @@ export const DeviceModelsColumns = ({
 }: {
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
-}) => [
+}): ColumnsType<Model> => [
   {
     key: 'pick',
     title: 'Изображение',
@@ -59,6 +60,7 @@ export const DeviceModelsColumns = ({
   {
     key: 'actions',
     width: 50,
+    fixed: 'right',
     render: (record: Model) => {
       return (
         <Flex gap={10}>
