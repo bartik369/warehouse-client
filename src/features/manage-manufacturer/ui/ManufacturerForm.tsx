@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { FormMode } from '@/shared/types/form';
@@ -11,7 +11,6 @@ import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../model/constants';
 import { ManufacturerFormValues, manufacturerSchema } from '../model/schema';
 import { Manufacturer } from '../model/types';
 
@@ -60,7 +59,6 @@ export const ManufacturerForm = ({ data, mode, onSave, resetId }: ManufacturerFo
       <ActionsPanel size="large" onReset={handleClear} onApply={submit} mode={mode}>
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfTextField<ManufacturerFormValues> name="name" label={LABELS.name} />
               <RhfTextField<ManufacturerFormValues>

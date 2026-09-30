@@ -1,7 +1,9 @@
-import { Empty, Flex } from 'antd';
+import { Card, Empty, Flex } from 'antd';
 
+import { PageHeader } from '@/shared/ui/page-header/PageHeader';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 
+import { DESCRIPTION, TITLE } from '../model/constants';
 import { useManageAccess } from '../model/useManageAccess';
 import styles from './ManageAccess.module.scss';
 import { AccessForm } from './form/AccessForm';
@@ -28,36 +30,40 @@ export const ManageAccess = () => {
     onDelete,
   } = useManageAccess();
   return (
-    <Flex gap={20} className={styles.page} wrap>
-      <div className={styles.formColumn}>
-        <AccessForm
-          mode={mode}
-          selectedUser={selectedUser}
-          roles={roles}
-          userRoles={userRoles?.roles}
-          userListOptions={userListOptions}
-          loading={userListLoading}
-          grantLoading={isGrantLoading}
-          searched={wasSearched}
-          onSave={onSave}
-          onOptionSelect={onSelect}
-          onUserSearch={onUserSearch}
-          onUserClear={onUserClear}
-        />
-      </div>
-      <div className={styles.listColumn}>
+    <Flex vertical>
+      <PageHeader title={TITLE} description={DESCRIPTION} />
+      <Flex className={styles.container}>
+        <Card className={styles.card}>
+          <AccessForm
+            mode={mode}
+            selectedUser={selectedUser}
+            roles={roles}
+            userRoles={userRoles?.roles}
+            userListOptions={userListOptions}
+            loading={userListLoading}
+            grantLoading={isGrantLoading}
+            searched={wasSearched}
+            onSave={onSave}
+            onOptionSelect={onSelect}
+            onUserSearch={onUserSearch}
+            onUserClear={onUserClear}
+          />
+        </Card>
+
         {rolesLoading ? (
           <Spinner />
         ) : selectedUser && isSuccess ? (
-          <UserAccessCard
-            deletingId={deletingId}
-            userRoles={userRoles?.roles ?? []}
-            user={selectedUser}
-            loading={isRevokeLoading}
-            onDelete={onDelete}
-          />
+          <Card className={styles.card}>
+            <UserAccessCard
+              deletingId={deletingId}
+              userRoles={userRoles?.roles ?? []}
+              user={selectedUser}
+              loading={isRevokeLoading}
+              onDelete={onDelete}
+            />
+          </Card>
         ) : null}
-      </div>
+      </Flex>
     </Flex>
   );
 };

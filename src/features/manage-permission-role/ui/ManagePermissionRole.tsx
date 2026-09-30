@@ -1,5 +1,8 @@
-import { Flex } from 'antd';
+import { Card, Flex } from 'antd';
 
+import { PageHeader } from '@/shared/ui/page-header/PageHeader';
+
+import { DESCRIPTION, TITLE } from '../model/constants';
 import { useManagePermissionRole } from '../model/useManagePermissionRole';
 import styles from './ManagePermissionRole.module.scss';
 import { PermissionRoleForm } from './permission-role-form/PermissionRoleForm';
@@ -24,31 +27,34 @@ export const ManagePermissionRole = () => {
     onDelete,
   } = useManagePermissionRole();
   return (
-    <Flex gap={20} className={styles.page}>
-      <div className={styles.formColumn}>
-        <PermissionRoleForm
-          roles={roles}
-          selectedRole={selectedPermissionRoles}
-          warehouseOptions={warehouseOptions}
-          roleOptions={roleOptions}
-          locationOptions={locationOptions}
-          permissionOptions={permissionOptions}
-          permissions={permissions}
-          permissionRoles={permissionRoles}
-          mode={mode}
-          resetId={resetId}
-          onSave={onSave}
-        />
-      </div>
-      <div className={styles.listColumn}>
-        <PermissionList
-          loading={permissionRolesLoading}
-          fetching={permissionRolesFetching}
-          roles={permissionRoles}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </div>
+    <Flex vertical>
+      <PageHeader title={TITLE} description={DESCRIPTION} />
+      <Flex className={styles.container}>
+        <Card className={styles.card}>
+          <PermissionRoleForm
+            roles={roles}
+            selectedRole={selectedPermissionRoles}
+            warehouseOptions={warehouseOptions}
+            roleOptions={roleOptions}
+            locationOptions={locationOptions}
+            permissionOptions={permissionOptions}
+            permissions={permissions}
+            permissionRoles={permissionRoles}
+            mode={mode}
+            resetId={resetId}
+            onSave={onSave}
+          />
+        </Card>
+        <Card className={styles.card}>
+          <PermissionList
+            loading={permissionRolesLoading}
+            fetching={permissionRolesFetching}
+            roles={permissionRoles}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </Card>
+      </Flex>
     </Flex>
   );
 };

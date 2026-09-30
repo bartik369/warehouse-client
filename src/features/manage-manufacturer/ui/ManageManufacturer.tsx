@@ -1,7 +1,9 @@
-import { Flex } from 'antd';
+import { Card, Flex } from 'antd';
 
 import { AdminEntityList } from '@/shared/ui/admin-entity-list/AdminEntityList';
+import { PageHeader } from '@/shared/ui/page-header/PageHeader';
 
+import { DESCRIPTION, TITLE } from '../model/constants';
 import { useManageManufacturer } from '../model/useManageManufacturer';
 import styles from './ManageManufacturer.module.scss';
 import { ManufacturerForm } from './ManufacturerForm';
@@ -19,24 +21,27 @@ export const ManageManufacturer = () => {
     resetId,
   } = useManageManufacturer();
   return (
-    <Flex gap={20} className={styles.page}>
-      <div className={styles.formColumn}>
-        <ManufacturerForm
-          data={editingManufacturer}
-          mode={mode}
-          resetId={resetId}
-          onSave={onSave}
-        />
-      </div>
-      <div className={styles.listColumn}>
-        <AdminEntityList
-          loading={manufacturersLoading}
-          fetching={manufacturersFetching}
-          items={manufacturers}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      </div>
+    <Flex vertical>
+      <PageHeader title={TITLE} description={DESCRIPTION} />
+      <Flex className={styles.container}>
+        <Card className={styles.card}>
+          <ManufacturerForm
+            data={editingManufacturer}
+            mode={mode}
+            resetId={resetId}
+            onSave={onSave}
+          />
+        </Card>
+        <Card className={styles.card}>
+          <AdminEntityList
+            loading={manufacturersLoading}
+            fetching={manufacturersFetching}
+            items={manufacturers}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        </Card>
+      </Flex>
     </Flex>
   );
 };

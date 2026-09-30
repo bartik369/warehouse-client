@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Typography } from 'antd';
+import { Flex } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { LuKeyRound } from 'react-icons/lu';
@@ -16,7 +16,6 @@ import { RhfUserAutocomplete } from '@/shared/ui/form-fields/RhfUserAutocomplete
 import { UserAutocompleteOption } from '@/shared/ui/user-autocomplete/types';
 import { LABELS } from '@/utils/constants/ui/labels';
 
-import { TITLE } from '../../model/constants';
 import { AccessFromValues, accessSchema } from '../../model/schema';
 
 interface AccessFormProps {
@@ -103,12 +102,11 @@ export const AccessForm = ({
       >
         <form onSubmit={submit}>
           <Flex vertical gap={24}>
-            <Typography.Title level={3}>{TITLE}</Typography.Title>
             <Flex vertical gap={10}>
               <RhfUserAutocomplete<AccessFromValues>
                 prefix={<HiOutlineEnvelope size={16} />}
                 name="userId"
-                label={LABELS.name}
+                label="Данные пользоваля(например, petrov)"
                 options={userListOptions}
                 loading={loading}
                 searched={searched}

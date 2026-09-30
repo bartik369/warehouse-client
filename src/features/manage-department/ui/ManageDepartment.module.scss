@@ -1,14 +1,19 @@
-.page {
-  height: 100%;
-  min-width: 0;
-}
+.container {
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  > :nth-child(1) {
+    flex: 1 1 300px;
+    max-width: 400px;
+  }
+  > :nth-child(2) {
+    flex: 1 1 auto;
+    max-width: 380px;
+  }
 
-.formColumn {
-  flex: 0 0 360px;
-  min-width: 0;
-}
-
-.listColumn {
-  flex: 1;
-  min-width: 0;
+  .card {
+    :global(.ant-card-body) {
+      padding: 15px;
+    }
+  }
 }
