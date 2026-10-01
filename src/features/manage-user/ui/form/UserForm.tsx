@@ -34,15 +34,29 @@ export const UserForm = ({
   locationsLoading,
   departmentsLoading,
 }: UserFormProps) => {
+  const initialValues: CreateUserFormValues = {
+    firstNameRu: '',
+    lastNameRu: '',
+    firstNameEn: '',
+    lastNameEn: '',
+    userName: '',
+    email: '',
+    workId: '',
+    departmentId: '',
+    locationId: '',
+    isActive: false,
+  };
   const form = useForm({
     resolver: zodResolver(createUserSchema),
+    defaultValues: initialValues,
   });
+
   const { reset } = form;
 
   const dataSources = { departments: departmentsOptions, locations: locationsOptions };
 
   const handleReset = () => {
-    reset();
+    reset(initialValues);
   };
 
   const onSubmit = () => {

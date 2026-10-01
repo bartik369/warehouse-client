@@ -1,6 +1,7 @@
-import { Empty } from 'antd';
+import { Empty, Flex } from 'antd';
 import { MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
 
+import { IconButton } from '../icon-button/IconButton';
 import { Spinner } from '../spinner/Spinner';
 import styles from './AdminEntityList.module.scss';
 
@@ -42,14 +43,15 @@ export const AdminEntityList = <T extends AdminEntityListItem>({
                 <div className={styles.name}>{item.name}</div>
                 {item.comment && <div className={styles.description}>{item.comment}</div>}
               </div>
-              <div className={styles.actions}>
-                <button type="button" className={styles.btn} onClick={() => onEdit?.(item.id)}>
-                  <MdOutlineEdit />
-                </button>
-                <button type="button" className={styles.btn} onClick={() => onDelete?.(item.id)}>
-                  <MdOutlineDelete />
-                </button>
-              </div>
+              <Flex gap={5}>
+                <IconButton icon={MdOutlineEdit} iconSize={14} onClick={() => onEdit?.(item.id)} />
+                <IconButton
+                  icon={MdOutlineDelete}
+                  iconSize={14}
+                  variant="danger"
+                  onClick={() => onDelete?.(item.id)}
+                />
+              </Flex>
             </li>
           ))}
         </ul>

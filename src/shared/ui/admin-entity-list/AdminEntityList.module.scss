@@ -36,23 +36,6 @@
         overflow: hidden;
       }
     }
-    .actions {
-      display: flex;
-      align-items: center;
-      .btn {
-        display: flex;
-        align-items: center;
-        font-size: 19px;
-        color: var(--gray-600);
-        margin-left: 15px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        &:hover {
-          color: var(--blue-300);
-        }
-      }
-    }
   }
   .spinner {
     display: flex;
