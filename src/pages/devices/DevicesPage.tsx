@@ -13,9 +13,9 @@ import { FiltersContent } from '@/features/filter-devices/ui/content/FiltersCont
 import { DeviceFilters } from '@/features/filter-devices/ui/filter/DeviceFilters';
 import { useAppDispatch } from '@/hooks/redux/useRedux';
 import { activeFiltersCount } from '@/shared/lib/activeFiltersCount';
+import { ActionButton } from '@/shared/ui/action-button/ActionButton';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import Search from '@/shared/ui/search/Search';
-import { StartProcessButton } from '@/shared/ui/start-process-button/StartProcessButton';
 import { resetDevice, resetStatus } from '@/store/slices/deviceSlice';
 import { setSelectedDevice } from '@/store/slices/issueSlice';
 import { useDeviceTableController } from '@/widgets/devices-table/model/useDeviceTableController';
@@ -79,8 +79,9 @@ const DevicesPage = () => {
             </Typography.Title>
             <span className={styles.description}>Реестр всех устройств в выбраном городе</span>
           </Flex>
-          <StartProcessButton
+          <ActionButton
             title="Добавить устройство"
+            variant="apply"
             onClick={() => navigate('/admin/add-device')}
             icon={IoAdd}
           />

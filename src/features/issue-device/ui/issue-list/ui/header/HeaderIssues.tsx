@@ -10,7 +10,6 @@ import { IssueProcessListItem, IssueProcessStatus } from '@/features/issue-devic
 import { PAGE_TITLES } from '@/shared/config/page-titles';
 import { ActionButton } from '@/shared/ui/action-button/ActionButton';
 import { ISSUE_LIST_DESCRIPTION } from '@/shared/ui/action-button/constants';
-import { StartProcessButton } from '@/shared/ui/start-process-button/StartProcessButton';
 
 import { DELETE_ISSUE_DESCRIPTION, TITLES } from '../../model/constants';
 import styles from './HeaderIssues.module.scss';
@@ -38,7 +37,7 @@ export const HeaderIssues = ({ selectedIssue, onStart, onDelete }: HeaderIssuesP
             <ActionButton
               title="Завершить"
               variant="apply"
-              iconSize={18}
+              iconSize={16}
               icon={AiOutlineFileDone}
               onClick={() => navigate(`/issues/${selectedIssue.id}/edit`)}
             />
@@ -65,7 +64,12 @@ export const HeaderIssues = ({ selectedIssue, onStart, onDelete }: HeaderIssuesP
             }
           />
         )}
-        <StartProcessButton title="Выдать устройства" onClick={onStart} icon={RxOpenInNewWindow} />
+        <ActionButton
+          title="Выдать устройства"
+          variant="apply"
+          onClick={onStart}
+          icon={RxOpenInNewWindow}
+        />
       </Flex>
     </Flex>
   );
