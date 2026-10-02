@@ -18,6 +18,11 @@ export type PermissionRole = {
   comment?: string;
 };
 
+export type SortedRolePermissionsRes = {
+  items: PermissionRole[];
+  total: number;
+};
+
 export type UserRoleAssignment = PermissionRole & {
   assignmentId: string;
 };

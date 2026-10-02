@@ -24,11 +24,11 @@ export const useManagePermissionRole = () => {
   const { data: locations = [] } = useGetLocationsQuery();
   const { data: permissions = [] } = useGetPermissionsQuery();
   const { data: warehouses = [] } = useGetWarehousesQuery();
-  const {
-    data: permissionRoles = [],
-    isFetching: permissionRolesFetching,
-    isLoading: permissionRolesLoading,
-  } = useGetPermissionsRolesQuery();
+  // const {
+  //   data: permissionRoles = [],
+  //   isFetching: permissionRolesFetching,
+  //   isLoading: permissionRolesLoading,
+  // } = useGetPermissionsRolesQuery();
   const [createPermissionRole] = useCreatePermissionRoleMutation();
   const [updatePermissionRole] = useUpdatePermissionRoleMutation();
 
@@ -96,9 +96,9 @@ export const useManagePermissionRole = () => {
     locationOptions,
     permissionOptions,
     permissions,
-    permissionRoles,
-    permissionRolesFetching,
-    permissionRolesLoading,
+    // permissionRoles,
+    // permissionRolesFetching,
+    // permissionRolesLoading,
     onSave: handleSubmit,
     onEdit: handleGetPermissionRole,
     onDelete: handleDeletePermissionRole,

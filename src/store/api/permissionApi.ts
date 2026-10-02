@@ -1,7 +1,9 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, retry } from '@reduxjs/toolkit/query/react';
+import { keyof } from 'zod';
 
-import { PermissionRole } from '@/entities/permission-role/model/types';
+import { PermissionRole, SortedRolePermissionsRes } from '@/entities/permission-role/model/types';
 import { Permission } from '@/entities/permission/model/types';
+import { RolePermissionsQueryParams } from '@/shared/types/api';
 import { CheckedPermissionOptions } from '@/types/content';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
@@ -72,14 +74,22 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission'],
     }),
-    getPermissionsRoles: build.query<PermissionRole[], void>({
-      query: () => ({
-        url: `${import.meta.env.VITE_PERMISSIONS_ROLES}`,
-      }),
+    getPermissionsRoles: build.query<SortedRolePermissionsRes, RolePermissionsQueryParams>({
+      query: (queryParams) => {
+        const { ...params } = queryParams;
+        const urlParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          if (value == null) return;
+          urlParams.append(key, String(value));
+        });
+        return {
+          url: `${import.meta.env.VITE_PERMISSIONS_ROLES}?${urlParams}`,
+        };
+      },
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ roleName, warehouseName, locationName }) => ({
+              ...result.items.map(({ roleName, warehouseName, locationName }) => ({
                 type: 'PermissionRole' as const,
                 id: `${roleName}_${locationName}_${warehouseName || 'null'}`,
               })),

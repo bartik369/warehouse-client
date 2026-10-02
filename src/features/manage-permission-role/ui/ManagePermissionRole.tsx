@@ -4,6 +4,7 @@ import { PageHeader } from '@/shared/ui/page-header/PageHeader';
 
 import { DESCRIPTION, TITLES } from '../model/constants';
 import { useManagePermissionRole } from '../model/useManagePermissionRole';
+import { useRolePermissionsTableController } from '../model/useRolePermissionsTableController';
 import styles from './ManagePermissionRole.module.scss';
 import { PermissionsRoleForm } from './permission-role-form/PermissionsRoleForm';
 import { PermissionsRoleTable } from './permission-role-table/PermissionRoleTable';
@@ -19,13 +20,22 @@ export const ManagePermissionRole = () => {
     locationOptions,
     permissionOptions,
     permissions,
-    permissionRoles,
-    permissionRolesFetching,
-    permissionRolesLoading,
     onSave,
     onEdit,
     onDelete,
   } = useManagePermissionRole();
+
+  const {
+    permissionRoles,
+    page,
+    limit,
+    totalCount,
+    setPage,
+    setLimit,
+    permissionRolesLoading,
+    permissionRolesFetching,
+  } = useRolePermissionsTableController();
+
   return (
     <Flex vertical>
       <PageHeader title={TITLES.MANAGE_PERMISSIONS_ROLE} description={DESCRIPTION} />
@@ -38,8 +48,13 @@ export const ManagePermissionRole = () => {
             typography="small"
             data={permissionRoles}
             loading={permissionRolesLoading}
+            limit={limit}
+            page={page}
+            totalCount={totalCount}
             onEdit={onEdit}
             onDelete={onDelete}
+            setLimit={setLimit}
+            setPage={setPage}
           />
         </Card>
         <Card className={styles.card}>
