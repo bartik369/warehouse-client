@@ -43,6 +43,7 @@ export const ManageUser = () => {
             <CardTitle title="Список пользователей" icon={<TbUsers size={16} />} />
             <UserFilters filters={filters} onSearch={onSearch} />
             <UsersTable
+              typography="small"
               page={page}
               limit={limit}
               users={users}

@@ -11,6 +11,11 @@ export type UserQueryParams = {
   limit: number;
   search: string;
 };
+
+export type RolePermissionsQueryParams = {
+  page: number;
+  limit: number;
+};
 export type IssueProcessQueryParams = {
   page: number;
   limit: number;

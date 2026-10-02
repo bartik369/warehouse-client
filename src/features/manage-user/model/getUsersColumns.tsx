@@ -6,7 +6,7 @@ import { IconButton } from '@/shared/ui/icon-button/IconButton';
 
 export const getUsersColumns = ({ onEdit }: { onEdit: (id: string) => void }) => [
   {
-    key: 'дфые',
+    key: 'user',
     title: 'Пользователь',
     width: 200,
     render: (record: UserWithRelations) => {

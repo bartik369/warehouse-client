@@ -1,8 +1,12 @@
 import { User } from '@/entities/user/model/types';
 
+export const USER_ROLES = ['manager', 'operator', 'viewer'] as const;
+
+export type UserRole = (typeof USER_ROLES)[number];
+
 export type PermissionRole = {
   roleId: string;
-  roleName?: string;
+  roleName: UserRole;
   permissionIds: string[];
   permissionsName?: string[];
   warehouseId?: string;
@@ -14,17 +18,14 @@ export type PermissionRole = {
   comment?: string;
 };
 
+export type SortedRolePermissionsRes = {
+  items: PermissionRole[];
+  total: number;
+};
+
 export type UserRoleAssignment = PermissionRole & {
   assignmentId: string;
 };
-
-// export type UserRolesList = {
-//   id: string;
-//   locationName: string;
-//   warehouseName: string;
-//   roleName: string;
-//   permissionsName: string[];
-// };
 
 export type UserRolesResponse = {
   user: Partial<User>;

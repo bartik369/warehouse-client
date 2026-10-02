@@ -2,15 +2,18 @@ import { useState } from 'react';
 
 import { ConfigProvider, Table, TableProps } from 'antd';
 import { TableRowSelection } from 'antd/es/table/interface';
+import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
 import { Device } from '@/entities/device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
+import { TableTypography } from '@/types/typography';
 
 import { getDevicesColumns } from '../model/devices.columns';
 
 interface DeviceTableProps {
+  typography: TableTypography;
   devices: Device[];
   page: number;
   limit: number;
@@ -22,6 +25,7 @@ interface DeviceTableProps {
 }
 
 export const DevicesTable = ({
+  typography,
   devices,
   page,
   limit,
@@ -72,7 +76,7 @@ export const DevicesTable = ({
     <Table
       loading={isLoading}
       showSorterTooltip={false}
-      className={tableStyles.devicesTable}
+      className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       rowKey="id"
       size="small"
       bordered={false}

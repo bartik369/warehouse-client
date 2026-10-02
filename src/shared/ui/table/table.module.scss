@@ -6,17 +6,38 @@
   background-color: #ffffff;
 }
 
+.small {
+  --table-header-font-size: 11px;
+  --table-header-line-height: 16px;
+  --table-cell-font-size: 12px;
+  --table-cell-line-height: 18px;
+}
+
+.medium {
+  --table-header-font-size: 12px;
+  --table-header-line-height: 18px;
+  --table-cell-font-size: 13px;
+  --table-cell-line-height: 20px;
+}
+
+.large {
+  --table-header-font-size: 14px;
+  --table-header-line-height: 22px;
+  --table-cell-font-size: 15px;
+  --table-cell-line-height: 24px;
+}
+
 .devicesTable {
   :global(.ant-table-thead > tr > th) {
-    font-size: 12px;
+    font-size: var(--table-header-font-size);
     font-weight: 600;
-    line-height: 18px;
+    line-height: var(--table-header-line-height);
   }
 
   :global(.ant-table-tbody > tr > td) {
-    font-size: 13px;
+    font-size: var(--table-cell-font-size);
     font-weight: 500;
-    line-height: 20px;
+    line-height: var(--table-cell-line-height);
   }
 
   :global(.ant-checkbox-checked .ant-checkbox-inner) {

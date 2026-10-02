@@ -8,7 +8,10 @@ import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { FormMode } from '@/shared/types/form';
 import { UserAutocompleteItem } from '@/shared/ui/user-autocomplete/UserAutocompleteItem';
 import { UserAutocompleteOption } from '@/shared/ui/user-autocomplete/types';
-import { useGetPermissionsRolesQuery } from '@/store/api/permissionApi';
+import {
+  useGetPermissionsRolesQuery,
+  useGetRolesPermissionsOptionsQuery,
+} from '@/store/api/permissionApi';
 import {
   useGetUserRolesQuery,
   useGrantRoleMutation,
@@ -19,7 +22,7 @@ import { useGetFilteredUsersQuery } from '@/store/api/userApi';
 export const useManageAccess = () => {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const { data: permissionRoles = [] } = useGetPermissionsRolesQuery();
+  const { data: permissionRoles = [] } = useGetRolesPermissionsOptionsQuery();
   const [revokeRole, { isLoading: isRevokeLoading }] = useRevokeRoleMutation();
   const [grantRoles, { isLoading: isGrantLoading }] = useGrantRoleMutation();
   const [searchValue, setSearchValue] = useState('');

@@ -1,11 +1,14 @@
 import { Table } from 'antd';
+import clsx from 'clsx';
 
 import { Model } from '@/entities/model/model/types';
 import tableStyles from '@/shared/ui/table/table.module.scss';
+import { TableTypography } from '@/types/typography';
 
 import { DeviceModelsColumns } from '../model/device-models-columns';
 
 interface DeviceModelsTableProps {
+  typography: TableTypography;
   totalCount?: number;
   page: number;
   limit: number;
@@ -17,6 +20,7 @@ interface DeviceModelsTableProps {
   setLimit: (limit: number) => void;
 }
 export const DeviceModelsTable = ({
+  typography,
   totalCount,
   page,
   limit,
@@ -36,7 +40,7 @@ export const DeviceModelsTable = ({
       rowKey="id"
       size="small"
       scroll={{ x: 'max-content' }}
-      className={tableStyles.devicesTable}
+      className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       bordered={false}
       rowClassName={(_, index) => (index % 2 !== 0 ? tableStyles.evenRow : tableStyles.oddRow)}
       pagination={{

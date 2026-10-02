@@ -139,6 +139,7 @@ const DevicesPage = () => {
         </Flex>
       </Flex>
       <DevicesTable
+        typography="medium"
         isLoading={isLoading || isFetching}
         devices={devices}
         page={page}

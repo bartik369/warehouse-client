@@ -1,45 +1,45 @@
 import { Table } from 'antd';
 import clsx from 'clsx';
 
-import { UserWithRelations } from '@/entities/user/model/types';
+import { PermissionRole } from '@/entities/permission-role/model/types';
 import tableStyles from '@/shared/ui/table/table.module.scss';
 import { TableTypography } from '@/types/typography';
 
-import { getUsersColumns } from '../../model/getUsersColumns';
+import { getPermissionsRoleColumns } from '../../model/getPermissionsRoleColumns';
 
-interface UsersTableProps {
+interface PermissionsRoleTableProps {
   typography: TableTypography;
-  users: UserWithRelations[];
+  data: PermissionRole[];
   limit: number;
   page: number;
   totalCount: number;
   loading: boolean;
   setLimit: (limit: number) => void;
   setPage: (page: number) => void;
-  onEdit: (id: string) => void;
+  onEdit?: (rolePermissions: PermissionRole) => void;
+  onDelete?: (id: string) => void;
 }
-
-export const UsersTable = ({
+export const PermissionsRoleTable = ({
   typography,
-  users,
-  loading,
+  data,
   limit,
   page,
   totalCount,
+  loading,
   setLimit,
   setPage,
   onEdit,
-}: UsersTableProps) => {
-  const columns = getUsersColumns({ onEdit });
-
+  onDelete,
+}: PermissionsRoleTableProps) => {
+  const columns = getPermissionsRoleColumns({ onEdit, onDelete });
   return (
-    <Table<UserWithRelations>
+    <Table<PermissionRole>
       columns={columns}
-      dataSource={users}
+      dataSource={data}
       loading={loading}
       scroll={{ x: 'max-content' }}
       rowKey="id"
-      size="small"
+      size="middle"
       className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       bordered={false}
       rowClassName={(_, index) => (index % 2 !== 0 ? tableStyles.evenRow : tableStyles.oddRow)}
