@@ -31,7 +31,7 @@ interface PermissionRoleFormProps {
   onSave: (data: PermissionRoleFormValues) => Promise<void>;
 }
 
-export const PermissionRoleForm = ({
+export const PermissionsRoleForm = ({
   roles,
   permissions,
   selectedRole,

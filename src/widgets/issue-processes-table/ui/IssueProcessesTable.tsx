@@ -1,16 +1,19 @@
 import type { Key } from 'react';
 
 import { ConfigProvider, Table } from 'antd';
+import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 
 import { IssueProcessListItem } from '@/features/issue-device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
 import { ROUTES } from '@/shared/config/routes/routes';
 import tableStyles from '@/shared/ui/table/table.module.scss';
+import { TableTypography } from '@/types/typography';
 
 import { getIssueProcessesColumns } from '../model/issue-processes.columns';
 
 interface IssueProcessesTableProps {
+  typography: TableTypography;
   page: number;
   limit: number;
   totalCount: number;
@@ -24,6 +27,7 @@ interface IssueProcessesTableProps {
 }
 
 export const IssueProcessesTable = ({
+  typography,
   page,
   limit,
   totalCount,
@@ -55,7 +59,7 @@ export const IssueProcessesTable = ({
   const IssueProcessTable = (
     <Table
       loading={loading}
-      className={tableStyles.devicesTable}
+      className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       rowKey="id"
       size="small"
       scroll={{ x: 'max-content' }}

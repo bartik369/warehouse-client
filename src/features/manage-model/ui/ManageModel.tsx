@@ -49,6 +49,7 @@ export const ManageModel = () => {
               onSearch={onSearch}
             />
             <DeviceModelsTable
+              typography="small"
               page={page}
               totalCount={totalCount}
               limit={limit}
