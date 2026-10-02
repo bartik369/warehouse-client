@@ -74,6 +74,12 @@ export const permissionApi = createApi({
       }),
       invalidatesTags: ['Permission'],
     }),
+    getRolesPermissionsOptions: build.query<PermissionRole[], void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_PERMISSIONS_ROLES_OPTIONS}`,
+      }),
+      providesTags: [{ type: 'PermissionRole', id: 'LIST' }],
+    }),
     getPermissionsRoles: build.query<SortedRolePermissionsRes, RolePermissionsQueryParams>({
       query: (queryParams) => {
         const { ...params } = queryParams;
@@ -125,4 +131,5 @@ export const {
   useCreatePermissionRoleMutation,
   useUpdatePermissionRoleMutation,
   useGetPermissionsRolesQuery,
+  useGetRolesPermissionsOptionsQuery,
 } = permissionApi;
