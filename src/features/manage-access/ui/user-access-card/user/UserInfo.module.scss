@@ -3,12 +3,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 45px;
-    width: 45px;
-    color: var(--white);
-    font-size: 22px;
+    height: 36px;
+    width: 36px;
+    color: var(--blue-600);
+    font-size: 20px;
     border-radius: 50%;
-    background-color: var(--blue-600);
+    background-color: var(--blue-50);
   }
 }
 .name {
@@ -16,7 +16,7 @@
     display: flex;
     gap: 5px;
     :global(.ant-typography) {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       line-height: 1;
     }
@@ -25,7 +25,7 @@
     display: flex;
     gap: 3px;
     :global(.ant-typography) {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--gray-600);
     }
   }
@@ -38,7 +38,7 @@
     font-size: 12px;
   }
   .value {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 600;
   }
 }

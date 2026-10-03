@@ -69,7 +69,6 @@ export const RoleAssignmentSelect = ({
               <Typography.Text className={styles.name}>{role.roleName}</Typography.Text>
               {role.warehouseName && (
                 <>
-                  {' '}
                   <Typography.Text className={styles.warehouse}>
                     {role.warehouseName}
                   </Typography.Text>
@@ -77,7 +76,6 @@ export const RoleAssignmentSelect = ({
               )}
               {role.locationName && (
                 <>
-                  {' '}
                   <Typography.Text className={styles.city}>{role.locationName}</Typography.Text>
                 </>
               )}

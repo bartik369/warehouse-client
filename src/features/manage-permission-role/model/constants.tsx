@@ -4,7 +4,7 @@ import { MdOutlineAdminPanelSettings, MdOutlineRemoveRedEye } from 'react-icons/
 export const TITLES = {
   MANAGE_PERMISSIONS_ROLE: 'Управление доступом ролей',
   PERMISSIONS_ROLE_LIST: 'Список доступов ролей',
-  PERMISSIONS_ROLE_ACTIONS: 'Назначить/забрать роль пользователю',
+  PERMISSIONS_ROLE_ACTIONS: 'Редактирование разрешений роли',
   OTHERS_PERMISSIONS: 'Остальные разрешения:',
 };
 export const DESCRIPTION = 'Назначение доступов ролям пользователей';

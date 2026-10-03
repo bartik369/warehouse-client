@@ -1,5 +1,5 @@
 import { Flex, Typography } from 'antd';
-import { FiUser } from 'react-icons/fi';
+import { LuUserRound } from 'react-icons/lu';
 
 import { User } from '@/entities/user/model/types';
 import { LABELS } from '@/utils/constants/ui/labels';
@@ -14,7 +14,7 @@ export const UserInfo = ({ user }: UserInfoProps) => {
     <Flex gap={10}>
       <div className={styles.profile}>
         <div className={styles.icon}>
-          <FiUser />
+          <LuUserRound />
         </div>
       </div>
       <Flex gap={30} align="center">

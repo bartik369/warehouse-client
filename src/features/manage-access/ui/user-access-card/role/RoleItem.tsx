@@ -1,11 +1,12 @@
-import { Avatar, Button, Card, Col, Flex, Row, Space, Tag, Typography } from 'antd';
+import { Avatar, Card, Col, Flex, Row, Space, Tag, Typography } from 'antd';
 import { FiTrash2 } from 'react-icons/fi';
 import { LiaWarehouseSolid } from 'react-icons/lia';
-import { LuKeyRound } from 'react-icons/lu';
 import { PiCityDuotone } from 'react-icons/pi';
 
 import { UserRoleAssignment } from '@/entities/role/model/types';
 import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
+import { userRoleInfo } from '@/features/manage-permission-role/model/constants';
+import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import { LABELS } from '@/utils/constants/ui/labels';
 
 import styles from './RoleItem.module.scss';
@@ -20,14 +21,14 @@ interface RoleItemProps {
 export const RoleItem = ({ role, loading, deletingId, onDelete }: RoleItemProps) => {
   return (
     <Card className={styles.card}>
-      <Row gutter={[32, 24]} wrap={false}>
+      <Row gutter={[32, 24]} wrap={false} align="middle">
         <Col flex="auto">
-          <Flex gap={10} align="flex-start">
-            <Avatar size={34} icon={<LuKeyRound />} className={styles.avatar} />
+          <Flex gap={5} align="flex-start">
+            <Avatar size={34} icon={userRoleInfo[role.roleName].icon} className={styles.avatar} />
             <Flex vertical gap={20}>
               <Flex gap={40}>
                 <Space size={12} wrap>
-                  <Typography.Title level={4}>{role.roleName}</Typography.Title>
+                  <Typography.Title className={styles.title}>{role.roleName}</Typography.Title>
                 </Space>
                 <Flex gap={30} align="center">
                   <Flex vertical>
@@ -54,7 +55,7 @@ export const RoleItem = ({ role, loading, deletingId, onDelete }: RoleItemProps)
             {role.permissionsName.length > 0 && (
               <Space size={[8, 8]} wrap style={{ marginTop: 15 }}>
                 {role.permissionsName.map((permission) => (
-                  <Tag key={permission} color="blue" className={styles.permission}>
+                  <Tag key={permission} className={styles.permission}>
                     {permission}
                   </Tag>
                 ))}
@@ -68,11 +69,11 @@ export const RoleItem = ({ role, loading, deletingId, onDelete }: RoleItemProps)
             description={DESCRIPTION_ACTION}
             onConfirm={() => onDelete(role.assignmentId)}
           >
-            <Button
+            <IconButton
+              icon={FiTrash2}
+              iconSize={14}
+              variant="danger"
               loading={loading && deletingId === role.assignmentId}
-              type="text"
-              className={styles.deleteBtn}
-              icon={<FiTrash2 size={18} />}
             />
           </DeleteConfirm>
         </Col>
