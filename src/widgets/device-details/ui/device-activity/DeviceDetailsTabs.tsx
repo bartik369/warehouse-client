@@ -1,5 +1,7 @@
 import { Tabs } from 'antd';
 
+import { TableTypography } from '@/types/typography';
+
 import { DeviceHistoryItem } from '../../model/types';
 import { DeviceHistoryTable } from './history/DeviceHistoryTable';
 
@@ -22,6 +24,7 @@ export const DeviceDetailsTabs = ({
       label: 'История',
       children: (
         <DeviceHistoryTable
+          typography="small"
           data={deviceHistory}
           loading={isHistoryLoading}
           page={page}

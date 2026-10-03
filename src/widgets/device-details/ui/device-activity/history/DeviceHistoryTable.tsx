@@ -1,22 +1,31 @@
 import { ConfigProvider, Table } from 'antd';
+import clsx from 'clsx';
 
 import { antdLocale } from '@/shared/config/antd-locale';
 import tableStyles from '@/shared/ui/table/table.module.scss';
+import { TableTypography } from '@/types/typography';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
 
 import { getDeviceHistoryColumns } from './columns';
 
 interface DeviceHistoryTableProps {
+  typography: TableTypography;
   loading: boolean;
   data: DeviceHistoryItem[];
   page: number;
   limit: number;
 }
-export const DeviceHistoryTable = ({ data, page, limit, loading }: DeviceHistoryTableProps) => {
+export const DeviceHistoryTable = ({
+  typography,
+  data,
+  page,
+  limit,
+  loading,
+}: DeviceHistoryTableProps) => {
   const columns = getDeviceHistoryColumns();
   const DeviceHistoryTable = (
     <Table
-      className={tableStyles.devicesTable}
+      className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       loading={loading}
       columns={columns}
       dataSource={data}
