@@ -43,6 +43,7 @@ export const ManagePermissionRole = () => {
         <Card className={styles.card}>
           <Typography.Title className={styles.blockTitle} level={2}>
             {TITLES.PERMISSIONS_ROLE_LIST}
+            {`:(${permissionRoles.length})`}
           </Typography.Title>
           <PermissionsRoleTable
             typography="small"
