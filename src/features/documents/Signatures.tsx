@@ -1,7 +1,7 @@
 import { BsPen } from 'react-icons/bs';
 
 import { User } from '@/entities/user/model/types';
-import { useGlobalModal } from '@/hooks/data/useGlobalModal';
+import { useGlobalModal } from '@/shared/hooks/useGlobalModal';
 
 import styles from './Document.module.scss';
 

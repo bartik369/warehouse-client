@@ -5,7 +5,7 @@ import { GoLock } from 'react-icons/go';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '@/hooks/data/useAuth';
+import { useAuth } from '@/features/auth/model/useAuth';
 import { Button } from '@/shared/ui/button/Button';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';

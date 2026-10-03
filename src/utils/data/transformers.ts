@@ -1,5 +1,4 @@
 import { Device } from '@/entities/device/model/types';
-import { AssignedDevice } from '@/types/issue';
 
 export const prepareIssueDeviceData = (device: Device): Device => {
   const data = {

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { RootState } from '@/store/store';
 import { accept, deviceInfo, issue, move } from '@/utils/constants/device';
 
-import { useAppSelector } from '../../../hooks/redux/useRedux';
+import { useAppSelector } from '../../../shared/hooks/useRedux';
 import { deviceActionsMenu } from './deviceActionMenu';
 
 export const useHeaderMenu = () => {

@@ -4,8 +4,8 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useOutsideClick } from '@/hooks/data/useOutsideClick';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useOutsideClick } from '@/shared/hooks/useOutsideClick';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { Button } from '@/shared/ui/button/Button';
 import { useLogoutUserMutation } from '@/store/api/authApi';
 import { RootState } from '@/store/store';

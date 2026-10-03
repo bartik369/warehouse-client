@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import TechnicalOptions from '@/shared/ui/options/TechnicalOptions';
 import { RootState } from '@/store/store';
 import { LABELS } from '@/utils/constants/ui/labels';

@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { ModalActionsType, ModalType } from "@/reducers/modal/modalTypes";
-import { modalSize } from "@/utils/modal/modalSize";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ModalActionsType, ModalType } from '@/reducers/modal/modalTypes';
+import { RootState } from '@/store/store';
+import { modalSize } from '@/utils/modal/modalSize';
 
 export function useGlobalModal() {
   const dispatch = useDispatch();
-  const { isOpen, modalType, modalProps } = useSelector(
-    (state: RootState) => state.modal
-  );
+  const { isOpen, modalType, modalProps } = useSelector((state: RootState) => state.modal);
 
   const openModal = (modalType: ModalType, modalProps: Record<string, any>) => {
     dispatch({
@@ -19,9 +18,9 @@ export function useGlobalModal() {
   const updateModalProps = (step: string) => {
     dispatch({
       type: ModalActionsType.SET_MODAL_SIZE,
-      payload: modalSize(step)
-    })
-  }
+      payload: modalSize(step),
+    });
+  };
 
   const closeModal = () => {
     dispatch({ type: ModalActionsType.CLOSE_MODAL });

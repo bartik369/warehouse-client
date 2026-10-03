@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
-import { useStickyHeader } from '@/hooks/data/useStickyHeader';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
+import { useStickyHeader } from '@/shared/hooks/useStickyHeader';
 import { BurgerBtn } from '@/shared/ui/burger-button/BurgerBtn';
 import { RootState } from '@/store/store';
 import { Breadcrumbs } from '@/widgets/breadcrumbs/ui/Breadcrumbs';

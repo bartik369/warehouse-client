@@ -7,7 +7,7 @@ import { setCredentials } from '@/store/slices/authSlice';
 import { Signin } from '@/types/user';
 import { handleApiError } from '@/utils/errors/handleApiError';
 
-import { useAppDispatch } from '../redux/useRedux';
+import { useAppDispatch } from '../../../shared/hooks/useRedux';
 
 export const useAuth = () => {
   const [signinUser] = useSigninMutation();

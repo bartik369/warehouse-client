@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Table } from 'antd';
 
 import { Device } from '@/entities/device/model/types';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 
 import { getAssignedDeviceColumns } from '../../model/getAssignedDeviceColumns';
 import styles from './AssignedDevicesTable.module.scss';

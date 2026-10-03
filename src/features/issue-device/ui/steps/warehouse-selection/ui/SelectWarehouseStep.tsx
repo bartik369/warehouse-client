@@ -4,7 +4,7 @@ import { Flex } from 'antd';
 import { LiaWarehouseSolid } from 'react-icons/lia';
 
 import { IssueActions, IssueWarehouse } from '@/features/issue-device/model/useIssue';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { WarehouseSelect } from '@/shared/ui/warehouse-select/WarehouseSelect';
 import { RootState } from '@/store/store';
 

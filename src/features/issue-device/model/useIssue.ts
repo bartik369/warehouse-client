@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useRedux';
 import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
 import {
   useCreateIssueProcessMutation,

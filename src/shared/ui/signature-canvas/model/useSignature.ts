@@ -2,8 +2,6 @@ import { useCallback } from 'react';
 
 import { formatDate } from '@/shared/lib/date/formatDate';
 
-import { useGlobalModal } from '../../../../hooks/data/useGlobalModal';
-import { useAppDispatch } from '../../../../hooks/redux/useRedux';
 import {
   resetAllSignatures,
   resetIssuerSignature,
@@ -11,6 +9,8 @@ import {
   setIssuerSignature,
   setReceiverSignature,
 } from '../../../../store/slices/signatureSlice';
+import { useGlobalModal } from '../../../hooks/useGlobalModal';
+import { useAppDispatch } from '../../../hooks/useRedux';
 import { SignatureRole } from './types';
 
 export const useSignature = () => {

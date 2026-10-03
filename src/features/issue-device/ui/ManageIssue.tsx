@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useAppDispatch } from '@/hooks/redux/useRedux';
 import { ROUTES } from '@/shared/config/routes/routes';
+import { useAppDispatch } from '@/shared/hooks/useRedux';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 import { useGetIssueProcessQuery } from '@/store/api/issueApi';
 import {

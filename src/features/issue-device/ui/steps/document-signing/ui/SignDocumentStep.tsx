@@ -2,7 +2,7 @@ import { User } from '@/entities/user/model/types';
 import { generateIssuePdfFile } from '@/features/issue-device/document/generateIssuePdfFile';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { IssueActions } from '@/features/issue-device/model/useIssue';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { formatDate } from '@/shared/lib/date/formatDate';
 
 import { StepLayout } from '../../layout/StepLayout';
