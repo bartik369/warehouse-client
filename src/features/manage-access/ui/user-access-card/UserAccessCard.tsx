@@ -22,17 +22,15 @@ export const UserAccessCard = ({
   onDelete,
 }: UserAccessCardProps) => {
   return (
-    <Card>
-      <Flex gap={20} vertical>
-        <UserInfo user={user} />
-        <Divider
-          dashed
-          style={{
-            margin: '0',
-          }}
-        />
-        <RoleList deletingId={deletingId} roles={userRoles} onDelete={onDelete} loading={loading} />
-      </Flex>
-    </Card>
+    <Flex gap={20} vertical>
+      <UserInfo user={user} />
+      <Divider
+        dashed
+        style={{
+          margin: '0',
+        }}
+      />
+      <RoleList deletingId={deletingId} roles={userRoles} onDelete={onDelete} loading={loading} />
+    </Flex>
   );
 };

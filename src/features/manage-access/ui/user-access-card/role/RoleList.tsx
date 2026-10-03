@@ -18,7 +18,7 @@ export const RoleList = ({ roles, loading, deletingId, onDelete }: RoleListProps
   return (
     <Flex vertical gap={15}>
       <Flex justify="center">
-        <Typography.Title level={3}>{TITLES.user_roles}</Typography.Title>
+        <Typography.Title level={4}>{TITLES.user_roles}</Typography.Title>
       </Flex>
       {hasRoles ? (
         roles.map((role) => (

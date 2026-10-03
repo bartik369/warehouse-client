@@ -1,3 +1,4 @@
+import { UserRole } from '@/entities/permission-role/model/types';
 import { User } from '@/entities/user/model/types';
 import { RoleFormValues } from '@/features/manage-role/model/schema';
 
@@ -25,7 +26,8 @@ export type UserRolesResponse = {
 export type UserRoleAssignment = {
   assignmentId: string;
   roleId: string;
-  roleName: string;
+  // roleName: string;
+  roleName: UserRole;
   locationId?: string;
   locationName?: string;
   warehouseId?: string;
