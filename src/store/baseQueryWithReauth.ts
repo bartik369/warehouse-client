@@ -1,13 +1,14 @@
-import { RefreshTokenResponse } from './../types/user';
-import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import getCookie from '@/utils/secure/getCookie';
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
-import { setCredentials, logOut, setAuth } from './slices/authSlice';
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_URL = import.meta.env.VITE_API_URL 
-  || (import.meta.env.NODE_ENV === 'development' 
-    ? 'http://localhost:5000' 
-    : '/api');
+import getCookie from '@/shared/utils/secure/getCookie';
+
+import { RefreshTokenResponse } from './../types/user';
+import { logOut, setAuth, setCredentials } from './slices/authSlice';
+
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '/api');
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
@@ -18,7 +19,7 @@ const baseQuery = fetchBaseQuery({
       headers.set('x-csrf-token', csrfToken);
     }
     return headers;
-  }
+  },
 });
 
 export const baseQueryWithReauth: BaseQueryFn<
@@ -29,12 +30,12 @@ export const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery(
+    const refreshResult = (await baseQuery(
       import.meta.env.VITE_REFRESH_TOKEN,
       api,
       extraOptions
-    ) as  {data?: RefreshTokenResponse};
-  
+    )) as { data?: RefreshTokenResponse };
+
     if (refreshResult.data) {
       api.dispatch(setCredentials(refreshResult.data.user));
       api.dispatch(setAuth(true));

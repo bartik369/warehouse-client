@@ -62,13 +62,6 @@ export const ManagePermissionRole = () => {
           <Typography.Title className={styles.blockTitle} level={2}>
             {TITLES.PERMISSIONS_ROLE_ACTIONS}
           </Typography.Title>
-          {/* <PermissionList
-            loading={permissionRolesLoading}
-            fetching={permissionRolesFetching}
-            roles={permissionRoles}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          /> */}
           <PermissionsRoleForm
             roles={roles}
             selectedRole={selectedPermissionRoles}

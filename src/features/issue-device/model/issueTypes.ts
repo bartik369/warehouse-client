@@ -1,6 +1,6 @@
 import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { DeviceIssueData } from '@/types/devices';
+import { DeviceIssueData } from '@/shared/types/devices';
 import { AssignedDevice } from '@/types/issue';
 
 export type IssueStepType =

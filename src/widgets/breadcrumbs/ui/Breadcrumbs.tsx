@@ -4,8 +4,8 @@ import { Breadcrumb } from 'antd';
 import { RiHome3Line } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
 
-import { routeNameMap } from '@/utils/constants/breadcrumbs';
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { routeNameMap } from '@/shared/utils/constants/breadcrumbs';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
 import { useEntityNameResolver } from '@/widgets/breadcrumbs/model/useEntityNameResolver';
 
 import styles from './Breadcrumbs.module.scss';

@@ -14,7 +14,7 @@ import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfRoleAssignmentSelect } from '@/shared/ui/form-fields/RhfRoleAssignmentSelect';
 import { RhfUserAutocomplete } from '@/shared/ui/form-fields/RhfUserAutocomplete';
 import { UserAutocompleteOption } from '@/shared/ui/user-autocomplete/types';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { AccessFromValues, accessSchema } from '../../model/schema';
 

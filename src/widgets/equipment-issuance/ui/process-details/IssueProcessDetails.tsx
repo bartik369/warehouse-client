@@ -3,7 +3,7 @@ import { PiClockCountdownDuotone } from 'react-icons/pi';
 import { PiClockDuotone } from 'react-icons/pi';
 
 import { EquipmentIssuance } from '@/features/issue-device/model/types';
-import { formatDate } from '@/utils/date/dateUtils';
+import { formatDate } from '@/shared/utils/date/dateUtils';
 
 import styles from '../EquipmentIssuanceInfo.module.scss';
 import { UserCard } from './UserCard';

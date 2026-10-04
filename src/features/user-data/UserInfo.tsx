@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/shared/hooks/useRedux';
 import TechnicalOptions from '@/shared/ui/options/TechnicalOptions';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 import { RootState } from '@/store/store';
-import { LABELS } from '@/utils/constants/ui/labels';
 
 import styles from './UserInfo.module.scss';
 

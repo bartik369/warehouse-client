@@ -2,7 +2,7 @@ import { Flex, Typography } from 'antd';
 import { LuUserRound } from 'react-icons/lu';
 
 import { User } from '@/entities/user/model/types';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import styles from './UserInfo.module.scss';
 

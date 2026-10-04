@@ -1,7 +1,7 @@
 import { UserRolesResponse } from '@/entities/permission-role/model/types';
 import TechnicalOptions from '@/shared/ui/options/TechnicalOptions';
-import { LABELS } from '@/utils/constants/ui/labels';
-import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
+import { SECTION_TITLES } from '@/shared/utils/constants/ui/titles';
 
 import styles from './GrantUserRoles.module.scss';
 

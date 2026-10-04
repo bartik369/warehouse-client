@@ -7,10 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useOutsideClick } from '@/shared/hooks/useOutsideClick';
 import { useAppSelector } from '@/shared/hooks/useRedux';
 import { Button } from '@/shared/ui/button/Button';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
+import { handleApiError } from '@/shared/utils/errors/handleApiError';
 import { useLogoutUserMutation } from '@/store/api/authApi';
 import { RootState } from '@/store/store';
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
-import { handleApiError } from '@/utils/errors/handleApiError';
 
 import { profileMenuData, systemMenuData } from '../../model/menuData';
 import styles from './Profile.module.scss';

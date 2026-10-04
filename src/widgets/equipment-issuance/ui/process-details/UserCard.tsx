@@ -7,7 +7,7 @@ import { RiUserSharedLine } from 'react-icons/ri';
 
 import { User } from '@/entities/user/model/types';
 import { CounterpartyRole } from '@/shared/types/counterparty';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import styles from '../EquipmentIssuanceInfo.module.scss';
 

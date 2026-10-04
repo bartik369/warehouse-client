@@ -7,7 +7,7 @@ import { UserRoleAssignment } from '@/entities/role/model/types';
 import { DeleteConfirm } from '@/features/delete-confirm/ui/DeleteConfirm';
 import { userRoleInfo } from '@/features/manage-permission-role/model/constants';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import styles from './RoleItem.module.scss';
 import { ALL_WAREHOUSES, DESCRIPTION_ACTION, TITLES } from './constants';

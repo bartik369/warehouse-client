@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { handleApiError } from '@/shared/utils/errors/handleApiError';
 import { useSigninMutation } from '@/store/api/authApi';
 import { setCredentials } from '@/store/slices/authSlice';
 import { Signin } from '@/types/user';
-import { handleApiError } from '@/utils/errors/handleApiError';
 
 import { useAppDispatch } from '../../../shared/hooks/useRedux';
 

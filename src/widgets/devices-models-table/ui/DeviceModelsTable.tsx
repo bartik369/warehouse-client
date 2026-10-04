@@ -2,8 +2,8 @@ import { Table } from 'antd';
 import clsx from 'clsx';
 
 import { Model } from '@/entities/model/model/types';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 
 import { DeviceModelsColumns } from '../model/device-models-columns';
 

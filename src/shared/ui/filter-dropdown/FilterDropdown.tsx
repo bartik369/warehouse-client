@@ -3,8 +3,8 @@ import React from 'react';
 import { Checkbox, CheckboxOptionType, Space } from 'antd';
 import { ColumnFilterItem, FilterDropdownProps } from 'antd/es/table/interface';
 
-import { DeviceFilters } from '@/types/devices';
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { DeviceFilters } from '@/shared/types/devices';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
 
 import { ActionsPanel } from '../action-panel/ActionsPanel';
 import styles from './FilterDropdown.module.scss';

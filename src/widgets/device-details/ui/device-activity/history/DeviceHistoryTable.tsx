@@ -2,8 +2,8 @@ import { ConfigProvider, Table } from 'antd';
 import clsx from 'clsx';
 
 import { antdLocale } from '@/shared/config/antd-locale';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
 
 import { getDeviceHistoryColumns } from './columns';

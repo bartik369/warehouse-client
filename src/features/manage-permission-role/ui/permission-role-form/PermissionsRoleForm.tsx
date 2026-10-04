@@ -13,7 +13,7 @@ import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfPermissionsSelect } from '@/shared/ui/form-fields/RhfPermissionsSelect';
 import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { PermissionRoleFormValues, permissionRoleSchema } from '../../model/schema';
 

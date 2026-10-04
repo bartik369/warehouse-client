@@ -8,9 +8,9 @@ import { RxCross2 } from 'react-icons/rx';
 
 import { Device } from '@/entities/device/model/types';
 import { sortNumbers } from '@/shared/lib/export/sortNums';
+import { DeviceFilters, Entity, FilterDeviceOptions } from '@/shared/types/devices';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';
-import { DeviceFilters, Entity, FilterDeviceOptions } from '@/types/devices';
 
 import styles from './Columns.module.scss';
 

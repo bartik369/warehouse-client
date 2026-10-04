@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '@/features/auth/model/useAuth';
 import { Button } from '@/shared/ui/button/Button';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
-import { MESSAGES } from '@/utils/constants/ui/messages';
-import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
+import { MESSAGES } from '@/shared/utils/constants/ui/messages';
+import { PLACEHOLDER_LABELS } from '@/shared/utils/constants/ui/placeholders';
 
 import { LoginFormValues, loginSchema } from '../../model/schema';
 import styles from './AuthForm.module.scss';

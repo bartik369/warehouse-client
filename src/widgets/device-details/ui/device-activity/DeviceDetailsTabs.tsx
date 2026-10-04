@@ -1,6 +1,6 @@
 import { Tabs } from 'antd';
 
-import { TableTypography } from '@/types/typography';
+import { TableTypography } from '@/shared/types/typography';
 
 import { DeviceHistoryItem } from '../../model/types';
 import { DeviceHistoryTable } from './history/DeviceHistoryTable';

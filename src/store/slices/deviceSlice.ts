@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Device } from '@/entities/device/model/types';
-import { DeviceMedia } from '@/types/devices';
+import { DeviceMedia } from '@/shared/types/devices';
 import { AssignedDevice } from '@/types/issue';
 
 type DeviceAction = {
