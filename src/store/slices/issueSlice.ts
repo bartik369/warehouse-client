@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { AssignedDevice } from '@/types/issue';
 
 import { IssueState } from '../../features/issue-device/model/issueTypes';
 

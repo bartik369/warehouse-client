@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { User } from '@/entities/user/model/types';
+import { AuthRes, Signin } from '@/shared/types/user';
 
-import { AuthRes, Signin } from '../../types/user';
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 import { logOut } from '../slices/authSlice';
 

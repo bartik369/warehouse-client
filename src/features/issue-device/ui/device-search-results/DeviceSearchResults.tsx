@@ -5,7 +5,6 @@ import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { useAppSelector } from '@/shared/hooks/useRedux';
 import { MESSAGES } from '@/shared/utils/constants/ui/messages';
 import { RootState } from '@/store/store';
-import { AssignedDevice } from '@/types/issue';
 
 import { DeviceList } from './DeviceList';
 import styles from './DeviceSearchResults.module.scss';

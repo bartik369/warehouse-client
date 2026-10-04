@@ -1,9 +1,9 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { RefreshTokenResponse } from '@/shared/types/user';
 import getCookie from '@/shared/utils/secure/getCookie';
 
-import { RefreshTokenResponse } from './../types/user';
 import { logOut, setAuth, setCredentials } from './slices/authSlice';
 
 const API_URL =

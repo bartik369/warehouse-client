@@ -12,7 +12,7 @@ import { getAssignedDeviceColumns } from '../../model/getAssignedDeviceColumns';
 
 interface AssignedDevicesTableProps {
   typography: TableTypography;
-  loading: boolean;
+  loading?: boolean;
   devices: Device[];
   onDelete?: (id: string) => void;
 }

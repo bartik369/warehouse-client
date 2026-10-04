@@ -33,7 +33,7 @@ export const IssueDocument = ({ devices, user, state }: IssueDocumentProps) => {
           </Flex>
           <Flex vertical gap={10}>
             <IssueActContent user={user} />
-            <AssignedDevicesTable devices={devices} />
+            <AssignedDevicesTable devices={devices} typography="small" />
           </Flex>
         </Flex>
       </Card>
