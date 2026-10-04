@@ -46,7 +46,7 @@ export const PermissionsSelect = ({
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: '#1d5fd0',
+              colorPrimary: '#3278f2',
               colorPrimaryHover: '#3574e5',
               colorPrimaryActive: '#3574e5',
             },
@@ -71,7 +71,11 @@ export const PermissionsSelect = ({
             placeholder={placeholder}
             status={error ? 'error' : undefined}
             maxTagCount={0}
-            maxTagPlaceholder={() => `Выбрано: ${value.length} из ${permissions.length}`}
+            maxTagPlaceholder={() => (
+              <div className={styles.selected}>
+                Выбрано: {value.length} из {permissions.length}
+              </div>
+            )}
             allowClear
             showSearch={false}
             popupMatchSelectWidth

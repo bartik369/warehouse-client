@@ -1,18 +1,27 @@
 import { useState } from 'react';
 
 import { Table } from 'antd';
+import clsx from 'clsx';
 
 import { Device } from '@/entities/device/model/types';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
+import { TableTypography } from '@/shared/types/typography';
+import tableStyles from '@/shared/ui/table/table.module.scss';
 
 import { getAssignedDeviceColumns } from '../../model/getAssignedDeviceColumns';
-import styles from './AssignedDevicesTable.module.scss';
 
 interface AssignedDevicesTableProps {
+  typography: TableTypography;
+  loading?: boolean;
   devices: Device[];
   onDelete?: (id: string) => void;
 }
-export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTableProps) => {
+export const AssignedDevicesTable = ({
+  typography,
+  loading,
+  devices,
+  onDelete,
+}: AssignedDevicesTableProps) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const issueStep = useAppSelector((state) => state.issue.issueStep);
@@ -27,8 +36,10 @@ export const AssignedDevicesTable = ({ devices, onDelete }: AssignedDevicesTable
   return (
     <Table<Device>
       bordered
-      className={styles.table}
+      loading={loading}
+      className={clsx(tableStyles.devicesTable, tableStyles[typography])}
       tableLayout="fixed"
+      size="small"
       pagination={
         isReadonlyStep
           ? false

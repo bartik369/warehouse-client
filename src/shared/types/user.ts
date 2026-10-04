@@ -1,0 +1,63 @@
+import { User } from '@/entities/user/model/types';
+
+type UserLabelsKeys =
+  | 'firstNameRu'
+  | 'firstNameRu'
+  | 'lastNameRu'
+  | 'firstNameEn'
+  | 'lastNameEn'
+  | 'email'
+  | 'location'
+  | 'department'
+  | 'workId'
+  | 'isActive'
+  | 'actions';
+
+export type UserLabel = {
+  key: UserLabelsKeys;
+  label: string;
+};
+
+export interface Signin {
+  email: string;
+  password: string;
+}
+
+export interface AuthRes {
+  user: User;
+  accessToken: string;
+}
+export interface RefreshTokenResponse {
+  accessToken: string;
+  user: User;
+}
+export interface ValidateUserErrors {
+  id?: string;
+  userName?: string;
+  email?: string;
+  workId?: string;
+  firstNameRu?: string;
+  lastNameRu?: string;
+  firstNameEn?: string;
+  lastNameEn?: string;
+  department?: string;
+  location?: string;
+}
+
+export interface UserFormActions {
+  handleInputChange: (name: keyof User, e: string) => void;
+  handleCreateUser: () => void;
+  handleResetUser: () => void;
+  handleGetUser: (id: string) => void;
+  handleChecked: () => void;
+}
+
+export interface BaseUserQuery {
+  handleUserChange: (value: string) => void;
+  handleCompleteProcess: (file: Blob) => void;
+  handleFullReset: () => void;
+  handleSetUser: (id: string) => void;
+  handleResetUser: () => void;
+  handleResetUserQuery: () => void;
+  handleNextStep: () => void;
+}

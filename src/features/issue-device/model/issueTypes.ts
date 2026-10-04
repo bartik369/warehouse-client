@@ -1,7 +1,6 @@
 import { Device } from '@/entities/device/model/types';
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { DeviceIssueData } from '@/types/devices';
-import { AssignedDevice } from '@/types/issue';
+import { AssignedDevice } from '@/shared/types/issue';
 
 export type IssueStepType =
   | 'select_warehouse'

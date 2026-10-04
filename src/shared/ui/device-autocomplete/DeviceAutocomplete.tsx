@@ -2,7 +2,7 @@ import { AutoComplete, Input } from 'antd';
 import clsx from 'clsx';
 import { PiDevicesDuotone } from 'react-icons/pi';
 
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { Spinner } from '../spinner/Spinner';
 import styles from './DeviceAutocomplete.module.scss';

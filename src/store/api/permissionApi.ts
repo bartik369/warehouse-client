@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { PermissionRole, SortedRolePermissionsRes } from '@/entities/permission-role/model/types';
 import { Permission } from '@/entities/permission/model/types';
 import { RolePermissionsQueryParams } from '@/shared/types/api';
-import { CheckedPermissionOptions } from '@/types/content';
+import { CheckedPermissionOptions } from '@/shared/types/content';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 

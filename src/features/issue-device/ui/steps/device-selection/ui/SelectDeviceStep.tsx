@@ -4,7 +4,7 @@ import { User } from '@/entities/user/model/types';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
 import { IssueActions, IssueDevice, IssueWarehouse } from '@/features/issue-device/model/useIssue';
 import { DeviceAutocomplete } from '@/shared/ui/device-autocomplete/DeviceAutocomplete';
-import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+import { SECTION_TITLES } from '@/shared/utils/constants/ui/titles';
 
 import { StepLayout } from '../../layout/StepLayout';
 import { DeviceList } from '../../user-selection/ui/DeviceList';

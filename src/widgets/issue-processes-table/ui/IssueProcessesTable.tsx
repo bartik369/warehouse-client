@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { IssueProcessListItem } from '@/features/issue-device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
 import { ROUTES } from '@/shared/config/routes/routes';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 
 import { getIssueProcessesColumns } from '../model/issue-processes.columns';
 

@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { Device, DeviceDetails, QueryParams } from '@/entities/device/model/types';
 import { DeviceFormValues } from '@/features/create-device/model/schema';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
-import { FilterDeviceOptions } from '@/types/devices';
+import { FilterDeviceOptions } from '@/shared/types/devices';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';

@@ -3,8 +3,9 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useRedux';
 import { generateDocumentNumber } from '@/shared/lib/document/generateDocumentNumber';
+import { handleApiError } from '@/shared/utils/errors/handleApiError';
 import {
   useCreateIssueProcessMutation,
   useFinalizeIssueProcessMutation,
@@ -14,7 +15,6 @@ import { resetDevices } from '@/store/slices/deviceSlice';
 import { resetAllSignatures } from '@/store/slices/signatureSlice';
 import { partnerUser, resetUser, resetUsers } from '@/store/slices/userSlice';
 import { RootState } from '@/store/store';
-import { handleApiError } from '@/utils/errors/handleApiError';
 
 import {
   clearSelectedDevices,

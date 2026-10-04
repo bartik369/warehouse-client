@@ -1,4 +1,4 @@
-import { ELEMENTS_LABELS } from '@/utils/constants/ui/elements';
+import { ELEMENTS_LABELS } from '@/shared/utils/constants/ui/elements';
 
 import logo from '../../../../assets/elements/logo.png';
 import styles from './Logo.module.scss';

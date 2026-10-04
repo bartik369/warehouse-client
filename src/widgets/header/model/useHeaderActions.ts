@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useIssue } from '@/features/issue-device/model/useIssue';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { RootState } from '@/store/store';
 
 type HeaderActionKey = 'issue' | 'move' | 'accept' | 'info';

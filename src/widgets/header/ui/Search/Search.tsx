@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Input } from 'antd';
 
-import { PLACEHOLDER_LABELS } from '@/utils/constants/ui/placeholders';
+import { PLACEHOLDER_LABELS } from '@/shared/utils/constants/ui/placeholders';
 
 import styles from './Search.module.scss';
 

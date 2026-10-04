@@ -2,11 +2,11 @@ import { Flex, Typography } from 'antd';
 import { IoMdInformationCircle } from 'react-icons/io';
 
 import { User } from '@/entities/user/model/types';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { SignatureCanvas } from '@/shared/ui/signature-canvas/ui/SignatureCanvas';
+import { SECTION_TITLES } from '@/shared/utils/constants/ui/titles';
 import { currentUser } from '@/store/slices/authSlice';
 import { selectIssuerSignature, selectReceiverSignature } from '@/store/slices/signatureSlice';
-import { SECTION_TITLES } from '@/utils/constants/ui/titles';
 
 import styles from './DocumentSignatures.module.scss';
 

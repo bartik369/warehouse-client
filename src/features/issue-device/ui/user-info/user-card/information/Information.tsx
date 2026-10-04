@@ -3,7 +3,7 @@ import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 
 import { User } from '@/entities/user/model/types';
 import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import styles from './Information.module.scss';
 

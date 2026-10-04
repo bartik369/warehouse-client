@@ -1,0 +1,10 @@
+export const labelFirstNameRu = 'Имя(ру)';
+export const labelLastNameRu = 'Фамилия(ру)';
+export const labelFirstNameEn = 'Имя(анг)';
+export const labelLastNameEn = 'Фамилия(анг)';
+export const labelUserLogin = 'Логин';
+export const labelEmail = 'Почта';
+export const labelUserId = 'User-ID';
+export const labelDepartment = 'Отдел';
+export const labelCity = 'Город';
+export const labelIsActive = 'Активность';

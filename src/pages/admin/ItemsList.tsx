@@ -3,8 +3,8 @@ import { memo } from 'react';
 import { Empty } from 'antd';
 import { MdOutlineEdit } from 'react-icons/md';
 
-import { Entity } from '@/types/devices';
-import { EntityFormActions } from '@/types/entity';
+import { Entity } from '@/shared/types/devices';
+import { EntityFormActions } from '@/shared/types/entity';
 
 import styles from './Admin.module.scss';
 

@@ -12,7 +12,7 @@ import { RhfSelectField } from '@/shared/ui/form-fields/RhfSelectField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { WarehouseFormValues, warehouseSchema } from '../model/schema';
 

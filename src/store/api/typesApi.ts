@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { DeviceType } from '@/entities/type/model/types';
-import { Entity } from '@/types/devices';
+import { Entity } from '@/shared/types/devices';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import {
   UserAutocompleteOption,

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
+import { handleApiError } from '@/shared/utils/errors/handleApiError';
 import { useLazyGetDeviceQuery } from '@/store/api/devicesApi';
 import { useLazyGetIssueProcessQuery } from '@/store/api/issueApi';
-import { handleApiError } from '@/utils/errors/handleApiError';
 
 const UUID_REGEXP = /^[0-9a-fA-F-]{36}$/;
 

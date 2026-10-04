@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { User } from '@/entities/user/model/types';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
+import { MESSAGES } from '@/shared/utils/constants/ui/messages';
 import { RootState } from '@/store/store';
-import { MESSAGES } from '@/utils/constants/ui/messages';
 
 import styles from './UsersList.module.scss';
 

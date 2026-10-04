@@ -11,7 +11,7 @@ import { ExportFile } from '@/features/export-file/ui/ExportFile';
 import { useDeviceFilters } from '@/features/filter-devices/model/useDeviceFilter';
 import { FiltersContent } from '@/features/filter-devices/ui/content/FiltersContent';
 import { DeviceFilters } from '@/features/filter-devices/ui/filter/DeviceFilters';
-import { useAppDispatch } from '@/hooks/redux/useRedux';
+import { useAppDispatch } from '@/shared/hooks/useRedux';
 import { activeFiltersCount } from '@/shared/lib/activeFiltersCount';
 import { ActionButton } from '@/shared/ui/action-button/ActionButton';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';

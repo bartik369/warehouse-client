@@ -3,9 +3,9 @@ import type { ColumnType, ColumnsType } from 'antd/es/table';
 import { RiDeleteBin4Line } from 'react-icons/ri';
 
 import { Device } from '@/entities/device/model/types';
+import { AssignedDevice } from '@/shared/types/issue';
 import { DEVICE_TYPES } from '@/shared/ui/device-autocomplete/constants';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { AssignedDevice } from '@/types/issue';
 
 export const getAssignedDeviceColumns = ({
   onDelete,

@@ -1,4 +1,4 @@
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { CreateUserFormValues } from './schema';
 import { FormFieldConfig } from './types';

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { Warehouse } from '@/entities/warehouse/model/types';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useRedux';
 import { useGetLocationsQuery } from '@/store/api/locationApi';
 import { useGetWarehousesQuery } from '@/store/api/warehousesApi';
 import { resetWarehouse, setWarehouse } from '@/store/slices/issueSlice';

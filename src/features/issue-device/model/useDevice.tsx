@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { skipToken } from '@reduxjs/toolkit/query';
 
 import { Device } from '@/entities/device/model/types';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/useRedux';
 import { useDebounce } from '@/shared/lib/debounce/useDebounce';
 import { DeviceAutocompleteItem } from '@/shared/ui/device-autocomplete/DeviceAutocompleteItem';
 import { DeviceAutocompleteOption } from '@/shared/ui/device-autocomplete/types';

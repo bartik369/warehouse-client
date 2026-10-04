@@ -2,8 +2,8 @@ import { Table } from 'antd';
 import clsx from 'clsx';
 
 import { UserWithRelations } from '@/entities/user/model/types';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 
 import { getUsersColumns } from '../../model/getUsersColumns';
 

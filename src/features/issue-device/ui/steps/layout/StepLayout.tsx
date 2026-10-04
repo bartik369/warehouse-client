@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { Button, Card, Flex } from 'antd';
 
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
 
 import styles from './StepLayout.module.scss';
 

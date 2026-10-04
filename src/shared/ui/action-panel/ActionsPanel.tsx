@@ -4,7 +4,7 @@ import { Button, Space } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { HiArrowPath, HiPlus } from 'react-icons/hi2';
 
-import { BUTTON_LABELS } from '@/utils/constants/ui/buttons';
+import { BUTTON_LABELS } from '@/shared/utils/constants/ui/buttons';
 
 import styles from './ActionsPanel.module.scss';
 

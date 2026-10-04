@@ -8,11 +8,11 @@ import PrivateRoutes from './app/router/PrivateRoutes';
 import PublicRoutes from './app/router/PublicRoutes';
 import privateRoutes from './config/routes/privateRoutes';
 import publicRoutes from './config/routes/publicRoutes';
-import { useAppDispatch } from './hooks/redux/useRedux';
 import PageNotFound from './pages/404/PageNotFound';
+import { useAppDispatch } from './shared/hooks/useRedux';
+import { handleApiError } from './shared/utils/errors/handleApiError';
 import { useValidateMutation } from './store/api/authApi';
 import { setAuth, setCredentials } from './store/slices/authSlice';
-import { handleApiError } from './utils/errors/handleApiError';
 import { Layout } from './widgets/app-layout/ui/Layout';
 
 function App() {

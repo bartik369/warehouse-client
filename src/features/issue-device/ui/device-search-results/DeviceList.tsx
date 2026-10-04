@@ -1,5 +1,5 @@
 import { Device } from '@/entities/device/model/types';
-import { prepareIssueDeviceData } from '@/utils/data/transformers';
+import { prepareIssueDeviceData } from '@/shared/utils/data/transformers';
 
 import styles from './DeviceSearchResults.module.scss';
 

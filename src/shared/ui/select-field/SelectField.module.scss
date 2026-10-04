@@ -21,7 +21,7 @@
   width: 100%;
   height: $form-control-height;
   border-radius: $form-control-radius;
-  font-size: 12px;
+  font-size: $form-control-font-size;
   --ant-color-primary: var(--blue-250);
   --ant-select-active-border-color: var(--blue-250);
   --ant-select-hover-border-color: var(--blue-250);

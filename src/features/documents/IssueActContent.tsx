@@ -1,5 +1,5 @@
 import { User } from '@/entities/user/model/types';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
 import { currentUser } from '@/store/slices/authSlice';
 import { partnerUser } from '@/store/slices/userSlice';
 

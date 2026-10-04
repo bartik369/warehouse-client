@@ -2,7 +2,7 @@ import { FaFileExcel } from 'react-icons/fa';
 import { FaFileCsv } from 'react-icons/fa6';
 
 import { exportToCSV, exportToExcel } from '@/shared/lib/export/export-file';
-import { SECTION_TITLES } from '@/utils/constants/ui/titles';
+import { SECTION_TITLES } from '@/shared/utils/constants/ui/titles';
 
 import styles from './OfficeFileBtn.module.scss';
 

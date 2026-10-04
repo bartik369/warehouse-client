@@ -9,7 +9,7 @@ import { FormMode } from '@/shared/types/form';
 import { ActionsPanel } from '@/shared/ui/action-panel/ActionsPanel';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { RoleFormValues, roleSchema } from '../model/schema';
 

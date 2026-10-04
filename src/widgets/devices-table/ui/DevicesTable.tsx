@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Device } from '@/entities/device/model/types';
 import { antdLocale } from '@/shared/config/antd-locale';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 
 import { getDevicesColumns } from '../model/devices.columns';
 

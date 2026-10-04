@@ -1,6 +1,6 @@
 import { User } from '@/entities/user/model/types';
 import { formatDate } from '@/shared/lib/date/formatDate';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import styles from './Details.module.scss';
 

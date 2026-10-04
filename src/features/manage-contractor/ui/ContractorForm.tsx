@@ -11,7 +11,7 @@ import { RhfPhoneField } from '@/shared/ui/form-fields/RhfPhoneField';
 import { RhfTextField } from '@/shared/ui/form-fields/RhfTextField';
 import { RhfTextareaField } from '@/shared/ui/form-fields/RhfTextareaField';
 import { FIELD_TOOLTIPS } from '@/shared/ui/text-field/constants';
-import { LABELS } from '@/utils/constants/ui/labels';
+import { LABELS } from '@/shared/utils/constants/ui/labels';
 
 import { ContractorFormValues, contractorSchema } from '../model/schema';
 

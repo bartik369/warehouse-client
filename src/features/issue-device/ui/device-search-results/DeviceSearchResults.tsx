@@ -2,10 +2,9 @@ import React from 'react';
 
 import { Device } from '@/entities/device/model/types';
 import { IssueState } from '@/features/issue-device/model/issueTypes';
-import { useAppSelector } from '@/hooks/redux/useRedux';
+import { useAppSelector } from '@/shared/hooks/useRedux';
+import { MESSAGES } from '@/shared/utils/constants/ui/messages';
 import { RootState } from '@/store/store';
-import { AssignedDevice } from '@/types/issue';
-import { MESSAGES } from '@/utils/constants/ui/messages';
 
 import { DeviceList } from './DeviceList';
 import styles from './DeviceSearchResults.module.scss';

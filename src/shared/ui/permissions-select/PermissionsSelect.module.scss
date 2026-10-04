@@ -72,12 +72,15 @@
 }
 
 .title {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
 }
 
 .code {
   color: var(--ant-color-text-secondary);
+  font-size: 11px;
+  line-height: 1;
+}
+.selected {
   font-size: 12px;
-  line-height: 18px;
 }

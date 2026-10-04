@@ -2,8 +2,8 @@ import { Table } from 'antd';
 import clsx from 'clsx';
 
 import { PermissionRole } from '@/entities/permission-role/model/types';
+import { TableTypography } from '@/shared/types/typography';
 import tableStyles from '@/shared/ui/table/table.module.scss';
-import { TableTypography } from '@/types/typography';
 
 import { getPermissionsRoleColumns } from '../../model/getPermissionsRoleColumns';
 

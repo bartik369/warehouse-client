@@ -7,8 +7,8 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { PiEraser } from 'react-icons/pi';
 import SignatureCanvas from 'react-signature-canvas';
 
+import { SignatureActions } from '@/shared/types/signature';
 import { SignatureItemType } from '@/store/slices/signatureSlice';
-import { SignatureActions } from '@/types/signature';
 
 import { SignatureRole } from '../model/types';
 import styles from './Signature.module.scss';
