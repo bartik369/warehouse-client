@@ -37,6 +37,7 @@
     "react-signature-canvas": "^1.1.0-alpha.2",
     "react-to-pdf": "^2.0.1",
     "react-toastify": "^11.0.3",
+    "recharts": "^3.10.1",
     "redux": "^5.0.1",
     "trim-canvas": "^0.1.2",
     "xlsx": "^0.18.5",
