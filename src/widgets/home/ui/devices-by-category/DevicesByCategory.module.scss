@@ -1,0 +1,101 @@
+.card {
+  align-items: center;
+  .chartWrapper {
+    position: relative;
+  }
+
+  .chart {
+    :global(.recharts-surface:focus:not(:focus-visible)) {
+      outline: none;
+    }
+  }
+
+  .chartCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .count {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .description {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .legend {
+    gap: 8px;
+    height: 220px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--gray-200);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--gray-200);
+    }
+  }
+
+  .legendRow {
+    display: grid;
+    grid-template-columns: 10px minmax(150px, 1fr) 30px 40px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .scrollHint {
+    position: absolute;
+    width: fit-content;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 30px;
+    // background-color: #387cf0;
+    // background: linear-gradient(to bottom, transparent, var(--white));
+    pointer-events: none;
+    button {
+      width: 25px;
+      height: 25px;
+      background-color: var(--gray-50);
+      pointer-events: auto;
+    }
+  }
+
+  .marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .name {
+    font-weight: 400;
+    font-size: 12px;
+  }
+  .value {
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .percent {
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+}
