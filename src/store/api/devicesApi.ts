@@ -5,6 +5,7 @@ import { DeviceFormValues } from '@/features/create-device/model/schema';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
 import { FilterDeviceOptions } from '@/shared/types/devices';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
+import { DeviceStatistics } from '@/widgets/home/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -37,8 +38,18 @@ export const devicesApi = createApi({
           urlParams.append(key, String(value));
         });
 
-        return `/devices/locations/${city}?${urlParams.toString()}`;
+        return `${import.meta.env.VITE_DEVICES}locations/${city}?${urlParams.toString()}`;
       },
+    }),
+    getAllDevices: build.query<Device[], void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_ALL_DEVICES}`,
+      }),
+    }),
+    getDevicesStatistics: build.query<DeviceStatistics, void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_DEVICES_STATISTICS}`,
+      }),
     }),
     getDeviceOptions: build.query<FilterDeviceOptions, string>({
       query: (city) => ({
@@ -104,6 +115,7 @@ export const {
   useCreateDeviceMutation,
   useUpdateDeviceMutation,
   useGetDevicesQuery,
+  useGetAllDevicesQuery,
   useLazyGetDeviceQuery,
   useGetDeviceQuery,
   useGetDeviceOptionsQuery,
@@ -112,4 +124,5 @@ export const {
   useGetAssignedDevicesQuery,
   useGetDevicesByIssueProcessQuery,
   useGetDeviceHistoryQuery,
+  useGetDevicesStatisticsQuery,
 } = devicesApi;
