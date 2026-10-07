@@ -49,7 +49,7 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
         <Typography.Title className={styles.title} level={2}>
           {TITLES.deviceCategories}
         </Typography.Title>
-        <span className={styles.descriptions}>{DESCRIPTIONS.deviceCategories}</span>
+        <span className={styles.description}>{DESCRIPTIONS.deviceCategories}</span>
       </Flex>
       <Spin spinning={loading}>
         {categories.length === 0 ? (

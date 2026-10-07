@@ -19,10 +19,12 @@ export const categoryColors: Record<string, string> = {
 export const TITLES = {
   deviceCategories: 'Устройства по категориям',
   deviceAdditions: 'Динамика добавления устройств',
+  recentIssues: 'Последние выдачи',
 };
 export const DESCRIPTIONS = {
   deviceCategories: 'Распределение всех устройств в компании',
   deviceAdditions: 'Количество новых устройств по меяцам',
+  recentIssues: 'Выдачи оборудования по всей компании',
 };
 
 export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] = [
@@ -30,6 +32,10 @@ export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] 
   { label: '12 мес', value: '12m' },
   { label: 'Всё время', value: '24m' },
 ];
+
+export const LABELS = {
+  allIssues: 'Все выдачи',
+};
 
 export const mockData = [
   { month: '2025-11', added: 5 },

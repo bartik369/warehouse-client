@@ -5,9 +5,12 @@ import styles from './HomeDashboard.module.scss';
 import { DeviceAdditions } from './device-additions/DeviceAdditions';
 import { DeviceStats } from './device-stats/DeviceStats';
 import { DevicesByCategory } from './devices-by-category/DevicesByCategory';
+import { RecentIssuances } from './recent-issuances/RecentIssuances';
 
 export const HomeDashboard = () => {
   const {
+    recentIssues,
+    recentIssuesLoading,
     period,
     categories,
     loading,
@@ -30,6 +33,9 @@ export const HomeDashboard = () => {
       <div className={styles.container}>
         <DevicesByCategory categories={categories} totalCount={totalCount} loading={loading} />
         <DeviceAdditions value={period} onPeriodChange={onPeriodChange} />
+      </div>
+      <div className={styles.test}>
+        <RecentIssuances issues={recentIssues} loading={recentIssuesLoading} />
       </div>
     </Flex>
   );

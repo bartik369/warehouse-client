@@ -4,6 +4,7 @@ import {
   useGetDevicesStatisticsAdditionsQuery,
   useGetDevicesStatisticsQuery,
 } from '@/store/api/devicesApi';
+import { useGetRecentIssuesQuery } from '@/store/api/issueApi';
 
 import { DeviceAdditionsPeriod } from './types';
 
@@ -16,8 +17,12 @@ export const useHomeDashboard = () => {
   const handlePeriodChange = (value: DeviceAdditionsPeriod) => {
     setPeriod(value);
   };
+  const { data: recentIssues = [], isLoading: recentIssuesLoading } = useGetRecentIssuesQuery();
+  console.log(recentIssues);
 
   return {
+    recentIssues,
+    recentIssuesLoading,
     period,
     loading: isStatsLoading,
     categories: statistics?.byCategory ?? [],

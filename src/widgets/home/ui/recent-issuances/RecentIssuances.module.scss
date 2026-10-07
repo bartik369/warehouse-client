@@ -1,0 +1,82 @@
+.card {
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
+  .description {
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-bottom: 15px;
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
+    font-weight: 600;
+  }
+}
+.department {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--gray-500);
+}
+.icon {
+  color: var(--muted-blue-300);
+}
+.link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--gray-700);
+  font-size: 11px;
+}
+.evenRow {
+  background-color: #fdfdfd;
+}
+
+.oddRow {
+  background-color: #ffffff;
+}
+.table {
+  :global(.ant-table-thead > tr > th) {
+    font-size: var(--table-header-font-size);
+    font-weight: 600;
+    font-size: 11px;
+    line-height: var(--table-header-line-height);
+  }
+
+  :global(.ant-table-tbody > tr > td) {
+    font-size: var(--table-cell-font-size);
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  :global(.ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
+  }
+
+  :global(.ant-checkbox:hover .ant-checkbox-inner) {
+    border-color: var(--blue-600);
+  }
+
+  :global(.ant-checkbox-checked:hover .ant-checkbox-inner) {
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
+  }
+
+  :global(.ant-checkbox-wrapper:hover .ant-checkbox-checked .ant-checkbox-inner) {
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
+  }
+
+  :global(
+    .ant-checkbox-wrapper:hover
+      .ant-checkbox-checked:not(.ant-checkbox-disabled)
+      .ant-checkbox-inner
+  ) {
+    background-color: var(--blue-500);
+    border-color: var(--blue-600);
+  }
+}
