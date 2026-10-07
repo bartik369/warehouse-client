@@ -1,5 +1,7 @@
 .card {
-  align-items: center;
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
   .chartWrapper {
     position: relative;
   }
@@ -70,8 +72,6 @@
     justify-content: center;
     align-items: flex-end;
     height: 30px;
-    // background-color: #387cf0;
-    // background: linear-gradient(to bottom, transparent, var(--white));
     pointer-events: none;
     button {
       width: 25px;

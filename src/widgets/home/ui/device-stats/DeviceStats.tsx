@@ -4,6 +4,7 @@ import { PiDevicesBold } from 'react-icons/pi';
 import { TbBuildingWarehouse, TbDeviceDesktopOff } from 'react-icons/tb';
 import { VscServerProcess } from 'react-icons/vsc';
 
+import { calculatePercentage } from '@/shared/utils/data/calculations';
 import { StatCard } from '@/widgets/stat-card/ui/StatCard';
 import { CircularProgress } from '@/widgets/stat-card/ui/circular-progress/CircularProgress';
 
@@ -42,7 +43,11 @@ export const DeviceStats = ({
         colorVariant="green"
         loading={loading}
       >
-        <CircularProgress colorVariant="green" percent={10} size={50} />
+        <CircularProgress
+          colorVariant="green"
+          percent={calculatePercentage(assignedCount, totalCount)}
+          size={50}
+        />
       </StatCard>
       <StatCard
         icon={<TbBuildingWarehouse size={18} />}
@@ -52,7 +57,11 @@ export const DeviceStats = ({
         colorVariant="blue"
         loading={loading}
       >
-        <CircularProgress colorVariant="blue" percent={10} size={50} />
+        <CircularProgress
+          colorVariant="blue"
+          percent={calculatePercentage(availableCount, totalCount)}
+          size={50}
+        />
       </StatCard>
       <StatCard
         icon={<MdMiscellaneousServices size={18} />}
@@ -62,7 +71,11 @@ export const DeviceStats = ({
         colorVariant="yellow"
         loading={loading}
       >
-        <CircularProgress colorVariant="yellow" percent={10} size={50} />
+        <CircularProgress
+          colorVariant="yellow"
+          percent={calculatePercentage(underRepairCount, totalCount)}
+          size={50}
+        />
       </StatCard>
       <StatCard
         icon={<TbDeviceDesktopOff size={18} />}

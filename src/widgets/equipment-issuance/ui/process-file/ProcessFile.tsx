@@ -3,7 +3,7 @@ import { FaFilePdf } from 'react-icons/fa6';
 import { TbDownload } from 'react-icons/tb';
 
 import { EquipmentIssuance } from '@/features/issue-device/model/types';
-import { downloadFile } from '@/shared/lib/ download-file/download-file';
+import { downloadFile } from '@/shared/lib/download-file/download-file';
 import { IconButton } from '@/shared/ui/icon-button/IconButton';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 import { useDownloadIssueFileMutation } from '@/store/api/issueApi';

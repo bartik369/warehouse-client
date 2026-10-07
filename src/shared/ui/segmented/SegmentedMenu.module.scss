@@ -1,0 +1,48 @@
+.segmented {
+  border-radius: 4px;
+  background: var(--gray-100);
+  :global(.ant-segmented-group) {
+    gap: 4px;
+  }
+
+  :global(.ant-segmented-item) {
+    border: 1px solid transparent;
+    color: var(--gray-500);
+  }
+
+  :global(.ant-segmented-item-selected) {
+    color: var(--blue-600);
+    border: 1px solid var(--blue-300);
+    background: var(--white);
+  }
+}
+
+.small {
+  font-size: 10px;
+
+  :global(.ant-segmented-item-label) {
+    min-height: 20px;
+    line-height: 20px;
+    padding: 0 6px;
+  }
+}
+
+.medium {
+  font-size: 11px;
+
+  :global(.ant-segmented-item-label) {
+    min-height: 22px;
+    line-height: 22px;
+    padding: 0 8px;
+  }
+}
+
+.large {
+  font-size: 13px;
+
+  :global(.ant-segmented-item-label) {
+    min-height: 28px;
+    line-height: 28px;
+    padding: 0 12px;
+  }
+}
