@@ -5,9 +5,7 @@ import { Entity } from './devices';
 export type ListRefObj = {
   [index: string]: HTMLDivElement | null;
 };
-// export type Checked = {
-//     [index: string]: boolean;
-// }
+
 export type Checked = Record<string, boolean>;
 
 export type CheckedDeviceOptions = {

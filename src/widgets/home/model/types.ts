@@ -11,3 +11,5 @@ export type DeviceStatistics = {
     count: number;
   }[];
 };
+
+export type DeviceAdditionsPeriod = '6m' | '12m' | '24m';

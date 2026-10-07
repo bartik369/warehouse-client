@@ -5,7 +5,7 @@ import { DeviceFormValues } from '@/features/create-device/model/schema';
 import { SearchDevicesParams } from '@/features/issue-device/model/types';
 import { FilterDeviceOptions } from '@/shared/types/devices';
 import { DeviceHistoryItem } from '@/widgets/device-details/model/types';
-import { DeviceStatistics } from '@/widgets/home/model/types';
+import { DeviceAdditionsPeriod, DeviceStatistics } from '@/widgets/home/model/types';
 
 import { baseQueryWithReauth } from '../baseQueryWithReauth';
 
@@ -49,6 +49,12 @@ export const devicesApi = createApi({
     getDevicesStatistics: build.query<DeviceStatistics, void>({
       query: () => ({
         url: `${import.meta.env.VITE_DEVICES_STATISTICS}`,
+      }),
+    }),
+    getDevicesStatisticsAdditions: build.query<any, DeviceAdditionsPeriod>({
+      query: (period) => ({
+        url: `${import.meta.env.VITE_DEVICES_STATISTICS_ADDITIONS}`,
+        params: { period },
       }),
     }),
     getDeviceOptions: build.query<FilterDeviceOptions, string>({
@@ -125,4 +131,5 @@ export const {
   useGetDevicesByIssueProcessQuery,
   useGetDeviceHistoryQuery,
   useGetDevicesStatisticsQuery,
+  useGetDevicesStatisticsAdditionsQuery,
 } = devicesApi;
