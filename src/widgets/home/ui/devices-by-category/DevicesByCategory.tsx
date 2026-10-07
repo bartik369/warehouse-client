@@ -6,7 +6,7 @@ import { Pie, PieChart } from 'recharts';
 
 import { calculatePercentage } from '@/shared/utils/data/calculations';
 
-import { TITLES, categoryColors } from '../../model/constants';
+import { DESCRIPTIONS, TITLES, categoryColors } from '../../model/constants';
 import { DeviceStatistics } from '../../model/types';
 import styles from './DevicesByCategory.module.scss';
 import { renderPieSector } from './renderPieSector';
@@ -45,9 +45,12 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
 
   return (
     <Card className={styles.card}>
-      <Typography.Title className={styles.title} level={2}>
-        {TITLES.deviceCategories}
-      </Typography.Title>
+      <Flex vertical>
+        <Typography.Title className={styles.title} level={2}>
+          {TITLES.deviceCategories}
+        </Typography.Title>
+        <span className={styles.descriptions}>{DESCRIPTIONS.deviceCategories}</span>
+      </Flex>
       <Spin spinning={loading}>
         {categories.length === 0 ? (
           <Empty />

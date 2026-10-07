@@ -8,7 +8,7 @@ import {
 import { DeviceAdditionsPeriod } from './types';
 
 export const useHomeDashboard = () => {
-  const [period, setPeriod] = useState<DeviceAdditionsPeriod>('24m');
+  const [period, setPeriod] = useState<DeviceAdditionsPeriod>('12m');
   const { data: statistics, isLoading: isStatsLoading } = useGetDevicesStatisticsQuery();
   // todo  период уходит на бэк и осталось доделать сервис, после чего удалить моковские данные
   const { data: additions, isLoading: isAdditionsLoading } =
