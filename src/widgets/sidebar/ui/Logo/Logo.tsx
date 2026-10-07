@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { ELEMENTS_LABELS } from '@/shared/utils/constants/ui/elements';
 
 import logo from '../../../../assets/elements/logo.png';
@@ -9,7 +11,7 @@ interface LogoProps {
 
 export const Logo = ({ open }: LogoProps) => {
   return (
-    <div className={styles.logo}>
+    <Link className={styles.logo} to="/">
       <img className={styles.image} src={logo} alt="" />
       {open && (
         <div className={styles.content}>
@@ -17,6 +19,6 @@ export const Logo = ({ open }: LogoProps) => {
           <span className={styles.description}>{ELEMENTS_LABELS.logoText}</span>
         </div>
       )}
-    </div>
+    </Link>
   );
 };

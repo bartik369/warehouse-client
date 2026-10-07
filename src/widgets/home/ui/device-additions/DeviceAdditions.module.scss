@@ -8,9 +8,13 @@
     line-height: 1;
     margin: 0;
   }
+  .description {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
   .chart {
     width: 100%;
-    height: 205px;
+    height: 220px;
   }
   .cardHeader {
     align-items: center;

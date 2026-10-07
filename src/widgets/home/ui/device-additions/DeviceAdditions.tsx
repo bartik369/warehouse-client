@@ -12,7 +12,7 @@ import {
 import { formatMonth } from '@/shared/lib/format/formatDate';
 import { SegmentedMenu } from '@/shared/ui/segmented/SegmentedMenu';
 
-import { TITLES, additionsPeriods, mockData } from '../../model/constants';
+import { DESCRIPTIONS, TITLES, additionsPeriods, mockData } from '../../model/constants';
 import { DeviceAdditionsPeriod } from '../../model/types';
 import styles from './DeviceAdditions.module.scss';
 
@@ -25,9 +25,12 @@ export const DeviceAdditions = ({ value, onPeriodChange }: DeviceAdditionsProps)
   return (
     <Card className={styles.card}>
       <Flex className={styles.cardHeader}>
-        <Typography.Title className={styles.title} level={2}>
-          {TITLES.deviceAdditions}
-        </Typography.Title>
+        <Flex vertical>
+          <Typography.Title className={styles.title} level={2}>
+            {TITLES.deviceAdditions}
+          </Typography.Title>
+          <span className={styles.description}>{DESCRIPTIONS.deviceAdditions}</span>
+        </Flex>
         <SegmentedMenu<DeviceAdditionsPeriod>
           variant="small"
           value={value}

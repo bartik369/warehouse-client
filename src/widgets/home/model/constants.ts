@@ -20,6 +20,10 @@ export const TITLES = {
   deviceCategories: 'Устройства по категориям',
   deviceAdditions: 'Динамика добавления устройств',
 };
+export const DESCRIPTIONS = {
+  deviceCategories: 'Распределение всех устройств в компании',
+  deviceAdditions: 'Количество новых устройств по меяцам',
+};
 
 export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] = [
   { label: '6 мес', value: '6m' },

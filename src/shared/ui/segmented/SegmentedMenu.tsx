@@ -12,12 +12,14 @@ interface SegmentedMenuProps<T> {
   onChange: SegmentedProps<T>['onChange'];
 }
 export const SegmentedMenu = <T,>({
+  value,
   variant = 'medium',
   options,
   onChange,
 }: SegmentedMenuProps<T>) => {
   return (
     <Segmented
+      value={value}
       className={clsx(styles.segmented, styles[variant])}
       options={options}
       onChange={onChange}
