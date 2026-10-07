@@ -10,3 +10,15 @@
     flex: 1 1 auto;
   }
 }
+.test {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 25px;
+  > :nth-child(1) {
+    flex: 0 1 750px;
+  }
+  > :nth-child(2) {
+    flex: 1 1 auto;
+  }
+}

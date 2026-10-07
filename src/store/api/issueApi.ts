@@ -6,6 +6,7 @@ import {
   FinalizeIssueRequest,
   IssueProcessDetails,
   IssueProcessDto,
+  IssueProcessListItem,
   SortedIssueProcessesRes,
 } from '@/features/issue-device/model/types';
 import { IssueProcessQueryParams } from '@/shared/types/api';
@@ -24,6 +25,11 @@ export const issueApi = createApi({
         body,
       }),
       invalidatesTags: [{ type: 'Issue', id: 'LIST' }],
+    }),
+    getRecentIssues: build.query<IssueProcessListItem[], void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_RECENT_ISSUES}`,
+      }),
     }),
     getIssueByDevice: build.query<IssueProcessDetails, string>({
       query: (id: string) => ({
@@ -113,4 +119,5 @@ export const {
   useDownloadIssueFileMutation,
   useDeleteIssueProcessMutation,
   useGetIssueByDeviceQuery,
+  useGetRecentIssuesQuery,
 } = issueApi;
