@@ -1,4 +1,4 @@
-.container {
+.middle {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -7,18 +7,18 @@
     flex: 0 1 550px;
   }
   > :nth-child(2) {
-    flex: 1 1 auto;
+    flex: 1 1 400px;
   }
 }
-.test {
+.bottom {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 25px;
   > :nth-child(1) {
-    flex: 0 1 750px;
+    flex: 1 1 450px;
   }
   > :nth-child(2) {
-    flex: 1 1 auto;
+    flex: 0 1 380px;
   }
 }

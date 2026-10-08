@@ -1,5 +1,7 @@
 import { Key, useMemo, useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import {
   IssueFilterState,
   IssueProcessListItem,
@@ -29,7 +31,11 @@ export const useIssueList = () => {
     company: '',
     employee: '',
   };
-  const [filters, setFIlters] = useState(initialFilters);
+  const [searchParams] = useSearchParams();
+  const [filters, setFIlters] = useState<IssueFilterState>({
+    ...initialFilters,
+    status: searchParams.get('status') ?? '',
+  });
   const [selectedIssue, setSelectedIssue] = useState<IssueProcessListItem | null>(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const { updateSearchParam, resetSearchParams, updateSearchParams } = useQueryParams();

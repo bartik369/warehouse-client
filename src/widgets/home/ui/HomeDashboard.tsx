@@ -2,6 +2,7 @@ import { Flex } from 'antd';
 
 import { useHomeDashboard } from '../model/useHomeDashboard';
 import styles from './HomeDashboard.module.scss';
+import { AttentionRequired } from './attention-required/AttentionRequired';
 import { DeviceAdditions } from './device-additions/DeviceAdditions';
 import { DeviceStats } from './device-stats/DeviceStats';
 import { DevicesByCategory } from './devices-by-category/DevicesByCategory';
@@ -11,6 +12,8 @@ export const HomeDashboard = () => {
   const {
     recentIssues,
     recentIssuesLoading,
+    unfinishedIssuesCount,
+    isUnfinishedLoading,
     period,
     categories,
     loading,
@@ -30,12 +33,16 @@ export const HomeDashboard = () => {
         availableCount={availableCount}
         underRepairCount={underRepairCount}
       />
-      <div className={styles.container}>
+      <div className={styles.middle}>
         <DevicesByCategory categories={categories} totalCount={totalCount} loading={loading} />
         <DeviceAdditions value={period} onPeriodChange={onPeriodChange} />
       </div>
-      <div className={styles.test}>
+      <div className={styles.bottom}>
         <RecentIssuances issues={recentIssues} loading={recentIssuesLoading} />
+        <AttentionRequired
+          unfinishedIssuesCount={unfinishedIssuesCount}
+          isUnfinishedLoading={isUnfinishedLoading}
+        />
       </div>
     </Flex>
   );

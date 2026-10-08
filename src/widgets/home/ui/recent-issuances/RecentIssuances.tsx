@@ -30,6 +30,7 @@ export const RecentIssuances = ({ issues, loading }: RecentIssuancesProps) => {
         </Link>
       </Flex>
       <Table<IssueProcessListItem>
+        rowKey="id"
         loading={loading}
         columns={columns}
         dataSource={issues}
