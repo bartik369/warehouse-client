@@ -39,7 +39,7 @@ export const DeviceStats = ({
         icon={<VscServerProcess size={18} />}
         label="В эксплуатации"
         value={assignedCount}
-        description="Исползуются"
+        description="Используются"
         colorVariant="green"
         loading={loading}
       >

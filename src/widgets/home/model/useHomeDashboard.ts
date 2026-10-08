@@ -4,7 +4,10 @@ import {
   useGetDevicesStatisticsAdditionsQuery,
   useGetDevicesStatisticsQuery,
 } from '@/store/api/devicesApi';
-import { useGetRecentIssuesQuery } from '@/store/api/issueApi';
+import {
+  useGetIssueUnfinishedProcessesCountQuery,
+  useGetRecentIssuesQuery,
+} from '@/store/api/issueApi';
 
 import { DeviceAdditionsPeriod } from './types';
 
@@ -18,13 +21,16 @@ export const useHomeDashboard = () => {
     setPeriod(value);
   };
   const { data: recentIssues = [], isLoading: recentIssuesLoading } = useGetRecentIssuesQuery();
-  console.log(recentIssues);
+  const { data: unfinishedIssuesCount = 0, isLoading: isUnfinishedLoading } =
+    useGetIssueUnfinishedProcessesCountQuery();
 
   return {
     recentIssues,
     recentIssuesLoading,
     period,
     loading: isStatsLoading,
+    unfinishedIssuesCount,
+    isUnfinishedLoading,
     categories: statistics?.byCategory ?? [],
     totalCount: statistics?.total ?? 0,
     assignedCount: statistics?.assigned ?? 0,

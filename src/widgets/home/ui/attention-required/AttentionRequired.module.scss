@@ -1,0 +1,90 @@
+.card {
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0;
+  }
+  .description {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 45px 220px 60px 25px;
+  align-items: center;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 12px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 12px;
+      color: var(--gray-700);
+    }
+    .description {
+      font-size: 11px;
+    }
+  }
+  .value {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 15px;
+  }
+}
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  color: var(--gray-500);
+  background-color: var(--gray-100);
+  transition:
+    background-color ease 0.5s,
+    color ease 0.5s;
+  &:hover {
+    color: var(--white);
+    background-color: var(--blue-400);
+  }
+}
+.blue {
+  .icon {
+    background-color: var(--blue-50);
+    color: var(--blue-500);
+  }
+  .value {
+    color: var(--blue-500);
+  }
+}
+.yellow {
+  .icon {
+    background-color: var(--yellow-50);
+    color: var(--yellow-500);
+  }
+  .value {
+    color: var(--yellow-500);
+  }
+}
+.red {
+  .icon {
+    background-color: var(--red-50);
+    color: var(--red-500);
+  }
+  .value {
+    color: var(--red-500);
+  }
+}

@@ -18,13 +18,21 @@ export const categoryColors: Record<string, string> = {
 
 export const TITLES = {
   deviceCategories: 'Устройства по категориям',
-  deviceAdditions: 'Динамика добавления устройств',
+  deviceAdditions: 'Динамика устройств',
   recentIssues: 'Последние выдачи',
+  attentionRequired: 'Требует внимания',
+  notFinishedTasks: 'Незавершеные задачи',
+  activeInventories: 'Активные инвентаризации',
+  licensesAndWarranties: 'Лицензии и гарантии',
 };
 export const DESCRIPTIONS = {
   deviceCategories: 'Распределение всех устройств в компании',
-  deviceAdditions: 'Количество новых устройств по меяцам',
+  deviceAdditions: 'Количество новых устройств',
   recentIssues: 'Выдачи оборудования по всей компании',
+  attentionRequired: 'Операции, ограничения и важные сроки',
+  notFinishedTasks: 'Проверить перед инвентаризацией',
+  activeInventories: 'Склады с ограниченными операциями',
+  licensesAndWarranties: 'Истекли или истекают в течении 3 мес',
 };
 
 export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] = [

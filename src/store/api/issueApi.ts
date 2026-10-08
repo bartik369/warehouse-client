@@ -28,7 +28,7 @@ export const issueApi = createApi({
     }),
     getRecentIssues: build.query<IssueProcessListItem[], void>({
       query: () => ({
-        url: `${import.meta.env.VITE_RECENT_ISSUES}`,
+        url: import.meta.env.VITE_RECENT_ISSUES,
       }),
     }),
     getIssueByDevice: build.query<IssueProcessDetails, string>({
@@ -41,6 +41,11 @@ export const issueApi = createApi({
         url: `${import.meta.env.VITE_ISSUE_PROCESS}${processid}`,
       }),
       providesTags: (_result, _error, processId) => [{ type: 'Issue', id: processId }],
+    }),
+    getIssueUnfinishedProcessesCount: build.query<number, void>({
+      query: () => ({
+        url: import.meta.env.VITE_ISSUE_UNFINISHED_COUNT,
+      }),
     }),
     getIssueProcesses: build.query<SortedIssueProcessesRes, IssueProcessQueryParams>({
       query: (queryParams) => {
@@ -120,4 +125,5 @@ export const {
   useDeleteIssueProcessMutation,
   useGetIssueByDeviceQuery,
   useGetRecentIssuesQuery,
+  useGetIssueUnfinishedProcessesCountQuery,
 } = issueApi;
