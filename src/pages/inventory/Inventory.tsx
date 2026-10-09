@@ -1,7 +1,5 @@
-import React from 'react';
-
-const Inventory = () => {
+const InventoryPage = () => {
   return <div></div>;
 };
 
-export default Inventory;
+export default InventoryPage;

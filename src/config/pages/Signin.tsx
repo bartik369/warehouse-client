@@ -1,9 +1,9 @@
-import Signin from '@/pages/signin/Signin';
+import SigninPage from '@/pages/signin/SigninPage';
 
 const SigninConfig = {
   title: 'Signin',
   path: '/login',
-  element: <Signin />,
+  element: <SigninPage />,
   requireAuth: true,
 };
 export default SigninConfig;

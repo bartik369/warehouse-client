@@ -1,9 +1,9 @@
-import EditDevice from '@/pages/admin/device/EditDevice';
+import EditDevicePage from '@/pages/admin/device/EditDevicePage';
 
 const EditDeviceConfig = {
   title: 'EditDevice',
   path: '/admin/edit-device',
-  element: <EditDevice />,
+  element: <EditDevicePage />,
   requireAuth: true,
 };
 export default EditDeviceConfig;

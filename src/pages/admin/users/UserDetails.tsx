@@ -1,5 +1,5 @@
-const UserDetails = () => {
+const UserDetailsPage = () => {
   return <div>данные</div>;
 };
 
-export default UserDetails;
+export default UserDetailsPage;

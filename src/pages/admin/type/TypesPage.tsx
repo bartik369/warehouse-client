@@ -1,7 +1,7 @@
 import { ManageType } from '@/features/manage-type/ui/ManageType';
 
-const AddType = () => {
+const TypesPage = () => {
   return <ManageType />;
 };
 
-export default AddType;
+export default TypesPage;

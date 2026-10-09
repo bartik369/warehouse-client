@@ -1,9 +1,9 @@
-import { ManageContractor } from '@/features/manage-contractor/ui/ManageContractor';
+import ContractorsPage from '@/pages/admin/contractor/ContractorsPage';
 
 const ContractorsConfig = {
   title: 'Contractors',
   path: '/admin/contractors',
-  element: <ManageContractor />,
+  element: <ContractorsPage />,
   requireAuth: true,
 };
 export default ContractorsConfig;

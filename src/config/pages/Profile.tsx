@@ -1,9 +1,9 @@
-import Profile from '@/pages/profile/Profile';
+import ProfilePage from '@/pages/profile/ProfilePage';
 
 const ProfileConfig = {
   title: 'Profile',
   path: '/profile',
-  element: <Profile />,
+  element: <ProfilePage />,
   requireAuth: true,
 };
 export default ProfileConfig;

@@ -1,9 +1,9 @@
-import { ManageLocation } from '@/features/manage-location/ui/ManageLocation';
+import LocationsPage from '@/pages/admin/locations/LocationsPage';
 
 const LocationsConfig = {
   title: 'AddLocation',
   path: '/admin/locations',
-  element: <ManageLocation />,
+  element: <LocationsPage />,
   requireAuth: true,
 };
 export default LocationsConfig;
