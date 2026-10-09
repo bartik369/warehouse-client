@@ -1,6 +1,6 @@
 import { SegmentedProps } from 'antd';
 
-import { DeviceAdditionsPeriod } from './types';
+import { Period } from './types';
 
 export const categoryColors: Record<string, string> = {
   laptop: 'var(--blue-500)',
@@ -24,6 +24,7 @@ export const TITLES = {
   notFinishedTasks: 'Незавершеные задачи',
   activeInventories: 'Активные инвентаризации',
   licensesAndWarranties: 'Лицензии и гарантии',
+  deviceMovements: 'Выдачи и приемы',
 };
 export const DESCRIPTIONS = {
   deviceCategories: 'Распределение всех устройств в компании',
@@ -32,10 +33,11 @@ export const DESCRIPTIONS = {
   attentionRequired: 'Операции, ограничения и важные сроки',
   notFinishedTasks: 'Проверить перед инвентаризацией',
   activeInventories: 'Склады с ограниченными операциями',
-  licensesAndWarranties: 'Истекли или истекают в течении 3 мес',
+  licensesAndWarranties: 'Лицензии и гарантии',
+  deviceMovements: 'Количество устройств',
 };
 
-export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] = [
+export const additionsPeriods: SegmentedProps<Period>['options'] = [
   { label: '6 мес', value: '6m' },
   { label: '12 мес', value: '12m' },
   { label: 'Всё время', value: '24m' },
@@ -44,18 +46,3 @@ export const additionsPeriods: SegmentedProps<DeviceAdditionsPeriod>['options'] 
 export const LABELS = {
   allIssues: 'Все выдачи',
 };
-
-export const mockData = [
-  { month: '2025-11', added: 5 },
-  { month: '2025-12', added: 8 },
-  { month: '2026-01', added: 4 },
-  { month: '2026-02', added: 6 },
-  { month: '2026-03', added: 10 },
-  { month: '2026-04', added: 7 },
-  { month: '2026-05', added: 3 },
-  { month: '2026-06', added: 7 },
-  { month: '2026-07', added: 4 },
-  { month: '2026-08', added: 9 },
-  { month: '2026-09', added: 5 },
-  { month: '2026-10', added: 11 },
-];

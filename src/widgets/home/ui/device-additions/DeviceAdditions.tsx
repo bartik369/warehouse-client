@@ -1,4 +1,4 @@
-import { Card, Flex, SegmentedProps, Typography } from 'antd';
+import { Card, Flex, Typography } from 'antd';
 import {
   Area,
   AreaChart,
@@ -12,13 +12,14 @@ import {
 import { formatMonth } from '@/shared/lib/format/formatDate';
 import { SegmentedMenu } from '@/shared/ui/segmented/SegmentedMenu';
 
-import { DESCRIPTIONS, TITLES, additionsPeriods, mockData } from '../../model/constants';
-import { DeviceAdditionsPeriod } from '../../model/types';
+import { DESCRIPTIONS, TITLES, additionsPeriods } from '../../model/constants';
+import { mockData } from '../../model/mocks';
+import { Period } from '../../model/types';
 import styles from './DeviceAdditions.module.scss';
 
 interface DeviceAdditionsProps {
-  value: DeviceAdditionsPeriod;
-  onPeriodChange: (value: DeviceAdditionsPeriod) => void;
+  value: Period;
+  onPeriodChange: (value: Period) => void;
 }
 
 export const DeviceAdditions = ({ value, onPeriodChange }: DeviceAdditionsProps) => {
@@ -31,7 +32,7 @@ export const DeviceAdditions = ({ value, onPeriodChange }: DeviceAdditionsProps)
           </Typography.Title>
           <span className={styles.description}>{DESCRIPTIONS.deviceAdditions}</span>
         </Flex>
-        <SegmentedMenu<DeviceAdditionsPeriod>
+        <SegmentedMenu<Period>
           variant="small"
           value={value}
           options={additionsPeriods}

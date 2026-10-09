@@ -4,6 +4,7 @@ import { useHomeDashboard } from '../model/useHomeDashboard';
 import styles from './HomeDashboard.module.scss';
 import { AttentionRequired } from './attention-required/AttentionRequired';
 import { DeviceAdditions } from './device-additions/DeviceAdditions';
+import { DeviceMovements } from './device-movements/DeviceMovements';
 import { DeviceStats } from './device-stats/DeviceStats';
 import { DevicesByCategory } from './devices-by-category/DevicesByCategory';
 import { RecentIssuances } from './recent-issuances/RecentIssuances';
@@ -35,6 +36,7 @@ export const HomeDashboard = () => {
       />
       <div className={styles.middle}>
         <DevicesByCategory categories={categories} totalCount={totalCount} loading={loading} />
+        <DeviceMovements />
         <DeviceAdditions value={period} onPeriodChange={onPeriodChange} />
       </div>
       <div className={styles.bottom}>

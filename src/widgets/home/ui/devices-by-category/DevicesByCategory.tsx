@@ -58,13 +58,13 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
           <Flex align="center" style={{ minHeight: '200px' }}>
             <Flex align="center">
               <div className={styles.chartWrapper}>
-                <PieChart className={styles.chart} width={215} height={200}>
+                <PieChart className={styles.chart} width={180} height={200}>
                   <Pie
                     data={categories}
                     dataKey="count"
                     nameKey="name"
-                    innerRadius={60}
-                    outerRadius={90}
+                    innerRadius={50}
+                    outerRadius={80}
                     shape={renderPieSector}
                   />
                 </PieChart>

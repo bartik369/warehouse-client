@@ -1,0 +1,25 @@
+.card {
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
+  .chart {
+    width: 100%;
+    height: 220px;
+  }
+  .cardHeader {
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .description {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .title {
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+}
