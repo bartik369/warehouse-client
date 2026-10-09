@@ -1,7 +1,7 @@
 import { ManageAuth } from '@/features/auth/ui/MangeAuth';
 
-const Signin = () => {
+const SigninPage = () => {
   return <ManageAuth />;
 };
 
-export default Signin;
+export default SigninPage;

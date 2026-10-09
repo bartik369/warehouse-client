@@ -3,10 +3,8 @@ import { AppRouteConfig } from '@/app/router/config/types';
 import GrantUserRolesConfig from './Access';
 import AddDeviceConfig from './AddDevice';
 import AddModelConfig from './AddModel';
-import AddTypeConfig from './AddType';
 import CalendarConfig from './Calendar';
 import AddContractorConfig from './Contractors';
-import ContractorsConfig from './Contractors2';
 import DeviceConfig from './Device';
 import DevicesConfig from './Devices';
 import EditDeviceConfig from './EditDevice';
@@ -24,7 +22,7 @@ import ProfileConfig from './Profile';
 import ResetPasswordConfig from './ResetPassword';
 import AddRoleConfig from './Roles';
 import SigninConfig from './Signin';
-import StatisticsConfig from './Statistics';
+import AddTypeConfig from './Types';
 import UserDetailsConfig from './UserDetails';
 import AddUserConfig from './Users';
 import AddWarehouseConfig from './Warehouses';
@@ -43,7 +41,6 @@ export const pageConfigs: AppRouteConfig[] = [
   AddUserConfig,
   AddWarehouseConfig,
   CalendarConfig,
-  ContractorsConfig,
   DeviceConfig,
   ...DevicesConfig,
   EditDeviceConfig,
@@ -60,6 +57,5 @@ export const pageConfigs: AppRouteConfig[] = [
   ProfileConfig,
   ResetPasswordConfig,
   SigninConfig,
-  StatisticsConfig,
   ...UserDetailsConfig,
 ];

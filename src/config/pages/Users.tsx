@@ -1,9 +1,9 @@
-import { ManageUser } from '@/features/manage-user/ui/ManageUser';
+import UsersPage from '@/pages/admin/users/UsersPage';
 
 const UsersConfig = {
   title: 'Users',
   path: '/admin/users',
-  element: <ManageUser />,
+  element: <UsersPage />,
   requireAuth: true,
 };
 export default UsersConfig;

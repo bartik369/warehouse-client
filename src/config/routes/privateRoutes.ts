@@ -1,7 +1,6 @@
 import AccessConfig from '../pages/Access';
 import AddDeviceConfig from '../pages/AddDevice';
 import AddModelConfig from '../pages/AddModel';
-import AddTypeConfig from '../pages/AddType';
 import CalendarConfig from '../pages/Calendar';
 import AddContractorConfig from '../pages/Contractors';
 import ContractorsConfig from '../pages/Contractors';
@@ -20,8 +19,9 @@ import MessagesConfig from '../pages/Messages';
 import PermissionRoleConfig from '../pages/PermissionRole';
 import AddPermissionConfig from '../pages/Permissions';
 import ProfileConfig from '../pages/Profile';
+import ReturnsConfig from '../pages/Returns';
 import AddRoleConfig from '../pages/Roles';
-import StatisticsConfig from '../pages/Statistics';
+import AddTypeConfig from '../pages/Types';
 import UserDetailsConfig from '../pages/UserDetails';
 import AddUserConfig from '../pages/Users';
 import WarehousesConfig from '../pages/Warehouses';
@@ -47,7 +47,6 @@ const privateRoutes = [
   DepartmentConfig,
   AddContractorConfig,
   AddRoleConfig,
-  StatisticsConfig,
   MessagesConfig,
   KnowledgeConfig,
   ContractorsConfig,
@@ -63,6 +62,7 @@ const privateRoutes = [
   IssueDetailsConfig,
   IssueEditConfig,
   IssueListConfig,
+  ReturnsConfig,
 ];
 
 export default privateRoutes;

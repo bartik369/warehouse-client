@@ -1,9 +1,9 @@
-import Calendar from '@/pages/calendar/Calendar';
+import CalendarPage from '@/pages/calendar/CalendarPage';
 
 const CalendarConfig = {
   title: 'Calendar',
   path: '/calendar',
-  element: <Calendar />,
+  element: <CalendarPage />,
   requireAuth: true,
 };
 export default CalendarConfig;

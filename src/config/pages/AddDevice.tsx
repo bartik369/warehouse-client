@@ -1,17 +1,9 @@
-import { Suspense, lazy } from 'react';
-
-import Loader from '@/shared/ui/loader/Loader';
-
-const LazyAddDevice = lazy(() => import('@/pages/admin/device/AddDevice'));
+import AddDevicePage from '@/pages/admin/device/AddDevicePage';
 
 const AddDeviceConfig = {
   title: 'AddDevices',
   path: '/admin/add-device',
-  element: (
-    <Suspense fallback={<Loader color="orange" size="lg" />}>
-      <LazyAddDevice />
-    </Suspense>
-  ),
+  element: <AddDevicePage />,
   requireAuth: true,
 };
 export default AddDeviceConfig;
