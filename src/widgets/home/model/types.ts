@@ -12,4 +12,15 @@ export type DeviceStatistics = {
   }[];
 };
 
-export type DeviceAdditionsPeriod = '6m' | '12m' | '24m';
+export type Period = '6m' | '12m' | '24m';
+
+export interface DeviceMovementItem {
+  month: string;
+  issued: number;
+  returned: number;
+}
+
+export interface DeviceMovementsResponse {
+  period: Period;
+  items: DeviceMovementItem[];
+}

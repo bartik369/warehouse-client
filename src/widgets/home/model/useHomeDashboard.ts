@@ -9,15 +9,15 @@ import {
   useGetRecentIssuesQuery,
 } from '@/store/api/issueApi';
 
-import { DeviceAdditionsPeriod } from './types';
+import { Period } from './types';
 
 export const useHomeDashboard = () => {
-  const [period, setPeriod] = useState<DeviceAdditionsPeriod>('12m');
+  const [period, setPeriod] = useState<Period>('12m');
   const { data: statistics, isLoading: isStatsLoading } = useGetDevicesStatisticsQuery();
   // todo  период уходит на бэк и осталось доделать сервис, после чего удалить моковские данные
   const { data: additions, isLoading: isAdditionsLoading } =
     useGetDevicesStatisticsAdditionsQuery(period);
-  const handlePeriodChange = (value: DeviceAdditionsPeriod) => {
+  const handlePeriodChange = (value: Period) => {
     setPeriod(value);
   };
   const { data: recentIssues = [], isLoading: recentIssuesLoading } = useGetRecentIssuesQuery();
