@@ -41,7 +41,6 @@ export const pageConfigs: AppRouteConfig[] = [
   AddUserConfig,
   AddWarehouseConfig,
   CalendarConfig,
-  ContractorsConfig,
   DeviceConfig,
   ...DevicesConfig,
   EditDeviceConfig,
@@ -58,6 +57,5 @@ export const pageConfigs: AppRouteConfig[] = [
   ProfileConfig,
   ResetPasswordConfig,
   SigninConfig,
-  StatisticsConfig,
   ...UserDetailsConfig,
 ];
