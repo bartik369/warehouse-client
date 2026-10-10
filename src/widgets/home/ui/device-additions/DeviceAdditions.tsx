@@ -14,12 +14,12 @@ import { SegmentedMenu } from '@/shared/ui/segmented/SegmentedMenu';
 
 import { DESCRIPTIONS, TITLES, additionsPeriods } from '../../model/constants';
 import { mockData } from '../../model/mocks';
-import { Period } from '../../model/types';
+import { ChartPeriods, Period } from '../../model/types';
 import styles from './DeviceAdditions.module.scss';
 
 interface DeviceAdditionsProps {
   value: Period;
-  onPeriodChange: (value: Period) => void;
+  onPeriodChange: (chart: keyof ChartPeriods, value: Period) => void;
 }
 
 export const DeviceAdditions = ({ value, onPeriodChange }: DeviceAdditionsProps) => {
@@ -36,7 +36,7 @@ export const DeviceAdditions = ({ value, onPeriodChange }: DeviceAdditionsProps)
           variant="small"
           value={value}
           options={additionsPeriods}
-          onChange={onPeriodChange}
+          onChange={(value) => onPeriodChange('deviceAdditions', value)}
         />
       </Flex>
       <div className={styles.chart}>
