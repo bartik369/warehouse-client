@@ -15,10 +15,15 @@ import { SegmentedMenu } from '@/shared/ui/segmented/SegmentedMenu';
 
 import { DESCRIPTIONS, TITLES, additionsPeriods } from '../../model/constants';
 import { mockDeviceMovements } from '../../model/mocks';
-import { Period } from '../../model/types';
+import { ChartPeriods, Period } from '../../model/types';
 import styles from './DeviceMovements.module.scss';
 
-export const DeviceMovements = () => {
+interface DeviceMovementsProps {
+  value: Period;
+  onPeriodChange: (chart: keyof ChartPeriods, value: Period) => void;
+}
+
+export const DeviceMovements = ({ value, onPeriodChange }: DeviceMovementsProps) => {
   return (
     <Card className={styles.card}>
       <Flex className={styles.cardHeader}>
@@ -30,11 +35,9 @@ export const DeviceMovements = () => {
         </Flex>
         <SegmentedMenu<Period>
           variant="small"
-          value="6m" // todo убрать хардкод после реализации бэка
+          value={value}
           options={additionsPeriods}
-          //   onChange={onPeriodChange} // todo прокинуть колбэк в хук в которм будет отдельный локальный
-          //   стейт, создать либо новый, либо объект с ключами под каждый график с периодами
-          onChange={() => console.log('click')}
+          onChange={(value) => onPeriodChange('deviceMovements', value)}
         />
       </Flex>
       <div className={styles.chart}>

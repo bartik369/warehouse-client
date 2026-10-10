@@ -24,3 +24,8 @@ export interface DeviceMovementsResponse {
   period: Period;
   items: DeviceMovementItem[];
 }
+
+export type ChartPeriods = {
+  deviceAdditions: Period;
+  deviceMovements: Period;
+};

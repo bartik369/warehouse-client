@@ -36,8 +36,8 @@ export const HomeDashboard = () => {
       />
       <div className={styles.middle}>
         <DevicesByCategory categories={categories} totalCount={totalCount} loading={loading} />
-        <DeviceMovements />
-        <DeviceAdditions value={period} onPeriodChange={onPeriodChange} />
+        <DeviceMovements value={period.deviceMovements} onPeriodChange={onPeriodChange} />
+        <DeviceAdditions value={period.deviceAdditions} onPeriodChange={onPeriodChange} />
       </div>
       <div className={styles.bottom}>
         <RecentIssuances issues={recentIssues} loading={recentIssuesLoading} />

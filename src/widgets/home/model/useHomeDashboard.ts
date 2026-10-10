@@ -9,16 +9,24 @@ import {
   useGetRecentIssuesQuery,
 } from '@/store/api/issueApi';
 
-import { Period } from './types';
+import { ChartPeriods, Period } from './types';
 
 export const useHomeDashboard = () => {
-  const [period, setPeriod] = useState<Period>('12m');
+  const [period, setPeriod] = useState<ChartPeriods>({
+    deviceAdditions: '12m',
+    deviceMovements: '6m',
+  });
   const { data: statistics, isLoading: isStatsLoading } = useGetDevicesStatisticsQuery();
   // todo  период уходит на бэк и осталось доделать сервис, после чего удалить моковские данные
-  const { data: additions, isLoading: isAdditionsLoading } =
-    useGetDevicesStatisticsAdditionsQuery(period);
-  const handlePeriodChange = (value: Period) => {
-    setPeriod(value);
+  const { data: additions, isLoading: isAdditionsLoading } = useGetDevicesStatisticsAdditionsQuery(
+    period.deviceAdditions
+  );
+
+  const handlePeriodChange = (chart: keyof ChartPeriods, value: Period) => {
+    setPeriod((prev) => ({
+      ...prev,
+      [chart]: value,
+    }));
   };
   const { data: recentIssues = [], isLoading: recentIssuesLoading } = useGetRecentIssuesQuery();
   const { data: unfinishedIssuesCount = 0, isLoading: isUnfinishedLoading } =
