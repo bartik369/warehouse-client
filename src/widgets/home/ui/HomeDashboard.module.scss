@@ -19,9 +19,12 @@
   align-items: flex-start;
   gap: 25px;
   > :nth-child(1) {
-    flex: 1 1 450px;
+    flex: 1 1 500px;
   }
   > :nth-child(2) {
-    flex: 0 1 380px;
+    flex: 0 0 450px;
+  }
+  > :nth-child(3) {
+    flex: 0 1 300px;
   }
 }

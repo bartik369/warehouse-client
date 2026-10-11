@@ -38,6 +38,9 @@
   background-color: #ffffff;
 }
 .table {
+  :global(.ant-table-tbody > tr:last-child > td) {
+    border-bottom: none;
+  }
   :global(.ant-table-thead > tr > th) {
     font-size: var(--table-header-font-size);
     font-weight: 600;

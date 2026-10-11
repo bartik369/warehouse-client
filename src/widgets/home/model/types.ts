@@ -29,3 +29,30 @@ export type ChartPeriods = {
   deviceAdditions: Period;
   deviceMovements: Period;
 };
+
+export type InventoryStatus = 'in_progress' | 'completed';
+
+export interface InventoryOverviewItem {
+  id: string;
+  processId: number;
+  warehouse: {
+    id: string;
+    name: string;
+  };
+  status: InventoryStatus;
+  expectedCount: number;
+  foundCount: number;
+  discrepancyCount: number;
+  createdAt: string;
+  completedAt: string | null;
+}
+
+export interface InventoryOverviewResponse {
+  active: InventoryOverviewItem;
+  completed: InventoryOverviewItem;
+}
+
+export const inventoryStatus = {
+  completed: 'Завершена',
+  in_progress: 'В процессе',
+} as const;
