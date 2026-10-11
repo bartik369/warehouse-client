@@ -7,6 +7,7 @@ import { DeviceAdditions } from './device-additions/DeviceAdditions';
 import { DeviceMovements } from './device-movements/DeviceMovements';
 import { DeviceStats } from './device-stats/DeviceStats';
 import { DevicesByCategory } from './devices-by-category/DevicesByCategory';
+import { InventoryOverview } from './inventory-overview/InventoryOverview';
 import { RecentIssuances } from './recent-issuances/RecentIssuances';
 
 export const HomeDashboard = () => {
@@ -41,6 +42,7 @@ export const HomeDashboard = () => {
       </div>
       <div className={styles.bottom}>
         <RecentIssuances issues={recentIssues} loading={recentIssuesLoading} />
+        <InventoryOverview />
         <AttentionRequired
           unfinishedIssuesCount={unfinishedIssuesCount}
           isUnfinishedLoading={isUnfinishedLoading}

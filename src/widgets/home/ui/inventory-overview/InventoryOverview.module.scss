@@ -1,0 +1,131 @@
+.card {
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
+
+  .description {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
+    font-weight: 600;
+  }
+  .tabs {
+    :global(.ant-tabs-tab) {
+      padding: 4px 12px;
+    }
+    :global(.ant-tabs-tab-btn) {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    :global(.ant-tabs-nav-list) {
+      gap: 8px;
+    }
+
+    :global(.ant-tabs-tab + .ant-tabs-tab) {
+      margin: 0;
+    }
+  }
+  .icon {
+    color: var(--muted-blue-300);
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--gray-700);
+    font-size: 11px;
+    &:hover {
+      color: var(--blue-300);
+    }
+  }
+}
+
+.item {
+  :global(.ant-card-body) {
+    padding: 15px;
+  }
+  .progress {
+    display: block;
+    width: 100%;
+    line-height: 0;
+    margin-bottom: 12px;
+
+    :global(.ant-progress-outer) {
+      display: block;
+    }
+
+    :global(.ant-progress-inner) {
+      display: block;
+    }
+  }
+  .header {
+    align-items: center;
+    justify-content: space-between;
+    .info {
+      .warehouse {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .description {
+        display: block;
+        font-size: 11px;
+      }
+    }
+    .status {
+      .date {
+        display: block;
+        font-size: 11px;
+        color: var(--gray-600);
+      }
+    }
+  }
+  .summary {
+    gap: 3px;
+    align-items: baseline;
+    font-size: 11px;
+    color: var(--gray-600);
+    .value {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--gray-900);
+    }
+  }
+  .counts {
+    margin-top: 5px;
+    gap: 10px;
+    flex: 1 1 auto;
+    .count {
+      display: flex;
+      flex-direction: column;
+      padding: 3px 6px 3px 8px;
+      border: 1px solid var(--blue-100);
+      border-radius: 8px;
+      background-color: var(--blue-25);
+      .green {
+        color: var(--green-500);
+      }
+      .red {
+        color: var(--red-500);
+      }
+      .value {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .info {
+        display: block;
+        font-size: 10px;
+        color: var(--gray-500);
+      }
+    }
+  }
+}

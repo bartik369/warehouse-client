@@ -25,6 +25,7 @@ export const TITLES = {
   activeInventories: 'Активные инвентаризации',
   licensesAndWarranties: 'Лицензии и гарантии',
   deviceMovements: 'Выдачи и приемы',
+  deviceInventory: 'Инвентаризация складов',
 };
 export const DESCRIPTIONS = {
   deviceCategories: 'Распределение всех устройств в компании',
@@ -34,7 +35,8 @@ export const DESCRIPTIONS = {
   notFinishedTasks: 'Проверить перед инвентаризацией',
   activeInventories: 'Склады с ограниченными операциями',
   licensesAndWarranties: 'Лицензии и гарантии',
-  deviceMovements: 'Количество устройств',
+  deviceMovements: 'Выдачи и приемы',
+  deviceInventory: 'Проверка фактического оборудования',
 };
 
 export const additionsPeriods: SegmentedProps<Period>['options'] = [
@@ -45,4 +47,5 @@ export const additionsPeriods: SegmentedProps<Period>['options'] = [
 
 export const LABELS = {
   allIssues: 'Все выдачи',
+  allInventory: 'Все инвентаризации',
 };

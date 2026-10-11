@@ -1,13 +1,14 @@
 import { Flex } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { BiCheck } from 'react-icons/bi';
+import { FaRegCircleCheck } from 'react-icons/fa6';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoCopyOutline } from 'react-icons/io5';
 import { IoDocumentTextOutline } from 'react-icons/io5';
 
 import { IssueProcessListItem } from '@/features/issue-device/model/types';
 import { copyToClipboard } from '@/shared/lib/clipboard/copyToClipboard';
 import { formatDate } from '@/shared/lib/date/formatDate';
-import { CustomTag } from '@/shared/ui/custom-tag/CustomTag';
 
 import styles from './RecentIssuances.module.scss';
 
@@ -65,9 +66,11 @@ export const RecentIssuancesColumns = (): ColumnsType<IssueProcessListItem> => [
   {
     key: 'status',
     title: 'Статус',
+    width: 30,
     render: () => {
       return (
-        <CustomTag icon={BiCheck} iconSize={12} title="Завершено" variant="success" size="sm" />
+        <IoIosCheckmarkCircle size={16} style={{ color: 'var(--green-400)' }} />
+        // <CustomTag icon={BiCheck} iconSize={12} title="Завершено" variant="success" size="sm" />
       );
     },
   },
