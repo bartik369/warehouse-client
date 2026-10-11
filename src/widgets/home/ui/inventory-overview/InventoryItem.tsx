@@ -14,7 +14,7 @@ interface InventoryItemProps {
 
 export const InventoryItem = ({ percent, data }: InventoryItemProps) => {
   const status = data.status;
-  const result = data.expectedCount - data.foundCount - data.discrepancyCount;
+  const remainingCount = data.expectedCount - data.foundCount - data.discrepancyCount;
   const totalFound = data.foundCount + data.discrepancyCount;
   const strokeColor = status === 'completed' ? 'var(--green-400)' : 'var(--blue-400)';
   return (
@@ -45,8 +45,8 @@ export const InventoryItem = ({ percent, data }: InventoryItemProps) => {
         className={styles.progress}
         percent={percent}
         strokeColor={strokeColor}
-        strokeWidth={8}
-        showInfo={false}
+        strokeWidth={5}
+        format={(value) => `${value}%`}
       />
       <Flex className={styles.counts}>
         <div className={styles.count}>
@@ -58,7 +58,7 @@ export const InventoryItem = ({ percent, data }: InventoryItemProps) => {
           <span className={styles.info}>Расхождения</span>
         </div>
         <div className={styles.count}>
-          <span className={styles.value}>{result}</span>
+          <span className={styles.value}>{remainingCount}</span>
           <span className={styles.info}>{status === 'completed' ? 'Не найдено' : 'Осталось'}</span>
         </div>
       </Flex>

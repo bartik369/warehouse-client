@@ -67,11 +67,9 @@ export const RecentIssuancesColumns = (): ColumnsType<IssueProcessListItem> => [
     key: 'status',
     title: 'Статус',
     width: 30,
+    align: 'center',
     render: () => {
-      return (
-        <IoIosCheckmarkCircle size={16} style={{ color: 'var(--green-400)' }} />
-        // <CustomTag icon={BiCheck} iconSize={12} title="Завершено" variant="success" size="sm" />
-      );
+      return <IoIosCheckmarkCircle size={16} style={{ color: 'var(--green-400)' }} />;
     },
   },
   {
