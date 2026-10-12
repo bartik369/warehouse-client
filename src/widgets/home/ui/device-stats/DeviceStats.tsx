@@ -47,6 +47,7 @@ export const DeviceStats = ({
           colorVariant="green"
           percent={calculatePercentage(assignedCount, totalCount)}
           size={50}
+          suffix="%"
         />
       </StatCard>
       <StatCard
@@ -61,6 +62,7 @@ export const DeviceStats = ({
           colorVariant="blue"
           percent={calculatePercentage(availableCount, totalCount)}
           size={50}
+          suffix="%"
         />
       </StatCard>
       <StatCard
@@ -75,6 +77,7 @@ export const DeviceStats = ({
           colorVariant="yellow"
           percent={calculatePercentage(underRepairCount, totalCount)}
           size={50}
+          suffix="%"
         />
       </StatCard>
       <StatCard
@@ -84,7 +87,7 @@ export const DeviceStats = ({
         description="Не используется"
         colorVariant="red"
       >
-        <CircularProgress colorVariant="red" percent={10} size={50} />
+        <CircularProgress colorVariant="red" percent={10} size={50} suffix="%" />
       </StatCard>
     </Flex>
   );

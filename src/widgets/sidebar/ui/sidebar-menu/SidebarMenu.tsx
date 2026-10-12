@@ -9,7 +9,7 @@ interface SidebarMenuProps {
   open: boolean;
 }
 
-const SidebarMenu = ({ open }: SidebarMenuProps) => {
+export const SidebarMenu = ({ open }: SidebarMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
   const handleMouseEnter = (id: number) => {
@@ -47,5 +47,3 @@ const SidebarMenu = ({ open }: SidebarMenuProps) => {
     </nav>
   );
 };
-
-export default SidebarMenu;
