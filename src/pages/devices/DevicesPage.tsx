@@ -104,7 +104,7 @@ const DevicesPage = () => {
             trigger="click"
             placement="bottomLeft"
             content={
-              <FiltersContent
+              <FilteпшеrsContent
                 advancedFilters={advancedFilters}
                 manufacturersOptions={manufacturersOptions}
                 availableOptions={availableOptions}
