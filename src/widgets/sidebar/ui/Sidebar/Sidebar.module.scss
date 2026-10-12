@@ -16,7 +16,7 @@
   flex-direction: column;
 }
 
-.notactive {
+.notActive {
   @include commonSettings;
   width: 70px;
   display: flex;

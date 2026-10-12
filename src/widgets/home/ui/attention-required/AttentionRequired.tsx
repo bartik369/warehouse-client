@@ -37,7 +37,7 @@ export const AttentionRequired = ({
           <AttentionItem
             title={TITLES.activeInventories}
             description={DESCRIPTIONS.activeInventories}
-            value={2} // todo убрать моки после реализации логики
+            value={1} // todo убрать моки после реализации логики
             variant="yellow"
             icon={<MdOutlineInventory size={17} />}
           />
