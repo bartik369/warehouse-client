@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import ProfilePage from '@/pages/profile/ProfilePage';
 
 const ProfileConfig = {
@@ -5,5 +6,6 @@ const ProfileConfig = {
   path: '/profile',
   element: <ProfilePage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default ProfileConfig;

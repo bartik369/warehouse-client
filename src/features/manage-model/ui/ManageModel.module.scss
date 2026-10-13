@@ -1,12 +1,15 @@
-.form {
-  width: 800px;
-}
-
 .container {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 250px;
   gap: 24px;
   width: 100%;
+  > :nth-child(1) {
+    flex: 1 1 500px;
+    min-width: 0;
+  }
+  > :nth-child(2) {
+    flex: 1 1 290px;
+    min-width: 0;
+    max-width: 290px;
+  }
 
   .card {
     :global(.ant-card-body) {

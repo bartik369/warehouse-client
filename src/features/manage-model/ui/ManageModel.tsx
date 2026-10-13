@@ -36,7 +36,7 @@ export const ManageModel = () => {
         title="Модели устройств"
         description="Упаравление моделями устройств. Добавление и редактирование."
       />
-      <div className={styles.container}>
+      <Flex className={styles.container}>
         <Card className={styles.card}>
           <Flex vertical gap={20}>
             <ModelFilters
@@ -62,20 +62,16 @@ export const ManageModel = () => {
             />
           </Flex>
         </Card>
-        <Flex gap={20}>
-          <div className={styles.form}>
-            <ModelForm
-              previewUrl={previewUrl}
-              data={editingModel}
-              mode={mode}
-              resetId={resetId}
-              onSave={onSave}
-              onPreview={onPreview}
-              onReset={onReset}
-            />
-          </div>
-        </Flex>
-      </div>
+        <ModelForm
+          previewUrl={previewUrl}
+          data={editingModel}
+          mode={mode}
+          resetId={resetId}
+          onSave={onSave}
+          onPreview={onPreview}
+          onReset={onReset}
+        />
+      </Flex>
     </Flex>
   );
 };

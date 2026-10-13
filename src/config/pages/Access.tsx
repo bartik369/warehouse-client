@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import AccessPage from '@/pages/admin/access/AccessPage';
 
 const AccessConfig = {
@@ -5,5 +6,6 @@ const AccessConfig = {
   path: '/admin/access',
   element: <AccessPage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default AccessConfig;
