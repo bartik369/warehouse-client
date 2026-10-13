@@ -4,7 +4,7 @@ import { useGetIssueProcessesQuery } from '@/store/api/issueApi';
 
 export const useIssueTableController = (filters: IssueFilterState) => {
   const { page, limit, setPage, setLimit } = useTablePagination({
-    itemLimit: 10,
+    itemLimit: 20,
   });
   const issueProcessesArgs = { ...filters };
 

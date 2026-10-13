@@ -28,7 +28,7 @@ export const IssueList = () => {
         actions={issueListActions}
       />
       <IssueProcessesTable
-        typography="medium"
+        typography="small"
         loading={isLoading || isFetching}
         page={page}
         limit={limit}
