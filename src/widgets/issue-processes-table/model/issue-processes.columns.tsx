@@ -177,7 +177,7 @@ export const getIssueProcessesColumns = ({
       with: 200,
       render: (status: IssueProcessStatus) => {
         const config = ISSUE_PROCESS_STATUS_CONFIG[status];
-        return <CustomTag {...config} />;
+        return <CustomTag size="md" {...config} />;
       },
     },
     {
