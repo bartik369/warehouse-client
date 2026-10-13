@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import UsersPage from '@/pages/admin/users/UsersPage';
 
 const UsersConfig = {
@@ -5,5 +6,6 @@ const UsersConfig = {
   path: '/admin/users',
   element: <UsersPage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default UsersConfig;

@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import KnowledgePage from '@/pages/knowledge/KnowledgePage';
 
 const KnowledgeConfig = {
@@ -5,5 +6,6 @@ const KnowledgeConfig = {
   path: '/knowledge',
   element: <KnowledgePage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default KnowledgeConfig;

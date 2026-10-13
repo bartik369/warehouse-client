@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import DevicePage from '@/pages/device/DevicePage';
 
 const DeviceConfig = {
@@ -5,5 +6,6 @@ const DeviceConfig = {
   path: '/devices/:id',
   element: <DevicePage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default DeviceConfig;

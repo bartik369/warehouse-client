@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import ReturnsPage from '@/pages/returns/ReturnPage';
 
 const ReturnsConfig = {
@@ -5,5 +6,6 @@ const ReturnsConfig = {
   path: '/returns',
   element: <ReturnsPage />,
   requireAuth: true,
-};
+  layout: 'wide',
+} satisfies AppRouteConfig;
 export default ReturnsConfig;

@@ -1,3 +1,4 @@
+import { AppRouteConfig } from '@/app/router/config/types';
 import WarehousesPage from '@/pages/admin/warehouses/WarehousesPage';
 
 const WarehousesConfig = {
@@ -5,5 +6,6 @@ const WarehousesConfig = {
   path: '/admin/warehouses',
   element: <WarehousesPage />,
   requireAuth: true,
-};
+  layout: 'default',
+} satisfies AppRouteConfig;
 export default WarehousesConfig;
