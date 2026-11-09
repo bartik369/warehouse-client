@@ -73,7 +73,7 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
                   <div className={styles.description}>Устройств</div>
                 </Flex>
               </div>
-              <div className={styles.legendWrapper}>
+              <>
                 <Flex ref={legendRef} vertical className={styles.legend} onScroll={handleScroll}>
                   {categories.map((item) => (
                     <div key={item.slug} className={styles.legendRow}>
@@ -98,7 +98,7 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
                     />
                   </div>
                 )}
-              </div>
+              </>
             </Flex>
           </Flex>
         )}
