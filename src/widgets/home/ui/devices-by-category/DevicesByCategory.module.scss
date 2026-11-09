@@ -43,6 +43,9 @@
     gap: 8px;
     height: 220px;
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-200) transparent;
     &::-webkit-scrollbar {
       width: 4px;
     }
@@ -91,6 +94,10 @@
   .name {
     font-weight: 400;
     font-size: 12px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .value {
     font-weight: 600;
