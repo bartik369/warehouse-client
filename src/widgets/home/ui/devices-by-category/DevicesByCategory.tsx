@@ -55,7 +55,7 @@ export const DevicesByCategory = ({ loading, totalCount, categories }: DevicesBy
         {categories.length === 0 ? (
           <Empty />
         ) : (
-          <Flex align="center" style={{ minHeight: '200px' }}>
+          <Flex align="center" style={{ minHeight: '210px' }}>
             <Flex align="center">
               <div className={styles.chartWrapper}>
                 <PieChart className={styles.chart} width={180} height={200}>
